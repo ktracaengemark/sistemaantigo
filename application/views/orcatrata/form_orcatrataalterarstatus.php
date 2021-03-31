@@ -471,28 +471,15 @@
 																							onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
 																							 name="QtdServico<?php echo $i ?>" readonly="" value="<?php echo $servico[$i]['QtdProduto'] ?>">
 																				</div>
-																				<div class="col-md-4">
-																					<label for="ProfissionalServico<?php echo $i ?>">Profissional</label>
-																					<?php if ($i == 1) { ?>
-																					<?php } ?>
-																					<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-																							 id="listadinamica_prof<?php echo $i ?>" name="ProfissionalServico<?php echo $i ?>">
-																						<option value="">-- Sel.Profis. --</option>
-																						<?php
-																						foreach ($select['ProfissionalServico'] as $key => $row) {
-																							(!$servico['ProfissionalServico']) ? $servico['ProfissionalServico'] = $_SESSION['log']['ProfissionalServico']: FALSE;
-																							if ($servico[$i]['ProfissionalProduto'] == $key) {
-																								echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																							} else {
-																								echo '<option value="' . $key . '">' . $row . '</option>';
-																							}
-																						}
-																						?>
-																					</select>
+																				<div class="col-md-2">
+																					<label for="QtdIncrementoServico">Qtd.na Embl</label>
+																					<input type="text" class="form-control Numero" id="QtdIncrementoServico<?php echo $i ?>" name="QtdIncrementoServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdIncrementoProduto'] ?>" readonly="">
 																				</div>
-																				<input type="hidden" class="form-control Numero" id="QtdIncrementoServico<?php echo $i ?>" name="QtdIncrementoServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdIncrementoProduto'] ?>">
+																				<div class="col-md-2">
+																					<label for="SubtotalQtdServico">Sub.Qtd.Serv</label>
+																					<input type="text" class="form-control Numero" id="SubtotalQtdServico<?php echo $i ?>" name="SubtotalQtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalQtdProduto'] ?>" readonly="">
+																				</div>
 																				<input type="hidden" class="form-control " id="SubtotalComissaoServico<?php echo $i ?>" name="SubtotalComissaoServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalComissaoProduto'] ?>">
-																				<input type="hidden" class="form-control " id="SubtotalQtdServico<?php echo $i ?>" name="SubtotalQtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalQtdProduto'] ?>">
 																				<div class="col-md-3">
 																					<label for="ValorServico">Valor do Serviço</label>
 																					<div class="input-group">
@@ -516,7 +503,26 @@
 																					<label for="PrazoServico">Prazo(Dias)</label>
 																					<input type="text" class="form-control Numero" readonly="" maxlength="3" placeholder="0"  id="PrazoServico<?php echo $i ?>" name="PrazoServico<?php echo $i ?>" value="<?php echo $servico[$i]['PrazoProduto'] ?>">
 																				</div>
-																				<div class="col-md-10">
+																				<div class="col-md-4">
+																					<label for="ProfissionalServico<?php echo $i ?>">Profissional</label>
+																					<?php if ($i == 1) { ?>
+																					<?php } ?>
+																					<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+																							 id="listadinamica_prof<?php echo $i ?>" name="ProfissionalServico<?php echo $i ?>">
+																						<option value="">-- Sel.Profis. --</option>
+																						<?php
+																						foreach ($select['ProfissionalServico'] as $key => $row) {
+																							(!$servico['ProfissionalServico']) ? $servico['ProfissionalServico'] = $_SESSION['log']['ProfissionalServico']: FALSE;
+																							if ($servico[$i]['ProfissionalProduto'] == $key) {
+																								echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																							} else {
+																								echo '<option value="' . $key . '">' . $row . '</option>';
+																							}
+																						}
+																						?>
+																					</select>
+																				</div>
+																				<div class="col-md-6">
 																					<label for="ObsServico">Observacao</label>
 																					<input type="text" class="form-control" readonly="" maxlength="200" id="ObsServico<?php echo $i ?>" placeholder="Observacao"
 																							 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
@@ -1661,7 +1667,7 @@
 																	<div class="panel-heading">
 																		<div class="row">
 																			<div class="col-md-12 text-left">
-																				<label for="CombinadoFrete">Tudo Combinado?</label><br>
+																				<label for="CombinadoFrete">Tudo Informado?</label><br>
 																				<div class="btn-group" data-toggle="buttons">
 																					<?php
 																					foreach ($select['CombinadoFrete'] as $key => $row) {
@@ -1921,7 +1927,7 @@
 																						</div>
 																					</div>
 																					<div class="row">		
-																						<div class="col-md-12 text-right">
+																						<div class="col-md-6 text-left">
 																							<label for="QuitadoOrca">Parcelas Pagas?</label><br>
 																							<?php if ($_SESSION['Usuario']['Bx_Pag'] == "S") { ?>
 																								<div class="btn-group" data-toggle="buttons">
@@ -1965,6 +1971,38 @@
 																								</span>
 																							<?php } ?>
 																						</div>
+																						<div id="QuitadoOrca" <?php echo $div['QuitadoOrca']; ?>>
+																							
+																							<div class="col-md-6 text-left">
+																								<label for="StatusParcelas">Todas as OS?</label><br>
+																								<div class="btn-group" data-toggle="buttons">
+																									<?php
+																									foreach ($select['StatusParcelas'] as $key => $row) {
+																										if (!$cadastrar['StatusParcelas'])$cadastrar['StatusParcelas'] = 'N';
+
+																										($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																										if ($cadastrar['StatusParcelas'] == $key) {
+																											echo ''
+																											. '<label class="btn btn-warning active" name="StatusParcelas_' . $hideshow . '">'
+																											. '<input type="radio" name="StatusParcelas" id="' . $hideshow . '" '
+																											. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																											. '</label>'
+																											;
+																										} else {
+																											echo ''
+																											. '<label class="btn btn-default" name="StatusParcelas_' . $hideshow . '">'
+																											. '<input type="radio" name="StatusParcelas" id="' . $hideshow . '" '
+																											. 'autocomplete="off" value="' . $key . '" >' . $row
+																											. '</label>'
+																											;
+																										}
+																									}
+																									?>
+																								</div>
+																							</div>
+																							
+																						</div>	
 																					</div>
 																				</div>
 																			</div>
@@ -2035,12 +2073,56 @@
 											<h4 class="mb-3"><b>Pedido</b></h4>
 											<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 												<div class="row">
-													<div class="col-md-9">
+													<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+													<div class="col-md-3">
+														<div class="panel panel-default">
+															<div class="panel-heading">
+																<div class="row">
+																	<div class="col-md-12 text-left">
+																		<label for="CanceladoOrca">Cancelado?</label><br>
+																		<div class="btn-group" data-toggle="buttons">
+																			<?php
+																			foreach ($select['CanceladoOrca'] as $key => $row) {
+																				if (!$orcatrata['CanceladoOrca'])$orcatrata['CanceladoOrca'] = 'N';
+
+																				($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																				if ($orcatrata['CanceladoOrca'] == $key) {
+																					echo ''
+																					. '<label class="btn btn-warning active" name="CanceladoOrca_' . $hideshow . '">'
+																					. '<input type="radio" name="CanceladoOrca" id="' . $hideshow . '" '
+																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																					. '</label>'
+																					;
+																				} else {
+																					echo ''
+																					. '<label class="btn btn-default" name="CanceladoOrca_' . $hideshow . '">'
+																					. '<input type="radio" name="CanceladoOrca" id="' . $hideshow . '" '
+																					. 'autocomplete="off" value="' . $key . '" >' . $row
+																					. '</label>'
+																					;
+																				}
+																			}
+																			?>
+																		</div>
+																	</div>
+																	<div class="col-md-12">
+																		<label for="ObsOrca"></label>
+																		<textarea class="form-control" id="ObsOrca" <?php echo $readonly; ?> placeholder="Motivo do Cancelamento:"
+																				  name="ObsOrca"><?php echo $orcatrata['ObsOrca']; ?></textarea>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<?php } ?>
+													<div class="col-md-3 text-right">
 														<?php if ($metodo > 1) { ?>
 														<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
 														<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 														<?php } ?>
 														<?php if ($metodo == 2) { ?>
+															<label >.</label><br>
 															<div class="btn-block">
 																<span class="input-group-btn">
 																	<!--
@@ -2091,49 +2173,6 @@
 															</div>
 														<?php } ?>
 													</div>
-													<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-													<div class="col-md-3">
-														<div class="panel panel-default">
-															<div class="panel-heading">
-																<div class="row">
-																	<div class="col-md-12 text-left">
-																		<label for="CanceladoOrca">Cancelado?</label><br>
-																		<div class="btn-group" data-toggle="buttons">
-																			<?php
-																			foreach ($select['CanceladoOrca'] as $key => $row) {
-																				if (!$orcatrata['CanceladoOrca'])$orcatrata['CanceladoOrca'] = 'N';
-
-																				($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																				if ($orcatrata['CanceladoOrca'] == $key) {
-																					echo ''
-																					. '<label class="btn btn-warning active" name="CanceladoOrca_' . $hideshow . '">'
-																					. '<input type="radio" name="CanceladoOrca" id="' . $hideshow . '" '
-																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																					. '</label>'
-																					;
-																				} else {
-																					echo ''
-																					. '<label class="btn btn-default" name="CanceladoOrca_' . $hideshow . '">'
-																					. '<input type="radio" name="CanceladoOrca" id="' . $hideshow . '" '
-																					. 'autocomplete="off" value="' . $key . '" >' . $row
-																					. '</label>'
-																					;
-																				}
-																			}
-																			?>
-																		</div>
-																	</div>
-																	<div class="col-md-12">
-																		<label for="ObsOrca"></label>
-																		<textarea class="form-control" id="ObsOrca" <?php echo $readonly; ?> placeholder="Motivo do Cancelamento:"
-																				  name="ObsOrca"><?php echo $orcatrata['ObsOrca']; ?></textarea>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<?php } ?>
 												</div>
 											<?php } ?>
 										</div>

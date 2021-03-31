@@ -53,14 +53,14 @@
 						</button>
 						-->
 						<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
-							 <span class="glyphicon glyphicon-pencil"></span> Tarefas |  
-							  <span class="glyphicon glyphicon-calendar"></span> Agenda | <span class="caret"></span>
+							<span class="glyphicon glyphicon-calendar"></span> Agenda | 
+							<span class="glyphicon glyphicon-pencil"></span> Tarefas |  <span class="caret"></span>
 						</button>
 						
 						<ul class="dropdown-menu" role="menu">
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>tarefa"><span class="glyphicon glyphicon-pencil"></span> Tarefas </a></li>
-							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>agenda"><span class="glyphicon glyphicon-calendar"></span> Agenda </a></li>
+							<li role="separator" class="divider"></li>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>tarefa"><span class="glyphicon glyphicon-pencil"></span> Tarefas </a></li>
 							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu </a></li>
 							<!--<li role="separator" class="divider"></li>
@@ -198,9 +198,9 @@
 							<li><a href="<?php echo base_url() ?>relatorio/loginempresa"><span class="glyphicon glyphicon-pencil"></span> Administracao</a></li>
 							<li role="separator" class="divider"></li>
 							<?php } ?>
-							<li><a href="<?php echo base_url() ?>login/sair"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
-							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>login/sair"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
 						</ul>
 					</div>
 				</li>	

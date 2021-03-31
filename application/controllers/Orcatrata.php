@@ -1466,6 +1466,8 @@ class Orcatrata extends CI_Controller {
 			'QuitadoParcelas',
 			'Cadastrar',
 			'AtualizaEndereco',
+			'StatusProdutos',
+			'StatusParcelas',
         ), TRUE));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1821,6 +1823,8 @@ class Orcatrata extends CI_Controller {
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusProdutos'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusParcelas'] = $this->Basico_model->select_status_sn();
 		$data['select']['Cli_Forn_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['Prd_Srv_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtualizaEndereco'] = $this->Basico_model->select_status_sn();
@@ -1919,13 +1923,15 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['CanceladoOrca']) ? $data['orcatrata']['CanceladoOrca'] = 'N' : FALSE;		
 		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;       
 		(!$data['orcatrata']['ProntoOrca']) ? $data['orcatrata']['ProntoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['DevolvidoOrca']) ? $data['orcatrata']['DevolvidoOrca'] = 'N' : FALSE;
         (!$data['orcatrata']['FinalizadoOrca']) ? $data['orcatrata']['FinalizadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;
 		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusProdutos']) ? $data['cadastrar']['StatusProdutos'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusParcelas']) ? $data['cadastrar']['StatusParcelas'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		
 		($data['orcatrata']['TipoFrete'] == '1') ? $data['div']['TipoFrete'] = 'style="display: none;"' : $data['div']['TipoFrete'] = '';
 		
@@ -1962,7 +1968,19 @@ class Orcatrata extends CI_Controller {
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
-            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusProdutos' => $this->basico->radio_checked($data['cadastrar']['StatusProdutos'], 'StatusProdutos', 'NS'),
+        );
+        ($data['cadastrar']['StatusProdutos'] == 'S') ?
+            $data['div']['StatusProdutos'] = '' : $data['div']['StatusProdutos'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusParcelas' => $this->basico->radio_checked($data['cadastrar']['StatusParcelas'], 'StatusParcelas', 'NS'),
+        );
+        ($data['cadastrar']['StatusParcelas'] == 'S') ?
+            $data['div']['StatusParcelas'] = '' : $data['div']['StatusParcelas'] = 'style="display: none;"';
 			
 		$data['radio'] = array(
             'AtualizaEndereco' => $this->basico->radio_checked($data['cadastrar']['AtualizaEndereco'], 'AtualizaEndereco', 'NS'),
@@ -2496,8 +2514,8 @@ class Orcatrata extends CI_Controller {
                 #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
 				#redirect(base_url() . 'relatorio/parcelas/' . $data['msg']);
-				//redirect(base_url() . 'OrcatrataPrint/imprimir/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
-				redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+				redirect(base_url() . 'OrcatrataPrint/imprimir/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
+				//redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 				exit();
             }
         }
@@ -2519,6 +2537,8 @@ class Orcatrata extends CI_Controller {
 			'QuitadoParcelas',
 			'Cadastrar',
 			'AtualizaEndereco',
+			'StatusProdutos',
+			'StatusParcelas',
 			'PeloPet',
 			'PortePet',
         ), TRUE));
@@ -2624,9 +2644,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['idApp_Cliente']) ? $data['orcatrata']['idApp_Cliente'] = '0' : FALSE;
 		(!$data['orcatrata']['Cli_Forn_Orca']) ? $data['orcatrata']['Cli_Forn_Orca'] = 'S' : FALSE;
 		(!$data['orcatrata']['Prd_Srv_Orca']) ? $data['orcatrata']['Prd_Srv_Orca'] = 'S' : FALSE;
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
-		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;
-		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;        
+		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;       
 		(!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['HoraOrca']) ? $data['orcatrata']['HoraOrca'] = date('H:i:s', time()) : FALSE;
 		(!$data['orcatrata']['DataEntregaOrca']) ? $data['orcatrata']['DataEntregaOrca'] = date('d/m/Y', time()) : FALSE;
@@ -2650,6 +2668,10 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['TipoFrete']) ? $data['orcatrata']['TipoFrete'] = "1" : FALSE;
 		(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
+		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE; 
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+ 		(!$data['cadastrar']['StatusProdutos']) ? $data['cadastrar']['StatusProdutos'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusParcelas']) ? $data['cadastrar']['StatusParcelas'] = 'N' : FALSE;
 		
 		/*
 		$j = 1;
@@ -2842,6 +2864,8 @@ class Orcatrata extends CI_Controller {
         );		
 		
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusProdutos'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusParcelas'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtualizaEndereco'] = $this->Basico_model->select_status_sn();
 		$data['select']['DetalhadaEntrega'] = $this->Basico_model->select_status_sn();
         $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroR();
@@ -2957,7 +2981,19 @@ class Orcatrata extends CI_Controller {
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
-            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusProdutos' => $this->basico->radio_checked($data['cadastrar']['StatusProdutos'], 'StatusProdutos', 'NS'),
+        );
+        ($data['cadastrar']['StatusProdutos'] == 'S') ?
+            $data['div']['StatusProdutos'] = '' : $data['div']['StatusProdutos'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusParcelas' => $this->basico->radio_checked($data['cadastrar']['StatusParcelas'], 'StatusParcelas', 'NS'),
+        );
+        ($data['cadastrar']['StatusParcelas'] == 'S') ?
+            $data['div']['StatusParcelas'] = '' : $data['div']['StatusParcelas'] = 'style="display: none;"';
 		
 		$data['radio'] = array(
             'CombinadoFrete' => $this->basico->radio_checked($data['orcatrata']['CombinadoFrete'], 'Combinado Entrega', 'NS'),
@@ -3627,6 +3663,8 @@ class Orcatrata extends CI_Controller {
 			'QuitadoParcelas',
 			'Cadastrar',
 			'AtualizaEndereco',
+			'StatusProdutos',
+			'StatusParcelas',
         ), TRUE));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4047,6 +4085,8 @@ class Orcatrata extends CI_Controller {
           exit ();
 				*/
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusProdutos'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusParcelas'] = $this->Basico_model->select_status_sn();
 		$data['select']['Cli_Forn_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['Prd_Srv_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtualizaEndereco'] = $this->Basico_model->select_status_sn();
@@ -4143,11 +4183,13 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['DevolvidoOrca']) ? $data['orcatrata']['DevolvidoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
- 		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;		
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
-		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE; 
+ 		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;
+		(!$data['orcatrata']['TipoFrete']) ? $data['orcatrata']['TipoFrete'] = "1" : FALSE;	
+		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;	
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE; 
 		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;
-		(!$data['orcatrata']['TipoFrete']) ? $data['orcatrata']['TipoFrete'] = "1" : FALSE;
+ 		(!$data['cadastrar']['StatusProdutos']) ? $data['cadastrar']['StatusProdutos'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusParcelas']) ? $data['cadastrar']['StatusParcelas'] = 'N' : FALSE;
 		
 		($data['orcatrata']['TipoFrete'] == '1') ? $data['div']['TipoFrete'] = 'style="display: none;"' : $data['div']['TipoFrete'] = '';
 		
@@ -4160,7 +4202,19 @@ class Orcatrata extends CI_Controller {
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
-            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusProdutos' => $this->basico->radio_checked($data['cadastrar']['StatusProdutos'], 'StatusProdutos', 'NS'),
+        );
+        ($data['cadastrar']['StatusProdutos'] == 'S') ?
+            $data['div']['StatusProdutos'] = '' : $data['div']['StatusProdutos'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusParcelas' => $this->basico->radio_checked($data['cadastrar']['StatusParcelas'], 'StatusParcelas', 'NS'),
+        );
+        ($data['cadastrar']['StatusParcelas'] == 'S') ?
+            $data['div']['StatusParcelas'] = '' : $data['div']['StatusParcelas'] = 'style="display: none;"';
 		
 		$data['radio'] = array(
             'AtualizaEndereco' => $this->basico->radio_checked($data['cadastrar']['AtualizaEndereco'], 'AtualizaEndereco', 'NS'),
@@ -5219,6 +5273,8 @@ class Orcatrata extends CI_Controller {
 			'QuitadoParcelas',
 			'Cadastrar',
 			'AtualizaEndereco',
+			'StatusProdutos',
+			'StatusParcelas',
         ), TRUE));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -5689,6 +5745,8 @@ class Orcatrata extends CI_Controller {
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusProdutos'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusParcelas'] = $this->Basico_model->select_status_sn();
 		$data['select']['Cli_Forn_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['Prd_Srv_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtualizaEndereco'] = $this->Basico_model->select_status_sn();
@@ -5776,9 +5834,11 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
  		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;
-		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;
+		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusProdutos']) ? $data['cadastrar']['StatusProdutos'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusParcelas']) ? $data['cadastrar']['StatusParcelas'] = 'N' : FALSE;
 		
         ($data['orcatrata']['TipoFrete'] == '1') ? $data['div']['TipoFrete'] = 'style="display: none;"' : $data['div']['TipoFrete'] = '';
 		
@@ -5800,7 +5860,19 @@ class Orcatrata extends CI_Controller {
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
-            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusProdutos' => $this->basico->radio_checked($data['cadastrar']['StatusProdutos'], 'StatusProdutos', 'NS'),
+        );
+        ($data['cadastrar']['StatusProdutos'] == 'S') ?
+            $data['div']['StatusProdutos'] = '' : $data['div']['StatusProdutos'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusParcelas' => $this->basico->radio_checked($data['cadastrar']['StatusParcelas'], 'StatusParcelas', 'NS'),
+        );
+        ($data['cadastrar']['StatusParcelas'] == 'S') ?
+            $data['div']['StatusParcelas'] = '' : $data['div']['StatusParcelas'] = 'style="display: none;"';
 			
 		$data['radio'] = array(
             'AtualizaEndereco' => $this->basico->radio_checked($data['cadastrar']['AtualizaEndereco'], 'AtualizaEndereco', 'NS'),
@@ -6850,6 +6922,8 @@ class Orcatrata extends CI_Controller {
 			'QuitadoParcelas',
 			'Cadastrar',
 			'AtualizaEndereco',
+			'StatusProdutos',
+			'StatusParcelas',
         ), TRUE));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -7283,6 +7357,8 @@ class Orcatrata extends CI_Controller {
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusProdutos'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusParcelas'] = $this->Basico_model->select_status_sn();
 		$data['select']['Cli_Forn_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['Prd_Srv_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtualizaEndereco'] = $this->Basico_model->select_status_sn();
@@ -7377,9 +7453,11 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;		
 		(!$data['orcatrata']['TipoFrete']) ? $data['orcatrata']['TipoFrete'] = "1" : FALSE;
  		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;
-		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;
+		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusProdutos']) ? $data['cadastrar']['StatusProdutos'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusParcelas']) ? $data['cadastrar']['StatusParcelas'] = 'N' : FALSE;
 		
         ($data['orcatrata']['TipoFrete'] == '1') ? $data['div']['TipoFrete'] = 'style="display: none;"' : $data['div']['TipoFrete'] = '';
 		
@@ -7401,7 +7479,19 @@ class Orcatrata extends CI_Controller {
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
-            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusProdutos' => $this->basico->radio_checked($data['cadastrar']['StatusProdutos'], 'StatusProdutos', 'NS'),
+        );
+        ($data['cadastrar']['StatusProdutos'] == 'S') ?
+            $data['div']['StatusProdutos'] = '' : $data['div']['StatusProdutos'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusParcelas' => $this->basico->radio_checked($data['cadastrar']['StatusParcelas'], 'StatusParcelas', 'NS'),
+        );
+        ($data['cadastrar']['StatusParcelas'] == 'S') ?
+            $data['div']['StatusParcelas'] = '' : $data['div']['StatusParcelas'] = 'style="display: none;"';
 			
 		$data['radio'] = array(
             'AtualizaEndereco' => $this->basico->radio_checked($data['cadastrar']['AtualizaEndereco'], 'AtualizaEndereco', 'NS'),
@@ -8105,6 +8195,8 @@ class Orcatrata extends CI_Controller {
 			'QuitadoParcelas',
 			'Cadastrar',
 			'AtualizaEndereco',
+			'StatusProdutos',
+			'StatusParcelas',
         ), TRUE));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -8366,25 +8458,14 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['DataQuitado'] = $this->basico->mascara_data($data['orcatrata']['DataQuitado'], 'barras');
 			$data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'barras');
             $data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'barras');
-         /*
 
-		  */
             #### Carrega os dados do cliente nas variáves de sessão ####
 			if($data['orcatrata']['idApp_Cliente'] != 0){
 				$this->load->model('Cliente_model');
 				$_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
 				$_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente'];
 			}
-			/*
-			echo '<br>';
-			echo "<pre>";
-			print_r($_SESSION['Orcatrata']['idApp_Cliente']);
-			echo '<br>';
-			print_r($_SESSION['Cliente']['idApp_Cliente']);
-			echo "</pre>";
-			exit ();			       
-			*/
-        
+
             #### App_Servico ####
             $data['servico'] = $this->Orcatrata_model->get_servico($id);
             if (count($data['servico']) > 0) {
@@ -8481,26 +8562,11 @@ class Orcatrata extends CI_Controller {
             }
 
         }
-
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #### App_OrcaTrata ####
-        
-		#$this->form_validation->set_rules('DataProcedimento', 'DataProcedimento', 'required|trim');
-        #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
-        #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
-		//if ($_SESSION['log']['NivelEmpresa'] >= '4' ) $this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
-		$this->form_validation->set_rules('DataOrca', 'Data do Orçamento', 'required|trim|valid_date');
-		$this->form_validation->set_rules('AVAP', 'À Vista ou À Prazo', 'required|trim');
-		$this->form_validation->set_rules('FormaPagamento', 'Forma de Pagamento', 'required|trim');
-		if ($_SESSION['log']['NivelEmpresa'] >= '4') {
-			$this->form_validation->set_rules('TipoFrete', 'Forma de Entrega', 'required|trim');
-		}
-		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
-		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+	
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusProdutos'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusParcelas'] = $this->Basico_model->select_status_sn();
 		$data['select']['Cli_Forn_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['Prd_Srv_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtualizaEndereco'] = $this->Basico_model->select_status_sn();
@@ -8589,6 +8655,8 @@ class Orcatrata extends CI_Controller {
  		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;
 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusProdutos']) ? $data['cadastrar']['StatusProdutos'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusParcelas']) ? $data['cadastrar']['StatusParcelas'] = 'N' : FALSE;
 		
         ($data['orcatrata']['TipoFrete'] == '1') ? $data['div']['TipoFrete'] = 'style="display: none;"' : $data['div']['TipoFrete'] = '';
 		
@@ -8610,7 +8678,19 @@ class Orcatrata extends CI_Controller {
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
-            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusProdutos' => $this->basico->radio_checked($data['cadastrar']['StatusProdutos'], 'StatusProdutos', 'NS'),
+        );
+        ($data['cadastrar']['StatusProdutos'] == 'S') ?
+            $data['div']['StatusProdutos'] = '' : $data['div']['StatusProdutos'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusParcelas' => $this->basico->radio_checked($data['cadastrar']['StatusParcelas'], 'StatusParcelas', 'NS'),
+        );
+        ($data['cadastrar']['StatusParcelas'] == 'S') ?
+            $data['div']['StatusParcelas'] = '' : $data['div']['StatusParcelas'] = 'style="display: none;"';
 			
 		$data['radio'] = array(
             'AtualizaEndereco' => $this->basico->radio_checked($data['cadastrar']['AtualizaEndereco'], 'AtualizaEndereco', 'NS'),
@@ -8707,7 +8787,23 @@ class Orcatrata extends CI_Controller {
           exit ();
         */
 
-		$data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);		
+		$data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #### App_OrcaTrata ####
+		#$this->form_validation->set_rules('DataProcedimento', 'DataProcedimento', 'required|trim');
+        #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
+        #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
+		//if ($_SESSION['log']['NivelEmpresa'] >= '4' ) $this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
+		$this->form_validation->set_rules('DataOrca', 'Data do Orçamento', 'required|trim|valid_date');
+		$this->form_validation->set_rules('AVAP', 'À Vista ou À Prazo', 'required|trim');
+		$this->form_validation->set_rules('FormaPagamento', 'Forma de Pagamento', 'required|trim');
+		if ($_SESSION['log']['NivelEmpresa'] >= '4') {
+			$this->form_validation->set_rules('TipoFrete', 'Forma de Entrega', 'required|trim');
+		}
+		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
+		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');			
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -9618,7 +9714,21 @@ class Orcatrata extends CI_Controller {
 				}
 				
 			}
-					
+			
+			/*
+			$_SESSION['Orcatratas'] = $data['orcatratas'] = $this->Orcatrata_model->get_orcatratas($_SESSION['Orcatrata']['RepeticaoOrca']);
+			
+			$data['count_orcatratas'] = count($_SESSION['Orcatratas']);
+			echo '<br>';
+			echo "<pre>";
+			print_r($_SESSION['Orcatrata']['RepeticaoOrca']);
+			echo '<br>';
+			print_r($data['count_orcatratas']);
+			echo '<br>';
+			print_r($_SESSION['Orcatratas']);
+			echo "</pre>";
+			exit ();			
+			*/
 			
 			/*
 			/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -9669,6 +9779,8 @@ class Orcatrata extends CI_Controller {
 			'QuitadoParcelas',
 			'Cadastrar',
 			'AtualizaEndereco',
+			'StatusProdutos',
+			'StatusParcelas',
         ), TRUE));
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 		$data['orcatrata'] = quotes_to_entities($this->input->post(array(
@@ -10011,6 +10123,8 @@ class Orcatrata extends CI_Controller {
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');	
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusProdutos'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusParcelas'] = $this->Basico_model->select_status_sn();
 		$data['select']['Cli_Forn_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['Prd_Srv_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtualizaEndereco'] = $this->Basico_model->select_status_sn();
@@ -10103,9 +10217,11 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['ProntoOrca']) ? $data['orcatrata']['ProntoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusProdutos']) ? $data['cadastrar']['StatusProdutos'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusParcelas']) ? $data['cadastrar']['StatusParcelas'] = 'N' : FALSE;
 
 		($data['orcatrata']['TipoFrete'] == '1') ? $data['div']['TipoFrete'] = 'style="display: none;"' : $data['div']['TipoFrete'] = '';
 		
@@ -10127,7 +10243,19 @@ class Orcatrata extends CI_Controller {
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
-            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusProdutos' => $this->basico->radio_checked($data['cadastrar']['StatusProdutos'], 'StatusProdutos', 'NS'),
+        );
+        ($data['cadastrar']['StatusProdutos'] == 'S') ?
+            $data['div']['StatusProdutos'] = '' : $data['div']['StatusProdutos'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusParcelas' => $this->basico->radio_checked($data['cadastrar']['StatusParcelas'], 'StatusParcelas', 'NS'),
+        );
+        ($data['cadastrar']['StatusParcelas'] == 'S') ?
+            $data['div']['StatusParcelas'] = '' : $data['div']['StatusParcelas'] = 'style="display: none;"';
 		
 		$data['radio'] = array(
             'CombinadoFrete' => $this->basico->radio_checked($data['orcatrata']['CombinadoFrete'], 'Combinado Entrega', 'NS'),
@@ -10735,6 +10863,8 @@ class Orcatrata extends CI_Controller {
 			'QuitadoParcelas',
 			'Cadastrar',
 			'AtualizaEndereco',
+			'StatusProdutos',
+			'StatusParcelas',
         ), TRUE));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -11176,6 +11306,8 @@ class Orcatrata extends CI_Controller {
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');	
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusProdutos'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusParcelas'] = $this->Basico_model->select_status_sn();
 		$data['select']['Cli_Forn_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['Prd_Srv_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtualizaEndereco'] = $this->Basico_model->select_status_sn();
@@ -11262,11 +11394,12 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['DevolvidoOrca']) ? $data['orcatrata']['DevolvidoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;		
-		
  		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;
 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;
 		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusProdutos']) ? $data['cadastrar']['StatusProdutos'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['StatusParcelas']) ? $data['cadastrar']['StatusParcelas'] = 'N' : FALSE;
 		
         ($data['orcatrata']['TipoFrete'] == '1') ? $data['div']['TipoFrete'] = 'style="display: none;"' : $data['div']['TipoFrete'] = '';
 		
@@ -11288,7 +11421,19 @@ class Orcatrata extends CI_Controller {
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
-            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusProdutos' => $this->basico->radio_checked($data['cadastrar']['StatusProdutos'], 'StatusProdutos', 'NS'),
+        );
+        ($data['cadastrar']['StatusProdutos'] == 'S') ?
+            $data['div']['StatusProdutos'] = '' : $data['div']['StatusProdutos'] = 'style="display: none;"';		
+		
+		$data['radio'] = array(
+            'StatusParcelas' => $this->basico->radio_checked($data['cadastrar']['StatusParcelas'], 'StatusParcelas', 'NS'),
+        );
+        ($data['cadastrar']['StatusParcelas'] == 'S') ?
+            $data['div']['StatusParcelas'] = '' : $data['div']['StatusParcelas'] = 'style="display: none;"';
 			
 		$data['radio'] = array(
             'AtualizaEndereco' => $this->basico->radio_checked($data['cadastrar']['AtualizaEndereco'], 'AtualizaEndereco', 'NS'),
@@ -13223,6 +13368,85 @@ class Orcatrata extends CI_Controller {
         $this->load->view('pedidos/tela_pedidos', $data);
 
         $this->load->view('basico/footer');
+    }
+
+    public function baixaparcelasrepet($id = FALSE) {
+		
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### App_OrcaTrata ####
+		
+        $data['titulo'] = 'Baixa da Receita';
+        $data['form_open_path'] = 'orcatrata/baixaparcelasrepet';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'info';
+        $data['metodo'] = 2;
+
+        if ($id) {
+            #### App_OrcaTrata ####
+            $_SESSION['Orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);		
+
+			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+			#### App_OrcaTrata ####
+			$data['orcatrata']['CombinadoFrete'] = "S";
+			$data['orcatrata']['AprovadoOrca'] = "S";
+			$data['orcatrata']['QuitadoOrca'] = "S";
+			if($_SESSION['Orcatrata']['ConcluidoOrca'] == "S"){
+				$data['orcatrata']['FinalizadoOrca'] = "S";
+			}
+			$data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata_baixa($id);
+			$data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+			$data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+				$data['update']['orcatrata']['anterior'],
+				$data['orcatrata'],
+				$data['update']['orcatrata']['campos'],
+				$id, 
+			TRUE);
+			$data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $id);
+
+
+			#### App_ParcelasRec ####
+			$data['update']['parcelasrec']['alterar'] = $this->Orcatrata_model->get_parcelas_posterior($id);
+			if (isset($data['update']['parcelasrec']['alterar'])){
+			
+				$max = count($data['update']['parcelasrec']['alterar']);
+				for($j=0;$j<$max;$j++) {
+					$data['update']['parcelasrec']['alterar'][$j]['Quitado'] = 'S';				
+					if(!$data['update']['parcelasrec']['alterar'][$j]['DataPago'] || $data['update']['parcelasrec']['alterar'][$j]['DataPago'] == "0000-00-00"){
+						$data['update']['parcelasrec']['alterar'][$j]['DataPago'] = $data['update']['parcelasrec']['alterar'][$j]['DataVencimento'];
+					}				
+				}
+				if (count($data['update']['parcelasrec']['alterar']))
+					$data['update']['parcelasrec']['bd']['alterar'] =  $this->Orcatrata_model->update_parcelas($data['update']['parcelasrec']['alterar']);
+
+			}
+		
+		}
+		if ($data['auditoriaitem'] && !$data['update']['orcatrata']['bd']) {
+			$data['msg'] = '?m=2';
+			$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+			$this->basico->erro($msg);
+			$this->load->view('orcatrata/form_orcatrataalterar2', $data);
+		} else {
+
+			$data['msg'] = '?m=1';
+
+			redirect(base_url() . 'agenda' . $data['msg']);
+			exit();
+		}
+        
+
+        $this->load->view('basico/footer');
+
     }
 
     public function baixadareceita($id = FALSE) {

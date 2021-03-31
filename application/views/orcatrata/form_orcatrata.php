@@ -495,28 +495,15 @@
 																									onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
 																									 name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdProduto'] ?>">
 																						</div>
-																						<div class="col-md-4">
-																							<label for="ProfissionalServico<?php echo $i ?>">Profissional</label>
-																							<?php if ($i == 1) { ?>
-																							<?php } ?>
-																							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-																									 id="listadinamica_prof<?php echo $i ?>" name="ProfissionalServico<?php echo $i ?>">
-																								<option value="">-- Sel.Profis. --</option>
-																								<?php
-																								foreach ($select['ProfissionalServico'] as $key => $row) {
-																									(!$servico['ProfissionalServico']) ? $servico['ProfissionalServico'] = $_SESSION['log']['ProfissionalServico']: FALSE;
-																									if ($servico[$i]['ProfissionalProduto'] == $key) {
-																										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																									} else {
-																										echo '<option value="' . $key . '">' . $row . '</option>';
-																									}
-																								}
-																								?>
-																							</select>
+																						<div class="col-md-2">
+																							<label for="QtdIncrementoServico">Qtd.na Embl</label>
+																							<input type="text" class="form-control Numero" id="QtdIncrementoServico<?php echo $i ?>" name="QtdIncrementoServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdIncrementoProduto'] ?>" readonly="">
 																						</div>
-																						<input type="hidden" class="form-control Numero" id="QtdIncrementoServico<?php echo $i ?>" name="QtdIncrementoServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdIncrementoProduto'] ?>">
+																						<div class="col-md-2">
+																							<label for="SubtotalQtdServico">Sub.Qtd.Serv</label>
+																							<input type="text" class="form-control Numero" id="SubtotalQtdServico<?php echo $i ?>" name="SubtotalQtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalQtdProduto'] ?>" readonly="">
+																						</div>
 																						<input type="hidden" class="form-control " id="SubtotalComissaoServico<?php echo $i ?>" name="SubtotalComissaoServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalComissaoProduto'] ?>">
-																						<input type="hidden" class="form-control " id="SubtotalQtdServico<?php echo $i ?>" name="SubtotalQtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalQtdProduto'] ?>">
 																						<div class="col-md-3">
 																							<label for="ValorServico">Valor do Serviço</label>
 																							<div class="input-group">
@@ -542,7 +529,26 @@
 																							onkeyup="calculaPrazoServicos('PrazoServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')" 
 																							name="PrazoServico<?php echo $i ?>" value="<?php echo $servico[$i]['PrazoProduto'] ?>">
 																						</div>
-																						<div class="col-md-10">
+																						<div class="col-md-4">
+																							<label for="ProfissionalServico<?php echo $i ?>">Profissional</label>
+																							<?php if ($i == 1) { ?>
+																							<?php } ?>
+																							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+																									 id="listadinamica_prof<?php echo $i ?>" name="ProfissionalServico<?php echo $i ?>">
+																								<option value="">-- Sel.Profis. --</option>
+																								<?php
+																								foreach ($select['ProfissionalServico'] as $key => $row) {
+																									(!$servico['ProfissionalServico']) ? $servico['ProfissionalServico'] = $_SESSION['log']['ProfissionalServico']: FALSE;
+																									if ($servico[$i]['ProfissionalProduto'] == $key) {
+																										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																									} else {
+																										echo '<option value="' . $key . '">' . $row . '</option>';
+																									}
+																								}
+																								?>
+																							</select>
+																						</div>
+																						<div class="col-md-6">
 																							<label for="ObsServico">Observacao</label>
 																							<input type="text" class="form-control" maxlength="200" id="ObsServico<?php echo $i ?>" placeholder="Observacao"
 																									 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">

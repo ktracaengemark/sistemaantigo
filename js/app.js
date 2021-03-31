@@ -6268,7 +6268,7 @@ $(document).ready(function () {
 										<div class="col-md-2">\
 											<label for="SubtotalQtdProduto">Sub.Qtd.Prod</label><br>\
 											<div id="txtHint">\
-												<input type="text" class="form-control Numero text-right" maxlength="10" readonly="" id="SubtotalQtdProduto'+pc+'"\
+												<input type="text" class="form-control Numero text-left" maxlength="10" readonly="" id="SubtotalQtdProduto'+pc+'"\
 													   name="SubtotalQtdProduto'+pc+'" value="">\
 											</div>\
 										</div>\
@@ -6513,18 +6513,17 @@ $(document).ready(function () {
 												onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
 												name="QtdServico'+ps+'" value="1">\
 										</div>\
-										<div class="col-md-4">\
-											<label for="ProfissionalServico'+ps+'">Profissional:</label>\
-											<select data-placeholder="Selecione uma opção..." class="form-control Chosen2"\
-													 id="listadinamica_prof'+ps+'" name="ProfissionalServico'+ps+'">\
-												<option value=""></option>\
-											</select>\
+										<div class="col-md-2">\
+											<label for="QtdIncrementoServico">QtdEmb</label><br>\
+											<input type="text" class="form-control Numero" id="QtdIncrementoServico'+ps+'" name="QtdIncrementoServico'+ps+'" value="1" readonly="">\
 										</div>\
-										<input type="hidden" class="form-control Numero" id="QtdIncrementoServico'+ps+'" name="QtdIncrementoServico'+ps+'" value="1">\
+										<div class="col-md-2">\
+											<label for="SubtotalQtdServico">Sub.Qtd.Serv</label><br>\
+											<input type="text" class="form-control Numero" id="SubtotalQtdServico'+ps+'" name="SubtotalQtdServico'+ps+'" value="" readonly="">\
+										</div>\
 										<input type="hidden" class="form-control" id="SubtotalComissaoServico'+ps+'" name="SubtotalComissaoServico'+ps+'" value="0.00">\
-										<input type="hidden" class="form-control Numero" id="SubtotalQtdServico'+ps+'" name="SubtotalQtdServico'+ps+'" value="">\
 										<div class="col-md-3">\
-											<label for="ValorServico">Valor do Serviço</label><br>\
+											<label for="ValorServico">Valor da Embl</label><br>\
 											<div class="input-group">\
 												<span class="input-group-addon" id="basic-addon1">R$</span>\
 												<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
@@ -6548,7 +6547,14 @@ $(document).ready(function () {
 												onkeyup="calculaPrazoServicos(\'PrazoServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
 												name="PrazoServico'+ps+'" value="0" >\
 										</div>\
-										<div class="col-md-10">\
+										<div class="col-md-4">\
+											<label for="ProfissionalServico'+ps+'">Profissional:</label>\
+											<select data-placeholder="Selecione uma opção..." class="form-control Chosen2"\
+													 id="listadinamica_prof'+ps+'" name="ProfissionalServico'+ps+'">\
+												<option value=""></option>\
+											</select>\
+										</div>\
+										<div class="col-md-6">\
 											<label for="ObsServico">Observacao</label><br>\
 											<input type="text" class="form-control " maxlength="200" id="ObsServico'+ps+'" placeholder="Observacao"\
 												name="ObsServico'+ps+'" value="">\
