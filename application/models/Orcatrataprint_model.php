@@ -328,6 +328,7 @@ class Orcatrataprint_model extends CI_Model {
 				EF.BairroEmpresa,
 				EF.MunicipioEmpresa,
 				EF.EstadoEmpresa,
+				EF.Telefone,
 				TAVAP.AVAP AS OndePagar,
 				MO.AVAP,
 				MO.Abrev3,
