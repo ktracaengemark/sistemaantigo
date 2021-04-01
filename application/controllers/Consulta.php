@@ -2592,7 +2592,7 @@ class Consulta extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('consulta/form_consulta', $data);
+                $this->load->view('consulta/form_evento', $data);
             } else {
 
 				$data['copiar']['Repeticao'] = $data['idApp_Consulta'];
@@ -2611,7 +2611,7 @@ class Consulta extends CI_Controller {
 					$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
 					$this->basico->erro($msg);
-					$this->load->view('consulta/form_consulta', $data);
+					$this->load->view('consulta/form_evento', $data);
 				} else {
 					if ($data['cadastrar']['Repetir'] == 'S') {
 						for($j=1; $j<$qtd; $j++) {
@@ -2849,6 +2849,46 @@ class Consulta extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
+
+    public function excluir_evento($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+		$data['alterar'] = quotes_to_entities($this->input->post(array(
+			'Quais',
+        ), TRUE));
+		
+		$quais = $data['alterar']['Quais'];	
+		
+		if (!$id) {
+            $data['msg'] = '?m=2';
+            redirect(base_url() . 'agenda' . $data['msg']);
+        } else {
+
+            $data['anterior'] = $this->Consulta_model->get_consulta($id);
+			
+			$repeticao = $data['anterior']['Repeticao'];
+			$dataini = $data['anterior']['DataInicio'];
+
+            $data['campos'] = array_keys($data['anterior']);
+
+            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], NULL, $data['campos'], $data['anterior']['idApp_Consulta'], FALSE, TRUE);
+            $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Consulta', 'DELETE', $data['auditoriaitem']);
+            $this->Consulta_model->delete_consulta($id, $repeticao, $quais, $dataini);	
+            $data['msg'] = '?m=1';
+
+            redirect(base_url() . 'agenda' . $data['msg']);
+            exit();
+        }
+
+        $this->load->view('basico/footer');
+    }
+	
 	public function cadastrar_particular($idApp_Cliente = NULL, $idApp_Agenda = NULL) {
 
         if ($this->input->get('m') == 1)

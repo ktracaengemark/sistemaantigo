@@ -791,7 +791,7 @@
 														-->
 													<?php } else { ?>
 														
-															<button type="submit" class="btn btn-lg btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)" data-loading-text="Aguarde..." value="1" >
+															<button type="submit" class="btn btn-lg btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
 																<span class="glyphicon glyphicon-save"></span> Salvar
 															</button>	
 															<div class="col-md-12 alert alert-warning aguardar" role="alert" >
