@@ -430,6 +430,7 @@ class Consulta extends CI_Controller {
             'idApp_Cliente',
             'idApp_ClienteDep',
             'idApp_ClientePet',
+            'idApp_OrcaTrata',
 			'idSis_EmpresaFilial',
             'Data2',
 			'Data',
@@ -730,13 +731,19 @@ class Consulta extends CI_Controller {
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			if($data['cadastrar']['Vincular'] == "N"){
 				$data['query']['OS'] = "0";
+				$data['query']['idApp_OrcaTrata'] = "0";
 			}else{
+			
 				if($data['cadastrar']['NovaOS'] == "N"){
 					$data['query']['OS'] = "1";
+					$data['query']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];
 				}else{
+					$data['query']['idApp_OrcaTrata'] = "0";
 					if($data['cadastrar']['PorConsulta'] == "N"){
+						//$data['query']['idApp_OrcaTrata'] = "0";
 						$data['query']['OS'] = "1";
 					}else{
+						//$data['query']['idApp_OrcaTrata'] = "0";
 						$data['query']['OS'] = $data['query']['Recorrencias'];
 					}
 				}
@@ -796,6 +803,7 @@ class Consulta extends CI_Controller {
 								'idApp_Cliente' 		=> $data['query']['idApp_Cliente'],
 								'idApp_ClienteDep' 		=> $data['query']['idApp_ClienteDep'],
 								'idApp_ClientePet' 		=> $data['query']['idApp_ClientePet'],
+								'idApp_OrcaTrata' 		=> $data['query']['idApp_OrcaTrata'],
 								//'Evento' 				=> $data['query']['Evento'],
 								'Obs' 					=> $data['query']['Obs'],
 								'idApp_Profissional' 	=> $data['query']['idApp_Profissional'],
@@ -831,7 +839,8 @@ class Consulta extends CI_Controller {
 						}
 					}else{
 						//Busca na lista de O.S. do cliente 
-						redirect(base_url() . 'orcatrata/listar/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+						//redirect(base_url() . 'orcatrata/listar/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+						redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 					}
 				}else{
 					//Não Gera O.S. 
@@ -1578,6 +1587,7 @@ class Consulta extends CI_Controller {
             'idApp_Cliente',
             'idApp_ClienteDep',
             'idApp_ClientePet',
+            'idApp_OrcaTrata',
             'Data',
             'Data2',
 			'HoraInicio',
@@ -1592,7 +1602,7 @@ class Consulta extends CI_Controller {
                 ), TRUE);
 
  		(!$data['alterar']['Quais']) ? $data['alterar']['Quais'] = 1 : FALSE;
- 		(!$data['alterar']['DeletarOS']) ? $data['alterar']['DeletarOS'] = 'S' : FALSE;
+ 		(!$data['alterar']['DeletarOS']) ? $data['alterar']['DeletarOS'] = 'N' : FALSE;
  		(!$data['cadastrar']['Vincular']) ? $data['cadastrar']['Vincular'] = 'N' : FALSE;
  		(!$data['cadastrar']['NovaOS']) ? $data['cadastrar']['NovaOS'] = 'N' : FALSE;
  		(!$data['cadastrar']['PorConsulta']) ? $data['cadastrar']['PorConsulta'] = 'N' : FALSE;
@@ -1629,18 +1639,7 @@ class Consulta extends CI_Controller {
 		
 		$data['count_zero'] = count($_SESSION['Consultas_zero']);
 		$data['count_repet'] = count($_SESSION['Consultas_Repet']);
-        /*
-		echo '<br>';
-          echo "<pre>";
-		  
-          print_r('contagem orca = ' . $data['count_zero']);
-		  echo '<br>';
-          print_r('contagem repeticao = ' . $data['count_repet']);
-          echo "</pre>";
-          exit ();
-		*/		
-		
-		
+
         if ($data['query']['DataFim'] < date('Y-m-d H:i:s', time())) {
             #$data['readonly'] = 'readonly';
             $data['readonly'] = '';
@@ -1720,9 +1719,9 @@ class Consulta extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
         $data['alterarcliente'] = 2;
-        $data['caminho2'] = '../../';
+        $data['caminho2'] = '../../../';
 
-		if(isset($_SESSION['Consulta']['idApp_OrcaTrata']) && ($_SESSION['Consulta']['idApp_OrcaTrata'] == 0 || $_SESSION['Consulta']['idApp_OrcaTrata'] == "")){
+		if($_SESSION['Consulta']['idApp_OrcaTrata'] == 0 || $_SESSION['Consulta']['idApp_OrcaTrata'] == ""){
 			$data['vincular'] = 'S';
 			if($data['count_repet'] == 0){
 				$data['porconsulta'] = 'S';
@@ -1730,13 +1729,35 @@ class Consulta extends CI_Controller {
 				$data['porconsulta'] = 'N';
 				$data['cadastrar']['PorConsulta'] = "N";
 			}
+			
+			if($data['cadastrar']['Vincular'] == "N"){
+				$data['query']['idApp_OrcaTrata'] = "0";
+			}else{
+				
+				if($data['cadastrar']['NovaOS'] == "N"){
+					$data['query']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];
+				
+				}else{
+				
+					$data['query']['idApp_OrcaTrata'] = "0";
+					if($data['cadastrar']['PorConsulta'] == "N"){
+						$data['query']['idApp_OrcaTrata'] = "0";
+					}else{
+						$data['query']['idApp_OrcaTrata'] = "0";
+					}
+				}
+			}
+
 		}else{
+			$data['query']['idApp_OrcaTrata'] = $_SESSION['Consulta']['idApp_OrcaTrata'];
 			$data['vincular'] = 'N';
 			$data['porconsulta'] = 'N';
 			$data['cadastrar']['Vincular'] = "N";
 			$data['cadastrar']['NovaOS'] = "N";
 			$data['cadastrar']['PorConsulta'] = "N";
 		}
+		
+
 			
  		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
@@ -1750,8 +1771,8 @@ class Consulta extends CI_Controller {
 		$data['radio'] = array(
             'DeletarOS' => $this->basico->radio_checked($data['alterar']['DeletarOS'], 'DeletarOS', 'NS'),
         );
-        ($data['alterar']['DeletarOS'] == 'N') ?
-            $data['div']['DeletarOS'] = 'style="display: none;"' : $data['div']['DeletarOS'] = '';			
+        ($data['alterar']['DeletarOS'] == 'S') ?
+            $data['div']['DeletarOS'] = '' : $data['div']['DeletarOS'] = 'style="display: none;"';			
 
 		$data['radio'] = array(
             'Vincular' => $this->basico->radio_checked($data['cadastrar']['Vincular'], 'Vincular', 'NS'),
@@ -1863,7 +1884,7 @@ class Consulta extends CI_Controller {
 					}
 				}
 			}			
-
+        
 			unset($data['query']['Data'], $data['query']['Data2'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
 			
             $data['anterior'] = $this->Consulta_model->get_consulta($data['query']['idApp_Consulta']);
@@ -1875,7 +1896,7 @@ class Consulta extends CI_Controller {
 			$data['update']['query']['bd'] = $this->Consulta_model->update_consulta($data['query'], $data['query']['idApp_Consulta']);
 			
 			$_SESSION['Repeticao'] = $data['repeticao'] = $this->Consulta_model->get_consulta_posterior($data['query']['idApp_Consulta'], $_SESSION['Consulta']['Repeticao'], $data['alterar']['Quais'], $dataini_alt);
-			
+
 			if (count($data['repeticao']) > 0) {
 				$data['repeticao'] = array_combine(range(1, count($data['repeticao'])), array_values($data['repeticao']));
                 $max = count($data['repeticao']);
@@ -1906,6 +1927,39 @@ class Consulta extends CI_Controller {
 					}
 				}
 			}
+			
+			if($_SESSION['Consulta']['idApp_OrcaTrata'] == 0 || $_SESSION['Consulta']['idApp_OrcaTrata'] == ""){
+			
+				if($data['cadastrar']['Vincular'] == "S" && $data['cadastrar']['NovaOS'] == "N"){
+					
+					$_SESSION['OrcaTrata'] = $data['orcatrata'] = $this->Consulta_model->get_consulta_posterior($data['query']['idApp_Consulta'], $_SESSION['Consulta']['Repeticao'], 4, $dataini_alt);
+					
+					if (count($data['orcatrata']) > 0) {
+						$data['orcatrata'] = array_combine(range(1, count($data['orcatrata'])), array_values($data['orcatrata']));
+						$max_orcatrata = count($data['orcatrata']);
+						if (isset($data['orcatrata'])) {
+							for($j=1; $j <= $max_orcatrata; $j++) {
+								
+								$data['orcatrata'][$j]['idApp_OrcaTrata'] 		= $data['query']['idApp_OrcaTrata'];
+								
+								$data['update']['orcatrata'][$j]['bd'] 			= $this->Consulta_model->update_consulta($data['orcatrata'][$j], $data['orcatrata'][$j]['idApp_Consulta']);
+							}
+						}
+					}
+				
+				}
+
+			}			
+			/*		
+					echo '<br>';
+          echo "<pre>";
+		  
+          print_r('contagem orca = ' . $max_orcatrata);
+		  echo '<br>';
+          print_r($_SESSION['OrcaTrata']);
+          echo "</pre>";
+          exit ();
+			*/
 
 			if ($data['auditoriaitem'] === FALSE) {
 				$data['msg'] = '';
@@ -1913,11 +1967,8 @@ class Consulta extends CI_Controller {
 				$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Consulta', 'UPDATE', $data['auditoriaitem']);
 				$data['msg'] = '?m=1';
 			}
-			
-			
-			//redirect(base_url() . 'consulta/listar/' . $data['query']['idApp_Cliente'] . $data['msg'] . $data['redirect']);
-			
-			if(isset($_SESSION['Consulta']['idApp_OrcaTrata']) && ($_SESSION['Consulta']['idApp_OrcaTrata'] == 0 || $_SESSION['Consulta']['idApp_OrcaTrata'] == "")){
+
+			if(isset($data['query']['idApp_OrcaTrata']) && ($data['query']['idApp_OrcaTrata'] == 0 || $data['query']['idApp_OrcaTrata'] == "")){
 				if($data['cadastrar']['Vincular'] == 'S'){	
 					if($data['cadastrar']['NovaOS'] == 'S'){
 						if($data['cadastrar']['PorConsulta'] == 'S'){
@@ -1932,7 +1983,8 @@ class Consulta extends CI_Controller {
 					}else{
 						//Busca na lista de O.S. do cliente
 						unset($_SESSION['Agenda'], $_SESSION['Cliente'], $_SESSION['Consulta'], $_SESSION['Consultas_Repet'], $_SESSION['Repeticao']);
-						redirect(base_url() . 'orcatrata/listar/' . $data['query']['idApp_Cliente'] . '/' . $data['query']['idApp_Consulta'] . $data['msg']);
+						//redirect(base_url() . 'orcatrata/listar/' . $data['query']['idApp_Cliente'] . '/' . $data['query']['idApp_Consulta'] . $data['msg']);
+						redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 					}
 				}else{
 					//Não Gera O.S.
@@ -2285,14 +2337,34 @@ class Consulta extends CI_Controller {
             redirect(base_url() . 'agenda' . $data['msg']);
         } else {
 
+		  
 			$data['anterior'] = $this->Consulta_model->get_consulta($id);
 			
 			$repeticao = $data['anterior']['Repeticao'];
 			$dataini = $data['anterior']['DataInicio'];
-			
-			$_SESSION['Repeticao'] 	= $this->Consulta_model->get_consulta_repeticao($id, $repeticao, $quais, $dataini);
-			$count_delete_orca		= count($_SESSION['Repeticao']);
 
+			$_SESSION['Repeticao'] 	= $this->Consulta_model->get_consulta_repeticao($id, $repeticao, $quais, $dataini);
+
+			$count_delete_orca		= count($_SESSION['Repeticao']);
+		/*	
+			echo '<br>';
+          echo "<pre>";
+          print_r('ido riginal = ' . $id);
+		  echo '<br>';
+          print_r('quais = ' . $quais);
+		  echo '<br>';
+          print_r('DeletarOS = ' . $deletaros);
+		  echo '<br>';
+          print_r('repeticao = ' . $repeticao);
+		  echo '<br>';
+          print_r('data = ' . $dataini);
+		  echo '<br>';
+          print_r('cont_delete_orca = ' . $count_delete_orca);
+          echo "</pre>";
+          exit ();
+		*/
+			
+			
             $data['campos'] = array_keys($data['anterior']);
 
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], NULL, $data['campos'], $data['anterior']['idApp_Consulta'], FALSE, TRUE);

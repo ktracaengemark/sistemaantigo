@@ -25,7 +25,8 @@ exibir();
 exibir_confirmar();	
 Aguardar();
 clientePet();
-//Agenda();
+clienteOT();
+//fechaBuscaOS();
 
 function codigo(id, tabela){
 	//alert('ok codigo');
@@ -2057,6 +2058,7 @@ $(document).ready(function(){
 	
 });
 
+//Função que busca Pets do Cliente.
 function clientePet(id = null){
 	//alert('carregando clientepets: ' + id);
 	
@@ -2065,14 +2067,14 @@ function clientePet(id = null){
 	var id_cliente = $('#idApp_Cliente').val();
 	
 	var caminho2 = $('#Caminho2').val();
-	console.log(caminho2);
+	//console.log(caminho2);
 	//var caminho2 = '../../';
-	console.log(id_cliente);
-	console.log(id);
+	//console.log(id_cliente);
+	//console.log(id);
 	
-	console.log(' <br>oioioioi<br> ');
+	//console.log(' <br>oioioioi<br> ');
 		
-	console.log('<br> Hidden_idApp_ClientePet = '+ $('#Hidden_idApp_ClientePet').val());
+	//console.log('<br> Hidden_idApp_ClientePet = '+ $('#Hidden_idApp_ClientePet').val());
 	
 	if(id_cliente) {
 		//console.log(id);
@@ -2113,6 +2115,76 @@ function clientePet(id = null){
 		
 	} else {
 		$('#idApp_ClientePet').html('<option value="">– Selecione um Cliente –</option>');
+	}
+
+}
+
+function fechaBuscaOS(novaos){
+	//alert('fechaBuscaOS');
+	
+	$('#Hidden_NovaOS').val(novaos);
+	var hnovaos = $('#Hidden_NovaOS').val();
+	//console.log(hnovaos);
+	
+	if(hnovaos == "S"){
+		$('.hnovaos').hide();
+	}else{
+		$('.hnovaos').show();
+	}
+	
+}
+
+
+function mudaBuscaOS(novaos){
+	
+	var hnovaos = $('#Hidden_NovaOS').val();
+	console.log(hnovaos);
+	
+	if(hnovaos == "S"){
+		$('.hnovaos').hide();
+	}else{
+		$('.hnovaos').show();
+	}
+	
+}
+//Função que busca O.S. do cliente.
+function clienteOT(id = null){
+	
+	var id_cliente = $('#idApp_Cliente').val();
+	
+	var caminho2 = $('#Caminho2').val();
+	console.log(caminho2);
+	//var caminho2 = '../../';
+	console.log(id_cliente);
+	console.log(id);
+	
+	console.log(' <br>OrcaTrata<br> ');
+		
+	console.log('<br> Hidden_idApp_OrcaTrata = '+ $('#Hidden_idApp_OrcaTrata').val());
+	
+	if(id_cliente) {
+		//console.log(id);
+		
+		$('#idApp_OrcaTrata').hide();
+		
+		$.getJSON(caminho2 + 'cadastros/pesquisar/OrcaTrata.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
+			
+			var options = '<option value="">-- Sel. O.S. --</option>';	
+			for (var i = 0; i < j.length; i++) {
+				if (j[i].id_OrcaTrata == $('#Hidden_idApp_OrcaTrata').val()) {
+					options += '<option value="' + j[i].id_OrcaTrata + '" selected="selected">' + j[i].id_OrcaTrata + ' | ' + j[i].descricao_OrcaTrata + '</option>';
+					buscaPet();
+				} else {
+					options += '<option value="' + j[i].id_OrcaTrata + '">' + j[i].id_OrcaTrata + ' | ' + j[i].descricao_OrcaTrata + '</option>';
+				}
+			}	
+			$('#idApp_OrcaTrata').html(options).show();
+			//$('.carregando').hide();
+			//console.log(options);
+		});
+		
+	} else {
+		$('#idApp_OrcaTrata').html('<option value="">– Selecione um Cliente –</option>');
 	}
 
 }

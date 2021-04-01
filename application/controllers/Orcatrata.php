@@ -204,12 +204,16 @@ class Orcatrata extends CI_Controller {
 		if ($idApp_Consulta) {
 			$_SESSION['Consulta'] = $this->Consulta_model->get_consulta($idApp_Consulta, TRUE);
 			$_SESSION['Consultas'] = $this->Consulta_model->get_consultas($_SESSION['Consulta']['Repeticao'], TRUE);
+
 		}
 		//$data['orcatrata']['RecorrenciasOrca'] = 2;
 		
-		$data['orcatrata']['RecorrenciasOrca'] 	= $_SESSION['Consulta']['OS'];
-		$data['orcatrata']['RepeticaoCons'] 	= $_SESSION['Consulta']['Repeticao'];	
-			/*
+		$dataini = explode(' ', $_SESSION['Consulta']['DataInicio']);
+		$data['orcatrata']['DataEntregaOrca']	=	$this->basico->mascara_data($dataini[0], 'barras');
+		$data['orcatrata']['HoraEntregaOrca']	=	substr($dataini[1], 0, 5);
+		$data['orcatrata']['RecorrenciasOrca'] 	= 	$_SESSION['Consulta']['OS'];
+		$data['orcatrata']['RepeticaoCons'] 	= 	$_SESSION['Consulta']['Repeticao'];	
+		/*
 			echo '<br>';
 			echo "<pre>";
 			print_r($data['orcatrata']['RecorrenciasOrca']);
