@@ -360,7 +360,7 @@ class Orcatrata_model extends CI_Model {
 				TAP.DataValidadeServico,
 				TAP.ConcluidoServico,
 				TAP.idTab_TipoRD,
-				TAP.ProfissionalServico,
+				TAP.ProfissionalServico_1,
 				P.Nome_Prod,
 				TOP2.Opcao,
 				TOP1.Opcao,
@@ -369,7 +369,7 @@ class Orcatrata_model extends CI_Model {
 				(TAP.QtdServico * TAP.ValorServico) AS Subtotal_Servico
 			FROM 
 				App_Servico AS TAP
-					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = TAP.ProfissionalServico
+					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = TAP.ProfissionalServico_1
 					LEFT JOIN Tab_Valor AS V ON V.idTab_Valor = TAP.idTab_Servico
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
@@ -410,10 +410,10 @@ class Orcatrata_model extends CI_Model {
 				TAP.HoraConcluidoProduto,
 				TAP.ConcluidoProduto,
 				TAP.idTab_TipoRD,
-				TAP.ProfissionalProduto,
-				TAP.ProfissionalProduto3,
-				TAP.ProfissionalProduto4,
-				TAP.ProfissionalProduto5,
+				TAP.ProfissionalProduto_1,
+				TAP.ProfissionalProduto_2,
+				TAP.ProfissionalProduto_3,
+				TAP.ProfissionalProduto_4,
 				P.Nome_Prod,
 				TOP2.Opcao,
 				TOP1.Opcao,
@@ -422,10 +422,10 @@ class Orcatrata_model extends CI_Model {
 				(TAP.QtdProduto * TAP.ValorProduto) AS Subtotal_Produto
 			FROM 
 				App_Produto AS TAP
-					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = TAP.ProfissionalProduto
-					LEFT JOIN Sis_Usuario AS SU3 ON SU3.idSis_Usuario = TAP.ProfissionalProduto3
-					LEFT JOIN Sis_Usuario AS SU4 ON SU4.idSis_Usuario = TAP.ProfissionalProduto4
-					LEFT JOIN Sis_Usuario AS SU5 ON SU5.idSis_Usuario = TAP.ProfissionalProduto5
+					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = TAP.ProfissionalProduto_1
+					LEFT JOIN Sis_Usuario AS SU3 ON SU3.idSis_Usuario = TAP.ProfissionalProduto_2
+					LEFT JOIN Sis_Usuario AS SU4 ON SU4.idSis_Usuario = TAP.ProfissionalProduto_3
+					LEFT JOIN Sis_Usuario AS SU5 ON SU5.idSis_Usuario = TAP.ProfissionalProduto_4
 					LEFT JOIN Tab_Valor AS V ON V.idTab_Valor = TAP.idTab_Produto
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
@@ -487,7 +487,7 @@ class Orcatrata_model extends CI_Model {
 				TAP.Aux_App_Produto_3,
 				TAP.Aux_App_Produto_4,
 				TAP.Aux_App_Produto_5,
-				TAP.ProfissionalProduto,
+				TAP.ProfissionalProduto_1,
 				V.Convdesc,
 				P.Nome_Prod,
 				TOP2.Opcao,
@@ -497,7 +497,7 @@ class Orcatrata_model extends CI_Model {
 				(TAP.QtdProduto * TAP.ValorProduto) AS Subtotal_Produto
 			FROM 
 				App_Produto AS TAP
-					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = TAP.ProfissionalProduto
+					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = TAP.ProfissionalProduto_1
 					LEFT JOIN Tab_Valor AS V ON V.idTab_Valor = TAP.idTab_Produto
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto

@@ -269,10 +269,10 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['DataConcluidoProduto'] = $this->input->post('DataConcluidoServico' . $i);
 				$data['servico'][$j]['HoraConcluidoProduto'] = $this->input->post('HoraConcluidoServico' . $i);
 				$data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto3'] = $this->input->post('ProfissionalServico3' . $i);
-				$data['servico'][$j]['ProfissionalProduto4'] = $this->input->post('ProfissionalServico4' . $i);
-				$data['servico'][$j]['ProfissionalProduto5'] = $this->input->post('ProfissionalServico5' . $i);
+				$data['servico'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalServico_1' . $i);
+				$data['servico'][$j]['ProfissionalProduto_2'] = $this->input->post('ProfissionalServico_2' . $i);
+				$data['servico'][$j]['ProfissionalProduto_3'] = $this->input->post('ProfissionalServico_3' . $i);
+				$data['servico'][$j]['ProfissionalProduto_4'] = $this->input->post('ProfissionalServico_4' . $i);
 				
 				(!$data['servico'][$j]['ConcluidoProduto']) ? $data['servico'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -316,7 +316,7 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				$data['produto'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalProduto' . $i);
+				$data['produto'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalProduto_1' . $i);
 				
 				(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -441,11 +441,11 @@ class Orcatrata extends CI_Controller {
 		$data['select']['QuitadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['Quitado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico3'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico4'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico5'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalProduto'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_1'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_2'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_3'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
         $data['select']['Produto'] = $this->Basico_model->select_produtos3($data['orcatrata']['Tipo_Orca']);
@@ -1367,10 +1367,10 @@ class Orcatrata extends CI_Controller {
 										'idTab_Produto' 		=> $data['update']['produto']['baixa'][$k]['idTab_Produto'],
 										'idTab_Valor_Produto' 	=> $data['update']['produto']['baixa'][$k]['idTab_Valor_Produto'],
 										'idTab_Produtos_Produto'=> $data['update']['produto']['baixa'][$k]['idTab_Produtos_Produto'],
-										'ProfissionalProduto' 	=> $data['update']['produto']['baixa'][$k]['ProfissionalProduto'],
-										'ProfissionalProduto3' 	=> $data['update']['produto']['baixa'][$k]['ProfissionalProduto3'],
-										'ProfissionalProduto4' 	=> $data['update']['produto']['baixa'][$k]['ProfissionalProduto4'],
-										'ProfissionalProduto5' 	=> $data['update']['produto']['baixa'][$k]['ProfissionalProduto5'],
+										'ProfissionalProduto_1' 	=> $data['update']['produto']['baixa'][$k]['ProfissionalProduto_1'],
+										'ProfissionalProduto_2' 	=> $data['update']['produto']['baixa'][$k]['ProfissionalProduto_2'],
+										'ProfissionalProduto_3' 	=> $data['update']['produto']['baixa'][$k]['ProfissionalProduto_3'],
+										'ProfissionalProduto_4' 	=> $data['update']['produto']['baixa'][$k]['ProfissionalProduto_4'],
 										'QtdProduto' 			=> $data['update']['produto']['baixa'][$k]['QtdProduto'],
 										'QtdIncrementoProduto' 	=> $data['update']['produto']['baixa'][$k]['QtdIncrementoProduto'],
 										'ObsProduto' 			=> $data['update']['produto']['baixa'][$k]['ObsProduto'],
@@ -1674,10 +1674,10 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['DataConcluidoProduto'] = $this->input->post('DataConcluidoServico' . $i);
 				$data['servico'][$j]['HoraConcluidoProduto'] = $this->input->post('HoraConcluidoServico' . $i);
 				$data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto3'] = $this->input->post('ProfissionalServico3' . $i);
-				$data['servico'][$j]['ProfissionalProduto4'] = $this->input->post('ProfissionalServico4' . $i);
-				$data['servico'][$j]['ProfissionalProduto5'] = $this->input->post('ProfissionalServico5' . $i);
+				$data['servico'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalServico_1' . $i);
+				$data['servico'][$j]['ProfissionalProduto_2'] = $this->input->post('ProfissionalServico_2' . $i);
+				$data['servico'][$j]['ProfissionalProduto_3'] = $this->input->post('ProfissionalServico_3' . $i);
+				$data['servico'][$j]['ProfissionalProduto_4'] = $this->input->post('ProfissionalServico_4' . $i);
 				
 				(!$data['servico'][$j]['ConcluidoProduto']) ? $data['servico'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -1721,7 +1721,7 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				$data['produto'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalProduto' . $i);
+				$data['produto'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalProduto_1' . $i);
 				
 				(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -1875,11 +1875,11 @@ class Orcatrata extends CI_Controller {
 		$data['select']['QuitadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['Quitado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico3'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico4'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico5'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalProduto'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_1'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_2'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_3'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
         $data['select']['Produto'] = $this->Basico_model->select_produtos3($data['orcatrata']['Tipo_Orca']);
@@ -2735,7 +2735,7 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['ObsServico'] = $this->input->post('ObsServico' . $i);
                 $data['servico'][$j]['DataValidadeServico'] = $this->input->post('DataValidadeServico' . $i);
 				$data['servico'][$j]['ConcluidoServico'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalServico'] = $this->input->post('ProfissionalServico' . $i);
+				$data['servico'][$j]['ProfissionalServico_1'] = $this->input->post('ProfissionalServico_1' . $i);
                 $j++;
             }
 
@@ -2764,10 +2764,10 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['DataConcluidoProduto'] = $this->input->post('DataConcluidoServico' . $i);
 				$data['servico'][$j]['HoraConcluidoProduto'] = $this->input->post('HoraConcluidoServico' . $i);
 				$data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto3'] = $this->input->post('ProfissionalServico3' . $i);
-				$data['servico'][$j]['ProfissionalProduto4'] = $this->input->post('ProfissionalServico4' . $i);
-				$data['servico'][$j]['ProfissionalProduto5'] = $this->input->post('ProfissionalServico5' . $i);
+				$data['servico'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalServico_1' . $i);
+				$data['servico'][$j]['ProfissionalProduto_2'] = $this->input->post('ProfissionalServico_2' . $i);
+				$data['servico'][$j]['ProfissionalProduto_3'] = $this->input->post('ProfissionalServico_3' . $i);
+				$data['servico'][$j]['ProfissionalProduto_4'] = $this->input->post('ProfissionalServico_4' . $i);
 				
 				(!$data['servico'][$j]['ConcluidoProduto']) ? $data['servico'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -2812,7 +2812,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['CanceladoProduto'] = $this->input->post('CanceladoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				$data['produto'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalProduto' . $i);
+				$data['produto'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalProduto_1' . $i);
 				
 				(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -2940,11 +2940,11 @@ class Orcatrata extends CI_Controller {
         #$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico3'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico4'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico5'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalProduto'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_1'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_2'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_3'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario();
@@ -3859,10 +3859,10 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['DataConcluidoProduto'] = $this->input->post('DataConcluidoServico' . $i);
 				$data['servico'][$j]['HoraConcluidoProduto'] = $this->input->post('HoraConcluidoServico' . $i);
                 $data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto3'] = $this->input->post('ProfissionalServico3' . $i);
-				$data['servico'][$j]['ProfissionalProduto4'] = $this->input->post('ProfissionalServico4' . $i);
-				$data['servico'][$j]['ProfissionalProduto5'] = $this->input->post('ProfissionalServico5' . $i);
+				$data['servico'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalServico_1' . $i);
+				$data['servico'][$j]['ProfissionalProduto_2'] = $this->input->post('ProfissionalServico_2' . $i);
+				$data['servico'][$j]['ProfissionalProduto_3'] = $this->input->post('ProfissionalServico_3' . $i);
+				$data['servico'][$j]['ProfissionalProduto_4'] = $this->input->post('ProfissionalServico_4' . $i);
 				
 				(!$data['servico'][$j]['ConcluidoProduto']) ? $data['servico'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -3907,7 +3907,7 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				$data['produto'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalProduto' . $i);
+				$data['produto'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalProduto_1' . $i);
 				
 				(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -4163,11 +4163,11 @@ class Orcatrata extends CI_Controller {
         $data['select']['Quitado'] = $this->Basico_model->select_status_sn();
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico3'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico4'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico5'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalProduto'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_1'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_2'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_3'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario();
@@ -4708,7 +4708,7 @@ class Orcatrata extends CI_Controller {
 
                 $max = count($data['update']['servico']['alterar']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto'];
+                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto_1'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto_1'];
 					$data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
 					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
@@ -5504,7 +5504,7 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['ObsServico'] = $this->input->post('ObsServico' . $i);
 				$data['servico'][$j]['DataValidadeServico'] = $this->input->post('DataValidadeServico' . $i);
                 $data['servico'][$j]['ConcluidoServico'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalServico'] = $this->input->post('ProfissionalServico' . $i);
+				$data['servico'][$j]['ProfissionalServico_1'] = $this->input->post('ProfissionalServico_1' . $i);
                 $j++;
             }
 
@@ -5534,10 +5534,10 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['DataConcluidoProduto'] = $this->input->post('DataConcluidoServico' . $i);
 				$data['servico'][$j]['HoraConcluidoProduto'] = $this->input->post('HoraConcluidoServico' . $i);
                 $data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto3'] = $this->input->post('ProfissionalServico3' . $i);
-				$data['servico'][$j]['ProfissionalProduto4'] = $this->input->post('ProfissionalServico4' . $i);
-				$data['servico'][$j]['ProfissionalProduto5'] = $this->input->post('ProfissionalServico5' . $i);
+				$data['servico'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalServico_1' . $i);
+				$data['servico'][$j]['ProfissionalProduto_2'] = $this->input->post('ProfissionalServico_2' . $i);
+				$data['servico'][$j]['ProfissionalProduto_3'] = $this->input->post('ProfissionalServico_3' . $i);
+				$data['servico'][$j]['ProfissionalProduto_4'] = $this->input->post('ProfissionalServico_4' . $i);
 				
 				(!$data['servico'][$j]['ConcluidoProduto']) ? $data['servico'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -5583,7 +5583,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['CanceladoProduto'] = $this->input->post('CanceladoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				$data['produto'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalProduto' . $i);
+				$data['produto'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalProduto_1' . $i);
 				
 				(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -5822,11 +5822,11 @@ class Orcatrata extends CI_Controller {
         $data['select']['Quitado'] = $this->Basico_model->select_status_sn();
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico3'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico4'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico5'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalProduto'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_1'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_2'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_3'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario();
@@ -6345,7 +6345,7 @@ class Orcatrata extends CI_Controller {
 
                 $max = count($data['update']['servico']['alterar']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto'];
+                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto_1'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto_1'];
 					$data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
 					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
@@ -6573,7 +6573,7 @@ class Orcatrata extends CI_Controller {
                 $max = count($data['update']['produto']['alterar']);
                 for($j=0;$j<$max;$j++) {
 				
-                    $data['update']['produto']['alterar'][$j]['ProfissionalProduto'] = $data['update']['produto']['alterar'][$j]['ProfissionalProduto'];
+                    $data['update']['produto']['alterar'][$j]['ProfissionalProduto_1'] = $data['update']['produto']['alterar'][$j]['ProfissionalProduto_1'];
 					$data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'];
 					$data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'] = $data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'];
@@ -7145,10 +7145,10 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['DataConcluidoProduto'] = $this->input->post('DataConcluidoServico' . $i);
 				$data['servico'][$j]['HoraConcluidoProduto'] = $this->input->post('HoraConcluidoServico' . $i);
                 $data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto3'] = $this->input->post('ProfissionalServico3' . $i);
-				$data['servico'][$j]['ProfissionalProduto4'] = $this->input->post('ProfissionalServico4' . $i);
-				$data['servico'][$j]['ProfissionalProduto5'] = $this->input->post('ProfissionalServico5' . $i);
+				$data['servico'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalServico_1' . $i);
+				$data['servico'][$j]['ProfissionalProduto_2'] = $this->input->post('ProfissionalServico_2' . $i);
+				$data['servico'][$j]['ProfissionalProduto_3'] = $this->input->post('ProfissionalServico_3' . $i);
+				$data['servico'][$j]['ProfissionalProduto_4'] = $this->input->post('ProfissionalServico_4' . $i);
 				
 				(!$data['servico'][$j]['ConcluidoProduto']) ? $data['servico'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -7194,7 +7194,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['CanceladoProduto'] = $this->input->post('CanceladoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				$data['produto'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalProduto' . $i);
+				$data['produto'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalProduto_1' . $i);
 				
 				(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -7485,11 +7485,11 @@ class Orcatrata extends CI_Controller {
 		}
 		*/
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico3'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico4'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico5'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalProduto'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_1'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_2'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_3'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario();
@@ -7916,7 +7916,7 @@ class Orcatrata extends CI_Controller {
 
                 $max = count($data['update']['servico']['alterar']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto'];
+                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto_1'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto_1'];
 					$data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
 					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
@@ -8424,10 +8424,10 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['DataConcluidoProduto'] = $this->input->post('DataConcluidoServico' . $i);
 				$data['servico'][$j]['HoraConcluidoProduto'] = $this->input->post('HoraConcluidoServico' . $i);
                 $data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto3'] = $this->input->post('ProfissionalServico3' . $i);
-				$data['servico'][$j]['ProfissionalProduto4'] = $this->input->post('ProfissionalServico4' . $i);
-				$data['servico'][$j]['ProfissionalProduto5'] = $this->input->post('ProfissionalServico5' . $i);
+				$data['servico'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalServico_1' . $i);
+				$data['servico'][$j]['ProfissionalProduto_2'] = $this->input->post('ProfissionalServico_2' . $i);
+				$data['servico'][$j]['ProfissionalProduto_3'] = $this->input->post('ProfissionalServico_3' . $i);
+				$data['servico'][$j]['ProfissionalProduto_4'] = $this->input->post('ProfissionalServico_4' . $i);
 				
 				(!$data['servico'][$j]['ConcluidoProduto']) ? $data['servico'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -8473,7 +8473,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['CanceladoProduto'] = $this->input->post('CanceladoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				$data['produto'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalProduto' . $i);
+				$data['produto'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalProduto_1' . $i);
 				
 				(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -8700,11 +8700,11 @@ class Orcatrata extends CI_Controller {
         $data['select']['Quitado'] = $this->Basico_model->select_status_sn();
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico3'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico4'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico5'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalProduto'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_1'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_2'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_3'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario();
@@ -9159,8 +9159,8 @@ class Orcatrata extends CI_Controller {
 
                 $max = count($data['update']['servico']['alterar']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto'];
-                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto3'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto3'];
+                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto_1'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto_1'];
+                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto_2'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto_2'];
 					$data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
 					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
@@ -9265,7 +9265,7 @@ class Orcatrata extends CI_Controller {
                 $max = count($data['update']['produto']['alterar']);
                 for($j=0;$j<$max;$j++) {
 
-					$data['update']['produto']['alterar'][$j]['ProfissionalProduto'] = $data['update']['produto']['alterar'][$j]['ProfissionalProduto'];
+					$data['update']['produto']['alterar'][$j]['ProfissionalProduto_1'] = $data['update']['produto']['alterar'][$j]['ProfissionalProduto_1'];
 					$data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'];
 					$data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'] = $data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'];
@@ -9580,7 +9580,8 @@ class Orcatrata extends CI_Controller {
 				if($data['orcatrata']['idApp_Cliente'] == 0 || $data['orcatrata']['idApp_Cliente'] == 1 || $data['orcatrata']['idApp_Cliente'] == 150001 || $_SESSION['log']['idSis_Empresa'] == 5){
 					redirect(base_url() . 'pedidos/pedidos/' . $data['msg']);
 				}else{
-					redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
+					//redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
+					redirect(base_url() . 'OrcatrataPrint/imprimir/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
 				}
 				exit();
             }
@@ -9745,7 +9746,7 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['ObsServico'] = $this->input->post('ObsServico' . $i);
                 $data['servico'][$j]['DataValidadeServico'] = $this->input->post('DataValidadeServico' . $i);
 				$data['servico'][$j]['ConcluidoServico'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalServico'] = $this->input->post('ProfissionalServico' . $i);
+				$data['servico'][$j]['ProfissionalServico_1'] = $this->input->post('ProfissionalServico_1' . $i);
                 $j++;
             }
 
@@ -9774,10 +9775,10 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['DataConcluidoProduto'] = $this->input->post('DataConcluidoServico' . $i);
 				$data['servico'][$j]['HoraConcluidoProduto'] = $this->input->post('HoraConcluidoServico' . $i);
 				$data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto3'] = $this->input->post('ProfissionalServico3' . $i);
-				$data['servico'][$j]['ProfissionalProduto4'] = $this->input->post('ProfissionalServico4' . $i);
-				$data['servico'][$j]['ProfissionalProduto5'] = $this->input->post('ProfissionalServico5' . $i);
+				$data['servico'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalServico_1' . $i);
+				$data['servico'][$j]['ProfissionalProduto_2'] = $this->input->post('ProfissionalServico_2' . $i);
+				$data['servico'][$j]['ProfissionalProduto_3'] = $this->input->post('ProfissionalServico_3' . $i);
+				$data['servico'][$j]['ProfissionalProduto_4'] = $this->input->post('ProfissionalServico_4' . $i);
 				
 				(!$data['servico'][$j]['ConcluidoProduto']) ? $data['servico'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -9822,7 +9823,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['CanceladoProduto'] = $this->input->post('CanceladoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				$data['produto'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalProduto' . $i);
+				$data['produto'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalProduto_1' . $i);
 				
 				(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -9980,11 +9981,11 @@ class Orcatrata extends CI_Controller {
         #$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
 		$data['select']['idApp_Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico3'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico4'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico5'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalProduto'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_1'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_2'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_3'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario();
@@ -10837,7 +10838,7 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['ObsServico'] = $this->input->post('ObsServico' . $i);
 				$data['servico'][$j]['DataValidadeServico'] = $this->input->post('DataValidadeServico' . $i);
                 $data['servico'][$j]['ConcluidoServico'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalServico'] = $this->input->post('ProfissionalServico' . $i);
+				$data['servico'][$j]['ProfissionalServico_1'] = $this->input->post('ProfissionalServico_1' . $i);
                 $j++;
             }
 
@@ -10867,10 +10868,10 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['DataConcluidoProduto'] = $this->input->post('DataConcluidoServico' . $i);
 				$data['servico'][$j]['HoraConcluidoProduto'] = $this->input->post('HoraConcluidoServico' . $i);
                 $data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
-				$data['servico'][$j]['ProfissionalProduto3'] = $this->input->post('ProfissionalServico3' . $i);
-				$data['servico'][$j]['ProfissionalProduto4'] = $this->input->post('ProfissionalServico4' . $i);
-				$data['servico'][$j]['ProfissionalProduto5'] = $this->input->post('ProfissionalServico5' . $i);
+				$data['servico'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalServico_1' . $i);
+				$data['servico'][$j]['ProfissionalProduto_2'] = $this->input->post('ProfissionalServico_2' . $i);
+				$data['servico'][$j]['ProfissionalProduto_3'] = $this->input->post('ProfissionalServico_3' . $i);
+				$data['servico'][$j]['ProfissionalProduto_4'] = $this->input->post('ProfissionalServico_4' . $i);
 				
 				(!$data['servico'][$j]['ConcluidoProduto']) ? $data['servico'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -10916,7 +10917,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['CanceladoProduto'] = $this->input->post('CanceladoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				$data['produto'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalProduto' . $i);
+				$data['produto'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalProduto_1' . $i);
 				
 				(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -11149,11 +11150,11 @@ class Orcatrata extends CI_Controller {
         $data['select']['Quitado'] = $this->Basico_model->select_status_sn();
 		$data['select']['idApp_Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico3'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico4'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico5'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalProduto'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_1'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_2'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_3'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario();
+		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario();
@@ -11673,7 +11674,7 @@ class Orcatrata extends CI_Controller {
                 $max = count($data['update']['servico']['alterar']);
                 for($j=0;$j<$max;$j++) {
 				
-                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto'];
+                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto_1'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto_1'];
 					$data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
 					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
@@ -11900,7 +11901,7 @@ class Orcatrata extends CI_Controller {
 
                 $max = count($data['update']['produto']['alterar']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['produto']['alterar'][$j]['ProfissionalProduto'] = $data['update']['produto']['alterar'][$j]['ProfissionalProduto'];
+                    $data['update']['produto']['alterar'][$j]['ProfissionalProduto_1'] = $data['update']['produto']['alterar'][$j]['ProfissionalProduto_1'];
 					$data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'];
 					$data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'] = $data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'];
@@ -16156,7 +16157,7 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['ObsServico'] = $this->input->post('ObsServico' . $i);
 				$data['servico'][$j]['DataValidadeServico'] = $this->input->post('DataValidadeServico' . $i);
                 $data['servico'][$j]['ConcluidoServico'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalServico'] = $this->input->post('ProfissionalServico' . $i);
+				$data['servico'][$j]['ProfissionalServico_1'] = $this->input->post('ProfissionalServico_1' . $i);
                 $j++;
             }
 
@@ -16195,7 +16196,7 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				$data['produto'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalProduto' . $i);
+				$data['produto'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalProduto_1' . $i);
 				
 				(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -16563,7 +16564,7 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['ObsServico'] = $this->input->post('ObsServico' . $i);
 				$data['servico'][$j]['DataValidadeServico'] = $this->input->post('DataValidadeServico' . $i);
                 $data['servico'][$j]['ConcluidoServico'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalServico'] = $this->input->post('ProfissionalServico' . $i);
+				$data['servico'][$j]['ProfissionalServico_1'] = $this->input->post('ProfissionalServico_1' . $i);
                 $j++;
             }
 
@@ -16602,7 +16603,7 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				$data['produto'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalProduto' . $i);
+				$data['produto'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalProduto_1' . $i);
 				
 				(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -16969,7 +16970,7 @@ class Orcatrata extends CI_Controller {
                 $data['servico'][$j]['ObsServico'] = $this->input->post('ObsServico' . $i);
 				$data['servico'][$j]['DataValidadeServico'] = $this->input->post('DataValidadeServico' . $i);
                 $data['servico'][$j]['ConcluidoServico'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalServico'] = $this->input->post('ProfissionalServico' . $i);
+				$data['servico'][$j]['ProfissionalServico_1'] = $this->input->post('ProfissionalServico_1' . $i);
                 $j++;
             }
 
@@ -17009,7 +17010,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['StatusComissao'] = $this->input->post('StatusComissao' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				$data['produto'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalProduto' . $i);
+				$data['produto'][$j]['ProfissionalProduto_1'] = $this->input->post('ProfissionalProduto_1' . $i);
 				
 				(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
 				$data['radio'] = array(

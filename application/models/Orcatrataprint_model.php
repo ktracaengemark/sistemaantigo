@@ -387,15 +387,25 @@ class Orcatrataprint_model extends CI_Model {
 				TCO.Convenio,
 				V.Convdesc,
 				TFO.NomeFornecedor,
-				SU.Nome,
+				SU1.Nome,
+				SU2.Nome,
+				SU3.Nome,
+				SU4.Nome,
 				CONCAT(IFNULL(PV.idApp_Produto,""), " - " , IFNULL(PV.ConcluidoProduto,""), " - Obs.: " , IFNULL(PV.ObsProduto,"")) AS idApp_Produto,
 				CONCAT(IFNULL(PV.QtdProduto,"")) AS QtdProduto,
-            	CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TPM.Promocao,""), " - ", IFNULL(SU.Nome,"")) AS NomeProduto,
+            	CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TPM.Promocao,"")) AS NomeProduto,
+            	CONCAT(IFNULL(SU1.Nome,"")) AS Prof1,
+            	CONCAT(IFNULL(SU2.Nome,"")) AS Prof2,
+            	CONCAT(IFNULL(SU3.Nome,"")) AS Prof3,
+            	CONCAT(IFNULL(SU4.Nome,"")) AS Prof4,
             	PV.ValorProduto
 				
             FROM
             	App_Produto AS PV
-					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = PV.ProfissionalProduto
+					LEFT JOIN Sis_Usuario AS SU1 ON SU1.idSis_Usuario = PV.ProfissionalProduto_1
+					LEFT JOIN Sis_Usuario AS SU2 ON SU2.idSis_Usuario = PV.ProfissionalProduto_2
+					LEFT JOIN Sis_Usuario AS SU3 ON SU3.idSis_Usuario = PV.ProfissionalProduto_3
+					LEFT JOIN Sis_Usuario AS SU4 ON SU4.idSis_Usuario = PV.ProfissionalProduto_4
             		LEFT JOIN Tab_Valor AS V ON V.idTab_Valor = PV.idTab_Produto
 					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao

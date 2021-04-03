@@ -6644,30 +6644,30 @@ $(document).ready(function () {
 									</div>\
 									<div class="row">\
 										<div class="col-md-3">\
-											<label for="ProfissionalServico'+ps+'">Profissional 1:</label>\
-											<select data-placeholder="Selecione uma opção..." class="form-control Chosen200"\
-													 id="listadinamica_prof'+ps+'" name="ProfissionalServico'+ps+'">\
+											<label for="ProfissionalServico_1'+ps+'">Profissional 1:</label>\
+											<select data-placeholder="Selecione uma opção..." class="form-control Chosen_1"\
+													 id="listadinamica_prof_1'+ps+'" name="ProfissionalServico_1'+ps+'">\
 												<option value=""></option>\
 											</select>\
 										</div>\
 										<div class="col-md-3">\
-											<label for="ProfissionalServico3'+ps+'">Profissional 2:</label>\
-											<select data-placeholder="Selecione uma opção..." class="form-control Chosen300"\
-													 id="listadinamica_prof3'+ps+'" name="ProfissionalServico3'+ps+'">\
+											<label for="ProfissionalServico_2'+ps+'">Profissional 2:</label>\
+											<select data-placeholder="Selecione uma opção..." class="form-control Chosen_2"\
+													 id="listadinamica_prof_2'+ps+'" name="ProfissionalServico_2'+ps+'">\
 												<option value=""></option>\
 											</select>\
 										</div>\
 										<div class="col-md-3">\
-											<label for="ProfissionalServico4'+ps+'">Profissional 3:</label>\
-											<select data-placeholder="Selecione uma opção..." class="form-control Chosen400"\
-													 id="listadinamica_prof4'+ps+'" name="ProfissionalServico4'+ps+'">\
+											<label for="ProfissionalServico_3'+ps+'">Profissional 3:</label>\
+											<select data-placeholder="Selecione uma opção..." class="form-control Chosen_3"\
+													 id="listadinamica_prof_3'+ps+'" name="ProfissionalServico_3'+ps+'">\
 												<option value=""></option>\
 											</select>\
 										</div>\
 										<div class="col-md-3">\
-											<label for="ProfissionalServico5'+ps+'">Profissional 4:</label>\
-											<select data-placeholder="Selecione uma opção..." class="form-control Chosen500"\
-													 id="listadinamica_prof5'+ps+'" name="ProfissionalServico5'+ps+'">\
+											<label for="ProfissionalServico_4'+ps+'">Profissional 4:</label>\
+											<select data-placeholder="Selecione uma opção..." class="form-control Chosen_4"\
+													 id="listadinamica_prof_4'+ps+'" name="ProfissionalServico_4'+ps+'">\
 												<option value=""></option>\
 											</select>\
 										</div>\
@@ -6769,7 +6769,7 @@ $(document).ready(function () {
         });
 		
 		//get a reference to the select element
-        $select2 = $('#listadinamica_prof'+ps);
+        $select_1 = $('#listadinamica_prof_1'+ps);
 
         //request the JSON data and parse into the select element
         $.ajax({
@@ -6778,14 +6778,14 @@ $(document).ready(function () {
             type: "GET",
             success: function (data) {
                 //clear the current content of the select
-                $select2.html('');
+                $select_1.html('');
                 //iterate over the data and append a select option
-                $select2.append('<option value="">-- Sel. Profis. --</option>');
+                $select_1.append('<option value="">-- Sel. Profis. --</option>');
                 $.each(data, function (key, val) {
                     //alert(val.id);
-                    $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
+                    $select_1.append('<option value="' + val.id + '">' + val.name + '</option>');
                 })
-                $('.Chosen200').chosen({
+                $('.Chosen_1').chosen({
                     disable_search_threshold: 10,
                     multiple_text: "Selecione uma ou mais opções",
                     single_text: "Selecione uma opção",
@@ -6796,13 +6796,13 @@ $(document).ready(function () {
             error: function () {
                 //alert('erro listadinamicaB');
                 //if there is an error append a 'none available' option
-                $select2.html('<option id="-1">ERRO</option>');
+                $select_1.html('<option id="-1">ERRO</option>');
             }
 
         });	
 		
 		//get a reference to the select element
-        $select3 = $('#listadinamica_prof3'+ps);
+        $select_2 = $('#listadinamica_prof_2'+ps);
 
         //request the JSON data and parse into the select element
         $.ajax({
@@ -6811,14 +6811,14 @@ $(document).ready(function () {
             type: "GET",
             success: function (data) {
                 //clear the current content of the select
-                $select3.html('');
+                $select_2.html('');
                 //iterate over the data and append a select option
-                $select3.append('<option value="">-- Sel. Profis. --</option>');
+                $select_2.append('<option value="">-- Sel. Profis. --</option>');
                 $.each(data, function (key, val) {
                     //alert(val.id);
-                    $select3.append('<option value="' + val.id + '">' + val.name + '</option>');
+                    $select_2.append('<option value="' + val.id + '">' + val.name + '</option>');
                 })
-                $('.Chosen300').chosen({
+                $('.Chosen_2').chosen({
                     disable_search_threshold: 10,
                     multiple_text: "Selecione uma ou mais opções",
                     single_text: "Selecione uma opção",
@@ -6829,13 +6829,13 @@ $(document).ready(function () {
             error: function () {
                 //alert('erro listadinamicaB');
                 //if there is an error append a 'none available' option
-                $select3.html('<option id="-1">ERRO</option>');
+                $select_2.html('<option id="-1">ERRO</option>');
             }
 
         });	
 		
 		//get a reference to the select element
-        $select4 = $('#listadinamica_prof4'+ps);
+        $select_3 = $('#listadinamica_prof_3'+ps);
 
         //request the JSON data and parse into the select element
         $.ajax({
@@ -6844,14 +6844,14 @@ $(document).ready(function () {
             type: "GET",
             success: function (data) {
                 //clear the current content of the select
-                $select4.html('');
+                $select_3.html('');
                 //iterate over the data and append a select option
-                $select4.append('<option value="">-- Sel. Profis. --</option>');
+                $select_3.append('<option value="">-- Sel. Profis. --</option>');
                 $.each(data, function (key, val) {
                     //alert(val.id);
-                    $select4.append('<option value="' + val.id + '">' + val.name + '</option>');
+                    $select_3.append('<option value="' + val.id + '">' + val.name + '</option>');
                 })
-                $('.Chosen400').chosen({
+                $('.Chosen_3').chosen({
                     disable_search_threshold: 10,
                     multiple_text: "Selecione uma ou mais opções",
                     single_text: "Selecione uma opção",
@@ -6862,13 +6862,13 @@ $(document).ready(function () {
             error: function () {
                 //alert('erro listadinamicaB');
                 //if there is an error append a 'none available' option
-                $select4.html('<option id="-1">ERRO</option>');
+                $select_3.html('<option id="-1">ERRO</option>');
             }
 
         });	
 		
 		//get a reference to the select element
-        $select5 = $('#listadinamica_prof5'+ps);
+        $select_4 = $('#listadinamica_prof_4'+ps);
 
         //request the JSON data and parse into the select element
         $.ajax({
@@ -6877,14 +6877,14 @@ $(document).ready(function () {
             type: "GET",
             success: function (data) {
                 //clear the current content of the select
-                $select5.html('');
+                $select_4.html('');
                 //iterate over the data and append a select option
-                $select5.append('<option value="">-- Sel. Profis. --</option>');
+                $select_4.append('<option value="">-- Sel. Profis. --</option>');
                 $.each(data, function (key, val) {
                     //alert(val.id);
-                    $select5.append('<option value="' + val.id + '">' + val.name + '</option>');
+                    $select_4.append('<option value="' + val.id + '">' + val.name + '</option>');
                 })
-                $('.Chosen500').chosen({
+                $('.Chosen_4').chosen({
                     disable_search_threshold: 10,
                     multiple_text: "Selecione uma ou mais opções",
                     single_text: "Selecione uma opção",
@@ -6895,7 +6895,7 @@ $(document).ready(function () {
             error: function () {
                 //alert('erro listadinamicaB');
                 //if there is an error append a 'none available' option
-                $select5.html('<option id="-1">ERRO</option>');
+                $select_4.html('<option id="-1">ERRO</option>');
             }
 
         });		

@@ -355,9 +355,13 @@
 														</td>																			
 														<td class="col-md-10" scope="col">
 															<h4>
-																<?php echo $servico[$i]['NomeProduto'] ?><br>
-																<?php if(!empty($servico[$i]['ObsProduto'])) echo 'Obs: ' . $servico[$i]['ObsProduto'] ?>
-															</h4>
+																<?php echo $servico[$i]['NomeProduto']  ?>
+															</h4>	
+																<?php if(!empty($servico[$i]['ObsProduto'])) echo 'Obs: ' . $servico[$i]['ObsProduto'] . '<br> '?>
+																<?php if(!empty($servico[$i]['Prof1'])) echo 'Prof1: ' . $servico[$i]['Prof1'] . ' | ' ?> 
+																<?php if(!empty($servico[$i]['Prof2'])) echo 'Prof2: ' . $servico[$i]['Prof2'] . ' | ' ?> 
+																<?php if(!empty($servico[$i]['Prof3'])) echo 'Prof3: ' . $servico[$i]['Prof3'] . ' | ' ?>
+																<?php if(!empty($servico[$i]['Prof3'])) echo 'Prof4: ' . $servico[$i]['Prof4'] ?> 
 														</td>
 														<td class="col-md-1" scope="col">
 															<?php echo $servico[$i]['SubtotalProduto'] ?>
