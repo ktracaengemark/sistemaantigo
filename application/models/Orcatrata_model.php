@@ -297,7 +297,15 @@ class Orcatrata_model extends CI_Model {
 
         return $query[0];
     }
-	
+
+    public function get_pet($data) {
+        $query = $this->db->query('SELECT * FROM App_ClientePet WHERE idApp_ClientePet = ' . $data);
+
+        $query = $query->result_array();
+
+        return $query[0];
+    }
+		
     public function get_fornecedor($data) {
         $query = $this->db->query('SELECT * FROM App_Fornecedor WHERE idApp_Fornecedor = ' . $data);
 

@@ -48,7 +48,7 @@ class Consulta_model extends CI_Model {
 		
         $query = $query->result_array();
 
-        return $query;
+        return $query[0];
     }
 
     public function get_consulta_repeticao($id, $repeticao, $quais, $dataini) {
@@ -156,13 +156,6 @@ class Consulta_model extends CI_Model {
         return $query;
     }
 	
-    public function update_procedimento($data) {
-
-        $query = $this->db->update_batch('App_Consulta', $data, 'idApp_Consulta');
-        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
-
-    }
-	
     public function get_consulta_posterior($id, $repeticao, $quais, $dia) {
 		
 		if($quais == 1){
@@ -197,6 +190,27 @@ class Consulta_model extends CI_Model {
 
         return $query;
     }	
+    
+	public function get_orcatrata($data) {
+        $query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_OrcaTrata
+			WHERE 
+				idApp_OrcaTrata = ' . $data
+		);
+		
+        $query = $query->result_array();
+
+        return $query[0];
+    }
+	
+    public function update_procedimento($data) {
+
+        $query = $this->db->update_batch('App_Consulta', $data, 'idApp_Consulta');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
 
     public function update_consulta($data, $id) {
 

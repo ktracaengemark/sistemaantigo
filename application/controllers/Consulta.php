@@ -1894,8 +1894,15 @@ class Consulta extends CI_Controller {
 
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Consulta'], TRUE);
 
-
 			$data['update']['query']['bd'] = $this->Consulta_model->update_consulta($data['query'], $data['query']['idApp_Consulta']);
+			
+			if($data['query']['idApp_OrcaTrata'] != 0){
+				$data['orca']['idApp_ClientePet']	= $data['query']['idApp_ClientePet'];
+				$data['orca']['DataEntregaOrca']	= $dataini_alt;
+				$data['orca']['HoraEntregaOrca']	= $horaini_alt;
+				
+				$data['update']['orca']['bd'] 	= $this->Orcatrata_model->update_orcatrata($data['orca'], $data['query']['idApp_OrcaTrata']);
+			}
 			
 			$_SESSION['Repeticao'] = $data['repeticao'] = $this->Consulta_model->get_consulta_posterior($data['query']['idApp_Consulta'], $_SESSION['Consulta']['Repeticao'], $data['alterar']['Quais'], $dataini_alt);
 
@@ -1926,6 +1933,17 @@ class Consulta extends CI_Controller {
 						$data['repeticao'][$j]['idTab_TipoConsulta'] 	= $data['query']['idTab_TipoConsulta'];
 						
 						$data['update']['repeticao'][$j]['bd'] 			= $this->Consulta_model->update_consulta($data['repeticao'][$j], $data['repeticao'][$j]['idApp_Consulta']);
+						
+						if($data['repeticao'][$j]['idApp_OrcaTrata'] != 0){
+							
+							$data['orca'][$j]['idApp_ClientePet'] 	= $data['query']['idApp_ClientePet'];
+							$data['orca'][$j]['DataEntregaOrca'] 	= $dataatualinicio[$j];
+							$data['orca'][$j]['HoraEntregaOrca'] 	= $horaini_alt;
+							
+							$data['update']['orca']['bd'] 			= $this->Orcatrata_model->update_orcatrata($data['orca'][$j], $data['repeticao'][$j]['idApp_OrcaTrata']);
+
+						}
+						
 					}
 				}
 			}
@@ -1952,16 +1970,7 @@ class Consulta extends CI_Controller {
 				}
 
 			}			
-			/*		
-					echo '<br>';
-          echo "<pre>";
-		  
-          print_r('contagem orca = ' . $max_orcatrata);
-		  echo '<br>';
-          print_r($_SESSION['OrcaTrata']);
-          echo "</pre>";
-          exit ();
-			*/
+
 
 			if ($data['auditoriaitem'] === FALSE) {
 				$data['msg'] = '';

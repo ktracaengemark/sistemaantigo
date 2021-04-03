@@ -252,6 +252,7 @@
 													id="idApp_ClienteDep" name="idApp_ClienteDep">
 												<option value="">-- Sel. Dependente --</option>
 												<?php
+												
 												foreach ($select['idApp_ClienteDep'] as $key => $row) {
 													if ($query['idApp_ClienteDep'] == $key) {
 														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -259,18 +260,30 @@
 														echo '<option value="' . $key . '">' . $row . '</option>';
 													}
 												}
+												
 												?>
 											</select>
 											<?php echo form_error('idApp_ClienteDep'); ?>
 										</div>
 									<?php } ?>
 									<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
+										
+										<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $query['idApp_ClientePet']; ?>" />
+										<div class="col-md-4 text-left">
+											<label  for="idApp_ClientePet">Pet</label>
+											<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_ClientePet" name="idApp_ClientePet">
+												<option value=""></option>
+											</select>
+											<span class="modal-title" id="Pet"></span>
+										</div>
+										<!--
 										<div class="col-md-4 text-left">	
 											<label  for="idApp_ClientePet">Pet:</label>
-											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+											<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 													id="idApp_ClientePet" name="idApp_ClientePet">
 												<option value="">-- Sel. Pet --</option>
 												<?php
+												/*
 												foreach ($select['idApp_ClientePet'] as $key => $row) {
 													if ($query['idApp_ClientePet'] == $key) {
 														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -278,10 +291,12 @@
 														echo '<option value="' . $key . '">' . $row . '</option>';
 													}
 												}
+												*/
 												?>
 											</select>
 											<?php echo form_error('idApp_ClientePet'); ?>
 										</div>
+										-->
 									<?php } ?>	
 								<?php } ?>
 							</div>
@@ -563,7 +578,7 @@
 														<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['DataTermino']; ?>">
 													</div>
 													<div class="col-md-5 ">
-														<label for="Quais">Quais Alterar?</label>
+														<label for="Quais">Alterar Quais?</label>
 														<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																id="Quais" name="Quais">
 															<!--<option value="">-- Selecione uma opção --</option>-->

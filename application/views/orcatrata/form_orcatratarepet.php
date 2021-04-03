@@ -241,8 +241,13 @@
 															<label >Cliente</label>
 															<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Cliente']['NomeCliente']; ?>">
 														</div>
+														<div class="col-md-4">
+															<label >Pet</label>
+															<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Pet']['NomeClientePet']; ?>">
+														</div>
 														<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $orcatrata['idApp_ClientePet']; ?>" />
 														
+														<!--
 														<div class="col-md-4 text-left">
 															<label  for="idApp_ClientePet">Pet</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_ClientePet" name="idApp_ClientePet">
@@ -250,7 +255,7 @@
 															</select>
 															<span class="modal-title" id="Pet"></span>
 														</div>
-														
+														-->
 													</div>
 												</div>
 												<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
