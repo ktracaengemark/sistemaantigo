@@ -28,6 +28,7 @@ clientePet();
 clienteOT();
 //fechaBuscaOS();
 
+
 function codigo(id, tabela){
 	//alert('ok codigo');
 	var categoria = $('#idTab_Catprod').val();
@@ -2134,7 +2135,6 @@ function fechaBuscaOS(novaos){
 	
 }
 
-
 function mudaBuscaOS(novaos){
 	
 	var hnovaos = $('#Hidden_NovaOS').val();
@@ -2147,6 +2147,23 @@ function mudaBuscaOS(novaos){
 	}
 	
 }
+
+function quais(){
+	//alert('quais');
+	var quais = $('#Quais').val();
+	$('#Quais_Excluir').val(quais);
+	if(quais == 1){
+		var quais_texto = '"Apenas Esse" ';
+	}else if(quais == 2){
+		var quais_texto = '"Esse e os Anteriores" ';
+	}else if(quais == 3){
+		var quais_texto = '"Esse e os Posteriores" ';
+	}else if(quais == 4){
+		var quais_texto = '"Todos" ';
+	}
+	$("#Texto_Excluir").html('<div class="col-md-7 text-left alert alert-warning" role="alert">Você vai excluir ' + quais_texto + ' agendamento(s) vinculado(s) a esse!</div>');
+}
+
 //Função que busca O.S. do cliente.
 function clienteOT(id = null){
 	

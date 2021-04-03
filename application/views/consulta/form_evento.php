@@ -208,7 +208,7 @@
 											</div>
 										<?php } else { ?>
 											<div class="row text-left">	
-												<div class="col-md-4">
+												<div class="col-md-3">
 													<label>Ocorrência</label>
 													<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencia']; ?>">
 												</div>	
@@ -216,7 +216,7 @@
 													<label>Termina em</label>
 													<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['DataTermino']; ?>">
 												</div>
-												<div class="col-md-4 ">
+												<div class="col-md-5 ">
 													<label for="Quais">Alterar Quais?</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 															id="Quais" name="Quais">
@@ -275,18 +275,13 @@
 											<div class="col-md-12">
 												<div class="col-md-12 btn-block">
 													<span class="input-group-btn">
-														<!--
-														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-															<span class="glyphicon glyphicon-save"></span> Salvar
-														</button>
-														-->
 														<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
 															<span class="glyphicon glyphicon-save"></span>Save
 														</button>
 													</span>
 													<?php if ($_SESSION['Usuario']['Delet_Orcam'] == "S" ) { ?>
 														<span class="input-group-btn">
-															<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+															<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="quais(),DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 																<span class="glyphicon glyphicon-trash"></span>Exc
 															</button>
 														</span>
@@ -295,51 +290,7 @@
 												<div class="col-md-12 alert alert-warning aguardar" role="alert" >
 													Aguarde um instante! Estamos processando sua solicitação!
 												</div>
-											</div>	
-											<!--
-											<div class="col-md-6">
-												<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-													<span class="glyphicon glyphicon-save"></span> Salvar
-												</button>
 											</div>
-											<div class="col-md-6 text-right">
-												<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-													<span class="glyphicon glyphicon-trash"></span> Excluir
-												</button>
-											</div>
-											-->
-											<!--
-											<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-												<div class="modal-dialog" role="document">
-													<form method="POST" action="">
-														<div class="modal-content">
-															<div class="modal-header bg-danger">
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
-															</div>
-															<div class="modal-body">
-																<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
-																	Esta operação é irreversível.</p>
-															</div>
-															<div class="modal-footer">
-																<div class="col-md-6 text-left">
-																	<button type="button" class="btn btn-warning" data-dismiss="modal">
-																		<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-																	</button>
-																</div>
-																
-																<div class="col-md-6 text-right">
-																	<a class="btn btn-danger" href="<?php echo base_url() . 'consulta/excluir/' . $query['idApp_Consulta'] . '?repeticao=' . $query['Repeticao'] . '&quais=' . $alterar['Quais'] . '&dataini=' . $query['Data']  ?>" role="button">
-																		<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-																	</a>
-																</div>
-																
-															</div>
-														</div>
-													</form>
-												</div>
-											</div>
-											-->
 										<?php } else { ?>
 											<div class="col-md-12">
 												<button type="submit" class="btn btn-lg btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
@@ -348,11 +299,6 @@
 												<div class="col-md-12 alert alert-warning aguardar" role="alert" >
 													Aguarde um instante! Estamos processando sua solicitação!
 												</div>
-												<!--
-												<button class="btn btn-lg btn-primary btn-block" id="inputDb" data-loading-text="Aguarde..." type="submit">
-													<span class="glyphicon glyphicon-save"></span> Salvar
-												</button>
-												-->
 											</div>
 										<?php } ?>
 									</div>
@@ -381,35 +327,11 @@
 						Esta operação é irreversível.</p>
 				</div>
 				<div class="modal-footer">
-					<div class="row text-left">	
-						<div class="col-md-3">
-							<label>Ocorrência</label>
-							<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencia']; ?>">
-						</div>	
-						<div class="col-md-4">
-							<label>Termina em</label>
-							<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['DataTermino']; ?>">
-						</div>
-						<div class="col-md-5 text-left">
-							<label for="Quais">Excluir Quais?</label>
-							<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-									id="Quais" name="Quais">
-								<!--<option value="">-- Selecione uma opção --</option>-->
-								<?php
-								foreach ($select['Quais'] as $key => $row) {
-									if ($alterar['Quais'] == $key) {
-										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-									} else {
-										echo '<option value="' . $key . '">' . $row . '</option>';
-									}
-								}
-								?>
-							</select>
-						</div>
+					<div class="row text-left">
+						<input type="hidden" id="Quais_Excluir" name="Quais_Excluir">	
+						<span id="Texto_Excluir"></span>
 					</div>	
-					<div class="row">	
-						
-
+					<div class="row">
 						<div class="col-md-6 text-left">
 							<button type="button" class="btn btn-warning" name="submeter4" id="submeter4" onclick="DesabilitaBotaoExcluir()" data-dismiss="modal">
 								<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
@@ -421,23 +343,7 @@
 									<span class="glyphicon glyphicon-trash"></span> Excluir
 								</button>
 							</div>	
-						<?php } ?>						
-						
-						
-						<!--
-						<div class="col-md-6 text-left">
-							<label ></label><br>
-							<button type="button" class="btn btn-warning" data-dismiss="modal">
-								<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-							</button>
-						</div>
-						<div class="col-md-6">
-							<label ></label><br>
-							<button class="btn btn-md btn-danger" id="inputDb" data-loading-text="Aguarde..." type="submit">
-								<span class="glyphicon glyphicon-trash"></span> Excluir
-							</button>
-						</div>
-						-->
+						<?php } ?>
 					</div>
 				</div>
 			</div>

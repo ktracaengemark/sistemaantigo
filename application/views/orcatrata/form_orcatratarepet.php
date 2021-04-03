@@ -826,7 +826,7 @@
 																	<div class="col-md-12">
 																		<label for="Descricao">Obs/Descrição:</label>
 																		<textarea class="form-control" id="Descricao" <?php echo $readonly; ?> placeholder="Observaçoes:"
-																				  name="Descricao"><?php echo $_SESSION['Consulta']['Obs']; ?></textarea>
+																				  name="Descricao"><?php echo $orcatrata['Descricao']; ?></textarea>
 																	</div>
 																</div>
 															</div>

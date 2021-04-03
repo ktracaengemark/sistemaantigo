@@ -225,6 +225,7 @@ class Orcatrata extends CI_Controller {
 		//Fim dos Dados//////
 		
 		$data['orcatrata']['Tipo_Orca'] = "B";
+		(!$data['orcatrata']['Descricao']) ? $data['orcatrata']['Descricao'] = $_SESSION['Consulta']['Obs'] : FALSE;
 		(!$data['orcatrata']['Cli_Forn_Orca']) ? $data['orcatrata']['Cli_Forn_Orca'] = 'S' : FALSE;
 		(!$data['orcatrata']['Prd_Srv_Orca']) ? $data['orcatrata']['Prd_Srv_Orca'] = 'S' : FALSE;
         (!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;

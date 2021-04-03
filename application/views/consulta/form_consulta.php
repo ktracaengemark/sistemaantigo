@@ -554,7 +554,7 @@
 												</div>
 											<?php } else { ?>
 												<div class="row text-left">	
-													<div class="col-md-4">
+													<div class="col-md-3">
 														<label>Ocorrência</label>
 														<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencia']; ?>">
 													</div>	
@@ -562,8 +562,8 @@
 														<label>Termina em</label>
 														<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['DataTermino']; ?>">
 													</div>
-													<div class="col-md-4 ">
-														<label for="Quais">Alterar Quais?</label>
+													<div class="col-md-5 ">
+														<label for="Quais">Quais Alterar?</label>
 														<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																id="Quais" name="Quais">
 															<!--<option value="">-- Selecione uma opção --</option>-->
@@ -577,6 +577,7 @@
 															}
 															?>
 														</select>
+														<?php echo form_error('Quais'); ?>
 													</div>
 												</div>
 											<?php } ?>	
@@ -749,11 +750,6 @@
 														<div class="row">
 															<div class="btn-block">
 																<span class="input-group-btn">
-																	<!--
-																	<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-																		<span class="glyphicon glyphicon-save"></span> Salvar
-																	</button>
-																	-->
 																	<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
 																		<span class="glyphicon glyphicon-save"></span>Save
 																	</button>
@@ -767,7 +763,7 @@
 																<?php } ?>
 																<?php if ($_SESSION['Usuario']['Delet_Orcam'] == "S" ) { ?>
 																	<span class="input-group-btn">
-																		<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+																		<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="quais(),DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 																			<span class="glyphicon glyphicon-trash"></span>Exc
 																		</button>
 																	</span>
@@ -777,32 +773,13 @@
 																Aguarde um instante! Estamos processando sua solicitação!
 															</div>
 														</div>
-														<!--
-														<div class="col-md-6">
-															<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-																<span class="glyphicon glyphicon-save"></span> Salvar
-															</button>
-														</div>
-														<div class="col-md-6 text-right">
-															<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-																<span class="glyphicon glyphicon-trash"></span> Excluir
-															</button>
-														</div>
-														-->
 													<?php } else { ?>
-														
-															<button type="submit" class="btn btn-lg btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
-																<span class="glyphicon glyphicon-save"></span> Salvar
-															</button>	
-															<div class="col-md-12 alert alert-warning aguardar" role="alert" >
-																Aguarde um instante! Estamos processando sua solicitação!
-															</div>
-															<!--
-															<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-																<span class="glyphicon glyphicon-save"></span> Salvar
-															</button>
-															-->
-														
+														<button type="submit" class="btn btn-lg btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
+															<span class="glyphicon glyphicon-save"></span> Salvar
+														</button>	
+														<div class="col-md-12 alert alert-warning aguardar" role="alert" >
+															Aguarde um instante! Estamos processando sua solicitação!
+														</div>
 													<?php } ?>
 													
 													<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -856,73 +833,47 @@
 						Esta operação é irreversível.</p>
 				</div>
 				<div class="modal-footer">
-					<div class="row text-left">	
-						<div class="col-md-3">
-							<label>Ocorrência</label>
-							<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencia']; ?>">
-						</div>	
-						<div class="col-md-4">
-							<label>Termina em</label>
-							<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['DataTermino']; ?>">
-						</div>
-						<div class="col-md-5 text-left">	
-							<div class="row ">	
-								<div class="col-md-12 text-left">
-									<label for="Quais">Apagar Quais Agendamentos?</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-											id="Quais" name="Quais">
-										<!--<option value="">-- Selecione uma opção --</option>-->
-										<?php
-										foreach ($select['Quais'] as $key => $row) {
-											if ($alterar['Quais'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
-											}
-										}
-										?>
-									</select>
-								</div>
-							</div>	
-							<div class="row ">	
-								<div class="col-md-12 ">
-									<label for="DeletarOS">Apagar O.S.Vinculas?</label><br>
-									<div class="btn-group" data-toggle="buttons">
-										<?php
-										foreach ($select['DeletarOS'] as $key => $row) {
-											if (!$alterar['DeletarOS']) $alterar['DeletarOS'] = 'N';
+					<div class="row text-left">
+						<input type="hidden" id="Quais_Excluir" name="Quais_Excluir">	
+						<span id="Texto_Excluir"></span>
+						<div class="col-md-5 text-left">
+							<label for="DeletarOS">Deseja Apagar as O.S.Vinculas?</label><br>
+							<div class="btn-group" data-toggle="buttons">
+								<?php
+								foreach ($select['DeletarOS'] as $key => $row) {
+									if (!$alterar['DeletarOS']) $alterar['DeletarOS'] = 'N';
 
-											($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+									($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
-											if ($alterar['DeletarOS'] == $key) {
-												echo ''
-												. '<label class="btn btn-warning active" name="DeletarOS_' . $hideshow . '">'
-												. '<input type="radio" name="DeletarOS" id="' . $hideshow . '" '
-												. 'autocomplete="off" value="' . $key . '" checked>' . $row
-												. '</label>'
-												;
-											} else {
-												echo ''
-												. '<label class="btn btn-default" name="DeletarOS_' . $hideshow . '">'
-												. '<input type="radio" name="DeletarOS" id="' . $hideshow . '" '
-												. 'autocomplete="off" value="' . $key . '" >' . $row
-												. '</label>'
-												;
-											}
-										}
-										?>
-									</div>
-								</div>
+									if ($alterar['DeletarOS'] == $key) {
+										echo ''
+										. '<label class="btn btn-warning active" name="DeletarOS_' . $hideshow . '">'
+										. '<input type="radio" name="DeletarOS" id="' . $hideshow . '" '
+										. 'autocomplete="off" value="' . $key . '" checked>' . $row
+										. '</label>'
+										;
+									} else {
+										echo ''
+										. '<label class="btn btn-default" name="DeletarOS_' . $hideshow . '">'
+										. '<input type="radio" name="DeletarOS" id="' . $hideshow . '" '
+										. 'autocomplete="off" value="' . $key . '" >' . $row
+										. '</label>'
+										;
+									}
+								}
+								?>
 							</div>
 						</div>	
 					</div>
 					<div id="DeletarOS" <?php echo $div['DeletarOS']; ?>>
+						<br>
 						<div class="row text-left ">	
 							<div class="col-md-12 bg-danger">
 								<h4 for="DeletarOS"><span class="glyphicon glyphicon-alert"></span> Atenção!! Caso as O.S., vinculadas aos agendamentos selecionados, não pertençam a nenhum outro agendamento, elas também serão apagadas?<span class="glyphicon glyphicon-alert"></span></h4>
 							</div>
 						</div>
 					</div>
+					<br>
 					<div class="row">
 						<div class="col-md-6 text-left">
 							<button type="button" class="btn btn-warning" name="submeter4" id="submeter4" onclick="DesabilitaBotaoExcluir()" data-dismiss="modal">
@@ -936,20 +887,6 @@
 								</button>
 							</div>	
 						<?php } ?>
-						<!--
-						<div class="col-md-6 text-left">
-							<label ></label><br>
-							<button type="button" class="btn btn-warning" data-dismiss="modal">
-								<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-							</button>
-						</div>
-						<div class="col-md-6">
-							<label ></label><br>
-							<button class="btn btn-md btn-danger" id="inputDb" data-loading-text="Aguarde..." type="submit">
-								<span class="glyphicon glyphicon-trash"></span> Excluir
-							</button>
-						</div>
-						-->
 					</div>
 				</div>
 			</div>

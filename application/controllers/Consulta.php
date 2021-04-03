@@ -1577,6 +1577,7 @@ class Consulta extends CI_Controller {
 		
 		$data['alterar'] = quotes_to_entities($this->input->post(array(
 			'Quais',
+			'Quais_excluir',
 			'DeletarOS',
         ), TRUE));
 
@@ -1808,7 +1809,8 @@ class Consulta extends CI_Controller {
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');	
         if ($data['query']['Paciente'] == 'D')
             $this->form_validation->set_rules('idApp_ContatoCliente', 'ContatoCliente', 'required|trim');
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');	
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
+		$this->form_validation->set_rules('Quais', 'Quais Alterar', 'required|trim');	
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -2325,11 +2327,11 @@ class Consulta extends CI_Controller {
             $data['msg'] = '';
 
 		$data['alterar'] = quotes_to_entities($this->input->post(array(
-			'Quais',
+			'Quais_Excluir',
 			'DeletarOS',
         ), TRUE));
 		
-		$quais = $data['alterar']['Quais'];	
+		$quais = $data['alterar']['Quais_Excluir'];	
 		$deletaros = $data['alterar']['DeletarOS'];
 		
 		if (!$id) {
@@ -2342,11 +2344,7 @@ class Consulta extends CI_Controller {
 			
 			$repeticao = $data['anterior']['Repeticao'];
 			$dataini = $data['anterior']['DataInicio'];
-
-			$_SESSION['Repeticao'] 	= $this->Consulta_model->get_consulta_repeticao($id, $repeticao, $quais, $dataini);
-
-			$count_delete_orca		= count($_SESSION['Repeticao']);
-		/*	
+			/*
 			echo '<br>';
           echo "<pre>";
           print_r('ido riginal = ' . $id);
@@ -2359,12 +2357,13 @@ class Consulta extends CI_Controller {
 		  echo '<br>';
           print_r('data = ' . $dataini);
 		  echo '<br>';
-          print_r('cont_delete_orca = ' . $count_delete_orca);
+          //print_r('cont_delete_orca = ' . $count_delete_orca);
           echo "</pre>";
           exit ();
-		*/
-			
-			
+		  */
+			$_SESSION['Repeticao'] 	= $this->Consulta_model->get_consulta_repeticao($id, $repeticao, $quais, $dataini);
+
+			$count_delete_orca		= count($_SESSION['Repeticao']);
             $data['campos'] = array_keys($data['anterior']);
 
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], NULL, $data['campos'], $data['anterior']['idApp_Consulta'], FALSE, TRUE);
@@ -2849,7 +2848,6 @@ class Consulta extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-
     public function excluir_evento($id = FALSE) {
 
         if ($this->input->get('m') == 1)
@@ -2860,10 +2858,10 @@ class Consulta extends CI_Controller {
             $data['msg'] = '';
 
 		$data['alterar'] = quotes_to_entities($this->input->post(array(
-			'Quais',
+			'Quais_Excluir',
         ), TRUE));
 		
-		$quais = $data['alterar']['Quais'];	
+		$quais = $data['alterar']['Quais_Excluir'];	
 		
 		if (!$id) {
             $data['msg'] = '?m=2';
@@ -2874,7 +2872,23 @@ class Consulta extends CI_Controller {
 			
 			$repeticao = $data['anterior']['Repeticao'];
 			$dataini = $data['anterior']['DataInicio'];
-
+			/*
+			echo '<br>';
+          echo "<pre>";
+          print_r('ido riginal = ' . $id);
+		  echo '<br>';
+          print_r('quais = ' . $quais);
+		  echo '<br>';
+          //print_r('DeletarOS = ' . $deletaros);
+		  echo '<br>';
+          print_r('repeticao = ' . $repeticao);
+		  echo '<br>';
+          print_r('data = ' . $dataini);
+		  echo '<br>';
+          //print_r('cont_delete_orca = ' . $count_delete_orca);
+          echo "</pre>";
+          exit ();
+		  */
             $data['campos'] = array_keys($data['anterior']);
 
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], NULL, $data['campos'], $data['anterior']['idApp_Consulta'], FALSE, TRUE);
