@@ -266,7 +266,8 @@
 											</div>
 										</div>
 									</div>
-								
+								</div>
+								<div class="col-md-4 text-left">
 									<div class="row">
 										<input type="hidden" name="idApp_Consulta" value="<?php echo $query['idApp_Consulta']; ?>">
 										<!--<input type="hidden" name="idApp_Agenda" value="<?php echo $_SESSION['log']['Agenda']; ?>">-->
@@ -304,6 +305,7 @@
 									</div>
 								</div>
 							</div>
+							
 							</form>
 						</div>	
 					</div>

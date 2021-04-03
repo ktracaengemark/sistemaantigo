@@ -428,6 +428,84 @@
 																						 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
 																			</div>
 																		</div>
+																		<div class="row">
+																			<div class="col-md-3">
+																				<label for="ProfissionalServico<?php echo $i ?>">Profissional 1</label>
+																				<?php if ($i == 1) { ?>
+																				<?php } ?>
+																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+																						 id="listadinamica_prof<?php echo $i ?>" name="ProfissionalServico<?php echo $i ?>">
+																					<option value="">-- Sel.Profis. --</option>
+																					<?php
+																					foreach ($select['ProfissionalServico'] as $key => $row) {
+																						//(!$servico['ProfissionalServico']) ? $servico['ProfissionalServico'] = $_SESSION['log']['ProfissionalServico']: FALSE;
+																						if ($servico[$i]['ProfissionalProduto'] == $key) {
+																							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																						} else {
+																							echo '<option value="' . $key . '">' . $row . '</option>';
+																						}
+																					}
+																					?>
+																				</select>
+																			</div>
+																			<div class="col-md-3">
+																				<label for="ProfissionalServico3<?php echo $i ?>">Profissional 2</label>
+																				<?php if ($i == 1) { ?>
+																				<?php } ?>
+																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+																						 id="listadinamica_prof3<?php echo $i ?>" name="ProfissionalServico3<?php echo $i ?>">
+																					<option value="">-- Sel.Profis. --</option>
+																					<?php
+																					foreach ($select['ProfissionalServico3'] as $key => $row) {
+																						//(!$servico['ProfissionalServico3']) ? $servico['ProfissionalServico3'] = $_SESSION['log']['ProfissionalServico']: FALSE;
+																						if ($servico[$i]['ProfissionalProduto3'] == $key) {
+																							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																						} else {
+																							echo '<option value="' . $key . '">' . $row . '</option>';
+																						}
+																					}
+																					?>
+																				</select>
+																			</div>
+																			<div class="col-md-3">
+																				<label for="ProfissionalServico4<?php echo $i ?>">Profissional 3</label>
+																				<?php if ($i == 1) { ?>
+																				<?php } ?>
+																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+																						 id="listadinamica_prof4<?php echo $i ?>" name="ProfissionalServico4<?php echo $i ?>">
+																					<option value="">-- Sel.Profis. --</option>
+																					<?php
+																					foreach ($select['ProfissionalServico4'] as $key => $row) {
+																						//(!$servico['ProfissionalServico4']) ? $servico['ProfissionalServico4'] = $_SESSION['log']['ProfissionalServico']: FALSE;
+																						if ($servico[$i]['ProfissionalProduto4'] == $key) {
+																							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																						} else {
+																							echo '<option value="' . $key . '">' . $row . '</option>';
+																						}
+																					}
+																					?>
+																				</select>
+																			</div>
+																			<div class="col-md-3">
+																				<label for="ProfissionalServico5<?php echo $i ?>">Profissional 4</label>
+																				<?php if ($i == 1) { ?>
+																				<?php } ?>
+																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+																						 id="listadinamica_prof5<?php echo $i ?>" name="ProfissionalServico5<?php echo $i ?>">
+																					<option value="">-- Sel.Profis. --</option>
+																					<?php
+																					foreach ($select['ProfissionalServico5'] as $key => $row) {
+																						//(!$servico['ProfissionalServico4']) ? $servico['ProfissionalServico5'] = $_SESSION['log']['ProfissionalServico']: FALSE;
+																						if ($servico[$i]['ProfissionalProduto5'] == $key) {
+																							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																						} else {
+																							echo '<option value="' . $key . '">' . $row . '</option>';
+																						}
+																					}
+																					?>
+																				</select>
+																			</div>
+																		</div>
 																	</div>
 																	<div class="col-md-4">
 																		<div class="row">
@@ -2022,89 +2100,8 @@
 									<h4 class="mb-3"><b>Pedido</b></h4>
 									<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 										<div class="row">
-											<div class="col-md-8">
-												<?php if ($metodo > 1) { ?>
-												<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
-												<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
-												<?php } ?>
-												<?php if ($metodo == 2) { ?>
-												
-													<div class="btn-block">
-														<span class="input-group-btn">
-															<!--
-															<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-																<span class="glyphicon glyphicon-save"></span> Salvar
-															</button>
-															-->
-															<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
-																<span class="glyphicon glyphicon-save"></span>Save
-															</button>
-														</span>
-														<span class="input-group-btn">
-															<a class="btn btn-lg btn-info " name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $orcatrata['idApp_OrcaTrata']; ?>">
-																<span class="glyphicon glyphicon-print"></span>										
-															</a>
-														</span>
-														<?php if ($_SESSION['Usuario']['Delet_Orcam'] == "S" ) { ?>
-															<span class="input-group-btn">
-																<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-																	<span class="glyphicon glyphicon-trash"></span>Exc
-																</button>
-															</span>
-														<?php } ?>	
-													</div>
-													<div class="col-md-12 alert alert-warning aguardar" role="alert" >
-														Aguarde um instante! Estamos processando sua solicitação!
-													</div>
-
-													<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-														<div class="modal-dialog" role="document">
-															<div class="modal-content">
-																<div class="modal-header bg-danger">
-																	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																	<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
-																</div>
-																<div class="modal-body">
-																	<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
-																		Esta operação é irreversível.</p>
-																</div>
-																<div class="modal-footer">
-																	<div class="col-md-6 text-left">
-																		<button type="button" class="btn btn-warning" name="submeter4" id="submeter4" onclick="DesabilitaBotaoExcluir()" data-dismiss="modal">
-																			<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-																		</button>
-																	</div>
-																	<?php if ($_SESSION['Usuario']['Delet_Orcam'] == "S" ) { ?>
-																		<div class="col-md-6 text-right">
-																			<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluir2/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
-																				<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-																			</a>
-																		</div>
-																	<?php } ?>	
-																</div>
-															</div>
-														</div>
-													</div>
-												
-												<?php } else { ?>
-													<div class="col-md-6 text-left">
-														<label></label>
-														<!--
-														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-															<span class="glyphicon glyphicon-save"></span> Salvar
-														</button>
-														-->
-														<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)" data-loading-text="Aguarde..." value="1" >
-															<span class="glyphicon glyphicon-save"></span> Salvar
-														</button>														
-													</div>
-													<div class="col-md-12 alert alert-warning aguardar" role="alert" >
-														Aguarde um instante! Estamos processando sua solicitação!
-													</div>
-												<?php } ?>
-											</div>
 											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-											<div class="col-md-4">
+											<div class="col-md-3">
 												<div class="panel panel-default">
 													<div class="panel-heading">
 														<div class="row">
@@ -2146,6 +2143,84 @@
 												</div>
 											</div>
 											<?php } ?>
+											<div class="col-md-6"></div>
+											<div class="col-md-3 text-center">
+												<?php if ($metodo > 1) { ?>
+												<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
+												<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
+												<?php } ?>
+												<?php if ($metodo == 2) { ?>
+													<label >.</label><br>
+													<div class="btn-block">
+														<span class="input-group-btn">
+															<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
+																<span class="glyphicon glyphicon-save"></span>Save
+															</button>
+														</span>
+														<span class="input-group-btn">
+															<a class="btn btn-lg btn-info " name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $orcatrata['idApp_OrcaTrata']; ?>">
+																<span class="glyphicon glyphicon-print"></span>										
+															</a>
+														</span>
+														<?php if ($_SESSION['Usuario']['Delet_Orcam'] == "S" ) { ?>
+															<span class="input-group-btn">
+																<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+																	<span class="glyphicon glyphicon-trash"></span>Exc
+																</button>
+															</span>
+														<?php } ?>	
+													</div>
+													<div class="col-md-12 alert alert-warning aguardar" role="alert" >
+														Aguarde um instante! Estamos processando sua solicitação!
+													</div>
+													<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header bg-danger">
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																	<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
+																</div>
+																<div class="modal-body">
+																	<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
+																		Esta operação é irreversível.</p>
+																</div>
+																<div class="modal-footer">
+																	<div class="col-md-6 text-left">
+																		<button type="button" class="btn btn-warning" name="submeter4" id="submeter4" onclick="DesabilitaBotaoExcluir()" data-dismiss="modal">
+																			<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+																		</button>
+																	</div>
+																	<?php if ($_SESSION['Usuario']['Delet_Orcam'] == "S" ) { ?>
+																		<?php if ($count_orca == 0 ) { ?>	
+																			<div class="col-md-6 text-right">
+																				<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluir2/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
+																					<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
+																				</a>
+																			</div>
+																		<?php }else{ ?>	
+																			<div class="col-md-6 text-left">
+																				<span class="glyphicon glyphicon-alert" name="submeter3" id="submeter3" ></span> Atenção! <br>Este Orçamento está vinculado a um agendamento e não pode ser apagado por aqui!
+																			</div>
+																		<?php } ?>	
+																	<?php } ?>	
+																</div>
+															</div>
+														</div>
+													</div>
+												<?php } else { ?>
+													<div class="col-md-12 text-left">
+														<label></label>
+														<!--
+														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+															<span class="glyphicon glyphicon-save"></span> Salvar
+														</button>
+														-->
+														<button type="submit" class="btn btn-lg btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)" data-loading-text="Aguarde..." value="1" >
+															<span class="glyphicon glyphicon-save"></span> Salvar
+														</button>														
+													</div>
+												<?php } ?>
+											</div>
 										</div>
 									<?php } ?>
 								</div>

@@ -529,8 +529,15 @@
 																							onkeyup="calculaPrazoServicos('PrazoServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')" 
 																							name="PrazoServico<?php echo $i ?>" value="<?php echo $servico[$i]['PrazoProduto'] ?>">
 																						</div>
-																						<div class="col-md-4">
-																							<label for="ProfissionalServico<?php echo $i ?>">Profissional</label>
+																						<div class="col-md-10">
+																							<label for="ObsServico">Observacao</label>
+																							<input type="text" class="form-control" maxlength="200" id="ObsServico<?php echo $i ?>" placeholder="Observacao"
+																									 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
+																						</div>
+																					</div>
+																					<div class="row">
+																						<div class="col-md-3">
+																							<label for="ProfissionalServico<?php echo $i ?>">Profissional 1</label>
 																							<?php if ($i == 1) { ?>
 																							<?php } ?>
 																							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -538,7 +545,7 @@
 																								<option value="">-- Sel.Profis. --</option>
 																								<?php
 																								foreach ($select['ProfissionalServico'] as $key => $row) {
-																									(!$servico['ProfissionalServico']) ? $servico['ProfissionalServico'] = $_SESSION['log']['ProfissionalServico']: FALSE;
+																									//(!$servico['ProfissionalServico']) ? $servico['ProfissionalServico'] = $_SESSION['log']['ProfissionalServico']: FALSE;
 																									if ($servico[$i]['ProfissionalProduto'] == $key) {
 																										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																									} else {
@@ -548,10 +555,62 @@
 																								?>
 																							</select>
 																						</div>
-																						<div class="col-md-6">
-																							<label for="ObsServico">Observacao</label>
-																							<input type="text" class="form-control" maxlength="200" id="ObsServico<?php echo $i ?>" placeholder="Observacao"
-																									 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
+																						<div class="col-md-3">
+																							<label for="ProfissionalServico3<?php echo $i ?>">Profissional 2</label>
+																							<?php if ($i == 1) { ?>
+																							<?php } ?>
+																							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+																									 id="listadinamica_prof3<?php echo $i ?>" name="ProfissionalServico3<?php echo $i ?>">
+																								<option value="">-- Sel.Profis. --</option>
+																								<?php
+																								foreach ($select['ProfissionalServico3'] as $key => $row) {
+																									//(!$servico['ProfissionalServico3']) ? $servico['ProfissionalServico3'] = $_SESSION['log']['ProfissionalServico']: FALSE;
+																									if ($servico[$i]['ProfissionalProduto3'] == $key) {
+																										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																									} else {
+																										echo '<option value="' . $key . '">' . $row . '</option>';
+																									}
+																								}
+																								?>
+																							</select>
+																						</div>
+																						<div class="col-md-3">
+																							<label for="ProfissionalServico4<?php echo $i ?>">Profissional 3</label>
+																							<?php if ($i == 1) { ?>
+																							<?php } ?>
+																							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+																									 id="listadinamica_prof4<?php echo $i ?>" name="ProfissionalServico4<?php echo $i ?>">
+																								<option value="">-- Sel.Profis. --</option>
+																								<?php
+																								foreach ($select['ProfissionalServico4'] as $key => $row) {
+																									//(!$servico['ProfissionalServico4']) ? $servico['ProfissionalServico4'] = $_SESSION['log']['ProfissionalServico']: FALSE;
+																									if ($servico[$i]['ProfissionalProduto4'] == $key) {
+																										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																									} else {
+																										echo '<option value="' . $key . '">' . $row . '</option>';
+																									}
+																								}
+																								?>
+																							</select>
+																						</div>
+																						<div class="col-md-3">
+																							<label for="ProfissionalServico5<?php echo $i ?>">Profissional 4</label>
+																							<?php if ($i == 1) { ?>
+																							<?php } ?>
+																							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+																									 id="listadinamica_prof5<?php echo $i ?>" name="ProfissionalServico5<?php echo $i ?>">
+																								<option value="">-- Sel.Profis. --</option>
+																								<?php
+																								foreach ($select['ProfissionalServico5'] as $key => $row) {
+																									//(!$servico['ProfissionalServico4']) ? $servico['ProfissionalServico5'] = $_SESSION['log']['ProfissionalServico']: FALSE;
+																									if ($servico[$i]['ProfissionalProduto5'] == $key) {
+																										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																									} else {
+																										echo '<option value="' . $key . '">' . $row . '</option>';
+																									}
+																								}
+																								?>
+																							</select>
 																						</div>
 																					</div>
 																				</div>

@@ -411,6 +411,9 @@ class Orcatrata_model extends CI_Model {
 				TAP.ConcluidoProduto,
 				TAP.idTab_TipoRD,
 				TAP.ProfissionalProduto,
+				TAP.ProfissionalProduto3,
+				TAP.ProfissionalProduto4,
+				TAP.ProfissionalProduto5,
 				P.Nome_Prod,
 				TOP2.Opcao,
 				TOP1.Opcao,
@@ -420,6 +423,9 @@ class Orcatrata_model extends CI_Model {
 			FROM 
 				App_Produto AS TAP
 					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = TAP.ProfissionalProduto
+					LEFT JOIN Sis_Usuario AS SU3 ON SU3.idSis_Usuario = TAP.ProfissionalProduto3
+					LEFT JOIN Sis_Usuario AS SU4 ON SU4.idSis_Usuario = TAP.ProfissionalProduto4
+					LEFT JOIN Sis_Usuario AS SU5 ON SU5.idSis_Usuario = TAP.ProfissionalProduto5
 					LEFT JOIN Tab_Valor AS V ON V.idTab_Valor = TAP.idTab_Produto
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
