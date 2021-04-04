@@ -375,6 +375,7 @@ class Orcatrata extends CI_Controller {
 					$data['parcelasrec'][$i]['ValorPago'] = $this->input->post('ValorPago' . $i);
 					$data['parcelasrec'][$i]['DataPago'] = $this->input->post('DataPago' . $i);
 					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
+					$data['parcelasrec'][$i]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				}
 				(!$data['parcelasrec'][$i]['Quitado']) ? $data['parcelasrec'][$i]['Quitado'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -397,6 +398,7 @@ class Orcatrata extends CI_Controller {
 					$data['parcelasrec'][$i]['ValorPago'] = $this->input->post('ValorPago' . $i);
 					$data['parcelasrec'][$i]['DataPago'] = $this->input->post('DataPago' . $i);
 					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
+					$data['parcelasrec'][$i]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				}
 				(!$data['parcelasrec'][$i]['Quitado']) ? $data['parcelasrec'][$i]['Quitado'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -429,6 +431,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['EnviadoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
+		$data['select']['FormaPagamentoParcela'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
@@ -1780,6 +1783,7 @@ class Orcatrata extends CI_Controller {
 					$data['parcelasrec'][$i]['ValorPago'] = $this->input->post('ValorPago' . $i);
 					$data['parcelasrec'][$i]['DataPago'] = $this->input->post('DataPago' . $i);
 					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
+					$data['parcelasrec'][$i]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				}
 				(!$data['parcelasrec'][$i]['Quitado']) ? $data['parcelasrec'][$i]['Quitado'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -1802,6 +1806,7 @@ class Orcatrata extends CI_Controller {
 					$data['parcelasrec'][$i]['ValorPago'] = $this->input->post('ValorPago' . $i);
 					$data['parcelasrec'][$i]['DataPago'] = $this->input->post('DataPago' . $i);
 					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
+					$data['parcelasrec'][$i]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				}
 				(!$data['parcelasrec'][$i]['Quitado']) ? $data['parcelasrec'][$i]['Quitado'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -1863,6 +1868,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['EnviadoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
+		$data['select']['FormaPagamentoParcela'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
@@ -2878,6 +2884,7 @@ class Orcatrata extends CI_Controller {
 					$data['parcelasrec'][$i]['ValorPago'] = $this->input->post('ValorPago' . $i);
 					$data['parcelasrec'][$i]['DataPago'] = $this->input->post('DataPago' . $i);
 					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
+					$data['parcelasrec'][$i]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				}
 				(!$data['parcelasrec'][$i]['Quitado']) ? $data['parcelasrec'][$i]['Quitado'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -2923,6 +2930,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['CombinadoFrete'] = $this->Basico_model->select_status_sn();
 		$data['select']['EnviadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
+		$data['select']['FormaPagamentoParcela'] = $this->Formapag_model->select_formapag();
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
@@ -3967,6 +3975,7 @@ class Orcatrata extends CI_Controller {
                 $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
                 $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
                 $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
+                $data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				
 				(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
@@ -3998,6 +4007,7 @@ class Orcatrata extends CI_Controller {
                 $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
                 $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
                 $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
+                $data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				
 				(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -4149,6 +4159,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['CombinadoFrete'] = $this->Basico_model->select_status_sn();
         $data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
+		$data['select']['FormaPagamentoParcela'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ProntoOrca'] = $this->Basico_model->select_status_sn();
@@ -5643,6 +5654,7 @@ class Orcatrata extends CI_Controller {
                 $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
                 $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
                 $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
+                $data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				
 				(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
@@ -5807,6 +5819,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['CombinadoFrete'] = $this->Basico_model->select_status_sn();
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
+		$data['select']['FormaPagamentoParcela'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
@@ -7255,6 +7268,7 @@ class Orcatrata extends CI_Controller {
 					$data['parcelasrec'][$i]['ValorPago'] = $this->input->post('ValorPago' . $i);
 					$data['parcelasrec'][$i]['DataPago'] = $this->input->post('DataPago' . $i);
 					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
+					$data['parcelasrec'][$i]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				}
 				(!$data['parcelasrec'][$i]['Quitado']) ? $data['parcelasrec'][$i]['Quitado'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -7282,6 +7296,7 @@ class Orcatrata extends CI_Controller {
 					$data['parcelasrec'][$i]['ValorPago'] = $this->input->post('ValorPago' . $i);
 					$data['parcelasrec'][$i]['DataPago'] = $this->input->post('DataPago' . $i);
 					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
+					$data['parcelasrec'][$i]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 					//$data['parcelasrec'][$i]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				}
 				(!$data['parcelasrec'][$i]['Quitado']) ? $data['parcelasrec'][$i]['Quitado'] = 'N' : FALSE;
@@ -7463,6 +7478,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['CombinadoFrete'] = $this->Basico_model->select_status_sn();
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
+		$data['select']['FormaPagamentoParcela'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
@@ -8526,6 +8542,7 @@ class Orcatrata extends CI_Controller {
                 $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
                 $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
                 $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
+                $data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				
 				(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
@@ -8686,6 +8703,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['CombinadoFrete'] = $this->Basico_model->select_status_sn();
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
+		$data['select']['FormaPagamentoParcela'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['ProntoOrca'] = $this->Basico_model->select_status_sn();
@@ -9883,6 +9901,7 @@ class Orcatrata extends CI_Controller {
 					$data['parcelasrec'][$i]['ValorPago'] = $this->input->post('ValorPago' . $i);
 					$data['parcelasrec'][$i]['DataPago'] = $this->input->post('DataPago' . $i);
 					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
+					$data['parcelasrec'][$i]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				}
 				(!$data['parcelasrec'][$i]['Quitado']) ? $data['parcelasrec'][$i]['Quitado'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -9906,6 +9925,7 @@ class Orcatrata extends CI_Controller {
 					$data['parcelasrec'][$i]['ValorPago'] = $this->input->post('ValorPago' . $i);
 					$data['parcelasrec'][$i]['DataPago'] = $this->input->post('DataPago' . $i);
 					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
+					$data['parcelasrec'][$i]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				}
             }
 
@@ -9964,6 +9984,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['CombinadoFrete'] = $this->Basico_model->select_status_sn();
 		$data['select']['EnviadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
+		$data['select']['FormaPagamentoParcela'] = $this->Formapag_model->select_formapag();
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
@@ -10977,6 +10998,7 @@ class Orcatrata extends CI_Controller {
                 $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
                 $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
                 $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
+                $data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				
 				(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
@@ -11135,6 +11157,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['CombinadoFrete'] = $this->Basico_model->select_status_sn();
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
+		$data['select']['FormaPagamentoParcela'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
@@ -15023,6 +15046,7 @@ class Orcatrata extends CI_Controller {
                 $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
                 $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
                 $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
+                $data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				
 				(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -15375,6 +15399,7 @@ class Orcatrata extends CI_Controller {
                 $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
                 $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
                 $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
+                $data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				
 				(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -15647,6 +15672,7 @@ class Orcatrata extends CI_Controller {
                 $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
                 $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
                 $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
+                $data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				
 				(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -15898,6 +15924,7 @@ class Orcatrata extends CI_Controller {
                 $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
                 $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
                 $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
+                $data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
 				
 				(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
 				$data['radio'] = array(

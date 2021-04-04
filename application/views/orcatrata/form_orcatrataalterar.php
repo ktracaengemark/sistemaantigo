@@ -1467,10 +1467,28 @@
 																<div class="panel panel-warning">
 																	<div class="panel-heading">
 																		<div class="row">
-																			<div class="col-md-2">
+																			<div class="col-md-1">
 																				<label for="Parcela">Parcela <?php echo $i ?>:</label><br>
 																				<input type="text" class="form-control" maxlength="6" 
 																					   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
+																			</div>
+																			<div class="col-md-2">
+																				<label for="FormaPagamentoParcela<?php echo $i ?>">FormaPagParcela</label>
+																				<?php if ($i == 1) { ?>
+																				<?php } ?>
+																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+																						 id="FormaPagamentoParcela<?php echo $i ?>" name="FormaPagamentoParcela<?php echo $i ?>">
+																					<option value="">-- Sel.FormaPag --</option>
+																					<?php
+																					foreach ($select['FormaPagamentoParcela'] as $key => $row) {
+																						if ($parcelasrec[$i]['FormaPagamentoParcela'] == $key) {
+																							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																						} else {
+																							echo '<option value="' . $key . '">' . $row . '</option>';
+																						}
+																					}
+																					?>
+																				</select>
 																			</div>
 																			<div class="col-md-2">
 																				<label for="ValorParcela">Valor:</label><br>

@@ -3641,11 +3641,23 @@ function calculaParcelas(mod) {
 	//captura os valores dos campos indicados
     //var resta = $("#ValorRestanteOrca").val();
 	//console.log(mod + ' - mod');
+	var formapag = $("#FormaPagamento").val();
+	//console.log(formapag + ' - forma de pagamento');
 	var resta = $("#ValorTotalOrca").val();
     var parcelas = $("#QtdParcelasOrca").val();
     if(parcelas == 0){
 		parcelas = 1;
 	}
+	
+
+    if (parcelas >= 2) {
+        //console.log( $("#listadinamicad"+(parcelas-1)).val() );
+        var chosen;
+        chosen = $("#listadinamicad"+(parcelas-1)).val();
+        //console.log( chosen + ' :: ' + parcelas );
+    }	
+	
+	
 	//$("#QtdParcelasOrca").val(parcelas);
 	var vencimento = $("#DataVencimentoOrca").val();
 
@@ -3696,6 +3708,13 @@ function calculaParcelas(mod) {
 									   name="Parcela'+i+'" value="'+i+'/'+parcelas+'">\
 							</div>\
 							<div class="col-md-2">\
+								<label for="FormaPagamentoParcela'+i+'">FormaPag:</label>\
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen_Parcela"\
+										 id="FormaPagamentoParcela'+i+'" name="FormaPagamentoParcela'+i+'">\
+									<option value=""></option>\
+								</select>\
+							</div>\
+							<div class="col-md-2">\
 								<label for="ValorParcela">Valor Parcela:</label><br>\
 								<div class="input-group" id="txtHint">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
@@ -3744,7 +3763,75 @@ function calculaParcelas(mod) {
 			</div>'
         );
 
-    }
+    
+		//get a reference to the select element
+		$select_1000 = $('#FormaPagamentoParcela'+i);
+		
+		//console.log($select_1000);
+		//request the JSON data and parse into the select element
+		$.ajax({
+			url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=70',
+			dataType: 'JSON',
+			type: "GET",
+			success: function (data) {
+				//clear the current content of the select
+				$select_1000.html('');
+				//iterate over the data and append a select option
+				$select_1000.append('<option value="">-- Sel. FormaPag. --</option>');
+				$.each(data, function (key, val) {
+					//alert(val.id);
+					$select_1000.append('<option value="' + val.id + '">' + val.name + '</option>');
+				})
+				$('.Chosen_Parcela').chosen({
+					disable_search_threshold: 10,
+					multiple_text: "Selecione uma ou mais opções",
+					single_text: "Selecione uma opção",
+					no_results_text: "Nenhum resultado para",
+					width: "100%"
+				});
+			},
+			error: function () {
+				//alert('erro listadinamicaB');
+				//if there is an error append a 'none available' option
+				$select_1000.html('<option id="-1">ERRO</option>');
+			}
+
+		});
+	
+	}
+	
+	/*
+	//request the JSON data and parse into the select element
+	$.ajax({
+		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=70',
+		dataType: 'JSON',
+		type: "GET",
+		success: function (data) {
+			//clear the current content of the select
+			$select_1000.html('');
+			//iterate over the data and append a select option
+			$select_1000.append('<option value="">-- Sel. FormaPag. --</option>');
+			$.each(data, function (key, val) {
+				//alert(val.id);
+				$select_1000.append('<option value="' + val.id + '">' + val.name + '</option>');
+			})
+			$('.Chosen_Parcela').chosen({
+				disable_search_threshold: 10,
+				multiple_text: "Selecione uma ou mais opções",
+				single_text: "Selecione uma opção",
+				no_results_text: "Nenhum resultado para",
+				width: "100%"
+			});
+		},
+		error: function () {
+			//alert('erro listadinamicaB');
+			//if there is an error append a 'none available' option
+			$select_1000.html('<option id="-1">ERRO</option>');
+		}
+
+	});
+	*/		
+			
     //habilita o botão de calendário após a geração dos campos dinâmicos
     $('.DatePicker').datetimepicker(dateTimePickerOptions);
 
@@ -3767,7 +3854,10 @@ function calculaParcelas(mod) {
 			$("#"+name_prc).css("display","none");
 		}
 
-    });
+    });	
+	
+
+
 }
 
 function adicionaTamanhos() {
@@ -5949,14 +6039,14 @@ function adicionaParcelas() {
 	var pr = $("#PRCount").val(); //initlal text box count
 	pr++; //text box increment
 	$("#PRCount").val(pr);
-	/*
+	
 	if (pr >= 2) {
-		//console.log( $("#listadinamicac"+(pr-1)).val() );
-		var chosen2;
-		chosen2 = $("#listadinamicac"+(pr-1)).val();
+		//console.log( $("#FormaPagamentoParcela"+(pr-1)).val() );
+		var chosen;
+		chosen = $("#FormaPagamentoParcela"+(pr-1)).val();
 		//console.log( chosen + ' :: ' + pr );
 	}
-	*/
+	
     //Captura a data do dia e carrega no campo correspondente
     
 	//var currentDate = moment();
@@ -5966,10 +6056,17 @@ function adicionaParcelas() {
 			<div class="panel panel-warning">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-2">\
+						<div class="col-md-1">\
 							<label for="Parcela">Parcela:</label><br>\
 							<input type="text" class="form-control" maxlength="6"\
 								   name="Parcela'+pr+'" value="Ex.">\
+						</div>\
+						<div class="col-md-2">\
+							<label for="FormaPagamentoParcela'+pr+'">FormaPag:</label>\
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen_Parcela"\
+									 id="FormaPagamentoParcela'+pr+'" name="FormaPagamentoParcela'+pr+'">\
+								<option value=""></option>\
+							</select>\
 						</div>\
 						<div class="col-md-2">\
 							<label for="ValorParcela">Valor:</label><br>\
@@ -6025,25 +6122,25 @@ function adicionaParcelas() {
 			</div>\
 		</div>'
 	); //add input box
-	/*
+	
 	//get a reference to the select element
-	$select2 = $('#listadinamicac'+pr);
+	$select2 = $('#FormaPagamentoParcela'+pr);
 
 	//request the JSON data and parse into the select element
 	$.ajax({
-		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=3',
+		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=70',
 		dataType: 'JSON',
 		type: "GET",
 		success: function (data) {
 			//clear the current content of the select
 			$select2.html('');
 			//iterate over the data and append a select option
-			$select2.append('<option value="">-- Sel. Profis. --</option>');
+			$select2.append('<option value="">-- Sel. FormaPag. --</option>');
 			$.each(data, function (key, val) {
 				//alert(val.id);
 				$select2.append('<option value="' + val.id + '">' + val.name + '</option>');
 			})
-			$('.Chosen').chosen2({
+			$('.Chosen_Parcela').chosen({
 				disable_search_threshold: 10,
 				multiple_text: "Selecione uma ou mais opções",
 				single_text: "Selecione uma opção",
@@ -6058,7 +6155,7 @@ function adicionaParcelas() {
 		}
 
 	});	
-	*/
+	
 	//habilita o botão de calendário após a geração dos campos dinâmicos
 	$('.DatePicker').datetimepicker(dateTimePickerOptions);	
 	

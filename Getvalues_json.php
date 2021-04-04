@@ -518,6 +518,28 @@ elseif ($_GET['q'] == 902) {
 
 }
 
+elseif ($_GET['q'] == 70) {
+
+    $result = mysql_query(
+            'SELECT
+				idTab_FormaPag,
+				FormaPag
+            FROM
+                Tab_FormaPag
+			ORDER BY 
+				FormaPag DESC'
+    );
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_FormaPag'],
+            'name' => utf8_encode($row['FormaPag']),
+        );
+    }
+
+}
+
 elseif ($_GET['q'] == 6) {
 
     $result = mysql_query(
