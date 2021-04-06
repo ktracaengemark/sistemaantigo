@@ -114,6 +114,11 @@ class Relatoriocomissoes_model extends CI_Model {
 				PRDS.ProfissionalProduto_3,
 				PRDS.ProfissionalProduto_4,
 				
+				UP1.Nome AS NomeProf1,
+				UP2.Nome AS NomeProf2,
+				UP3.Nome AS NomeProf3,
+				UP4.Nome AS NomeProf4,
+				
 				TPRDS.idTab_Produtos,
 				TPRDS.Nome_Prod,
 				TCAT.idTab_Catprod,
@@ -128,6 +133,12 @@ class Relatoriocomissoes_model extends CI_Model {
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Parcelas AS PR ON PR.idApp_OrcaTrata = OT.idApp_OrcaTrata
 					LEFT JOIN App_Produto AS PRDS ON PRDS.idApp_OrcaTrata = OT.idApp_OrcaTrata
+					
+					LEFT JOIN Sis_Usuario AS UP1 ON UP1.idSis_Usuario = PRDS.ProfissionalProduto_1
+					LEFT JOIN Sis_Usuario AS UP2 ON UP2.idSis_Usuario = PRDS.ProfissionalProduto_2
+					LEFT JOIN Sis_Usuario AS UP3 ON UP3.idSis_Usuario = PRDS.ProfissionalProduto_3
+					LEFT JOIN Sis_Usuario AS UP4 ON UP4.idSis_Usuario = PRDS.ProfissionalProduto_4
+					
 					LEFT JOIN Tab_Produtos AS TPRDS ON TPRDS.idTab_Produtos = PRDS.idTab_Produtos_Produto
 					LEFT JOIN Tab_Produto AS TPRD ON TPRD.idTab_Produto = TPRDS.idTab_Produto
 					LEFT JOIN Tab_Catprod AS TCAT ON TCAT.idTab_Catprod = TPRD.idTab_Catprod
@@ -203,6 +214,11 @@ class Relatoriocomissoes_model extends CI_Model {
 				PRDS.ProfissionalProduto_3,
 				PRDS.ProfissionalProduto_4,
 				
+				UP1.Nome AS NomeProf1,
+				UP2.Nome AS NomeProf2,
+				UP3.Nome AS NomeProf3,
+				UP4.Nome AS NomeProf4,
+				
 				TPRDS.idTab_Produtos,
 				TPRDS.Nome_Prod,
 				TCAT.idTab_Catprod,
@@ -213,6 +229,13 @@ class Relatoriocomissoes_model extends CI_Model {
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN App_Produto AS PRDS ON PRDS.idApp_OrcaTrata = OT.idApp_OrcaTrata
+					
+					LEFT JOIN Sis_Usuario AS UP1 ON UP1.idSis_Usuario = PRDS.ProfissionalProduto_1
+					LEFT JOIN Sis_Usuario AS UP2 ON UP2.idSis_Usuario = PRDS.ProfissionalProduto_2
+					LEFT JOIN Sis_Usuario AS UP3 ON UP3.idSis_Usuario = PRDS.ProfissionalProduto_3
+					LEFT JOIN Sis_Usuario AS UP4 ON UP4.idSis_Usuario = PRDS.ProfissionalProduto_4
+					
+					
 					LEFT JOIN Tab_Produtos AS TPRDS ON TPRDS.idTab_Produtos = PRDS.idTab_Produtos_Produto
 					LEFT JOIN Tab_Produto AS TPRD ON TPRD.idTab_Produto = TPRDS.idTab_Produto
 					LEFT JOIN Tab_Catprod AS TCAT ON TCAT.idTab_Catprod = TPRD.idTab_Catprod
@@ -286,8 +309,8 @@ class Relatoriocomissoes_model extends CI_Model {
                 $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
 				$row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
                 $row->DataConcluidoProduto = $this->basico->mascara_data($row->DataConcluidoProduto, 'barras');
-				$row->ValorProduto = number_format($row->ValorProduto, 2, ',', '.');
-				$row->ComissaoProduto = number_format($row->ComissaoProduto, 2, ',', '.');
+				
+				
 
 				$somaentregar += $row->QuantidadeProduto;
 				#esse trecho pode ser melhorado, serve para somar apenas uma vez
@@ -311,10 +334,29 @@ class Relatoriocomissoes_model extends CI_Model {
 						$contagem = $count_prof;
 					}
 				}
-
+				if($row->ProfissionalProduto_4 != 0){
+					$contagem++;
+				}
 				$row->Contagem = $contagem;
 				
-                $somareceber += $row->ValorParcela;
+				if($contagem == 0){
+					//$row->Contagem = 'Ninguém';
+					$divisor = 1;
+					
+				}else{
+					//$row->Contagem = $contagem;
+					$divisor = $contagem;
+				}
+				$comissao_total = $row->QtdProduto*$row->ComissaoProduto;
+				$pro_prof = $row->QtdProduto*$row->ComissaoProduto/$divisor;
+				
+				
+				$row->ValorProduto = number_format($row->ValorProduto, 2, ',', '.');
+				$row->ComissaoProduto = number_format($row->ComissaoProduto, 2, ',', '.');
+				$row->ComissaoTotal = number_format($comissao_total, 2, ',', '.');
+				$row->ComissaoProf = number_format($pro_prof, 2, ',', '.');
+                
+				$somareceber += $row->ValorParcela;
 				$row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');				
                 $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.'); 			
 				

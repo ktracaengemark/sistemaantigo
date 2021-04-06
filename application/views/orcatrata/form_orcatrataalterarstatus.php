@@ -250,10 +250,12 @@
 																<label >Cliente</label>
 																<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Orcatrata']['NomeCliente']; ?>">
 															</div>
-															<div class="col-md-4">
-																<label >Cliente</label>
-																<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['ClientePet']['NomeClientePet']; ?>">
-															</div>
+															<?php if ($orcatrata['idApp_ClientePet'] != 0) { ?>
+																<div class="col-md-4">
+																	<label >ClientePet</label>
+																	<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['ClientePet']['NomeClientePet']; ?>">
+																</div>
+															<?php } ?>	
 															<!--
 															<div class="col-md-4">
 																<h4 class="text-left"><b>Cliente</b>: <?php echo '' . $_SESSION['Orcatrata']['NomeCliente'] . '' ?> - <?php echo '' . $orcatrata['idApp_Cliente'] . '' ?></h4>

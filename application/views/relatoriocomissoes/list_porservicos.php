@@ -60,7 +60,6 @@
 							<th class="active">Prof2.</th>
 							<th class="active">Prof3.</th>
 							<th class="active">Prof4.</th>
-							<th class="active">Contagem</th>
 							<!--<th class="active">Comb.</th>
 							<th class="active">Apro.</th>
 							<th class="active">Entr.</th>
@@ -77,11 +76,12 @@
 							<th class="active">DtEntrega</th>
 							<!--<th class="active">DtVenc</th>-->
 						<?php } ?>
-						<th class="active">Categoria</th>
+						<!--<th class="active">Categoria</th>-->
 						<th class="active">Qtd</th>
 						<th class="active">Produto</th>
 						<th class="active">ValorR$</th>
 						<th class="active">Com.R$</th>
+						<th class="active">Prof.R$</th>
 						<th class="active">Entregue</th>
 						<th class="active">DataEntr.</th>
 						<th class="active">HoraEntr.</th>					
@@ -131,11 +131,10 @@
 							echo '<td>' . $row['idApp_OrcaTrata'] . '- ' . $row['TipoFinanceiro'] . ' - ' . $row['Descricao'] . '</td>';
 							if($_SESSION['log']['idSis_Empresa'] != "5"){
 								echo '<td>' . $row['Nome' . $nome] . '</td>';
-								echo '<td>' . $row['ProfissionalProduto_1'] . '</td>';
-								echo '<td>' . $row['ProfissionalProduto_2'] . '</td>';
-								echo '<td>' . $row['ProfissionalProduto_3'] . '</td>';
-								echo '<td>' . $row['ProfissionalProduto_4'] . '</td>';
-								echo '<td>' . $row['Contagem'] . '</td>';
+								echo '<td>' . $row['NomeProf1'] . '</td>';
+								echo '<td>' . $row['NomeProf2'] . '</td>';
+								echo '<td>' . $row['NomeProf3'] . '</td>';
+								echo '<td>' . $row['NomeProf4'] . '</td>';
 								//echo '<td>' . $row['CombinadoFrete'] . '</td>';
 								//echo '<td>' . $row['AprovadoOrca'] . '</td>';
 								//echo '<td>' . $row['ConcluidoOrca'] . '</td>';
@@ -152,11 +151,12 @@
 								echo '<td>' . $row['DataEntregaOrca'] . '</td>';
 								//echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 							}
-							echo '<td class="text-left">' . $row['Catprod'] . '</td>';
-							echo '<td class="text-left">' . $row['QuantidadeProduto'] . '</td>';
+							//echo '<td class="text-left">' . $row['Catprod'] . '</td>';
+							echo '<td class="text-left">' . $row['QtdProduto'] . '</td>';
 							echo '<td class="text-left">' . $row['NomeProduto'] . '</td>';
 							echo '<td class="text-left">' . $row['ValorProduto'] . '</td>';
-							echo '<td class="text-left">' . $row['ComissaoProduto'] . '</td>';
+							echo '<td class="text-left">' . $row['ComissaoTotal'] . '/' . $row['Contagem'] . '</td>';
+							echo '<td class="text-left">' . $row['ComissaoProf'] . '</td>';
 							echo '<td>' . $row['ConcluidoProduto'] . '</td>';
 							echo '<td>' . $row['DataConcluidoProduto'] . '</td>';
 							echo '<td>' . $row['HoraConcluidoProduto'] . '</td>';
