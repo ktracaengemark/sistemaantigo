@@ -333,6 +333,12 @@ class Orcatrataprint_model extends CI_Model {
 				MO.AVAP,
 				MO.Abrev3,
 				OT.Modalidade,
+				OT.TipoDescOrca,
+				OT.DescPercOrca,
+				OT.DescValorOrca,
+				OT.UsarCashBack,
+				OT.CashBackOrca,
+				OT.ValorFinalOrca,
 				MO.Modalidade,
 				TP.TipoFinanceiro
 

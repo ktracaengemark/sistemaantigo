@@ -18,16 +18,13 @@ app = app.substring(0, pos);
 var currentDate = moment();
 
 camposDisponiveis();
-
 exibirentrega();
-
 exibir();
 exibir_confirmar();	
 Aguardar();
 clientePet();
 clienteOT();
 //fechaBuscaOS();
-
 
 function codigo(id, tabela){
 	//alert('ok codigo');
@@ -123,8 +120,8 @@ function exibir_confirmar(){
 function buscaPet(){
 		//var id_pet = $('#idApp_ClientePet').val();
 		var id_pet = $('#Hidden_idApp_ClientePet').val();
-		console.log("executa safado");	
-		console.log("id do pet" + id_pet);
+		//console.log("executa safado");	
+		//console.log("id do pet" + id_pet);
 		event.preventDefault();
 		
 		$.ajax({
@@ -2170,14 +2167,14 @@ function clienteOT(id = null){
 	var id_cliente = $('#idApp_Cliente').val();
 	
 	var caminho2 = $('#Caminho2').val();
-	console.log(caminho2);
+	//console.log(caminho2);
 	//var caminho2 = '../../';
-	console.log(id_cliente);
-	console.log(id);
+	//console.log(id_cliente);
+	//console.log(id);
 	
-	console.log(' <br>OrcaTrata<br> ');
+	//console.log(' <br>OrcaTrata<br> ');
 		
-	console.log('<br> Hidden_idApp_OrcaTrata = '+ $('#Hidden_idApp_OrcaTrata').val());
+	//console.log('<br> Hidden_idApp_OrcaTrata = '+ $('#Hidden_idApp_OrcaTrata').val());
 	
 	if(id_cliente) {
 		//console.log(id);
@@ -2513,6 +2510,7 @@ function dateTermina() {
 }
 
 function exibirentrega() {
+		$('.Exibir_Troco').hide();
 		$('.Exibir').hide();
 		$('.QtdSoma').hide();
 		$('.FormaPag').hide();
@@ -2538,10 +2536,11 @@ function formaPag(formapag){
 function exibirTroco(pagocom){
 	//alert('teste');
 	//console.log(pagocom);
+	
 	if(pagocom == "7"){
-		$('.Exibir').show();
+		$('.Exibir_Troco').show();
 	}else{
-		$('.Exibir').hide();
+		$('.Exibir_Troco').hide();
 	}
 }
 
@@ -3525,23 +3524,202 @@ function calculaTotal(entrada) {
     //o valor é escrito no seu campo no formulário
     $('#ValorSomaOrca').val(valorsomaorca);
 	$('#ValorTotalOrca').val(restaT);
+	var tipodescorca = $('#Hidden_TipoDescOrca').val();
+	tipoDescOrca(tipodescorca);
+	//calculaParcelas();
+}
+
+function tipoDescOrca(valor){
+	//alert('teste tipoDescOrca');
 	
+	if(valor){
+		if(valor == 'P'){
+			$('#DescPercOrca').prop('readonly', false);
+			//$('#DescPercOrca').prop('onkeyup', true);
+			//$("#DescPercOrca").on("click");
+			$('#DescValorOrca').prop('readonly', true);
+			//$('#DescValorOrca').prop('onkeyup', false);
+			//$("#DescValorOrca").off("click");
+		}else if(valor == 'V'){
+			$('#DescPercOrca').prop('readonly', true);
+			//$('#DescPercOrca').prop('onkeyup', false);
+			//$("#DescPercOrca").off("click");
+			$('#DescValorOrca').prop('readonly', false);
+			//$('#DescValorOrca').prop('onkeyup', true);
+			//$("#DescValorOrca").on("click");
+		}
+		$('#Hidden_TipoDescOrca').val(valor);
+		var tipodescorca = valor;
+		if(tipodescorca == 'P'){
+			var desconto = 'Percentual';
+			descPercOrca();
+		}else if(tipodescorca == 'V'){
+			var desconto = 'Valor';
+			descValorOrca();
+		}
+	}else{
+		var tipodescorca = $('#Hidden_TipoDescOrca').val();
+		if(tipodescorca == 'P'){
+			var desconto = 'Percentual';
+			descPercOrca();
+		}else if(tipodescorca == 'V'){
+			var desconto = 'Valor';
+			descValorOrca();
+		}
+	}
+	//var tipodescorca = $('#Hidden_TipoDescOrca').val();
+	//console.log('Tipo. hidden ='+tipodescorca);
+	//console.log('Tipo. valor ='+valor);
+	//console.log('Tipo. desconto ='+desconto);
+}
+
+function descPercOrca(){
+	//alert('teste descPercOrca');
+	var recorrencias = $('#Recorrencias').val();
+	//console.log('Total de Recorrencias = ' + recorrencias);
+	var valortotalorca = $('#ValorTotalOrca').val();
+	valortotalorca = valortotalorca.replace(".","").replace(",",".");
+	
+	var descpercorca = $('#DescPercOrca').val();
+	descpercorca = descpercorca.replace(".","").replace(",",".");
+	
+	if(valortotalorca > 0){
+		var descvalororca = descpercorca*valortotalorca/100;
+		descvalororca	= parseFloat(descvalororca);
+		descvalororca	= descvalororca.toFixed(2);
+		
+		if(descpercorca <= 100){	
+			
+			var valorfinalorca = (valortotalorca - descvalororca);
+			
+			var valor_s_desc = recorrencias*valortotalorca;
+			valor_s_desc	= parseFloat(valor_s_desc);
+			valor_s_desc	= valor_s_desc.toFixed(2);
+			valor_s_desc 	= valor_s_desc.replace('.',',');
+			
+			var valor_c_desc = recorrencias*valorfinalorca;
+			valor_c_desc	= parseFloat(valor_c_desc);
+			valor_c_desc	= valor_c_desc.toFixed(2);
+			valor_c_desc 	= valor_c_desc.replace('.',',');
+			
+			descvalororca 	= descvalororca.replace('.',',');
+			
+			valorfinalorca	= parseFloat(valorfinalorca);
+			valorfinalorca	= valorfinalorca.toFixed(2);
+			valorfinalorca 	= valorfinalorca.replace('.',',');
+			
+			
+			$('#DescValorOrca').val(descvalororca);
+			$('#ValorFinalOrca').val(valorfinalorca);
+			$('#Valor_C_Desc').val(valor_c_desc);
+			$('#Valor_S_Desc').val(valor_s_desc);
+			
+			//console.log(valortotalorca);
+			//console.log(descpercorca);
+			//console.log(descvalororca);
+		
+		}else{
+			$('#ValorFinalOrca').val('0,00');
+			$('#DescPercOrca').val('0,00');
+			$('#DescValorOrca').val('0,00');
+			$('#Valor_C_Desc').val('0,00');
+			$('#Valor_S_Desc').val('0,00');
+		}	
+	}else{
+		$('#ValorFinalOrca').val('0,00');
+		$('#DescPercOrca').val('0,00');
+		$('#DescValorOrca').val('0,00');
+		$('#Valor_C_Desc').val('0,00');
+		$('#Valor_S_Desc').val('0,00');
+	}
 	calculaParcelas();
+	calculaTroco();
+	//console.log('Perc. Pedido = ' + valortotalorca);
+	//console.log('Perc. Desc Valor = ' + descvalororca);
+	//console.log('Perc. Desc Perc = ' + descpercorca);
+	//console.log('Perc. Final Orca = ' + valorfinalorca);
+}
+
+function descValorOrca(){
+	//alert('teste descValorOrca');
+	var recorrencias = $('#Recorrencias').val();
+	//console.log('Total de Recorrencias = ' + recorrencias);
+	var valortotalorca = $('#ValorTotalOrca').val();
+	valortotalorca = valortotalorca.replace(".","").replace(",",".");
+	valortotalorca	= parseFloat(valortotalorca);
+	var descvalororca = $('#DescValorOrca').val();
+	descvalororca = descvalororca.replace(".","").replace(",",".");
+	descvalororca	= parseFloat(descvalororca);
+	
+	if(valortotalorca > 0){
+		if(valortotalorca >= descvalororca){
+			//console.log('Total do Desconto em Valor = ' + descvalororca);
+			//console.log('Total do Pedido = ' + valortotalorca);
+			var valorfinalorca = (valortotalorca - descvalororca);
+			
+			var valor_c_desc = recorrencias*valorfinalorca;
+			valor_c_desc	= parseFloat(valor_c_desc);
+			valor_c_desc	= valor_c_desc.toFixed(2);
+			valor_c_desc 	= valor_c_desc.replace('.',',');
+			
+			var descpercorca = (valortotalorca - valorfinalorca)*100/valortotalorca;
+			descpercorca	= parseFloat(descpercorca);
+			descpercorca	= descpercorca.toFixed(2);
+			descpercorca 	= descpercorca.replace('.',',');
+			
+			valorfinalorca	= parseFloat(valorfinalorca);
+			valorfinalorca	= valorfinalorca.toFixed(2);
+			valorfinalorca 	= valorfinalorca.replace('.',',');
+			
+			
+			$('#ValorFinalOrca').val(valorfinalorca);
+			$('#DescPercOrca').val(descpercorca);
+			$('#Valor_C_Desc').val(valor_c_desc);
+		}else{
+			$('#ValorFinalOrca').val('0,00');
+			$('#DescPercOrca').val('0,00');
+			$('#DescValorOrca').val('0,00');
+			$('#Valor_C_Desc').val('0,00');
+		}	
+	}else{
+		$('#ValorFinalOrca').val('0,00');
+		$('#DescPercOrca').val('0,00');
+		$('#DescValorOrca').val('0,00');
+		$('#Valor_C_Desc').val('0,00');
+	}
+	calculaParcelas();
+	calculaTroco();	
+	
+	//console.log('Desc. Total Pedido = ' + valortotalorca);
+	//console.log('Desc. Desc Valor = ' + descvalororca);
+	//console.log('Desc. Desc Perc = ' + descpercorca);
+	//console.log('Desc. Final Orca = ' + valorfinalorca);
 }
 
 function calculaTroco(entrada) {
 
     //recebe o valor do orçamento
     //var orcamento = $("#ValorRestanteOrca").val();
-	var orcamento = $("#ValorTotalOrca").val();
+	//var orcamento = $("#ValorTotalOrca").val();
+	var orcamento = $("#ValorFinalOrca").val();
+	orcamento = orcamento.replace(".","").replace(",",".");
+	orcamento	= parseFloat(orcamento);
 	var devolucao = $("#ValorDinheiro").val();
-    var resta = (devolucao.replace(".","").replace(",",".") - orcamento.replace(".","").replace(",","."));
-
-    resta = mascaraValorReal(resta);
-
+	devolucao = devolucao.replace(".","").replace(",",".");
+	devolucao	= parseFloat(devolucao);
+    //console.log('Valor Final = '+orcamento);
+    //console.log('Valor Dinheiro = '+devolucao);
+	
+	if(devolucao > orcamento){
+		var resta = (devolucao - orcamento);
+		resta = mascaraValorReal(resta);
+	}else{
+		var resta = '0,00';
+	}
+	
     //o valor é escrito no seu campo no formulário
     $('#ValorTroco').val(resta);
-
+	
 }
 
 /*
@@ -3643,131 +3821,167 @@ function calculaParcelas(mod) {
 	//console.log(mod + ' - mod');
 	var formapag = $("#FormaPagamento").val();
 	//console.log(formapag + ' - forma de pagamento');
-	var resta = $("#ValorTotalOrca").val();
+	var resta = $("#ValorFinalOrca").val();
+	//var resta = $("#ValorTotalOrca").val();
     var parcelas = $("#QtdParcelasOrca").val();
-    if(parcelas == 0){
-		parcelas = 1;
-	}
-	
+    //console.log('QtdParcelasOrca = ' +parcelas);
+	if(parcelas){	
+		if(parcelas == 0){
+			parcelas = 1;
+		}
+		
 
-    if (parcelas >= 2) {
-        //console.log( $("#listadinamicad"+(parcelas-1)).val() );
-        var chosen;
-        chosen = $("#listadinamicad"+(parcelas-1)).val();
-        //console.log( chosen + ' :: ' + parcelas );
-    }	
-	
-	
-	//$("#QtdParcelasOrca").val(parcelas);
-	var vencimento = $("#DataVencimentoOrca").val();
-
-    //valor de cada parcela
-	if(mod){
-		if(mod == "P"){
-			var parcorca = (resta.replace(".","").replace(",",".") / parcelas);
-		}else{
-			var parcorca = (resta.replace(".","").replace(",",".") / 1);
+		if (parcelas >= 2) {
+			//console.log( $("#FormaPagamentoParcela"+(parcelas-1)).val() );
+			var chosen;
+			chosen = $("#FormaPagamentoParcela"+(parcelas-1)).val();
+			//console.log( chosen + ' :: ' + parcelas );
 		}	
-	}else{
-		var parcorca = (resta.replace(".","").replace(",",".") / parcelas);
-	}	
-	parcorca = mascaraValorReal(parcorca);
-	
-    //pega a data do primeiro vencimento e separa em dia, mês e ano
-    var split = vencimento.split("/");
+		
+		
+		//$("#QtdParcelasOrca").val(parcelas);
+		var vencimento = $("#DataVencimentoOrca").val();
 
-    //define a data do primeiro vencimento no formato do momentjs
-    var currentDate = moment(split[2]+'-'+split[1]+'-'+split[0]);
+		//valor de cada parcela
+		if(mod){
+			if(mod == "P"){
+				var parcorca = (resta.replace(".","").replace(",",".") / parcelas);
+			}else{
+				var parcorca = (resta.replace(".","").replace(",",".") / 1);
+			}	
+		}else{
+			var parcorca = (resta.replace(".","").replace(",",".") / parcelas);
+		}	
+		parcorca = mascaraValorReal(parcorca);
+		
+		//pega a data do primeiro vencimento e separa em dia, mês e ano
+		var split = vencimento.split("/");
 
-    //console.log(currentDate.format('DD-MM-YYYY'));
-    //console.log(futureMonth.format('DD-MM-YYYY'));
-    //alert('>>v '+vencimento+'::d1 '+currentDate.format('DD/MM/YYYY')+'::d2 '+futureMonth.format('DD/MM/YYYY')+'::d3 '+futureMonthEnd.format('DD/MM/YYYY')+'<<');
+		//define a data do primeiro vencimento no formato do momentjs
+		var currentDate = moment(split[2]+'-'+split[1]+'-'+split[0]);
 
-    //caso as parcelas já tenham sido geradas elas serão excluídas para que
-    //sejam geradas novas parcelas
-    $(".input_fields_parcelas").empty();
+		//console.log(currentDate.format('DD-MM-YYYY'));
+		//console.log(futureMonth.format('DD-MM-YYYY'));
+		//alert('>>v '+vencimento+'::d1 '+currentDate.format('DD/MM/YYYY')+'::d2 '+futureMonth.format('DD/MM/YYYY')+'::d3 '+futureMonthEnd.format('DD/MM/YYYY')+'<<');
 
-    //gera os campos de parcelas
-    for (i=1; i<=parcelas; i++) {
+		//caso as parcelas já tenham sido geradas elas serão excluídas para que
+		//sejam geradas novas parcelas
+		$(".input_fields_parcelas").empty();
 
-        //calcula as datas das próximas parcelas
-        var futureMonth = moment(currentDate).add(i-1, 'M');
-        var futureMonthEnd = moment(futureMonth).endOf('month');
+		//gera os campos de parcelas
+		for (i=1; i<=parcelas; i++) {
 
-        if(currentDate.date() != futureMonth.date() && futureMonth.isSame(futureMonthEnd.format('YYYY-MM-DD')))
-            futureMonth = futureMonth.add(i-1, 'd');
+			//calcula as datas das próximas parcelas
+			var futureMonth = moment(currentDate).add(i-1, 'M');
+			var futureMonthEnd = moment(futureMonth).endOf('month');
 
-        $(".input_fields_parcelas").append('\
-            <div class="form-group">\
-				<div class="panel panel-warning">\
-					<div class="panel-heading">\
-						<div class="row">\
-							<div class="col-md-2">\
-								<label for="Parcela">Parcela:</label><br>\
-								<input type="text" class="form-control" maxlength="6"\
-									   name="Parcela'+i+'" value="'+i+'/'+parcelas+'">\
-							</div>\
-							<div class="col-md-2">\
-								<label for="FormaPagamentoParcela'+i+'">FormaPag:</label>\
-								<select data-placeholder="Selecione uma opção..." class="form-control Chosen_Parcela"\
-										 id="FormaPagamentoParcela'+i+'" name="FormaPagamentoParcela'+i+'">\
-									<option value=""></option>\
-								</select>\
-							</div>\
-							<div class="col-md-2">\
-								<label for="ValorParcela">Valor Parcela:</label><br>\
-								<div class="input-group" id="txtHint">\
-									<span class="input-group-addon" id="basic-addon1">R$</span>\
-									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
-										    id="ValorParcela'+i+'" name="ValorParcela'+i+'" value="'+parcorca+'">\
+			if(currentDate.date() != futureMonth.date() && futureMonth.isSame(futureMonthEnd.format('YYYY-MM-DD')))
+				futureMonth = futureMonth.add(i-1, 'd');
+
+			$(".input_fields_parcelas").append('\
+				<div class="form-group">\
+					<div class="panel panel-warning">\
+						<div class="panel-heading">\
+							<div class="row">\
+								<div class="col-md-2">\
+									<label for="Parcela">Prcl.:'+i+'</label><br>\
+									<input type="text" class="form-control" maxlength="6"\
+										   name="Parcela'+i+'" value="'+i+'/'+parcelas+'">\
 								</div>\
-							</div>\
-							<div class="col-md-2">\
-								<label for="DataVencimento">Vencimento</label>\
-								<div class="input-group DatePicker">\
-									<span class="input-group-addon" disabled>\
-										<span class="glyphicon glyphicon-calendar"></span>\
-									</span>\
-									<input type="text" class="form-control Date" id="DataVencimento'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
-										   name="DataVencimento'+i+'" value="'+futureMonth.format('DD/MM/YYYY')+'">\
+								<div class="col-md-2">\
+									<label for="FormaPagamentoParcela'+i+'">FormaPag:</label>\
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen_Parcela"\
+											 id="FormaPagamentoParcela'+i+'" name="FormaPagamentoParcela'+i+'">\
+										<option value=""></option>\
+									</select>\
 								</div>\
-							</div>\
-							<div class="col-md-2">\
-								<label for="Quitado">Parc.Quitada?</label><br>\
-								<div class="btn-group" data-toggle="buttons">\
-									<label class="btn btn-warning active" name="radio_Quitado'+i+'" id="radio_Quitado'+i+'N">\
-									<input type="radio" name="Quitado'+i+'" id="rdgrldnmc_cal_parc"\
-										onchange="carregaQuitado(this.value,this.name,'+i+',1)" autocomplete="off" value="N" checked>Não\
-									</label>\
-									<label class="btn btn-default" name="radio_Quitado'+i+'" id="radio_Quitado'+i+'S">\
-									<input type="radio" name="Quitado'+i+'" id="rdgrldnmc_cal_parc"\
-										onchange="carregaQuitado(this.value,this.name,'+i+',1)" autocomplete="off" value="S">Sim\
-									</label>\
+								<div class="col-md-2">\
+									<label for="ValorParcela">Valor Parcela:</label><br>\
+									<div class="input-group" id="txtHint">\
+										<span class="input-group-addon" id="basic-addon1">R$</span>\
+										<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
+												id="ValorParcela'+i+'" name="ValorParcela'+i+'" value="'+parcorca+'">\
+									</div>\
 								</div>\
-							</div>\
-							<div class="col-md-2">\
-								<div id="Quitado'+i+'" style="display:none">\
-									<label for="DataPago">Pagamento</label>\
+								<div class="col-md-2">\
+									<label for="DataVencimento">Vencimento</label>\
 									<div class="input-group DatePicker">\
 										<span class="input-group-addon" disabled>\
 											<span class="glyphicon glyphicon-calendar"></span>\
 										</span>\
-										<input type="text" class="form-control Date" id="DataPago'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
-											   name="DataPago'+i+'" value="">\
+										<input type="text" class="form-control Date" id="DataVencimento'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
+											   name="DataVencimento'+i+'" value="'+futureMonth.format('DD/MM/YYYY')+'">\
+									</div>\
+								</div>\
+								<div class="col-md-2">\
+									<label for="Quitado">Parc.Quitada?</label><br>\
+									<div class="btn-group" data-toggle="buttons">\
+										<label class="btn btn-warning active" name="radio_Quitado'+i+'" id="radio_Quitado'+i+'N">\
+										<input type="radio" name="Quitado'+i+'" id="rdgrldnmc_cal_parc"\
+											onchange="carregaQuitado(this.value,this.name,'+i+',1)" autocomplete="off" value="N" checked>Não\
+										</label>\
+										<label class="btn btn-default" name="radio_Quitado'+i+'" id="radio_Quitado'+i+'S">\
+										<input type="radio" name="Quitado'+i+'" id="rdgrldnmc_cal_parc"\
+											onchange="carregaQuitado(this.value,this.name,'+i+',1)" autocomplete="off" value="S">Sim\
+										</label>\
+									</div>\
+								</div>\
+								<div class="col-md-2">\
+									<div id="Quitado'+i+'" style="display:none">\
+										<label for="DataPago">Pagamento</label>\
+										<div class="input-group DatePicker">\
+											<span class="input-group-addon" disabled>\
+												<span class="glyphicon glyphicon-calendar"></span>\
+											</span>\
+											<input type="text" class="form-control Date" id="DataPago'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
+												   name="DataPago'+i+'" value="">\
+										</div>\
 									</div>\
 								</div>\
 							</div>\
 						</div>\
 					</div>\
-				</div>\
-			</div>'
-        );
+				</div>'
+			);
 
-    
-		//get a reference to the select element
-		$select_1000 = $('#FormaPagamentoParcela'+i);
 		
-		//console.log($select_1000);
+			//get a reference to the select element
+			$select_1000 = $('#FormaPagamentoParcela'+i);
+			
+			//console.log($select_1000);
+			//request the JSON data and parse into the select element
+			$.ajax({
+				url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=70',
+				dataType: 'JSON',
+				type: "GET",
+				success: function (data) {
+					//clear the current content of the select
+					$select_1000.html('');
+					//iterate over the data and append a select option
+					$select_1000.append('<option value="">-- Sel. FormaPag. --</option>');
+					$.each(data, function (key, val) {
+						//alert(val.id);
+						$select_1000.append('<option value="' + val.id + '">' + val.name + '</option>');
+					})
+					$('.Chosen_Parcela').chosen({
+						disable_search_threshold: 10,
+						multiple_text: "Selecione uma ou mais opções",
+						single_text: "Selecione uma opção",
+						no_results_text: "Nenhum resultado para",
+						width: "100%"
+					});
+				},
+				error: function () {
+					//alert('erro listadinamicaB');
+					//if there is an error append a 'none available' option
+					$select_1000.html('<option id="-1">ERRO</option>');
+				}
+
+			});
+		
+		}
+		
+		/*
 		//request the JSON data and parse into the select element
 		$.ajax({
 			url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=70',
@@ -3797,67 +4011,36 @@ function calculaParcelas(mod) {
 			}
 
 		});
-	
+		*/		
+				
+		//habilita o botão de calendário após a geração dos campos dinâmicos
+		$('.DatePicker').datetimepicker(dateTimePickerOptions);
+
+		//permite o uso de radio buttons nesse bloco dinâmico
+		$('input:radio[id="rdgrldnmc_cal_parc"]').change(function() {
+
+			var value_prc = $(this).val();
+			var name_prc = $(this).attr("name");
+
+			//console.log(value_prc + ' <<>> ' + name);
+
+			$('label[name="radio_' + name_prc + '"]').removeClass();
+			$('label[name="radio_' + name_prc + '"]').addClass("btn btn-default");
+			$('#radio_' + name_prc + value_prc).addClass("btn btn-warning active");
+			//$('#radiogeral'+ value_prc).addClass("btn btn-warning active");
+			
+			if(value_prc == "S"){
+				$("#"+name_prc).css("display","");
+			}else{
+				$("#"+name_prc).css("display","none");
+			}
+
+		});	
+		//console.log('SIM calculou parcelas');
+	}else{
+		//console.log('NÃO calculou parcelas');
 	}
 	
-	/*
-	//request the JSON data and parse into the select element
-	$.ajax({
-		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=70',
-		dataType: 'JSON',
-		type: "GET",
-		success: function (data) {
-			//clear the current content of the select
-			$select_1000.html('');
-			//iterate over the data and append a select option
-			$select_1000.append('<option value="">-- Sel. FormaPag. --</option>');
-			$.each(data, function (key, val) {
-				//alert(val.id);
-				$select_1000.append('<option value="' + val.id + '">' + val.name + '</option>');
-			})
-			$('.Chosen_Parcela').chosen({
-				disable_search_threshold: 10,
-				multiple_text: "Selecione uma ou mais opções",
-				single_text: "Selecione uma opção",
-				no_results_text: "Nenhum resultado para",
-				width: "100%"
-			});
-		},
-		error: function () {
-			//alert('erro listadinamicaB');
-			//if there is an error append a 'none available' option
-			$select_1000.html('<option id="-1">ERRO</option>');
-		}
-
-	});
-	*/		
-			
-    //habilita o botão de calendário após a geração dos campos dinâmicos
-    $('.DatePicker').datetimepicker(dateTimePickerOptions);
-
-    //permite o uso de radio buttons nesse bloco dinâmico
-    $('input:radio[id="rdgrldnmc_cal_parc"]').change(function() {
-
-        var value_prc = $(this).val();
-        var name_prc = $(this).attr("name");
-
-        //console.log(value_prc + ' <<>> ' + name);
-
-        $('label[name="radio_' + name_prc + '"]').removeClass();
-        $('label[name="radio_' + name_prc + '"]').addClass("btn btn-default");
-        $('#radio_' + name_prc + value_prc).addClass("btn btn-warning active");
-        //$('#radiogeral'+ value_prc).addClass("btn btn-warning active");
-		
-		if(value_prc == "S"){
-			$("#"+name_prc).css("display","");
-		}else{
-			$("#"+name_prc).css("display","none");
-		}
-
-    });	
-	
-
-
 }
 
 function adicionaTamanhos() {
@@ -5683,7 +5866,7 @@ function adiciona_item_promocao5() {
  */
 
 function buscaValor1Tabelas(id, campo, tabela, num, campo2, recorrencias) {
-	console.log('recorrencia no busca valor = ' +recorrencias);
+	//console.log('recorrencia no busca valor = ' +recorrencias);
     $.ajax({
         // url para o arquivo json.php
         url: window.location.origin + "/" + app + "/Valor1_json.php?tabela=" + tabela + "&campo2=" + campo2 + "&recorrencias=" + recorrencias,
@@ -6647,7 +6830,7 @@ $(document).ready(function () {
     var ps = $("#SCount").val(); //initlal text box count
 	$(".add_field_button10").click(function(e){ //on add input button click
         var recorrencias = $('#Recorrencias').val();
-		console.log('Recorrencias no serviço = ' + recorrencias);
+		//console.log('Recorrencias no serviço = ' + recorrencias);
 		var negocio = $('#Negocio').val();
 		//console.log( negocio );
 		
