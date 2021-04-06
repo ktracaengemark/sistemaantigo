@@ -183,7 +183,7 @@
 												<div class="form-group col-md-12 text-left">
 													<div class="row">										
 														<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/comissao" role="button"> 
-															<span class="glyphicon glyphicon-usd"></span> NaLoja
+															<span class="glyphicon glyphicon-usd"></span>Por Pedido NaLoja
 														</a>
 													</div>	
 												</div>
@@ -192,11 +192,20 @@
 												<div class="form-group col-md-12 text-left">
 													<div class="row">										
 														<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/comissao_online" role="button"> 
-															<span class="glyphicon glyphicon-usd"></span> OnLine
+															<span class="glyphicon glyphicon-usd"></span>Por Pedido OnLine
 														</a>
 													</div>	
 												</div>
 											<?php }?>	
+											<?php if($_SESSION['log']['idSis_Empresa'] != 5) {?>
+												<div class="form-group col-md-12 text-left">
+													<div class="row">										
+														<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatoriocomissoes/porservicos" role="button"> 
+															<span class="glyphicon glyphicon-usd"></span> Por Serviços
+														</a>
+													</div>	
+												</div>
+											<?php } ?>	
 										</div>
 									<?php }?>
 								<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>	
