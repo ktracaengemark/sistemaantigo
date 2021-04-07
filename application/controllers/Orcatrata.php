@@ -2668,6 +2668,7 @@ class Orcatrata extends CI_Controller {
 			'StatusParcelas',
 			'PeloPet',
 			'PortePet',
+			'EspeciePet',
         ), TRUE));
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 		$data['orcatrata'] = quotes_to_entities($this->input->post(array(
@@ -2993,7 +2994,13 @@ class Orcatrata extends CI_Controller {
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
 
         //Fim do trecho de código que dá pra melhorar
-
+		
+		$data['select']['EspeciePet'] = array (
+            '0' => '',
+            '1' => 'CÃO',
+            '2' => 'GATO',
+			'3' => 'AVE',
+        );	
 		$data['select']['PeloPet'] = array (
             '0' => '',
             '1' => 'CURTO',

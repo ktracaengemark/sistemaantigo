@@ -294,7 +294,7 @@ class Relatoriocomissoes_model extends CI_Model {
             return TRUE;
         } else {
 
-            $diferenca=$somaentregar=$somaentregue=$somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somapago=$somapagar=$somareal=$balanco=$ant=0;
+            $somacomissaoprof=$somacomissaototal=$diferenca=$somaentregar=$somaentregue=$somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somapago=$somapagar=$somareal=$balanco=$ant=0;
             foreach ($query->result() as $row) {
 				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
                 $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
@@ -349,10 +349,14 @@ class Relatoriocomissoes_model extends CI_Model {
 					//$row->Contagem = $contagem;
 					$divisor = $contagem;
 				}
-				$comissao_total = $row->QtdProduto*$row->ComissaoProduto;
-				$pro_prof = $row->QtdProduto*$row->ComissaoProduto/$divisor;
 				
+				$valortotalproduto = $row->QtdProduto*$row->ValorProduto;
+				$comissao_total = $valortotalproduto*$row->ComissaoProduto/100;
+				$pro_prof = $comissao_total/$divisor;
+				$somacomissaototal 	+= $comissao_total;
+				$somacomissaoprof	+= $pro_prof;
 				
+				$row->ValorTotalProduto = number_format($valortotalproduto, 2, ',', '.');
 				$row->ValorProduto = number_format($row->ValorProduto, 2, ',', '.');
 				$row->ComissaoProduto = number_format($row->ComissaoProduto, 2, ',', '.');
 				$row->ComissaoTotal = number_format($comissao_total, 2, ',', '.');
@@ -397,6 +401,8 @@ class Relatoriocomissoes_model extends CI_Model {
 			
             $query->soma = new stdClass();
 			//$query->soma->contagem = $contagem;
+            $query->soma->somacomissaototal = number_format($somacomissaototal, 2, ',', '.');
+            $query->soma->somacomissaoprof = number_format($somacomissaoprof, 2, ',', '.');
             $query->soma->diferenca = $diferenca;
             $query->soma->somaentregar = $somaentregar;
             $query->soma->somaentregue = $somaentregue;

@@ -1,7 +1,7 @@
 <div class="panel panel-<?php echo $panel; ?>">
 	<div class="panel-heading">
 		<div class="row">	
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<label for="DataFim">
 					<?php if($metodo == 2) {?>
 						Entregues
@@ -10,11 +10,11 @@
 					<?php } ?>	
 				</label>
 				<div class="input-group">
-					<span class="input-group-addon">Prds</span>
 					<input type="text" class="form-control" disabled aria-label="Total Recebido" value="<?php echo $report->soma->somaentregue ?>">
+					<span class="input-group-addon">Srvs</span>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<label for="DataFim">
 					<?php if($metodo == 2) {?>
 						à Entregar
@@ -23,15 +23,29 @@
 					<?php } ?>	
 				</label>
 				<div class="input-group">
-					<span class="input-group-addon">Prds</span>
 					<input type="text" class="form-control" disabled aria-label="Total a Receber" value="<?php echo $report->soma->diferenca ?>">
+					<span class="input-group-addon">Srvs</span>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<label for="DataFim">Total <?php echo $titulo1; ?></label>
 				<div class="input-group">
-					<span class="input-group-addon">Prds</span>
 					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somaentregar ?>">
+					<span class="input-group-addon">Srvs</span>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<label for="DataFim">Comissão Total</label>
+				<div class="input-group">
+					<span class="input-group-addon">R$</span>
+					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somacomissaototal ?>">
+				</div>
+			</div>
+			<div class="col-md-3">
+				<label for="DataFim">Comissão Profis</label>
+				<div class="input-group">
+					<span class="input-group-addon">R$</span>
+					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somacomissaoprof ?>">
 				</div>
 			</div>				
 		</div>	
@@ -80,6 +94,7 @@
 						<th class="active">Qtd</th>
 						<th class="active">Produto</th>
 						<th class="active">ValorR$</th>
+						<th class="active">Com.%</th>
 						<th class="active">Com.R$</th>
 						<th class="active">Prof.R$</th>
 						<th class="active">Entregue</th>
@@ -154,9 +169,10 @@
 							//echo '<td class="text-left">' . $row['Catprod'] . '</td>';
 							echo '<td class="text-left">' . $row['QtdProduto'] . '</td>';
 							echo '<td class="text-left">' . $row['NomeProduto'] . '</td>';
-							echo '<td class="text-left">' . $row['ValorProduto'] . '</td>';
-							echo '<td class="text-left">' . $row['ComissaoTotal'] . '/' . $row['Contagem'] . '</td>';
-							echo '<td class="text-left">' . $row['ComissaoProf'] . '</td>';
+							echo '<td class="text-left">R$' . $row['ValorTotalProduto'] . '</td>';
+							echo '<td class="text-left">' . $row['ComissaoProduto'] . '%</td>';
+							echo '<td class="text-left">R$' . $row['ComissaoTotal'] . '/' . $row['Contagem'] . '</td>';
+							echo '<td class="text-left">R$' . $row['ComissaoProf'] . '</td>';
 							echo '<td>' . $row['ConcluidoProduto'] . '</td>';
 							echo '<td>' . $row['DataConcluidoProduto'] . '</td>';
 							echo '<td>' . $row['HoraConcluidoProduto'] . '</td>';

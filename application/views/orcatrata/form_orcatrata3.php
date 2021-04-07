@@ -2665,9 +2665,27 @@
 								<input type="hidden" name="id_Cliente" id="id_Cliente" value="<?php echo $orcatrata['idApp_Cliente']; ?>" >
 							</div>
 							<div class="row">
+								<!--
 								<div class="col-md-3">
 									<label for="EspeciePet">Especie: *</label>
 									<input name="EspeciePet" type="text" class="form-control" id="EspeciePet" maxlength="45" placeholder="Especie do Pet">
+								</div>
+								-->
+								<div class="col-md-3 text-left">
+									<label for="EspeciePet">Especie:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control"
+											id="EspeciePet" name="EspeciePet">
+										<option value="">-- Selecione uma opção --</option>
+										<?php
+										foreach ($select['EspeciePet'] as $key => $row) {
+											if ($cadastrar['EspeciePet'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
 								</div>
 								<div class="col-md-3">
 									<label for="RacaPet">Raca: *</label>
