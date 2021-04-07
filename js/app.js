@@ -3982,49 +3982,16 @@ function tipoExtraOrca(valor){
 	}
 	
 	//var tipoextraorca = $('#Hidden_TipoExtraOrca').val();
-	console.log('Tipo. hidden ='+tipoextraorca);
-	console.log('Tipo. valor ='+valor);
-	console.log('Tipo. desconto ='+desconto);
+	//console.log('Tipo. hidden ='+tipoextraorca);
+	//console.log('Tipo. valor ='+valor);
+	//console.log('Tipo. desconto ='+desconto);
 }
-	
-$('#PercExtraOrca').on('keyup', function(event){
-	//alert('PercExtraOrca');			
-	$('#PercExtraOrca').prop('readonly', false);
-	$('#ValorExtraOrca').prop('readonly', true);
-	$('#TipoExtraOrca').val('P');
-});	
-
-$('#ValorExtraOrca').on('keyup', function(event){
-	//alert('ValorExtraOrca');			
-	$('#PercExtraOrca').prop('readonly', true);
-	$('#ValorExtraOrca').prop('readonly', false);
-	$('#TipoExtraOrca').val('V');
-	
-	/*
-				var value_prd = $(this).val();
-			var name_prd = $(this).attr("name");
-			//console.log(value_prd + ' <<>> ' + name_prd);
-			$('label[name="radio_' + name_prd + '"]').removeClass();
-			$('label[name="radio_' + name_prd + '"]').addClass("btn btn-default");
-			$('#radio_' + name_prd + value_prd).addClass("btn btn-warning active");
-			
-			if(value_prd == "S"){
-				$("#"+name_prd).css("display","");
-			}else{
-				$("#"+name_prd).css("display","none");
-			}
-	*/
-	
-	
-	
-	
-});
 
 function percExtraOrca(){
 	//alert('teste percExtraOrca');
 	
 	var recorrencias = $('#Recorrencias').val();
-	console.log('Total de Recorrencias = ' + recorrencias);
+	//console.log('Total de Recorrencias = ' + recorrencias);
 	var valorsomaorca = $('#ValorSomaOrca').val();
 	valorsomaorca = valorsomaorca.replace(".","").replace(",",".");
 	

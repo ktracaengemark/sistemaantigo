@@ -1262,7 +1262,7 @@
 														</div>
 														<div class="row">
 															<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-																<div class="col-md-8 text-left">
+																<div class="col-md-12 text-left">
 																	<label for="AVAP">Local do Pagamento:</label><br>
 																	<div class="btn-block" data-toggle="buttons">
 																		<?php
