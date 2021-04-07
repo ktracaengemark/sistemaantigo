@@ -65,6 +65,7 @@ class Relatoriocomissoes extends CI_Controller {
             'Orcamento',
             'Cliente',
 			'Fornecedor',
+			'Funcionario',
 			'Produtos',
 			'Categoria',
 			'Dia',
@@ -296,6 +297,7 @@ class Relatoriocomissoes extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
+		$data['select']['Funcionario'] = $this->Relatorio_model->select_funcionario();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Categoria'] = $this->Relatorio_model->select_catprod();
 		$data['select']['Orcarec'] = $this->Relatorio_model->select_orcarec();
@@ -377,6 +379,7 @@ class Relatoriocomissoes extends CI_Controller {
 			$data['bd']['TipoFrete'] = $data['query']['TipoFrete'];
 			$data['bd']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
 			$data['bd']['AVAP'] = $data['query']['AVAP'];
+            $data['bd']['Funcionario'] = $data['query']['Funcionario'];
 			
 			$data['report'] = $this->Relatoriocomissoes_model->list_porservicos($data['bd'],TRUE);
 

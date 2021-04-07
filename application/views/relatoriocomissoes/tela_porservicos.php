@@ -40,7 +40,7 @@
 							<input type="hidden" name="Cliente" id="Cliente" value=""/>
 							<input type="hidden" name="Fornecedor" id="Fornecedor" value=""/>
 						<?php } ?>
-						<div class="col-md-3 text-left">
+						<div class="col-md-2 text-left">
 							<label for="Categoria">Categoria:</label>
 							<div class="input-group">
 								<span class="input-group-btn">
@@ -62,7 +62,7 @@
 								</select>
 							</div>	
 						</div>
-						<div class="col-md-3 text-left">
+						<div class="col-md-2 text-left">
 							<label for="Produtos">Produto:</label>
 							<div class="input-group">
 								<span class="input-group-btn">
@@ -83,6 +83,28 @@
 									?>
 								</select>
 							</div>	
+						</div>
+						<div class="col-md-2 text-left">
+							<label for="Ordenamento">Colaborador:</label>
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+										<span class="glyphicon glyphicon-search"></span> 
+									</button>
+								</span>
+								<select data-placeholder="Selecione uma opção..." class="form-control" 
+										id="Funcionario" name="Funcionario">
+									<?php
+									foreach ($select['Funcionario'] as $key => $row) {
+										if ($query['Funcionario'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="col-md-6">
