@@ -25,6 +25,9 @@ Aguardar();
 clientePet();
 clienteOT();
 //fechaBuscaOS();
+exibirTroco();
+exibirExtraOrca();
+exibirDescOrca();
 
 function codigo(id, tabela){
 	//alert('ok codigo');
@@ -2536,11 +2539,21 @@ function formaPag(formapag){
 function exibirTroco(pagocom){
 	//alert('teste');
 	//console.log(pagocom);
-	
-	if(pagocom == "7"){
-		$('.Exibir_Troco').show();
+	if(pagocom){
+		//console.log('pagocom = '+pagocom);
+		if(pagocom == "7"){
+			$('.Exibir_Troco').show();
+		}else{
+			$('.Exibir_Troco').hide();
+		}
 	}else{
-		$('.Exibir_Troco').hide();
+		var formpag = $('#FormaPagamento').val();
+		//console.log('formpag = '+formpag);
+		if(formpag == "7"){
+			$('.Exibir_Troco').show();
+		}else{
+			$('.Exibir_Troco').hide();
+		}
 	}
 }
 
@@ -3942,6 +3955,34 @@ function calculaTotal_Antigo(entrada) {
 	
 }
 
+function exibirExtraOrca(){
+	//alert('teste');
+	//console.log(pagocom);
+	var tipoextraorca = $('#Hidden_TipoExtraOrca').val();
+	//console.log('#Hidden_TipoExtraOrca = '+tipoextraorca);
+	if(tipoextraorca == 'P'){
+		$('#PercExtraOrca').prop('readonly', false);
+		$('#ValorExtraOrca').prop('readonly', true);
+	}else if(tipoextraorca == 'V'){
+		$('#PercExtraOrca').prop('readonly', true);
+		$('#ValorExtraOrca').prop('readonly', false);
+	}
+}
+
+function exibirDescOrca(){
+	//alert('teste');
+	//console.log(pagocom);
+	var tipodescorca = $('#Hidden_TipoDescOrca').val();
+	//console.log('#Hidden_TipoDescOrca = '+tipodescorca);
+	if(tipodescorca == 'P'){
+		$('#DescPercOrca').prop('readonly', false);
+		$('#DescValorOrca').prop('readonly', true);
+	}else if(tipodescorca == 'V'){
+		$('#DescPercOrca').prop('readonly', true);
+		$('#DescValorOrca').prop('readonly', false);
+	}
+}
+
 function tipoExtraOrca(valor){
 	//alert('teste tipoExtraOrca | valor = ' + valor);
 	
@@ -3972,6 +4013,7 @@ function tipoExtraOrca(valor){
 		}
 	}else{
 		var tipoextraorca = $('#Hidden_TipoExtraOrca').val();
+		console.log('#Hidden_TipoExtraOrca = '+tipoextraorca);
 		if(tipoextraorca == 'P'){
 			var desconto = 'Percentual';
 			percExtraOrca();

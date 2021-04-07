@@ -1323,7 +1323,7 @@
 																	?>
 																</select>
 																<?php echo form_error('FormaPagamento'); ?>
-															</div>																
+															</div>
 														</div>
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 															<div class="row ">

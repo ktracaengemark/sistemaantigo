@@ -472,19 +472,19 @@
 											<table class="table table-bordered table-condensed table-striped">
 												<thead>
 													<tr>
-														<th class="col-md-3" scope="col">Extra</th>
 														<th class="col-md-3" scope="col">Prudutos</th>
 														<th class="col-md-3" scope="col">Servicos</th>
 														<th class="col-md-3" scope="col">Taxa Entrega</th>
+														<th class="col-md-3" scope="col">Extra</th>
 														<!--<th class="col-md-3" scope="col">Extra + Prd + Srv</th>-->
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
-														<td>R$ <?php echo number_format($orcatrata['ValorExtraOrca'], 2, ',', '.') ?></td>
 														<td>R$ <?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
 														<td>R$ <?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
 														<td>R$ <?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
+														<td>R$ <?php echo number_format($orcatrata['ValorExtraOrca'], 2, ',', '.') ?></td>
 														<!--<td>R$ <?php echo number_format($orcatrata['ValorSomaOrca'], 2, ',', '.') ?></td>-->
 													</tr>
 												</tbody>

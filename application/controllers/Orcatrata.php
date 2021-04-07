@@ -3323,7 +3323,6 @@ class Orcatrata extends CI_Controller {
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');		
 		
         if ($this->form_validation->run() === FALSE) {
-            //if (1 == 1) {
             $this->load->view('orcatrata/form_orcatrata3', $data);
         } else {
 		
@@ -3393,12 +3392,17 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['ValorComissao'] = $data['orcatrata']['ValorComissao'];
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
-			$data['orcatrata']['ValorDinheiro'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDinheiro']));
-			if($data['orcatrata']['ValorTroco'] > 0){
-				$data['orcatrata']['ValorTroco'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTroco']));
+			if($data['orcatrata']['ValorTroco'] == "7"){
+				$data['orcatrata']['ValorDinheiro'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDinheiro']));
+				if($data['orcatrata']['ValorTroco'] > 0){
+					$data['orcatrata']['ValorTroco'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTroco']));
+				}else{
+					$data['orcatrata']['ValorTroco'] = 0.00;
+				}
 			}else{
+				$data['orcatrata']['ValorDinheiro'] = 0.00;
 				$data['orcatrata']['ValorTroco'] = 0.00;
-			}
+			}	
 			$data['orcatrata']['ValorFrete'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFrete']));
 			$data['orcatrata']['ValorExtraOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorExtraOrca']));
 			$data['orcatrata']['PercExtraOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['PercExtraOrca']));
