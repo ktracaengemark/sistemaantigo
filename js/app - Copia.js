@@ -3111,6 +3111,7 @@ var dateTimePickerOptions = {
     locale: 'pt-br'
 }
 
+
 //Função que desabilita o botão submit após 1 click, evitando mais de um envio de formulário.
 function DesabilitaBotao (valor) {
 	$('.aguardar').show();
@@ -3473,6 +3474,32 @@ function mascaraValorReal(value) {
 
 }
 
+/*
+ * Função responsável por calcular o subtotal dos campos de produto
+ *
+ * @param {int} quant
+ * @param {string} campo
+ * @param {int} num
+ * @returns {decimal}
+ */
+function calculaResta(entrada) {
+
+    //recebe o valor do orçamento
+	var orcamento = $("#ValorOrca").val();
+	var devolucao = $("#ValorDev").val();
+    var resta = -(-orcamento.replace(".","").replace(",",".") - devolucao.replace(".","").replace(",","."));
+
+    resta = mascaraValorReal(resta);
+
+    //o valor é escrito no seu campo no formulário
+    $('#ValorRestanteOrca').val(resta);
+	
+	var tipoextraorca = $('#Hidden_TipoExtraOrca').val();
+	tipoExtraOrca(tipoextraorca);	
+	
+	//calculaParcelas();
+	//calculaTotal();
+}
 
 function buscaValor1Tabelas(id, campo, tabela, num, campo2, recorrencias) {
 	//console.log('recorrencia no busca valor = ' +recorrencias);
@@ -3826,57 +3853,7 @@ function calculaOrcamento() {
 	calculaTotal($("#ValorEntradaOrca").val());
 }
 
-/*
- * Função responsável por calcular o subtotal dos campos de produto
- *
- * @param {int} quant
- * @param {string} campo
- * @param {int} num
- * @returns {decimal}
- */
-function calculaResta(entrada) {
-
-    //recebe o valor do orçamento
-	var orcamento = $("#ValorOrca").val();
-	var devolucao = $("#ValorDev").val();
-    var resta = -(-orcamento.replace(".","").replace(",",".") - devolucao.replace(".","").replace(",","."));
-
-    resta = mascaraValorReal(resta);
-
-    //o valor é escrito no seu campo no formulário
-    $('#ValorRestanteOrca').val(resta);
-	
-	//var tipoextraorca = $('#Hidden_TipoExtraOrca').val();
-	//tipoExtraOrca(tipoextraorca);	
-	
-	//calculaParcelas();
-	calculaTotal();
-}
-
 function calculaTotal(entrada) {
-
-	//console.log(nivelempresa +' - Nível da Empresa');
-
-
-	var valorrestanteorca = $("#ValorRestanteOrca").val();
-	var devolucao = $("#ValorFrete").val();    
-	
-
-	var valorsomaorca = -(- devolucao.replace(".","").replace(",",".") - valorrestanteorca.replace(".","").replace(",","."));
-	valorsomaorca = mascaraValorReal(valorsomaorca);
-	//console.log(restaT +' - Valor Total');
-
-	$("#ValorSomaOrca").val(valorsomaorca);	
-
-	var tipoextraorca = $('#Hidden_TipoExtraOrca').val();
-	tipoExtraOrca(tipoextraorca);	
-	
-
-	//calculaParcelas();
-	
-}
-
-function calculaTotal_Antigo(entrada) {
 	//recebe o Nivel da Empresa
 	var nivelempresa = $("#NivelEmpresa").val();
 	//console.log(nivelempresa +' - Nível da Empresa');
@@ -3986,109 +3963,74 @@ function tipoExtraOrca(valor){
 	console.log('Tipo. valor ='+valor);
 	console.log('Tipo. desconto ='+desconto);
 }
-	
-$('#PercExtraOrca').on('keyup', function(event){
-	//alert('PercExtraOrca');			
-	$('#PercExtraOrca').prop('readonly', false);
-	$('#ValorExtraOrca').prop('readonly', true);
-	$('#TipoExtraOrca').val('P');
-});	
-
-$('#ValorExtraOrca').on('keyup', function(event){
-	//alert('ValorExtraOrca');			
-	$('#PercExtraOrca').prop('readonly', true);
-	$('#ValorExtraOrca').prop('readonly', false);
-	$('#TipoExtraOrca').val('V');
-	
-	/*
-				var value_prd = $(this).val();
-			var name_prd = $(this).attr("name");
-			//console.log(value_prd + ' <<>> ' + name_prd);
-			$('label[name="radio_' + name_prd + '"]').removeClass();
-			$('label[name="radio_' + name_prd + '"]').addClass("btn btn-default");
-			$('#radio_' + name_prd + value_prd).addClass("btn btn-warning active");
-			
-			if(value_prd == "S"){
-				$("#"+name_prd).css("display","");
-			}else{
-				$("#"+name_prd).css("display","none");
-			}
-	*/
-	
-	
-	
-	
-});
 
 function percExtraOrca(){
 	//alert('teste percExtraOrca');
 	
 	var recorrencias = $('#Recorrencias').val();
 	console.log('Total de Recorrencias = ' + recorrencias);
-	var valorsomaorca = $('#ValorSomaOrca').val();
-	valorsomaorca = valorsomaorca.replace(".","").replace(",",".");
+	var valorrestanteorca = $('#ValorRestanteOrca').val();
+	valorrestanteorca = valorrestanteorca.replace(".","").replace(",",".");
 	
 	var percextraorca = $('#PercExtraOrca').val();
 	percextraorca = percextraorca.replace(".","").replace(",",".");
 	
-	if(valorsomaorca > 0){
-		var valorextraorca = percextraorca*valorsomaorca/100;
+	if(valorrestanteorca > 0){
+		var valorextraorca = percextraorca*valorrestanteorca/100;
 		valorextraorca	= parseFloat(valorextraorca);
 		valorextraorca	= valorextraorca.toFixed(2);
 		
 		if(percextraorca <= 100){	
 			
-			var valortotalorca = -(-valorsomaorca - valorextraorca);
+			var valorsomaorca = -(-valorrestanteorca - valorextraorca);
 			
-			var valor_s_extra = recorrencias*valorsomaorca;
+			var valor_s_extra = recorrencias*valorrestanteorca;
 			valor_s_extra	= parseFloat(valor_s_extra);
 			valor_s_extra	= valor_s_extra.toFixed(2);
 			valor_s_extra 	= valor_s_extra.replace('.',',');
 			
-			var valor_c_extra = recorrencias*valortotalorca;
+			var valor_c_extra = recorrencias*valorsomaorca;
 			valor_c_extra	= parseFloat(valor_c_extra);
 			valor_c_extra	= valor_c_extra.toFixed(2);
 			valor_c_extra 	= valor_c_extra.replace('.',',');
 			
 			valorextraorca 	= valorextraorca.replace('.',',');
 			
-			valortotalorca	= parseFloat(valortotalorca);
-			valortotalorca	= valortotalorca.toFixed(2);
-			valortotalorca 	= valortotalorca.replace('.',',');
+			valorsomaorca	= parseFloat(valorsomaorca);
+			valorsomaorca	= valorsomaorca.toFixed(2);
+			valorsomaorca 	= valorsomaorca.replace('.',',');
 			
 			
 			$('#ValorExtraOrca').val(valorextraorca);
-			$('#ValorTotalOrca').val(valortotalorca);
+			$('#ValorSomaOrca').val(valorsomaorca);
 			$('#Valor_C_Extra').val(valor_c_extra);
 			$('#Valor_S_Extra').val(valor_s_extra);
 			
-			//console.log(valorsomaorca);
+			//console.log(valorrestanteorca);
 			//console.log(percextraorca);
 			//console.log(valorextraorca);
 		
 		}else{
-			$('#ValorTotalOrca').val('0,00');
+			$('#ValorSomaOrca').val('0,00');
 			$('#PercExtraOrca').val('0,00');
 			$('#ValorExtraOrca').val('0,00');
 			$('#Valor_C_Extra').val('0,00');
 			$('#Valor_S_Extra').val('0,00');
 		}	
 	}else{
-		$('#ValorTotalOrca').val('0,00');
+		$('#ValorSomaOrca').val('0,00');
 		$('#PercExtraOrca').val('0,00');
 		$('#ValorExtraOrca').val('0,00');
 		$('#Valor_C_Extra').val('0,00');
 		$('#Valor_S_Extra').val('0,00');
 	}
-	//calculaParcelas();
-	//calculaTroco();
-	//calculaTotal();
-	var tipodescorca = $('#Hidden_TipoDescOrca').val();
-	tipoDescOrca(tipodescorca);	
-	//console.log('Perc. Pdr+Srv = ' + valorsomaorca);
-	//console.log('Perc. Valor Extra = ' + valorextraorca);
-	//console.log('Perc. Perc Extra = ' + percextraorca);
-	//console.log('Perc. Prd+Srv+Extra = ' + valortotalorca);
+	calculaParcelas();
+	calculaTroco();
+	
+	console.log('Perc. Pdr+Srv = ' + valorrestanteorca);
+	console.log('Perc. Valor Extra = ' + valorextraorca);
+	console.log('Perc. Perc Extra = ' + percextraorca);
+	console.log('Perc. Prd+Srv+Extra = ' + valorsomaorca);
 }
 
 function valorExtraOrca(){
@@ -4096,52 +4038,51 @@ function valorExtraOrca(){
 	
 	var recorrencias = $('#Recorrencias').val();
 	//console.log('Total de Recorrencias = ' + recorrencias);
-	var valorsomaorca = $('#ValorSomaOrca').val();
+	var valorrestanteorca = $('#ValorRestanteOrca').val();
 	
-		valorsomaorca = valorsomaorca.replace(".","").replace(",",".");
-		valorsomaorca	= parseFloat(valorsomaorca);
+		valorrestanteorca = valorrestanteorca.replace(".","").replace(",",".");
+		valorrestanteorca	= parseFloat(valorrestanteorca);
 		var valorextraorca = $('#ValorExtraOrca').val();
 		valorextraorca = valorextraorca.replace(".","").replace(",",".");
 		valorextraorca	= parseFloat(valorextraorca);
 		
 		//console.log('Total do Desconto em Valor = ' + valorextraorca);
-		//console.log('Total do Pedido = ' + valorsomaorca);
-		var valortotalorca = -(-valorsomaorca - valorextraorca);
+		//console.log('Total do Pedido = ' + valorrestanteorca);
+		var valorsomaorca = -(-valorrestanteorca - valorextraorca);
 		
-		var valor_c_extra = recorrencias*valortotalorca;
+		var valor_c_extra = recorrencias*valorsomaorca;
 		valor_c_extra	= parseFloat(valor_c_extra);
 		valor_c_extra	= valor_c_extra.toFixed(2);
 		valor_c_extra 	= valor_c_extra.replace('.',',');
-		if(valorsomaorca <= 0.00){
+		if(valorrestanteorca <= 0.00){
 			var percextraorca = '0,00';
 		}else{
-			var percextraorca = (valortotalorca - valorsomaorca)*100/valorsomaorca;
+			var percextraorca = (valorsomaorca - valorrestanteorca)*100/valorrestanteorca;
 			percextraorca	= parseFloat(percextraorca);
 			percextraorca	= percextraorca.toFixed(2);
 			percextraorca 	= percextraorca.replace('.',',');
 		}
 			
 		
-		valortotalorca	= parseFloat(valortotalorca);
-		valortotalorca	= valortotalorca.toFixed(2);
-		valortotalorca 	= valortotalorca.replace('.',',');
+		valorsomaorca	= parseFloat(valorsomaorca);
+		valorsomaorca	= valorsomaorca.toFixed(2);
+		valorsomaorca 	= valorsomaorca.replace('.',',');
 		
 		
-		$('#ValorTotalOrca').val(valortotalorca);
+		$('#ValorSomaOrca').val(valorsomaorca);
 		$('#PercExtraOrca').val(percextraorca);
 		$('#Valor_C_Extra').val(valor_c_extra);
 			
 
-	//calculaParcelas();
-	//calculaTroco();	
-	//calculaTotal();
-	var tipodescorca = $('#Hidden_TipoDescOrca').val();
-	tipoDescOrca(tipodescorca);		
-	//console.log('Perc. Pdr+Srv = ' + valorsomaorca);
-	//console.log('Perc. Valor Extra = ' + valorextraorca);
-	//console.log('Perc. Perc Extra = ' + percextraorca);
-	//console.log('Perc. Prd+Srv+Extra = ' + valortotalorca);
+	calculaParcelas();
+	calculaTroco();	
+
+	console.log('Perc. Pdr+Srv = ' + valorrestanteorca);
+	console.log('Perc. Valor Extra = ' + valorextraorca);
+	console.log('Perc. Perc Extra = ' + percextraorca);
+	console.log('Perc. Prd+Srv+Extra = ' + valorsomaorca);
 }
+
 
 function tipoDescOrca(valor){
 	//alert('teste tipoDescOrca');
@@ -4335,6 +4276,98 @@ function calculaTroco(entrada) {
     $('#ValorTroco').val(resta);
 	
 }
+
+/*
+ * Função responsável por calcular as parcelas do orçamento em função do dados
+ * informados no formulário (valor restante / parcelas e datas do vencimento)
+ */
+ 
+function adicionaDias(mod) {
+    //alert();
+	
+	$(".input_fields_dias").empty();
+
+    //gera os campos de parcelas
+    for (i=1; i<=7; i++) {
+		
+		//var dia = i;
+		if (i == 1){
+			var dia_semana = 'SEGUNDA';
+		}else if(i == 2){
+			var dia_semana = 'TERCA';
+		}else if(i == 3){
+			var dia_semana = 'QUARTA';
+		}else if(i == 4){
+			var dia_semana = 'QUINTA';
+		}else if(i == 5){
+			var dia_semana = 'SEXTA';
+		}else if(i == 6){
+			var dia_semana = 'SABADO';
+		}else if(i == 7){
+			var dia_semana = 'DOMINGO';
+		}
+
+        $(".input_fields_dias").append('\
+            <div class="col-md-2">\
+				<div class="panel panel-warning">\
+					<div class="panel-heading">\
+						<div class="row">\
+							<div class="col-md-12">\
+								<label for="Aberto_Prom">'+dia_semana+'</label><br>\
+								<div class="btn-group" data-toggle="buttons">\
+									<label class="btn btn-warning active" name="radio_Aberto_Prom'+i+'" id="radio_Aberto_Prom'+i+'N">\
+									<input type="radio" name="Aberto_Prom'+i+'" id="rdgrldnmc_add_dias"\
+										 autocomplete="off" value="N" checked>Não\
+									</label>\
+									<label class="btn btn-default" name="radio_Aberto_Prom'+i+'" id="radio_Aberto_Prom'+i+'S">\
+									<input type="radio" name="Aberto_Prom'+i+'" id="rdgrldnmc_add_dias"\
+										 autocomplete="off" value="S">Sim\
+									</label>\
+								</div>\
+							</div>\
+						</div>\
+					</div>\
+				</div>\
+			</div>'
+        );
+
+    }
+    //habilita o botão de calendário após a geração dos campos dinâmicos
+    $('.DatePicker').datetimepicker(dateTimePickerOptions);
+
+    //permite o uso de radio buttons nesse bloco dinâmico
+    $('input:radio[id="rdgrldnmc_add_dias"]').change(function() {
+
+        var value_add_dias = $(this).val();
+        var name_add_dias = $(this).attr("name");
+
+        //console.log(value_add_dias + ' <<>> ' + name);
+
+        $('label[name="radio_' + name_add_dias + '"]').removeClass();
+        $('label[name="radio_' + name_add_dias + '"]').addClass("btn btn-default");
+        $('#radio_' + name_add_dias + value_add_dias).addClass("btn btn-warning active");
+        //$('#radiogeral'+ value_add_dias).addClass("btn btn-warning active");
+		
+		if(value_add_dias == "S"){
+			$("#"+name_add_dias).css("display","");
+		}else{
+			$("#"+name_add_dias).css("display","none");
+		}
+
+    });
+	
+	
+}
+
+/*
+$(document).on('focus',".input_fields_parcelas", function(){
+    $(this).datepicker();
+});
+*/
+/*
+ * Função responsável por calcular as parcelas do orçamento em função do dados
+ * informados no formulário (valor restante / parcelas e datas do vencimento)
+ */
  
 function calculaParcelas(mod) {
     //alert();
@@ -4564,98 +4597,6 @@ function calculaParcelas(mod) {
 	}
 	
 }
-
-/*
- * Função responsável por calcular as parcelas do orçamento em função do dados
- * informados no formulário (valor restante / parcelas e datas do vencimento)
- */
- 
-function adicionaDias(mod) {
-    //alert();
-	
-	$(".input_fields_dias").empty();
-
-    //gera os campos de parcelas
-    for (i=1; i<=7; i++) {
-		
-		//var dia = i;
-		if (i == 1){
-			var dia_semana = 'SEGUNDA';
-		}else if(i == 2){
-			var dia_semana = 'TERCA';
-		}else if(i == 3){
-			var dia_semana = 'QUARTA';
-		}else if(i == 4){
-			var dia_semana = 'QUINTA';
-		}else if(i == 5){
-			var dia_semana = 'SEXTA';
-		}else if(i == 6){
-			var dia_semana = 'SABADO';
-		}else if(i == 7){
-			var dia_semana = 'DOMINGO';
-		}
-
-        $(".input_fields_dias").append('\
-            <div class="col-md-2">\
-				<div class="panel panel-warning">\
-					<div class="panel-heading">\
-						<div class="row">\
-							<div class="col-md-12">\
-								<label for="Aberto_Prom">'+dia_semana+'</label><br>\
-								<div class="btn-group" data-toggle="buttons">\
-									<label class="btn btn-warning active" name="radio_Aberto_Prom'+i+'" id="radio_Aberto_Prom'+i+'N">\
-									<input type="radio" name="Aberto_Prom'+i+'" id="rdgrldnmc_add_dias"\
-										 autocomplete="off" value="N" checked>Não\
-									</label>\
-									<label class="btn btn-default" name="radio_Aberto_Prom'+i+'" id="radio_Aberto_Prom'+i+'S">\
-									<input type="radio" name="Aberto_Prom'+i+'" id="rdgrldnmc_add_dias"\
-										 autocomplete="off" value="S">Sim\
-									</label>\
-								</div>\
-							</div>\
-						</div>\
-					</div>\
-				</div>\
-			</div>'
-        );
-
-    }
-    //habilita o botão de calendário após a geração dos campos dinâmicos
-    $('.DatePicker').datetimepicker(dateTimePickerOptions);
-
-    //permite o uso de radio buttons nesse bloco dinâmico
-    $('input:radio[id="rdgrldnmc_add_dias"]').change(function() {
-
-        var value_add_dias = $(this).val();
-        var name_add_dias = $(this).attr("name");
-
-        //console.log(value_add_dias + ' <<>> ' + name);
-
-        $('label[name="radio_' + name_add_dias + '"]').removeClass();
-        $('label[name="radio_' + name_add_dias + '"]').addClass("btn btn-default");
-        $('#radio_' + name_add_dias + value_add_dias).addClass("btn btn-warning active");
-        //$('#radiogeral'+ value_add_dias).addClass("btn btn-warning active");
-		
-		if(value_add_dias == "S"){
-			$("#"+name_add_dias).css("display","");
-		}else{
-			$("#"+name_add_dias).css("display","none");
-		}
-
-    });
-	
-	
-}
-
-/*
-$(document).on('focus',".input_fields_parcelas", function(){
-    $(this).datepicker();
-});
-*/
-/*
- * Função responsável por calcular as parcelas do orçamento em função do dados
- * informados no formulário (valor restante / parcelas e datas do vencimento)
- */
 
 function adicionaTamanhos() {
 
