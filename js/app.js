@@ -3483,7 +3483,6 @@ function mascaraValorReal(value) {
 
 }
 
-
 function buscaValor1Tabelas(id, campo, tabela, num, campo2, recorrencias) {
 	//console.log('recorrencia no busca valor = ' +recorrencias);
     $.ajax({
@@ -3869,13 +3868,17 @@ function calculaTotal(entrada) {
 
 
 	var valorrestanteorca = $("#ValorRestanteOrca").val();
-	var devolucao = $("#ValorFrete").val();    
 	
+	//console.log('Prd+Srv = '+valorrestanteorca);
+	
+	var devolucao = $("#ValorFrete").val();    
+	//console.log('Taxa de Entrega = '+devolucao);
 
 	var valorsomaorca = -(- devolucao.replace(".","").replace(",",".") - valorrestanteorca.replace(".","").replace(",","."));
+	//console.log('Prd+Srv+Entrega 1 = '+valorsomaorca);	
 	valorsomaorca = mascaraValorReal(valorsomaorca);
 	//console.log(restaT +' - Valor Total');
-
+	//console.log('Prd+Srv+Entrega 2 = '+valorsomaorca);
 	$("#ValorSomaOrca").val(valorsomaorca);	
 
 	var tipoextraorca = $('#Hidden_TipoExtraOrca').val();
@@ -3954,30 +3957,45 @@ function calculaTotal_Antigo(entrada) {
 
 function exibirExtraOrca(){
 	//alert('teste');
-	//console.log(pagocom);
+	var exibirExtraOrca = $('#exibirExtraOrca').val();
+	//console.log('Extra| Cadastar-Alterar/Status = ' +exibirExtraOrca);
 	var tipoextraorca = $('#Hidden_TipoExtraOrca').val();
 	//console.log('#Hidden_TipoExtraOrca = '+tipoextraorca);
-	if(tipoextraorca == 'P'){
-		$('#PercExtraOrca').prop('readonly', false);
-		$('#ValorExtraOrca').prop('readonly', true);
-	}else if(tipoextraorca == 'V'){
+	if(exibirExtraOrca == '1'){
+		if(tipoextraorca == 'P'){
+			$('#PercExtraOrca').prop('readonly', false);
+			$('#ValorExtraOrca').prop('readonly', true);
+		}else if(tipoextraorca == 'V'){
+			$('#PercExtraOrca').prop('readonly', true);
+			$('#ValorExtraOrca').prop('readonly', false);
+		}
+	}else{
 		$('#PercExtraOrca').prop('readonly', true);
-		$('#ValorExtraOrca').prop('readonly', false);
-	}
+		$('#ValorExtraOrca').prop('readonly', true);
+	}	
 }
 
 function exibirDescOrca(){
 	//alert('teste');
 	//console.log(pagocom);
+	var exibirDescOrca = $('#exibirDescOrca').val();
+	//console.log('Desc| Cadastar-Alterar/Status = ' +exibirDescOrca);
+	
 	var tipodescorca = $('#Hidden_TipoDescOrca').val();
 	//console.log('#Hidden_TipoDescOrca = '+tipodescorca);
-	if(tipodescorca == 'P'){
-		$('#DescPercOrca').prop('readonly', false);
-		$('#DescValorOrca').prop('readonly', true);
-	}else if(tipodescorca == 'V'){
+	if(exibirDescOrca == '1'){
+		if(tipodescorca == 'P'){
+			$('#DescPercOrca').prop('readonly', false);
+			$('#DescValorOrca').prop('readonly', true);
+		}else if(tipodescorca == 'V'){
+			$('#DescPercOrca').prop('readonly', true);
+			$('#DescValorOrca').prop('readonly', false);
+		}
+	}else{
 		$('#DescPercOrca').prop('readonly', true);
-		$('#DescValorOrca').prop('readonly', false);
+		$('#DescValorOrca').prop('readonly', true);
 	}
+		
 }
 
 function tipoExtraOrca(valor){
@@ -4569,6 +4587,150 @@ function calculaParcelas(mod) {
 		//console.log('NÃO calculou parcelas');
 	}
 	
+}
+
+function adicionaParcelas() {
+
+	var pr = $("#PRCount").val(); //initlal text box count
+	pr++; //text box increment
+	$("#PRCount").val(pr);
+	
+	if (pr >= 2) {
+		//console.log( $("#FormaPagamentoParcela"+(pr-1)).val() );
+		var chosen;
+		chosen = $("#FormaPagamentoParcela"+(pr-1)).val();
+		//console.log( chosen + ' :: ' + pr );
+	}
+	
+    //Captura a data do dia e carrega no campo correspondente
+    
+	//var currentDate = moment();
+	
+    $(".input_fields_wrap21").append('\
+		<div class="form-group" id="21div'+pr+'">\
+			<div class="panel panel-warning">\
+				<div class="panel-heading">\
+					<div class="row">\
+						<div class="col-md-1">\
+							<label for="Parcela">Prcl.:</label><br>\
+							<input type="text" class="form-control" maxlength="6"\
+								   name="Parcela'+pr+'" value="Ex.">\
+						</div>\
+						<div class="col-md-2">\
+							<label for="FormaPagamentoParcela'+pr+'">FormaPag:</label>\
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen_Parcela"\
+									 id="FormaPagamentoParcela'+pr+'" name="FormaPagamentoParcela'+pr+'">\
+								<option value=""></option>\
+							</select>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="ValorParcela">Valor:</label><br>\
+							<div class="input-group" id="txtHint">\
+								<span class="input-group-addon" id="basic-addon1">R$</span>\
+								<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
+										id="ValorParcela'+pr+'" name="ValorParcela'+pr+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="DataVencimento">Vencimento</label>\
+							<div class="input-group DatePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-calendar"></span>\
+								</span>\
+								<input type="text" class="form-control Date" id="DataVencimento'+pr+'" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataVencimento'+pr+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="Quitado">Parc.Quitado?</label><br>\
+							<div class="btn-group" data-toggle="buttons">\
+								<label class="btn btn-warning active" name="radio_Quitado'+pr+'" id="radio_Quitado'+pr+'N">\
+								<input type="radio" name="Quitado'+pr+'" id="rdgrldnmc_adic_parc"\
+									onchange="carregaQuitado(this.value,this.name,'+pr+',1)" autocomplete="off" value="N" checked>Não\
+								</label>\
+								<label class="btn btn-default" name="radio_Quitado'+pr+'" id="radio_Quitado'+pr+'S">\
+								<input type="radio" name="Quitado'+pr+'" id="rdgrldnmc_adic_parc"\
+									onchange="carregaQuitado(this.value,this.name,'+pr+',1)" autocomplete="off" value="S">Sim\
+								</label>\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<div id="Quitado'+pr+'" style="display:none">\
+								<label for="DataPago">Pagamento</label>\
+								<div class="input-group DatePicker">\
+									<span class="input-group-addon" disabled>\
+										<span class="glyphicon glyphicon-calendar"></span>\
+									</span>\
+									<input type="text" class="form-control Date" id="DataPago'+pr+'" maxlength="10" placeholder="DD/MM/AAAA"\
+										   name="DataPago'+pr+'" value="">\
+								</div>\
+							</div>\
+						</div>\
+						<div class="col-md-1">\
+							<label><br></label><br>\
+							<a href="#" id="'+pr+'" class="remove_field21 btn btn-danger">\
+								<span class="glyphicon glyphicon-trash"></span>\
+							</a>\
+						</div>\
+					</div>\
+				</div>\
+			</div>\
+		</div>'
+	); //add input box
+	
+	//get a reference to the select element
+	$select2 = $('#FormaPagamentoParcela'+pr);
+
+	//request the JSON data and parse into the select element
+	$.ajax({
+		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=70',
+		dataType: 'JSON',
+		type: "GET",
+		success: function (data) {
+			//clear the current content of the select
+			$select2.html('');
+			//iterate over the data and append a select option
+			$select2.append('<option value="">-- Sel. FormaPag. --</option>');
+			$.each(data, function (key, val) {
+				//alert(val.id);
+				$select2.append('<option value="' + val.id + '">' + val.name + '</option>');
+			})
+			$('.Chosen_Parcela').chosen({
+				disable_search_threshold: 10,
+				multiple_text: "Selecione uma ou mais opções",
+				single_text: "Selecione uma opção",
+				no_results_text: "Nenhum resultado para",
+				width: "100%"
+			});
+		},
+		error: function () {
+			//alert('erro listadinamicaB');
+			//if there is an error append a 'none available' option
+			$select2.html('<option id="-1">ERRO</option>');
+		}
+
+	});	
+	
+	//habilita o botão de calendário após a geração dos campos dinâmicos
+	$('.DatePicker').datetimepicker(dateTimePickerOptions);	
+	
+    //permite o uso de radio buttons nesse bloco dinâmico
+    $('input:radio[id="rdgrldnmc_adic_parc"]').change(function() {
+
+        var value_prc = $(this).val();
+        var name_prc = $(this).attr("name");
+        //console.log(value_prc + ' <<>> ' + name_prc);
+		
+		$('label[name="radio_' + name_prc + '"]').removeClass();
+        $('label[name="radio_' + name_prc + '"]').addClass("btn btn-default");
+        $('#radio_' + name_prc + value_prc).addClass("btn btn-warning active");
+		
+		if(value_prc == "S"){
+			$("#"+name_prc).css("display","");
+		}else{
+			$("#"+name_prc).css("display","none");
+		}
+    });
 }
 
 /*
@@ -6485,150 +6647,6 @@ function adiciona_item_promocao5() {
  * @returns {decimal}
  */
 
-function adicionaParcelas() {
-
-	var pr = $("#PRCount").val(); //initlal text box count
-	pr++; //text box increment
-	$("#PRCount").val(pr);
-	
-	if (pr >= 2) {
-		//console.log( $("#FormaPagamentoParcela"+(pr-1)).val() );
-		var chosen;
-		chosen = $("#FormaPagamentoParcela"+(pr-1)).val();
-		//console.log( chosen + ' :: ' + pr );
-	}
-	
-    //Captura a data do dia e carrega no campo correspondente
-    
-	//var currentDate = moment();
-	
-    $(".input_fields_wrap21").append('\
-		<div class="form-group" id="21div'+pr+'">\
-			<div class="panel panel-warning">\
-				<div class="panel-heading">\
-					<div class="row">\
-						<div class="col-md-1">\
-							<label for="Parcela">Parcela:</label><br>\
-							<input type="text" class="form-control" maxlength="6"\
-								   name="Parcela'+pr+'" value="Ex.">\
-						</div>\
-						<div class="col-md-2">\
-							<label for="FormaPagamentoParcela'+pr+'">FormaPag:</label>\
-							<select data-placeholder="Selecione uma opção..." class="form-control Chosen_Parcela"\
-									 id="FormaPagamentoParcela'+pr+'" name="FormaPagamentoParcela'+pr+'">\
-								<option value=""></option>\
-							</select>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="ValorParcela">Valor:</label><br>\
-							<div class="input-group" id="txtHint">\
-								<span class="input-group-addon" id="basic-addon1">R$</span>\
-								<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
-										id="ValorParcela'+pr+'" name="ValorParcela'+pr+'" value="">\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="DataVencimento">Vencimento</label>\
-							<div class="input-group DatePicker">\
-								<span class="input-group-addon" disabled>\
-									<span class="glyphicon glyphicon-calendar"></span>\
-								</span>\
-								<input type="text" class="form-control Date" id="DataVencimento'+pr+'" maxlength="10" placeholder="DD/MM/AAAA"\
-									   name="DataVencimento'+pr+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="Quitado">Parc.Quitado?</label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-warning active" name="radio_Quitado'+pr+'" id="radio_Quitado'+pr+'N">\
-								<input type="radio" name="Quitado'+pr+'" id="rdgrldnmc_adic_parc"\
-									onchange="carregaQuitado(this.value,this.name,'+pr+',1)" autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-default" name="radio_Quitado'+pr+'" id="radio_Quitado'+pr+'S">\
-								<input type="radio" name="Quitado'+pr+'" id="rdgrldnmc_adic_parc"\
-									onchange="carregaQuitado(this.value,this.name,'+pr+',1)" autocomplete="off" value="S">Sim\
-								</label>\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<div id="Quitado'+pr+'" style="display:none">\
-								<label for="DataPago">Pagamento</label>\
-								<div class="input-group DatePicker">\
-									<span class="input-group-addon" disabled>\
-										<span class="glyphicon glyphicon-calendar"></span>\
-									</span>\
-									<input type="text" class="form-control Date" id="DataPago'+pr+'" maxlength="10" placeholder="DD/MM/AAAA"\
-										   name="DataPago'+pr+'" value="">\
-								</div>\
-							</div>\
-						</div>\
-						<div class="col-md-1">\
-							<label><br></label><br>\
-							<a href="#" id="'+pr+'" class="remove_field21 btn btn-danger">\
-								<span class="glyphicon glyphicon-trash"></span>\
-							</a>\
-						</div>\
-					</div>\
-				</div>\
-			</div>\
-		</div>'
-	); //add input box
-	
-	//get a reference to the select element
-	$select2 = $('#FormaPagamentoParcela'+pr);
-
-	//request the JSON data and parse into the select element
-	$.ajax({
-		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=70',
-		dataType: 'JSON',
-		type: "GET",
-		success: function (data) {
-			//clear the current content of the select
-			$select2.html('');
-			//iterate over the data and append a select option
-			$select2.append('<option value="">-- Sel. FormaPag. --</option>');
-			$.each(data, function (key, val) {
-				//alert(val.id);
-				$select2.append('<option value="' + val.id + '">' + val.name + '</option>');
-			})
-			$('.Chosen_Parcela').chosen({
-				disable_search_threshold: 10,
-				multiple_text: "Selecione uma ou mais opções",
-				single_text: "Selecione uma opção",
-				no_results_text: "Nenhum resultado para",
-				width: "100%"
-			});
-		},
-		error: function () {
-			//alert('erro listadinamicaB');
-			//if there is an error append a 'none available' option
-			$select2.html('<option id="-1">ERRO</option>');
-		}
-
-	});	
-	
-	//habilita o botão de calendário após a geração dos campos dinâmicos
-	$('.DatePicker').datetimepicker(dateTimePickerOptions);	
-	
-    //permite o uso de radio buttons nesse bloco dinâmico
-    $('input:radio[id="rdgrldnmc_adic_parc"]').change(function() {
-
-        var value_prc = $(this).val();
-        var name_prc = $(this).attr("name");
-        //console.log(value_prc + ' <<>> ' + name_prc);
-		
-		$('label[name="radio_' + name_prc + '"]').removeClass();
-        $('label[name="radio_' + name_prc + '"]').addClass("btn btn-default");
-        $('#radio_' + name_prc + value_prc).addClass("btn btn-warning active");
-		
-		if(value_prc == "S"){
-			$("#"+name_prc).css("display","");
-		}else{
-			$("#"+name_prc).css("display","none");
-		}
-    });
-}
-
 function adicionaTipo() {
 
     var at = $("#TCount").val(); //initlal text box count
@@ -8134,6 +8152,7 @@ ko.bindingHandlers.dateTimePicker = {
         }
     }
 };
+
 function EventModel() {
     this.ScheduledDate = ko.observable('');
 }

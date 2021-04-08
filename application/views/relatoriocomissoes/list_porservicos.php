@@ -95,8 +95,8 @@
 						<th class="active">Produto</th>
 						<th class="active">ValorR$</th>
 						<th class="active">Com.%</th>
-						<th class="active">NºProf.</th>
 						<th class="active">Com.R$</th>
+						<th class="active">NºProf.</th>
 						<th class="active">Prof.R$</th>
 						<th class="active">Entregue</th>
 						<th class="active">DataEntr.</th>
@@ -172,8 +172,8 @@
 							echo '<td class="text-left">' . $row['NomeProduto'] . '</td>';
 							echo '<td class="text-left">R$' . $row['ValorTotalProduto'] . '</td>';
 							echo '<td class="text-left">' . $row['ComissaoProduto'] . '%</td>';
-							echo '<td class="text-left">' . $row['Contagem'] . '</td>';
-							echo '<td class="text-left">R$' . $row['ComissaoTotal'] . '/' . $row['Contagem'] . '</td>';
+							echo '<td class="text-left">R$' . $row['ComissaoTotal'] . '</td>';
+							echo '<td class="text-left">/ ' . $row['Contagem'] . '</td>';
 							echo '<td class="text-left">R$' . $row['ComissaoProf'] . '</td>';
 							echo '<td>' . $row['ConcluidoProduto'] . '</td>';
 							echo '<td>' . $row['DataConcluidoProduto'] . '</td>';

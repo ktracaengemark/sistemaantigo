@@ -169,6 +169,8 @@
 									
 										<div class="panel panel-success">
 											<div class="panel-heading">
+												<input type="hidden" id="exibirExtraOrca" value="<?php echo $exibirExtraOrca; ?>" />
+												<input type="hidden" id="exibirDescOrca" value="<?php echo $exibirDescOrca; ?>" />
 												<input type="hidden" id="Recorrencias" name="Recorrencias" value="<?php echo $Recorrencias; ?>" />
 												<input type="hidden" name="Negocio" id="Negocio" value="1"/>
 												<input type="hidden" name="Empresa" id="Empresa" value="<?php echo $_SESSION['log']['idSis_Empresa']; ?>"/>
@@ -1614,7 +1616,7 @@
 																		<div class="panel-heading">
 																			<div class="row">
 																				<div class="col-md-1">
-																					<label for="Parcela">Parcela <?php echo $i ?>:</label><br>
+																					<label for="Parcela">Prcl.:<?php echo $i ?></label><br>
 																					<input type="text" class="form-control" maxlength="6" readonly=""
 																						   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
 																				</div>
