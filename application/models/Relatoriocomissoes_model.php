@@ -326,19 +326,15 @@ class Relatoriocomissoes_model extends CI_Model {
                     $row->ValorEntradaOrca = FALSE;
                     $row->DataEntradaOrca = FALSE;
                 }
-
-				$count_prof=0;
+				
+				$contagem=0;
 				for ($i = 1; $i <= 4; $i++) {
 					$p = 'ProfissionalProduto_'.$i;
 					if($row->$p != 0){
-						$contagem = $count_prof++;
-					}else{
-						$contagem = $count_prof;
+						$contagem++;
 					}
 				}
-				if($row->ProfissionalProduto_4 != 0){
-					$contagem++;
-				}
+				
 				$row->Contagem = $contagem;
 				
 				if($contagem == 0){
