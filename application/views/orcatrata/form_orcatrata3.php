@@ -1220,7 +1220,7 @@
 													<div class="panel-heading">
 														<div class="row">
 															<div class="col-md-6">
-																<label for="PercExtraOrca">Perc. Extra</label><br>
+																<label for="PercExtraOrca">Percent. do Extra</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">%</span>
 																	<input type="text" class="form-control Valor" id="PercExtraOrca" maxlength="10" placeholder="0,00"
@@ -1229,7 +1229,7 @@
 																</div>
 															</div>	
 															<div class="col-md-6">
-																<label for="ValorExtraOrca">Valor Extra:</label>
+																<label for="ValorExtraOrca">Valor do Extra:</label>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon " id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorExtraOrca" maxlength="10" placeholder="0,00" 
@@ -1377,7 +1377,7 @@
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 															<div class="row">
 																<div class="col-md-6">
-																	<label for="DescPercOrca">Desc.Perc.</label><br>
+																	<label for="DescPercOrca">Percent. do Desconto</label><br>
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon" id="basic-addon1">%</span>
 																		<input type="text" class="form-control Valor" id="DescPercOrca" maxlength="10" placeholder="0,00"
@@ -1386,7 +1386,7 @@
 																	</div>
 																</div>
 																<div class="col-md-6">
-																	<label for="DescValorOrca">Desc.Valor.</label><br>
+																	<label for="DescValorOrca">Valor do Desconto</label><br>
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" id="DescValorOrca" maxlength="10" placeholder="0,00"

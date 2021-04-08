@@ -1343,6 +1343,10 @@ class Orcatrata extends CI_Controller {
 							'ValorFrete' 			=> $data['orcatrata']['ValorFrete'],
 							'ValorTotalOrca' 		=> $data['orcatrata']['ValorTotalOrca'],
 							
+							'TipoExtraOrca' 		=> $data['orcatrata']['TipoExtraOrca'],
+							'PercExtraOrca' 		=> $data['orcatrata']['PercExtraOrca'],
+							'ValorExtraOrca' 		=> $data['orcatrata']['ValorExtraOrca'],
+							
 							'TipoDescOrca' 			=> $data['orcatrata']['TipoDescOrca'],
 							'DescPercOrca' 			=> $data['orcatrata']['DescPercOrca'],
 							'DescValorOrca' 		=> $data['orcatrata']['DescValorOrca'],
@@ -1374,7 +1378,6 @@ class Orcatrata extends CI_Controller {
 							'Aux2Entrega' 			=> $data['orcatrata']['Aux2Entrega'],
 							'DetalhadaEntrega' 		=> $data['orcatrata']['DetalhadaEntrega'],
 							'Associado' 			=> $data['orcatrata']['Associado'],
-							'ValorExtraOrca' 		=> $data['orcatrata']['ValorExtraOrca'],
 							'ValorSomaOrca' 		=> $data['orcatrata']['ValorSomaOrca'],
 							'PrazoProdutos' 		=> $data['orcatrata']['PrazoProdutos'],
 							'PrazoServicos' 		=> $data['orcatrata']['PrazoServicos'],
@@ -1462,6 +1465,7 @@ class Orcatrata extends CI_Controller {
 										'idTab_Modulo' 			=> $data['update']['parcelas']['baixa'][$k]['idTab_Modulo'],
 										'idTab_TipoRD' 			=> $data['update']['parcelas']['baixa'][$k]['idTab_TipoRD'],
 										'Parcela' 				=> $data['update']['parcelas']['baixa'][$k]['Parcela'],
+										'FormaPagamentoParcela' => $data['update']['parcelas']['baixa'][$k]['FormaPagamentoParcela'],
 										'ValorParcela' 			=> $data['update']['parcelas']['baixa'][$k]['ValorParcela'],
 										'DataVencimento'		=> $data['update']['parcelas']['baixa'][$k]['DataVencimento'],
 										'ValorPago' 			=> $data['update']['parcelas']['baixa'][$k]['ValorPago'],
