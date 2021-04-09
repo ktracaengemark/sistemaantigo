@@ -107,6 +107,103 @@ class Relatorio extends CI_Controller {
 
     }
 
+	public function list_agendamentos() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            'idApp_Consulta',
+			'idApp_Cliente',
+			'idApp_ClientePet',
+            'DataInicio',
+            'DataFim',
+			'Ordenamento',
+            'Campo',
+        ), TRUE));
+
+        $_SESSION['Agendamentos']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+		$_SESSION['Agendamentos']['DataFim'] 	= $this->basico->mascara_data($data['query']['DataFim'], 'mysql');	
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        $this->form_validation->set_rules('DataInicio', 'Data Início', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
+
+		$data['collapse'] = '';	
+
+		$data['collapse1'] = 'class="collapse"';
+		
+
+
+		if($_SESSION['log']['idSis_Empresa'] != 5){
+			$data['select']['Campo'] = array(
+				'CO.DataInicio' => 'Data',
+				'CO.idApp_Consulta' => 'id do Agendamento',	
+				
+			);
+		}else{
+			$data['select']['Campo'] = array(
+				'CO.DataInicio' => 'Data',
+				'CO.idApp_Consulta' => 'id do Agendamento',
+			);		
+		}
+		
+        $data['select']['Ordenamento'] = array(
+            'ASC' => 'Crescente',
+            'DESC' => 'Decrescente',
+        );
+
+		$data['select']['idApp_Cliente'] = $this->Relatorio_model->select_cliente();
+		$data['select']['idApp_ClientePet'] = $this->Relatorio_model->select_clientepet();
+
+		
+		$data['query']['nome'] = 'Cliente';
+        $data['titulo1'] = 'Lista de Agendamentos';
+		$data['metodo'] = 2;
+		$data['form_open_path'] = 'relatorio/list_agendamentos';
+		$data['panel'] = 'info';
+		$data['Data'] = 'Data';
+		$data['TipoRD'] = 2;
+        $data['nome'] = 'Cliente';
+		$data['editar'] = 1;
+		$data['print'] = 1;
+		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
+		$data['imprimirlista'] = 'ConsultaPrint/imprimirlista/';
+		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
+		$data['edit'] = 'Consulta/alterar/';
+		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
+		
+        #run form validation
+        if ($this->form_validation->run() !== FALSE) {
+
+			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+            $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+			
+			$data['report'] = $this->Relatorio_model->list_agendamentos($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($_SESSION['FiltroAlteraParcela']['DataFim']);
+              echo "</pre>";
+              exit();
+             */ 
+
+            $data['list1'] = $this->load->view('relatorio/list_agendamentos', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+        }
+
+        $this->load->view('relatorio/tela_agendamentos', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+
 	public function receitas() {
 
         if ($this->input->get('m') == 1)

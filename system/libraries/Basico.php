@@ -395,8 +395,38 @@ class Basico {
         }
 		#exit($data);
         return $data;
-    }	
+    }
 	
+    function mascara_hora($data, $opcao) {
+
+        if (preg_match("/[0-9]{2,4}(\/|-)[0-9]{2,4}(\/|-)[0-9]{2,4}/", $data)) {
+			
+            if ($opcao == 'barras') {
+                if ($data && $data != '0000-00-00') {
+                    $data = nice_date($data, 'd/m/Y');
+                } else {
+                    $data = '';
+                }
+            } elseif ($opcao == 'mysql') {
+                if ($data) {
+                    $data = DateTime::createFromFormat('d/m/Y', $data);
+                    $data = $data->format('Y-m-d');
+                } else {
+                    $data = NULL;
+                }
+            } elseif ($opcao == 'hora') {
+                if ($data) {
+					$dataini = explode(' ', $data);
+					$data = substr($dataini[1], 0, 5);
+                } else {
+                    $data = NULL;
+                }
+            }
+        }
+		#exit($data);
+        return $data;
+    }
+
     function apenas_numeros($data) {
 
         return preg_replace("/[^0-9]/", "", $data);

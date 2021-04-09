@@ -9,7 +9,7 @@
 			<div class="panel panel-success">
 				<div class="panel-heading">
 					<div class=" text-center" style="color: #3CB371" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
-						 <h3 class="text-center"><b>Tarefas & Agendas</b></h3>
+						 <h3 class="text-center"><b>Agenda & Tarefas</b></h3>
 					</div>
 					<!--
 					<a class="text-center" style="color: #3CB371" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
@@ -23,7 +23,7 @@
 									<label for=""><h4><b>Agenda</b></h4></label>
 									<div class="form-group col-md-12 text-left">
 										<div class="row">
-											<a  type="button" class="btn btn-md btn-default btn-block text-left" href="" role="button"> 
+											<a  type="button" class="btn btn-md btn-default btn-block text-left" href="<?php echo base_url() ?>relatorio/list_agendamentos" role="button"> 
 												<span class="glyphicon glyphicon-pencil"></span> Relatório de Agendamentos
 											</a>											
 										</div>	

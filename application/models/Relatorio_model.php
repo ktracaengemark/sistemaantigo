@@ -13,6 +13,128 @@ class Relatorio_model extends CI_Model {
         $this->load->model(array('Basico_model'));
     }
 
+	public function list_agendamentos($data, $completo) {
+		/*
+        if ($data['DataFim']) {
+            $consulta =
+                '(CO.DataInicio >= "' . $data['DataInicio'] . '" AND CO.DataInicio  <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(CO.DataInicio  >= "' . $data['DataInicio'] . '")';
+        }
+		*/
+		//$date_inicio_orca = ($data['DataInicio']) ? 'CO.DataInicio >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		//$date_fim_orca = ($data['DataFim']) ? 'CO.DataInicio <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		/*
+	  
+	  */
+		//$data['Consulta'] = ($data['Consulta']) ? ' AND CO.idApp_Consulta = ' . $data['Consulta'] : FALSE;
+		//$data['Cliente'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $data['Cliente']) ? ' AND CO.idApp_Cliente = ' . $data['Cliente'] : FALSE;
+
+		//$data['Campo'] = (!$data['Campo']) ? 'CO.DataInicio' : $data['Campo'];
+        //$data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		//echo date('d/m/Y', strtotime('-25 days', strtotime('14-12-2016')));
+		
+		//$date_fim_orca = ($data['DataFim']) ? 'CO.DataInicio <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		
+		//$date_inicio_orca = "2021-04-08";
+		//$date_fim_orca = date('Y-m-d', strtotime('+1 days', strtotime('2021-04-08')));
+		
+		($data['DataInicio']) ? $date_inicio = $data['DataInicio'] : FALSE;
+		($data['DataFim']) ? $date_fim = date('Y-m-d', strtotime('+1 days', strtotime($data['DataFim']))) : FALSE;
+		
+		$date_inicio_orca 	= ($data['DataInicio']) ? 'DataInicio >= "' . $date_inicio . '" AND ' : FALSE;
+		$date_fim_orca 		= ($data['DataFim']) ? 'DataInicio <= "' . $date_fim . '" AND ' : FALSE;		
+		
+		/*
+		//echo $this->db->last_query();
+	  echo "<pre>";
+	  print_r($date_inicio);
+	  echo "<br>";
+	  print_r($date_fim);
+	  echo "<br>";
+	  print_r($date_inicio_orca);
+	  echo "<br>";
+	  print_r($date_fim_orca);
+	  echo "</pre>";
+	  exit();
+		*/
+		
+		$query = $this->db->query('
+            SELECT
+				CO.*,
+				DATE_FORMAT(CO.DataInicio, "%Y-%m-%d") AS DataInicio,
+				DATE_FORMAT(CO.DataInicio, "%H:%i") AS HoraInicio,
+				DATE_FORMAT(CO.DataFim, "%Y-%m-%d") AS DataFim,
+				DATE_FORMAT(CO.DataFim, "%H:%i") AS HoraFim,
+				CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,"")) AS NomeCliente,
+				CONCAT(IFNULL(CP.idApp_ClientePet,""), " - " ,IFNULL(CP.NomeClientePet,"")) AS NomeClientePet
+            FROM
+                App_Consulta AS CO
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = CO.idApp_Cliente
+					LEFT JOIN App_ClientePet AS CP ON CP.idApp_ClientePet = CO.idApp_ClientePet
+            WHERE
+				' . $date_inicio_orca . '
+				' . $date_fim_orca . '
+                CO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				CO.Tipo = 2
+			ORDER BY
+				DataInicio ASC,
+				HoraInicio ASC
+		');
+		
+			/*
+			  echo $this->db->last_query();
+			  echo "<pre>";
+			  print_r($query);
+			  echo "</pre>";
+			  exit();
+			  */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            $somareceber=0;
+            foreach ($query->result() as $row) {
+				//$row->HoraInicio = $this->basico->mascara_hora($row->DataInicio, 'hora');
+				$row->DataInicio = $this->basico->mascara_data($row->DataInicio, 'barras');
+				//$row->HoraFim = $this->basico->mascara_hora($row->DataFim, 'hora');
+				$row->DataFim = $this->basico->mascara_data($row->DataFim, 'barras');
+                //$row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
+				
+				
+				/*
+				$data = DateTime::createFromFormat('d/m/Y H:i:s', $data);
+				$data = $data->format('Y-m-d H:i:s');
+				format('Y-m-d H:i:s');
+				*/
+				/*
+				  echo $this->db->last_query();
+				  echo "<pre>";
+				  print_r($somaentrada);          
+				  echo "</pre>";
+				  exit();
+				*/	
+		  
+            }	
+			/*
+			echo $this->db->last_query();
+			echo "<pre>";
+			print_r($balanco);
+			echo "</pre>";
+			exit();			
+			*/
+			
+            $query->soma = new stdClass();
+            //$query->soma->somareceber = number_format($somareceber, 2, ',', '.');
+			
+            return $query;
+        }
+
+    }
+
     public function list_orcamento($data, $completo) {
 		
 		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
@@ -5090,7 +5212,31 @@ exit();*/
 
         return $array;
     }
+	
+    public function select_clientepet() {
 
+        $query = $this->db->query('
+            SELECT
+                CP.idApp_ClientePet,
+                CONCAT(IFNULL(CP.idApp_ClientePet, ""), " --- ", IFNULL(CP.NomeClientePet, "")) As NomeClientePet
+            FROM
+                App_ClientePet AS CP
+
+            WHERE
+                CP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+            ORDER BY
+                CP.NomeClientePet ASC	
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos os Pets ::';
+        foreach ($query->result() as $row) {
+			$array[$row->idApp_ClientePet] = $row->NomeClientePet;
+        }
+
+        return $array;
+    }
+	
     public function select_clenkontraki() {
 
         $query = $this->db->query('
