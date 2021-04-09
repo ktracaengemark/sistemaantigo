@@ -127,30 +127,23 @@ class Relatorio extends CI_Controller {
         ), TRUE));
 
         $_SESSION['Agendamentos']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
-		$_SESSION['Agendamentos']['DataFim'] 	= $this->basico->mascara_data($data['query']['DataFim'], 'mysql');	
+		$_SESSION['Agendamentos']['DataFim'] 	= $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+		$_SESSION['Agendamentos']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
+		$_SESSION['Agendamentos']['idApp_ClientePet'] = $data['query']['idApp_ClientePet'];
+		$_SESSION['Agendamentos']['Campo'] = $data['query']['Campo'];
+		$_SESSION['Agendamentos']['Ordenamento'] = $data['query']['Ordenamento'];	
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         $this->form_validation->set_rules('DataInicio', 'Data Início', 'trim|valid_date');
         $this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
 
-		$data['collapse'] = '';	
-
+		$data['collapse'] = '';
 		$data['collapse1'] = 'class="collapse"';
 		
-
-
-		if($_SESSION['log']['idSis_Empresa'] != 5){
-			$data['select']['Campo'] = array(
-				'CO.DataInicio' => 'Data',
-				'CO.idApp_Consulta' => 'id do Agendamento',	
-				
-			);
-		}else{
-			$data['select']['Campo'] = array(
-				'CO.DataInicio' => 'Data',
-				'CO.idApp_Consulta' => 'id do Agendamento',
-			);		
-		}
+		$data['select']['Campo'] = array(
+			'CO.DataInicio' => 'Data',
+			'CO.idApp_Consulta' => 'id do Agendamento',
+		);		
 		
         $data['select']['Ordenamento'] = array(
             'ASC' => 'Crescente',
@@ -160,7 +153,6 @@ class Relatorio extends CI_Controller {
 		$data['select']['idApp_Cliente'] = $this->Relatorio_model->select_cliente();
 		$data['select']['idApp_ClientePet'] = $this->Relatorio_model->select_clientepet();
 
-		
 		$data['query']['nome'] = 'Cliente';
         $data['titulo1'] = 'Lista de Agendamentos';
 		$data['metodo'] = 2;
@@ -182,6 +174,8 @@ class Relatorio extends CI_Controller {
 
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
+			$data['bd']['idApp_ClientePet'] = $data['query']['idApp_ClientePet'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 			

@@ -14,33 +14,13 @@ class Relatorio_model extends CI_Model {
     }
 
 	public function list_agendamentos($data, $completo) {
-		/*
-        if ($data['DataFim']) {
-            $consulta =
-                '(CO.DataInicio >= "' . $data['DataInicio'] . '" AND CO.DataInicio  <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(CO.DataInicio  >= "' . $data['DataInicio'] . '")';
-        }
-		*/
-		//$date_inicio_orca = ($data['DataInicio']) ? 'CO.DataInicio >= "' . $data['DataInicio'] . '" AND ' : FALSE;
-		//$date_fim_orca = ($data['DataFim']) ? 'CO.DataInicio <= "' . $data['DataFim'] . '" AND ' : FALSE;
-		/*
-	  
-	  */
-		//$data['Consulta'] = ($data['Consulta']) ? ' AND CO.idApp_Consulta = ' . $data['Consulta'] : FALSE;
-		//$data['Cliente'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $data['Cliente']) ? ' AND CO.idApp_Cliente = ' . $data['Cliente'] : FALSE;
 
-		//$data['Campo'] = (!$data['Campo']) ? 'CO.DataInicio' : $data['Campo'];
-        //$data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-		//echo date('d/m/Y', strtotime('-25 days', strtotime('14-12-2016')));
-		
-		//$date_fim_orca = ($data['DataFim']) ? 'CO.DataInicio <= "' . $data['DataFim'] . '" AND ' : FALSE;
-		
-		//$date_inicio_orca = "2021-04-08";
-		//$date_fim_orca = date('Y-m-d', strtotime('+1 days', strtotime('2021-04-08')));
-		
+		$cliente 	= ($data['idApp_Cliente']) ? ' AND CO.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;
+		$clientepet = ($data['idApp_ClientePet']) ? ' AND CO.idApp_ClientePet = ' . $data['idApp_ClientePet'] : FALSE;
+
+		$campo 			= (!$data['Campo']) ? 'CO.DataInicio' : $data['Campo'];
+        $ordenamento 	= (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+
 		($data['DataInicio']) ? $date_inicio = $data['DataInicio'] : FALSE;
 		($data['DataFim']) ? $date_fim = date('Y-m-d', strtotime('+1 days', strtotime($data['DataFim']))) : FALSE;
 		
@@ -79,9 +59,11 @@ class Relatorio_model extends CI_Model {
 				' . $date_fim_orca . '
                 CO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				CO.Tipo = 2
+				' . $cliente . '
+				' . $clientepet . '
 			ORDER BY
-				DataInicio ASC,
-				HoraInicio ASC
+				' . $campo . '
+				' . $ordenamento . '
 		');
 		
 			/*
@@ -5218,10 +5200,10 @@ exit();*/
         $query = $this->db->query('
             SELECT
                 CP.idApp_ClientePet,
-                CONCAT(IFNULL(CP.idApp_ClientePet, ""), " --- ", IFNULL(CP.NomeClientePet, "")) As NomeClientePet
+                CONCAT(IFNULL(CP.idApp_ClientePet, ""), " --- ", IFNULL(CP.NomeClientePet, ""), " || Tutor: ", IFNULL(C.NomeCliente, "")) As NomeClientePet
             FROM
                 App_ClientePet AS CP
-
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = CP.idApp_Cliente
             WHERE
                 CP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
             ORDER BY

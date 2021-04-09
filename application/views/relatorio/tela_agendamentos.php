@@ -8,7 +8,51 @@
 			<div class="panel panel-<?php echo $panel; ?>">
 				<div class="panel-heading">
 					<div class="row">
-						<div class="col-md-3">
+						<div class="col-md-4 text-left">
+							<label>Pet</label>
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+										<span class="glyphicon glyphicon-search"></span> 
+									</button>
+								</span>
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+										id="idApp_ClientePet" name="idApp_ClientePet">
+									<?php
+									foreach ($select['idApp_ClientePet'] as $key => $row) {
+										if ($query['idApp_ClientePet'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4 text-left">
+							<label>Cliente</label>
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+										<span class="glyphicon glyphicon-search"></span> 
+									</button>
+								</span>
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+										id="idApp_Cliente" name="idApp_Cliente">
+									<?php
+									foreach ($select['idApp_Cliente'] as $key => $row) {
+										if ($query['idApp_Cliente'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
 							<div class="col-md-4">
 								<label>Filtros</label>
 								<button class="btn btn-warning btn-md btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
