@@ -326,7 +326,7 @@ class Relatoriocomissoes extends CI_Controller {
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
-		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
+		$data['baixacomissao'] = 'Orcatrata/baixadacomissaoservico/';
 		
         #run form validation
         if ($this->form_validation->run() !== FALSE) {

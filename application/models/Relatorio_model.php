@@ -418,7 +418,7 @@ class Relatorio_model extends CI_Model {
 				$row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
 				$row->DevolvidoProduto = $this->basico->mascara_palavra_completa($row->DevolvidoProduto, 'NS');
 				$row->ConcluidoServico = $this->basico->mascara_palavra_completa($row->ConcluidoServico, 'NS');
-				$row->StatusComissao = $this->basico->mascara_palavra_completa($row->StatusComissao, 'NS');
+				$row->StatusComissaoPedido = $this->basico->mascara_palavra_completa($row->StatusComissaoPedido, 'NS');
 
                 $somaorcamento += $row->ValorOrca;
                 $row->ValorOrca = number_format($row->ValorOrca, 2, ',', '.');
