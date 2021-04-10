@@ -171,7 +171,7 @@
 							echo '<td class="text-left">' . $row['QtdProduto'] . '</td>';
 							echo '<td class="text-left">' . $row['NomeProduto'] . '</td>';
 							echo '<td class="text-left">R$' . $row['ValorTotalProduto'] . '</td>';
-							echo '<td class="text-left">' . $row['ComissaoProduto'] . '%</td>';
+							echo '<td class="text-left">' . $row['ComissaoServicoProduto'] . '%</td>';
 							echo '<td class="text-left">R$' . $row['ComissaoTotal'] . '</td>';
 							echo '<td class="text-left">/ ' . $row['Contagem'] . '</td>';
 							echo '<td class="text-left">R$' . $row['ComissaoProf'] . '</td>';

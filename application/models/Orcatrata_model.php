@@ -1153,8 +1153,7 @@ class Orcatrata_model extends CI_Model {
 				App_Produto AS PR
 			WHERE
 				PR.idSis_Empresa = ' . $data . ' AND
-				PR.Prod_Serv_Produto = "S" AND
-				PR.idApp_OrcaTrata = 152967
+				PR.Prod_Serv_Produto = "S"
 		');
         $query = $query->result_array();
           

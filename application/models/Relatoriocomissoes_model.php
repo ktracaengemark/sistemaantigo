@@ -100,7 +100,12 @@ class Relatoriocomissoes_model extends CI_Model {
 				PRDS.idTab_TipoRD,
 				PRDS.NomeProduto,
 				PRDS.ValorProduto,
+				PRDS.ValorComissaoVenda,
+				PRDS.ValorComissaoServico,
+				PRDS.ValorComissaoCashBack,
 				PRDS.ComissaoProduto,
+				PRDS.ComissaoServicoProduto,
+				PRDS.ComissaoCashBackProduto,
 				PRDS.QtdProduto,
 				PRDS.QtdIncrementoProduto,
 				(PRDS.QtdProduto * PRDS.QtdIncrementoProduto) AS QuantidadeProduto,
@@ -201,7 +206,12 @@ class Relatoriocomissoes_model extends CI_Model {
 				PRDS.idTab_TipoRD,
 				PRDS.NomeProduto,
 				PRDS.ValorProduto,
+				PRDS.ValorComissaoVenda,
+				PRDS.ValorComissaoServico,
+				PRDS.ValorComissaoCashBack,
 				PRDS.ComissaoProduto,
+				PRDS.ComissaoServicoProduto,
+				PRDS.ComissaoCashBackProduto,
 				PRDS.QtdProduto,
 				PRDS.QtdIncrementoProduto,
 				(PRDS.QtdProduto * PRDS.QtdIncrementoProduto) AS QuantidadeProduto,
@@ -347,14 +357,15 @@ class Relatoriocomissoes_model extends CI_Model {
 				}
 				
 				$valortotalproduto = $row->QtdProduto*$row->ValorProduto;
-				$comissao_total = $valortotalproduto*$row->ComissaoProduto/100;
+				//$comissao_total = $valortotalproduto*$row->ComissaoProduto/100;
+				$comissao_total = $row->ValorComissaoServico;
 				$pro_prof = $comissao_total/$divisor;
 				$somacomissaototal 	+= $comissao_total;
 				$somacomissaoprof	+= $pro_prof;
 				
 				$row->ValorTotalProduto = number_format($valortotalproduto, 2, ',', '.');
 				$row->ValorProduto = number_format($row->ValorProduto, 2, ',', '.');
-				$row->ComissaoProduto = number_format($row->ComissaoProduto, 2, ',', '.');
+				$row->ComissaoServicoProduto = number_format($row->ComissaoServicoProduto, 2, ',', '.');
 				$row->ComissaoTotal = number_format($comissao_total, 2, ',', '.');
 				$row->ComissaoProf = number_format($pro_prof, 2, ',', '.');
                 
