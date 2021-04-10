@@ -394,7 +394,7 @@
 					<div class="panel-heading text-left">
 						<div class="row">
 							<div class="col-md-3">
-								<label for="DataInicio"><?php echo $TipoFinanceiro;?> Inc.</label>
+								<label for="DataInicio"><?php echo $TipoFinanceiro;?> Ini</label>
 								<div class="input-group DatePicker">
 									<span class="input-group-addon" disabled>
 										<span class="glyphicon glyphicon-calendar"></span>
@@ -415,7 +415,7 @@
 							</div>
 							<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<div class="col-md-3">
-								<label for="DataInicio2">Entrega Inc.</label>
+								<label for="DataInicio2">Entrega Pedido Ini</label>
 								<div class="input-group DatePicker">
 									<span class="input-group-addon" disabled>
 										<span class="glyphicon glyphicon-calendar"></span>
@@ -425,7 +425,7 @@
 								</div>
 							</div>
 							<div class="col-md-3">
-								<label for="DataFim2">Entrega Fim</label>
+								<label for="DataFim2">Entrega Pedido Fim</label>
 								<div class="input-group DatePicker">
 									<span class="input-group-addon" disabled>
 										<span class="glyphicon glyphicon-calendar"></span>
@@ -438,7 +438,7 @@
 						<div class="row">
 							<div class="col-md-6"></div>
 							<div class="col-md-3">
-								<label for="DataInicio8">Data Entregue Prd Inc.</label>
+								<label for="DataInicio8">Entregua Serviço Ini</label>
 								<div class="input-group DatePicker">
 									<span class="input-group-addon" disabled>
 										<span class="glyphicon glyphicon-calendar"></span>
@@ -448,7 +448,7 @@
 								</div>
 							</div>
 							<div class="col-md-3">
-								<label for="DataFim8">Data Entregue Prd Fim</label>
+								<label for="DataFim8">Entregua Serviço Fim</label>
 								<div class="input-group DatePicker">
 									<span class="input-group-addon" disabled>
 										<span class="glyphicon glyphicon-calendar"></span>

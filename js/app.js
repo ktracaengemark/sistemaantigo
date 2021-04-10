@@ -24,7 +24,7 @@ exibir_confirmar();
 Aguardar();
 clientePet();
 clienteOT();
-//fechaBuscaOS();
+fechaBuscaOS();
 exibirTroco();
 exibirExtraOrca();
 exibirDescOrca();
@@ -2119,17 +2119,18 @@ function clientePet(id = null){
 
 function fechaBuscaOS(novaos){
 	//alert('fechaBuscaOS');
-	
-	$('#Hidden_NovaOS').val(novaos);
-	var hnovaos = $('#Hidden_NovaOS').val();
-	//console.log(hnovaos);
-	
+	//console.log('novaos = '+novaos);
+	//console.log('Hidden_NovaOS = '+$('#Hidden_NovaOS').val());
+	if(novaos){
+		var hnovaos = novaos;
+	}else{
+		var hnovaos = $('#Hidden_NovaOS').val();
+	}
 	if(hnovaos == "S"){
 		$('.hnovaos').hide();
 	}else{
 		$('.hnovaos').show();
 	}
-	
 }
 
 function mudaBuscaOS(novaos){

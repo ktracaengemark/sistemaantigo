@@ -457,178 +457,177 @@
 										</div>
 									</div>
 								</div>
-								
-									<div class="col-md-4 text-left">
-										<div class="panel panel-warning">
-											<div class="panel-heading">
-											
-											<?php if ($metodo == 1) { ?>			
-												<div class="row text-left">
-													<div class="col-md-8 ">
-														<label for="Repetir">Repetir Agendamento?</label><br>
-														<div class="btn-group" data-toggle="buttons">
-															<?php
-															foreach ($select['Repetir'] as $key => $row) {
-																if (!$cadastrar['Repetir']) $cadastrar['Repetir'] = 'N';
+								<div class="col-md-4 text-left">
+									<div class="panel panel-warning">
+										<div class="panel-heading">
+										
+										<?php if ($metodo == 1) { ?>			
+											<div class="row text-left">
+												<div class="col-md-8 ">
+													<label for="Repetir">Repetir Agendamento?</label><br>
+													<div class="btn-group" data-toggle="buttons">
+														<?php
+														foreach ($select['Repetir'] as $key => $row) {
+															if (!$cadastrar['Repetir']) $cadastrar['Repetir'] = 'N';
 
-																($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+															($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
-																if ($cadastrar['Repetir'] == $key) {
-																	echo ''
-																	. '<label class="btn btn-warning active" name="Repetir_' . $hideshow . '">'
-																	. '<input type="radio" name="Repetir" id="' . $hideshow . '" '
-																	. 'onchange="ocorrencias(this.value)" '
-																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																	. '</label>'
-																	;
-																} else {
-																	echo ''
-																	. '<label class="btn btn-default" name="Repetir_' . $hideshow . '">'
-																	. '<input type="radio" name="Repetir" id="' . $hideshow . '" '
-																	. 'onchange="ocorrencias(this.value)" '
-																	. 'autocomplete="off" value="' . $key . '" >' . $row
-																	. '</label>'
-																	;
-																}
+															if ($cadastrar['Repetir'] == $key) {
+																echo ''
+																. '<label class="btn btn-warning active" name="Repetir_' . $hideshow . '">'
+																. '<input type="radio" name="Repetir" id="' . $hideshow . '" '
+																. 'onchange="ocorrencias(this.value)" '
+																. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																. '</label>'
+																;
+															} else {
+																echo ''
+																. '<label class="btn btn-default" name="Repetir_' . $hideshow . '">'
+																. '<input type="radio" name="Repetir" id="' . $hideshow . '" '
+																. 'onchange="ocorrencias(this.value)" '
+																. 'autocomplete="off" value="' . $key . '" >' . $row
+																. '</label>'
+																;
 															}
-															?>
+														}
+														?>
 
-														</div>
-														<?php echo form_error('Repetir'); ?>
 													</div>
-													<div class="col-md-4">	
-														<label for="Recorrencias">Ocorrências: </label>
-															<input type="text" class="form-control" name="Recorrencias" id="Recorrencias" value="<?php echo $query['Recorrencias']; ?>" onkeyup="ocorrencias()">
-														<?php echo form_error('Recorrencias'); ?>	
-													</div>
-												</div>	
-												<div class="row text-left">	
-													<div class="col-md-12 text-left" id="Repetir" <?php echo $div['Repetir']; ?>>
-														<br>
-														<div class="row">	
-															<div class="col-md-4">
-																<label for="Intervalo">Repetir a cada:</label><br>
-																<input type="text" class="form-control Numero" id="Intervalo" maxlength="3" placeholder="Ex: '5' dias."
-																	   name="Intervalo" onkeyup="ocorrencias()" value="<?php echo $query['Intervalo'] ?>">
-																<?php echo form_error('Intervalo'); ?>		
-															</div>
-															<div class="col-md-4 ">
-																<label for="Tempo">Período</label>
-																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-																		id="Tempo" name="Tempo" onchange="ocorrencias()">
-																	<!--<option value="">-- Selecione uma opção --</option>-->
-																	<?php
-																	foreach ($select['Tempo'] as $key => $row) {
-																		if ($query['Tempo'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																		} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
-																		}
-																	}
-																	?>
-																</select>
-															</div>
-															<div class="col-md-4">	
-																<label for="DataMinima">Próxima: </label>
-																	<input type="text" class="form-control Date" readonly="" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																		   name="DataMinima" id="DataMinima" value="<?php echo $cadastrar['DataMinima']; ?>" >
-																<?php echo form_error('DataMinima'); ?>	
-															</div>
-														</div>	
-														<div class="row">	
-															<div class="col-md-4">
-																<label for="Periodo">Durante:</label><br>
-																<input type="text" class="form-control Numero" id="Periodo" maxlength="3" placeholder="Ex: '30' dias."
-																	   name="Periodo" value="<?php echo $query['Periodo'] ?>" onkeyup="dateTermina()">
-																<?php echo form_error('Periodo'); ?>		
-															</div>
-															<div class="col-md-4 ">
-																<label for="Tempo2">Período</label>
-																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-																		id="Tempo2" name="Tempo2" onchange="dateTermina()">
-																	<!--<option value="">-- Selecione uma opção --</option>-->
-																	<?php
-																	foreach ($select['Tempo'] as $key => $row) {
-																		if ($query['Tempo2'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																		} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
-																		}
-																	}
-																	?>
-																</select>
-															</div>
-															<div class="col-md-4">	
-																<label for="DataTermino">Última: </label>
-																	<input type="text" class="form-control Date" readonly="" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																		   name="DataTermino" id="DataTermino" value="<?php echo $query['DataTermino']; ?>" >
-																<?php echo form_error('DataTermino'); ?>	
-															</div>
-														</div>
-													</div>
+													<?php echo form_error('Repetir'); ?>
 												</div>
-											<?php } else { ?>
-												<div class="row text-left">	
-													<div class="col-md-3">
-														<label>Ocorrência</label>
-														<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencia']; ?>">
+												<div class="col-md-4">	
+													<label for="Recorrencias">Ocorrências: </label>
+														<input type="text" class="form-control" name="Recorrencias" id="Recorrencias" value="<?php echo $query['Recorrencias']; ?>" onkeyup="ocorrencias()">
+													<?php echo form_error('Recorrencias'); ?>	
+												</div>
+											</div>	
+											<div class="row text-left">	
+												<div class="col-md-12 text-left" id="Repetir" <?php echo $div['Repetir']; ?>>
+													<br>
+													<div class="row">	
+														<div class="col-md-4">
+															<label for="Intervalo">Repetir a cada:</label><br>
+															<input type="text" class="form-control Numero" id="Intervalo" maxlength="3" placeholder="Ex: '5' dias."
+																   name="Intervalo" onkeyup="ocorrencias()" value="<?php echo $query['Intervalo'] ?>">
+															<?php echo form_error('Intervalo'); ?>		
+														</div>
+														<div class="col-md-4 ">
+															<label for="Tempo">Período</label>
+															<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+																	id="Tempo" name="Tempo" onchange="ocorrencias()">
+																<!--<option value="">-- Selecione uma opção --</option>-->
+																<?php
+																foreach ($select['Tempo'] as $key => $row) {
+																	if ($query['Tempo'] == $key) {
+																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																	} else {
+																		echo '<option value="' . $key . '">' . $row . '</option>';
+																	}
+																}
+																?>
+															</select>
+														</div>
+														<div class="col-md-4">	
+															<label for="DataMinima">Próxima: </label>
+																<input type="text" class="form-control Date" readonly="" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																	   name="DataMinima" id="DataMinima" value="<?php echo $cadastrar['DataMinima']; ?>" >
+															<?php echo form_error('DataMinima'); ?>	
+														</div>
 													</div>	
-													<div class="col-md-4">
-														<label>Termina em</label>
-														<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['DataTermino']; ?>">
-													</div>
-													<div class="col-md-5 ">
-														<label for="Quais">Alterar Quais?</label>
-														<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-																id="Quais" name="Quais">
-															<!--<option value="">-- Selecione uma opção --</option>-->
-															<?php
-															foreach ($select['Quais'] as $key => $row) {
-																if ($alterar['Quais'] == $key) {
-																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																} else {
-																	echo '<option value="' . $key . '">' . $row . '</option>';
+													<div class="row">	
+														<div class="col-md-4">
+															<label for="Periodo">Durante:</label><br>
+															<input type="text" class="form-control Numero" id="Periodo" maxlength="3" placeholder="Ex: '30' dias."
+																   name="Periodo" value="<?php echo $query['Periodo'] ?>" onkeyup="dateTermina()">
+															<?php echo form_error('Periodo'); ?>		
+														</div>
+														<div class="col-md-4 ">
+															<label for="Tempo2">Período</label>
+															<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+																	id="Tempo2" name="Tempo2" onchange="dateTermina()">
+																<!--<option value="">-- Selecione uma opção --</option>-->
+																<?php
+																foreach ($select['Tempo'] as $key => $row) {
+																	if ($query['Tempo2'] == $key) {
+																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																	} else {
+																		echo '<option value="' . $key . '">' . $row . '</option>';
+																	}
 																}
-															}
-															?>
-														</select>
-														<?php echo form_error('Quais'); ?>
+																?>
+															</select>
+														</div>
+														<div class="col-md-4">	
+															<label for="DataTermino">Última: </label>
+																<input type="text" class="form-control Date" readonly="" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																	   name="DataTermino" id="DataTermino" value="<?php echo $query['DataTermino']; ?>" >
+															<?php echo form_error('DataTermino'); ?>	
+														</div>
 													</div>
 												</div>
-											<?php } ?>	
-												<br>
-												<div class="row">
-													<div class="col-md-12 text-left">
-														<label for="idTab_Status">Status:</label><br>
-														<div class=" " data-toggle="buttons">
-															<?php
-															foreach ($select['Status'] as $key => $row) {
-																if (!$query['idTab_Status'])
-																	$query['idTab_Status'] = 1;
-
-																if ($query['idTab_Status'] == $key) {
-																	echo ''
-																	. '<label class="btn btn-' . $this->basico->tipo_status_cor($key) . ' active" name="radio" id="radio' . $key . '">'
-																	. '<input type="radio" name="idTab_Status" id="radio" '
-																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																	. '</label>'
-																	;
-																} else {
-																	echo ''
-																	. '<label class="btn btn-default" name="radio" id="radio' . $key . '">'
-																	. '<input type="radio" name="idTab_Status" id="radio" class="idTab_Status" '
-																		. 'autocomplete="off" value="' . $key . '" >' . $row
-																	. '</label>'
-																	;
-																}
+											</div>
+										<?php } else { ?>
+											<div class="row text-left">	
+												<div class="col-md-3">
+													<label>Ocorrência</label>
+													<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencia']; ?>">
+												</div>	
+												<div class="col-md-4">
+													<label>Termina em</label>
+													<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['DataTermino']; ?>">
+												</div>
+												<div class="col-md-5 ">
+													<label for="Quais">Alterar Quais?</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+															id="Quais" name="Quais">
+														<!--<option value="">-- Selecione uma opção --</option>-->
+														<?php
+														foreach ($select['Quais'] as $key => $row) {
+															if ($alterar['Quais'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
 															}
-															?>
-														</div>
+														}
+														?>
+													</select>
+													<?php echo form_error('Quais'); ?>
+												</div>
+											</div>
+										<?php } ?>	
+											<br>
+											<div class="row">
+												<div class="col-md-12 text-left">
+													<label for="idTab_Status">Status:</label><br>
+													<div class=" " data-toggle="buttons">
+														<?php
+														foreach ($select['Status'] as $key => $row) {
+															if (!$query['idTab_Status'])
+																$query['idTab_Status'] = 1;
+
+															if ($query['idTab_Status'] == $key) {
+																echo ''
+																. '<label class="btn btn-' . $this->basico->tipo_status_cor($key) . ' active" name="radio" id="radio' . $key . '">'
+																. '<input type="radio" name="idTab_Status" id="radio" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																. '</label>'
+																;
+															} else {
+																echo ''
+																. '<label class="btn btn-default" name="radio" id="radio' . $key . '">'
+																. '<input type="radio" name="idTab_Status" id="radio" class="idTab_Status" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																. '</label>'
+																;
+															}
+														}
+														?>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
+								</div>
 								
 								<div class="col-md-4 text-left">
 									<div class="panel panel-warning">
@@ -724,12 +723,13 @@
 																		}
 																		?>
 																	</div>
+																	
 																<?php }else{ ?>
 																	<label for="PorConsulta">Gerar 1 OS</label>
 																<?php } ?>
 															</div>
 														</div>
-														<input type="hidden" id="Hidden_NovaOS" name="Hidden_NovaOS" value="" />
+														<input type="hidden" id="Hidden_NovaOS" name="Hidden_NovaOS" value="<?php echo $cadastrar['NovaOS']; ?>" />
 														<input type="hidden" id="Hidden_idApp_OrcaTrata" name="Hidden_idApp_OrcaTrata" value="<?php echo $query['idApp_OrcaTrata']; ?>" />
 														
 														<div class="col-md-12 text-left hnovaos"  >
