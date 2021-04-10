@@ -39,33 +39,38 @@
 														<div class="panel panel-warning">
 															<div class="panel-heading">
 																<div class="row">
-																	<input type="hidden" name="idApp_OrcaTrata<?php echo $i ?>" id="idApp_OrcaTrata<?php echo $i ?>" value="<?php echo $produto[$i]['idApp_OrcaTrata']; ?>"/>
-																	<div class="col-md-1">
-																		<label >Prdt <?php echo $i ?> / <?php echo $count['PRCount']; ?></label><br>
-																	</div>
+																	<!--<input type="hidden" name="idApp_OrcaTrata<?php echo $i ?>" id="idApp_OrcaTrata<?php echo $i ?>" value="<?php echo $produto[$i]['idApp_OrcaTrata']; ?>"/>
+																	<input type="hidden" name="QtdProduto<?php echo $i ?>" id="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto']; ?>"/>
+																	<input type="hidden" name="ValorProduto<?php echo $i ?>" id="ValorProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ValorProduto']; ?>"/>
+																	<input type="hidden" name="ComissaoServicoProduto<?php echo $i ?>" id="ComissaoServicoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ComissaoServicoProduto']; ?>"/>-->
 																	<div class="col-md-2">
-																		<label for="Receita">Receita:</label><br>
+																		<label ><?php echo $i ?> / <?php echo $count['PRCount']; ?></label><br>
 																		<span><?php echo $_SESSION['Produto'][$i]['Receita']; ?></span>
 																	</div>
 																	<div class="col-md-2">
-																		<label >Valor Comissao </label><br>
+																		<label for="Valor">Comissão:</label><br>
+																		<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Produto'][$i]['Valor'] ?>">
+																	</div>
+																	<div class="col-md-2">
+																		<label for="ValorComissaoServico">Valor Comissao </label><br>
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
-																			<input type="text" class="form-control Valor" readonly="" value="<?php echo $_SESSION['Produto'][$i]['ValorComissao'] ?>">
+																			<input type="text" class="form-control Valor"  id="ValorComissaoServico<?php echo $i ?>" 
+																				   name="ValorComissaoServico<?php echo $i ?>"  value="<?php echo $produto[$i]['ValorComissaoServico'] ?>">
 																		</div>
 																	</div>
 																	<div class="col-md-2">
-																		<label for="DataConcluidoProduto">DataConcluidoProduto</label>
+																		<label for="DataConcluidoProduto" >Data Entrega</label>
 																		<div class="input-group DatePicker">
 																			<span class="input-group-addon" disabled>
 																				<span class="glyphicon glyphicon-calendar"></span>
 																			</span>
-																			<input type="text" class="form-control Date" id="DataConcluidoProduto<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA" 
-																				   name="DataConcluidoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataConcluidoProduto'] ?>">																
+																			<input type="text" class="form-control Date" readonly=""  id="DataConcluidoProduto<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA" 
+																					   name="DataConcluidoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataConcluidoProduto'] ?>">																
 																		</div>
 																	</div>
 																	<div class="col-md-2">
-																		<label for="StatusComissaoServico">StatusComissaoServico?</label><br>
+																		<label for="StatusComissaoServico">Status Comissao</label><br>
 																		<div class="form-group">
 																			<div class="btn-group" data-toggle="buttons">
 																				<?php
@@ -96,7 +101,7 @@
 																	</div>
 																	<div id="StatusComissaoServico<?php echo $i ?>" <?php echo $div['StatusComissaoServico' . $i]; ?>>
 																		<div class="col-md-2">
-																			<label for="DataPagoComissaoServico">DataPagoComissaoServico</label>
+																			<label for="DataPagoComissaoServico">Data Pago Comissao</label>
 																			<div class="input-group DatePicker">
 																				<span class="input-group-addon" disabled>
 																					<span class="glyphicon glyphicon-calendar"></span>

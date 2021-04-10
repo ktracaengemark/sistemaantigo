@@ -1147,12 +1147,14 @@ class Orcatrata_model extends CI_Model {
 		$query = $this->db->query('
 			SELECT
 				PR.*,
-				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "--", IFNULL(PR.NomeProduto,"")) AS Receita
+				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "--", IFNULL(PR.NomeProduto,"")) AS Receita,
+				CONCAT(IFNULL(PR.QtdProduto,"")," x ", IFNULL(PR.ValorProduto,"")," x ", IFNULL(PR.ComissaoServicoProduto,""),"%") AS Valor
 			FROM 
 				App_Produto AS PR
 			WHERE
 				PR.idSis_Empresa = ' . $data . ' AND
-				PR.Prod_Serv_Produto = "S"
+				PR.Prod_Serv_Produto = "S" AND
+				PR.idApp_OrcaTrata = 152967
 		');
         $query = $query->result_array();
           
@@ -2521,7 +2523,7 @@ class Orcatrata_model extends CI_Model {
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }	
-	
+
     public function update_comissao($data) {
 
         $query = $this->db->update_batch('App_OrcaTrata', $data, 'idApp_OrcaTrata');
