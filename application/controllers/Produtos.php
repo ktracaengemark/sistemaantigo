@@ -933,6 +933,8 @@ class Produtos extends CI_Controller {
 				//$data['valor'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
 				$data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['valor'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
+				$data['valor'][$j]['ComissaoServico'] = $this->input->post('ComissaoServico' . $i);
+				$data['valor'][$j]['ComissaoCashBack'] = $this->input->post('ComissaoCashBack' . $i);
 				$data['valor'][$j]['TempoDeEntrega'] = $this->input->post('TempoDeEntrega' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
 				//$data['valor'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
@@ -1042,6 +1044,8 @@ class Produtos extends CI_Controller {
 					$data['update']['valor']['inserir'][$j]['idTab_Produto'] = $_SESSION['Produtos']['idTab_Produto'];
 					$data['update']['valor']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ValorProduto']));
 					$data['update']['valor']['inserir'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ComissaoVenda']));
+					$data['update']['valor']['inserir'][$j]['ComissaoServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ComissaoServico']));
+					$data['update']['valor']['inserir'][$j]['ComissaoCashBack'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ComissaoCashBack']));
 				}
 
                 $max = count($data['update']['valor']['alterar']);
@@ -1052,6 +1056,8 @@ class Produtos extends CI_Controller {
 					$data['update']['valor']['alterar'][$j]['idTab_Produto'] = $_SESSION['Produtos']['idTab_Produto'];
 					$data['update']['valor']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ValorProduto']));
 					$data['update']['valor']['alterar'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ComissaoVenda']));
+					$data['update']['valor']['alterar'][$j]['ComissaoServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ComissaoServico']));
+					$data['update']['valor']['alterar'][$j]['ComissaoCashBack'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ComissaoCashBack']));
 					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'UTF-8'));
 				}
 
@@ -1170,6 +1176,8 @@ class Produtos extends CI_Controller {
             'QtdProdutoDesconto', 
             'QtdProdutoIncremento',
 			'ComissaoVenda',
+			'ComissaoServico',
+			'ComissaoCashBack',
 			'TempoDeEntrega',
 			//'AtivoPreco', 
             'VendaSitePreco',
@@ -1229,7 +1237,9 @@ class Produtos extends CI_Controller {
 			$data['valor']['idTab_Produto'] = $_SESSION['Valor']['idTab_Produto'];
 			$data['valor']['idTab_Catprod'] = $_SESSION['Valor']['idTab_Catprod'];
 			$data['valor']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ValorProduto']));
-			$data['valor']['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ComissaoVenda']));			
+			$data['valor']['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ComissaoVenda']));
+			$data['valor']['ComissaoServico'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ComissaoServico']));
+			$data['valor']['ComissaoCashBack'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ComissaoCashBack']));			
 			
 			$data['update']['valor']['anterior'] = $this->Produtos_model->get_valor($data['valor']['idTab_Valor']);
             $data['update']['valor']['campos'] = array_keys($data['valor']);

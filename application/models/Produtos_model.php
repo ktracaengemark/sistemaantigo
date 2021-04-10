@@ -774,6 +774,8 @@ class Produtos_model extends CI_Model {
 					$row->VendaBalcaoPreco = $this->basico->mascara_palavra_completa($row->VendaBalcaoPreco, 'NS');
 					$row->ValorProduto = number_format($row->ValorProduto, 2, ',', '.');
 					$row->ComissaoVenda = number_format($row->ComissaoVenda, 2, ',', '.');
+					$row->ComissaoServico = number_format($row->ComissaoServico, 2, ',', '.');
+					$row->ComissaoCashBack = number_format($row->ComissaoCashBack, 2, ',', '.');
 					if($row->TempoDeEntrega == 0){
 						$row->TempoDeEntrega = "Pronta Entrega";
 					}else{

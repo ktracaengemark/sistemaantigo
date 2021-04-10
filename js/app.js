@@ -5845,14 +5845,6 @@ function adiciona_precos() {
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ComissaoVenda'+pt+'">Comissao</label><br>\
-							<div class="input-group id="ComissaoVenda'+pt+'">\
-								<input type="text" class="form-control Valor text-right" id="ComissaoVenda'+pt+'" maxlength="10" placeholder="0,00" \
-									name="ComissaoVenda'+pt+'" value="">\
-								<span class="input-group-addon" id="basic-addon1">%</span>\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
 							<label for="TempoDeEntrega'+pt+'">Prazo De Entrega</label><br>\
 							<div class="input-group id="TempoDeEntrega'+pt+'">\
 								<input type="text" class="form-control Numero text-right" id="TempoDeEntrega'+pt+'" maxlength="3" placeholder="0" \
@@ -5860,7 +5852,7 @@ function adiciona_precos() {
 								<span class="input-group-addon" id="basic-addon1">Dia(s)</span>\
 							</div>\
 						</div>\
-						<div class="col-md-2">\
+						<div class="col-md-4">\
 							<label for="Convdesc'+pt+'">Desc. Embal:</label>\
 							<textarea type="text" class="form-control" id="Convdesc'+pt+'"\
 									  name="Convdesc'+pt+'" value=""></textarea>\
@@ -5873,6 +5865,30 @@ function adiciona_precos() {
 						</div>\
 					</div>\
 					<div class="row">\
+						<div class="col-md-2">\
+							<label for="ComissaoVenda'+pt+'">ComissaoVenda</label><br>\
+							<div class="input-group id="ComissaoVenda'+pt+'">\
+								<input type="text" class="form-control Valor text-right" id="ComissaoVenda'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ComissaoVenda'+pt+'" value="">\
+								<span class="input-group-addon" id="basic-addon1">%</span>\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="ComissaoServico'+pt+'">ComissaoServico</label><br>\
+							<div class="input-group id="ComissaoServico'+pt+'">\
+								<input type="text" class="form-control Valor text-right" id="ComissaoServico'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ComissaoServico'+pt+'" value="">\
+								<span class="input-group-addon" id="basic-addon1">%</span>\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="ComissaoCashBack'+pt+'">CashBack</label><br>\
+							<div class="input-group id="ComissaoCashBack'+pt+'">\
+								<input type="text" class="form-control Valor text-right" id="ComissaoCashBack'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ComissaoCashBack'+pt+'" value="">\
+								<span class="input-group-addon" id="basic-addon1">%</span>\
+							</div>\
+						</div>\
 						<div class="col-md-2">\
 							<label for="VendaBalcaoPreco">VendaBalcao?</label><br>\
 							<div class="form-group">\
@@ -6046,14 +6062,6 @@ function adiciona_item_promocao() {
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ComissaoVenda'+pt+'">Comissao:</label><br>\
-							<div class="input-group id="ComissaoVenda'+pt+'">\
-								<input type="text" class="form-control Valor text-right" id="ComissaoVenda'+pt+'" maxlength="10" placeholder="0,00" \
-									name="ComissaoVenda'+pt+'" value="">\
-								<span class="input-group-addon" id="basic-addon1">%</span>\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
 							<label for="TempoDeEntrega'+pt+'">Prazo De Entrega:</label><br>\
 							<div class="input-group id="TempoDeEntrega'+pt+'">\
 								<input type="text" class="form-control Numero text-right" id="TempoDeEntrega'+pt+'" maxlength="3" placeholder="0" \
@@ -6061,7 +6069,7 @@ function adiciona_item_promocao() {
 								<span class="input-group-addon" id="basic-addon1">Dia(s)</span>\
 							</div>\
 						</div>\
-						<div class="col-md-2">\
+						<div class="col-md-4">\
 							<label for="Convdesc'+pt+'">Desc. Embal:</label>\
 							<textarea type="text" class="form-control" id="Convdesc'+pt+'"\
 									  name="Convdesc'+pt+'" value=""></textarea>\
@@ -6071,6 +6079,32 @@ function adiciona_item_promocao() {
 							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
 								<span class="glyphicon glyphicon-trash"></span>\
 							</button>\
+						</div>\
+					</div>\
+					<div class="row">\
+						<div class="col-md-2">\
+							<label for="ComissaoVenda'+pt+'">ComissaoVenda:</label><br>\
+							<div class="input-group id="ComissaoVenda'+pt+'">\
+								<input type="text" class="form-control Valor text-right" id="ComissaoVenda'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ComissaoVenda'+pt+'" value="">\
+								<span class="input-group-addon" id="basic-addon1">%</span>\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="ComissaoServico'+pt+'">ComissaoServico:</label><br>\
+							<div class="input-group id="ComissaoServico'+pt+'">\
+								<input type="text" class="form-control Valor text-right" id="ComissaoServico'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ComissaoServico'+pt+'" value="">\
+								<span class="input-group-addon" id="basic-addon1">%</span>\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="ComissaoCashBack'+pt+'">CashBack:</label><br>\
+							<div class="input-group id="ComissaoCashBack'+pt+'">\
+								<input type="text" class="form-control Valor text-right" id="ComissaoCashBack'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ComissaoCashBack'+pt+'" value="">\
+								<span class="input-group-addon" id="basic-addon1">%</span>\
+							</div>\
 						</div>\
 					</div>\
 				</div>\

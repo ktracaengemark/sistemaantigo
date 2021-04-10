@@ -112,18 +112,6 @@
 																	</div>
 																</div>
 																<div class="col-md-2">
-																	<label for="ComissaoVenda">Comissao</label>
-																	<div class="input-group">
-																		<?php if ($metodo == 6) { ?>
-																			<input type="text" class="form-control Valor text-right" readonly="" value="<?php echo $_SESSION['Valor']['ComissaoVenda'] ?>">
-																		<?php }elseif ($metodo == 7) { ?>
-																			<input type="text" class="form-control Valor text-right" id="ComissaoVenda" maxlength="10" placeholder="0,00"
-																				name="ComissaoVenda" value="<?php echo $valor['ComissaoVenda'] ?>">
-																		<?php } ?>
-																		<span class="input-group-addon" id="basic-addon1">%</span>
-																	</div>
-																</div>
-																<div class="col-md-2">
 																	<label for="TempoDeEntrega">Prazo De Entrega</label>
 																	<div class="input-group">
 																		<?php if ($metodo == 6) { ?>
@@ -135,7 +123,7 @@
 																		<span class="input-group-addon" id="basic-addon1">Dia(s)</span>
 																	</div>
 																</div>
-																<div class="col-md-2">
+																<div class="col-md-4">
 																	<label for="Convdesc">Desc. Embal </label>
 																	<?php if ($metodo == 6) { ?>
 																		<textarea type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Convdesc']; ?>"><?php echo $_SESSION['Valor']['Convdesc']; ?></textarea>
@@ -182,6 +170,42 @@
 																	<?php } ?>	
 																</div>
 																-->
+																<div class="col-md-2">
+																	<label for="ComissaoVenda">ComissaoVenda</label>
+																	<div class="input-group">
+																		<?php if ($metodo == 6) { ?>
+																			<input type="text" class="form-control Valor text-right" readonly="" value="<?php echo $_SESSION['Valor']['ComissaoVenda'] ?>">
+																		<?php }elseif ($metodo == 7) { ?>
+																			<input type="text" class="form-control Valor text-right" id="ComissaoVenda" maxlength="10" placeholder="0,00"
+																				name="ComissaoVenda" value="<?php echo $valor['ComissaoVenda'] ?>">
+																		<?php } ?>
+																		<span class="input-group-addon" id="basic-addon1">%</span>
+																	</div>
+																</div>
+																<div class="col-md-2">
+																	<label for="ComissaoServico">ComissaoServico</label>
+																	<div class="input-group">
+																		<?php if ($metodo == 6) { ?>
+																			<input type="text" class="form-control Valor text-right" readonly="" value="<?php echo $_SESSION['Valor']['ComissaoServico'] ?>">
+																		<?php }elseif ($metodo == 7) { ?>
+																			<input type="text" class="form-control Valor text-right" id="ComissaoServico" maxlength="10" placeholder="0,00"
+																				name="ComissaoServico" value="<?php echo $valor['ComissaoServico'] ?>">
+																		<?php } ?>
+																		<span class="input-group-addon" id="basic-addon1">%</span>
+																	</div>
+																</div>
+																<div class="col-md-2">
+																	<label for="ComissaoCashBack">Cashback</label>
+																	<div class="input-group">
+																		<?php if ($metodo == 6) { ?>
+																			<input type="text" class="form-control Valor text-right" readonly="" value="<?php echo $_SESSION['Valor']['ComissaoCashBack'] ?>">
+																		<?php }elseif ($metodo == 7) { ?>
+																			<input type="text" class="form-control Valor text-right" id="ComissaoCashBack" maxlength="10" placeholder="0,00"
+																				name="ComissaoCashBack" value="<?php echo $valor['ComissaoCashBack'] ?>">
+																		<?php } ?>
+																		<span class="input-group-addon" id="basic-addon1">%</span>
+																	</div>
+																</div>
 																<div class="col-md-2">
 																	<label for="VendaBalcaoPreco">VendaBalcao?</label><br>
 																	<?php if ($metodo == 6) { ?>

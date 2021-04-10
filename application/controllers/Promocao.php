@@ -80,6 +80,8 @@ class Promocao extends CI_Controller {
 				$data['item_promocao'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
 				$data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
+				$data['item_promocao'][$j]['ComissaoServico'] = $this->input->post('ComissaoServico' . $i);
+				$data['item_promocao'][$j]['ComissaoCashBack'] = $this->input->post('ComissaoCashBack' . $i);
 				$data['item_promocao'][$j]['TempoDeEntrega'] = $this->input->post('TempoDeEntrega' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
 				//$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
@@ -242,6 +244,8 @@ class Promocao extends CI_Controller {
                     $data['item_promocao'][$j]['idTab_Promocao'] = $data['promocao']['idTab_Promocao'];
 					$data['item_promocao'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['item_promocao'][$j]['ValorProduto']));
 					$data['item_promocao'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['item_promocao'][$j]['ComissaoVenda']));
+					$data['item_promocao'][$j]['ComissaoServico'] = str_replace(',', '.', str_replace('.', '', $data['item_promocao'][$j]['ComissaoServico']));
+					$data['item_promocao'][$j]['ComissaoCashBack'] = str_replace(',', '.', str_replace('.', '', $data['item_promocao'][$j]['ComissaoCashBack']));
                 }
                 $data['item_promocao']['idTab_Valor'] = $this->Promocao_model->set_item_promocao($data['item_promocao']);
             }
@@ -327,6 +331,8 @@ class Promocao extends CI_Controller {
 				$data['item_promocao'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
 				$data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
+				$data['item_promocao'][$j]['ComissaoServico'] = $this->input->post('ComissaoServico' . $i);
+				$data['item_promocao'][$j]['ComissaoCashBack'] = $this->input->post('ComissaoCashBack' . $i);
 				$data['item_promocao'][$j]['TempoDeEntrega'] = $this->input->post('TempoDeEntrega' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
 				//$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
@@ -514,12 +520,16 @@ class Promocao extends CI_Controller {
 					//$data['update']['item_promocao']['inserir'][$j]['idTab_Produto'] = $_SESSION['Promocao']['idTab_Produto'];
 					$data['update']['item_promocao']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ValorProduto']));
 					$data['update']['item_promocao']['inserir'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoVenda']));
+					$data['update']['item_promocao']['inserir'][$j]['ComissaoServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoServico']));
+					$data['update']['item_promocao']['inserir'][$j]['ComissaoCashBack'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoCashBack']));
 				}
 
                 $max = count($data['update']['item_promocao']['alterar']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['item_promocao']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ValorProduto']));
 					$data['update']['item_promocao']['alterar'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ComissaoVenda']));
+					$data['update']['item_promocao']['alterar'][$j]['ComissaoServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ComissaoServico']));
+					$data['update']['item_promocao']['alterar'][$j]['ComissaoCashBack'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ComissaoCashBack']));
 					$data['update']['item_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['alterar'][$j]['Convdesc'], 'UTF-8'));
 				}
 
@@ -672,6 +682,8 @@ class Promocao extends CI_Controller {
 				$data['item_promocao'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
 				$data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
+				$data['item_promocao'][$j]['ComissaoServico'] = $this->input->post('ComissaoServico' . $i);
+				$data['item_promocao'][$j]['ComissaoCashBack'] = $this->input->post('ComissaoCashBack' . $i);
 				$data['item_promocao'][$j]['TempoDeEntrega'] = $this->input->post('TempoDeEntrega' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
 				//$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
@@ -842,12 +854,16 @@ class Promocao extends CI_Controller {
 					//$data['update']['item_promocao']['inserir'][$j]['idTab_Produto'] = $_SESSION['Promocao']['idTab_Produto'];
 					$data['update']['item_promocao']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ValorProduto']));
 					$data['update']['item_promocao']['inserir'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoVenda']));
+					$data['update']['item_promocao']['inserir'][$j]['ComissaoServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoServico']));
+					$data['update']['item_promocao']['inserir'][$j]['ComissaoCashBack'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoCashBack']));
 				}
 
                 $max = count($data['update']['item_promocao']['alterar']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['item_promocao']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ValorProduto']));
 					$data['update']['item_promocao']['alterar'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ComissaoVenda']));
+					$data['update']['item_promocao']['alterar'][$j]['ComissaoServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ComissaoServico']));
+					$data['update']['item_promocao']['alterar'][$j]['ComissaoCashBack'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ComissaoCashBack']));
 					$data['update']['item_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['alterar'][$j]['Convdesc'], 'UTF-8'));
 				}
 

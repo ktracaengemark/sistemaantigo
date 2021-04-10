@@ -390,18 +390,6 @@
 																		</div>
 																	</div>
 																	<div class="col-md-2">
-																		<label for="ComissaoVenda">Comissao:</label>
-																		<div class="input-group">
-																		<?php if ($metodo == 3) { ?>
-																			<input type="text" class="form-control Valor text-right" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['ComissaoVenda'] ?>">
-																		<?php }else{ ?>	
-																			<input type="text" class="form-control Valor text-right" maxlength="10" placeholder="0,00" 
-																			id="ComissaoVenda<?php echo $i ?>" name="ComissaoVenda<?php echo $i ?>" value="<?php echo $item_promocao[$i]['ComissaoVenda'] ?>">
-																		<?php } ?>	
-																			<span class="input-group-addon" id="basic-addon1">%</span>
-																		</div>
-																	</div>
-																	<div class="col-md-2">
 																		<label for="TempoDeEntrega">Prazo De Entrega:</label>
 																		<div class="input-group">
 																		<?php if ($metodo == 3) { ?>
@@ -413,7 +401,7 @@
 																			<span class="input-group-addon" id="basic-addon1">Dia(s)</span>
 																		</div>
 																	</div>
-																	<div class="col-md-2">
+																	<div class="col-md-4">
 																		<label for="Convdesc">Desc. Embal:</label>
 																		<?php if ($metodo == 3) { ?>
 																			<textarea type="text" class="form-control" readonly="" <?php echo $readonly; ?>
@@ -432,8 +420,44 @@
 																		</div>
 																	<?php } ?>
 																</div>
-																<!--
 																<div class="row">
+																	<div class="col-md-2">
+																		<label for="ComissaoVenda">ComissaoVenda:</label>
+																		<div class="input-group">
+																		<?php if ($metodo == 3) { ?>
+																			<input type="text" class="form-control Valor text-right" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['ComissaoVenda'] ?>">
+																		<?php }else{ ?>	
+																			<input type="text" class="form-control Valor text-right" maxlength="10" placeholder="0,00" 
+																			id="ComissaoVenda<?php echo $i ?>" name="ComissaoVenda<?php echo $i ?>" value="<?php echo $item_promocao[$i]['ComissaoVenda'] ?>">
+																		<?php } ?>	
+																			<span class="input-group-addon" id="basic-addon1">%</span>
+																		</div>
+																	</div>
+																	<div class="col-md-2">
+																		<label for="ComissaoServico">ComissaoServico:</label>
+																		<div class="input-group">
+																		<?php if ($metodo == 3) { ?>
+																			<input type="text" class="form-control Valor text-right" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['ComissaoServico'] ?>">
+																		<?php }else{ ?>	
+																			<input type="text" class="form-control Valor text-right" maxlength="10" placeholder="0,00" 
+																			id="ComissaoServico<?php echo $i ?>" name="ComissaoServico<?php echo $i ?>" value="<?php echo $item_promocao[$i]['ComissaoServico'] ?>">
+																		<?php } ?>	
+																			<span class="input-group-addon" id="basic-addon1">%</span>
+																		</div>
+																	</div>
+																	<div class="col-md-2">
+																		<label for="ComissaoCashBack">CashBack:</label>
+																		<div class="input-group">
+																		<?php if ($metodo == 3) { ?>
+																			<input type="text" class="form-control Valor text-right" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['ComissaoCashBack'] ?>">
+																		<?php }else{ ?>	
+																			<input type="text" class="form-control Valor text-right" maxlength="10" placeholder="0,00" 
+																			id="ComissaoCashBack<?php echo $i ?>" name="ComissaoCashBack<?php echo $i ?>" value="<?php echo $item_promocao[$i]['ComissaoCashBack'] ?>">
+																		<?php } ?>	
+																			<span class="input-group-addon" id="basic-addon1">%</span>
+																		</div>
+																	</div>
+																	<!--
 																	<div class="col-md-2">
 																		<label for="AtivoPreco">Ativo?</label><br>
 																		<?php /* if ($metodo == 3) { ?>
@@ -532,8 +556,8 @@
 																			</div>
 																		<?php } */?>
 																	</div>
+																	-->
 																</div>
-																-->
 															</div>	
 														</div>		
 													</div>

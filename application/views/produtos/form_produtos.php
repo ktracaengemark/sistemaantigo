@@ -252,14 +252,6 @@
 																			</div>
 																		</div>
 																		<div class="col-md-2">
-																			<label for="ComissaoVenda">Comissao<?php echo $i ?></label>
-																			<div class="input-group">
-																				<input type="text" class="form-control Valor text-right" id="ComissaoVenda<?php echo $i ?>" maxlength="10" placeholder="0,00"
-																					name="ComissaoVenda<?php echo $i ?>" value="<?php echo $valor[$i]['ComissaoVenda'] ?>">
-																				<span class="input-group-addon" id="basic-addon1">%</span>
-																			</div>
-																		</div>
-																		<div class="col-md-2">
 																			<label for="TempoDeEntrega">Prazo De Entrega<?php echo $i ?></label>
 																			<div class="input-group">
 																				<input type="text" class="form-control Numero text-right" id="TempoDeEntrega<?php echo $i ?>" maxlength="3" placeholder="0"
@@ -267,7 +259,7 @@
 																				<span class="input-group-addon" id="basic-addon1">Dia(s)</span>
 																			</div>
 																		</div>
-																		<div class="col-md-2">
+																		<div class="col-md-4">
 																			<label for="Convdesc">Desc. Embal <?php echo $i ?></label>
 																			<textarea type="text" class="form-control"  id="Convdesc<?php echo $i ?>" 
 																					  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>"><?php echo $valor[$i]['Convdesc']; ?></textarea>
@@ -312,6 +304,30 @@
 																			</div>
 																		</div>
 																		-->
+																		<div class="col-md-2">
+																			<label for="ComissaoVenda">ComissaoVenda<?php echo $i ?></label>
+																			<div class="input-group">
+																				<input type="text" class="form-control Valor text-right" id="ComissaoVenda<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																					name="ComissaoVenda<?php echo $i ?>" value="<?php echo $valor[$i]['ComissaoVenda'] ?>">
+																				<span class="input-group-addon" id="basic-addon1">%</span>
+																			</div>
+																		</div>
+																		<div class="col-md-2">
+																			<label for="ComissaoServico">ComissaoServico<?php echo $i ?></label>
+																			<div class="input-group">
+																				<input type="text" class="form-control Valor text-right" id="ComissaoServico<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																					name="ComissaoServico<?php echo $i ?>" value="<?php echo $valor[$i]['ComissaoServico'] ?>">
+																				<span class="input-group-addon" id="basic-addon1">%</span>
+																			</div>
+																		</div>
+																		<div class="col-md-2">
+																			<label for="ComissaoCashBack">CashBack<?php echo $i ?></label>
+																			<div class="input-group">
+																				<input type="text" class="form-control Valor text-right" id="ComissaoCashBack<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																					name="ComissaoCashBack<?php echo $i ?>" value="<?php echo $valor[$i]['ComissaoCashBack'] ?>">
+																				<span class="input-group-addon" id="basic-addon1">%</span>
+																			</div>
+																		</div>
 																		<div class="col-md-2">
 																			<label for="VendaBalcaoPreco">VendaBalcao?</label><br>
 																			<div class="form-group">
