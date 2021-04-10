@@ -3750,11 +3750,9 @@ function calculaSubtotal(valor, campo, num, tipo, tabela, qtdinc, comissao, comi
 	subtotalcomissaocashback	= subtotalcomissaocashback.toFixed(2);
 	subtotalcomissaocashback 	= subtotalcomissaocashback.replace(',','.');
 	
-	console.log('Sub venda = '+subtotalcomissao);
-	console.log('Sub servico = '+subtotalcomissaoservico);
-	console.log('Sub cash = '+subtotalcomissaocashback);	
-	
-	
+	//console.log('Sub venda = '+subtotalcomissao);
+	//console.log('Sub servico = '+subtotalcomissaoservico);
+	//console.log('Sub cash = '+subtotalcomissaocashback);	
 	
 	//console.log(subtotalqtd1 + ' - Quantidade do ' + tabela);
 	//console.log(subtotal + ' - Subtotal do ' + tabela);
@@ -4370,11 +4368,6 @@ function descValorOrca(){
 			$('#ValorFinalOrca').val(valorfinalorca);
 			$('#DescPercOrca').val(descpercorca);
 			$('#Valor_C_Desc').val(valor_c_desc);
-		}else{
-			$('#ValorFinalOrca').val('0,00');
-			$('#DescPercOrca').val('0,00');
-			$('#DescValorOrca').val('0,00');
-			$('#Valor_C_Desc').val('0,00');
 		}	
 	}else{
 		$('#ValorFinalOrca').val('0,00');
@@ -6941,7 +6934,7 @@ $(document).ready(function () {
 	$(".add_field_button9").click(function(e){ //on add input button click
 		
         var recorrencias = $('#Recorrencias').val();
-		console.log('Recorrencias no produto = ' + recorrencias);
+		//console.log('Recorrencias no produto = ' + recorrencias);
 		
 		var negocio = $('#Negocio').val();
 		//console.log( negocio );
