@@ -620,6 +620,8 @@ class Orcatrata_model extends CI_Model {
 				TAP.idTab_TipoRD,
 				TAP.itens_pedido_valor_total,
 				TAP.ComissaoProduto,
+				TAP.ComissaoServicoProduto,
+				TAP.ComissaoCashBackProduto,
 				TAP.PrazoProduto,
 				TAP.StatusComissaoPedido,
 				TAP.Aux_App_Produto_1,

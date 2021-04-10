@@ -24,6 +24,8 @@ $result = mysql_query(
 			V.QtdProdutoIncremento,
 			V.Convdesc,
 			V.ComissaoVenda,
+			V.ComissaoServico,
+			V.ComissaoCashBack,
 			V.TempoDeEntrega,
 			P.Nome_Prod,
 			P.NomeProdutos,
@@ -64,6 +66,8 @@ if ($_GET['tabela']) {
             //'valor' => str_replace(".", ",", $row['ValorProduto']),
 			'valor' => str_replace(".", ",", $valordividido),
 			'comissaoprod' => $row['ComissaoVenda'],
+			'comissaoservico' => $row['ComissaoServico'],
+			'comissaocashback' => $row['ComissaoCashBack'],
 			'prazoprod' => $row['TempoDeEntrega'],
 			'nomeprod' => $row['NomeProduto'],
 			'qtdprod' => $row['QtdProdutoDesconto'],
@@ -75,16 +79,32 @@ if ($_GET['tabela']) {
     }
 }
 else {
-
+	if ($_GET['recorrencias']) {
+		$recorrencias = $_GET['recorrencias'];
+	}else{
+		$recorrencias = 1;
+	}
     while ($row = mysql_fetch_assoc($result)) {
-
+		$qtdincinteiro	= $row['QtdProdutoIncremento'];
+		$qtdincdividido	= intval($qtdincinteiro/$recorrencias);
+		if($qtdincdividido < 1){
+			$qtdinccorrigido = 1;
+		}else{
+			$qtdinccorrigido = $qtdincdividido;
+		}
+		$valorinteiro 	= $row['ValorProduto'];
+		$valordividido 	= $valorinteiro/$recorrencias;
+		$valordividido 	= number_format($valordividido, 2, ",", ".");
         $event_array[] = array(
             'id' => $row['idTab_Valor'],
-            'valor' => str_replace(".", ",", $row['ValorProduto']),
+            //'valor' => str_replace(".", ",", $row['ValorProduto']),
+			'valor' => str_replace(".", ",", $valordividido),
 			'comissaovenda' => str_replace(".", ",", $row['ComissaoVenda']),
+			'comissaoservico' => str_replace(".", ",", $row['ComissaoServico']),
+			'comissaocashback' => str_replace(".", ",", $row['ComissaoCashBack']),
 			'nomeprod' => $row['NomeProduto'],
 			'qtdprod' => $row['QtdProdutoDesconto'],
-			'qtdinc' => $row['QtdProdutoIncremento'],
+			'qtdinc' => $qtdinccorrigido,
 			'id_produto' => $row['idTab_Produtos'],
 			'id_valor' => $row['idTab_Valor'],
 			'prod_serv' => $row['Prod_Serv'],
