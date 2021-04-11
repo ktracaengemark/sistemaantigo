@@ -8416,6 +8416,13 @@ $('#Posicao').chosen({
     no_results_text: "Nenhum resultado para",
     width: "100%"
 });
+
+//console.log($('#AgendaI').val()); 
+//console.log($('#AgendaF').val());
+
+//var horarioAgendaI = $('#AgendaI').val();
+//var horarioAgendaF = $('#AgendaF').val(); 
+ 
 $('#calendar').fullCalendar({
 	header: {
         left: 'prev,next today',
@@ -8436,8 +8443,17 @@ $('#calendar').fullCalendar({
 	fixedWeekCount: false,
     firstDay: '0',
     scrollTime: '06:00',
-	minTime: '00:00',
-    maxTime: '24:00',
+	eventLimit: false,
+
+	minTime: $('#AgendaI').val(),
+    maxTime: $('#AgendaF').val(),	
+	
+	//minTime: horarioAgendaI,
+    //maxTime: horarioAgendaF,	
+	
+	//minTime: '00:00',
+    //maxTime: '24:00',
+	
     nowIndicator: true,
     selectable: true,
     //selectHelper: true,

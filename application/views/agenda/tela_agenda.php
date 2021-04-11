@@ -4,6 +4,8 @@
 	<?php echo form_open('agenda', 'role="form"'); ?>
 	<div class="panel panel-info">
 		<div class="panel-heading">
+			<input type="hidden" id="AgendaI" value="<?php echo $_SESSION['Empresa']['AgendaI'];?>">
+			<input type="hidden" id="AgendaF" value="<?php echo $_SESSION['Empresa']['AgendaF'];?>">
 			<div class="row">		
 				<?php if ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) { ?>
 				<div class="col-md-4 text-left">
