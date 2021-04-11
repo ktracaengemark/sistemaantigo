@@ -3315,7 +3315,7 @@ if (isset($data) && $data) {
             SELECT
 				TCAT.idTab_Catprod,
 				TCAT.TipoCatprod,
-                CONCAT(IFNULL(TCAT.Catprod,"")) AS Catprod
+                CONCAT(IFNULL(TPRS.Prod_Serv,""), " - " ,IFNULL(TCAT.Catprod,"")) AS Catprod
             FROM 
                 Tab_Catprod AS TCAT
 					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TCAT.TipoCatprod
@@ -3323,6 +3323,7 @@ if (isset($data) && $data) {
                 TCAT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TCAT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
 			ORDER BY 
+				TPRS.Prod_Serv ASC,
 				TCAT.Catprod ASC
     ');
         } else {
@@ -3330,7 +3331,7 @@ if (isset($data) && $data) {
             SELECT
 				TCAT.idTab_Catprod,
 				TCAT.TipoCatprod,
-                CONCAT(IFNULL(TCAT.Catprod,"")) AS Catprod
+                CONCAT(IFNULL(TPRS.Prod_Serv,""), " - " ,IFNULL(TCAT.Catprod,"")) AS Catprod
             FROM 
                 Tab_Catprod AS TCAT
 					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TCAT.TipoCatprod
@@ -3338,6 +3339,7 @@ if (isset($data) && $data) {
                 TCAT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TCAT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
 			ORDER BY 
+				TPRS.Prod_Serv ASC,
 				TCAT.Catprod ASC
     ');
 
