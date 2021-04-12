@@ -59,7 +59,8 @@ if ($_GET['tabela']) {
 			$qtdinccorrigido = $qtdincdividido;
 		}
 		$valorinteiro 	= $row['ValorProduto'];
-		$valordividido 	= $valorinteiro/$recorrencias;
+		//$valordividido 	= $valorinteiro/$recorrencias;
+		$valordividido 	= $valorinteiro/1;
 		$valordividido 	= number_format($valordividido, 2, ",", ".");
         $event_array[] 	= array(
             'id' => $row['idTab_' . $_GET['tabela']],
@@ -93,7 +94,8 @@ else {
 			$qtdinccorrigido = $qtdincdividido;
 		}
 		$valorinteiro 	= $row['ValorProduto'];
-		$valordividido 	= $valorinteiro/$recorrencias;
+		//$valordividido 	= $valorinteiro/$recorrencias;
+		$valordividido 	= $valorinteiro/1;
 		$valordividido 	= number_format($valordividido, 2, ",", ".");
         $event_array[] = array(
             'id' => $row['idTab_Valor'],
