@@ -46,7 +46,9 @@
 									<th class="active">Qtd</th>
 									<th class="active">Embal</th>
 									<th class="active">Preco</th>
-									<th class="active">Comissao</th>
+									<th class="active">ComVenda</th>
+									<th class="active">ComServico</th>
+									<th class="active">CashBack</th>
 									<th class="active">Tempo</th>
 									<th class="active">Ativo</th>
 								<?php } ?>
@@ -130,6 +132,8 @@
 										<td><?php echo $row['QtdProdutoIncremento'] ?>unid</td>
 										<td>R$<?php echo $row['ValorProduto'] ?></td>
 										<td><?php echo $row['ComissaoVenda'] ?> %</td>
+										<td><?php echo $row['ComissaoServico'] ?> %</td>
+										<td><?php echo $row['ComissaoCashBack'] ?> %</td>
 										<td><?php echo $row['TempoDeEntrega'] ?> Dias</td>
 										<td><?php echo $row['AtivoPreco'] ?></td>
 									<?php } ?>	

@@ -3752,6 +3752,8 @@ exit();*/
 				TV.ValorProduto,
 				TV.Convdesc,
 				TV.ComissaoVenda,
+				TV.ComissaoServico,
+				TV.ComissaoCashBack,
 				TV.AtivoPreco,
 				TV.VendaBalcaoPreco,
 				TV.VendaSitePreco,
@@ -3843,6 +3845,16 @@ exit();*/
 					$row->ComissaoVenda = number_format($row->ComissaoVenda, 2, ',', '.');
 				}else{
 					$row->ComissaoVenda = "";
+				}
+				if($row->ComissaoServico != 0.00){
+					$row->ComissaoServico = number_format($row->ComissaoServico, 2, ',', '.');
+				}else{
+					$row->ComissaoServico = "";
+				}
+				if($row->ComissaoCashBack != 0.00){
+					$row->ComissaoCashBack = number_format($row->ComissaoCashBack, 2, ',', '.');
+				}else{
+					$row->ComissaoCashBack = "";
 				}
 				#$valor_produto = number_format($valor_produto, 2, ',', '.');
 				
