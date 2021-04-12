@@ -188,6 +188,8 @@
 									</select>
 									<?php echo form_error('idApp_Agenda'); ?>
 								</div>
+								
+								<input type="hidden" id="exibir_id" value="<?php echo $exibir_id; ?>" />
 								<input type="hidden" id="Caminho2" name="Caminho2" value="<?php echo $caminho2; ?>">
 								<?php if($alterarcliente == 1){?>	
 									<div class="col-md-4">

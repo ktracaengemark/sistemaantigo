@@ -221,6 +221,8 @@ class Consulta extends CI_Controller {
         $data['caminho2'] = '';
  		$data['vincular'] = 'S';
 		$data['porconsulta'] = 'S';
+		
+		$data['exibir_id'] = 0;
 
  		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
@@ -663,6 +665,8 @@ class Consulta extends CI_Controller {
         $data['caminho2'] = '../';
  		$data['vincular'] = 'S';
 		$data['porconsulta'] = 'S';
+		
+		$data['exibir_id'] = 1;
 		
 		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
@@ -1797,6 +1801,8 @@ class Consulta extends CI_Controller {
         $data['metodo'] = 2;
         $data['alterarcliente'] = 2;
         $data['caminho2'] = '../../';
+		
+		$data['exibir_id'] = 0;
 
 		if($_SESSION['Consulta']['idApp_OrcaTrata'] == 0 || $_SESSION['Consulta']['idApp_OrcaTrata'] == ""){
 			$data['vincular'] = 'S';
@@ -3185,7 +3191,7 @@ class Consulta extends CI_Controller {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
+			elseif ($this->input->get('m') == 2)
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';

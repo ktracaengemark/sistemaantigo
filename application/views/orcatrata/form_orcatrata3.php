@@ -12,6 +12,7 @@
 						<div class="panel-group">
 							<div class="panel panel-success">
 								<div class="panel-heading">
+									<input type="hidden" id="exibir_id" value="<?php echo $exibir_id; ?>" />
 									<input type="hidden" id="exibirExtraOrca" value="<?php echo $exibirExtraOrca; ?>" />
 									<input type="hidden" id="exibirDescOrca" value="<?php echo $exibirDescOrca; ?>" />
 									<input type="hidden" id="Recorrencias" name="Recorrencias" value="<?php echo $Recorrencias; ?>" />

@@ -2155,11 +2155,13 @@ function clientePet(id = null){
 	$("#Pet").html('');
 
 	var id_cliente = $('#idApp_Cliente').val();
+	//var id_pet = $('#idApp_ClientePet').val();
 	
 	var caminho2 = $('#Caminho2').val();
 	//console.log('caminho pet = '+caminho2);
 	//var caminho2 = '../../';
-	//console.log('id cliente pet = '+id_cliente);
+	//console.log('id cliente  = '+id_cliente);
+	
 	//console.log(id);
 	
 	//console.log(' <br>oioioioi<br> ');
@@ -2168,28 +2170,22 @@ function clientePet(id = null){
 	
 	if(id_cliente) {
 		//console.log(id);
+		var exibir_id = $('#exibir_id').val();
+		//console.log('exibir_id = '+exibir_id);
 		
-		//$('#idApp_ClientePet').hide();
+		if(exibir_id == 1){
+			$('#idApp_ClientePet').hide();
+		}
 		/*
 		$('.carregando').show();
 		*/
+		
 		$.getJSON(caminho2 + 'cadastros/pesquisar/ClientePet.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
-			
-			
-			//console.log(idApp_Cliente);
-			//console.log(j.length);
-			
-			//console.log(j);
 
-			/*		
-			foreach ($select['idApp_ClientePet'] as $key => $row) {
-				if ($query['idApp_ClientePet'] == $key) {
-					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-				} else {
-					echo '<option value="' . $key . '">' . $row . '</option>';
-				}
-			}			
-			*/			
+			//console.log(idApp_Cliente);
+			//console.log(j);
+			//console.log(j.length);
+		
 			var options = '<option value="">-- Sel. Pet --</option>';	
 			for (var i = 0; i < j.length; i++) {
 				if (j[i].id_ClientePet == $('#Hidden_idApp_ClientePet').val()) {
@@ -2204,7 +2200,7 @@ function clientePet(id = null){
 			//$('.carregando').hide();
 			//console.log(options);
 		});
-		
+			
 	} else {
 		$('#idApp_ClientePet').html('<option value="">– Selecione um Cliente –</option>');
 	}
@@ -2231,6 +2227,11 @@ function clienteDep(id = null){
 	
 	if(id_cliente) {
 		//console.log(id);
+		var exibir_id = $('#exibir_id').val();
+		//console.log('exibir_id = '+exibir_id);
+		if(exibir_id == 1){
+			$('#idApp_ClienteDep').hide();
+		}
 		
 		//$('#idApp_ClienteDep').hide();
 		/*

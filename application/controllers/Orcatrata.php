@@ -509,6 +509,8 @@ class Orcatrata extends CI_Controller {
         $data['caminho2'] = '../';
 		$data['Recorrencias'] = $_SESSION['Consulta']['OS'];
 		
+		$data['exibir_id'] = 0;
+		
 		$data['exibirExtraOrca'] = 1;
 		$data['exibirDescOrca'] = 1;		
 		
@@ -2021,6 +2023,8 @@ class Orcatrata extends CI_Controller {
         $data['caminho2'] = '';
 		$data['Recorrencias'] = 1;
 		
+		$data['exibir_id'] = 0;
+		
 		$data['exibirExtraOrca'] = 1;
 		$data['exibirDescOrca'] = 1;		
 		
@@ -3183,6 +3187,8 @@ class Orcatrata extends CI_Controller {
         $data['caminho'] = '../';
         $data['caminho2'] = '../';
 		$data['Recorrencias'] = 1;
+		
+		$data['exibir_id'] = 1;
 		
 		$data['exibirExtraOrca'] = 1;
 		$data['exibirDescOrca'] = 1;
@@ -4499,6 +4505,8 @@ class Orcatrata extends CI_Controller {
         $data['caminho'] = '../../';
         $data['caminho2'] = '';
 		$data['Recorrencias'] = 1;
+		
+		$data['exibir_id'] = 0;
 		
 		$data['exibirExtraOrca'] = 1;
 		$data['exibirDescOrca'] = 1;
@@ -7890,6 +7898,8 @@ class Orcatrata extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
         $data['caminho'] = '../../';
+		
+		$data['exibir_id'] = 0;
 
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';
