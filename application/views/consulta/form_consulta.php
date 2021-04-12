@@ -755,13 +755,32 @@
 														</div>
 														<input type="hidden" id="Hidden_NovaOS" name="Hidden_NovaOS" value="<?php echo $cadastrar['NovaOS']; ?>" />
 														<input type="hidden" id="Hidden_idApp_OrcaTrata" name="Hidden_idApp_OrcaTrata" value="<?php echo $query['idApp_OrcaTrata']; ?>" />
-														
-														<div class="col-md-12 text-left hnovaos"  >
-															<label  for="idApp_OrcaTrata">O.S.</label>
-															<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_OrcaTrata" name="idApp_OrcaTrata">
-																<option value=""></option>
-															</select>
-														</div>
+														<?php if($alterarcliente == 1){?>
+															<div class="col-md-12 text-left hnovaos"  >
+																<label  for="idApp_OrcaTrata">O.S.</label>
+																<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_OrcaTrata" name="idApp_OrcaTrata">
+																	<option value=""></option>
+																</select>
+															</div>
+														<?php } elseif($alterarcliente == 2){?>	
+															<div class="col-md-12 text-left hnovaos">	
+																<label  for="idApp_OrcaTrata">O.S.:</label>
+																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																		id="idApp_OrcaTrata" name="idApp_OrcaTrata">
+																	<option value="">-- Sel. Orcamento --</option>
+																	<?php
+																	foreach ($select['idApp_OrcaTrata'] as $key => $row) {
+																		if ($query['idApp_OrcaTrata'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>
+																</select>
+																<?php echo form_error('idApp_OrcaTrata'); ?>
+															</div>
+														<?php } ?>
 														
 													</div>
 												<?php }else{ ?>

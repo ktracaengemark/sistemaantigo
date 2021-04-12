@@ -188,6 +188,7 @@ class Consulta extends CI_Controller {
 		$data['select']['RelacaoDep'] = $this->Cliente_model->select_relacao();
         $data['select']['idApp_ClienteDep'] = $this->Cliente_model->select_clientedep($_SESSION['Cliente']['idApp_Cliente']);
         $data['select']['idApp_ClientePet'] = $this->Cliente_model->select_clientepet($_SESSION['Cliente']['idApp_Cliente']);
+        $data['select']['idApp_OrcaTrata'] = $this->Cliente_model->select_orcatrata($_SESSION['Cliente']['idApp_Cliente']);
 		#$data['select']['idSis_EmpresaFilial'] = $this->Empresafilial_model->select_empresafilial();
 		#$data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
 		
@@ -1765,7 +1766,8 @@ class Consulta extends CI_Controller {
 		$data['select']['idApp_Agenda'] = $this->Basico_model->select_agenda();
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
         $data['select']['idApp_ClienteDep'] = $this->Cliente_model->select_clientedep($_SESSION['Cliente']['idApp_Cliente']);
-        $data['select']['idApp_ClientePet'] = $this->Cliente_model->select_clientepet($_SESSION['Cliente']['idApp_Cliente']);	
+        $data['select']['idApp_ClientePet'] = $this->Cliente_model->select_clientepet($_SESSION['Cliente']['idApp_Cliente']);
+        $data['select']['idApp_OrcaTrata'] = $this->Cliente_model->select_orcatrata($_SESSION['Cliente']['idApp_Cliente']);	
 		$data['select']['Status'] = $this->Basico_model->select_status();
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
         $data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
@@ -2596,7 +2598,7 @@ class Consulta extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
         $data['evento'] = 1;
-
+		
         $data['readonly'] = '';
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';

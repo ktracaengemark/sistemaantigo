@@ -2157,9 +2157,9 @@ function clientePet(id = null){
 	var id_cliente = $('#idApp_Cliente').val();
 	
 	var caminho2 = $('#Caminho2').val();
-	//console.log(caminho2);
+	//console.log('caminho pet = '+caminho2);
 	//var caminho2 = '../../';
-	//console.log(id_cliente);
+	//console.log('id cliente pet = '+id_cliente);
 	//console.log(id);
 	
 	//console.log(' <br>oioioioi<br> ');
@@ -2169,11 +2169,13 @@ function clientePet(id = null){
 	if(id_cliente) {
 		//console.log(id);
 		
-		$('#idApp_ClientePet').hide();
+		//$('#idApp_ClientePet').hide();
 		/*
 		$('.carregando').show();
 		*/
 		$.getJSON(caminho2 + 'cadastros/pesquisar/ClientePet.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
+			
+			
 			//console.log(idApp_Cliente);
 			//console.log(j.length);
 			
@@ -2218,9 +2220,9 @@ function clienteDep(id = null){
 	var id_cliente = $('#idApp_Cliente').val();
 	
 	var caminho2 = $('#Caminho2').val();
-	console.log(caminho2);
+	//console.log(caminho2);
 	//var caminho2 = '../../';
-	console.log(id_cliente);
+	//console.log('id cliente dep = '+id_cliente);
 	//console.log(id);
 	
 	//console.log(' <br>oioioioi<br> ');
@@ -2230,7 +2232,7 @@ function clienteDep(id = null){
 	if(id_cliente) {
 		//console.log(id);
 		
-		$('#idApp_ClienteDep').hide();
+		//$('#idApp_ClienteDep').hide();
 		/*
 		$('.carregando').show();
 		*/
@@ -2333,7 +2335,7 @@ function clienteOT(id = null){
 	if(id_cliente) {
 		//console.log(id);
 		
-		$('#idApp_OrcaTrata').hide();
+		//$('#idApp_OrcaTrata').hide();
 		
 		$.getJSON(caminho2 + 'cadastros/pesquisar/OrcaTrata.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
 			

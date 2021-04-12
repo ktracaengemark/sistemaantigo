@@ -1581,6 +1581,10 @@ class Orcatrata extends CI_Controller {
 			'AtualizaEndereco',
 			'StatusProdutos',
 			'StatusParcelas',
+			'PeloPet',
+			'PortePet',
+			'EspeciePet',
+			'RelacaoDep',
         ), TRUE));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1928,7 +1932,27 @@ class Orcatrata extends CI_Controller {
 		*/
 
         //Fim do trecho de código que dá pra melhorar
-			
+		$data['select']['EspeciePet'] = array (
+            '0' => '',
+            '1' => 'CÃO',
+            '2' => 'GATO',
+			'3' => 'AVE',
+        );	
+		$data['select']['PeloPet'] = array (
+            '0' => '',
+            '1' => 'CURTO',
+            '2' => 'MÉDIO',
+			'3' => 'LONGO',
+			'4' => 'CACHEADO',
+        );		
+		$data['select']['PortePet'] = array (
+            '0' => '',
+            '1' => 'MINI',
+            '2' => 'PEQUENO',
+			'3' => 'MÉDIO',
+			'4' => 'GRANDE',
+			'5' => 'GIGANTE',
+        );		
 		$data['select']['TipoDescOrca'] = array (
             'P' => '.%',
             'V' => 'R$',
@@ -1936,7 +1960,8 @@ class Orcatrata extends CI_Controller {
 		$data['select']['TipoExtraOrca'] = array (
             'P' => '.%',
             'V' => 'R$',
-        );			
+        );
+		$data['select']['RelacaoDep'] = $this->Cliente_model->select_relacao();			
         $data['select']['UsarCashBack'] = $this->Basico_model->select_status_sn();
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
         $data['select']['StatusProdutos'] = $this->Basico_model->select_status_sn();
@@ -3944,6 +3969,10 @@ class Orcatrata extends CI_Controller {
 			'AtualizaEndereco',
 			'StatusProdutos',
 			'StatusParcelas',
+			'PeloPet',
+			'PortePet',
+			'EspeciePet',
+			'RelacaoDep',
         ), TRUE));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4381,6 +4410,27 @@ class Orcatrata extends CI_Controller {
 
         }
 		
+		$data['select']['EspeciePet'] = array (
+            '0' => '',
+            '1' => 'CÃO',
+            '2' => 'GATO',
+			'3' => 'AVE',
+        );	
+		$data['select']['PeloPet'] = array (
+            '0' => '',
+            '1' => 'CURTO',
+            '2' => 'MÉDIO',
+			'3' => 'LONGO',
+			'4' => 'CACHEADO',
+        );		
+		$data['select']['PortePet'] = array (
+            '0' => '',
+            '1' => 'MINI',
+            '2' => 'PEQUENO',
+			'3' => 'MÉDIO',
+			'4' => 'GRANDE',
+			'5' => 'GIGANTE',
+        );		
 		$data['select']['TipoDescOrca'] = array (
             'P' => '.%',
             'V' => 'R$',
@@ -4388,7 +4438,8 @@ class Orcatrata extends CI_Controller {
 		$data['select']['TipoExtraOrca'] = array (
             'P' => '.%',
             'V' => 'R$',
-        );			
+        );
+		$data['select']['RelacaoDep'] = $this->Cliente_model->select_relacao();			
         $data['select']['UsarCashBack'] = $this->Basico_model->select_status_sn();
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
         $data['select']['StatusProdutos'] = $this->Basico_model->select_status_sn();

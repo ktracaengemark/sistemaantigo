@@ -2774,17 +2774,17 @@
 								</div>
 							</div>								
 						</div>
-						<div class="form-group row">	
-							<div class="col-sm-6">
-								<br>
-								<button type="submit" class="btn btn-success btn-block" name="botaoCad" id="botaoCad" >
-									<span class="glyphicon glyphicon-plus"></span> Cadastrar
-								</button>
-							</div>
+						<div class="form-group row">
 							<div class="col-sm-6">
 								<br>
 								<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFechar" id="botaoFechar">
 									<span class="glyphicon glyphicon-remove"></span> Fechar
+								</button>
+							</div>	
+							<div class="col-sm-6">
+								<br>
+								<button type="submit" class="btn btn-success btn-block" name="botaoCad" id="botaoCad" >
+									<span class="glyphicon glyphicon-plus"></span> Cadastrar
 								</button>
 							</div>	
 							<div class="col-md-12 alert alert-warning aguardar1" role="alert" >
