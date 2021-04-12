@@ -11,7 +11,9 @@
 				<th>Embl</th>
 				<th>Valor</th>
 				<!--<th>Ativo</th>-->
-				<th>Comissão</th>
+				<th>ComVenda</th>
+				<th>ComServico</th>
+				<th>CashBack</th>
 				<th>Tempo</th>
 				<th>Desc</th>
 				<th>Ativo</th>
@@ -40,6 +42,8 @@
 						echo '<td>R$ ' . $row['ValorProduto'] . '</td>';
 						#echo '<td>' . $row['AtivoPreco'] . '</td>';
 						echo '<td>' . $row['ComissaoVenda'] . '%</td>';
+						echo '<td>' . $row['ComissaoServico'] . '%</td>';
+						echo '<td>' . $row['ComissaoCashBack'] . '%</td>';
 						echo '<td>' . $row['TempoDeEntrega'] . '</td>';
 						echo '<td>' . $row['Convdesc'] . '</td>';
 						echo '<td>' . $row['AtivoPreco'] . '</td>';
