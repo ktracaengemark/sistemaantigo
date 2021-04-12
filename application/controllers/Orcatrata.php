@@ -14326,6 +14326,8 @@ class Orcatrata extends CI_Controller {
 
 		(!$this->input->post('PRCount')) ? $data['count']['PRCount'] = 0 : $data['count']['PRCount'] = $this->input->post('PRCount');
 		
+		$datadehoje = date('Y-m-d', time());
+		
         $j = 1;
         for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
 
@@ -14504,7 +14506,7 @@ class Orcatrata extends CI_Controller {
 					if ($data['update']['produto']['alterar'][$j]['StatusComissaoServico'] == 'S'){
 						if(!$data['update']['produto']['alterar'][$j]['DataPagoComissaoServico'] || $data['update']['produto']['alterar'][$j]['DataPagoComissaoServico'] == "0000-00-00"){
 							if($data['query']['MostrarDataPagamento'] == 'N'){
-								$data['update']['produto']['alterar'][$j]['DataPagoComissaoServico'] = $data['update']['produto']['alterar'][$j]['DataConcluidoProduto'];
+								$data['update']['produto']['alterar'][$j]['DataPagoComissaoServico'] = $datadehoje;
 							}else{
 								$data['update']['produto']['alterar'][$j]['DataPagoComissaoServico'] = $data['query']['DataPagamento'];
 							}
