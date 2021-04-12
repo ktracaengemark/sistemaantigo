@@ -235,20 +235,54 @@
 													</div>
 												</div>
 											</div>
+											<input type="hidden" id="Caminho2" name="Caminho2" value="<?php echo $caminho2; ?>">
 											<div <?php echo $visivel; ?>>
 												<div class="row">
 													<div class="col-md-4">
 														<label >Cliente</label>
 														<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Cliente']['NomeCliente']; ?>">
 													</div>
-													<div class="col-md-4 text-left">
-														<label  for="idApp_ClientePet">Pet</label>
-														<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_ClientePet" name="idApp_ClientePet">
-															<option value=""></option>
-														</select>
-														<span class="modal-title" id="Pet"></span>
-													</div>
-													<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $orcatrata['idApp_ClientePet']; ?>" />
+													<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
+														<div class="col-md-4 text-left">	
+															<label  for="idApp_ClientePet">Pet:</label>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																	id="idApp_ClientePet" name="idApp_ClientePet">
+																<option value="">-- Sel. Pet --</option>
+																<?php
+																foreach ($select['idApp_ClientePet'] as $key => $row) {
+																	if ($orcatrata['idApp_ClientePet'] == $key) {
+																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																	} else {
+																		echo '<option value="' . $key . '">' . $row . '</option>';
+																	}
+																}
+																?>
+															</select>
+															<?php echo form_error('idApp_ClientePet'); ?>
+														</div>
+													<?php }else{ ?>
+														<?php if($_SESSION['Empresa']['CadastrarDep'] == "S"){?>
+															<div class="col-md-4 text-left">	
+																<label  for="idApp_ClienteDep">Dependente:</label>
+																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																		id="idApp_ClienteDep" name="idApp_ClienteDep">
+																	<option value="">-- Sel. Dependente --</option>
+																	<?php
+																	
+																	foreach ($select['idApp_ClienteDep'] as $key => $row) {
+																		if ($orcatrata['idApp_ClienteDep'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	
+																	?>
+																</select>
+																<?php echo form_error('idApp_ClienteDep'); ?>
+															</div>
+														<?php } ?>
+													<?php } ?>
 												</div>
 											</div>
 										
@@ -2440,9 +2474,9 @@
 										</div>
 										<div class="panel panel-default">
 											<div class="panel-heading">
-												<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
+												<input type="hidden" name="idApp_OrcaTrata" id="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
 												<input type="hidden" name="Tipo_Orca"  id="Tipo_Orca" value="<?php echo $orcatrata['Tipo_Orca']; ?>">
-												<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<input type="hidden" name="idApp_Cliente" id="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
 												<h4 class="mb-3"><b>Pedido</b></h4>
 												<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 													<div class="row">

@@ -23,6 +23,7 @@ exibir();
 exibir_confirmar();	
 Aguardar();
 clientePet();
+clienteDep();
 clienteOT();
 fechaBuscaOS();
 exibirTroco();
@@ -120,6 +121,8 @@ function exibir_confirmar(){
 	$('.Close').hide();
 }
 
+// Funções de cadastros auxiliares
+
 function buscaPet(){
 		//var id_pet = $('#idApp_ClientePet').val();
 		var id_pet = $('#Hidden_idApp_ClientePet').val();
@@ -196,7 +199,33 @@ function buscaPet(){
 		});	
 }
 
-// Funções de cadastros auxiliares
+function buscaDep(){
+		//var id_dep = $('#idApp_ClienteDep').val();
+		var id_dep = $('#Hidden_idApp_ClienteDep').val();
+		//console.log("executa safado");	
+		//console.log("id do pet" + id_dep);
+		event.preventDefault();
+		
+		$.ajax({
+			url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Dep.php?id=' + id_dep,
+			dataType: "json",
+			success: function (data) {
+			
+				var id 			= data[0]['id'];
+				var nome 		= data[0]['nome'];
+				var nascimento 	= data[0]['nascimento'];
+				var sexo 		= data[0]['sexo'];
+				var obs 		= data[0]['obs'];
+				
+				$("#Dep").html('<p >Nenhum Dependente Selecionado!</p>');
+				
+			},
+			error:function(data){
+				$("#Dep").html('<p >Nenhum Dependente Selecionado!</p>');
+			}
+			
+		});	
+}
 
 $('#addPet').on('click', function(event){
 	//alert('addPet');			
@@ -224,6 +253,38 @@ $('#addPet').on('click', function(event){
 		},
 		error:function(data){
 			$("#addClientePetModalLabel").html('<div class="alert alert-warning" role="alert">Nenhum Cliente Selecionado!</div>');
+		}
+		
+	});	
+	
+});
+
+$('#addDep').on('click', function(event){
+	//alert('addDep');			
+	
+	var id_cliente =  $('#idApp_Cliente').val();
+	$('#id_Cliente').val(id_cliente);
+
+	//console.log(id_cliente);
+	//Limpar mensagem de erro
+	//$("#addClienteDepModalLabel").html('<div class="alert alert-warning" role="alert">Dep do Cliente: '+id_cliente+'</div>');		
+	
+	event.preventDefault();
+	
+	$.ajax({
+		url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Cliente.php?id=' + id_cliente,
+		dataType: "json",
+		success: function (data) {
+		
+			var idcliente = data[0]['id'];
+			var nomecliente = data[0]['nome'];
+			var celularcliente = data[0]['celular'];
+			
+			$("#addClienteDepModalLabel").html('<div class="alert alert-warning" role="alert">Cadsatrar Dependente do(a) Cliente: '+idcliente+ '<br>Nome: ' + nomecliente + '<br>Celular: ' + celularcliente + '</div>');
+			
+		},
+		error:function(data){
+			$("#addClienteDepModalLabel").html('<div class="alert alert-warning" role="alert">Nenhum Cliente Selecionado!</div>');
 		}
 		
 	});	
@@ -302,6 +363,37 @@ $('#idApp_ClientePet').on('change', function(event){
 		},
 		error:function(data){
 			$("#Pet").html('<p >Nenhum Pet Selecionado!</p>');
+		}
+		
+	});	
+	
+});
+
+$('#idApp_ClienteDep').on('change', function(event){
+	//alert('idApp_ClienteDep');			
+	
+	var id_dep =  $('#idApp_ClienteDep').val();
+
+	//console.log(id_dep);	
+	
+	event.preventDefault();
+	
+	$.ajax({
+		url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Dep.php?id=' + id_dep,
+		dataType: "json",
+		success: function (data) {
+		
+			var id 			= data[0]['id'];
+			var nome 		= data[0]['nome'];
+			var nascimento 	= data[0]['nascimento'];
+			var sexo 		= data[0]['sexo'];
+			var obs 		= data[0]['obs'];
+
+			$("#Dep").html('<p>' + obs + '</p>');
+			
+		},
+		error:function(data){
+			$("#Dep").html('<p >Nenhum Dependente Selecionado!</p>');
 		}
 		
 	});	
@@ -2113,6 +2205,67 @@ function clientePet(id = null){
 		
 	} else {
 		$('#idApp_ClientePet').html('<option value="">– Selecione um Cliente –</option>');
+	}
+
+}
+
+//Função que busca Deps do Cliente.
+function clienteDep(id = null){
+	//alert('carregando clientepets: ' + id);
+	
+	$("#Dep").html('');
+
+	var id_cliente = $('#idApp_Cliente').val();
+	
+	var caminho2 = $('#Caminho2').val();
+	console.log(caminho2);
+	//var caminho2 = '../../';
+	console.log(id_cliente);
+	//console.log(id);
+	
+	//console.log(' <br>oioioioi<br> ');
+		
+	//console.log('<br> Hidden_idApp_ClienteDep = '+ $('#Hidden_idApp_ClienteDep').val());
+	
+	if(id_cliente) {
+		//console.log(id);
+		
+		$('#idApp_ClienteDep').hide();
+		/*
+		$('.carregando').show();
+		*/
+		$.getJSON(caminho2 + 'cadastros/pesquisar/ClienteDep.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
+			//console.log(idApp_Cliente);
+			//console.log(j.length);
+			
+			//console.log(j);
+
+			/*		
+			foreach ($select['idApp_ClientePet'] as $key => $row) {
+				if ($query['idApp_ClientePet'] == $key) {
+					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+				} else {
+					echo '<option value="' . $key . '">' . $row . '</option>';
+				}
+			}			
+			*/			
+			var options = '<option value="">-- Sel. Dep --</option>';	
+			for (var i = 0; i < j.length; i++) {
+				if (j[i].id_ClienteDep == $('#Hidden_idApp_ClienteDep').val()) {
+					options += '<option value="' + j[i].id_ClienteDep + '" selected="selected">' + j[i].nome_ClienteDep + '</option>';
+					buscaDep();
+				} else {
+					options += '<option value="' + j[i].id_ClienteDep + '">' + j[i].nome_ClienteDep + '</option>';
+				}
+				//options += '<option value="' + j[i].id_ClienteDep + '">' + j[i].nome_ClienteDep + '</option>';
+			}	
+			$('#idApp_ClienteDep').html(options).show();
+			//$('.carregando').hide();
+			//console.log(options);
+		});
+		
+	} else {
+		$('#idApp_ClienteDep').html('<option value="">– Selecione um Cliente –</option>');
 	}
 
 }

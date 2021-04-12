@@ -13,7 +13,7 @@ class Orcatrata extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Orcatrata_model', 'Procedimento_model', 'Pedidos_model', 'Produtos_model', 'Usuario_model', 'Cliente_model', 'Clientepet_model', 'Consulta_model', 'Fornecedor_model', 'Relatorio_model', 'Formapag_model'));
+        $this->load->model(array('Basico_model', 'Orcatrata_model', 'Procedimento_model', 'Pedidos_model', 'Produtos_model', 'Usuario_model', 'Cliente_model', 'Clientepet_model', 'Clientedep_model', 'Consulta_model', 'Fornecedor_model', 'Relatorio_model', 'Formapag_model'));
         $this->load->driver('session');
 
         #load header view
@@ -215,7 +215,12 @@ class Orcatrata extends CI_Controller {
 		if ($idApp_Consulta) {
 			$_SESSION['Consulta'] = $this->Consulta_model->get_consulta($idApp_Consulta, TRUE);
 			$_SESSION['Consultas'] = $this->Consulta_model->get_consultas($_SESSION['Consulta']['Repeticao'], TRUE);
-			$_SESSION['Pet'] = $this->Orcatrata_model->get_pet($_SESSION['Consulta']['idApp_ClientePet'], TRUE);
+			if(!empty($_SESSION['Consulta']['idApp_ClientePet']) && $_SESSION['Consulta']['idApp_ClientePet'] != 0){
+				$_SESSION['Pet'] = $this->Orcatrata_model->get_pet($_SESSION['Consulta']['idApp_ClientePet'], TRUE);
+			}
+			if(!empty($_SESSION['Consulta']['idApp_ClienteDep']) && $_SESSION['Consulta']['idApp_ClienteDep'] != 0){
+				$_SESSION['Dep'] = $this->Orcatrata_model->get_dep($_SESSION['Consulta']['idApp_ClienteDep'], TRUE);
+			}
 		}
 		//$data['orcatrata']['RecorrenciasOrca'] = 2;
 		$dataini = explode(' ', $_SESSION['Consulta']['DataInicio']);
@@ -223,7 +228,8 @@ class Orcatrata extends CI_Controller {
 		$data['orcatrata']['HoraEntregaOrca']	=	substr($dataini[1], 0, 5);
 		$data['orcatrata']['RecorrenciasOrca'] 	= 	$_SESSION['Consulta']['OS'];
 		$data['orcatrata']['RepeticaoCons'] 	= 	$_SESSION['Consulta']['Repeticao'];
-		$data['orcatrata']['idApp_ClientePet'] 	= 	$_SESSION['Consulta']['idApp_ClientePet'];	
+		$data['orcatrata']['idApp_ClientePet'] 	= 	$_SESSION['Consulta']['idApp_ClientePet'];
+		$data['orcatrata']['idApp_ClienteDep'] 	= 	$_SESSION['Consulta']['idApp_ClienteDep'];	
 		/*
 			echo '<br>';
 			echo "<pre>";
@@ -1977,6 +1983,8 @@ class Orcatrata extends CI_Controller {
 			'2' => 'Média',
 			'3' => 'Baixa',
         );
+        $data['select']['idApp_ClienteDep'] = $this->Cliente_model->select_clientedep($_SESSION['Cliente']['idApp_Cliente']);
+        $data['select']['idApp_ClientePet'] = $this->Cliente_model->select_clientepet($_SESSION['Cliente']['idApp_Cliente']);
 		
         $data['titulo'] = 'Nova Receita';
         $data['form_open_path'] = 'orcatrata/cadastrar';
@@ -1985,7 +1993,7 @@ class Orcatrata extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
         $data['caminho'] = '../../';
-        $data['caminho2'] = '../../';
+        $data['caminho2'] = '';
 		$data['Recorrencias'] = 1;
 		
 		$data['exibirExtraOrca'] = 1;
@@ -2724,6 +2732,7 @@ class Orcatrata extends CI_Controller {
 			'PeloPet',
 			'PortePet',
 			'EspeciePet',
+			'RelacaoDep',
         ), TRUE));
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 		$data['orcatrata'] = quotes_to_entities($this->input->post(array(
@@ -2732,6 +2741,7 @@ class Orcatrata extends CI_Controller {
 			'Tipo_Orca',
             'idApp_Cliente',
             'idApp_ClientePet',
+            'idApp_ClienteDep',
             'DataOrca',
 			'HoraOrca',
 			'DataPrazo',
@@ -3087,7 +3097,8 @@ class Orcatrata extends CI_Controller {
 		$data['select']['TipoExtraOrca'] = array (
             'P' => '.%',
             'V' => 'R$',
-        );			
+        );
+		$data['select']['RelacaoDep'] = $this->Cliente_model->select_relacao();			
         $data['select']['UsarCashBack'] = $this->Basico_model->select_status_sn();
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
         $data['select']['StatusProdutos'] = $this->Basico_model->select_status_sn();
@@ -3941,6 +3952,8 @@ class Orcatrata extends CI_Controller {
             'idApp_OrcaTrata',
             #Não há a necessidade de atualizar o valor do campo a seguir
             'idApp_Cliente',
+			'idApp_ClientePet',
+			'idApp_ClienteDep',
             'DataOrca',
 			'TipoFinanceiro',
 			'DataPrazo',
@@ -4254,6 +4267,18 @@ class Orcatrata extends CI_Controller {
 			$_SESSION['Consultas_orca'] = $data['consultas_orca'] = $this->Consulta_model->get_consultas_orca($id, TRUE);
 			$_SESSION['Orcatratas'] = $data['orcatratas'] = $this->Orcatrata_model->get_orcatratas_repet($_SESSION['Orcatrata']['RepeticaoOrca']);
 			
+			if(!empty($data['orcatrata']['idApp_ClientePet']) && $data['orcatrata']['idApp_ClientePet'] != 0){
+				//$this->load->model('Clientepet_model');
+				$_SESSION['ClientePet'] = $data['clientepet'] = $this->Clientepet_model->get_clientepet($data['orcatrata']['idApp_ClientePet'], TRUE);
+				$_SESSION['ClientePet']['NomeClientePet'] = (strlen($data['clientepet']['NomeClientePet']) > 20) ? substr($data['clientepet']['NomeClientePet'], 0, 20) : $data['clientepet']['NomeClientePet'];
+			}
+
+			if(!empty($data['orcatrata']['idApp_ClienteDep']) && $data['orcatrata']['idApp_ClienteDep'] != 0){
+				//$this->load->model('Clientedep_model');
+				$_SESSION['ClienteDep'] = $data['clientedep'] = $this->Clientedep_model->get_clientedep($data['orcatrata']['idApp_ClienteDep'], TRUE);
+				$_SESSION['ClienteDep']['NomeClienteDep'] = (strlen($data['clientedep']['NomeClienteDep']) > 20) ? substr($data['clientedep']['NomeClienteDep'], 0, 20) : $data['clientedep']['NomeClienteDep'];
+			}
+						
             #### App_Servico ####
             $data['servico'] = $this->Orcatrata_model->get_servico($id);
             if (count($data['servico']) > 0) {
@@ -4411,6 +4436,8 @@ class Orcatrata extends CI_Controller {
 			'2' => 'Média',
 			'3' => 'Baixa',
         );
+        $data['select']['idApp_ClienteDep'] = $this->Cliente_model->select_clientedep($_SESSION['Cliente']['idApp_Cliente']);
+        $data['select']['idApp_ClientePet'] = $this->Cliente_model->select_clientepet($_SESSION['Cliente']['idApp_Cliente']);
 		
         $data['titulo'] = 'Pedido';
         $data['form_open_path'] = 'orcatrata/alterar';
@@ -4419,7 +4446,7 @@ class Orcatrata extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
         $data['caminho'] = '../../';
-        $data['caminho2'] = '../../';
+        $data['caminho2'] = '';
 		$data['Recorrencias'] = 1;
 		
 		$data['exibirExtraOrca'] = 1;
@@ -7636,12 +7663,18 @@ class Orcatrata extends CI_Controller {
 				$_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente'];
 			}
 			
-			if($data['orcatrata']['idApp_ClientePet'] != 0){
+			if(!empty($data['orcatrata']['idApp_ClientePet']) && $data['orcatrata']['idApp_ClientePet'] != 0){
 				//$this->load->model('Clientepet_model');
 				$_SESSION['ClientePet'] = $data['clientepet'] = $this->Clientepet_model->get_clientepet($data['orcatrata']['idApp_ClientePet'], TRUE);
 				$_SESSION['ClientePet']['NomeClientePet'] = (strlen($data['clientepet']['NomeClientePet']) > 20) ? substr($data['clientepet']['NomeClientePet'], 0, 20) : $data['clientepet']['NomeClientePet'];
 			}
 
+			if(!empty($data['orcatrata']['idApp_ClienteDep']) && $data['orcatrata']['idApp_ClienteDep'] != 0){
+				//$this->load->model('Clientedep_model');
+				$_SESSION['ClienteDep'] = $data['clientedep'] = $this->Clientedep_model->get_clientedep($data['orcatrata']['idApp_ClienteDep'], TRUE);
+				$_SESSION['ClienteDep']['NomeClienteDep'] = (strlen($data['clientedep']['NomeClienteDep']) > 20) ? substr($data['clientedep']['NomeClienteDep'], 0, 20) : $data['clientedep']['NomeClienteDep'];
+			}
+			
             #### App_Servico ####
             $data['servico'] = $this->Orcatrata_model->get_servico($id);
             if (count($data['servico']) > 0) {
@@ -7815,20 +7848,7 @@ class Orcatrata extends CI_Controller {
 		
 		$data['count_orca'] = count($_SESSION['Consultas_orca']);// conta quantos idApp_OrcaTrata existem na tabela de APP_Consultas,  na posicao idApp_OrcaTrata
 		$data['count_orcatratas'] = count($_SESSION['Orcatratas']);// conta quantos RepeticaoOrca, que está anotado nesta O.S., existem na tabela App_OrcaTrata, na posição RepeticaoOrca
-		
-			/*	
-			echo '<br>';
-			echo "<pre>";
-			print_r('na App_Consulta, idApp_OrcaTrata = ' . $data['orcatrata']['idApp_OrcaTrata']);
-			echo '<br>';
-			print_r('Quantos aparecem na App_Consulta = ' . $data['count_orca']);
-			echo '<br>';
-			print_r('na App_Orcatrata, RepeticaoOrca = ' . $_SESSION['Orcatrata']['RepeticaoOrca']);
-			echo '<br>';
-			print_r('Quantos aparecem na App_Orcatrata = ' . $data['count_orcatratas']);
-			echo "</pre>";
-			exit ();
-			*/
+
 			
 		if($data['count_orcatratas'] <= 0){
 			$data['vinculadas'] = 0;

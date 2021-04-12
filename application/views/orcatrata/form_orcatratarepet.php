@@ -243,12 +243,21 @@
 															<label >Cliente</label>
 															<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Cliente']['NomeCliente']; ?>">
 														</div>
-														<div class="col-md-4">
-															<label >Pet</label>
-															<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Pet']['NomeClientePet']; ?>">
-														</div>
-														<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $orcatrata['idApp_ClientePet']; ?>" />
-														
+														<?php if ($_SESSION['Empresa']['CadastrarPet'] == "S") { ?>
+															<div class="col-md-4">
+																<label >Pet</label>
+																<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Pet']['NomeClientePet']; ?>">
+															</div>
+															<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $orcatrata['idApp_ClientePet']; ?>" />
+														<?php }else{ ?>	
+															<?php if ($_SESSION['Empresa']['CadastrarDep'] == "S") { ?>
+																<div class="col-md-4">
+																<label >Dependente</label>
+																	<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Dep']['NomeClienteDep']; ?>">
+																</div>
+																<input type="hidden" id="Hidden_idApp_ClienteDep" name="Hidden_idApp_ClienteDep" value="<?php echo $orcatrata['idApp_ClienteDep']; ?>" />
+															<?php } ?>
+														<?php } ?>	
 														<!--
 														<div class="col-md-4 text-left">
 															<label  for="idApp_ClientePet">Pet</label>

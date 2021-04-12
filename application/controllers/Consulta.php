@@ -53,6 +53,9 @@ class Consulta extends CI_Controller {
 			'PeloPet',
 			'PortePet',
 			'EspeciePet',
+			'Vincular',
+			'NovaOS',
+			'PorConsulta',
         ), TRUE));
 
         $data['query'] = quotes_to_entities($this->input->post(array(
@@ -62,6 +65,7 @@ class Consulta extends CI_Controller {
             'idApp_Cliente',
             'idApp_ClienteDep',
             'idApp_ClientePet',
+			'idApp_OrcaTrata',
 			'idSis_EmpresaFilial',
             'Data2',
 			'Data',
@@ -85,6 +89,9 @@ class Consulta extends CI_Controller {
 		
  		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
  		(!$data['cadastrar']['Repetir']) ? $data['cadastrar']['Repetir'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['Vincular']) ? $data['cadastrar']['Vincular'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['NovaOS']) ? $data['cadastrar']['NovaOS'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['PorConsulta']) ? $data['cadastrar']['PorConsulta'] = 'N' : FALSE;
 		//(!$data['query']['Intervalo']) ? $data['query']['Intervalo'] = '1' : FALSE;
 		//(!$data['query']['Periodo']) ? $data['query']['Periodo'] = '1' : FALSE;
 		(!$data['query']['Recorrencias']) ? $data['query']['Recorrencias'] = '1' : FALSE;
@@ -164,7 +171,10 @@ class Consulta extends CI_Controller {
 			'5' => 'GIGANTE',
         );
 		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
-		$data['select']['Repetir'] = $this->Basico_model->select_status_sn();        
+		$data['select']['Repetir'] = $this->Basico_model->select_status_sn();
+		$data['select']['Vincular'] = $this->Basico_model->select_status_sn();
+		$data['select']['NovaOS'] = $this->Basico_model->select_status_sn();
+		$data['select']['PorConsulta'] = $this->Basico_model->select_status_sn();         
 		$data['select']['Tempo'] = array (
             '1' => 'Dia(s)',
             '2' => 'Semana(s)',
@@ -207,6 +217,9 @@ class Consulta extends CI_Controller {
         $data['disabled'] = '';
         $data['metodo'] = 1;
         $data['alterarcliente'] = 2;
+        $data['caminho2'] = '';
+ 		$data['vincular'] = 'S';
+		$data['porconsulta'] = 'S';
 
  		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
@@ -221,6 +234,24 @@ class Consulta extends CI_Controller {
         );
         ($data['cadastrar']['Repetir'] == 'S') ?
             $data['div']['Repetir'] = '' : $data['div']['Repetir'] = 'style="display: none;"';
+			
+		$data['radio'] = array(
+            'Vincular' => $this->basico->radio_checked($data['cadastrar']['Vincular'], 'Vincular', 'NS'),
+        );
+        ($data['cadastrar']['Vincular'] == 'S') ?
+            $data['div']['Vincular'] = '' : $data['div']['Vincular'] = 'style="display: none;"';
+		
+		$data['radio'] = array(
+            'NovaOS' => $this->basico->radio_checked($data['cadastrar']['NovaOS'], 'NovaOS', 'NS'),
+        );
+        ($data['cadastrar']['NovaOS'] == 'S') ?
+            $data['div']['NovaOS'] = '' : $data['div']['NovaOS'] = 'style="display: none;"';
+		
+		$data['radio'] = array(
+            'PorConsulta' => $this->basico->radio_checked($data['cadastrar']['PorConsulta'], 'PorConsulta', 'NS'),
+        );
+        ($data['cadastrar']['PorConsulta'] == 'S') ?
+            $data['div']['PorConsulta'] = '' : $data['div']['PorConsulta'] = 'style="display: none;"';
 					
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
@@ -237,6 +268,10 @@ class Consulta extends CI_Controller {
 			$this->form_validation->set_rules('Tempo', 'Tempo2', 'required|trim');
 			$this->form_validation->set_rules('DataMinima', 'Data Mínima:', 'trim|valid_date');
 			$this->form_validation->set_rules('DataTermino', 'Termina em:', 'required|trim|valid_date|valid_data_termino[' . $data['cadastrar']['DataMinima'] . ']|valid_data_termino2[' . $data['query']['Data'] . ']');
+		}else{
+			if($data['query']['Recorrencias'] > 1){
+				$this->form_validation->set_rules('Repetir', 'Repetir', 'valid_repetir');
+			}
 		}
 		
         $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
@@ -317,6 +352,25 @@ class Consulta extends CI_Controller {
             $data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			if($data['cadastrar']['Vincular'] == "N"){
+				$data['query']['OS'] = "0";
+				$data['query']['idApp_OrcaTrata'] = "0";
+			}else{
+			
+				if($data['cadastrar']['NovaOS'] == "N"){
+					$data['query']['OS'] = "1";
+					$data['query']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];
+				}else{
+					$data['query']['idApp_OrcaTrata'] = "0";
+					if($data['cadastrar']['PorConsulta'] == "N"){
+						//$data['query']['idApp_OrcaTrata'] = "0";
+						$data['query']['OS'] = "1";
+					}else{
+						//$data['query']['idApp_OrcaTrata'] = "0";
+						$data['query']['OS'] = $data['query']['Recorrencias'];
+					}
+				}
+			}
 
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
 
@@ -368,6 +422,7 @@ class Consulta extends CI_Controller {
 								'idApp_Cliente' 		=> $data['query']['idApp_Cliente'],
 								'idApp_ClienteDep' 		=> $data['query']['idApp_ClienteDep'],
 								'idApp_ClientePet' 		=> $data['query']['idApp_ClientePet'],
+								'idApp_OrcaTrata' 		=> $data['query']['idApp_OrcaTrata'],
 								//'Evento' 				=> $data['query']['Evento'],
 								'Obs' 					=> $data['query']['Obs'],
 								'idApp_Profissional' 	=> $data['query']['idApp_Profissional'],
@@ -380,6 +435,7 @@ class Consulta extends CI_Controller {
 								'idSis_Usuario' 		=> $_SESSION['log']['idSis_Usuario'],
 								'idSis_Empresa' 		=> $_SESSION['log']['idSis_Empresa'],
 								'idTab_Modulo' 			=> $_SESSION['log']['idTab_Modulo']
+
 							);
 							$data['campos'] = array_keys($data['repeticao'][$j]);
 							$data['id_Repeticao'] = $this->Consulta_model->set_consulta($data['repeticao'][$j]);
@@ -392,7 +448,26 @@ class Consulta extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 //redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg'] . $data['redirect']);
-                redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+                //redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+				//redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg'] . $data['redirect']);
+				if($data['cadastrar']['Vincular'] == 'S'){	
+					if($data['cadastrar']['NovaOS'] == 'S'){
+						if($data['cadastrar']['PorConsulta'] == 'S'){
+							//Gera O.S. Replicadas pelo número de ocorrências
+							redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+						}else{
+							//Gera uma única O.S.
+							redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+						}
+					}else{
+						//Busca na lista de O.S. do cliente 
+						//redirect(base_url() . 'orcatrata/listar/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+						redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+					}
+				}else{
+					//Não Gera O.S. 
+					redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+				}				
                 exit();
             }
         }
@@ -585,7 +660,6 @@ class Consulta extends CI_Controller {
         $data['metodo'] = 1;
         $data['alterarcliente'] = 1;
         $data['caminho2'] = '../';
-		$data['vincular'] = 'S';
  		$data['vincular'] = 'S';
 		$data['porconsulta'] = 'S';
 		
@@ -1720,7 +1794,7 @@ class Consulta extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
         $data['alterarcliente'] = 2;
-        $data['caminho2'] = '../../../';
+        $data['caminho2'] = '../../';
 
 		if($_SESSION['Consulta']['idApp_OrcaTrata'] == 0 || $_SESSION['Consulta']['idApp_OrcaTrata'] == ""){
 			$data['vincular'] = 'S';

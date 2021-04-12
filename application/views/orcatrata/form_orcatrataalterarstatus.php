@@ -234,12 +234,23 @@
 																<label >Cliente</label>
 																<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Orcatrata']['NomeCliente']; ?>">
 															</div>
-															<?php if ($_SESSION['Orcatrata']['idApp_ClientePet'] != 0) { ?>
-																<div class="col-md-4">
-																	<label >ClientePet</label>
-																	<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['ClientePet']['NomeClientePet']; ?>">
-																</div>
-															<?php } ?>	
+															<?php if ($_SESSION['Empresa']['CadastrarPet'] == "S") { ?>
+																<?php if (!empty($_SESSION['Orcatrata']['idApp_ClientePet']) && $_SESSION['Orcatrata']['idApp_ClientePet'] != 0) { ?>
+																	<div class="col-md-4">
+																		<label >Pet</label>
+																		<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['ClientePet']['NomeClientePet']; ?>">
+																	</div>
+																<?php } ?>
+															<?php }else{ ?>	
+																<?php if ($_SESSION['Empresa']['CadastrarDep'] == "S") { ?>
+																	<?php if (!empty($_SESSION['Orcatrata']['idApp_ClienteDep']) && $_SESSION['Orcatrata']['idApp_ClienteDep'] != 0) { ?>
+																		<div class="col-md-4">
+																			<label >Dependente</label>
+																			<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['ClienteDep']['NomeClienteDep']; ?>">
+																		</div>
+																	<?php } ?>
+																<?php } ?>
+															<?php } ?>
 															<!--
 															<div class="col-md-4">
 																<h4 class="text-left"><b>Cliente</b>: <?php echo '' . $_SESSION['Orcatrata']['NomeCliente'] . '' ?> - <?php echo '' . $orcatrata['idApp_Cliente'] . '' ?></h4>
@@ -289,13 +300,11 @@
 																				<div class="col-md-2">
 																					<label for="QtdProduto">Qtd.Item</label>
 																					<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
-																							onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																							name="QtdProduto<?php echo $i ?>" readonly="" value="<?php echo $produto[$i]['QtdProduto'] ?>">
 																				</div>
 																				<div class="col-md-2">
 																					<label for="QtdIncrementoProduto">Qtd.na Embl</label>
 																					<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>" placeholder="0"
-																						onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTDINC','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																						name="QtdIncrementoProduto<?php echo $i ?>" readonly="" value="<?php echo $produto[$i]['QtdIncrementoProduto'] ?>">
 																				</div>
 																				<input type="hidden" class="form-control " id="SubtotalComissaoProduto<?php echo $i ?>" name="SubtotalComissaoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalComissaoProduto'] ?>">
@@ -311,7 +320,6 @@
 																					<div class="input-group">
 																						<span class="input-group-addon" id="basic-addon1">R$</span>
 																						<input type="text" class="form-control Valor" id="idTab_Produto<?php echo $i ?>" maxlength="10" placeholder="0,00"
-																							onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','VP','Produto')"
 																							name="ValorProduto<?php echo $i ?>" readonly="" value="<?php echo $produto[$i]['ValorProduto'] ?>">
 																					</div>
 																				</div>
@@ -468,7 +476,6 @@
 																				<div class="col-md-2">
 																					<label for="QtdServico">Qtd</label>
 																					<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
-																							onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
 																							 name="QtdServico<?php echo $i ?>" readonly="" value="<?php echo $servico[$i]['QtdProduto'] ?>">
 																				</div>
 																				<div class="col-md-2">
@@ -487,7 +494,6 @@
 																					<div class="input-group">
 																						<span class="input-group-addon" id="basic-addon1">R$</span>
 																						<input type="text" class="form-control Valor" id="idTab_Servico<?php echo $i ?>" maxlength="10" placeholder="0,00"
-																							onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','VP','Servico')"
 																							name="ValorServico<?php echo $i ?>" readonly="" value="<?php echo $servico[$i]['ValorProduto'] ?>">
 																					</div>
 																				</div>
@@ -583,13 +589,12 @@
 																			<div class="row">
 																				<div class="col-md-7">
 																					<label for="ObsServico">Obs</label>
-																					<input type="text" class="form-control" maxlength="200" id="ObsServico<?php echo $i ?>" placeholder="Observacao"
+																					<input type="text" class="form-control" maxlength="200" id="ObsServico<?php echo $i ?>" placeholder="Observacao" readonly=""
 																							 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
 																				</div>
 																				<div class="col-md-3">
 																					<label for="PrazoServico">Prazo</label>
-																					<input type="text" class="form-control Numero" maxlength="3" placeholder="0"  id="PrazoServico<?php echo $i ?>"
-																					onkeyup="calculaPrazoServicos('PrazoServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')" 
+																					<input type="text" class="form-control Numero" maxlength="3" placeholder="0"  id="PrazoServico<?php echo $i ?>" readonly=""
 																					name="PrazoServico<?php echo $i ?>" value="<?php echo $servico[$i]['PrazoProduto'] ?>">
 																				</div>
 																				<div class="col-md-1 text-left">
@@ -727,7 +732,6 @@
 																								<div class="input-group" id="txtHint">
 																									<span class="input-group-addon" id="basic-addon1">R$</span>
 																									<input type="text" class="form-control text-left Valor" id="ValorOrca" maxlength="10" placeholder="0,00" readonly=""
-																										   onkeyup="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)" onchange="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)"
 																										   name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
 																								</div>
 																							</div>
@@ -796,7 +800,6 @@
 																						<div class="input-group" id="txtHint">
 																							<span class="input-group-addon" id="basic-addon1">R$</span>
 																							<input type="text" class="form-control text-left Valor" id="ValorDev" maxlength="10" placeholder="0,00" readonly=""
-																								   onkeyup="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)" onchange="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)"
 																								   name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
 																						</div>
 																					</div>
@@ -1018,7 +1021,6 @@
 																			<label for="PrazoProdServ">Prazo Loja</label>
 																			<div  class="input-group" id="txtHint">
 																				<input type="text" class="form-control " id="PrazoProdServ" maxlength="100" readonly=""
-																						onkeyup="calculaPrazoEntrega()"
 																					   name="PrazoProdServ" value="<?php echo $orcatrata['PrazoProdServ']; ?>">
 																				<span class="input-group-addon" id="basic-addon1">Dias</span>	   
 																			</div>
@@ -1028,7 +1030,6 @@
 																			<label for="PrazoCorreios">Prazo Correios</label>
 																			<div  class="input-group" id="txtHint">
 																				<input type="text" class="form-control " id="PrazoCorreios" maxlength="100" readonly=""
-																					onkeyup="calculaPrazoEntrega()"
 																					name="PrazoCorreios" value="<?php echo $orcatrata['PrazoCorreios']; ?>">
 																				<span class="input-group-addon" id="basic-addon1">Dias</span>   
 																			</div>
@@ -1084,8 +1085,6 @@
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon " id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" id="ValorFrete" maxlength="10" placeholder="0,00" readonly=""
-																			   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value),calculaTroco()" onchange="calculaParcelas(),calculaTroco()" onkeydown="calculaParcelas(),calculaTroco()"
-																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																			   name="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>">
 																	</div>
 																</div>
@@ -1156,7 +1155,6 @@
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon" id="basic-addon1">%</span>
 																		<input type="text" class="form-control Valor" id="PercExtraOrca" maxlength="10" placeholder="0,00"
-																			   onkeyup="percExtraOrca()"
 																			   name="PercExtraOrca" value="<?php echo $orcatrata['PercExtraOrca'] ?>">
 																	</div>
 																</div>	
@@ -1165,7 +1163,6 @@
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon " id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" id="ValorExtraOrca" maxlength="10" placeholder="0,00" 
-																				onkeyup="valorExtraOrca()"
 																			   name="ValorExtraOrca" value="<?php echo $orcatrata['ValorExtraOrca'] ?>">
 																	</div>
 																</div>
@@ -1190,8 +1187,6 @@
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
 																			<input type="text" class="form-control Valor" id="ValorTotalOrca" maxlength="10" placeholder="0,00" readonly=''
-																				   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value),calculaTroco()" onchange="calculaParcelas(),calculaTotal(this.value),calculaTroco()" onkeydown="calculaParcelas(),calculaTotal(this.value),calculaTroco()"
-																					data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																				   name="ValorTotalOrca" value="<?php echo $orcatrata['ValorTotalOrca'] ?>">
 																		</div>
 																	</div>
@@ -1287,7 +1282,6 @@
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon" id="basic-addon1">%</span>
 																			<input type="text" class="form-control Valor" id="DescPercOrca" maxlength="10" placeholder="0,00"
-																				   onkeyup="descPercOrca()"
 																				   name="DescPercOrca" value="<?php echo $orcatrata['DescPercOrca'] ?>">
 																		</div>
 																	</div>
@@ -1296,7 +1290,6 @@
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
 																			<input type="text" class="form-control Valor" id="DescValorOrca" maxlength="10" placeholder="0,00"
-																				   onkeyup="descValorOrca()" 
 																				   name="DescValorOrca" value="<?php echo $orcatrata['DescValorOrca'] ?>">
 																		</div>
 																	</div>	
