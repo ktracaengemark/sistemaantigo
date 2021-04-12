@@ -38,6 +38,20 @@
 							<input type="text" class="form-control" disabled aria-label="Total" value="<?php echo $report->soma->somatotal ?>">
 						</div>
 					</div>
+					<div class="col-md-2">
+						<label for="DataFim">Desc:</label>
+						<div class="input-group">
+							<span class="input-group-addon">R$</span>
+							<input type="text" class="form-control" disabled aria-label="Total" value="<?php echo $report->soma->somadesc ?>">
+						</div>
+					</div>
+					<div class="col-md-2">
+						<label for="DataFim">Final:</label>
+						<div class="input-group">
+							<span class="input-group-addon">R$</span>
+							<input type="text" class="form-control" disabled aria-label="Total" value="<?php echo $report->soma->somafinal ?>">
+						</div>
+					</div>
 				<?php } ?>
 				<?php if($metodo == 1 || $metodo == 2) { ?>
 					<?php if($_SESSION['Usuario']['Rel_Com'] == "S") {?>
@@ -95,6 +109,8 @@
 							<th class="active">Prd.SrvR$</th>
 							<th class="active">FreteR$</th>
 							<th class="active">TotalR$</th>
+							<th class="active">DescR$</th>
+							<th class="active">FinalR$</th>
 						<?php } ?>	
 						<th class="active"><?php echo $nomeusuario ?></th>
 						<th class="active">Comb.</th>
@@ -183,6 +199,8 @@
 								echo '<td>' . $row['ValorRestanteOrca'] . '</td>';
 								echo '<td>' . $row['ValorFrete'] . '</td>';
 								echo '<td>' . $row['TotalOrca'] . '</td>';
+								echo '<td>' . $row['DescValorOrca'] . '</td>';
+								echo '<td>' . $row['ValorFinalOrca'] . '</td>';
 							}	
 							echo '<td>' . $row[$nomeusuario] . '</td>';
 							echo '<td>' . $row['CombinadoFrete'] . '</td>';

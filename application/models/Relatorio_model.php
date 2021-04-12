@@ -246,6 +246,10 @@ class Relatorio_model extends CI_Model {
 				OT.ValorEntradaOrca,
 				OT.ValorRestanteOrca,
 				OT.ValorTotalOrca,
+				
+				OT.DescValorOrca,
+				OT.ValorFinalOrca,
+				
 				OT.ValorFrete,
 				OT.ValorExtraOrca,
 				(OT.ValorExtraOrca + OT.ValorRestanteOrca) AS OrcamentoOrca,
@@ -363,6 +367,8 @@ class Relatorio_model extends CI_Model {
 			$somaextra=0;
 			$somafrete=0;
 			$somatotal=0;
+			$somadesc=0;
+			$somafinal=0;
             foreach ($query->result() as $row) {
 				
 				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
@@ -412,6 +418,10 @@ class Relatorio_model extends CI_Model {
 				$row->TotalOrca = number_format($row->TotalOrca, 2, ',', '.');
 				$somacomissao += $row->ValorComissao;
 				$row->ValorComissao = number_format($row->ValorComissao, 2, ',', '.');
+				$somadesc += $row->DescValorOrca;
+				$row->DescValorOrca = number_format($row->DescValorOrca, 2, ',', '.');
+				$somafinal += $row->ValorFinalOrca;
+				$row->ValorFinalOrca = number_format($row->ValorFinalOrca, 2, ',', '.');
 				
 				/*
 				$row->DataValidadeProduto = $this->basico->mascara_data($row->DataValidadeProduto, 'barras');
@@ -452,6 +462,8 @@ class Relatorio_model extends CI_Model {
             $query->soma->somafrete = number_format($somafrete, 2, ',', '.');
             $query->soma->somatotal = number_format($somatotal, 2, ',', '.');
 			$query->soma->somacomissao = number_format($somacomissao, 2, ',', '.');
+            $query->soma->somadesc = number_format($somadesc, 2, ',', '.');
+            $query->soma->somafinal = number_format($somafinal, 2, ',', '.');
 			//$query->soma->contagem = number_format($contagem, 2, ',', '.');
 			/*
 			$query->soma->somadesconto = number_format($somadesconto, 2, ',', '.');
