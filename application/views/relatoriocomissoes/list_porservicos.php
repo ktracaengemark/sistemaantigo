@@ -34,14 +34,14 @@
 					<span class="input-group-addon">Srvs</span>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<label for="DataFim">Comissão Total</label>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
 					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somacomissaototal ?>">
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<label for="DataFim">Comissão Profis</label>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
@@ -98,6 +98,8 @@
 						<th class="active">Com.R$</th>
 						<th class="active">NºProf.</th>
 						<th class="active">Prof.R$</th>
+						<th class="active">StatusCom</th>
+						<th class="active">DataPago.</th>
 						<th class="active">Entregue</th>
 						<th class="active">DataEntr.</th>
 						<th class="active">HoraEntr.</th>					
@@ -175,6 +177,10 @@
 							echo '<td class="text-left">R$' . $row['ComissaoTotal'] . '</td>';
 							echo '<td class="text-left">/ ' . $row['Contagem'] . '</td>';
 							echo '<td class="text-left">R$' . $row['ComissaoProf'] . '</td>';
+							
+							echo '<td>' . $row['StatusComissaoServico'] . '</td>';
+							echo '<td>' . $row['DataPagoComissaoServico'] . '</td>';
+							
 							echo '<td>' . $row['ConcluidoProduto'] . '</td>';
 							echo '<td>' . $row['DataConcluidoProduto'] . '</td>';
 							echo '<td>' . $row['HoraConcluidoProduto'] . '</td>';

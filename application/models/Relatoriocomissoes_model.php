@@ -15,56 +15,47 @@ class Relatoriocomissoes_model extends CI_Model {
 
 	public function list_porservicos($data, $completo) {
 
-		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
-		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		$date_inicio_orca 		= ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca 			= ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
 		
-		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
-		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		$date_inicio_entrega 	= ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
+		$date_fim_entrega 		= ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
 		
-		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
-		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
+		$date_inicio_pg_com 	= ($data['DataInicio7']) ? 'PRDS.DataPagoComissaoServico >= "' . $data['DataInicio7'] . '" AND ' : FALSE;
+		$date_fim_pg_com 		= ($data['DataFim7']) ? 'PRDS.DataPagoComissaoServico <= "' . $data['DataFim7'] . '" AND ' : FALSE;
 		
-		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
-		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
+		$date_inicio_prd_entr 	= ($data['DataInicio8']) ? 'PRDS.DataConcluidoProduto >= "' . $data['DataInicio8'] . '" AND ' : FALSE;
+		$date_fim_prd_entr 		= ($data['DataFim8']) ? 'PRDS.DataConcluidoProduto <= "' . $data['DataFim8'] . '" AND ' : FALSE;
 		
-		$date_inicio_prd_entr = ($data['DataInicio8']) ? 'PRDS.DataConcluidoProduto >= "' . $data['DataInicio8'] . '" AND ' : FALSE;
-		$date_fim_prd_entr = ($data['DataFim8']) ? 'PRDS.DataConcluidoProduto <= "' . $data['DataFim8'] . '" AND ' : FALSE;
-		
-		$data['Funcionario'] = ($data['Funcionario']) ? ' AND (PRDS.ProfissionalProduto_1 = ' . $data['Funcionario'] . ' OR PRDS.ProfissionalProduto_2 = ' . $data['Funcionario'] . ' OR PRDS.ProfissionalProduto_3 = ' . $data['Funcionario'] . ' OR PRDS.ProfissionalProduto_4 = ' . $data['Funcionario'] . ' )' : FALSE;
-		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
-		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
-		$data['Fornecedor'] = ($data['Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['Fornecedor'] : FALSE;
-		$data['Produtos'] = ($data['Produtos']) ? ' AND PRDS.idTab_Produtos_Produto = ' . $data['Produtos'] : FALSE;
-		$data['Categoria'] = ($data['Categoria']) ? ' AND TCAT.idTab_Catprod = ' . $data['Categoria'] : FALSE;
-		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
-		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
-		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
-		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;
-		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
-		$data['idTab_TipoRD'] = ($data['idTab_TipoRD']) ? ' AND OT.idTab_TipoRD = ' . $data['idTab_TipoRD'] . ' AND PRDS.idTab_TipoRD = ' . $data['idTab_TipoRD'] : FALSE;
-		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
-		$data['Orcarec'] = ($data['Orcarec']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcarec'] : FALSE;
-		$data['Campo'] = (!$data['Campo']) ? 'PR.DataVencimento' : $data['Campo'];
-        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-		$filtro1 = ($data['AprovadoOrca']) ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
-        $filtro2 = ($data['QuitadoOrca']) ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ConcluidoOrca']) ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
-		$filtro4 = ($data['Quitado']) ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
-		$filtro17 = ($data['ConcluidoProduto']) ? 'PRDS.ConcluidoProduto = "' . $data['ConcluidoProduto'] . '" AND ' : FALSE;
-		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
-		$filtro6 = ($data['FormaPagamento']) ? 'OT.FormaPagamento = "' . $data['FormaPagamento'] . '" AND ' : FALSE;
-		$filtro7 = ($data['Tipo_Orca']) ? 'OT.Tipo_Orca = "' . $data['Tipo_Orca'] . '" AND ' : FALSE;
-		$filtro8 = ($data['TipoFrete']) ? 'OT.TipoFrete = "' . $data['TipoFrete'] . '" AND ' : FALSE;
-		$filtro9 = ($data['AVAP']) ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
-		$filtro10 = ($data['FinalizadoOrca']) ? 'OT.FinalizadoOrca = "' . $data['FinalizadoOrca'] . '" AND ' : FALSE;
-		$filtro11 = ($data['CanceladoOrca']) ? 'OT.CanceladoOrca = "' . $data['CanceladoOrca'] . '" AND ' : FALSE;
-		$filtro13 = ($data['CombinadoFrete']) ? 'OT.CombinadoFrete = "' . $data['CombinadoFrete'] . '" AND ' : FALSE;
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND PR.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
-		$groupby = (1 == 1) ? 'GROUP BY PRDS.idApp_Produto' : FALSE;
-        $query = $this->db->query(
+		$Funcionario 			= ($data['Funcionario']) ? ' AND (PRDS.ProfissionalProduto_1 = ' . $data['Funcionario'] . ' OR PRDS.ProfissionalProduto_2 = ' . $data['Funcionario'] . ' OR PRDS.ProfissionalProduto_3 = ' . $data['Funcionario'] . ' OR PRDS.ProfissionalProduto_4 = ' . $data['Funcionario'] . ' )' : FALSE;
+		$Orcamento 				= ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
+		$Cliente 				= ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
+		$Fornecedor 			= ($data['Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['Fornecedor'] : FALSE;
+		$Produtos 				= ($data['Produtos']) ? ' AND PRDS.idTab_Produtos_Produto = ' . $data['Produtos'] : FALSE;
+		$Categoria 				= ($data['Categoria']) ? ' AND TCAT.idTab_Catprod = ' . $data['Categoria'] : FALSE;
+		$TipoFinanceiro 		= ($data['TipoFinanceiro']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
+		$idTab_TipoRD			= ($data['idTab_TipoRD']) ? ' AND OT.idTab_TipoRD = ' . $data['idTab_TipoRD'] . ' AND PRDS.idTab_TipoRD = ' . $data['idTab_TipoRD'] : FALSE;
+		$AprovadoOrca 			= ($data['AprovadoOrca']) ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
+        $QuitadoOrca 			= ($data['QuitadoOrca']) ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
+		$ConcluidoOrca 			= ($data['ConcluidoOrca']) ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
+		$StatusComissaoServico 	= ($data['StatusComissaoServico']) ? 'PRDS.StatusComissaoServico = "' . $data['StatusComissaoServico'] . '" AND ' : FALSE;
+		$ConcluidoProduto 		= ($data['ConcluidoProduto']) ? 'PRDS.ConcluidoProduto = "' . $data['ConcluidoProduto'] . '" AND ' : FALSE;
+		$Modalidade 			= ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
+		$FormaPagamento 		= ($data['FormaPagamento']) ? 'OT.FormaPagamento = "' . $data['FormaPagamento'] . '" AND ' : FALSE;
+		$Tipo_Orca 				= ($data['Tipo_Orca']) ? 'OT.Tipo_Orca = "' . $data['Tipo_Orca'] . '" AND ' : FALSE;
+		$TipoFrete 				= ($data['TipoFrete']) ? 'OT.TipoFrete = "' . $data['TipoFrete'] . '" AND ' : FALSE;
+		$AVAP 					= ($data['AVAP']) ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
+		$FinalizadoOrca 		= ($data['FinalizadoOrca']) ? 'OT.FinalizadoOrca = "' . $data['FinalizadoOrca'] . '" AND ' : FALSE;
+		$CanceladoOrca 			= ($data['CanceladoOrca']) ? 'OT.CanceladoOrca = "' . $data['CanceladoOrca'] . '" AND ' : FALSE;
+		$CombinadoFrete 		= ($data['CombinadoFrete']) ? 'OT.CombinadoFrete = "' . $data['CombinadoFrete'] . '" AND ' : FALSE;
+		$permissao 				= ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
+		$groupby 				= (1 == 1) ? 'GROUP BY PRDS.idApp_Produto' : FALSE;
+		$Campo 					= (!$data['Campo']) ? 'OT.DataOrca' : $data['Campo'];
+        $Ordenamento 			= (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];        
+
+		$query = $this->db->query(
             'SELECT
 				CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,""), " - " ,IFNULL(C.CelularCliente,""), " - " ,IFNULL(C.Telefone,""), " - " ,IFNULL(C.Telefone2,""), " - " ,IFNULL(C.Telefone3,"") ) AS NomeCliente,
-				CONCAT(IFNULL(F.idApp_Fornecedor,""), " - " ,IFNULL(F.NomeFornecedor,"")) AS NomeFornecedor,
                 OT.idApp_OrcaTrata,
 				OT.Tipo_Orca,
 				OT.idSis_Usuario,
@@ -85,17 +76,6 @@ class Relatoriocomissoes_model extends CI_Model {
 				OT.Modalidade,
 				TR.TipoFinanceiro,
 				MD.Modalidade,
-                PR.idApp_Parcelas,
-                PR.idSis_Empresa,
-				PR.idSis_Usuario,
-				PR.Parcela,
-				CONCAT(PR.Parcela) AS Parcela,
-                PR.DataVencimento,
-                PR.ValorParcela,
-                PR.DataPago,
-                PR.ValorPago,
-                PR.Quitado,
-				PR.idTab_TipoRD,
 				PRDS.idApp_Produto,
 				PRDS.idTab_TipoRD,
 				PRDS.NomeProduto,
@@ -114,6 +94,9 @@ class Relatoriocomissoes_model extends CI_Model {
 				PRDS.Prod_Serv_Produto,
 				PRDS.DataConcluidoProduto,
 				PRDS.HoraConcluidoProduto,
+				
+				PRDS.StatusComissaoServico,
+				PRDS.DataPagoComissaoServico,
 				
 				PRDS.ProfissionalProduto_1,
 				PRDS.ProfissionalProduto_2,
@@ -135,9 +118,7 @@ class Relatoriocomissoes_model extends CI_Model {
             FROM
                 App_OrcaTrata AS OT
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
-					LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = OT.idApp_Fornecedor
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
-					LEFT JOIN App_Parcelas AS PR ON PR.idApp_OrcaTrata = OT.idApp_OrcaTrata
 					LEFT JOIN App_Produto AS PRDS ON PRDS.idApp_OrcaTrata = OT.idApp_OrcaTrata
 					
 					LEFT JOIN Sis_Usuario AS UP1 ON UP1.idSis_Usuario = PRDS.ProfissionalProduto_1
@@ -158,42 +139,43 @@ class Relatoriocomissoes_model extends CI_Model {
                 ' . $date_fim_orca . '
                 ' . $date_inicio_entrega . '
                 ' . $date_fim_entrega . '
-                ' . $date_inicio_vnc . '
-                ' . $date_fim_vnc . '
-                ' . $date_inicio_vnc_prc . '
-                ' . $date_fim_vnc_prc . '
+				
+				
+                ' . $date_inicio_pg_com . '
+                ' . $date_fim_pg_com . '
+				
+				
                 ' . $date_inicio_prd_entr . '
                 ' . $date_fim_prd_entr . '
 				' . $permissao . '
-				' . $filtro1 . '
-				' . $filtro2 . '
-				' . $filtro3 . '
-				' . $filtro4 . '
-				' . $filtro5 . '
-				' . $filtro6 . '
-				' . $filtro7 . '
-				' . $filtro8 . '
-				' . $filtro9 . '
-				' . $filtro10 . '
-				' . $filtro11 . '
-				' . $filtro13 . '
-				' . $filtro17 . '
+				' . $AprovadoOrca . '
+				' . $QuitadoOrca . '
+				' . $ConcluidoOrca . '
+				' . $Modalidade . '
+				' . $FormaPagamento . '
+				' . $Tipo_Orca . '
+				' . $TipoFrete . '
+				' . $AVAP . '
+				' . $FinalizadoOrca . '
+				' . $CanceladoOrca . '
+				' . $CombinadoFrete . '
+				' . $ConcluidoProduto . '
+				' . $StatusComissaoServico . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				PRDS.Prod_Serv_Produto = "S" AND
                 PRDS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
-                ' . $data['Orcamento'] . '
-                ' . $data['Cliente'] . '
-                ' . $data['Fornecedor'] . '
-				' . $data['TipoFinanceiro'] . '
-				' . $data['idTab_TipoRD'] . '
-                ' . $data['Produtos'] . '
-                ' . $data['Categoria'] . '
-				' . $data['Funcionario'] . '
+                ' . $Orcamento . '
+                ' . $Cliente . '
+                ' . $Fornecedor . '
+				' . $TipoFinanceiro . '
+				' . $idTab_TipoRD . '
+                ' . $Produtos . '
+                ' . $Categoria . '
+				' . $Funcionario . '
                 ' . $groupby . '
 			ORDER BY
-                OT.DataEntregaOrca,
-				C.NomeCliente ASC,
-				F.NomeFornecedor ASC
+				' . $Campo . '
+                ' . $Ordenamento . '
 		');
 
         ####################################################################
@@ -201,7 +183,6 @@ class Relatoriocomissoes_model extends CI_Model {
 		
         $parcelasrecebidas = $this->db->query(
             'SELECT
-                PR.ValorParcela,
 				PRDS.idApp_Produto,
 				PRDS.idTab_TipoRD,
 				PRDS.NomeProduto,
@@ -221,6 +202,9 @@ class Relatoriocomissoes_model extends CI_Model {
 				PRDS.DataConcluidoProduto,
 				PRDS.HoraConcluidoProduto,
 				
+				PRDS.StatusComissaoServico,
+				PRDS.DataPagoComissaoServico,
+				
 				PRDS.ProfissionalProduto_1,
 				PRDS.ProfissionalProduto_2,
 				PRDS.ProfissionalProduto_3,
@@ -239,14 +223,12 @@ class Relatoriocomissoes_model extends CI_Model {
                 App_OrcaTrata AS OT
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
-					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN App_Produto AS PRDS ON PRDS.idApp_OrcaTrata = OT.idApp_OrcaTrata
 					
 					LEFT JOIN Sis_Usuario AS UP1 ON UP1.idSis_Usuario = PRDS.ProfissionalProduto_1
 					LEFT JOIN Sis_Usuario AS UP2 ON UP2.idSis_Usuario = PRDS.ProfissionalProduto_2
 					LEFT JOIN Sis_Usuario AS UP3 ON UP3.idSis_Usuario = PRDS.ProfissionalProduto_3
 					LEFT JOIN Sis_Usuario AS UP4 ON UP4.idSis_Usuario = PRDS.ProfissionalProduto_4
-					
 					
 					LEFT JOIN Tab_Produtos AS TPRDS ON TPRDS.idTab_Produtos = PRDS.idTab_Produtos_Produto
 					LEFT JOIN Tab_Produto AS TPRD ON TPRD.idTab_Produto = TPRDS.idTab_Produto
@@ -257,38 +239,42 @@ class Relatoriocomissoes_model extends CI_Model {
                 ' . $date_fim_orca . '
                 ' . $date_inicio_entrega . '
                 ' . $date_fim_entrega . '
-                ' . $date_inicio_vnc . '
-                ' . $date_fim_vnc . '
-                ' . $date_inicio_vnc_prc . '
-                ' . $date_fim_vnc_prc . '
+				
+				' . $date_inicio_pg_com . '
+                ' . $date_fim_pg_com . '
+				
                 ' . $date_inicio_prd_entr . '
                 ' . $date_fim_prd_entr . '			
 				' . $permissao . '
-				' . $filtro1 . '
-				' . $filtro2 . '
-				' . $filtro3 . '
-				' . $filtro4 . '
-				' . $filtro5 . '
-				' . $filtro6 . '
-				' . $filtro7 . '
-				' . $filtro8 . '
-				' . $filtro9 . '
-				' . $filtro10 . '
-				' . $filtro11 . '
-				' . $filtro13 . '
-				' . $filtro17 . '
+				' . $AprovadoOrca . '
+				' . $QuitadoOrca . '
+				' . $ConcluidoOrca . '
+				' . $Modalidade . '
+				' . $FormaPagamento . '
+				' . $Tipo_Orca . '
+				' . $TipoFrete . '
+				' . $AVAP . '
+				' . $FinalizadoOrca . '
+				' . $CanceladoOrca . '
+				' . $CombinadoFrete . '
+				' . $ConcluidoProduto . '
+				' . $StatusComissaoServico . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				PRDS.Prod_Serv_Produto = "S" AND
                 PRDS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				PRDS.ConcluidoProduto = "S"
-				' . $data['Orcamento'] . '
-                ' . $data['Cliente'] . '
-                ' . $data['Fornecedor'] . '
-				' . $data['TipoFinanceiro'] . '	
-				' . $data['idTab_TipoRD'] . '
-                ' . $data['Produtos'] . '
-                ' . $data['Categoria'] . '
-                ' . $groupby . '	
+				' . $Orcamento . '
+                ' . $Cliente . '
+                ' . $Fornecedor . '
+				' . $TipoFinanceiro . '	
+				' . $idTab_TipoRD . '
+                ' . $Produtos . '
+                ' . $Categoria . '
+				' . $Funcionario . '
+                ' . $groupby . '
+			ORDER BY
+				' . $Campo . '
+                ' . $Ordenamento . '
  				
         ');			
 		$parcelasrecebidas = $parcelasrecebidas->result();		
@@ -310,20 +296,17 @@ class Relatoriocomissoes_model extends CI_Model {
                 $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
                 $row->DataEntregaOrca = $this->basico->mascara_data($row->DataEntregaOrca, 'barras');
                 $row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
-                $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
-                $row->DataPago = $this->basico->mascara_data($row->DataPago, 'barras');
                 $row->CombinadoFrete = $this->basico->mascara_palavra_completa($row->CombinadoFrete, 'NS');
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
 				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
 				$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
 				$row->FinalizadoOrca = $this->basico->mascara_palavra_completa($row->FinalizadoOrca, 'NS');
 				$row->CanceladoOrca = $this->basico->mascara_palavra_completa($row->CanceladoOrca, 'NS');
-                $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
+				$row->StatusComissaoServico = $this->basico->mascara_palavra_completa($row->StatusComissaoServico, 'NS');
 				$row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
                 $row->DataConcluidoProduto = $this->basico->mascara_data($row->DataConcluidoProduto, 'barras');
+                $row->DataPagoComissaoServico = $this->basico->mascara_data($row->DataPagoComissaoServico, 'barras');
 				
-				
-
 				$somaentregar += $row->QuantidadeProduto;
 				#esse trecho pode ser melhorado, serve para somar apenas uma vez
                 #o valor da entrada que pode aparecer mais de uma vez
@@ -348,11 +331,8 @@ class Relatoriocomissoes_model extends CI_Model {
 				$row->Contagem = $contagem;
 				
 				if($contagem == 0){
-					//$row->Contagem = 'Ninguém';
 					$divisor = 1;
-					
 				}else{
-					//$row->Contagem = $contagem;
 					$divisor = $contagem;
 				}
 				
@@ -369,9 +349,8 @@ class Relatoriocomissoes_model extends CI_Model {
 				$row->ComissaoTotal = number_format($comissao_total, 2, ',', '.');
 				$row->ComissaoProf = number_format($pro_prof, 2, ',', '.');
                 
-				$somareceber += $row->ValorParcela;
-				$row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');				
-                $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.'); 			
+				
+				$row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');			
 				
 				if($row->Tipo_Orca == "B"){
 					$row->Tipo_Orca = "Na Loja";
@@ -392,11 +371,8 @@ class Relatoriocomissoes_model extends CI_Model {
 			
             foreach ($parcelasrecebidas as $row) {
 				$somaentregue += $row->QuantidadeProduto;
-                $somarecebido += $row->ValorParcela;
-				$row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
             }			
 			$diferenca =  $somaentregar - $somaentregue;
-            $balanco =  $somareceber - $somarecebido;
 			
 			/*
 			echo $this->db->last_query();
@@ -413,10 +389,7 @@ class Relatoriocomissoes_model extends CI_Model {
             $query->soma->diferenca = $diferenca;
             $query->soma->somaentregar = $somaentregar;
             $query->soma->somaentregue = $somaentregue;
-            $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
-            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
             $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
-            $query->soma->balanco = number_format($balanco, 2, ',', '.');
 			
             return $query;
         }

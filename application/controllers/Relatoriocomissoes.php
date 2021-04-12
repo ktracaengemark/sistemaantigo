@@ -68,10 +68,6 @@ class Relatoriocomissoes extends CI_Controller {
 			'Funcionario',
 			'Produtos',
 			'Categoria',
-			'Dia',
-			'Ano',
-			'Mesvenc',
-			'Mespag',
 			'Tipo_Orca',
 			'AVAP',
 			'TipoFinanceiro',
@@ -80,14 +76,6 @@ class Relatoriocomissoes extends CI_Controller {
             'DataFim',
 			'DataInicio2',
             'DataFim2',
-			'DataInicio3',
-            'DataFim3',
-			'DataInicio4',
-            'DataFim4',
-			'DataInicio5',
-            'DataFim5',
-			'DataInicio6',
-            'DataFim6',
 			'DataInicio7',
             'DataFim7',
 			'DataInicio8',
@@ -101,8 +89,8 @@ class Relatoriocomissoes extends CI_Controller {
 			'FinalizadoOrca',
 			'CanceladoOrca',
 			'CombinadoFrete',
-			'Quitado',
 			'ConcluidoProduto',
+			'StatusComissaoServico',
 			'Modalidade',
 			'Orcarec',
 			'Orcades',
@@ -138,23 +126,12 @@ class Relatoriocomissoes extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
         $_SESSION['FiltroAlteraParcela']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
 		$_SESSION['FiltroAlteraParcela']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
-        $_SESSION['FiltroAlteraParcela']['DataInicio3'] = $this->basico->mascara_data($data['query']['DataInicio3'], 'mysql');
-		$_SESSION['FiltroAlteraParcela']['DataFim3'] = $this->basico->mascara_data($data['query']['DataFim3'], 'mysql');
-        $_SESSION['FiltroAlteraParcela']['DataInicio4'] = $this->basico->mascara_data($data['query']['DataInicio4'], 'mysql');
-		$_SESSION['FiltroAlteraParcela']['DataFim4'] = $this->basico->mascara_data($data['query']['DataFim4'], 'mysql');	
-        $_SESSION['FiltroAlteraParcela']['DataInicio5'] = $this->basico->mascara_data($data['query']['DataInicio5'], 'mysql');
-		$_SESSION['FiltroAlteraParcela']['DataFim5'] = $this->basico->mascara_data($data['query']['DataFim5'], 'mysql');
-        $_SESSION['FiltroAlteraParcela']['DataInicio6'] = $this->basico->mascara_data($data['query']['DataInicio6'], 'mysql');
-		$_SESSION['FiltroAlteraParcela']['DataFim6'] = $this->basico->mascara_data($data['query']['DataFim6'], 'mysql');
         $_SESSION['FiltroAlteraParcela']['DataInicio7'] = $this->basico->mascara_data($data['query']['DataInicio7'], 'mysql');
 		$_SESSION['FiltroAlteraParcela']['DataFim7'] = $this->basico->mascara_data($data['query']['DataFim7'], 'mysql');
         $_SESSION['FiltroAlteraParcela']['DataInicio8'] = $this->basico->mascara_data($data['query']['DataInicio8'], 'mysql');
-		$_SESSION['FiltroAlteraParcela']['DataFim8'] = $this->basico->mascara_data($data['query']['DataFim8'], 'mysql');	
-		$_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
-        $_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
-        $_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];
-		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
+		$_SESSION['FiltroAlteraParcela']['DataFim8'] = $this->basico->mascara_data($data['query']['DataFim8'], 'mysql');
 		$_SESSION['FiltroAlteraParcela']['ConcluidoProduto'] = $data['query']['ConcluidoProduto'];
+		$_SESSION['FiltroAlteraParcela']['StatusComissaoServico'] = $data['query']['StatusComissaoServico'];
 		$_SESSION['FiltroAlteraParcela']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
 		$_SESSION['FiltroAlteraParcela']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
 		$_SESSION['FiltroAlteraParcela']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
@@ -172,27 +149,20 @@ class Relatoriocomissoes extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['Funcionario'] = $data['query']['Funcionario'];
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
-		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
-		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
 		$_SESSION['FiltroAlteraParcela']['Produtos'] = $data['query']['Produtos'];
 		$_SESSION['FiltroAlteraParcela']['Categoria'] = $data['query']['Categoria'];
+		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
+		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         $this->form_validation->set_rules('DataInicio', 'Data Início do Pedido', 'trim|valid_date');
         $this->form_validation->set_rules('DataFim', 'Data Fim do Pedido', 'trim|valid_date');
 		$this->form_validation->set_rules('DataInicio2', 'Data Início da Entrega', 'trim|valid_date');
         $this->form_validation->set_rules('DataFim2', 'Data Fim da Entrega', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio3', 'Data Início do Vencimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim3', 'Data Fim do Vencimento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio4', 'Data Início do Vnc da Prc', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim4', 'Data Fim do Vnc da Prc', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio5', 'Data Início do Pag Comissao', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim5', 'Data Fim do Pag Comissao', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio6', 'Data Início do Cadastro', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim6', 'Data Fim do Cadastro', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio7', 'Data Pago Com. Início', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim7', 'Data Pago Com.Fim', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio7', 'Data Pago Com Ini', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim7', 'Data Pago Com Fim', 'trim|valid_date');
 		$this->form_validation->set_rules('DataInicio8', 'Data Início Entregue Prod', 'trim|valid_date');
         $this->form_validation->set_rules('DataFim8', 'Data Fim Entregue Prod', 'trim|valid_date');
 
@@ -236,18 +206,18 @@ class Relatoriocomissoes extends CI_Controller {
             'N' => 'Não Combinado',
         );
 
-		$data['select']['Quitado'] = array(
-			'0' => '::TODOS::',			
-			'S' => 'Quitada',
-			'N' => 'NÃO Quitada',
-        );
-
 		$data['select']['ConcluidoProduto'] = array(
 			'0' => '::TODOS::',			
 			'S' => 'Entregue',
 			'N' => 'NÃO Entregue',
         );
-		
+
+		$data['select']['StatusComissaoServico'] = array(
+			'0' => '::TODOS::',			
+			'S' => 'Paga',
+			'N' => 'NÃO Paga',
+        );
+				
 		$data['select']['Modalidade'] = array(
             '0' => '::TODOS::',
             'P' => 'Dividido',
@@ -282,11 +252,8 @@ class Relatoriocomissoes extends CI_Controller {
 		$data['select']['Campo'] = array(
 			'OT.DataOrca' => 'Data do Pedido',
 			'OT.DataEntregaOrca' => 'Data da Entrega',
-			'PR.DataVencimento' => 'Data do Venc.',
-			'PR.Quitado' => 'Parc.Quit.',
 			'OT.Modalidade' => 'Modalidade',
-            'OT.idApp_OrcaTrata' => 'Orçamento',
-            'OT.ValorOrca' => 'Valor',
+            'OT.idApp_OrcaTrata' => 'Pedido',
 			'OT.TipoFinanceiro' => 'Tipo',
 			'OT.Tipo_Orca' => 'Compra',
 			'OT.TipoFrete' => 'Entrega',
@@ -304,11 +271,7 @@ class Relatoriocomissoes extends CI_Controller {
 		$data['select']['Orcades'] = $this->Relatorio_model->select_orcades();
 		$data['select']['ObsOrca'] = $this->Relatorio_model->select_obsorca();
 		$data['select']['Receitas'] = $this->Relatorio_model->select_tipofinanceiroR();
-		$data['select']['Despesas'] = $this->Relatorio_model->select_tipofinanceiroD();
-		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
-		$data['select']['Mespag'] = $this->Relatorio_model->select_mes();
-		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
-		$data['select']['Ano'] = $this->Relatorio_model->select_ano();		
+		$data['select']['Despesas'] = $this->Relatorio_model->select_tipofinanceiroD();		
 		$data['select']['FormaPagamento'] = $this->Relatorio_model->select_formapag();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
 		
@@ -338,25 +301,13 @@ class Relatoriocomissoes extends CI_Controller {
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Categoria'] = $data['query']['Categoria'];
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
-            $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
-			$data['bd']['Ano'] = $data['query']['Ano'];
-			$data['bd']['Dia'] = $data['query']['Dia'];
-			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
-			$data['bd']['Mespag'] = $data['query']['Mespag'];			
+            $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];			
 			$data['bd']['ObsOrca'] = $data['query']['ObsOrca'];
 			$data['bd']['Orcarec'] = $data['query']['Orcarec'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
             $data['bd']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
-			$data['bd']['DataInicio3'] = $this->basico->mascara_data($data['query']['DataInicio3'], 'mysql');
-            $data['bd']['DataFim3'] = $this->basico->mascara_data($data['query']['DataFim3'], 'mysql');
-			$data['bd']['DataInicio4'] = $this->basico->mascara_data($data['query']['DataInicio4'], 'mysql');
-            $data['bd']['DataFim4'] = $this->basico->mascara_data($data['query']['DataFim4'], 'mysql');
-			$data['bd']['DataInicio5'] = $this->basico->mascara_data($data['query']['DataInicio5'], 'mysql');
-            $data['bd']['DataFim5'] = $this->basico->mascara_data($data['query']['DataFim5'], 'mysql');
-			$data['bd']['DataInicio6'] = $this->basico->mascara_data($data['query']['DataInicio6'], 'mysql');
-            $data['bd']['DataFim6'] = $this->basico->mascara_data($data['query']['DataFim6'], 'mysql');
 			$data['bd']['DataInicio7'] = $this->basico->mascara_data($data['query']['DataInicio7'], 'mysql');
             $data['bd']['DataFim7'] = $this->basico->mascara_data($data['query']['DataFim7'], 'mysql');
 			$data['bd']['DataInicio8'] = $this->basico->mascara_data($data['query']['DataInicio8'], 'mysql');
@@ -372,8 +323,8 @@ class Relatoriocomissoes extends CI_Controller {
 			$data['bd']['FinalizadoOrca'] = $data['query']['FinalizadoOrca'];
 			$data['bd']['CanceladoOrca'] = $data['query']['CanceladoOrca'];
 			$data['bd']['CombinadoFrete'] = $data['query']['CombinadoFrete'];
-			$data['bd']['Quitado'] = $data['query']['Quitado'];
 			$data['bd']['ConcluidoProduto'] = $data['query']['ConcluidoProduto'];
+			$data['bd']['StatusComissaoServico'] = $data['query']['StatusComissaoServico'];
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
             $data['bd']['FormaPagamento'] = $data['query']['FormaPagamento'];
 			$data['bd']['TipoFrete'] = $data['query']['TipoFrete'];
