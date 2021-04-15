@@ -215,30 +215,35 @@ class Orcatrata extends CI_Controller {
 		if ($idApp_Consulta) {
 			$_SESSION['Consulta'] = $this->Consulta_model->get_consulta($idApp_Consulta, TRUE);
 			$_SESSION['Consultas'] = $this->Consulta_model->get_consultas($_SESSION['Consulta']['Repeticao'], TRUE);
-			if(!empty($_SESSION['Consulta']['idApp_ClientePet']) && $_SESSION['Consulta']['idApp_ClientePet'] != 0){
+			if(isset($_SESSION['Consulta']['idApp_ClientePet']) && !empty($_SESSION['Consulta']['idApp_ClientePet']) && $_SESSION['Consulta']['idApp_ClientePet'] != 0){
 				$_SESSION['Pet'] = $this->Orcatrata_model->get_pet($_SESSION['Consulta']['idApp_ClientePet'], TRUE);
 			}
-			if(!empty($_SESSION['Consulta']['idApp_ClienteDep']) && $_SESSION['Consulta']['idApp_ClienteDep'] != 0){
+			if(isset($_SESSION['Consulta']['idApp_ClienteDep']) && !empty($_SESSION['Consulta']['idApp_ClienteDep']) && $_SESSION['Consulta']['idApp_ClienteDep'] != 0){
 				$_SESSION['Dep'] = $this->Orcatrata_model->get_dep($_SESSION['Consulta']['idApp_ClienteDep'], TRUE);
 			}
 		}
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r($_SESSION['Consulta']['idApp_ClientePet']);
+			echo '<br>';
+			//print_r($idApp_Consulta);
+			echo "</pre>";
+			exit ();
+			*/		
+		
+		
 		//$data['orcatrata']['RecorrenciasOrca'] = 2;
 		$dataini = explode(' ', $_SESSION['Consulta']['DataInicio']);
 		$data['orcatrata']['DataEntregaOrca']	=	$this->basico->mascara_data($dataini[0], 'barras');
 		$data['orcatrata']['HoraEntregaOrca']	=	substr($dataini[1], 0, 5);
 		$data['orcatrata']['RecorrenciasOrca'] 	= 	$_SESSION['Consulta']['OS'];
 		$data['orcatrata']['RepeticaoCons'] 	= 	$_SESSION['Consulta']['Repeticao'];
+		
 		$data['orcatrata']['idApp_ClientePet'] 	= 	$_SESSION['Consulta']['idApp_ClientePet'];
-		$data['orcatrata']['idApp_ClienteDep'] 	= 	$_SESSION['Consulta']['idApp_ClienteDep'];	
-		/*
-			echo '<br>';
-			echo "<pre>";
-			print_r($data['orcatrata']['RecorrenciasOrca']);
-			echo '<br>';
-			print_r($idApp_Consulta);
-			echo "</pre>";
-			exit ();
-			*/
+		$data['orcatrata']['idApp_ClienteDep'] 	= 	$_SESSION['Consulta']['idApp_ClienteDep'];
+		
+
 		//Fim dos Dados//////
 		
 		$data['orcatrata']['Tipo_Orca'] = "B";

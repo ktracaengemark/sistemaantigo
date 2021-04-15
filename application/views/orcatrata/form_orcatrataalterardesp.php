@@ -1227,8 +1227,8 @@
 													<div class="row">	
 														<div class="col-md-12">
 															<label for="Descricao">Obs/Descrição:</label>
-															<input class="form-control" id="Descricao" <?php echo $readonly; ?> 
-															placeholder="Observaçoes:" name="Descricao" value="<?php echo $orcatrata['Descricao']; ?>"></input>
+															<textarea class="form-control" id="Descricao" <?php echo $readonly; ?> 
+															placeholder="Observaçoes:" name="Descricao" value="<?php echo $orcatrata['Descricao']; ?>"><?php echo $orcatrata['Descricao']; ?></textarea>
 														</div>
 													</div>
 												</div>
@@ -1253,6 +1253,36 @@
 															<input type="hidden" name="ValorTotalOrca" id="ValorTotalOrca" value="<?php echo $orcatrata['ValorTotalOrca'] ?>"/>
 														<?php } ?>
 													</div>
+													<div class="row">
+														<div class="col-md-12">
+															<label for="FormaPagamento">Forma de Pagamento</label>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+																data-toggle="collapse" onchange="exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
+																	data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
+																	id="FormaPagamento" name="FormaPagamento">
+																<option value="">-- Selecione uma opção --</option>
+																<?php
+																foreach ($select['FormaPagamento'] as $key => $row) {
+																	if ($orcatrata['FormaPagamento'] == $key) {
+																		echo'<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																	} else {
+																		echo'<option value="' . $key . '">' . $row . '</option>';
+																	}
+																}
+																?>
+															</select>
+															<?php echo form_error('FormaPagamento'); ?>
+														</div>
+													</div>
+												</div>
+											</div>	
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="panel panel-default">
+												<div class="panel-heading">
 													<div class="row">
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 															<div class="col-md-12 text-left">
@@ -1287,36 +1317,6 @@
 														<?php }else{ ?>
 															<input type="hidden" name="AVAP" id="AVAP" value="<?php echo $orcatrata['AVAP'] ?>"/>
 														<?php } ?>
-													</div>
-												</div>
-											</div>	
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div class="col-md-4">
-											<div class="panel panel-default">
-												<div class="panel-heading">
-													<div class="row">
-														<div class="col-md-12">
-															<label for="FormaPagamento">Forma de Pagamento</label>
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
-																data-toggle="collapse" onchange="exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
-																	data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-																	id="FormaPagamento" name="FormaPagamento">
-																<option value="">-- Selecione uma opção --</option>
-																<?php
-																foreach ($select['FormaPagamento'] as $key => $row) {
-																	if ($orcatrata['FormaPagamento'] == $key) {
-																		echo'<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																	} else {
-																		echo'<option value="' . $key . '">' . $row . '</option>';
-																	}
-																}
-																?>
-															</select>
-															<?php echo form_error('FormaPagamento'); ?>
-														</div>
 													</div>
 													<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 														<div class="row ">

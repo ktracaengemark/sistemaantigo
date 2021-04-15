@@ -1213,35 +1213,6 @@
 																<?php } ?>
 															</div>
 															<div class="row">
-																<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-																	<div class="col-md-12">
-																		<label for="AVAP">Local do Pagamento</label><br>
-																			<?php 
-																				if($orcatrata['AVAP'] == "P") {
-																					$AVAP = 'Na Casa';
-																				} elseif($orcatrata['AVAP'] == "V"){
-																					$AVAP = 'Na Loja';
-																				}else{
-																					$AVAP = 'On Line';
-																				}
-																			?>
-																		<input type="text" class="form-control" value="<?php echo $AVAP; ?>" readonly=""/>
-																	</div>
-																	<input type="hidden" name="AVAP" value="<?php echo $orcatrata['AVAP'] ?>"/>
-																<?php }else{ ?>
-																	<input type="hidden" name="AVAP" id="AVAP" value="<?php echo $orcatrata['AVAP'] ?>"/>
-																<?php } ?>
-															</div>
-														</div>
-													</div>	
-												</div>
-											</div>
-											<br>
-											<div class="row">
-												<div class="col-md-4">
-													<div class="panel panel-default">
-														<div class="panel-heading">
-															<div class="row">
 																<div class="col-md-12">
 																	<label for="FormaPagamento">Forma de Pagamento</label><br>
 																		<?php 
@@ -1266,6 +1237,35 @@
 																	<input type="text" class="form-control" value="<?php echo $FormaPagamento; ?>" readonly=""/>
 																</div>
 																<input type="hidden" name="FormaPagamento" id="FormaPagamento" value="<?php echo $orcatrata['FormaPagamento'] ?>"/>
+															</div>
+														</div>
+													</div>	
+												</div>
+											</div>
+											<br>
+											<div class="row">
+												<div class="col-md-4">
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<div class="row">
+																<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+																	<div class="col-md-12">
+																		<label for="AVAP">Local do Pagamento</label><br>
+																			<?php 
+																				if($orcatrata['AVAP'] == "P") {
+																					$AVAP = 'Na Casa';
+																				} elseif($orcatrata['AVAP'] == "V"){
+																					$AVAP = 'Na Loja';
+																				}else{
+																					$AVAP = 'On Line';
+																				}
+																			?>
+																		<input type="text" class="form-control" value="<?php echo $AVAP; ?>" readonly=""/>
+																	</div>
+																	<input type="hidden" name="AVAP" value="<?php echo $orcatrata['AVAP'] ?>"/>
+																<?php }else{ ?>
+																	<input type="hidden" name="AVAP" id="AVAP" value="<?php echo $orcatrata['AVAP'] ?>"/>
+																<?php } ?>
 															</div>
 															<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																<div class="row ">

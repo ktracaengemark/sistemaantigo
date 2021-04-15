@@ -262,17 +262,22 @@
 															<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Cliente']['NomeCliente']; ?>">
 														</div>
 														<?php if ($_SESSION['Empresa']['CadastrarPet'] == "S") { ?>
-															<div class="col-md-4">
-																<label >Pet</label>
-																<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Pet']['NomeClientePet']; ?>">
-															</div>
+															<?php if (isset($_SESSION['Consulta']['idApp_ClientePet']) && !empty($_SESSION['Consulta']['idApp_ClientePet']) && $_SESSION['Consulta']['idApp_ClientePet'] != 0) { ?>
+																<div class="col-md-4">
+																	<label >Pet</label>
+																	<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Pet']['NomeClientePet']; ?>">
+																</div>
+															<?php } ?>	
 															<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $orcatrata['idApp_ClientePet']; ?>" />
+															
 														<?php }else{ ?>	
 															<?php if ($_SESSION['Empresa']['CadastrarDep'] == "S") { ?>
-																<div class="col-md-4">
-																<label >Dependente</label>
-																	<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Dep']['NomeClienteDep']; ?>">
-																</div>
+																<?php if (isset($_SESSION['Consulta']['idApp_ClienteDep']) && !empty($_SESSION['Consulta']['idApp_ClienteDep']) && $_SESSION['Consulta']['idApp_ClienteDep'] != 0) { ?>
+																	<div class="col-md-4">
+																	<label >Dependente</label>
+																		<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Dep']['NomeClienteDep']; ?>">
+																	</div>
+																	<?php } ?>
 																<input type="hidden" id="Hidden_idApp_ClienteDep" name="Hidden_idApp_ClienteDep" value="<?php echo $orcatrata['idApp_ClienteDep']; ?>" />
 															<?php } ?>
 														<?php } ?>	
@@ -1346,6 +1351,36 @@
 																	<?php } ?>
 																</div>
 																<div class="row">
+																	<div class="col-md-12">
+																		<label for="FormaPagamento">Forma de Pagamento</label>
+																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+																			data-toggle="collapse" onchange="exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
+																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
+																				id="FormaPagamento" name="FormaPagamento">
+																			<option value="">-- Selecione uma opção --</option>
+																			<?php
+																			foreach ($select['FormaPagamento'] as $key => $row) {
+																				if ($orcatrata['FormaPagamento'] == $key) {
+																					echo'<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																				} else {
+																					echo'<option value="' . $key . '">' . $row . '</option>';
+																				}
+																			}
+																			?>
+																		</select>
+																		<?php echo form_error('FormaPagamento'); ?>
+																	</div>
+																</div>
+															</div>
+														</div>	
+													</div>
+												</div>
+												<br>
+												<div class="row">
+													<div class="col-md-4">
+														<div class="panel panel-default">
+															<div class="panel-heading">
+																<div class="row">
 																	<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																		<div class="col-md-12 text-left">
 																			<label for="AVAP">Local do Pagamento:</label><br>
@@ -1379,36 +1414,6 @@
 																	<?php }else{ ?>
 																		<input type="hidden" name="AVAP" id="AVAP" value="<?php echo $orcatrata['AVAP'] ?>"/>
 																	<?php } ?>
-																</div>
-															</div>
-														</div>	
-													</div>
-												</div>
-												<br>
-												<div class="row">
-													<div class="col-md-4">
-														<div class="panel panel-default">
-															<div class="panel-heading">
-																<div class="row">
-																	<div class="col-md-12">
-																		<label for="FormaPagamento">Forma de Pagamento</label>
-																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
-																			data-toggle="collapse" onchange="exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
-																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-																				id="FormaPagamento" name="FormaPagamento">
-																			<option value="">-- Selecione uma opção --</option>
-																			<?php
-																			foreach ($select['FormaPagamento'] as $key => $row) {
-																				if ($orcatrata['FormaPagamento'] == $key) {
-																					echo'<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																				} else {
-																					echo'<option value="' . $key . '">' . $row . '</option>';
-																				}
-																			}
-																			?>
-																		</select>
-																		<?php echo form_error('FormaPagamento'); ?>
-																	</div>
 																</div>
 																<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																	<div class="row ">

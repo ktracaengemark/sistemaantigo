@@ -2176,6 +2176,7 @@ function clientePet(id = null){
 		
 		if(exibir_id == 1){
 			$('#idApp_ClientePet').hide();
+			$('#idApp_ClientePet').val('0');
 		}
 		/*
 		$('.carregando').show();
@@ -2232,6 +2233,7 @@ function clienteDep(id = null){
 		//console.log('exibir_id = '+exibir_id);
 		if(exibir_id == 1){
 			$('#idApp_ClienteDep').hide();
+			$('#idApp_ClienteDep').val('0');
 		}
 		
 		//$('#idApp_ClienteDep').hide();
