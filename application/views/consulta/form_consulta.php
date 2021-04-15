@@ -359,7 +359,7 @@
 													<textarea class="form-control" id="Obs" name="Obs"><?php echo $query['Obs']; ?></textarea>
 												</div>
 											</div>	
-											<div class="row">		
+											<div class="row">
 												<div class="col-md-6">	
 													<label for="Data">Data Início : </label>												
 													<div class="input-group <?php echo $datepicker; ?>">
@@ -367,22 +367,21 @@
 															<span class="glyphicon glyphicon-calendar"></span>
 														</span>
 														<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-															   name="Data" id="Data" value="<?php echo $query['Data']; ?>" onchange="ocorrencias()" onkeyup="ocorrencias()">
+															   name="Data" id="Data" value="<?php echo $query['Data']; ?>" onchange="ocorrencias(), dataehora(this.value, 'null')" onkeyup="ocorrencias(), dataehora(this.value, 'null')">
 													</div>
 													<?php echo form_error('Data'); ?>
 												</div>	
 												<div class="col-md-6">
 													<label for="Hora">Dàs :</label>
-													<div class="input-group <?php echo $timepicker; ?>">
-														<span class="input-group-addon">
-															<span class="glyphicon glyphicon-time"></span>
-														</span>
+													
 														<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5"  placeholder="HH:MM"
-															   accept=""name="HoraInicio" value="<?php echo $query['HoraInicio']; ?>">
-													</div>
+															   accept=""name="HoraInicio" id="HoraInicio" value="<?php echo $query['HoraInicio']; ?>" onchange="dataehora('null', this.value)" onkeyup="dataehora('null', this.value)">
+													
 													<?php echo form_error('HoraInicio'); ?>
 												</div>
-											</div>	
+												<input type="hidden" id="Hidden_Data" value="<?php echo $query['Data']; ?>">
+												<input type="hidden" id="Hidden_HoraInicio" value="<?php echo $query['HoraInicio']; ?>">
+											</div>
 											<div class="row">		
 												<div class="col-md-6">	
 													<label for="Data2">Data Fim : </label>												
@@ -397,13 +396,10 @@
 												</div>
 												<div class="col-md-6">		
 													<label for="Hora">Às :</label>
-													<div class="input-group <?php echo $timepicker; ?>">
-														<span class="input-group-addon">
-															<span class="glyphicon glyphicon-time"></span>
-														</span>
+													
 														<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5" placeholder="HH:MM"
 															   accept=""name="HoraFim" value="<?php echo $query['HoraFim']; ?>">
-													</div>
+													
 													<?php echo form_error('HoraFim'); ?>
 												</div>
 											</div>
@@ -770,42 +766,68 @@
 												
 												<div class="col-md-12 text-center">
 													<?php if ($metodo == 2) { ?>
-																
-																	<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
-																		<span class="glyphicon glyphicon-save"></span>Savar 
-																	</button>
-																
-																
-																<?php if ($_SESSION['Consulta']['idApp_OrcaTrata'] > 0) { ?>
-																	<!--
-																	<span class="input-group-btn">
-																		<a class="btn btn-lg btn-info " name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $query['idApp_OrcaTrata']; ?>">
-																			<span class="glyphicon glyphicon-print"></span>										
-																		</a>
-																	</span>
-																	-->
-																<?php } ?>
-																<?php if ($_SESSION['Usuario']['Delet_Orcam'] == "S" ) { ?>
-																	<br>
-																		<button  type="button" class="btn btn-md btn-danger btn-block" name="submeter2" id="submeter2" onclick="quais(),DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-																			<span class="glyphicon glyphicon-trash"></span>Exc
-																		</button>
-																	
-																<?php } ?>	
-															
-															<div class="col-md-12 alert alert-warning aguardar" role="alert" >
-																Aguarde um instante! Estamos processando sua solicitação!
-															</div>
-														
+														<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
+															<span class="glyphicon glyphicon-save"></span>Salvar 
+														</button>
+														<?php if ($_SESSION['Consulta']['idApp_OrcaTrata'] > 0) { ?>
+															<!--
+															<span class="input-group-btn">
+																<a class="btn btn-lg btn-info " name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $query['idApp_OrcaTrata']; ?>">
+																	<span class="glyphicon glyphicon-print"></span>										
+																</a>
+															</span>
+															-->
+														<?php } ?>
+														<?php if ($_SESSION['Usuario']['Delet_Orcam'] == "S" ) { ?>
+															<br>
+															<button  type="button" class="btn btn-md btn-danger btn-block" name="submeter2" id="submeter2" onclick="quais(),DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+																<span class="glyphicon glyphicon-trash"></span>Exc
+															</button>
+														<?php } ?>
+														<div class="col-md-12 alert alert-warning aguardar" role="alert" >
+															Aguarde um instante! Estamos processando sua solicitação!
+														</div>
 													<?php } else { ?>
+														
+														<button  type="button" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-salvar-modal-sm">
+															<span class="glyphicon glyphicon-save"></span>Salvar
+														</button>
+														<!--
 														<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
 															<span class="glyphicon glyphicon-save"></span> Salvar
-														</button>	
+														</button>
+														-->
 														<div class="col-md-12 alert alert-warning aguardar" role="alert" >
 															Aguarde um instante! Estamos processando sua solicitação!
 														</div>
 													<?php } ?>
 													
+													<div class="modal fade bs-salvar-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header bg-danger">
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																	<h4 class="modal-title">Tem certeza que deseja Salvar?</h4>
+																</div>
+																<div class="modal-body">  
+																	<span id="Horarios"></span>
+																</div>
+																<div class="modal-footer">
+																	<div class="col-md-6 text-left">
+																		<button type="button" class="btn btn-warning"  name="submeter6" id="submeter6" onclick="DesabilitaBotao()" data-dismiss="modal">
+																			<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+																		</button>
+																	</div>
+																	<div class="col-md-6 text-right">
+																		<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
+																			<span class="glyphicon glyphicon-save"></span> Salvar
+																		</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+														
 													<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">

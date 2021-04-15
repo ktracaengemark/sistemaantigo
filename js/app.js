@@ -29,6 +29,7 @@ fechaBuscaOS();
 exibirTroco();
 exibirExtraOrca();
 exibirDescOrca();
+dataehora();
 qtd_ocorrencias();
 
 function codigo(id, tabela){
@@ -2432,6 +2433,89 @@ function addData() {
   //Exibir a data ja atualizada
   document.getElementById('dataAtualizada').value = currentDate.toLocaleDateString();
 
+}
+
+function dataehora(datainicio = null, horainicio = null) {
+	//alert('dataehora');
+	if(datainicio || horainicio){
+		if(datainicio != "null" && horainicio == "null"){
+			var dtinicio = datainicio;
+			$('#Hidden_Data').val(dtinicio);
+			var hrinicio = $('#Hidden_HoraInicio').val();
+		}else if(datainicio == "null" && horainicio != "null"){
+			var hrinicio = horainicio;
+			$('#Hidden_HoraInicio').val(hrinicio);
+			var dtinicio = $('#Hidden_Data').val();
+		}
+	}else{
+		var dtinicio = $('#Data').val();
+		$('#Hidden_Data').val(dtinicio);
+		var hrinicio = $('#HoraInicio').val();
+		$('#Hidden_HoraInicio').val(hrinicio);
+	}
+	
+		//console.log('datainicio = '+datainicio);
+		//console.log('horainicio = '+horainicio);
+		//console.log('dtinicio = '+dtinicio);
+		//console.log('hrinicio = '+hrinicio);
+		
+	if(dtinicio){
+		var datainicial = dtinicio;
+		// Digamos que este é o formato das suas datas
+		// data = '30/03/2019';
+		// Precisamos quebrar a string para retornar cada parte
+		var datainicialSplit = datainicial.split('/');
+		var day = datainicialSplit[0]; 
+		var month = datainicialSplit[1];
+		var year = datainicialSplit[2];
+		// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
+		//datainicial = new Date(year, month - 1, day);
+		datainicial = year+'-'+month+'-'+day;
+		//console.log('datainicial = '+datainicial);
+	}
+	if(hrinicio){
+		var horainicial = hrinicio;
+		horainicial = hrinicio+':00';
+		//console.log('horainicial = '+horainicial);
+	}	
+	if(dtinicio && hrinicio){
+		var dataehora = datainicial+' '+horainicial;
+		//console.log('dataehora = '+dataehora);
+		var dataehora_orig = dtinicio+ ' às ' +hrinicio;
+		//console.log('dataehora_orig = '+dataehora_orig);
+	}
+		
+    $.ajax({
+		
+		//url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Horarios.php?q=1000&idCliente=' + dataehora,
+		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=1000&idCliente=' + dataehora,
+
+		// dataType json
+        dataType: "json",
+		//method:'get',
+        // função para de sucesso
+        success: function (data) {
+            //console.log(data.length);
+			$("#Horarios").html('<span>Existem '+data.length+' Agendamentos neste horário: ' + dataehora_orig + '</span>');
+			for (i = 0; i < data.length; i++) {
+
+                if (data[i].dataehora == dataehora) {
+					//console.log('id_Consulta = '+data[i].id);
+					//$('#Cep').val(data[i].cepcliente);
+                    break;
+                }
+
+            }//fim do laço
+		},
+		error:function(data){
+			//console.log('Nada encontrado');
+			$("#Horarios").html('<span>Não Existem Agendamentos neste horário: ' + dataehora_orig + '</span>');
+			//alert('Cep não encontrado. Confira o Cep e Tente Novamente');
+			//$('#Cep').val(CepDestino);
+		}
+		
+    });//termina o ajax
+	
 }
 
 function qtd_ocorrencias(status_PorConsulta) {

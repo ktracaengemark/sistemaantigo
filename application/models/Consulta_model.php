@@ -141,6 +141,23 @@ class Consulta_model extends CI_Model {
         return $query;
     }
 	
+    public function get_horarios($data) {
+        $query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_Consulta
+			WHERE
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				DataInicio = "' . $data . '"
+			ORDER BY
+				idApp_Consulta ASC
+		');
+		
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
     public function get_recorrencia() {
         $query = $this->db->query('
 			SELECT 

@@ -635,7 +635,41 @@ class Consulta extends CI_Controller {
             $data['query']['Data2'] = date('d/m/Y', substr($this->input->get('end'), 0, -3));
 			$data['query']['HoraInicio'] = date('H:i', substr($this->input->get('start'), 0, -3));
             $data['query']['HoraFim'] = date('H:i', substr($this->input->get('end'), 0, -3));
-        }
+
+			/*
+			$data['dtinicio'] = DateTime::createFromFormat('d/m/Y', $data['query']['Data']);
+			$data['dtinicio'] = $data['dtinicio']->format('Y-m-d');
+			
+			
+			$data['hrinicio'] = DateTime::createFromFormat('H:i', $data['query']['HoraInicio']);
+			$data['hrinicio'] = $data['hrinicio']->format('H:i:s');
+			
+			
+			$_SESSION['Horario'] = $this->Consulta_model->get_horarios($data['dtinicio'] . ' ' . $data['hrinicio']);		
+			
+			$data['count_horario'] = count($_SESSION['Horario']);
+			
+		   
+			echo '<br>';
+			echo "<pre>";
+			print_r($data['query']['Data']);
+			echo '<br>';
+			print_r($data['query']['HoraInicio']);
+			echo '<br>';
+			print_r($data['dtinicio']);
+			echo '<br>';
+			print_r($data['hrinicio']);
+			echo '<br>';
+			print_r($data['count_horario']);
+			echo '<br>';
+			print_r($_SESSION['Horario']);
+			echo '<br>';
+			echo "</pre>";
+			*/	
+		
+		
+		}
+			
 		
         #Ver uma solução melhor para este campo
         (!$data['query']['Paciente']) ? $data['query']['Paciente'] = 'R' : FALSE;
@@ -758,7 +792,39 @@ class Consulta extends CI_Controller {
         $data['timepicker'] = 'TimePicker';
 
         #$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
-
+		
+		/*
+		$data['dtinicio'] = DateTime::createFromFormat('d/m/Y', $data['query']['Data']);
+		$data['dtinicio'] = $data['dtinicio']->format('Y-m-d');
+		
+		
+		$data['hrinicio'] = DateTime::createFromFormat('H:i', $data['query']['HoraInicio']);
+		$data['hrinicio'] = $data['hrinicio']->format('H:i:s');
+		
+		
+		$_SESSION['Horario'] = $this->Consulta_model->get_horarios($data['dtinicio'] . ' ' . $data['hrinicio']);		
+		
+		$data['count_horario'] = count($_SESSION['Horario']);
+		
+	   
+		echo '<br>';
+		echo "<pre>";
+		print_r($data['query']['Data']);
+		echo '<br>';
+		print_r($data['query']['HoraInicio']);
+		echo '<br>';
+		print_r($data['dtinicio']);
+		echo '<br>';
+		print_r($data['hrinicio']);
+		echo '<br>';
+		print_r($data['count_horario']);
+		echo '<br>';
+		print_r($_SESSION['Horario']);
+		echo '<br>';
+		echo "</pre>";
+		exit();	
+		*/
+		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
 		if ($data['cadastrar']['Repetir'] == 'S') {

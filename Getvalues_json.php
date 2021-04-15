@@ -803,6 +803,27 @@ elseif ($_GET['q'] == 102) {
     
 }
 
+elseif  ($_GET['q']==1000) {
+
+    $result = mysql_query('
+		SELECT *
+        FROM
+            App_Consulta
+        WHERE
+			idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+			DataInicio = "' . $_GET['idCliente'] . '"
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idApp_Consulta'],
+            'dataehora' => $row['DataInicio'],
+        );
+    }
+
+}
+
 echo json_encode($event_array);
 mysql_close($link);
 ?>
