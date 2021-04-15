@@ -196,16 +196,34 @@
 												<input type="hidden" name="Negocio" id="Negocio" value="1"/>
 												<input type="hidden" name="Empresa" id="Empresa" value="<?php echo $_SESSION['log']['idSis_Empresa']; ?>"/>
 												<input type="hidden" name="NivelEmpresa" id="NivelEmpresa" value="<?php echo $_SESSION['log']['NivelEmpresa']; ?>"/>
-												<h4 class="mb-3">
-														<b>Editar Status Receita</b> - Nº <?php echo $orcatrata['idApp_OrcaTrata'] ?> - 
-																					<?php 
-																						if($orcatrata['Tipo_Orca'] == "B"){
-																							echo 'Balcão';
-																						} elseif($orcatrata['Tipo_Orca'] == "O"){
-																							echo 'OnLine';
-																						}
-																					?>
-													</h4>
+												
+												<div class="form-group">	
+													<div class="row">
+														<div class="col-md-4 ">
+															<h4 class="mb-3">
+																	<b>Editar Status Receita</b> - Nº <?php echo $orcatrata['idApp_OrcaTrata'] ?> - 
+																								<?php 
+																									if($orcatrata['Tipo_Orca'] == "B"){
+																										echo 'Balcão';
+																									} elseif($orcatrata['Tipo_Orca'] == "O"){
+																										echo 'OnLine';
+																									}
+																								?>
+															</h4>
+														</div>	
+														<?php if (isset($_SESSION['Orcatrata']['RepeticaoCons']) && $_SESSION['Orcatrata']['RepeticaoCons'] != 0){ ?>	
+															<div class="col-md-4 ">
+																<label >Agendamento</label>
+																<a class="btn btn-md btn-info btn-block"  name="submeter6" id="submeter6" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() ?>consulta/alterar/<?php echo $_SESSION['Orcatrata']['idApp_Cliente'];?>/<?php echo $_SESSION['Orcatrata']['RepeticaoCons'];?>" role="button">
+																	<span class="glyphicon glyphicon-pencil"></span> <?php echo $_SESSION['Orcatrata']['RepeticaoCons'];?>
+																</a>
+																<div class="col-md-12 alert alert-warning aguardar" role="alert" >
+																	Aguarde um instante! Estamos processando sua solicitação!
+																</div>
+															</div>
+														<?php } ?>
+													</div>	
+												</div>		
 												<div class="form-group">	
 													<div class="row">
 														<div class="col-md-4">
@@ -1170,8 +1188,8 @@
 															<div class="row">	
 																<div class="col-md-12">
 																	<label for="Descricao">Obs/Descrição:</label>
-																	<input class="form-control" id="Descricao" <?php echo $readonly; ?> 
-																	placeholder="Observaçoes:" name="Descricao" readonly="" value="<?php echo $orcatrata['Descricao']; ?>"></input>
+																	<textarea class="form-control" id="Descricao" <?php echo $readonly; ?> 
+																	placeholder="Observaçoes:" name="Descricao" readonly="" value="<?php echo $orcatrata['Descricao']; ?>"><?php echo $orcatrata['Descricao']; ?></textarea>
 																</div>
 															</div>
 														</div>

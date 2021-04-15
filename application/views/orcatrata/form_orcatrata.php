@@ -1375,8 +1375,8 @@
 																<div class="row">	
 																	<div class="col-md-12">
 																		<label for="Descricao">Obs/Descrição:</label>
-																		<input class="form-control" id="Descricao" <?php echo $readonly; ?> 
-																		placeholder="Observaçoes:" name="Descricao" value="<?php echo $orcatrata['Descricao']; ?>"></input>
+																		<textarea class="form-control" id="Descricao" <?php echo $readonly; ?> 
+																		placeholder="Observaçoes:" name="Descricao" value="<?php echo $orcatrata['Descricao']; ?>"><?php echo $orcatrata['Descricao']; ?></textarea>
 																	</div>
 																</div>
 															</div>

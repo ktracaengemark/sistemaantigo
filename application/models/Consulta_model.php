@@ -131,7 +131,7 @@ class Consulta_model extends CI_Model {
 				App_Consulta
 			WHERE 
 				Repeticao = ' . $data . ' AND
-				idApp_OrcaTrata != 0
+				idApp_OrcaTrata = 0
 			ORDER BY
 				idApp_Consulta ASC
 		');
@@ -172,7 +172,7 @@ class Consulta_model extends CI_Model {
 			SELECT 
 				*
 			FROM 
-				App_Consulta
+			App_Consulta
 			WHERE
 				' . $filtro . '
 		');

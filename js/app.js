@@ -29,6 +29,7 @@ fechaBuscaOS();
 exibirTroco();
 exibirExtraOrca();
 exibirDescOrca();
+qtd_ocorrencias();
 
 function codigo(id, tabela){
 	//alert('ok codigo');
@@ -2279,20 +2280,26 @@ function fechaBuscaOS(novaos){
 	//console.log('Hidden_NovaOS = '+$('#Hidden_NovaOS').val());
 	if(novaos){
 		var hnovaos = novaos;
+		$('#Hidden_NovaOS').val(hnovaos);
 	}else{
 		var hnovaos = $('#Hidden_NovaOS').val();
 	}
+	//console.log('hnovaos = '+hnovaos);
 	if(hnovaos == "S"){
+		$('.vincular').hide();
 		$('.hnovaos').hide();
 	}else{
+		$('.vincular').show();
 		$('.hnovaos').show();
 	}
+	
+	
 }
 
 function mudaBuscaOS(novaos){
 	
 	var hnovaos = $('#Hidden_NovaOS').val();
-	console.log(hnovaos);
+	//console.log(hnovaos);
 	
 	if(hnovaos == "S"){
 		$('.hnovaos').hide();
@@ -2425,8 +2432,67 @@ function addData() {
 
 }
 
+function qtd_ocorrencias(status_PorConsulta) {
+	if(status_PorConsulta){
+		var novo_status_PorConsulta = status_PorConsulta;
+		$('#Hidden_Status_PorConsulta').val(novo_status_PorConsulta);
+		var Hidden_Status_Vincular = $('#Hidden_Status_Vincular').val();
+	}else{
+		var novo_status_PorConsulta = $('#Hidden_Status_PorConsulta').val();
+		
+	}
+	//$("#Ocorrencias").html('<span>'+ocorrencias+ '</span>');
+		
+		//console.log('Hidden_Status_Vincular = '+Hidden_Status_Vincular);
+	
+	
+		var count_repet = $('#count_repet').val();
+						//console.log('count_repet = '+count_repet);
+		var metodo = $('#metodo').val();
+						//console.log('metodo = '+metodo);
+		//var ocorrencias = $('#Recorrencias').val();
+						
+		
+		if(metodo == 1){
+			var ocorrencias = $('#Recorrencias').val();
+			$("#Ocorrencias").html('<span>'+ocorrencias+'</span>');
+			
+		}else{
+			if(count_repet == 0){
+				var ocorrencias = 1;
+				$("#Ocorrencias").html('<span>1</span>');
+			}else{
+				var ocorrencias = count_repet;
+				$("#Ocorrencias").html('<span>'+count_repet+'</span>');
+			}
+		}
+			
+		//console.log('status_PorConsulta = '+novo_status_PorConsulta);
+	
+		if(ocorrencias == 1){
+			if(novo_status_PorConsulta == "N"){
+				$('.novaos').hide();
+				$('.vincular').show();
+				$('.hnovaos').show();
+				
+			}else{
+				$('.novaos').hide();
+				$('.hnovaos').hide();
+			}
+		}else{
+			$('.novaos').show();
+			$('.vincular').hide();
+			$('.hnovaos').hide();
+		}
+		//console.log('ocorrencias = '+ocorrencias);
+		
+	
+}
+
 function ocorrencias(repetir = null) {
 	if(repetir){
+		var status_repetir = repetir;
+		$('#Hidden_Status_Repetir').val(status_repetir);
 		if(repetir == 'N'){
 			$('#Recorrencias').val('1');
 			$('#Intervalo').val('');
@@ -2434,7 +2500,20 @@ function ocorrencias(repetir = null) {
 			$('#Periodo').val('');
 			$('#Tempo2').val('1');
 		}
+	}else{
+		var status_repetir = $('#Hidden_Status_Repetir').val();
+		if(status_repetir == 'N'){
+			$('#Recorrencias').val('1');
+		}
 	}
+	
+	var ocorrencias = $('#Recorrencias').val();
+	$("#Ocorrencias").html('<span>'+ocorrencias+ '</span>');
+
+	//console.log('Repetir = '+repetir);
+	//console.log('ocorrencias = '+ocorrencias);
+	//console.log('Status_Repetir = '+status_repetir);
+	
 	var datainicial = $('#Data').val();
 	// Digamos que este é o formato das suas datas
 	// data = '30/03/2019';
@@ -2523,7 +2602,7 @@ function ocorrencias(repetir = null) {
 	//console.log('Ocorrências: ' + ocorrencias + ' Vez(es)');
 	//$('#Recorrencias').val(ocorrencias);
 	
-	var ocorrencias = $('#Recorrencias').val();
+	//var ocorrencias = $('#Recorrencias').val();
 	
 	if(escala1 == 1){
 		datatermino.setDate(datatermino.getDate()+(inter_int*(ocorrencias - 1)));
