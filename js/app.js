@@ -190,7 +190,7 @@ function buscaPet(){
 					var pelopet = 'N.I.';
 				}
 				
-				$("#Pet").html('<p>' + especiepet + '/ ' + raca + '/ ' + portepet + '/ ' + pelopet + '</p>');
+				$("#Pet").html('<p>' + especiepet + '/ ' + raca + '/ ' + portepet + '/ ' + pelopet + '/ ' + obs + '</p>');
 				//$("#Pet").html('<div class="alert alert-warning" role="alert">' + nome + '/ ' + especiepet + '/ ' + portepet + '/<br>' + raca + '/ ' + pelopet + '</div>');
 				
 			},
@@ -219,7 +219,7 @@ function buscaDep(){
 				var sexo 		= data[0]['sexo'];
 				var obs 		= data[0]['obs'];
 				
-				$("#Dep").html('<p >Nenhum Dependente Selecionado!</p>');
+				$("#Dep").html('<p>' + obs + '</p>');
 				
 			},
 			error:function(data){
@@ -360,7 +360,7 @@ $('#idApp_ClientePet').on('change', function(event){
 				var pelopet = 'N.I.';
 			}
 			
-			$("#Pet").html('<p>' + especiepet + '/ ' + raca + '/ ' + portepet + '/ ' + pelopet + '</p>');
+			$("#Pet").html('<p>' + especiepet + '/ ' + raca + '/ ' + portepet + '/ ' + pelopet + '/ ' + obs + '</p>');
 			
 		},
 		error:function(data){
@@ -2183,8 +2183,7 @@ function clientePet(id = null){
 		$('.carregando').show();
 		*/
 		
-		$.getJSON(caminho2 + 'cadastros/pesquisar/ClientePet.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
-
+		$.getJSON(window.location.origin+ '/' + app + '/cadastros/pesquisar/ClientePet.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
 			//console.log(idApp_Cliente);
 			//console.log(j);
 			//console.log(j.length);
@@ -2241,7 +2240,7 @@ function clienteDep(id = null){
 		/*
 		$('.carregando').show();
 		*/
-		$.getJSON(caminho2 + 'cadastros/pesquisar/ClienteDep.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
+		$.getJSON(window.location.origin+ '/' + app + '/cadastros/pesquisar/ClienteDep.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
 			//console.log(idApp_Cliente);
 			//console.log(j.length);
 			
@@ -2347,8 +2346,7 @@ function clienteOT(id = null){
 		//console.log(id);
 		
 		//$('#idApp_OrcaTrata').hide();
-		
-		$.getJSON(caminho2 + 'cadastros/pesquisar/OrcaTrata.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
+		$.getJSON(window.location.origin+ '/' + app + '/cadastros/pesquisar/OrcaTrata.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
 			
 			var options = '<option value="">-- Sel. O.S. --</option>';	
 			for (var i = 0; i < j.length; i++) {
@@ -2487,8 +2485,8 @@ function dataehora(datainicio = null, horainicio = null) {
 		
     $.ajax({
 		
-		//url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Horarios.php?q=1000&idCliente=' + dataehora,
-		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=1000&idCliente=' + dataehora,
+		url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Horarios.php?id=' + dataehora,
+		//url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=1000&idCliente=' + dataehora,
 
 		// dataType json
         dataType: "json",
@@ -2512,7 +2510,7 @@ function dataehora(datainicio = null, horainicio = null) {
 					$("#Horarios").html('<span>Existe(m) <strong>" ' +quantidade+' " </strong> Agendamento(s) neste horário: ' + dataehora_orig + '</span>');
 				}
 			}
-			
+			//console.log('quantidade = '+quantidade);
 			for (i = 0; i < data.length; i++) {
 
                 if (data[i].dataehora == dataehora) {

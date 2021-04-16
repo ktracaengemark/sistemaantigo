@@ -240,13 +240,22 @@
 										<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Cliente']['NomeCliente']; ?>">
 									</div>
 									<?php if($_SESSION['Empresa']['CadastrarDep'] == "S"){?>
+										<input type="hidden" id="Hidden_idApp_ClienteDep" name="Hidden_idApp_ClienteDep" value="<?php echo $query['idApp_ClienteDep']; ?>" />
+										<div class="col-md-4 text-left">
+											<label  for="idApp_ClienteDep">Dep</label>
+											<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_ClienteDep" name="idApp_ClienteDep">
+												<option value=""></option>
+											</select>
+											<span class="modal-title" id="Dep"></span>
+										</div>
+										<!--
 										<div class="col-md-4 text-left">	
 											<label  for="idApp_ClienteDep">Dependente:</label>
-											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php #echo $readonly; ?>
 													id="idApp_ClienteDep" name="idApp_ClienteDep">
 												<option value="">-- Sel. Dependente --</option>
 												<?php
-												
+												/*
 												foreach ($select['idApp_ClienteDep'] as $key => $row) {
 													if ($query['idApp_ClienteDep'] == $key) {
 														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -254,20 +263,30 @@
 														echo '<option value="' . $key . '">' . $row . '</option>';
 													}
 												}
-												
+												*/
 												?>
 											</select>
-											<?php echo form_error('idApp_ClienteDep'); ?>
+											<?php #echo form_error('idApp_ClienteDep'); ?>
 										</div>
+										-->
 									<?php } ?>
 									<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
+										<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $query['idApp_ClientePet']; ?>" />
+										<div class="col-md-4 text-left">
+											<label  for="idApp_ClientePet">Pet</label>
+											<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_ClientePet" name="idApp_ClientePet">
+												<option value=""></option>
+											</select>
+											<span class="modal-title" id="Pet"></span>
+										</div>
+										<!--
 										<div class="col-md-4 text-left">	
 											<label  for="idApp_ClientePet">Pet:</label>
-											<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+											<select data-placeholder="Selecione uma opção..." class="form-control" <?php #echo $readonly; ?>
 													id="idApp_ClientePet" name="idApp_ClientePet">
 												<option value="">-- Sel. Pet --</option>
 												<?php
-												
+												/*
 												foreach ($select['idApp_ClientePet'] as $key => $row) {
 													if ($query['idApp_ClientePet'] == $key) {
 														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -275,11 +294,12 @@
 														echo '<option value="' . $key . '">' . $row . '</option>';
 													}
 												}
-												
+												*/
 												?>
 											</select>
-											<?php echo form_error('idApp_ClientePet'); ?>
+											<?php #echo form_error('idApp_ClientePet'); ?>
 										</div>
+										-->
 									<?php } ?>	
 								<?php } ?>
 							</div>
@@ -714,12 +734,20 @@
 															</div>
 														<?php } elseif($alterarcliente == 2){?>	
 															<div id="Vincular" <?php echo $div['Vincular']; ?>>
+																<div class="col-md-12 text-left hnovaos"><?php //retirei essa classe "" desta div?>
+																	<label  for="idApp_OrcaTrata">O.S.</label>
+																	<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_OrcaTrata" name="idApp_OrcaTrata">
+																		<option value=""></option>
+																	</select>
+																</div>
+																<!--
 																<div class="col-md-12 text-left hnovaos"><?php //retirei essa classe "" desta div?>	
 																	<label  for="idApp_OrcaTrata">O.S.:</label>
-																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php #echo $readonly; ?>
 																			id="idApp_OrcaTrata" name="idApp_OrcaTrata">
 																		<option value="">-- Sel. Orcamento --</option>
 																		<?php
+																		/*
 																		foreach ($select['idApp_OrcaTrata'] as $key => $row) {
 																			if ($query['idApp_OrcaTrata'] == $key) {
 																				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -727,10 +755,12 @@
 																				echo '<option value="' . $key . '">' . $row . '</option>';
 																			}
 																		}
+																		*/
 																		?>
 																	</select>
-																	<?php echo form_error('idApp_OrcaTrata'); ?>
+																	<?php #echo form_error('idApp_OrcaTrata'); ?>
 																</div>
+																-->
 															</div>	
 														<?php } ?>
 													</div>

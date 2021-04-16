@@ -266,18 +266,20 @@
 																<div class="col-md-4">
 																	<label >Pet</label>
 																	<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Pet']['NomeClientePet']; ?>">
+																	<span class="modal-title" id="Pet"></span>
 																</div>
 															<?php } ?>	
 															<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $orcatrata['idApp_ClientePet']; ?>" />
-															
 														<?php }else{ ?>	
 															<?php if ($_SESSION['Empresa']['CadastrarDep'] == "S") { ?>
 																<?php if (isset($_SESSION['Consulta']['idApp_ClienteDep']) && !empty($_SESSION['Consulta']['idApp_ClienteDep']) && $_SESSION['Consulta']['idApp_ClienteDep'] != 0) { ?>
+																	
 																	<div class="col-md-4">
-																	<label >Dependente</label>
+																		<label >Dependente</label>
 																		<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Dep']['NomeClienteDep']; ?>">
+																		<span class="modal-title" id="Dep"></span>
 																	</div>
-																	<?php } ?>
+																<?php } ?>
 																<input type="hidden" id="Hidden_idApp_ClienteDep" name="Hidden_idApp_ClienteDep" value="<?php echo $orcatrata['idApp_ClienteDep']; ?>" />
 															<?php } ?>
 														<?php } ?>	

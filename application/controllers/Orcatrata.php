@@ -7472,6 +7472,8 @@ class Orcatrata extends CI_Controller {
             'idApp_OrcaTrata',
             #Não há a necessidade de atualizar o valor do campo a seguir
             'idApp_Cliente',
+			'idApp_ClientePet',
+			'idApp_ClienteDep',
             'DataOrca',
 			'TipoFinanceiro',
 			'DataPrazo',

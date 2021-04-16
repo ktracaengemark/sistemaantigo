@@ -257,16 +257,20 @@
 																	<div class="col-md-4">
 																		<label >Pet</label>
 																		<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['ClientePet']['NomeClientePet']; ?>">
+																		<span class="modal-title" id="Pet"></span>
 																	</div>
 																<?php } ?>
+																<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $orcatrata['idApp_ClientePet']; ?>" />
 															<?php }else{ ?>	
 																<?php if ($_SESSION['Empresa']['CadastrarDep'] == "S") { ?>
 																	<?php if (!empty($_SESSION['Orcatrata']['idApp_ClienteDep']) && $_SESSION['Orcatrata']['idApp_ClienteDep'] != 0) { ?>
 																		<div class="col-md-4">
 																			<label >Dependente</label>
 																			<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['ClienteDep']['NomeClienteDep']; ?>">
+																			<span class="modal-title" id="Dep"></span>
 																		</div>
 																	<?php } ?>
+																	<input type="hidden" id="Hidden_idApp_ClienteDep" name="Hidden_idApp_ClienteDep" value="<?php echo $orcatrata['idApp_ClienteDep']; ?>" />
 																<?php } ?>
 															<?php } ?>
 															<!--
@@ -2202,7 +2206,9 @@
 											<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
 											<input type="hidden" name="Tipo_Orca"  id="Tipo_Orca" value="<?php echo $orcatrata['Tipo_Orca']; ?>">
 											<input type="hidden" name="Cadastrar" value="<?php echo $cadastrar['Cadastrar'] ?>">
-											<input type="hidden" name="idApp_Cliente" value="<?php echo $orcatrata['idApp_Cliente'] ?>">
+											<input type="hidden" name="idApp_Cliente" id="idApp_Cliente" value="<?php echo $orcatrata['idApp_Cliente'] ?>">
+											<input type="hidden" name="idApp_ClientePet" id="idApp_ClientePet" value="<?php echo $orcatrata['idApp_ClientePet']; ?>" />
+											<input type="hidden" name="idApp_ClienteDep" id="idApp_ClienteDep" value="<?php echo $orcatrata['idApp_ClienteDep']; ?>" />
 											<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
 											<input type="hidden" name="Modalidade" value="<?php echo $orcatrata['Modalidade'] ?>">
 											<input type="hidden" name="BrindeOrca" value="<?php echo $orcatrata['BrindeOrca'] ?>">-->
