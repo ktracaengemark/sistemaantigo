@@ -47,6 +47,8 @@ $result = mysql_query(
             C.idApp_ClientePet,
 			C.idSis_Usuario,
             E.NomeEmpresa AS NomeEmpresaEmp,
+            E.CadastrarPet,
+            E.CadastrarDep,
 			R.NomeCliente,
 			R.CelularCliente,
 			R.CpfCliente,
@@ -205,6 +207,8 @@ while ($row = mysql_fetch_assoc($result)) {
         'Repeticao' 	=> $repeticao,
         'DataTermino' 	=> $datatermino,
         'OS' 			=> $OS,
+		'CadastrarPet' 	=> $row['CadastrarPet'],
+		'CadastrarDep' 	=> $row['CadastrarDep'],
 		'titledep' 		=> $row['NomeClienteDep'],
 		'titlepet' 		=> $row['NomeClientePet'],
     );
