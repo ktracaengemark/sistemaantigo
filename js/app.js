@@ -8760,8 +8760,8 @@ $('#calendar').fullCalendar({
     timezone: "local",
     lang: 'pt-br',
     eventAfterRender: function (event, element) {
-		console.log('CadastrarPet = '+event.CadastrarPet);
-		console.log('CadastrarDep = '+event.CadastrarDep);
+		//console.log('CadastrarPet = '+event.CadastrarPet);
+		//console.log('CadastrarDep = '+event.CadastrarDep);
         if (event.Evento == 1){
             var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b>" + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencia + " <b> - </b> " + event.Repeticao + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
         }else{
