@@ -541,10 +541,12 @@
 											<table class="table table-bordered table-condensed table-striped">
 												<thead>
 													<tr>
-														<th class="col-md-3" scope="col">Parcela</th>
-														<th class="col-md-3" scope="col">R$</th>											
-														<th class="col-md-3" scope="col">Venc Prc</th>
-														<th class="col-md-3" scope="col">Prc.Qt?</th>
+														<th class="col-md-1" scope="col">Parcela</th>
+														<th class="col-md-3" scope="col">FormaPag</th>
+														<th class="col-md-1" scope="col">R$</th>
+														<th class="col-md-3" scope="col">Venc. </th>
+														<th class="col-md-1" scope="col">Pago?</th>
+														<th class="col-md-3" scope="col">Dt.Pago</th>
 													</tr>
 												</thead>
 
@@ -557,9 +559,11 @@
 
 													<tr>
 														<td><?php echo $parcelasrec[$i]['Parcela'] ?></td>
-														<td><?php echo number_format($parcelasrec[$i]['ValorParcela'], 2, ',', '.') ?></td>											
+														<td><?php echo $parcelasrec[$i]['FormaPag'] ?></td>
+														<td><?php echo number_format($parcelasrec[$i]['ValorParcela'], 2, ',', '.') ?></td>
 														<td><?php echo $parcelasrec[$i]['DataVencimento'] ?></td>
-														<td><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$i]['Quitado'], 'NS') ?></td>									
+														<td><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$i]['Quitado'], 'NS') ?></td>
+														<td><?php echo $parcelasrec[$i]['DataPago'] ?></td>									
 													</tr>
 
 													<?php
@@ -738,9 +742,9 @@
 								
 								<thead>
 									<tr>
-										<th class="col-md-1" scope="col">Parcela</th>
-										<th class="col-md-3" scope="col">Venc.</th>
-										<th class="col-md-1" scope="col">R$</th>
+										<th class="col-md-1" scope="col">Par</th>
+										<th class="col-md-1" scope="col">R$|Forma</th>
+										<th class="col-md-3" scope="col">Venc. || Dt.Pago</th>
 										<th class="col-md-1" scope="col">Pago?</th>										
 									</tr>
 								</thead>
@@ -749,9 +753,9 @@
 									<?php for ($j=1; $j <= $count['PRCount']; $j++) { ?>
 										<tr>
 											<td class="col-md-1" scope="col"><?php echo $parcelasrec[$j]['Parcela'] ?></td>
-											<td class="col-md-3" scope="col"><?php echo $parcelasrec[$j]['DataVencimento'] ?></td>
-											<td class="col-md-1" scope="col"><?php echo number_format($parcelasrec[$j]['ValorParcela'], 2, ',', '.') ?></td>
-											<td class="col-md-1" scope="col"><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$j]['Quitado'], 'NS') ?></td>									
+											<td class="col-md-1" scope="col"><?php echo number_format($parcelasrec[$j]['ValorParcela'], 2, ',', '.') ?> | <?php echo $parcelasrec[$j]['FormaPag'] ?></td>
+											<td class="col-md-3" scope="col"><?php echo $parcelasrec[$j]['DataVencimento'] ?> || <?php echo $parcelasrec[$j]['DataPago'] ?></td>
+											<td class="col-md-1" scope="col"><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$j]['Quitado'], 'NS') ?></td>
 										</tr>
 									<?php
 									} 

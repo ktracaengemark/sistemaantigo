@@ -4763,16 +4763,7 @@ function calculaParcelas(mod) {
 		if(parcelas == 0){
 			parcelas = 1;
 		}
-		
 
-		if (parcelas >= 2) {
-			//console.log( $("#FormaPagamentoParcela"+(parcelas-1)).val() );
-			var chosen;
-			chosen = $("#FormaPagamentoParcela"+(parcelas-1)).val();
-			//console.log( chosen + ' :: ' + parcelas );
-		}	
-		
-		
 		//$("#QtdParcelasOrca").val(parcelas);
 		var vencimento = $("#DataVencimentoOrca").val();
 
@@ -4804,7 +4795,15 @@ function calculaParcelas(mod) {
 
 		//gera os campos de parcelas
 		for (i=1; i<=parcelas; i++) {
-
+			
+			if (i >= 2) {
+				//console.log( $("#FormaPagamentoParcela"+(i-1)).val() );
+				var chosen;
+				chosen = $("#FormaPagamentoParcela"+(i-1)).val();
+				//console.log( chosen + ' :: ' + i );
+			}		
+			
+		
 			//calcula as datas das próximas parcelas
 			var futureMonth = moment(currentDate).add(i-1, 'M');
 			var futureMonthEnd = moment(futureMonth).endOf('month');
@@ -4817,7 +4816,7 @@ function calculaParcelas(mod) {
 					<div class="panel panel-warning">\
 						<div class="panel-heading">\
 							<div class="row">\
-								<div class="col-md-2">\
+								<div class="col-md-1">\
 									<label for="Parcela">Prcl.:'+i+'</label><br>\
 									<input type="text" class="form-control" maxlength="6"\
 										   name="Parcela'+i+'" value="'+i+'/'+parcelas+'">\
@@ -4826,7 +4825,7 @@ function calculaParcelas(mod) {
 									<label for="FormaPagamentoParcela'+i+'">FormaPag:</label>\
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen_Parcela"\
 											 id="FormaPagamentoParcela'+i+'" name="FormaPagamentoParcela'+i+'">\
-										<option value=""></option>\
+										<option value="'+formapag+'"></option>\
 									</select>\
 								</div>\
 								<div class="col-md-2">\
@@ -4878,11 +4877,9 @@ function calculaParcelas(mod) {
 				</div>'
 			);
 
-		
 			//get a reference to the select element
-			$select_1000 = $('#FormaPagamentoParcela'+i);
-			
-			//console.log($select_1000);
+			$select2 = $('#FormaPagamentoParcela'+i);
+			//console.log( $select2 + ' :: ' + i );
 			//request the JSON data and parse into the select element
 			$.ajax({
 				url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=70',
@@ -4890,12 +4887,12 @@ function calculaParcelas(mod) {
 				type: "GET",
 				success: function (data) {
 					//clear the current content of the select
-					$select_1000.html('');
+					$select2.html('');
 					//iterate over the data and append a select option
-					$select_1000.append('<option value="">-- Sel. FormaPag. --</option>');
+					$select2.append('<option value="">-- Sel. FormaPag. --</option>');
 					$.each(data, function (key, val) {
 						//alert(val.id);
-						$select_1000.append('<option value="' + val.id + '">' + val.name + '</option>');
+						$select2.append('<option value="' + val.id + '">' + val.name + '</option>');
 					})
 					$('.Chosen_Parcela').chosen({
 						disable_search_threshold: 10,
@@ -4908,45 +4905,14 @@ function calculaParcelas(mod) {
 				error: function () {
 					//alert('erro listadinamicaB');
 					//if there is an error append a 'none available' option
-					$select_1000.html('<option id="-1">ERRO</option>');
+					$select2.html('<option id="-1">ERRO</option>');
 				}
 
-			});
+			});	
+	
 		
 		}
-		
-		/*
-		//request the JSON data and parse into the select element
-		$.ajax({
-			url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=70',
-			dataType: 'JSON',
-			type: "GET",
-			success: function (data) {
-				//clear the current content of the select
-				$select_1000.html('');
-				//iterate over the data and append a select option
-				$select_1000.append('<option value="">-- Sel. FormaPag. --</option>');
-				$.each(data, function (key, val) {
-					//alert(val.id);
-					$select_1000.append('<option value="' + val.id + '">' + val.name + '</option>');
-				})
-				$('.Chosen_Parcela').chosen({
-					disable_search_threshold: 10,
-					multiple_text: "Selecione uma ou mais opções",
-					single_text: "Selecione uma opção",
-					no_results_text: "Nenhum resultado para",
-					width: "100%"
-				});
-			},
-			error: function () {
-				//alert('erro listadinamicaB');
-				//if there is an error append a 'none available' option
-				$select_1000.html('<option id="-1">ERRO</option>');
-			}
-
-		});
-		*/		
-				
+	
 		//habilita o botão de calendário após a geração dos campos dinâmicos
 		$('.DatePicker').datetimepicker(dateTimePickerOptions);
 
@@ -4978,7 +4944,10 @@ function calculaParcelas(mod) {
 }
 
 function adicionaParcelas() {
-
+	
+	var formapag = $("#FormaPagamento").val();
+	//console.log(formapag + ' - forma de pagamento');
+	
 	var pr = $("#PRCount").val(); //initlal text box count
 	pr++; //text box increment
 	$("#PRCount").val(pr);
@@ -5008,7 +4977,7 @@ function adicionaParcelas() {
 							<label for="FormaPagamentoParcela'+pr+'">FormaPag:</label>\
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen_Parcela"\
 									 id="FormaPagamentoParcela'+pr+'" name="FormaPagamentoParcela'+pr+'">\
-								<option value=""></option>\
+								<option value="'+formapag+'"></option>\
 							</select>\
 						</div>\
 						<div class="col-md-2">\
@@ -8753,13 +8722,6 @@ $('#Posicao').chosen({
     no_results_text: "Nenhum resultado para",
     width: "100%"
 });
-
-//console.log($('#AgendaI').val()); 
-//console.log($('#AgendaF').val());
-
-//var horarioAgendaI = $('#AgendaI').val();
-//var horarioAgendaF = $('#AgendaF').val(); 
- 
 $('#calendar').fullCalendar({
 	header: {
         left: 'prev,next today',

@@ -1595,14 +1595,14 @@
 																		</select>
 																	</div>
 																	-->
-																	<!--
-																	<div class="col-md-1">
-																		<label><br></label><br>
-																		<button type="button" id="<?php echo $i ?>" class="remove_field21 btn btn-danger">
-																			<span class="glyphicon glyphicon-trash"></span>
-																		</button>
-																	</div>
-																	-->
+																	<?php if ($_SESSION['Usuario']['Bx_Pag'] == "S") { ?>
+																		<div class="col-md-1">
+																			<label><br></label><br>
+																			<button type="button" id="<?php echo $i ?>" class="remove_field21 btn btn-danger">
+																				<span class="glyphicon glyphicon-trash"></span>
+																			</button>
+																		</div>
+																	<?php } ?>
 																</div>
 															</div>
 														</div>

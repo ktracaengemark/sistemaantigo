@@ -585,7 +585,16 @@ class Orcatrataprint_model extends CI_Model {
     }
 	
     public function get_parcelasrec($data) {
-		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data);
+		$query = $this->db->query('
+			SELECT 
+				PR.*,
+				FP.FormaPag
+			FROM 
+				App_Parcelas AS PR 
+					LEFT JOIN Tab_FormaPag AS FP ON FP.idTab_FormaPag = PR.FormaPagamentoParcela
+			WHERE 
+				PR.idApp_OrcaTrata = ' . $data . '
+		');
         $query = $query->result_array();
 
         return $query;

@@ -1354,7 +1354,7 @@
 																	<div class="col-md-12">
 																		<label for="FormaPagamento">Forma de Pagamento</label>
 																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
-																			data-toggle="collapse" onchange="exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
+																			data-toggle="collapse" onchange="calculaParcelas(),exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
 																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																				id="FormaPagamento" name="FormaPagamento">
 																			<option value="">-- Selecione uma opção --</option>

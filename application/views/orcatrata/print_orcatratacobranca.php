@@ -119,7 +119,7 @@
 					<thead>
 						<tr>
 							<th class="col-md-1" scope="col">Parcela</th>
-							<th class="col-md-3" scope="col">Venc.</th>
+							<th class="col-md-3" scope="col">FormaPag || Venc. || Dt.Pago</th>
 							<th class="col-md-1" scope="col">R$</th>
 							<th class="col-md-1" scope="col">Pago?</th>										
 						</tr>
@@ -129,7 +129,7 @@
 						<?php if($orcatrata[$i]['idApp_OrcaTrata'] == $parcelasrec[$j]['idApp_OrcaTrata']) { ?>
 						<tr>
 							<td class="col-md-1" scope="col"><?php echo $parcelasrec[$j]['Parcela'] ?></td>
-							<td class="col-md-3" scope="col"><?php echo $parcelasrec[$j]['DataVencimento'] ?></td>
+							<td class="col-md-3" scope="col"><?php echo $parcelasrec[$j]['FormaPag'] ?> || <?php echo $parcelasrec[$j]['DataVencimento'] ?> || <?php echo $parcelasrec[$j]['DataPago'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo number_format($parcelasrec[$j]['ValorParcela'], 2, ',', '.') ?></td>
 							<td class="col-md-1" scope="col"><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$j]['Quitado'], 'NS') ?></td>									
 						</tr>

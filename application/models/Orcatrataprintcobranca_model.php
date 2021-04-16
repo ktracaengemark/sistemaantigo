@@ -241,10 +241,12 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				PR.ValorParcela,
 				PR.DataVencimento,
 				PR.DataPago,
-				PR.Quitado
+				PR.Quitado,
+				FP.FormaPag
 			FROM 
 				App_OrcaTrata AS OT,
 				App_Parcelas AS PR
+					LEFT JOIN Tab_FormaPag AS FP ON FP.idTab_FormaPag = PR.FormaPagamentoParcela
 
 			WHERE 
 				PR.idApp_OrcaTrata = OT.idApp_OrcaTrata AND
