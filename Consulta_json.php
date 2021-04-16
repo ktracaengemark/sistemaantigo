@@ -24,10 +24,10 @@ $query3 = ($_SESSION['FiltroAlteraProcedimento']['NomeCliente'] && isset($_SESSI
 																				
 $permissao = ($_SESSION['log']['Permissao'] >= 3 ) ? 'AND A.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
 $permissao3 = ($_SESSION['log']['idSis_Empresa'] != 5 ) ? 'AND A.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  ' : FALSE;
-
-$permissao1 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'OR R.CelularCliente = ' . $_SESSION['log']['CelularUsuario'] . '  ' : FALSE;
-$permissao4 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'OR U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . '  ' : FALSE;
-$permissao2 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' OR ' : FALSE;																																			
+$permissao5 = ($_SESSION['log']['idSis_Empresa'] == 5) ? 'AND A.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
+//$permissao1 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'OR R.CelularCliente = ' . $_SESSION['log']['CelularUsuario'] . '  ' : FALSE;
+//$permissao4 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'OR U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . '  ' : FALSE;
+//$permissao2 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' OR ' : FALSE;																																			
 
 $result = mysql_query(
         'SELECT
@@ -43,6 +43,8 @@ $result = mysql_query(
 			C.idApp_Consulta,
 			C.idSis_Empresa AS EmpresaCon,
             C.idApp_Cliente,
+            C.idApp_ClienteDep,
+            C.idApp_ClientePet,
 			C.idSis_Usuario,
             E.NomeEmpresa AS NomeEmpresaEmp,
 			R.NomeCliente,
@@ -74,13 +76,14 @@ $result = mysql_query(
                 LEFT JOIN Tab_TipoConsulta AS TC ON TC.idTab_TipoConsulta = C.idTab_TipoConsulta
 				LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = C.idSis_Empresa
         WHERE
-			((C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
+			(C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
+				
 				' . $query . '
 				' . $query3 . '
 				' . $permissao . '
-				' . $permissao3 . ' ) 
-				' . $permissao1 . '
-				' . $permissao4 . '
+				' . $permissao3 . '
+				' . $permissao5 . '
+  
 			)
 		ORDER BY 
 			C.DataInicio ASC'
@@ -95,11 +98,7 @@ while ($row = mysql_fetch_assoc($result)) {
         //(strlen(utf8_encode($row['Obs'])) > 20) ? $title = substr(utf8_encode($row['Obs']), 0, 20).'...' : $title = utf8_encode($row['Obs']);
         $title = 'Prof: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1") . ' - Obs: ' . mb_convert_encoding($row['Obs'], "UTF-8", "ISO-8859-1");
         $titlecliente = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
-		#$title = utf8_encode($row['NomeUsuario']);
-		#$title = utf8_encode($row['idSis_Usuario']);
 		$subtitle = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
-		#$profissional = utf8_encode($row['NomeUsuario']);
-		#$profissional = utf8_encode($row['idApp_Agenda']);
 		$profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
         $recorrencia = mb_convert_encoding($row['Recorrencia'], "UTF-8", "ISO-8859-1");
         $repeticao = $row['Repeticao'];
@@ -127,16 +126,7 @@ while ($row = mysql_fetch_assoc($result)) {
             #$title = utf8_encode($row['NomeCliente']);
             $title = 'Prf: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1") . ' - Cli: ' . mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
             $titlecliente = mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
-			$titledep = mb_convert_encoding($row['NomeClienteDep'], "UTF-8", "ISO-8859-1");
-            $titlepet = mb_convert_encoding($row['NomeClientePet'], "UTF-8", "ISO-8859-1");
-            #$title = $row['NomeCliente'];
-            #'name' => mb_convert_encoding($row['NomeProduto'], "UTF-8", "ISO-8859-1"),
-			#$title = utf8_encode($row['NomeUsuario']);
-			#$subtitle = utf8_encode($row['NomeUsuario']);
             $subtitle = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
-			#$profissional = utf8_encode($row['NomeUsuario']);
-			#$profissional = utf8_encode($row['idApp_Agenda']);
-			#$profissional = utf8_encode($row['idSis_Usuario']);
             $profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
 			$recorrencia = mb_convert_encoding($row['Recorrencia'], "UTF-8", "ISO-8859-1");
 			$repeticao = $row['Repeticao'];
@@ -144,7 +134,6 @@ while ($row = mysql_fetch_assoc($result)) {
 			$OS = $row['idApp_OrcaTrata'];
 			#$telefone1 = utf8_encode($row['CelularCliente']);
             $telefone1 = mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1");
-
         }
 
     }
@@ -188,36 +177,36 @@ while ($row = mysql_fetch_assoc($result)) {
     }
 
     $event_array[] = array(
-        'id' => $row['idApp_Consulta'],
-        'title' => $title,
-        'titlecliente' => $titlecliente,
-        'titledep' => $titledep,
-        'titlepet' => $titlepet,
-        'subtitle' => $subtitle,
-        'start' => str_replace('', 'T', $row['DataInicio']),
-        'end' => str_replace('', 'T', $row['DataFim']),
-        'allDay' => false,
-        'url' => $url,
-        'color' => $status,
-        'textColor' => $textColor,
-        'TipoConsulta' => mb_convert_encoding($row['TipoConsulta'], "UTF-8", "ISO-8859-1"),
-        'Procedimento' => mb_convert_encoding($row['Procedimento'], "UTF-8", "ISO-8859-1"),
-		'CelularCliente' => mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1"),
-		'CelularUsuario' => mb_convert_encoding($row['CelularUsuario'], "UTF-8", "ISO-8859-1"),
-        'Obs' => mb_convert_encoding($row['Obs'], "UTF-8", "ISO-8859-1"),
-		'CpfUsuario' => mb_convert_encoding($row['CpfUsuario'], "UTF-8", "ISO-8859-1"),
-		'CpfCliente' => mb_convert_encoding($row['CpfCliente'], "UTF-8", "ISO-8859-1"),
-		'EmpresaCon' => mb_convert_encoding($row['EmpresaCon'], "UTF-8", "ISO-8859-1"),
-		'EmpresaUsu' => mb_convert_encoding($row['EmpresaUsu'], "UTF-8", "ISO-8859-1"),
-        'NomeEmpresaEmp' => mb_convert_encoding($row['NomeEmpresaEmp'], "UTF-8", "ISO-8859-1"),
-		'Evento' => $row['Evento'],
-        'Paciente' => $row['Paciente'],
-        #   'ContatoCliente' => $contatocliente,
-        'Profissional' => $profissional,
-        'Recorrencia' => $recorrencia,
-        'Repeticao' => $repeticao,
-        'DataTermino' => $datatermino,
-        'OS' => $OS,
+        'id' 			=> $row['idApp_Consulta'],
+		'title' 		=> $title,
+		'titlecliente' 	=> $titlecliente,
+        'subtitle' 		=> $subtitle,
+        'start' 		=> str_replace('', 'T', $row['DataInicio']),
+        'end' 			=> str_replace('', 'T', $row['DataFim']),
+        'allDay' 		=> false,
+        'url' 			=> $url,
+        'color' 		=> $status,
+        'textColor' 	=> $textColor,
+        'TipoConsulta' 	=> mb_convert_encoding($row['TipoConsulta'], "UTF-8", "ISO-8859-1"),
+        'Procedimento' 	=> mb_convert_encoding($row['Procedimento'], "UTF-8", "ISO-8859-1"),
+		'CelularCliente'=> mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1"),
+		'CelularUsuario'=> mb_convert_encoding($row['CelularUsuario'], "UTF-8", "ISO-8859-1"),
+        'Obs' 			=> mb_convert_encoding($row['Obs'], "UTF-8", "ISO-8859-1"),
+		'CpfUsuario' 	=> mb_convert_encoding($row['CpfUsuario'], "UTF-8", "ISO-8859-1"),
+		'CpfCliente' 	=> mb_convert_encoding($row['CpfCliente'], "UTF-8", "ISO-8859-1"),
+		'EmpresaCon' 	=> mb_convert_encoding($row['EmpresaCon'], "UTF-8", "ISO-8859-1"),
+		'EmpresaUsu' 	=> mb_convert_encoding($row['EmpresaUsu'], "UTF-8", "ISO-8859-1"),
+        'NomeEmpresaEmp'=> mb_convert_encoding($row['NomeEmpresaEmp'], "UTF-8", "ISO-8859-1"),
+		'Evento' 		=> $row['Evento'],
+        'Paciente' 		=> $row['Paciente'],
+        #'ContatoCliente' => $contatocliente,
+        'Profissional' 	=> $profissional,
+        'Recorrencia' 	=> $recorrencia,
+        'Repeticao' 	=> $repeticao,
+        'DataTermino' 	=> $datatermino,
+        'OS' 			=> $OS,
+		'titledep' 		=> $row['NomeClienteDep'],
+		'titlepet' 		=> $row['NomeClientePet'],
     );
 }
 

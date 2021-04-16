@@ -7,35 +7,37 @@
 			<input type="hidden" id="AgendaI" value="<?php echo $_SESSION['Empresa']['AgendaI'];?>">
 			<input type="hidden" id="AgendaF" value="<?php echo $_SESSION['Empresa']['AgendaF'];?>">
 			<div class="row">		
-				<?php if ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) { ?>
-				<div class="col-md-4 text-left">
-					<label class="" for="Ordenamento">Profissional:</label><br>
-					<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()" id="NomeUsuario" name="NomeUsuario">
-						<?php
-						foreach ($select['NomeUsuario'] as $key => $row) {
-							if ($query['NomeUsuario'] == $key) {
-								echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-							} else {
-								echo '<option value="' . $key . '">' . $row . '</option>';
+				<?php if ($_SESSION['log']['idSis_Empresa'] != 5) { ?>
+					<?php if ($_SESSION['log']['Permissao'] <= 2 ) { ?>
+						<div class="col-md-4 text-left">
+							<label class="" for="Ordenamento">Profissional:</label><br>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()" id="NomeUsuario" name="NomeUsuario">
+								<?php
+								foreach ($select['NomeUsuario'] as $key => $row) {
+									if ($query['NomeUsuario'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+					<?php } ?>
+					<div class="col-md-4 text-left">
+						<label class="" for="Ordenamento">Cliente:</label><br>
+						<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()" id="NomeCliente" name="NomeCliente">
+							<?php
+							foreach ($select['NomeCliente'] as $key => $row) {
+								if ($query['NomeCliente'] == $key) {
+									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+								} else {
+									echo '<option value="' . $key . '">' . $row . '</option>';
+								}
 							}
-						}
-						?>
-					</select>
-				</div>
-				<div class="col-md-4 text-left">
-					<label class="" for="Ordenamento">Cliente:</label><br>
-					<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()" id="NomeCliente" name="NomeCliente">
-						<?php
-						foreach ($select['NomeCliente'] as $key => $row) {
-							if ($query['NomeCliente'] == $key) {
-								echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-							} else {
-								echo '<option value="' . $key . '">' . $row . '</option>';
-							}
-						}
-						?>
-					</select>
-				</div>	
+							?>
+						</select>
+					</div>	
 				<?php } ?>
 				<!--
 				<div class=" btn btn-success" type="button" data-toggle="collapse" data-target="#Agenda" aria-expanded="false" aria-controls="Agenda">

@@ -2453,7 +2453,7 @@ function dataehora(datainicio = null, horainicio = null) {
 		var hrinicio = $('#HoraInicio').val();
 		$('#Hidden_HoraInicio').val(hrinicio);
 	}
-	
+	var metodo = $('#metodo').val();
 		//console.log('datainicio = '+datainicio);
 		//console.log('horainicio = '+horainicio);
 		//console.log('dtinicio = '+dtinicio);
@@ -2495,8 +2495,24 @@ function dataehora(datainicio = null, horainicio = null) {
 		//method:'get',
         // função para de sucesso
         success: function (data) {
-            //console.log(data.length);
-			$("#Horarios").html('<span>Existem '+data.length+' Agendamentos neste horário: ' + dataehora_orig + '</span>');
+            //console.log('length = '+data.length);
+			//console.log('metodo = '+metodo);
+			if(metodo == 1){
+				var quantidade = data.length;
+				if(quantidade <= 0){
+					$("#Horarios").html('<span>Não Existem Agendamentos neste horário: ' + dataehora_orig + '</span>');
+				}else{
+					$("#Horarios").html('<span>Existe(m) <strong>" ' +quantidade+' " </strong> Agendamento(s) neste horário: ' + dataehora_orig + '</span>');
+				}
+			}else{
+				var quantidade = data.length - 1;
+				if(quantidade <= 0){
+					$("#Horarios").html('<span>Não Existem Agendamentos neste horário: ' + dataehora_orig + '</span>');
+				}else{
+					$("#Horarios").html('<span>Existe(m) <strong>" ' +quantidade+' " </strong> Agendamento(s) neste horário: ' + dataehora_orig + '</span>');
+				}
+			}
+			
 			for (i = 0; i < data.length; i++) {
 
                 if (data[i].dataehora == dataehora) {
@@ -8782,7 +8798,7 @@ $('#calendar').fullCalendar({
     timezone: "local",
     lang: 'pt-br',
     eventAfterRender: function (event, element) {
-
+		
         if (event.Evento == 1){
             var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b>" + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencia + " <b> - </b> " + event.Repeticao + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
         }else{

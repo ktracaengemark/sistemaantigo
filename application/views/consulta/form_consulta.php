@@ -766,9 +766,14 @@
 												
 												<div class="col-md-12 text-center">
 													<?php if ($metodo == 2) { ?>
+														<button  type="button" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-salvar-modal-sm">
+															<span class="glyphicon glyphicon-save"></span>Salvar
+														</button>
+														<!--
 														<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
 															<span class="glyphicon glyphicon-save"></span>Salvar 
 														</button>
+														-->
 														<?php if ($_SESSION['Consulta']['idApp_OrcaTrata'] > 0) { ?>
 															<!--
 															<span class="input-group-btn">
@@ -814,12 +819,12 @@
 																</div>
 																<div class="modal-footer">
 																	<div class="col-md-6 text-left">
-																		<button type="button" class="btn btn-warning"  name="submeter6" id="submeter6" onclick="DesabilitaBotao()" data-dismiss="modal">
+																		<button type="button" class="btn btn-warning"  name="submeter6" id="submeter6" onclick="DesabilitaBotaoExcluir()" data-dismiss="modal">
 																			<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
 																		</button>
 																	</div>
 																	<div class="col-md-6 text-right">
-																		<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
+																		<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotaoExcluir(this.name)" data-loading-text="Aguarde..." value="1" >
 																			<span class="glyphicon glyphicon-save"></span> Salvar
 																		</button>
 																	</div>
