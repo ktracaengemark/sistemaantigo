@@ -31,6 +31,7 @@ exibirExtraOrca();
 exibirDescOrca();
 dataehora();
 qtd_ocorrencias();
+cashback();
 
 function codigo(id, tabela){
 	//alert('ok codigo');
@@ -4419,7 +4420,7 @@ function tipoExtraOrca(valor){
 		}
 	}else{
 		var tipoextraorca = $('#Hidden_TipoExtraOrca').val();
-		console.log('#Hidden_TipoExtraOrca = '+tipoextraorca);
+		//console.log('#Hidden_TipoExtraOrca = '+tipoextraorca);
 		if(tipoextraorca == 'P'){
 			var desconto = 'Percentual';
 			percExtraOrca();
@@ -4558,6 +4559,60 @@ function valorExtraOrca(){
 	//console.log('Perc. Prd+Srv+Extra = ' + valortotalorca);
 }
 
+
+function cashback(id_Cliente) {
+	//alert('cashback | id_Cliente = '+id_Cliente);
+	
+	//console.log('id_Cliente = '+id_Cliente);
+	if(id_Cliente){
+		var id = id_Cliente;
+		$('#Hidden_idApp_Cliente').val(id);
+	}else if($('#idApp_Cliente').val()){
+		var id = $('#idApp_Cliente').val();
+		$('#Hidden_idApp_Cliente').val(id);
+	}else{
+		var id = 'null';
+		//console.log('id = '+id);
+	}
+	if(id && id != 'null'){
+		//var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
+		//var valorfinalorca = $('#ValorFinalOrca').val();
+		//console.log('Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
+		//console.log('valorfinalorca = '+valorfinalorca);
+		//$('#CashBackOrca').val('0,00');
+		var metodo = $('#metodo').val();
+		$.ajax({
+			
+			url: window.location.origin+ '/' + app + '/cadastros/pesquisar/CashBack.php?id=' + id,
+			dataType: "json",
+			
+			success: function (data) {
+				
+				//console.log('data = '+data);
+				
+				CashBackOrca	= parseFloat(data);
+				CashBackOrca	= CashBackOrca.toFixed(2);
+				CashBackOrca 	= CashBackOrca.replace(".",",");
+				
+				//console.log('CashBackOrca = '+CashBackOrca);	
+				
+				$('#CashBackOrca').val(CashBackOrca);
+				
+				console.log('CashBackOrca = '+CashBackOrca);
+				tipoDescOrca();
+				
+			},
+			error:function(data){
+				//console.log('Nada encontrado');
+				$('#CashBackOrca').val('0,00');
+			}
+			
+		});//termina o ajax
+		
+
+	}	
+}
+
 function tipoDescOrca(valor){
 	//alert('teste tipoDescOrca');
 	
@@ -4602,12 +4657,32 @@ function tipoDescOrca(valor){
 	//console.log('Tipo. desconto ='+desconto);
 }
 
-function descPercOrca(){
+function descPercOrca(usarcash){
+	
+	if(usarcash){
+		var Hidden_UsarCashBack	= usarcash;
+		$('#Hidden_UsarCashBack').val(usarcash);
+	}else{
+		var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
+	}	
+	//console.log('usarcash = ' + usarcash);
 	//alert('teste descPercOrca');
 	var recorrencias = $('#Recorrencias').val();
 	//console.log('Total de Recorrencias = ' + recorrencias);
 	var valortotalorca = $('#ValorTotalOrca').val();
 	valortotalorca = valortotalorca.replace(".","").replace(",",".");
+	
+	
+	//var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
+	
+	var cashbackorca 	= $('#CashBackOrca').val();
+	//var cashbackorca 	= '10,00';
+	cashbackorca 		= cashbackorca.replace(".","").replace(",",".");
+	cashbackorca		= parseFloat(cashbackorca);
+	console.log('Pelo Perc - Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
+	console.log('Pelo Perc - cashbackorca = ' + cashbackorca);
+	console.log('Pelo Perc - valortotalorca = ' + valortotalorca);	
+	
 	
 	var descpercorca = $('#DescPercOrca').val();
 	descpercorca = descpercorca.replace(".","").replace(",",".");
@@ -4619,7 +4694,18 @@ function descPercOrca(){
 		
 		if(descpercorca <= 100){	
 			
-			var valorfinalorca = (valortotalorca - descvalororca);
+			var subvalorfinal = (valortotalorca - descvalororca);
+			
+			if(subvalorfinal >= cashbackorca){
+				if(Hidden_UsarCashBack == 'S'){
+					var valorfinalorca = (subvalorfinal - cashbackorca);
+				}else{
+					var valorfinalorca = subvalorfinal;
+				}
+			}else{
+				var valorfinalorca = subvalorfinal;
+			}			
+			//var valorfinalorca = (valortotalorca - descvalororca);
 			
 			var valor_s_desc = recorrencias*valortotalorca;
 			valor_s_desc	= parseFloat(valor_s_desc);
@@ -4633,12 +4719,17 @@ function descPercOrca(){
 			
 			descvalororca 	= descvalororca.replace('.',',');
 			
+			subvalorfinal	= parseFloat(subvalorfinal);
+			subvalorfinal	= subvalorfinal.toFixed(2);
+			subvalorfinal 	= subvalorfinal.replace('.',',');
+			
 			valorfinalorca	= parseFloat(valorfinalorca);
 			valorfinalorca	= valorfinalorca.toFixed(2);
 			valorfinalorca 	= valorfinalorca.replace('.',',');
 			
 			
 			$('#DescValorOrca').val(descvalororca);
+			$('#SubValorFinal').val(subvalorfinal);
 			$('#ValorFinalOrca').val(valorfinalorca);
 			$('#Valor_C_Desc').val(valor_c_desc);
 			$('#Valor_S_Desc').val(valor_s_desc);
@@ -4648,16 +4739,18 @@ function descPercOrca(){
 			//console.log(descvalororca);
 		
 		}else{
-			$('#ValorFinalOrca').val('0,00');
 			$('#DescPercOrca').val('0,00');
 			$('#DescValorOrca').val('0,00');
+			$('#SubValorFinal').val('0,00');
+			$('#ValorFinalOrca').val('0,00');
 			$('#Valor_C_Desc').val('0,00');
 			$('#Valor_S_Desc').val('0,00');
 		}	
 	}else{
-		$('#ValorFinalOrca').val('0,00');
 		$('#DescPercOrca').val('0,00');
 		$('#DescValorOrca').val('0,00');
+		$('#SubValorFinal').val('0,00');
+		$('#ValorFinalOrca').val('0,00');
 		$('#Valor_C_Desc').val('0,00');
 		$('#Valor_S_Desc').val('0,00');
 	}
@@ -4669,43 +4762,75 @@ function descPercOrca(){
 	//console.log('Perc. Final Orca = ' + valorfinalorca);
 }
 
-function descValorOrca(){
+function descValorOrca(usarcash){
+	if(usarcash){
+		var Hidden_UsarCashBack	= usarcash;
+		$('#Hidden_UsarCashBack').val(usarcash);
+	}else{
+		var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
+	}
+	
 	//alert('teste descValorOrca');
+	//console.log('usarcash = ' + usarcash);
 	var recorrencias = $('#Recorrencias').val();
 	//console.log('Total de Recorrencias = ' + recorrencias);
-	var valortotalorca = $('#ValorTotalOrca').val();
-	valortotalorca = valortotalorca.replace(".","").replace(",",".");
-	valortotalorca	= parseFloat(valortotalorca);
+	
+	var valortotalorca 	= $('#ValorTotalOrca').val();
+	valortotalorca 		= valortotalorca.replace(".","").replace(",",".");
+	valortotalorca		= parseFloat(valortotalorca);
+	
 	var descvalororca = $('#DescValorOrca').val();
 	descvalororca = descvalororca.replace(".","").replace(",",".");
 	descvalororca	= parseFloat(descvalororca);
+	
+	var cashbackorca 	= $('#CashBackOrca').val();
+	cashbackorca 		= cashbackorca.replace(".","").replace(",",".");
+	cashbackorca		= parseFloat(cashbackorca);
+	console.log('Pelo Desc - Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
+	console.log('Pelo Desc - cashbackorca = ' + cashbackorca);
+	
 	
 	if(valortotalorca > 0){
 		if(valortotalorca >= descvalororca){
 			//console.log('Total do Desconto em Valor = ' + descvalororca);
 			//console.log('Total do Pedido = ' + valortotalorca);
-			var valorfinalorca = (valortotalorca - descvalororca);
+			var subvalorfinal = (valortotalorca - descvalororca);
+			
+			if(subvalorfinal >= cashbackorca){
+				if(Hidden_UsarCashBack == 'S'){
+					var valorfinalorca = (subvalorfinal - cashbackorca);
+				}else{
+					var valorfinalorca = subvalorfinal;
+				}
+			}else{
+				var valorfinalorca = subvalorfinal;
+			}
 			
 			var valor_c_desc = recorrencias*valorfinalorca;
 			valor_c_desc	= parseFloat(valor_c_desc);
 			valor_c_desc	= valor_c_desc.toFixed(2);
 			valor_c_desc 	= valor_c_desc.replace('.',',');
 			
-			var descpercorca = (valortotalorca - valorfinalorca)*100/valortotalorca;
+			var descpercorca = (valortotalorca - subvalorfinal)*100/valortotalorca;
 			descpercorca	= parseFloat(descpercorca);
 			descpercorca	= descpercorca.toFixed(2);
 			descpercorca 	= descpercorca.replace('.',',');
+			
+			subvalorfinal	= parseFloat(subvalorfinal);
+			subvalorfinal	= subvalorfinal.toFixed(2);
+			subvalorfinal 	= subvalorfinal.replace('.',',');
 			
 			valorfinalorca	= parseFloat(valorfinalorca);
 			valorfinalorca	= valorfinalorca.toFixed(2);
 			valorfinalorca 	= valorfinalorca.replace('.',',');
 			
-			
+			$('#SubValorFinal').val(subvalorfinal);
 			$('#ValorFinalOrca').val(valorfinalorca);
 			$('#DescPercOrca').val(descpercorca);
 			$('#Valor_C_Desc').val(valor_c_desc);
 		}	
 	}else{
+		$('#SubValorFinal').val('0,00');
 		$('#ValorFinalOrca').val('0,00');
 		$('#DescPercOrca').val('0,00');
 		$('#DescValorOrca').val('0,00');

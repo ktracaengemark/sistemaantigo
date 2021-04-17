@@ -1551,12 +1551,21 @@
 																			</div>
 																		</div>	
 																	</div>
+																	<div class="row">	
+																		<div class="col-md-6 text-left">
+																			<label>"Texto sobre o valor Final ser menor que o Cash"</label><br>
+																			<div class="input-group" id="txtHint">
+																				<span class="input-group-addon" id="basic-addon1">R$</span>
+																				<input type="text" class="form-control Valor" id="SubValorFinal" readonly="">
+																			</div>
+																		</div>	
+																	</div>
 																	<div class="row">
 																		<div class="col-md-6">
 																			<label for="CashBackOrca">CashBack.</label><br>
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
-																				<input type="text" class="form-control Valor" id="CashBackOrca" maxlength="10" placeholder="0,00" readonly=''
+																				<input type="text" class="form-control Valor" id="CashBackOrca" readonly=''
 																					   name="CashBackOrca" value="<?php echo $orcatrata['CashBackOrca'] ?>">
 																			</div>
 																		</div>	
@@ -1588,7 +1597,8 @@
 																				?>
 																			</div>
 																		</div>
-																	</div>
+																		<input type="hidden" id="Hidden_UsarCashBack" value="<?php echo $orcatrata['UsarCashBack'] ?>">
+																	</div>	
 																<?php }else{ ?>
 																	<input type="hidden" name="UsarCashBack" id="UsarCashBack" value="<?php echo $orcatrata['UsarCashBack'] ?>"/>
 																	<input type="hidden" name="CashBackOrca" id="CashBackOrca" value="<?php echo $orcatrata['CashBackOrca'] ?>"/>
@@ -2562,6 +2572,7 @@
 												<input type="hidden" name="idApp_OrcaTrata" id="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
 												<input type="hidden" name="Tipo_Orca"  id="Tipo_Orca" value="<?php echo $orcatrata['Tipo_Orca']; ?>">
 												<input type="hidden" name="idApp_Cliente" id="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<input type="hidden" name="Hidden_idApp_Cliente" id="Hidden_idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>" />
 												<h4 class="mb-3"><b>Pedido</b></h4>
 												<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 													<div class="row">

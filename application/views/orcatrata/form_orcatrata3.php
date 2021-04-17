@@ -117,7 +117,7 @@
 													<div class="row">
 														<div class="col-md-4 text-left">
 															<label  for="idApp_Cliente">Cliente</label>
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value),dateDiff(),clientePet(this.value),clienteDep(this.value)" <?php echo $readonly; ?>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value),dateDiff(),clientePet(this.value),clienteDep(this.value),cashback(this.value)" <?php echo $readonly; ?>
 																	id="idApp_Cliente" autofocus name="idApp_Cliente">
 																<option value="">-- Sel. Cliente --</option>
 																<?php
@@ -133,6 +133,7 @@
 															</select>
 															<?php echo form_error('idApp_Cliente'); ?>
 														</div>
+														<input type="hidden" id="Hidden_idApp_Cliente" name="Hidden_idApp_Cliente" value="<?php echo $orcatrata['idApp_Cliente']; ?>" />
 														<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
 															<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $orcatrata['idApp_ClientePet']; ?>" />
 															<div class="col-md-4 text-left">
@@ -1414,15 +1415,25 @@
 																	</div>
 																</div>	
 															</div>
+															<div class="row">	
+																<div class="col-md-12 text-left">
+																	<label>"Texto sobre o valor Final ser menor que o Cash"</label><br>
+																	<div class="input-group" id="txtHint">
+																		<span class="input-group-addon" id="basic-addon1">R$</span>
+																		<input type="text" class="form-control Valor" id="SubValorFinal" readonly="">
+																	</div>
+																</div>	
+															</div>
 															<div class="row">
 																<div class="col-md-6">
 																	<label for="CashBackOrca">CashBack.</label><br>
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
-																		<input type="text" class="form-control Valor" id="CashBackOrca" maxlength="10" placeholder="0,00" readonly=''
+																		<input type="text" class="form-control Valor" id="CashBackOrca" readonly=''
 																			   name="CashBackOrca" value="<?php echo $orcatrata['CashBackOrca'] ?>">
 																	</div>
-																</div>	
+																</div>
+																<input type="hidden" id="Hidden_CashBackOrca">
 																<div class="col-md-6 text-left">
 																	<label for="UsarCashBack">Uasr CashBack?</label><br>
 																	<div class="btn-group" data-toggle="buttons">
@@ -1436,6 +1447,7 @@
 																				echo ''
 																				. '<label class="btn btn-warning active" name="UsarCashBack_' . $hideshow . '">'
 																				. '<input type="radio" name="UsarCashBack" id="' . $hideshow . '" '
+																				. 'onchange="descValorOrca(this.value)" '
 																				. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																				. '</label>'
 																				;
@@ -1443,6 +1455,7 @@
 																				echo ''
 																				. '<label class="btn btn-default" name="UsarCashBack_' . $hideshow . '">'
 																				. '<input type="radio" name="UsarCashBack" id="' . $hideshow . '" '
+																				. 'onchange="descValorOrca(this.value)" '
 																				. 'autocomplete="off" value="' . $key . '" >' . $row
 																				. '</label>'
 																				;
@@ -1451,6 +1464,7 @@
 																		?>
 																	</div>
 																</div>
+																<input type="hidden" id="Hidden_UsarCashBack" value="<?php echo $orcatrata['UsarCashBack'] ?>">
 															</div>
 														<?php }else{ ?>
 															<input type="hidden" name="UsarCashBack" id="UsarCashBack" value="<?php echo $orcatrata['UsarCashBack'] ?>"/>

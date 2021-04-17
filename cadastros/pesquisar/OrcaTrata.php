@@ -4,7 +4,7 @@ include_once '../../conexao.php';
 
 $id_categoria = $_REQUEST['idApp_Cliente'];
 
-$result_sub_cat = "SELECT * FROM App_OrcaTrata WHERE idApp_Cliente=$id_categoria ORDER BY idApp_OrcaTrata";
+$result_sub_cat = "SELECT * FROM App_OrcaTrata WHERE idApp_Cliente=$id_categoria AND ConcluidoOrca='N' AND CanceladoOrca='N' ORDER BY idApp_OrcaTrata";
 
 $resultado_sub_cat = mysqli_query($conn, $result_sub_cat);
 
