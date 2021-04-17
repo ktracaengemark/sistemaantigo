@@ -206,6 +206,7 @@
 														</div>
 													</div>
 													<div class="col-md-2 text-left"></div>
+													<input type="hidden" id="Hidden_Cli_Forn_Orca" value="<?php echo $orcatrata['Cli_Forn_Orca']; ?>"/>
 													<div class="col-md-2 text-left">
 														<label for="Prd_Srv_Orca">Com Prd & Srv?</label><br>
 														<div class="btn-group" data-toggle="buttons">
@@ -306,68 +307,70 @@
 															-->
 														<?php } ?>
 													<?php } ?>
-													<div class="col-md-2 text-left">
-														<label for="Cadastrar">Cliente Encontrado?</label><br>
-														<div class="btn-group" data-toggle="buttons">
-															<?php
-															foreach ($select['Cadastrar'] as $key => $row) {
-																if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
+													<?php if ($_SESSION['Empresa']['CadastrarPet'] == "S" || $_SESSION['Empresa']['CadastrarDep'] == "S") { ?>	
+														<div class="col-md-2 text-left">
+															<label for="Cadastrar">Dependente Encontrado?</label><br>
+															<div class="btn-group" data-toggle="buttons">
+																<?php
+																foreach ($select['Cadastrar'] as $key => $row) {
+																	if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
 
-																($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																	($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
-																if ($cadastrar['Cadastrar'] == $key) {
-																	echo ''
-																	. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
-																	. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
-																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																	. '</label>'
-																	;
-																} else {
-																	echo ''
-																	. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
-																	. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
-																	. 'autocomplete="off" value="' . $key . '" >' . $row
-																	. '</label>'
-																	;
+																	if ($cadastrar['Cadastrar'] == $key) {
+																		echo ''
+																		. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+																		. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																		. '</label>'
+																		;
+																	} else {
+																		echo ''
+																		. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+																		. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																		. 'autocomplete="off" value="' . $key . '" >' . $row
+																		. '</label>'
+																		;
+																	}
 																}
-															}
-															?>
+																?>
 
+															</div>
 														</div>
-													</div>
-													<div class="col-md-4 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-														<div class="row">
-															<?php if ($_SESSION['Empresa']['CadastrarPet'] == "S") { ?>
-																<div class="col-md-4 text-left">
-																	<label >Pet</label><br>
-																	<button type="button" class="btn btn-success btn-block" id="addPet" data-toggle="modal" data-target="#addClientePetModal" >
-																		<span class="glyphicon glyphicon-plus"></span>Cadastrar
-																	</button>
-																</div>
-															<?php }else{ ?>	
-																<?php if ($_SESSION['Empresa']['CadastrarDep'] == "S") { ?>
+														<div class="col-md-4 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+															<div class="row">
+																<?php if ($_SESSION['Empresa']['CadastrarPet'] == "S") { ?>
 																	<div class="col-md-4 text-left">
-																		<label >Dependente</label><br>
-																		<button type="button" class="btn btn-success btn-block" id="addDep" data-toggle="modal" data-target="#addClienteDepModal">
+																		<label >Pet</label><br>
+																		<button type="button" class="btn btn-success btn-block" id="addPet" data-toggle="modal" data-target="#addClientePetModal" >
 																			<span class="glyphicon glyphicon-plus"></span>Cadastrar
 																		</button>
 																	</div>
-																<?php } ?>
-															<?php } ?>	
-															<!--
-															<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>cliente2/cadastrar3/" role="button"> 
-																<span class="glyphicon glyphicon-plus"></span> <span class="glyphicon glyphicon-edit"></span> Cliente
-															</a>
-															-->
-															<div class="col-md-4 text-left">
-																<label >Recarregar</label><br>
-																<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
-																		<span class="glyphicon glyphicon-refresh"></span>Recarregar
-																</button>
+																<?php }else{ ?>	
+																	<?php if ($_SESSION['Empresa']['CadastrarDep'] == "S") { ?>
+																		<div class="col-md-4 text-left">
+																			<label >Dependente</label><br>
+																			<button type="button" class="btn btn-success btn-block" id="addDep" data-toggle="modal" data-target="#addClienteDepModal">
+																				<span class="glyphicon glyphicon-plus"></span>Cadastrar
+																			</button>
+																		</div>
+																	<?php } ?>
+																<?php } ?>	
+																<!--
+																<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>cliente2/cadastrar3/" role="button"> 
+																	<span class="glyphicon glyphicon-plus"></span> <span class="glyphicon glyphicon-edit"></span> Cliente
+																</a>
+																-->
+																<div class="col-md-4 text-left">
+																	<label >Recarregar</label><br>
+																	<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+																			<span class="glyphicon glyphicon-refresh"></span>Recarregar
+																	</button>
+																</div>	
 															</div>	
-														</div>	
-														<?php echo form_error('Cadastrar'); ?>
-													</div>
+															<?php echo form_error('Cadastrar'); ?>
+														</div>
+													<?php } ?>
 												</div>
 											</div>
 										
@@ -1552,8 +1555,8 @@
 																		</div>	
 																	</div>
 																	<div class="row">	
-																		<div class="col-md-6 text-left">
-																			<label>"Texto sobre o valor Final ser menor que o Cash"</label><br>
+																		<div class="col-md-12 text-left">
+																			<label>"Total com Desconto"</label><br>
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
 																				<input type="text" class="form-control Valor" id="SubValorFinal" readonly="">
@@ -1582,6 +1585,7 @@
 																						echo ''
 																						. '<label class="btn btn-warning active" name="UsarCashBack_' . $hideshow . '">'
 																						. '<input type="radio" name="UsarCashBack" id="' . $hideshow . '" '
+																						. 'onchange="descValorOrca(this.value)" '
 																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																						. '</label>'
 																						;
@@ -1589,6 +1593,7 @@
 																						echo ''
 																						. '<label class="btn btn-default" name="UsarCashBack_' . $hideshow . '">'
 																						. '<input type="radio" name="UsarCashBack" id="' . $hideshow . '" '
+																						. 'onchange="descValorOrca(this.value)" '
 																						. 'autocomplete="off" value="' . $key . '" >' . $row
 																						. '</label>'
 																						;

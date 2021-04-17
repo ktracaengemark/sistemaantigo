@@ -63,6 +63,7 @@
 																echo ''
 																. '<label class="btn btn-warning active" name="Cli_Forn_Orca_' . $hideshow . '">'
 																. '<input type="radio" name="Cli_Forn_Orca" id="' . $hideshow . '" '
+																. 'onchange="calculacashback(0,this.value)" '
 																. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																. '</label>'
 																;
@@ -70,6 +71,7 @@
 																echo ''
 																. '<label class="btn btn-default" name="Cli_Forn_Orca_' . $hideshow . '">'
 																. '<input type="radio" name="Cli_Forn_Orca" id="' . $hideshow . '" '
+																. 'onchange="calculacashback(0,this.value)" '
 																. 'autocomplete="off" value="' . $key . '" >' . $row
 																. '</label>'
 																;
@@ -78,6 +80,7 @@
 														?>
 													</div>
 												</div>
+												<input type="hidden" id="Hidden_Cli_Forn_Orca" value="<?php echo $orcatrata['Cli_Forn_Orca']; ?>"/>
 												<div class="col-md-2 text-left">
 													<label for="Prd_Srv_Orca">Com Prd & Srv?</label><br>
 													<div class="btn-group" data-toggle="buttons">
@@ -117,7 +120,7 @@
 													<div class="row">
 														<div class="col-md-4 text-left">
 															<label  for="idApp_Cliente">Cliente</label>
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value),dateDiff(),clientePet(this.value),clienteDep(this.value),cashback(this.value)" <?php echo $readonly; ?>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value),dateDiff(),clientePet(this.value),clienteDep(this.value),calculacashback(this.value,0)" <?php echo $readonly; ?>
 																	id="idApp_Cliente" autofocus name="idApp_Cliente">
 																<option value="">-- Sel. Cliente --</option>
 																<?php
@@ -1417,7 +1420,7 @@
 															</div>
 															<div class="row">	
 																<div class="col-md-12 text-left">
-																	<label>"Texto sobre o valor Final ser menor que o Cash"</label><br>
+																	<label>"Total com Desconto"</label><br>
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" id="SubValorFinal" readonly="">
