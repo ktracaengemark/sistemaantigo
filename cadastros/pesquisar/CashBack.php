@@ -10,7 +10,10 @@ if ($_GET['id']) {
 					App_Produto
 				WHERE
 					idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-					idApp_Cliente = "' . $_GET['id'] . '"
+					idApp_Cliente = "' . $_GET['id'] . '" AND
+					StatusCashBack = "N" AND
+					id_Orca_CashBack = 0 AND
+					ValorComissaoCashBack > 0.00
 			';
 
 	$resultado = mysqli_query($conn, $result);

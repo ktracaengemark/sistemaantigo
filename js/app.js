@@ -4563,16 +4563,16 @@ function valorExtraOrca(){
 }
 
 function calculacashback(id_Cliente, valor2) {
-	//alert('cashback | id_Cliente = '+id_Cliente);
+	
 	if(valor2 && valor2!=0){
 		var comcliente = valor2;
 		$('#Hidden_Cli_Forn_Orca').val(valor2);
 	}else{
 		var comcliente = $('#Hidden_Cli_Forn_Orca').val();
 	}
-	//console.log('id_Cliente = '+id_Cliente);
-	//console.log('valor2 = '+valor2);
-	//console.log('comcliente = '+comcliente);
+	
+	console.log('comcliente = '+comcliente);
+
 	if(comcliente == "S"){
 		if(id_Cliente && id_Cliente!=0){
 			var id = id_Cliente;
@@ -4582,13 +4582,12 @@ function calculacashback(id_Cliente, valor2) {
 			$('#Hidden_idApp_Cliente').val(id);
 		}else{
 			var id = 'null';
-			//console.log('id = '+id);
 		}
+		
+		console.log('id = '+id);
+		
 		if(id && id != 'null'){
-			//var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
-			//var valorfinalorca = $('#ValorFinalOrca').val();
-			//console.log('Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
-			//console.log('valorfinalorca = '+valorfinalorca);
+
 			var metodo = $('#metodo').val();
 			$.ajax({
 				
@@ -4596,17 +4595,13 @@ function calculacashback(id_Cliente, valor2) {
 				dataType: "json",
 				
 				success: function (data) {
-					
 					//console.log('data = '+data);
 					
 					CashBackOrca	= parseFloat(data);
 					CashBackOrca	= CashBackOrca.toFixed(2);
 					CashBackOrca 	= CashBackOrca.replace(".",",");
 					
-					//console.log('CashBackOrca = '+CashBackOrca);	
-					
 					$('#CashBackOrca').val(CashBackOrca);
-					
 					//console.log('CashBackOrca = '+CashBackOrca);
 					tipoDescOrca();
 					
@@ -4618,14 +4613,13 @@ function calculacashback(id_Cliente, valor2) {
 				}
 				
 			});//termina o ajax
-		}else{
-			$('#CashBackOrca').val('0,00');
-			tipoDescOrca();
 		}
+		
 	}else{
 		$('#CashBackOrca').val('0,00');
 		tipoDescOrca();
 	}	
+	
 }
 
 function tipoDescOrca(valor){
@@ -4693,11 +4687,11 @@ function descPercOrca(usarcash){
 	//var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
 	
 	var cashbackorca 	= $('#CashBackOrca').val();
-	//var cashbackorca 	= '10,00';
+
 	cashbackorca 		= cashbackorca.replace(".","").replace(",",".");
 	cashbackorca		= parseFloat(cashbackorca);
-	//console.log('Pelo Perc - Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
-	//console.log('Pelo Perc - cashbackorca = ' + cashbackorca);
+	console.log('Pelo Perc - Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
+	console.log('Pelo Perc - cashbackorca = ' + cashbackorca);
 	//console.log('Pelo Perc - valortotalorca = ' + valortotalorca);	
 	
 	
@@ -4787,9 +4781,6 @@ function descValorOrca(usarcash){
 	}else{
 		var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
 	}
-
-
-	
 	//alert('teste descValorOrca');
 	//console.log('usarcash = ' + usarcash);
 	var recorrencias = $('#Recorrencias').val();
@@ -4806,10 +4797,8 @@ function descValorOrca(usarcash){
 	var cashbackorca 	= $('#CashBackOrca').val();
 	cashbackorca 		= cashbackorca.replace(".","").replace(",",".");
 	cashbackorca		= parseFloat(cashbackorca);
-	//console.log('Pelo Desc - Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
-	//console.log('Pelo Desc - cashbackorca = ' + cashbackorca);
-	
-	
+	console.log('Pelo Desc - Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
+	console.log('Pelo Desc - cashbackorca = ' + cashbackorca);
 	if(valortotalorca > 0){
 		if(valortotalorca >= descvalororca){
 			//console.log('Total do Desconto em Valor = ' + descvalororca);
