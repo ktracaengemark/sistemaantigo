@@ -191,6 +191,7 @@
 									<div class="panel panel-success">
 										<div class="panel-heading">
 											<input type="hidden" id="AtivoCashBack" value="<?php echo $AtivoCashBack; ?>"/>
+											<input type="hidden" id="metodo" value="<?php echo $metodo; ?>"/>
 											<input type="hidden" id="exibirExtraOrca" value="<?php echo $exibirExtraOrca; ?>" />
 											<input type="hidden" id="exibirDescOrca" value="<?php echo $exibirDescOrca; ?>" />
 											<input type="hidden" name="Negocio" id="Negocio" value="1"/>

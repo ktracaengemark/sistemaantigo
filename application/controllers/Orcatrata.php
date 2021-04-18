@@ -1402,6 +1402,7 @@ class Orcatrata extends CI_Controller {
 							'DescValorOrca' 		=> $data['orcatrata']['DescValorOrca'],
 							'UsarCashBack' 			=> $data['orcatrata']['UsarCashBack'],
 							'CashBackOrca' 			=> $data['orcatrata']['CashBackOrca'],
+							'SubValorFinal' 		=> $data['orcatrata']['SubValorFinal'],
 							'ValorFinalOrca' 		=> $data['orcatrata']['ValorFinalOrca'],
 							
 							'BrindeOrca' 			=> $data['orcatrata']['BrindeOrca'],
@@ -3611,6 +3612,23 @@ class Orcatrata extends CI_Controller {
 			if ($data['orcatrata']['Cli_Forn_Orca'] == 'S' && $data['orcatrata']['UsarCashBack'] == 'S' && $data['orcatrata']['idApp_Cliente'] != 0){
 				$data['orcatrata']['AtivoCashBack'] = 'N';
 			}
+			/*
+			//uso estas linhas apenas para testar a pesquisa do cashbak
+			if ($data['orcatrata']['Cli_Forn_Orca'] == 'S' && $data['orcatrata']['UsarCashBack'] == 'S' && $data['orcatrata']['idApp_Cliente'] != 0){
+				$data['update']['cashback'] = $this->Orcatrata_model->get_produto_cashback($data['orcatrata']['idApp_Cliente']);
+				if (isset($data['update']['cashback'])){
+					$count_cash = count($data['update']['cashback']);
+					echo '<br>';
+					echo "<pre>";
+					print_r($count_cash);
+					echo '<br>';
+					print_r($data['update']['cashback']);
+					echo "</pre>";
+					
+				}
+			}			
+			exit ();
+			*/
 			
 			$data['orcatrata']['idApp_OrcaTrata'] = $this->Orcatrata_model->set_orcatrata($data['orcatrata']);
             
@@ -5034,25 +5052,7 @@ class Orcatrata extends CI_Controller {
 				*/
 				
 			}
-			
-			if ($_SESSION['Orcatrata']['AtivoCashBack'] == "S" && $data['orcatrata']['Cli_Forn_Orca'] == 'S' && $data['orcatrata']['UsarCashBack'] == 'S' && $data['orcatrata']['idApp_Cliente'] != 0){
-				$data['update']['cashback'] = $this->Orcatrata_model->get_produto_cashback($data['orcatrata']['idApp_Cliente']);
-				if (isset($data['update']['cashback'])){
-					$count_cash = count($data['update']['cashback']);
-					for($k=0;$k<$count_cash;$k++) {
-						
-						$data['update']['cashback'][$k]['StatusComissaoCashBack'] = 'S';
-						$data['update']['cashback'][$k]['DataPagoCashBack'] = $data['orcatrata']['DataOrca'];
-						$data['update']['cashback'][$k]['id_Orca_CashBack'] = $data['orcatrata']['idApp_OrcaTrata'];
-						
-						$data['update']['cashback']['bd'] = $this->Orcatrata_model->update_produto_id($data['update']['cashback'][$k], $data['update']['cashback'][$k]['idApp_Produto']);
-					
-					
-					}
-				}
-			}
-			
-			
+
 			
 			/*
             //echo count($data['servico']);

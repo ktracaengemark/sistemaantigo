@@ -4563,71 +4563,71 @@ function valorExtraOrca(){
 }
 
 function calculacashback(id_Cliente, valor2) {
-	console.log('AtivoCashBack = '+$('#AtivoCashBack').val());
-	if($('#AtivoCashBack').val() && $('#AtivoCashBack').val() == "S"){
-		
-		if(valor2 && valor2!=0){
-			var comcliente = valor2;
-			$('#Hidden_Cli_Forn_Orca').val(valor2);
-		}else{
-			var comcliente = $('#Hidden_Cli_Forn_Orca').val();
-		}
-		
-		console.log('comcliente = '+comcliente);
-
-		if(comcliente == "S"){
-			if(id_Cliente && id_Cliente!=0){
-				var id = id_Cliente;
-				$('#Hidden_idApp_Cliente').val(id);
-			}else if($('#idApp_Cliente').val()){
-				var id = $('#idApp_Cliente').val();
-				$('#Hidden_idApp_Cliente').val(id);
+	//console.log('metodo = '+$('#metodo').val());
+	if($('#metodo').val() && $('#metodo').val() == 1){
+		//console.log('AtivoCashBack = '+$('#AtivoCashBack').val());
+		if($('#AtivoCashBack').val() && $('#AtivoCashBack').val() == "S"){
+			
+			if(valor2 && valor2!=0){
+				var comcliente = valor2;
+				$('#Hidden_Cli_Forn_Orca').val(valor2);
 			}else{
-				var id = 'null';
+				var comcliente = $('#Hidden_Cli_Forn_Orca').val();
 			}
 			
-			console.log('id = '+id);
-			
-			if(id && id != 'null'){
+			//console.log('comcliente = '+comcliente);
 
-			
-				var metodo = $('#metodo').val();
-				console.log('metodo = '+metodo);
+			if(comcliente == "S"){
+				if(id_Cliente && id_Cliente!=0){
+					var id = id_Cliente;
+					$('#Hidden_idApp_Cliente').val(id);
+				}else if($('#idApp_Cliente').val()){
+					var id = $('#idApp_Cliente').val();
+					$('#Hidden_idApp_Cliente').val(id);
+				}else{
+					var id = 'null';
+				}
 				
-				$.ajax({
+				console.log('id = '+id);
+				
+				if(id && id != 'null'){
+					var ocorrencias = $('#Recorrencias').val();
+					//console.log('ocorrencias = '+ocorrencias);
 					
-					url: window.location.origin+ '/' + app + '/cadastros/pesquisar/CashBack.php?id=' + id,
-					dataType: "json",
-					
-					success: function (data) {
-						//console.log('data = '+data);
+					$.ajax({
 						
-						CashBackOrca	= parseFloat(data);
-						CashBackOrca	= CashBackOrca.toFixed(2);
-						CashBackOrca 	= CashBackOrca.replace(".",",");
+						url: window.location.origin+ '/' + app + '/cadastros/pesquisar/CashBack.php?id=' + id,
+						dataType: "json",
 						
-						$('#CashBackOrca').val(CashBackOrca);
-						//console.log('CashBackOrca = '+CashBackOrca);
-						tipoDescOrca();
+						success: function (data) {
+							//console.log('data = '+data);
+							
+							CashBackOrca	= parseFloat(data);
+							CashBackOrca	= CashBackOrca/ocorrencias;
+							CashBackOrca	= CashBackOrca.toFixed(2);
+							CashBackOrca 	= CashBackOrca.replace(".",",");
+							
+							$('#CashBackOrca').val(CashBackOrca);
+							//console.log('CashBackOrca = '+CashBackOrca);
+							tipoDescOrca();
+							
+						},
+						error:function(data){
+							//console.log('Nada encontrado');
+							$('#CashBackOrca').val('0,00');
+							tipoDescOrca();
+						}
 						
-					},
-					error:function(data){
-						//console.log('Nada encontrado');
-						$('#CashBackOrca').val('0,00');
-						tipoDescOrca();
-					}
-					
-				});//termina o ajax
-					
-			}
-			
-		}else{
-			$('#CashBackOrca').val('0,00');
-			tipoDescOrca();
-		}	
-	}else{
-		//tipoDescOrca();
-	}
+					});//termina o ajax
+						
+				}
+				
+			}else{
+				$('#CashBackOrca').val('0,00');
+				tipoDescOrca();
+			}	
+		}
+	}	
 }
 
 function tipoDescOrca(valor){
@@ -4821,6 +4821,11 @@ function descValorOrca(usarcash){
 				var valorfinalorca = subvalorfinal;
 			}
 			
+			var valor_s_desc = recorrencias*valortotalorca;
+			valor_s_desc	= parseFloat(valor_s_desc);
+			valor_s_desc	= valor_s_desc.toFixed(2);
+			valor_s_desc 	= valor_s_desc.replace('.',',');
+			
 			var valor_c_desc = recorrencias*valorfinalorca;
 			valor_c_desc	= parseFloat(valor_c_desc);
 			valor_c_desc	= valor_c_desc.toFixed(2);
@@ -4843,6 +4848,7 @@ function descValorOrca(usarcash){
 			$('#ValorFinalOrca').val(valorfinalorca);
 			$('#DescPercOrca').val(descpercorca);
 			$('#Valor_C_Desc').val(valor_c_desc);
+			$('#Valor_S_Desc').val(valor_s_desc);
 		}	
 	}else{
 		$('#SubValorFinal').val('0,00');
@@ -4850,6 +4856,7 @@ function descValorOrca(usarcash){
 		$('#DescPercOrca').val('0,00');
 		$('#DescValorOrca').val('0,00');
 		$('#Valor_C_Desc').val('0,00');
+		$('#Valor_S_Desc').val('0,00');
 	}
 	calculaParcelas();
 	calculaTroco();	

@@ -541,22 +541,24 @@ class Orcatrata_model extends CI_Model {
     public function get_produto_cashback($data) {
 		$query = $this->db->query('
 			SELECT 
-				idApp_Produto,
-				idSis_Empresa,
-				idApp_Cliente,
-				ValorComissaoCashBack,
-				StatusComissaoCashBack,
-				DataPagoCashBack,
-				id_Orca_CashBack
+				PD.idApp_Produto,
+				PD.idSis_Empresa,
+				PD.idApp_Cliente,
+				PD.ValorComissaoCashBack,
+				PD.StatusComissaoCashBack,
+				PD.DataPagoCashBack,
+				PD.id_Orca_CashBack
 			FROM 
-				App_Produto
+				App_Produto AS PD
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PD.idApp_OrcaTrata
 			WHERE
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				StatusComissaoCashBack = "N" AND
-				id_Orca_CashBack = 0 AND
-				ValorComissaoCashBack > 0.00 AND
-				idApp_Cliente = ' . $data . '
-				
+				PD.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				PD.StatusComissaoCashBack = "N" AND
+				PD.id_Orca_CashBack = 0 AND
+				PD.ValorComissaoCashBack > 0.00 AND
+				OT.QuitadoOrca = "S" AND
+				OT.CanceladoOrca = "N" AND
+				PD.idApp_Cliente = ' . $data . '
 		');
         $query = $query->result_array();
 

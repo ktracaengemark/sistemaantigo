@@ -1564,53 +1564,20 @@
 																			<input type="text" class="form-control Valor" id="CashBackOrca" maxlength="10" placeholder="0,00" readonly=''
 																				   name="CashBackOrca" value="<?php echo $orcatrata['CashBackOrca'] ?>">
 																		</div>
-																	</div>	
-																	<?php if ($AtivoCashBack == "S" ) { ?>
-																		<div class="col-md-6 text-left">
-																			<label for="UsarCashBack">Uasr CashBack?</label><br>
-																			<div class="btn-group" data-toggle="buttons">
-																				<?php
-																				foreach ($select['UsarCashBack'] as $key => $row) {
-																					if (!$orcatrata['UsarCashBack'])$orcatrata['UsarCashBack'] = 'N';
-
-																					($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																					if ($orcatrata['UsarCashBack'] == $key) {
-																						echo ''
-																						. '<label class="btn btn-warning active" name="UsarCashBack_' . $hideshow . '">'
-																						. '<input type="radio" name="UsarCashBack" id="' . $hideshow . '" '
-																						. 'onchange="descValorOrca(this.value)" '
-																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																						. '</label>'
-																						;
-																					} else {
-																						echo ''
-																						. '<label class="btn btn-default" name="UsarCashBack_' . $hideshow . '">'
-																						. '<input type="radio" name="UsarCashBack" id="' . $hideshow . '" '
-																						. 'onchange="descValorOrca(this.value)" '
-																						. 'autocomplete="off" value="' . $key . '" >' . $row
-																						. '</label>'
-																						;
-																					}
-																				}
-																				?>
-																			</div>
-																		</div>
-																	<?php }else{ ?>	
-																		<div class="col-md-6 text-left">
-																			<input type="hidden" name="UsarCashBack" id="UsarCashBack" value="<?php echo $_SESSION['Orcatrata']['UsarCashBack']; ?>"/>
-																			<label for="UsarCashBack">Usar CashBack?</label><br>
-																			<?php 
-																				if($_SESSION['Orcatrata']['UsarCashBack'] == "S"){
-																					$UsarCashBack = 'Sim';
-																				}elseif($_SESSION['Orcatrata']['UsarCashBack'] == "N"){
-																					$UsarCashBack = 'Não';
-																				}
-																			?>
-																			<input type="text" class="form-control" readonly="" value="<?php echo $UsarCashBack; ?>"/>
-																		</div>
-																	<?php } ?>
-																	<input type="hidden" id="Hidden_UsarCashBack" value="<?php echo $orcatrata['UsarCashBack'] ?>">
+																	</div>
+																	<div class="col-md-6 text-left">
+																		<label for="UsarCashBack">Usar CashBack?</label><br>
+																		<?php 
+																			if($_SESSION['Orcatrata']['UsarCashBack'] == "S"){
+																				$UsarCashBack = 'Sim';
+																			}elseif($_SESSION['Orcatrata']['UsarCashBack'] == "N"){
+																				$UsarCashBack = 'Não';
+																			}
+																		?>
+																		<input type="text" class="form-control" readonly="" value="<?php echo $UsarCashBack; ?>"/>
+																	</div>
+																	<input type="hidden" name="UsarCashBack" id="UsarCashBack" value="<?php echo $_SESSION['Orcatrata']['UsarCashBack']; ?>"/>
+																	<input type="hidden" id="Hidden_UsarCashBack" value="<?php echo $_SESSION['Orcatrata']['UsarCashBack']; ?>">
 																</div>
 															<?php }else{ ?>
 																<input type="hidden" name="UsarCashBack" id="UsarCashBack" value="<?php echo $orcatrata['UsarCashBack'] ?>"/>
