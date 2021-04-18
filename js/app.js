@@ -4563,63 +4563,71 @@ function valorExtraOrca(){
 }
 
 function calculacashback(id_Cliente, valor2) {
-	
-	if(valor2 && valor2!=0){
-		var comcliente = valor2;
-		$('#Hidden_Cli_Forn_Orca').val(valor2);
-	}else{
-		var comcliente = $('#Hidden_Cli_Forn_Orca').val();
-	}
-	
-	console.log('comcliente = '+comcliente);
-
-	if(comcliente == "S"){
-		if(id_Cliente && id_Cliente!=0){
-			var id = id_Cliente;
-			$('#Hidden_idApp_Cliente').val(id);
-		}else if($('#idApp_Cliente').val()){
-			var id = $('#idApp_Cliente').val();
-			$('#Hidden_idApp_Cliente').val(id);
+	console.log('AtivoCashBack = '+$('#AtivoCashBack').val());
+	if($('#AtivoCashBack').val() && $('#AtivoCashBack').val() == "S"){
+		
+		if(valor2 && valor2!=0){
+			var comcliente = valor2;
+			$('#Hidden_Cli_Forn_Orca').val(valor2);
 		}else{
-			var id = 'null';
+			var comcliente = $('#Hidden_Cli_Forn_Orca').val();
 		}
 		
-		console.log('id = '+id);
-		
-		if(id && id != 'null'){
+		console.log('comcliente = '+comcliente);
 
-			var metodo = $('#metodo').val();
-			$.ajax({
+		if(comcliente == "S"){
+			if(id_Cliente && id_Cliente!=0){
+				var id = id_Cliente;
+				$('#Hidden_idApp_Cliente').val(id);
+			}else if($('#idApp_Cliente').val()){
+				var id = $('#idApp_Cliente').val();
+				$('#Hidden_idApp_Cliente').val(id);
+			}else{
+				var id = 'null';
+			}
+			
+			console.log('id = '+id);
+			
+			if(id && id != 'null'){
+
+			
+				var metodo = $('#metodo').val();
+				console.log('metodo = '+metodo);
 				
-				url: window.location.origin+ '/' + app + '/cadastros/pesquisar/CashBack.php?id=' + id,
-				dataType: "json",
-				
-				success: function (data) {
-					//console.log('data = '+data);
+				$.ajax({
 					
-					CashBackOrca	= parseFloat(data);
-					CashBackOrca	= CashBackOrca.toFixed(2);
-					CashBackOrca 	= CashBackOrca.replace(".",",");
+					url: window.location.origin+ '/' + app + '/cadastros/pesquisar/CashBack.php?id=' + id,
+					dataType: "json",
 					
-					$('#CashBackOrca').val(CashBackOrca);
-					//console.log('CashBackOrca = '+CashBackOrca);
-					tipoDescOrca();
+					success: function (data) {
+						//console.log('data = '+data);
+						
+						CashBackOrca	= parseFloat(data);
+						CashBackOrca	= CashBackOrca.toFixed(2);
+						CashBackOrca 	= CashBackOrca.replace(".",",");
+						
+						$('#CashBackOrca').val(CashBackOrca);
+						//console.log('CashBackOrca = '+CashBackOrca);
+						tipoDescOrca();
+						
+					},
+					error:function(data){
+						//console.log('Nada encontrado');
+						$('#CashBackOrca').val('0,00');
+						tipoDescOrca();
+					}
 					
-				},
-				error:function(data){
-					//console.log('Nada encontrado');
-					$('#CashBackOrca').val('0,00');
-					tipoDescOrca();
-				}
-				
-			});//termina o ajax
-		}
-		
+				});//termina o ajax
+					
+			}
+			
+		}else{
+			$('#CashBackOrca').val('0,00');
+			tipoDescOrca();
+		}	
 	}else{
-		$('#CashBackOrca').val('0,00');
-		tipoDescOrca();
-	}	
-	
+		//tipoDescOrca();
+	}
 }
 
 function tipoDescOrca(valor){
@@ -4690,8 +4698,8 @@ function descPercOrca(usarcash){
 
 	cashbackorca 		= cashbackorca.replace(".","").replace(",",".");
 	cashbackorca		= parseFloat(cashbackorca);
-	console.log('Pelo Perc - Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
-	console.log('Pelo Perc - cashbackorca = ' + cashbackorca);
+	//console.log('Pelo Perc - Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
+	//console.log('Pelo Perc - cashbackorca = ' + cashbackorca);
 	//console.log('Pelo Perc - valortotalorca = ' + valortotalorca);	
 	
 	
@@ -4707,17 +4715,15 @@ function descPercOrca(usarcash){
 			
 			var subvalorfinal = (valortotalorca - descvalororca);
 			
+			if(Hidden_UsarCashBack == 'S'){
 				if(subvalorfinal >= cashbackorca){
-					if(Hidden_UsarCashBack == 'S'){
-						var valorfinalorca = (subvalorfinal - cashbackorca);
-					}else{
-						var valorfinalorca = subvalorfinal;
-					}
+					var valorfinalorca = (subvalorfinal - cashbackorca);
 				}else{
-					var valorfinalorca = subvalorfinal;
-				}
-				
-			//var valorfinalorca = (valortotalorca - descvalororca);
+					var valorfinalorca = '0,00';
+				}	
+			}else{
+				var valorfinalorca = subvalorfinal;
+			}
 			
 			var valor_s_desc = recorrencias*valortotalorca;
 			valor_s_desc	= parseFloat(valor_s_desc);
@@ -4805,12 +4811,12 @@ function descValorOrca(usarcash){
 			//console.log('Total do Pedido = ' + valortotalorca);
 			var subvalorfinal = (valortotalorca - descvalororca);
 			
-			if(subvalorfinal >= cashbackorca){
-				if(Hidden_UsarCashBack == 'S'){
+			if(Hidden_UsarCashBack == 'S'){
+				if(subvalorfinal >= cashbackorca){
 					var valorfinalorca = (subvalorfinal - cashbackorca);
 				}else{
-					var valorfinalorca = subvalorfinal;
-				}
+					var valorfinalorca = '0,00';
+				}	
 			}else{
 				var valorfinalorca = subvalorfinal;
 			}

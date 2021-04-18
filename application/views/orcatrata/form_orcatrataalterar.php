@@ -168,6 +168,8 @@
 								<div class="panel-group">
 									<div class="panel panel-success">
 										<div class="panel-heading">
+											<input type="hidden" id="AtivoCashBack" value="<?php echo $AtivoCashBack; ?>"/>
+											<input type="hidden" id="metodo" value="<?php echo $metodo; ?>"/>
 											<input type="hidden" id="exibir_id" value="<?php echo $exibir_id; ?>" />
 											<input type="hidden" id="exibirExtraOrca" value="<?php echo $exibirExtraOrca; ?>" />
 											<input type="hidden" id="exibirDescOrca" value="<?php echo $exibirDescOrca; ?>" />
@@ -230,6 +232,7 @@
 														</div>
 													</div>
 													<div class="col-md-2 text-left"></div>
+													<input type="hidden" id="Hidden_Cli_Forn_Orca" value="<?php echo $_SESSION['Orcatrata']['Cli_Forn_Orca']; ?>"/>
 													<div class="col-md-2 text-left">
 														<label for="Prd_Srv_Orca">Com Prd & Srv?</label><br>
 														<div class="btn-group" data-toggle="buttons">
@@ -1544,6 +1547,15 @@
 																		</div>
 																	</div>	
 																</div>
+																<div class="row">	
+																	<div class="col-md-12 text-left">
+																		<label>"Total com Desconto"</label><br>
+																		<div class="input-group" id="txtHint">
+																			<span class="input-group-addon" id="basic-addon1">R$</span>
+																			<input type="text" class="form-control Valor" id="SubValorFinal" name="SubValorFinal" value="<?php echo $orcatrata['SubValorFinal'] ?>" readonly="">
+																		</div>
+																	</div>	
+																</div>
 																<div class="row">
 																	<div class="col-md-6">
 																		<label for="CashBackOrca">CashBack.</label><br>
@@ -1553,34 +1565,52 @@
 																				   name="CashBackOrca" value="<?php echo $orcatrata['CashBackOrca'] ?>">
 																		</div>
 																	</div>	
-																	<div class="col-md-6 text-left">
-																		<label for="UsarCashBack">Uasr CashBack?</label><br>
-																		<div class="btn-group" data-toggle="buttons">
-																			<?php
-																			foreach ($select['UsarCashBack'] as $key => $row) {
-																				if (!$orcatrata['UsarCashBack'])$orcatrata['UsarCashBack'] = 'N';
+																	<?php if ($AtivoCashBack == "S" ) { ?>
+																		<div class="col-md-6 text-left">
+																			<label for="UsarCashBack">Uasr CashBack?</label><br>
+																			<div class="btn-group" data-toggle="buttons">
+																				<?php
+																				foreach ($select['UsarCashBack'] as $key => $row) {
+																					if (!$orcatrata['UsarCashBack'])$orcatrata['UsarCashBack'] = 'N';
 
-																				($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																					($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
-																				if ($orcatrata['UsarCashBack'] == $key) {
-																					echo ''
-																					. '<label class="btn btn-warning active" name="UsarCashBack_' . $hideshow . '">'
-																					. '<input type="radio" name="UsarCashBack" id="' . $hideshow . '" '
-																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																					. '</label>'
-																					;
-																				} else {
-																					echo ''
-																					. '<label class="btn btn-default" name="UsarCashBack_' . $hideshow . '">'
-																					. '<input type="radio" name="UsarCashBack" id="' . $hideshow . '" '
-																					. 'autocomplete="off" value="' . $key . '" >' . $row
-																					. '</label>'
-																					;
+																					if ($orcatrata['UsarCashBack'] == $key) {
+																						echo ''
+																						. '<label class="btn btn-warning active" name="UsarCashBack_' . $hideshow . '">'
+																						. '<input type="radio" name="UsarCashBack" id="' . $hideshow . '" '
+																						. 'onchange="descValorOrca(this.value)" '
+																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																						. '</label>'
+																						;
+																					} else {
+																						echo ''
+																						. '<label class="btn btn-default" name="UsarCashBack_' . $hideshow . '">'
+																						. '<input type="radio" name="UsarCashBack" id="' . $hideshow . '" '
+																						. 'onchange="descValorOrca(this.value)" '
+																						. 'autocomplete="off" value="' . $key . '" >' . $row
+																						. '</label>'
+																						;
+																					}
 																				}
-																			}
-																			?>
+																				?>
+																			</div>
 																		</div>
-																	</div>
+																	<?php }else{ ?>	
+																		<div class="col-md-6 text-left">
+																			<input type="hidden" name="UsarCashBack" id="UsarCashBack" value="<?php echo $_SESSION['Orcatrata']['UsarCashBack']; ?>"/>
+																			<label for="UsarCashBack">Usar CashBack?</label><br>
+																			<?php 
+																				if($_SESSION['Orcatrata']['UsarCashBack'] == "S"){
+																					$UsarCashBack = 'Sim';
+																				}elseif($_SESSION['Orcatrata']['UsarCashBack'] == "N"){
+																					$UsarCashBack = 'Não';
+																				}
+																			?>
+																			<input type="text" class="form-control" readonly="" value="<?php echo $UsarCashBack; ?>"/>
+																		</div>
+																	<?php } ?>
+																	<input type="hidden" id="Hidden_UsarCashBack" value="<?php echo $orcatrata['UsarCashBack'] ?>">
 																</div>
 															<?php }else{ ?>
 																<input type="hidden" name="UsarCashBack" id="UsarCashBack" value="<?php echo $orcatrata['UsarCashBack'] ?>"/>

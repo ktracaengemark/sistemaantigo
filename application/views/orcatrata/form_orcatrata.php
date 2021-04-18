@@ -168,6 +168,8 @@
 								<div class="panel-group">
 									<div class="panel panel-success">
 										<div class="panel-heading">
+											<input type="hidden" id="AtivoCashBack" value="<?php echo $AtivoCashBack; ?>"/>
+											<input type="hidden" id="metodo" value="<?php echo $metodo; ?>"/>
 											<input type="hidden" id="exibir_id" value="<?php echo $exibir_id; ?>" />
 											<input type="hidden" id="exibirExtraOrca" value="<?php echo $exibirExtraOrca; ?>" />
 											<input type="hidden" id="exibirDescOrca" value="<?php echo $exibirDescOrca; ?>" />
@@ -1559,7 +1561,7 @@
 																			<label>"Total com Desconto"</label><br>
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
-																				<input type="text" class="form-control Valor" id="SubValorFinal" readonly="">
+																				<input type="text" class="form-control Valor" id="SubValorFinal" name="SubValorFinal" value="<?php echo $orcatrata['SubValorFinal'] ?>" readonly="">
 																			</div>
 																		</div>	
 																	</div>
