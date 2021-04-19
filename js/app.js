@@ -4240,9 +4240,10 @@ function calculaResta(entrada) {
     //recebe o valor do orçamento
 	var orcamento = $("#ValorOrca").val();
 	var devolucao = $("#ValorDev").val();
-    var resta = -(-orcamento.replace(".","").replace(",",".") - devolucao.replace(".","").replace(",","."));
-
-    resta = mascaraValorReal(resta);
+    var resta 	= -(-orcamento.replace(".","").replace(",",".") - devolucao.replace(".","").replace(",","."));
+	resta		= parseFloat(resta);
+	resta		= resta.toFixed(2);
+    //resta = mascaraValorReal(resta);
 
     //o valor é escrito no seu campo no formulário
     $('#ValorRestanteOrca').val(resta);
@@ -4261,7 +4262,8 @@ function calculaTotal(entrada) {
 
 	var valorrestanteorca = $("#ValorRestanteOrca").val();
 	
-	//console.log('Prd+Srv = '+valorrestanteorca);
+	console.log('Prd+Srv = '+valorrestanteorca);
+	
 	if($("#ValorFrete").val() == ''){
 		var devolucao = '0,00';
 	}else{
@@ -4271,9 +4273,13 @@ function calculaTotal(entrada) {
     
 	//console.log('Taxa de Entrega = '+devolucao);
 
-	var valorsomaorca = -(- devolucao.replace(".","").replace(",",".") - valorrestanteorca.replace(".","").replace(",","."));
-	//console.log('Prd+Srv+Entrega 1 = '+valorsomaorca);	
-	valorsomaorca = mascaraValorReal(valorsomaorca);
+	//var valorsomaorca = -(- devolucao.replace(".","").replace(",",".") - valorrestanteorca.replace(".","").replace(",","."));
+	var valorsomaorca = -(- devolucao.replace(".","").replace(",",".") - valorrestanteorca);
+	console.log('Prd+Srv+Entrega 1 = '+valorsomaorca);	
+	valorsomaorca	= parseFloat(valorsomaorca);
+	valorsomaorca	= valorsomaorca.toFixed(2);
+	
+	//valorsomaorca = mascaraValorReal(valorsomaorca);
 	//console.log(restaT +' - Valor Total');
 	console.log('Prd+Srv+Entrega 2 = '+valorsomaorca);
 	$("#ValorSomaOrca").val(valorsomaorca);	
@@ -4450,12 +4456,18 @@ function percExtraOrca(){
 	var recorrencias = $('#Recorrencias').val();
 	//console.log('Total de Recorrencias = ' + recorrencias);
 	var valorsomaorca = $('#ValorSomaOrca').val();
-	valorsomaorca = valorsomaorca.replace(".","").replace(",",".");
+	//valorsomaorca = valorsomaorca.replace(".","").replace(",",".");
+	valorsomaorca	= parseFloat(valorsomaorca);
+	valorsomaorca	= valorsomaorca.toFixed(2);
+	console.log('PercExtra. valorsomaorca = ' + valorsomaorca);
 	
 	var percextraorca = $('#PercExtraOrca').val();
 	percextraorca = percextraorca.replace(".","").replace(",",".");
-	
+	percextraorca	= parseFloat(percextraorca);
+	percextraorca	= percextraorca.toFixed(2);
+	console.log('PercExtra. percextraorca = ' + percextraorca);
 	if(valorsomaorca > 0){
+		
 		var valorextraorca = percextraorca*valorsomaorca/100;
 		valorextraorca	= parseFloat(valorextraorca);
 		valorextraorca	= valorextraorca.toFixed(2);
@@ -4463,6 +4475,8 @@ function percExtraOrca(){
 		if(percextraorca <= 100){	
 			
 			var valortotalorca = -(-valorsomaorca - valorextraorca);
+			valortotalorca	= parseFloat(valortotalorca);
+			valortotalorca	= valortotalorca.toFixed(2);
 			
 			var valor_s_extra = recorrencias*valorsomaorca;
 			valor_s_extra	= parseFloat(valor_s_extra);
@@ -4476,9 +4490,6 @@ function percExtraOrca(){
 			
 			valorextraorca 	= valorextraorca.replace('.',',');
 			
-			valortotalorca	= parseFloat(valortotalorca);
-			valortotalorca	= valortotalorca.toFixed(2);
-			valortotalorca 	= valortotalorca.replace('.',',');
 			
 			
 			$('#ValorExtraOrca').val(valorextraorca);
@@ -4491,14 +4502,14 @@ function percExtraOrca(){
 			//console.log(valorextraorca);
 		
 		}else{
-			$('#ValorTotalOrca').val('0,00');
+			$('#ValorTotalOrca').val('0.00');
 			$('#PercExtraOrca').val('0,00');
 			$('#ValorExtraOrca').val('0,00');
 			$('#Valor_C_Extra').val('0,00');
 			$('#Valor_S_Extra').val('0,00');
 		}	
 	}else{
-		$('#ValorTotalOrca').val('0,00');
+		$('#ValorTotalOrca').val('0.00');
 		$('#PercExtraOrca').val('0,00');
 		$('#ValorExtraOrca').val('0,00');
 		$('#Valor_C_Extra').val('0,00');
@@ -4521,45 +4532,54 @@ function valorExtraOrca(){
 	var recorrencias = $('#Recorrencias').val();
 	console.log('Total de Recorrencias = ' + recorrencias);
 	var valorsomaorca = $('#ValorSomaOrca').val();
+	valorsomaorca	= parseFloat(valorsomaorca);
+	valorsomaorca	= valorsomaorca.toFixed(2);
+	console.log('ValorExtra. valorsomaorca = ' + valorsomaorca);
+	//valorsomaorca = valorsomaorca.replace(".","").replace(",",".");
+
+
+	if($('#ValorExtraOrca').val() == ''){
+		var valorextraorca = '0,00';
+	}else{
+		var valorextraorca = $('#ValorExtraOrca').val();
+	}
+		
 	
-		valorsomaorca = valorsomaorca.replace(".","").replace(",",".");
-		valorsomaorca	= parseFloat(valorsomaorca);
-		if($('#ValorExtraOrca').val() == ''){
-			var valorextraorca = '0,00';
-		}else{
-			var valorextraorca = $('#ValorExtraOrca').val();
-		}
-			
+	valorextraorca = valorextraorca.replace(".","").replace(",",".");
+	valorextraorca	= parseFloat(valorextraorca);
+	valorextraorca	= valorextraorca.toFixed(2);
+	console.log('ValorExtra. valorextraorca = ' + valorextraorca);
+	
+	var valortotalorca = -(-valorsomaorca - valorextraorca);
+	valortotalorca	= parseFloat(valortotalorca);
+	valortotalorca	= valortotalorca.toFixed(2);	
+	
+	console.log('ValorExtra. Prdvalortotalorca = ' + valortotalorca);
+	
+	var valor_c_extra = recorrencias*valortotalorca;
+	valor_c_extra	= parseFloat(valor_c_extra);
+	valor_c_extra	= valor_c_extra.toFixed(2);
+	valor_c_extra 	= valor_c_extra.replace('.',',');
+	
+	var valor_s_extra = recorrencias*valorsomaorca;
+	valor_s_extra	= parseFloat(valor_s_extra);
+	valor_s_extra	= valor_s_extra.toFixed(2);
+	valor_s_extra 	= valor_s_extra.replace('.',',');	
+	
+	if(valorsomaorca <= 0.00){
+		var percextraorca = '0,00';
+	}else{
+		var percextraorca = (valortotalorca - valorsomaorca)*100/valorsomaorca;
+		percextraorca	= parseFloat(percextraorca);
+		percextraorca	= percextraorca.toFixed(2);
+		percextraorca 	= percextraorca.replace('.',',');
+	}
 		
-		valorextraorca = valorextraorca.replace(".","").replace(",",".");
-		valorextraorca	= parseFloat(valorextraorca);
-		
-		console.log('valorextraorca = ' + valorextraorca);
-		console.log('Total do Pedido = ' + valorsomaorca);
-		var valortotalorca = -(-valorsomaorca - valorextraorca);
-		
-		var valor_c_extra = recorrencias*valortotalorca;
-		valor_c_extra	= parseFloat(valor_c_extra);
-		valor_c_extra	= valor_c_extra.toFixed(2);
-		valor_c_extra 	= valor_c_extra.replace('.',',');
-		if(valorsomaorca <= 0.00){
-			var percextraorca = '0,00';
-		}else{
-			var percextraorca = (valortotalorca - valorsomaorca)*100/valorsomaorca;
-			percextraorca	= parseFloat(percextraorca);
-			percextraorca	= percextraorca.toFixed(2);
-			percextraorca 	= percextraorca.replace('.',',');
-		}
-			
-		
-		valortotalorca	= parseFloat(valortotalorca);
-		valortotalorca	= valortotalorca.toFixed(2);
-		valortotalorca 	= valortotalorca.replace('.',',');
-		
-		
-		$('#ValorTotalOrca').val(valortotalorca);
-		$('#PercExtraOrca').val(percextraorca);
-		$('#Valor_C_Extra').val(valor_c_extra);
+
+	$('#ValorTotalOrca').val(valortotalorca);
+	$('#PercExtraOrca').val(percextraorca);
+	$('#Valor_C_Extra').val(valor_c_extra);
+	$('#Valor_S_Extra').val(valor_s_extra);
 			
 
 	//calculaParcelas();
@@ -4572,6 +4592,272 @@ function valorExtraOrca(){
 	//console.log('Perc. Valor Extra = ' + valorextraorca);
 	//console.log('Perc. Perc Extra = ' + percextraorca);
 	//console.log('Perc. Prd+Srv+Extra = ' + valortotalorca);
+}
+
+function tipoDescOrca(valor){
+	//alert('teste tipoDescOrca');
+	console.log('valor = ' + valor);
+	if(valor){
+		if(valor == 'P'){
+			$('#DescPercOrca').prop('readonly', false);
+			//$('#DescPercOrca').prop('onkeyup', true);
+			//$("#DescPercOrca").on("click");
+			$('#DescValorOrca').prop('readonly', true);
+			//$('#DescValorOrca').prop('onkeyup', false);
+			//$("#DescValorOrca").off("click");
+		}else if(valor == 'V'){
+			$('#DescPercOrca').prop('readonly', true);
+			//$('#DescPercOrca').prop('onkeyup', false);
+			//$("#DescPercOrca").off("click");
+			$('#DescValorOrca').prop('readonly', false);
+			//$('#DescValorOrca').prop('onkeyup', true);
+			//$("#DescValorOrca").on("click");
+		}
+		$('#Hidden_TipoDescOrca').val(valor);
+		var tipodescorca = valor;
+		if(tipodescorca == 'P'){
+			var desconto = 'Percentual';
+			descPercOrca();
+		}else if(tipodescorca == 'V'){
+			var desconto = 'Valor';
+			descValorOrca();
+		}
+	}else{
+		var tipodescorca = $('#Hidden_TipoDescOrca').val();
+		if(tipodescorca == 'P'){
+			var desconto = 'Percentual';
+			descPercOrca();
+		}else if(tipodescorca == 'V'){
+			var desconto = 'Valor';
+			descValorOrca();
+		}
+	}
+
+	//var tipodescorca = $('#Hidden_TipoDescOrca').val();
+	//console.log('Tipo. hidden ='+tipodescorca);
+	//console.log('Tipo. valor ='+valor);
+	//console.log('Tipo. desconto ='+desconto);
+}
+
+function descPercOrca(usarcash){
+	
+	if(usarcash){
+		var Hidden_UsarCashBack	= usarcash;
+		$('#Hidden_UsarCashBack').val(usarcash);
+	}else{
+		var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
+	}	
+
+	
+	//alert('teste descPercOrca');
+	var recorrencias = $('#Recorrencias').val();
+	//console.log('Total de Recorrencias = ' + recorrencias);
+	var valortotalorca = $('#ValorTotalOrca').val();
+	//valortotalorca = valortotalorca.replace(".","").replace(",",".");
+	valortotalorca	= parseFloat(valortotalorca);
+	valortotalorca	= valortotalorca.toFixed(2);
+	
+	//var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
+	
+	var cashbackorca 	= $('#CashBackOrca').val();
+
+	cashbackorca 		= cashbackorca.replace(".","").replace(",",".");
+	cashbackorca		= parseFloat(cashbackorca);
+	//cashbackorca		= cashbackorca.toFixed(2);
+	
+	//console.log('Pelo Perc - Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
+	console.log('PercDesc - cashbackorca = ' + cashbackorca);
+	console.log('PercDesc - valortotalorca = ' + valortotalorca);	
+	
+	
+	var descpercorca = $('#DescPercOrca').val();
+	descpercorca 	= descpercorca.replace(".","").replace(",",".");
+	descpercorca	= parseFloat(descpercorca);
+	descpercorca	= descpercorca.toFixed(2);
+	console.log('PercDesc descpercorca = ' + descpercorca);
+	
+	
+	//console.log('Perc. Pedido = ' + valortotalorca);
+	//console.log('Perc. Desc Valor = ' + descvalororca);
+	
+	//console.log('Perc. Final Orca = ' + valorfinalorca);	
+	
+	
+	
+	
+	if(valortotalorca > 0){
+		console.log('valortotalorca > 0 ');
+		var descvalororca = descpercorca*valortotalorca/100;
+		descvalororca	= parseFloat(descvalororca);
+		descvalororca	= descvalororca.toFixed(2);
+		console.log('Perc. descvalororca = ' + descvalororca);
+		if(descpercorca <= 100){	
+			console.log('descpercorca <= 100');
+			var subvalorfinal 	= (valortotalorca - descvalororca);
+			subvalorfinal		= parseFloat(subvalorfinal);
+			//subvalorfinal		= subvalorfinal.toFixed(2);
+			console.log('PercDesc subvalorfinal = ' + subvalorfinal);
+			if(Hidden_UsarCashBack == 'S'){
+				if(subvalorfinal >= cashbackorca){
+					console.log('Sim');
+					var valorfinalorca = (subvalorfinal - cashbackorca);
+				}else{
+					console.log('Não');
+					var valorfinalorca = '0.00';
+				}	
+			}else{
+				var valorfinalorca = subvalorfinal;
+			}
+			
+			var valor_s_desc = recorrencias*valortotalorca;
+			valor_s_desc	= parseFloat(valor_s_desc);
+			valor_s_desc	= valor_s_desc.toFixed(2);
+			valor_s_desc 	= valor_s_desc.replace('.',',');
+			
+			var valor_c_desc = recorrencias*valorfinalorca;
+			valor_c_desc	= parseFloat(valor_c_desc);
+			valor_c_desc	= valor_c_desc.toFixed(2);
+			valor_c_desc 	= valor_c_desc.replace('.',',');
+			
+			
+			
+			descvalororca 	= descvalororca.replace('.',',');
+			
+			subvalorfinal		= subvalorfinal.toFixed(2);
+			//subvalorfinal 	= subvalorfinal.replace('.',',');
+			console.log('Perc. subvalorfinal = ' + subvalorfinal);
+			
+			valorfinalorca	= parseFloat(valorfinalorca);
+			valorfinalorca	= valorfinalorca.toFixed(2);
+			valorfinalorca 	= valorfinalorca.replace('.',',');
+			console.log('PercDesc. valorfinalorca = ' + valorfinalorca);
+			
+			$('#DescValorOrca').val(descvalororca);
+			$('#SubValorFinal').val(subvalorfinal);
+			$('#ValorFinalOrca').val(valorfinalorca);
+			$('#Valor_C_Desc').val(valor_c_desc);
+			$('#Valor_S_Desc').val(valor_s_desc);
+			
+			//console.log(valortotalorca);
+			//console.log(descpercorca);
+			//console.log(descvalororca);
+		
+		}else{
+			$('#DescPercOrca').val('0,00');
+			$('#DescValorOrca').val('0,00');
+			$('#SubValorFinal').val('0.00');
+			$('#ValorFinalOrca').val('0,00');
+			$('#Valor_C_Desc').val('0,00');
+			$('#Valor_S_Desc').val('0,00');
+		}	
+	}else{
+		$('#DescPercOrca').val('0,00');
+		$('#DescValorOrca').val('0,00');
+		$('#SubValorFinal').val('0.00');
+		$('#ValorFinalOrca').val('0,00');
+		$('#Valor_C_Desc').val('0,00');
+		$('#Valor_S_Desc').val('0,00');
+	}
+	calculaParcelas();
+	calculaTroco();
+
+}
+
+function descValorOrca(usarcash){
+	if(usarcash && usarcash!=0){
+		var Hidden_UsarCashBack	= usarcash;
+		$('#Hidden_UsarCashBack').val(usarcash);
+	}else{
+		var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
+	}
+	//alert('teste descValorOrca');
+	//console.log('usarcash = ' + usarcash);
+	var recorrencias = $('#Recorrencias').val();
+	//console.log('Total de Recorrencias = ' + recorrencias);
+	
+	var valortotalorca 	= $('#ValorTotalOrca').val();
+	//valortotalorca 		= valortotalorca.replace(".","").replace(",",".");
+	valortotalorca		= parseFloat(valortotalorca);
+	//valortotalorca		= valortotalorca.toFixed(2);
+	
+	if($('#DescValorOrca').val() == ''){
+		var descvalororca = '0,00';
+	}else{
+		var descvalororca = $('#DescValorOrca').val();
+	}
+		
+	
+	descvalororca 	= descvalororca.replace(".","").replace(",",".");
+	descvalororca	= parseFloat(descvalororca);
+	
+	var cashbackorca 	= $('#CashBackOrca').val();
+	cashbackorca 		= cashbackorca.replace(".","").replace(",",".");
+	cashbackorca		= parseFloat(cashbackorca);
+	console.log('Pelo Desc - Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
+	//console.log('Pelo Desc - cashbackorca = ' + cashbackorca);
+	console.log('PeloDesc-valortotalorca = ' + valortotalorca);
+	console.log('PeloDesc-descvalororca = ' + descvalororca);
+	if(valortotalorca > 0){
+		if(valortotalorca >= descvalororca){
+			//console.log('Total do Desconto em Valor = ' + descvalororca);
+			//console.log('Total do Pedido = ' + valortotalorca);
+			var subvalorfinal = (valortotalorca - descvalororca);
+			subvalorfinal	= parseFloat(subvalorfinal);
+			
+			if(Hidden_UsarCashBack == 'S'){
+				if(subvalorfinal >= cashbackorca){
+					var valorfinalorca = (subvalorfinal - cashbackorca);
+				}else{
+					var valorfinalorca = '0,00';
+				}	
+			}else{
+				var valorfinalorca = subvalorfinal;
+			}
+			
+			var valor_s_desc = recorrencias*valortotalorca;
+			valor_s_desc	= parseFloat(valor_s_desc);
+			valor_s_desc	= valor_s_desc.toFixed(2);
+			valor_s_desc 	= valor_s_desc.replace('.',',');
+			
+			var valor_c_desc = recorrencias*valorfinalorca;
+			valor_c_desc	= parseFloat(valor_c_desc);
+			valor_c_desc	= valor_c_desc.toFixed(2);
+			valor_c_desc 	= valor_c_desc.replace('.',',');
+			
+			var descpercorca = (valortotalorca - subvalorfinal)*100/valortotalorca;
+			descpercorca	= parseFloat(descpercorca);
+			descpercorca	= descpercorca.toFixed(2);
+			descpercorca 	= descpercorca.replace('.',',');
+			
+			
+			subvalorfinal	= subvalorfinal.toFixed(2);
+			//subvalorfinal 	= subvalorfinal.replace('.',',');
+			
+			valorfinalorca	= parseFloat(valorfinalorca);
+			valorfinalorca	= valorfinalorca.toFixed(2);
+			valorfinalorca 	= valorfinalorca.replace('.',',');
+			
+			$('#SubValorFinal').val(subvalorfinal);
+			$('#ValorFinalOrca').val(valorfinalorca);
+			$('#DescPercOrca').val(descpercorca);
+			$('#Valor_C_Desc').val(valor_c_desc);
+			$('#Valor_S_Desc').val(valor_s_desc);
+		}	
+	}else{
+		$('#SubValorFinal').val('0.00');
+		$('#ValorFinalOrca').val('0,00');
+		$('#DescPercOrca').val('0,00');
+		$('#DescValorOrca').val('0,00');
+		$('#Valor_C_Desc').val('0,00');
+		$('#Valor_S_Desc').val('0,00');
+	}
+	calculaParcelas();
+	calculaTroco();	
+	
+	//console.log('Desc. Total Pedido = ' + valortotalorca);
+	//console.log('Desc. Desc Valor = ' + descvalororca);
+	//console.log('Desc. Desc Perc = ' + descpercorca);
+	//console.log('Desc. Final Orca = ' + valorfinalorca);
 }
 
 function calculacashback(id_Cliente, valor2) {
@@ -4640,250 +4926,6 @@ function calculacashback(id_Cliente, valor2) {
 			}	
 		}
 	}	
-}
-
-function tipoDescOrca(valor){
-	//alert('teste tipoDescOrca');
-	console.log('valor = ' + valor);
-	if(valor){
-		if(valor == 'P'){
-			$('#DescPercOrca').prop('readonly', false);
-			//$('#DescPercOrca').prop('onkeyup', true);
-			//$("#DescPercOrca").on("click");
-			$('#DescValorOrca').prop('readonly', true);
-			//$('#DescValorOrca').prop('onkeyup', false);
-			//$("#DescValorOrca").off("click");
-		}else if(valor == 'V'){
-			$('#DescPercOrca').prop('readonly', true);
-			//$('#DescPercOrca').prop('onkeyup', false);
-			//$("#DescPercOrca").off("click");
-			$('#DescValorOrca').prop('readonly', false);
-			//$('#DescValorOrca').prop('onkeyup', true);
-			//$("#DescValorOrca").on("click");
-		}
-		$('#Hidden_TipoDescOrca').val(valor);
-		var tipodescorca = valor;
-		if(tipodescorca == 'P'){
-			var desconto = 'Percentual';
-			descPercOrca();
-		}else if(tipodescorca == 'V'){
-			var desconto = 'Valor';
-			descValorOrca();
-		}
-	}else{
-		var tipodescorca = $('#Hidden_TipoDescOrca').val();
-		if(tipodescorca == 'P'){
-			var desconto = 'Percentual';
-			descPercOrca();
-		}else if(tipodescorca == 'V'){
-			var desconto = 'Valor';
-			descValorOrca();
-		}
-	}
-
-	//var tipodescorca = $('#Hidden_TipoDescOrca').val();
-	//console.log('Tipo. hidden ='+tipodescorca);
-	//console.log('Tipo. valor ='+valor);
-	//console.log('Tipo. desconto ='+desconto);
-}
-
-function descPercOrca(usarcash){
-	
-	if(usarcash){
-		var Hidden_UsarCashBack	= usarcash;
-		$('#Hidden_UsarCashBack').val(usarcash);
-	}else{
-		var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
-	}	
-
-	
-	//alert('teste descPercOrca');
-	var recorrencias = $('#Recorrencias').val();
-	//console.log('Total de Recorrencias = ' + recorrencias);
-	var valortotalorca = $('#ValorTotalOrca').val();
-	valortotalorca = valortotalorca.replace(".","").replace(",",".");
-	
-	
-	//var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
-	
-	var cashbackorca 	= $('#CashBackOrca').val();
-
-	cashbackorca 		= cashbackorca.replace(".","").replace(",",".");
-	cashbackorca		= parseFloat(cashbackorca);
-	//console.log('Pelo Perc - Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
-	//console.log('Pelo Perc - cashbackorca = ' + cashbackorca);
-	//console.log('Pelo Perc - valortotalorca = ' + valortotalorca);	
-	
-	
-	var descpercorca = $('#DescPercOrca').val();
-	descpercorca = descpercorca.replace(".","").replace(",",".");
-	
-	if(valortotalorca > 0){
-		var descvalororca = descpercorca*valortotalorca/100;
-		descvalororca	= parseFloat(descvalororca);
-		descvalororca	= descvalororca.toFixed(2);
-		
-		if(descpercorca <= 100){	
-			
-			var subvalorfinal = (valortotalorca - descvalororca);
-			
-			if(Hidden_UsarCashBack == 'S'){
-				if(subvalorfinal >= cashbackorca){
-					var valorfinalorca = (subvalorfinal - cashbackorca);
-				}else{
-					var valorfinalorca = '0,00';
-				}	
-			}else{
-				var valorfinalorca = subvalorfinal;
-			}
-			
-			var valor_s_desc = recorrencias*valortotalorca;
-			valor_s_desc	= parseFloat(valor_s_desc);
-			valor_s_desc	= valor_s_desc.toFixed(2);
-			valor_s_desc 	= valor_s_desc.replace('.',',');
-			
-			var valor_c_desc = recorrencias*valorfinalorca;
-			valor_c_desc	= parseFloat(valor_c_desc);
-			valor_c_desc	= valor_c_desc.toFixed(2);
-			valor_c_desc 	= valor_c_desc.replace('.',',');
-			
-			descvalororca 	= descvalororca.replace('.',',');
-			
-			subvalorfinal	= parseFloat(subvalorfinal);
-			subvalorfinal	= subvalorfinal.toFixed(2);
-			subvalorfinal 	= subvalorfinal.replace('.',',');
-			
-			valorfinalorca	= parseFloat(valorfinalorca);
-			valorfinalorca	= valorfinalorca.toFixed(2);
-			valorfinalorca 	= valorfinalorca.replace('.',',');
-			
-			
-			$('#DescValorOrca').val(descvalororca);
-			$('#SubValorFinal').val(subvalorfinal);
-			$('#ValorFinalOrca').val(valorfinalorca);
-			$('#Valor_C_Desc').val(valor_c_desc);
-			$('#Valor_S_Desc').val(valor_s_desc);
-			
-			//console.log(valortotalorca);
-			//console.log(descpercorca);
-			//console.log(descvalororca);
-		
-		}else{
-			$('#DescPercOrca').val('0,00');
-			$('#DescValorOrca').val('0,00');
-			$('#SubValorFinal').val('0,00');
-			$('#ValorFinalOrca').val('0,00');
-			$('#Valor_C_Desc').val('0,00');
-			$('#Valor_S_Desc').val('0,00');
-		}	
-	}else{
-		$('#DescPercOrca').val('0,00');
-		$('#DescValorOrca').val('0,00');
-		$('#SubValorFinal').val('0,00');
-		$('#ValorFinalOrca').val('0,00');
-		$('#Valor_C_Desc').val('0,00');
-		$('#Valor_S_Desc').val('0,00');
-	}
-	calculaParcelas();
-	calculaTroco();
-	//console.log('Perc. Pedido = ' + valortotalorca);
-	//console.log('Perc. Desc Valor = ' + descvalororca);
-	//console.log('Perc. Desc Perc = ' + descpercorca);
-	//console.log('Perc. Final Orca = ' + valorfinalorca);
-}
-
-function descValorOrca(usarcash){
-	if(usarcash && usarcash!=0){
-		var Hidden_UsarCashBack	= usarcash;
-		$('#Hidden_UsarCashBack').val(usarcash);
-	}else{
-		var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
-	}
-	//alert('teste descValorOrca');
-	//console.log('usarcash = ' + usarcash);
-	var recorrencias = $('#Recorrencias').val();
-	//console.log('Total de Recorrencias = ' + recorrencias);
-	
-	var valortotalorca 	= $('#ValorTotalOrca').val();
-	valortotalorca 		= valortotalorca.replace(".","").replace(",",".");
-	valortotalorca		= parseFloat(valortotalorca);
-	if($('#DescValorOrca').val() == ''){
-		var descvalororca = '0,00';
-	}else{
-		var descvalororca = $('#DescValorOrca').val();
-	}
-		
-	
-	descvalororca = descvalororca.replace(".","").replace(",",".");
-	descvalororca	= parseFloat(descvalororca);
-	
-	var cashbackorca 	= $('#CashBackOrca').val();
-	cashbackorca 		= cashbackorca.replace(".","").replace(",",".");
-	cashbackorca		= parseFloat(cashbackorca);
-	console.log('Pelo Desc - Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
-	//console.log('Pelo Desc - cashbackorca = ' + cashbackorca);
-	console.log('PeloDesc-valortotalorca = ' + valortotalorca);
-	console.log('PeloDesc-descvalororca = ' + descvalororca);
-	if(valortotalorca > 0){
-		if(valortotalorca >= descvalororca){
-			//console.log('Total do Desconto em Valor = ' + descvalororca);
-			//console.log('Total do Pedido = ' + valortotalorca);
-			var subvalorfinal = (valortotalorca - descvalororca);
-			
-			if(Hidden_UsarCashBack == 'S'){
-				if(subvalorfinal >= cashbackorca){
-					var valorfinalorca = (subvalorfinal - cashbackorca);
-				}else{
-					var valorfinalorca = '0,00';
-				}	
-			}else{
-				var valorfinalorca = subvalorfinal;
-			}
-			
-			var valor_s_desc = recorrencias*valortotalorca;
-			valor_s_desc	= parseFloat(valor_s_desc);
-			valor_s_desc	= valor_s_desc.toFixed(2);
-			valor_s_desc 	= valor_s_desc.replace('.',',');
-			
-			var valor_c_desc = recorrencias*valorfinalorca;
-			valor_c_desc	= parseFloat(valor_c_desc);
-			valor_c_desc	= valor_c_desc.toFixed(2);
-			valor_c_desc 	= valor_c_desc.replace('.',',');
-			
-			var descpercorca = (valortotalorca - subvalorfinal)*100/valortotalorca;
-			descpercorca	= parseFloat(descpercorca);
-			descpercorca	= descpercorca.toFixed(2);
-			descpercorca 	= descpercorca.replace('.',',');
-			
-			subvalorfinal	= parseFloat(subvalorfinal);
-			subvalorfinal	= subvalorfinal.toFixed(2);
-			subvalorfinal 	= subvalorfinal.replace('.',',');
-			
-			valorfinalorca	= parseFloat(valorfinalorca);
-			valorfinalorca	= valorfinalorca.toFixed(2);
-			valorfinalorca 	= valorfinalorca.replace('.',',');
-			
-			$('#SubValorFinal').val(subvalorfinal);
-			$('#ValorFinalOrca').val(valorfinalorca);
-			$('#DescPercOrca').val(descpercorca);
-			$('#Valor_C_Desc').val(valor_c_desc);
-			$('#Valor_S_Desc').val(valor_s_desc);
-		}	
-	}else{
-		$('#SubValorFinal').val('0,00');
-		$('#ValorFinalOrca').val('0,00');
-		$('#DescPercOrca').val('0,00');
-		$('#DescValorOrca').val('0,00');
-		$('#Valor_C_Desc').val('0,00');
-		$('#Valor_S_Desc').val('0,00');
-	}
-	calculaParcelas();
-	calculaTroco();	
-	
-	//console.log('Desc. Total Pedido = ' + valortotalorca);
-	//console.log('Desc. Desc Valor = ' + descvalororca);
-	//console.log('Desc. Desc Perc = ' + descpercorca);
-	//console.log('Desc. Final Orca = ' + valorfinalorca);
 }
 
 function calculaTroco(entrada) {

@@ -823,7 +823,6 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
-            $data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
 			if($data['orcatrata']['FormaPagamento'] == "7"){
 				$data['orcatrata']['ValorDinheiro'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDinheiro']));
 				$data['orcatrata']['ValorTroco'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTroco']));
@@ -834,8 +833,6 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['ValorFrete'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFrete']));
 			$data['orcatrata']['ValorExtraOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorExtraOrca']));
 			$data['orcatrata']['PercExtraOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['PercExtraOrca']));
-			$data['orcatrata']['ValorSomaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorSomaOrca']));
-			$data['orcatrata']['ValorTotalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
 			
 			$data['orcatrata']['DescPercOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescPercOrca']));
 			$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
@@ -844,8 +841,13 @@ class Orcatrata extends CI_Controller {
 			}else{
 				$data['orcatrata']['CashBackOrca'] = 0.00;
 			}
-			$data['orcatrata']['SubValorFinal'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['SubValorFinal']));
 			$data['orcatrata']['ValorFinalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFinalOrca']));
+			
+			//$data['orcatrata']['SubValorFinal'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['SubValorFinal']));
+			//$data['orcatrata']['ValorSomaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorSomaOrca']));
+			//$data['orcatrata']['ValorTotalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+            //$data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
+			
 			$data['orcatrata']['idTab_TipoRD'] = "2";
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
@@ -2349,7 +2351,6 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
-            $data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
 			if($data['orcatrata']['FormaPagamento'] == "7"){
 				$data['orcatrata']['ValorDinheiro'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDinheiro']));
 				$data['orcatrata']['ValorTroco'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTroco']));
@@ -2360,8 +2361,6 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['ValorFrete'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFrete']));
 			$data['orcatrata']['ValorExtraOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorExtraOrca']));
 			$data['orcatrata']['PercExtraOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['PercExtraOrca']));
-			$data['orcatrata']['ValorSomaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorSomaOrca']));
-			$data['orcatrata']['ValorTotalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
 			
 			$data['orcatrata']['DescPercOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescPercOrca']));
 			$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
@@ -2373,7 +2372,12 @@ class Orcatrata extends CI_Controller {
 			}
 			
 			$data['orcatrata']['ValorFinalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFinalOrca']));
-			$data['orcatrata']['SubValorFinal'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['SubValorFinal']));
+			
+			//$data['orcatrata']['SubValorFinal'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['SubValorFinal']));
+			//$data['orcatrata']['ValorSomaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorSomaOrca']));
+			//$data['orcatrata']['ValorTotalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+            //$data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
+			
 			$data['orcatrata']['idTab_TipoRD'] = "2";
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
@@ -2938,8 +2942,13 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['TipoExtraOrca']) ? $data['orcatrata']['TipoExtraOrca'] = 'V' : FALSE; 
 		(!$data['orcatrata']['UsarCashBack']) ? $data['orcatrata']['UsarCashBack'] = 'N' : FALSE;  
 		(!$data['orcatrata']['idApp_Cliente']) ? $data['orcatrata']['idApp_Cliente'] = '0' : FALSE;
-		(!$data['orcatrata']['Cli_Forn_Orca']) ? $data['orcatrata']['Cli_Forn_Orca'] = 'S' : FALSE;
-		(!$data['orcatrata']['Prd_Srv_Orca']) ? $data['orcatrata']['Prd_Srv_Orca'] = 'S' : FALSE;
+		if($_SESSION['log']['idSis_Empresa'] != 5){
+			(!$data['orcatrata']['Cli_Forn_Orca']) ? $data['orcatrata']['Cli_Forn_Orca'] = 'S' : FALSE;
+			(!$data['orcatrata']['Prd_Srv_Orca']) ? $data['orcatrata']['Prd_Srv_Orca'] = 'S' : FALSE;
+		}else{
+			$data['orcatrata']['Cli_Forn_Orca'] = 'N';
+			$data['orcatrata']['Prd_Srv_Orca'] = 'N';
+		}
 		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;       
 		(!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['HoraOrca']) ? $data['orcatrata']['HoraOrca'] = date('H:i:s', time()) : FALSE;
@@ -3557,7 +3566,6 @@ class Orcatrata extends CI_Controller {
 			
 			$data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
-			$data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
 			$data['orcatrata']['ValorComissao'] = $data['orcatrata']['ValorComissao'];
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
@@ -3571,8 +3579,6 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['ValorFrete'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFrete']));
 			$data['orcatrata']['ValorExtraOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorExtraOrca']));
 			$data['orcatrata']['PercExtraOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['PercExtraOrca']));
-			$data['orcatrata']['ValorSomaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorSomaOrca']));
-			$data['orcatrata']['ValorTotalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
 			
 			$data['orcatrata']['DescPercOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescPercOrca']));
 			$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
@@ -3584,7 +3590,11 @@ class Orcatrata extends CI_Controller {
 			}
 			
 			$data['orcatrata']['ValorFinalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFinalOrca']));
-			$data['orcatrata']['SubValorFinal'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['SubValorFinal']));
+			
+			//$data['orcatrata']['SubValorFinal'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['SubValorFinal']));
+			//$data['orcatrata']['ValorSomaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorSomaOrca']));
+			//$data['orcatrata']['ValorTotalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+			//$data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
 			
 			$data['orcatrata']['idTab_TipoRD'] = "2";
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa']; 
@@ -4666,8 +4676,8 @@ class Orcatrata extends CI_Controller {
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 		*/
 		
-		(!$data['orcatrata']['TipoDescOrca']) ? $data['orcatrata']['TipoDescOrca'] = 'P' : FALSE;
-		(!$data['orcatrata']['TipoExtraOrca']) ? $data['orcatrata']['TipoExtraOrca'] = 'P' : FALSE; 
+		(!$data['orcatrata']['TipoDescOrca']) ? $data['orcatrata']['TipoDescOrca'] = 'V' : FALSE;
+		(!$data['orcatrata']['TipoExtraOrca']) ? $data['orcatrata']['TipoExtraOrca'] = 'V' : FALSE; 
 		(!$data['orcatrata']['UsarCashBack']) ? $data['orcatrata']['UsarCashBack'] = 'N' : FALSE;
 		(!$data['orcatrata']['CombinadoFrete']) ? $data['orcatrata']['CombinadoFrete'] = 'N' : FALSE;
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'N' : FALSE;
@@ -4960,34 +4970,26 @@ class Orcatrata extends CI_Controller {
 				$data['orcatrata']['ValorDinheiro'] = 0.00;
 				$data['orcatrata']['ValorTroco'] = 0.00;
 			}
-            $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
-            $data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));		
+            $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');		
 			$data['orcatrata']['ValorFrete'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFrete']));
 			$data['orcatrata']['ValorExtraOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorExtraOrca']));
 			$data['orcatrata']['PercExtraOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['PercExtraOrca']));
 			
-			if ($_SESSION['log']['NivelEmpresa'] >= '4') {
-				$data['orcatrata']['ValorSomaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorSomaOrca']));
-				$data['orcatrata']['ValorTotalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
-			
-				$data['orcatrata']['DescPercOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescPercOrca']));
-				$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
-				if($data['orcatrata']['UsarCashBack'] == "S"){
-					$data['orcatrata']['CashBackOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['CashBackOrca']));
-				}else{
-					$data['orcatrata']['CashBackOrca'] = 0.00;
-				}
-				$data['orcatrata']['ValorFinalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFinalOrca']));
-				$data['orcatrata']['SubValorFinal'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['SubValorFinal']));
+		
+			$data['orcatrata']['DescPercOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescPercOrca']));
+			$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
+			if($data['orcatrata']['UsarCashBack'] == "S"){
+				$data['orcatrata']['CashBackOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['CashBackOrca']));
 			}else{
-				$data['orcatrata']['ValorSomaOrca'] = $data['orcatrata']['ValorSomaOrca'];
-				$data['orcatrata']['ValorTotalOrca'] = $data['orcatrata']['ValorTotalOrca'];
-				$data['orcatrata']['DescPercOrca'] = $data['orcatrata']['DescPercOrca'];
-				$data['orcatrata']['DescValorOrca'] = $data['orcatrata']['DescValorOrca'];
-				$data['orcatrata']['CashBackOrca'] = $data['orcatrata']['CashBackOrca'];
-				$data['orcatrata']['ValorFinalOrca'] = $data['orcatrata']['ValorFinalOrca'];
-				$data['orcatrata']['SubValorFinal'] = $data['orcatrata']['SubValorFinal'];
+				$data['orcatrata']['CashBackOrca'] = 0.00;
 			}
+			$data['orcatrata']['ValorFinalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFinalOrca']));
+			
+            //$data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
+			//$data['orcatrata']['ValorTotalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+			//$data['orcatrata']['ValorSomaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorSomaOrca']));
+			//$data['orcatrata']['SubValorFinal'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['SubValorFinal']));
+			
 			#$data['orcatrata']['idTab_TipoRD'] = $data['orcatrata']['idTab_TipoRD'];
 			#$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             #$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
@@ -6363,8 +6365,8 @@ class Orcatrata extends CI_Controller {
         else
             $data['visivel'] = 'style="display: none;"';		
 		
-		(!$data['orcatrata']['TipoDescOrca']) ? $data['orcatrata']['TipoDescOrca'] = 'P' : FALSE;
-		(!$data['orcatrata']['TipoExtraOrca']) ? $data['orcatrata']['TipoExtraOrca'] = 'P' : FALSE; 
+		(!$data['orcatrata']['TipoDescOrca']) ? $data['orcatrata']['TipoDescOrca'] = 'V' : FALSE;
+		(!$data['orcatrata']['TipoExtraOrca']) ? $data['orcatrata']['TipoExtraOrca'] = 'V' : FALSE; 
 		(!$data['orcatrata']['UsarCashBack']) ? $data['orcatrata']['UsarCashBack'] = 'N' : FALSE;
 		//(!$data['orcatrata']['TipoFrete']) ? $data['orcatrata']['TipoFrete'] = "1" : FALSE;
 		//(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
@@ -6676,33 +6678,24 @@ class Orcatrata extends CI_Controller {
 				$data['orcatrata']['ValorTroco'] = 0.00;
 			}
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
-            $data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
 			$data['orcatrata']['ValorFrete'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFrete']));
 			$data['orcatrata']['ValorExtraOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorExtraOrca']));
 			$data['orcatrata']['PercExtraOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['PercExtraOrca']));
 			
-			if ($_SESSION['log']['NivelEmpresa'] >= '4') {
-				$data['orcatrata']['ValorSomaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorSomaOrca']));
-				$data['orcatrata']['ValorTotalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
-			
-				$data['orcatrata']['DescPercOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescPercOrca']));
-				$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
-				if($data['orcatrata']['UsarCashBack'] == "S"){
-					$data['orcatrata']['CashBackOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['CashBackOrca']));
-				}else{
-					$data['orcatrata']['CashBackOrca'] = 0.00;
-				}
-				$data['orcatrata']['ValorFinalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFinalOrca']));
-				$data['orcatrata']['SubValorFinal'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['SubValorFinal']));
+			$data['orcatrata']['DescPercOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescPercOrca']));
+			$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
+			if($data['orcatrata']['UsarCashBack'] == "S"){
+				$data['orcatrata']['CashBackOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['CashBackOrca']));
 			}else{
-				$data['orcatrata']['ValorSomaOrca'] = $data['orcatrata']['ValorSomaOrca'];
-				$data['orcatrata']['ValorTotalOrca'] = $data['orcatrata']['ValorTotalOrca'];
-				$data['orcatrata']['DescPercOrca'] = $data['orcatrata']['DescPercOrca'];
-				$data['orcatrata']['DescValorOrca'] = $data['orcatrata']['DescValorOrca'];
-				$data['orcatrata']['CashBackOrca'] = $data['orcatrata']['CashBackOrca'];
-				$data['orcatrata']['ValorFinalOrca'] = $data['orcatrata']['ValorFinalOrca'];
-				$data['orcatrata']['SubValorFinal'] = $data['orcatrata']['SubValorFinal'];
+				$data['orcatrata']['CashBackOrca'] = 0.00;
 			}
+			$data['orcatrata']['ValorFinalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFinalOrca']));
+			
+			//$data['orcatrata']['SubValorFinal'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['SubValorFinal']));
+			//$data['orcatrata']['ValorSomaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorSomaOrca']));
+			//$data['orcatrata']['ValorTotalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+            //$data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
+			
 			#$data['orcatrata']['idTab_TipoRD'] = $data['orcatrata']['idTab_TipoRD'];
 			#$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             #$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
@@ -9381,8 +9374,8 @@ class Orcatrata extends CI_Controller {
         else
             $data['visivel'] = 'style="display: none;"';
 		
-		(!$data['orcatrata']['TipoDescOrca']) ? $data['orcatrata']['TipoDescOrca'] = 'P' : FALSE;
-		(!$data['orcatrata']['TipoExtraOrca']) ? $data['orcatrata']['TipoExtraOrca'] = 'P' : FALSE; 
+		(!$data['orcatrata']['TipoDescOrca']) ? $data['orcatrata']['TipoDescOrca'] = 'V' : FALSE;
+		(!$data['orcatrata']['TipoExtraOrca']) ? $data['orcatrata']['TipoExtraOrca'] = 'V' : FALSE; 
 		(!$data['orcatrata']['UsarCashBack']) ? $data['orcatrata']['UsarCashBack'] = 'N' : FALSE;
 		#(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
 		(!$data['orcatrata']['CombinadoFrete']) ? $data['orcatrata']['CombinadoFrete'] = 'N' : FALSE;
@@ -10643,8 +10636,8 @@ class Orcatrata extends CI_Controller {
             $data['visivel'] = 'style="display: none;"';		
 		
 		
-		(!$data['orcatrata']['TipoDescOrca']) ? $data['orcatrata']['TipoDescOrca'] = 'P' : FALSE;
-		(!$data['orcatrata']['TipoExtraOrca']) ? $data['orcatrata']['TipoExtraOrca'] = 'P' : FALSE; 
+		(!$data['orcatrata']['TipoDescOrca']) ? $data['orcatrata']['TipoDescOrca'] = 'V' : FALSE;
+		(!$data['orcatrata']['TipoExtraOrca']) ? $data['orcatrata']['TipoExtraOrca'] = 'V' : FALSE; 
 		(!$data['orcatrata']['UsarCashBack']) ? $data['orcatrata']['UsarCashBack'] = 'N' : FALSE;
 		//(!$data['orcatrata']['TipoFrete']) ? $data['orcatrata']['TipoFrete'] = "1" : FALSE;
 		//(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;

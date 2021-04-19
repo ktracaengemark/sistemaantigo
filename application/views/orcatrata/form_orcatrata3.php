@@ -58,7 +58,6 @@
 														<?php
 														foreach ($select['Cli_Forn_Orca'] as $key => $row) {
 															if (!$orcatrata['Cli_Forn_Orca'])$orcatrata['Cli_Forn_Orca'] = 'S';
-
 															($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
 															if ($orcatrata['Cli_Forn_Orca'] == $key) {
@@ -82,14 +81,12 @@
 														?>
 													</div>
 												</div>
-												<input type="hidden" id="Hidden_Cli_Forn_Orca" value="<?php echo $orcatrata['Cli_Forn_Orca']; ?>"/>
 												<div class="col-md-2 text-left">
 													<label for="Prd_Srv_Orca">Com Prd & Srv?</label><br>
 													<div class="btn-group" data-toggle="buttons">
 														<?php
 														foreach ($select['Prd_Srv_Orca'] as $key => $row) {
 															if (!$orcatrata['Prd_Srv_Orca'])$orcatrata['Prd_Srv_Orca'] = 'S';
-
 															($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
 															if ($orcatrata['Prd_Srv_Orca'] == $key) {
@@ -111,8 +108,12 @@
 														?>
 													</div>
 												</div>
+											<?php }else{ ?>
+												<input type="hidden" name="Cli_Forn_Orca" id="Cli_Forn_Orca" value="<?php echo $orcatrata['Cli_Forn_Orca']; ?>"/>
+												<input type="hidden" name="Prd_Srv_Orca" id="Prd_Srv_Orca" value="<?php echo $orcatrata['Prd_Srv_Orca']; ?>"/>
 											<?php } ?>
 										</div>
+										<input type="hidden" id="Hidden_Cli_Forn_Orca" value="<?php echo $orcatrata['Cli_Forn_Orca']; ?>"/>
 									</div>
 									<input type="hidden" id="Caminho2" name="Caminho2" value="<?php echo $caminho2; ?>">
 									<div <?php echo $visivel; ?>>
@@ -1181,7 +1182,6 @@
 								<div class="panel panel-success">
 									<div class="panel-heading">	
 										<h4 class="mb-3"><b>Pagamento</b></h4>
-										<!-- soma dos produtos, serviços e total do orçamento-->
 										<div class="row">
 											<div class="col-md-4">
 												<div class="panel panel-info">
@@ -1312,7 +1312,7 @@
 											<input type="hidden" id="Hidden_TipoDescOrca" value="<?php echo $orcatrata['TipoDescOrca'] ?>">
 											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 												<div class="col-md-4">
-													<div class="panel panel-default">
+													<div class="panel panel-warning">
 														<div class="panel-heading">
 															<div class="row">
 																<div class="col-md-6 text-left">
