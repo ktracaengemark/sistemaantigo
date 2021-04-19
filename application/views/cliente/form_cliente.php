@@ -498,7 +498,7 @@
 											-->
 											<div class="col-md-3">
 												<label for="RegistroFicha">Ficha Nº:</label>
-												<input type="text" class="form-control" maxlength="45" <?php echo $readonly; ?>
+												<input type="text" class="form-control Numero" maxlength="5" <?php echo $readonly; ?>
 													   name="RegistroFicha" value="<?php echo $query['RegistroFicha']; ?>">
 											</div>
 											<div class="col-md-4">

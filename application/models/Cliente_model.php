@@ -321,12 +321,14 @@ class Cliente_model extends CI_Model {
                 $query = 'DataNascimento = "' . substr($data, 4, 4).'-'.substr($data, 2, 2).'-'.substr($data, 0, 2) . '" OR '
                         . 'DataCadastroCliente = "' . substr($data, 4, 4).'-'.substr($data, 2, 2).'-'.substr($data, 0, 2) . '" ';
             }else{
-				if((strlen($data)) <= 7){
+				if((strlen($data)) < 6){
 					/*
 					$query = 'idApp_Cliente like "' . $data . '" OR '
 							. 'RegistroFicha like "' . $data . '" ';
 					*/		
-					$query = 'idApp_Cliente like "' . $data . '"';		
+					$query = 'RegistroFicha like "' . $data . '"';
+				}elseif(strlen($data) >= 6 && strlen($data) <= 7){
+					$query = 'idApp_Cliente like "' . $data . '"';
 				}else{
 					$query = 'CelularCliente like "%' . $data . '%" OR '
 							. 'Telefone like "%' . $data . '%" OR '
