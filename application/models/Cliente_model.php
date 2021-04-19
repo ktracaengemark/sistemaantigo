@@ -314,30 +314,32 @@ class Cliente_model extends CI_Model {
     public function lista_cliente($data, $existe = FALSE, $total = FALSE, $limit = FALSE, $start = FALSE, $date = FALSE) {
 
         if (preg_match("/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](1[89][0-9][0-9]|2[0189][0-9][0-9])$/", $data)) {
-            $query = 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
-                    . 'DataCadastroCliente = "' . $this->basico->mascara_data($data, 'mysql') . '" ';
+            $query = '(DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
+                    . 'DataCadastroCliente = "' . $this->basico->mascara_data($data, 'mysql') . '" )';
         }elseif (is_numeric($data)) {
             if($date === TRUE) {
-                $query = 'DataNascimento = "' . substr($data, 4, 4).'-'.substr($data, 2, 2).'-'.substr($data, 0, 2) . '" OR '
-                        . 'DataCadastroCliente = "' . substr($data, 4, 4).'-'.substr($data, 2, 2).'-'.substr($data, 0, 2) . '" ';
+                $query = '(DataNascimento = "' . substr($data, 4, 4).'-'.substr($data, 2, 2).'-'.substr($data, 0, 2) . '" OR '
+                        . 'DataCadastroCliente = "' . substr($data, 4, 4).'-'.substr($data, 2, 2).'-'.substr($data, 0, 2) . '" )';
             }else{
 				if((strlen($data)) < 6){
 					/*
-					$query = 'idApp_Cliente like "' . $data . '" OR '
-							. 'RegistroFicha like "' . $data . '" ';
-					*/		
+					$query = '(idApp_Cliente like "' . $data . '" OR '
+							. 'RegistroFicha like "' . $data . '" )';
+					
+					*/
 					$query = 'RegistroFicha like "' . $data . '"';
 				}elseif(strlen($data) >= 6 && strlen($data) <= 7){
 					$query = 'idApp_Cliente like "' . $data . '"';
+					
 				}else{
-					$query = 'CelularCliente like "%' . $data . '%" OR '
+					$query = '(CelularCliente like "%' . $data . '%" OR '
 							. 'Telefone like "%' . $data . '%" OR '
 							. 'Telefone2 like "%' . $data . '%" OR '
-							. 'Telefone3 like "%' . $data . '%" ';
+							. 'Telefone3 like "%' . $data . '%" )';
 				}
 			}			
         }else{
-			$query = 'NomeCliente like "' . $data . '%" ';
+			$query = '(NomeCliente like "' . $data . '%" )';
 		}
             
 
