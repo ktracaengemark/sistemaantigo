@@ -4262,15 +4262,20 @@ function calculaTotal(entrada) {
 	var valorrestanteorca = $("#ValorRestanteOrca").val();
 	
 	//console.log('Prd+Srv = '+valorrestanteorca);
-	
-	var devolucao = $("#ValorFrete").val();    
+	if($("#ValorFrete").val() == ''){
+		var devolucao = '0,00';
+	}else{
+		var devolucao = $("#ValorFrete").val();
+	}
+		
+    
 	//console.log('Taxa de Entrega = '+devolucao);
 
 	var valorsomaorca = -(- devolucao.replace(".","").replace(",",".") - valorrestanteorca.replace(".","").replace(",","."));
 	//console.log('Prd+Srv+Entrega 1 = '+valorsomaorca);	
 	valorsomaorca = mascaraValorReal(valorsomaorca);
 	//console.log(restaT +' - Valor Total');
-	//console.log('Prd+Srv+Entrega 2 = '+valorsomaorca);
+	console.log('Prd+Srv+Entrega 2 = '+valorsomaorca);
 	$("#ValorSomaOrca").val(valorsomaorca);	
 
 	var tipoextraorca = $('#Hidden_TipoExtraOrca').val();
@@ -4514,17 +4519,23 @@ function valorExtraOrca(){
 	//alert('teste valorExtraOrca');
 	
 	var recorrencias = $('#Recorrencias').val();
-	//console.log('Total de Recorrencias = ' + recorrencias);
+	console.log('Total de Recorrencias = ' + recorrencias);
 	var valorsomaorca = $('#ValorSomaOrca').val();
 	
 		valorsomaorca = valorsomaorca.replace(".","").replace(",",".");
 		valorsomaorca	= parseFloat(valorsomaorca);
-		var valorextraorca = $('#ValorExtraOrca').val();
+		if($('#ValorExtraOrca').val() == ''){
+			var valorextraorca = '0,00';
+		}else{
+			var valorextraorca = $('#ValorExtraOrca').val();
+		}
+			
+		
 		valorextraorca = valorextraorca.replace(".","").replace(",",".");
 		valorextraorca	= parseFloat(valorextraorca);
 		
-		//console.log('Total do Desconto em Valor = ' + valorextraorca);
-		//console.log('Total do Pedido = ' + valorsomaorca);
+		console.log('valorextraorca = ' + valorextraorca);
+		console.log('Total do Pedido = ' + valorsomaorca);
 		var valortotalorca = -(-valorsomaorca - valorextraorca);
 		
 		var valor_c_extra = recorrencias*valortotalorca;
@@ -4555,6 +4566,7 @@ function valorExtraOrca(){
 	//calculaTroco();	
 	//calculaTotal();
 	var tipodescorca = $('#Hidden_TipoDescOrca').val();
+	console.log('tipodescorca = ' + tipodescorca);
 	tipoDescOrca(tipodescorca);		
 	//console.log('Perc. Pdr+Srv = ' + valorsomaorca);
 	//console.log('Perc. Valor Extra = ' + valorextraorca);
@@ -4563,9 +4575,9 @@ function valorExtraOrca(){
 }
 
 function calculacashback(id_Cliente, valor2) {
-	//console.log('metodo = '+$('#metodo').val());
+	console.log('metodo = '+$('#metodo').val());
 	if($('#metodo').val() && $('#metodo').val() == 1){
-		//console.log('AtivoCashBack = '+$('#AtivoCashBack').val());
+		console.log('AtivoCashBack = '+$('#AtivoCashBack').val());
 		if($('#AtivoCashBack').val() && $('#AtivoCashBack').val() == "S"){
 			
 			if(valor2 && valor2!=0){
@@ -4588,7 +4600,7 @@ function calculacashback(id_Cliente, valor2) {
 					var id = 'null';
 				}
 				
-				console.log('id = '+id);
+				//console.log('id = '+id);
 				
 				if(id && id != 'null'){
 					var ocorrencias = $('#Recorrencias').val();
@@ -4632,7 +4644,7 @@ function calculacashback(id_Cliente, valor2) {
 
 function tipoDescOrca(valor){
 	//alert('teste tipoDescOrca');
-	
+	console.log('valor = ' + valor);
 	if(valor){
 		if(valor == 'P'){
 			$('#DescPercOrca').prop('readonly', false);
@@ -4795,8 +4807,13 @@ function descValorOrca(usarcash){
 	var valortotalorca 	= $('#ValorTotalOrca').val();
 	valortotalorca 		= valortotalorca.replace(".","").replace(",",".");
 	valortotalorca		= parseFloat(valortotalorca);
+	if($('#DescValorOrca').val() == ''){
+		var descvalororca = '0,00';
+	}else{
+		var descvalororca = $('#DescValorOrca').val();
+	}
+		
 	
-	var descvalororca = $('#DescValorOrca').val();
 	descvalororca = descvalororca.replace(".","").replace(",",".");
 	descvalororca	= parseFloat(descvalororca);
 	
@@ -4804,7 +4821,9 @@ function descValorOrca(usarcash){
 	cashbackorca 		= cashbackorca.replace(".","").replace(",",".");
 	cashbackorca		= parseFloat(cashbackorca);
 	console.log('Pelo Desc - Hidden_UsarCashBack = ' + Hidden_UsarCashBack);
-	console.log('Pelo Desc - cashbackorca = ' + cashbackorca);
+	//console.log('Pelo Desc - cashbackorca = ' + cashbackorca);
+	console.log('PeloDesc-valortotalorca = ' + valortotalorca);
+	console.log('PeloDesc-descvalororca = ' + descvalororca);
 	if(valortotalorca > 0){
 		if(valortotalorca >= descvalororca){
 			//console.log('Total do Desconto em Valor = ' + descvalororca);
