@@ -66,7 +66,7 @@
 																		echo ''
 																		. '<label class="btn btn-warning active" name="Cli_Forn_Orca_' . $hideshow . '">'
 																		. '<input type="radio" name="Cli_Forn_Orca" id="' . $hideshow . '" '
-																		. 'onchange="calculacashback(0,this.value)" '
+																		. 'onchange="comcliente(this.value)" '
 																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																		. '</label>'
 																		;
@@ -74,7 +74,7 @@
 																		echo ''
 																		. '<label class="btn btn-default" name="Cli_Forn_Orca_' . $hideshow . '">'
 																		. '<input type="radio" name="Cli_Forn_Orca" id="' . $hideshow . '" '
-																		. 'onchange="calculacashback(0,this.value)" '
+																		. 'onchange="comcliente(this.value)" '
 																		. 'autocomplete="off" value="' . $key . '" >' . $row
 																		. '</label>'
 																		;
@@ -122,7 +122,7 @@
 																		echo ''
 																		. '<label class="btn btn-warning active" name="Entrega_Orca_' . $hideshow . '">'
 																		. '<input type="radio" name="Entrega_Orca" id="' . $hideshow . '" '
-																		. 'onchange="calculacashback(0,this.value)" '
+																		//. 'onchange="calculacashback(0,this.value)" '
 																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																		. '</label>'
 																		;
@@ -130,7 +130,7 @@
 																		echo ''
 																		. '<label class="btn btn-default" name="Entrega_Orca_' . $hideshow . '">'
 																		. '<input type="radio" name="Entrega_Orca" id="' . $hideshow . '" '
-																		. 'onchange="calculacashback(0,this.value)" '
+																		//. 'onchange="calculacashback(0,this.value)" '
 																		. 'autocomplete="off" value="' . $key . '" >' . $row
 																		. '</label>'
 																		;
@@ -157,7 +157,7 @@
 													<div class="row">
 														<div class="col-md-4 text-left">
 															<label  for="idApp_Cliente">Cliente</label>
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value),dateDiff(),clientePet(this.value),clienteDep(this.value),calculacashback(this.value,0)" <?php echo $readonly; ?>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value),dateDiff(),clientePet(this.value),clienteDep(this.value),calculacashback(this.value)" <?php echo $readonly; ?>
 																	id="idApp_Cliente" autofocus name="idApp_Cliente">
 																<option value="">-- Sel. Cliente --</option>
 																<?php
@@ -888,14 +888,15 @@
 															</div>
 														</div>
 													</div>
-													<input type="text" class="form-control" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>" readonly=''>
-													<input type="text" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
+													
 												</div>
 											</div>
 										</div>
+										<input type="text" class="form-control" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>" readonly=''>
+										<input type="text" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
 									<?php }else{ ?>	
-										<input type="hidden" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
-										<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
+										<input type="text" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
+										<input type="text" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
 									<?php } ?>
 								</div>
 							</div>

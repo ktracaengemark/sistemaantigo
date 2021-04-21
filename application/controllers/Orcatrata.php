@@ -2830,6 +2830,7 @@ class Orcatrata extends CI_Controller {
 			'PortePet',
 			'EspeciePet',
 			'RelacaoDep',
+			'Hidden_idApp_Cliente',
         ), TRUE));
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 		$data['orcatrata'] = quotes_to_entities($this->input->post(array(

@@ -3084,8 +3084,8 @@ function valorTipoFrete(valor, nome) {
 	}
 	calculaPrazoEntrega();
 	calculaTotal();
-	calculaTroco();
-	calculaParcelas();
+	//calculaTroco();
+	//calculaParcelas();
 }
 
 function Procuraendereco() {
@@ -3231,7 +3231,7 @@ function LoadFrete() {
 			}
 			
 			calculaTotal();
-			calculaTroco();
+			//calculaTroco();
 			//calculaParcelas();
 			
 			$('#Cep').val(CepDestino);
@@ -4785,71 +4785,81 @@ function descValorOrca(usarcash){
 	usarcashback();
 }
 
-function calculacashback(id_Cliente, valor2) {
+function comcliente(valor2) {
+	
+	//console.log('valor2 = '+valor2);
+	
+	var id_Cliente = $('#idApp_Cliente').val();
+	//console.log('id_Cliente = '+id_Cliente);
+
+	$('#Hidden_Cli_Forn_Orca').val(valor2);	
+	
+	if(valor2 == 'S'){
+		if(id_Cliente && id_Cliente!=0 && id_Cliente!= ''){
+			calculacashback(id_Cliente);
+		}else{
+			$('#CashBackOrca').val('0,00');
+			usarcashback();
+		}
+	}else{
+		$('#CashBackOrca').val('0,00');
+		usarcashback();
+	}
+}
+
+function calculacashback(id_Cliente) {
+	//console.log('id_Cliente = '+id_Cliente);
 	//console.log('metodo = '+$('#metodo').val());
+	
+	if(id_Cliente && id_Cliente!=0 && id_Cliente!= ''){
+		var id = id_Cliente;
+	}else if($('#idApp_Cliente').val()){
+		var id = $('#idApp_Cliente').val();
+	}else{
+		var id = 'null';
+	}	
+	$('#Hidden_idApp_Cliente').val(id);
+	//console.log('id = '+id);
+	
+	var comcliente = $('#Hidden_Cli_Forn_Orca').val();
+	
+	//console.log('comcliente = '+comcliente);
+	
 	if($('#metodo').val() && $('#metodo').val() == 1){
 		//console.log('AtivoCashBack = '+$('#AtivoCashBack').val());
 		if($('#AtivoCashBack').val() && $('#AtivoCashBack').val() == "S"){
-			
-			if(valor2 && valor2!=0){
-				var comcliente = valor2;
-				$('#Hidden_Cli_Forn_Orca').val(valor2);
-			}else{
-				var comcliente = $('#Hidden_Cli_Forn_Orca').val();
-			}
-			
-			//console.log('comcliente = '+comcliente);
 
 			if(comcliente == "S"){
-				if(id_Cliente && id_Cliente!=0){
-					var id = id_Cliente;
-					$('#Hidden_idApp_Cliente').val(id);
-				}else if($('#idApp_Cliente').val()){
-					var id = $('#idApp_Cliente').val();
-					$('#Hidden_idApp_Cliente').val(id);
-				}else{
-					var id = 'null';
-				}
+
+				var ocorrencias = $('#Recorrencias').val();
+				//console.log('ocorrencias = '+ocorrencias);
 				
-				//console.log('id = '+id);
-				
-				if(id && id != 'null'){
-					var ocorrencias = $('#Recorrencias').val();
-					//console.log('ocorrencias = '+ocorrencias);
+				$.ajax({
 					
-					$.ajax({
+					url: window.location.origin+ '/' + app + '/cadastros/pesquisar/CashBack.php?id=' + id,
+					dataType: "json",
+					
+					success: function (data) {
+						//console.log('data = '+data);
+						//console.log('sucesso');
+						CashBackOrca	= parseFloat(data);
+						CashBackOrca	= CashBackOrca/ocorrencias;
+						CashBackOrca 	= mascaraValorReal(CashBackOrca);
 						
-						url: window.location.origin+ '/' + app + '/cadastros/pesquisar/CashBack.php?id=' + id,
-						dataType: "json",
+						//CashBackOrca	= CashBackOrca.toFixed(2);
+						//CashBackOrca 	= CashBackOrca.replace(".",",");
 						
-						success: function (data) {
-							//console.log('data = '+data);
-							
-							CashBackOrca	= parseFloat(data);
-							CashBackOrca	= CashBackOrca/ocorrencias;
-							CashBackOrca 	= mascaraValorReal(CashBackOrca);
-							
-							//CashBackOrca	= CashBackOrca.toFixed(2);
-							//CashBackOrca 	= CashBackOrca.replace(".",",");
-							
-							$('#CashBackOrca').val(CashBackOrca);
-							//console.log('CashBackOrca = '+CashBackOrca);
-							usarcashback();
-							
-						},
-						error:function(data){
-							//console.log('Nada encontrado');
-							$('#CashBackOrca').val('0,00');
-							usarcashback();
-						}
+						$('#CashBackOrca').val(CashBackOrca);
+						//console.log('CashBackOrca = '+CashBackOrca);
+						usarcashback();
 						
-					});//termina o ajax
-						
-				}
-				
-			}else{
-				$('#CashBackOrca').val('0,00');
-				usarcashback();
+					},
+					error:function(data){
+						//console.log('Nada encontrado');
+						$('#CashBackOrca').val('0,00');
+						usarcashback();
+					}
+				});//termina o ajax
 			}	
 		}
 	}	
@@ -4940,9 +4950,11 @@ function calculaTroco(entrada) {
     //console.log('Valor Dinheiro = '+devolucao);
 	
 	if(devolucao > orcamento){
+		//console.log('devolucao > orcamento =  SIM');
 		var resta = (devolucao - orcamento);
 		resta = mascaraValorReal(resta);
 	}else{
+		//console.log('devolucao > orcamento =  NÃO');
 		var resta = '0,00';
 	}
 	
