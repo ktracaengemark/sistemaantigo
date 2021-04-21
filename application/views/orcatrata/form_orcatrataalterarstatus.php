@@ -842,10 +842,14 @@
 																		</div>
 																	</div>
 																</div>
-																<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
 															</div>
+															<input type="text" class="form-control "name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>" readonly=''>
+															<input type="text" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
 														</div>
 													</div>
+											<?php }else{ ?>
+												<input type="text" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
+												<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
 											<?php } ?>
 										</div>
 									</div>
@@ -1119,7 +1123,7 @@
 										</div>
 									</div>
 									<?php }else{ ?>
-										<input type="hidden" name="ValorFrete" id="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>"/>
+										<input type="hidden" class="form-control Valor" name="ValorFrete" id="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>"/>
 									<?php } ?>																							
 									<br>	
 									<div class="panel panel-success">
@@ -1131,6 +1135,13 @@
 														<div class="panel-heading">
 															<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																<div class="row">
+																	<div class="col-md-6">
+																		<label for="ValorSomaOrca">Total:</label>
+																		<div class="input-group" id="txtHint">
+																			<span class="input-group-addon " id="basic-addon1">R$</span>
+																			<input type="text" class="form-control Valor" name="ValorSomaOrca" id="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>" readonly=''/>
+																		</div>
+																	</div>
 																	<div class="col-md-6 text-left">
 																		<label for="TipoExtraOrca">Tipo de Extra</label><br>
 																		<?php 
@@ -1143,7 +1154,9 @@
 																		<input type="text" class="form-control" readonly="" value="<?php echo $TipoExtraOrca; ?>"/>
 																	</div>
 																</div>
-															<?php } ?>	
+															<?php }else{ ?>
+																<input type="text" class="form-control Valor" name="ValorSomaOrca" id="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>" readonly=''/>
+															<?php } ?>
 															<div class="row">
 																<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																	<div class="col-md-6">
@@ -1155,6 +1168,7 @@
 																		</div>
 																	</div>
 																<?php }else{ ?>
+																	<input type="hidden" name="TipoExtraOrca" id="TipoExtraOrca" value="<?php echo $_SESSION['Orcatrata']['TipoExtraOrca']; ?>"/>
 																	<input type="hidden" id="PercExtraOrca" name="PercExtraOrca" value="<?php echo $orcatrata['PercExtraOrca'] ?>">
 																<?php } ?>
 																<div class="col-md-6">
@@ -1166,17 +1180,22 @@
 																	</div>
 																</div>
 															</div>
-															<input type="hidden" name="TipoExtraOrca" id="TipoExtraOrca" value="<?php echo $_SESSION['Orcatrata']['TipoExtraOrca']; ?>"/>
 															<input type="hidden" id="Hidden_TipoExtraOrca" value="<?php echo $_SESSION['Orcatrata']['TipoExtraOrca'] ?>">
-															<input type="hidden" name="ValorTotalOrca" id="ValorTotalOrca" value="<?php echo $orcatrata['ValorTotalOrca'] ?>"/>	
 														</div>
 													</div>
 												</div>
 												<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 													<div class="col-md-4">
 														<div class="panel panel-danger">
-															<div class="panel-heading">
+															<div class="panel-heading">	
 																<div class="row">
+																	<div class="col-md-6">
+																		<label for="ValorTotalOrca">Total C/Extra</label><br>
+																		<div class="input-group" id="txtHint">
+																			<span class="input-group-addon" id="basic-addon1">R$</span>
+																			<input type="text" class="form-control Valor" name="ValorTotalOrca" id="ValorTotalOrca" value="<?php echo $orcatrata['ValorTotalOrca'] ?>" readonly=''/>
+																		</div>
+																	</div>
 																	<div class="col-md-6 text-left">
 																		<label for="TipoDescOrca">Tipo de Desconto</label><br>
 																		<?php 
@@ -1191,7 +1210,7 @@
 																</div>
 																<div class="row">
 																	<div class="col-md-6">
-																		<label for="DescPercOrca">Percent. do Desconto</label><br>
+																		<label for="DescPercOrca">Perc. do Desconto</label><br>
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon" id="basic-addon1">%</span>
 																			<input type="text" class="form-control Valor" id="DescPercOrca" maxlength="10" placeholder="0,00"
@@ -1211,25 +1230,35 @@
 														</div>
 													</div>
 												<?php }else{ ?>
-													<input type="hidden" name="DescValorOrca" id="DescValorOrca" value="<?php echo $orcatrata['DescValorOrca'] ?>"/>
-													<input type="hidden" name="DescPercOrca" id="DescPercOrca" value="<?php echo $orcatrata['DescPercOrca'] ?>"/>
+													<input type="hidden" class="form-control Valor"  name="DescValorOrca" id="DescValorOrca" value="<?php echo $orcatrata['DescValorOrca'] ?>"/>
+													<input type="hidden" class="form-control Valor"  name="DescPercOrca" id="DescPercOrca" value="<?php echo $orcatrata['DescPercOrca'] ?>"/>
+													<input type="text" class="form-control Valor" name="ValorTotalOrca" id="ValorTotalOrca" value="<?php echo $orcatrata['ValorTotalOrca'] ?>"readonly=''/>
 												<?php } ?>
 												<input type="hidden" name="TipoDescOrca" id="TipoDescOrca" value="<?php echo $_SESSION['Orcatrata']['TipoDescOrca']; ?>"/>
 												<input type="hidden" id="Hidden_TipoDescOrca" value="<?php echo $_SESSION['Orcatrata']['TipoDescOrca'] ?>">
-												<input type="hidden" name="SubValorFinal" id="SubValorFinal" value="<?php echo $orcatrata['SubValorFinal'] ?>"/>
+												
 												<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 													<div class="col-md-4">
 														<div class="panel panel-default">
 															<div class="panel-heading">
 																<div class="row">
 																	<div class="col-md-6">
+																		<label for="SubValorFinal">Total C/Desc</label><br>
+																		<div class="input-group" id="txtHint">
+																			<span class="input-group-addon" id="basic-addon1">R$</span>
+																			<input type="text" class="form-control Valor" name="SubValorFinal" id="SubValorFinal" value="<?php echo $orcatrata['SubValorFinal'] ?>" readonly=''/>
+																		</div>
+																	</div>
+																	<div class="col-md-6">
 																		<label for="CashBackOrca">CashBack.</label><br>
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
-																			<input type="text" class="form-control Valor" id="CashBackOrca" maxlength="10" placeholder="0,00" readonly=''
+																			<input style="color: #FF0000"  type="text" class="form-control Valor" id="CashBackOrca" readonly=''
 																				   name="CashBackOrca" value="<?php echo $orcatrata['CashBackOrca'] ?>">
 																		</div>
 																	</div>
+																</div>
+																<div class="row">
 																	<div class="col-md-6 text-left">
 																		<label for="UsarCashBack">Usar CashBack?</label><br>
 																		<?php 
@@ -1241,9 +1270,7 @@
 																		?>
 																		<input type="text" class="form-control" readonly="" value="<?php echo $UsarCashBack; ?>"/>
 																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-12">
+																	<div class="col-md-6">
 																		<label for="ValorFinalOrca">Valor Final:</label><br>
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -1256,18 +1283,18 @@
 														</div>	
 													</div>
 												<?php }else{ ?>
-													<input type="hidden" name="CashBackOrca" id="CashBackOrca" value="<?php echo $orcatrata['CashBackOrca'] ?>"/>
-													<input type="hidden" name="ValorFinalOrca" id="ValorFinalOrca" value="<?php echo $orcatrata['ValorFinalOrca'] ?>"/>
+													<input type="hidden" class="form-control Valor" name="SubValorFinal" id="SubValorFinal" value="<?php echo $orcatrata['SubValorFinal'] ?>"/>
+													<input type="hidden" class="form-control Valor" name="CashBackOrca" id="CashBackOrca" value="<?php echo $orcatrata['CashBackOrca'] ?>"/>
+													<input type="hidden" class="form-control Valor" name="ValorFinalOrca" id="ValorFinalOrca" value="<?php echo $orcatrata['ValorFinalOrca'] ?>"/>
 												<?php } ?>
 												<input type="hidden" name="UsarCashBack" id="UsarCashBack" value="<?php echo $_SESSION['Orcatrata']['UsarCashBack']; ?>"/>
+												<input type="hidden" id="Hidden_UsarCashBack" value="<?php echo $orcatrata['UsarCashBack'] ?>">	
 											</div>
 											<br>
 											<div class="row">
 												<div class="col-md-4">
 													<div class="panel panel-default">
 														<div class="panel-heading">
-															<input type="hidden" name="ValorSomaOrca" id="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>"/>
-															<input type="hidden" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>"/>
 															<div class="row">	
 																<div class="col-md-12">
 																	<label for="Descricao">Obs/Descrição:</label>
