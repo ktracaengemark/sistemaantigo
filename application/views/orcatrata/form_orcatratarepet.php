@@ -1224,7 +1224,7 @@
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon " id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" id="ValorFrete" maxlength="10" placeholder="0,00" 
-																			   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value),calculaTroco()" onchange="calculaParcelas(),calculaTroco()" onkeydown="calculaParcelas(),calculaTroco()"
+																			   data-toggle="collapse" onkeyup="calculaTotal()"
 																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																			   name="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>">
 																	</div>
@@ -1418,7 +1418,7 @@
 																	</div>
 																	<div class="row">
 																		<div class="col-md-12">
-																			<label for="ValorFinalOrca">Valor Final:</label><br>
+																			<label for="ValorFinalOrca">Valor Final P/ 1 O.S.</label><br>
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
 																				<input type="text" class="form-control Valor" id="ValorFinalOrca" maxlength="10" placeholder="0,00" readonly=''
@@ -1428,15 +1428,9 @@
 																	</div>
 																	<?php if($Recorrencias > 1) { ?>
 																		<div class="row">
-																			<div class="col-md-6">
-																				<label>Valor Total S/Desc <?php echo $Recorrencias; ?>/OS:</label><br>
-																				<div class="input-group" id="txtHint">
-																					<span class="input-group-addon">R$</span>
-																					<input type="text" class="form-control Valor" id="Valor_S_Desc" name="Valor_S_Desc" value="<?php echo $cadastrar['Valor_S_Desc'] ?>" readonly=''>
-																				</div>
-																			</div>
-																			<div class="col-md-6">
-																				<label>Valor Total C/Desc <?php echo $Recorrencias; ?>/OS:</label><br>
+																			<input type="hidden" id="Valor_S_Desc" name="Valor_S_Desc" value="<?php echo $cadastrar['Valor_S_Desc'] ?>" />
+																			<div class="col-md-12">
+																				<label>Valor Final P/ <?php echo $Recorrencias; ?> O.S.</label><br>
 																				<div class="input-group" id="txtHint">
 																					<span class="input-group-addon">R$</span>
 																					<input type="text" class="form-control Valor" id="Valor_C_Desc" name="Valor_C_Desc" value="<?php echo $cadastrar['Valor_C_Desc'] ?>" readonly=''>
@@ -1515,7 +1509,7 @@
 																	<div class="col-md-12">
 																		<label for="FormaPagamento">Forma de Pagamento</label>
 																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
-																			data-toggle="collapse" onchange="calculaParcelas(),exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
+																			data-toggle="collapse" onchange="exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
 																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																				id="FormaPagamento" name="FormaPagamento">
 																			<option value="">-- Selecione uma opção --</option>

@@ -2912,6 +2912,7 @@ class Orcatrata extends CI_Controller {
 			'UsarCashBack',
 			'SubValorFinal',
 			'ValorFinalOrca',
+			'Entrega_Orca',
         ), TRUE));
 		
 		$data['cliente'] = $this->input->post(array(
@@ -2945,9 +2946,11 @@ class Orcatrata extends CI_Controller {
 		if($_SESSION['log']['idSis_Empresa'] != 5){
 			(!$data['orcatrata']['Cli_Forn_Orca']) ? $data['orcatrata']['Cli_Forn_Orca'] = 'S' : FALSE;
 			(!$data['orcatrata']['Prd_Srv_Orca']) ? $data['orcatrata']['Prd_Srv_Orca'] = 'S' : FALSE;
+			(!$data['orcatrata']['Entrega_Orca']) ? $data['orcatrata']['Entrega_Orca'] = 'S' : FALSE;
 		}else{
 			$data['orcatrata']['Cli_Forn_Orca'] = 'N';
 			$data['orcatrata']['Prd_Srv_Orca'] = 'N';
+			$data['orcatrata']['Entrega_Orca'] = 'N';
 		}
 		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;       
 		(!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;
@@ -3210,6 +3213,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroR();
 		$data['select']['Cli_Forn_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['Prd_Srv_Orca'] = $this->Basico_model->select_status_sn();
+		$data['select']['Entrega_Orca'] = $this->Basico_model->select_status_sn();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['CanceladoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['CombinadoFrete'] = $this->Basico_model->select_status_sn();
@@ -3430,6 +3434,12 @@ class Orcatrata extends CI_Controller {
         );
         ($data['orcatrata']['Prd_Srv_Orca'] == 'S') ?
             $data['div']['Prd_Srv_Orca'] = '' : $data['div']['Prd_Srv_Orca'] = 'style="display: none;"';
+		
+		$data['radio'] = array(
+            'Entrega_Orca' => $this->basico->radio_checked($data['orcatrata']['Entrega_Orca'], 'Entrega', 'NS'),
+        );
+        ($data['orcatrata']['Entrega_Orca'] == 'S') ?
+            $data['div']['Entrega_Orca'] = '' : $data['div']['Entrega_Orca'] = 'style="display: none;"';
 		
 		
 		$data['radio'] = array(

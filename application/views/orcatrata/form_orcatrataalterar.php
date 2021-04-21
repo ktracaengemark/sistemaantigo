@@ -1286,7 +1286,7 @@
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon " id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" id="ValorFrete" maxlength="10" placeholder="0,00" 
-																			   data-toggle="collapse" onkeyup="calculaTotal(this.value),calculaTroco()" onchange="calculaTroco()" onkeydown="calculaTroco()"
+																			   data-toggle="collapse" onkeyup="calculaTotal()"
 																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																			   name="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>">
 																	</div>
@@ -1366,9 +1366,9 @@
 																	</div>
 																</div>
 															</div>
-															<input type="hidden" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>"/>
-															<input type="hidden" name="ValorSomaOrca" id="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>"/>
-															<input type="hidden" name="ValorTotalOrca" id="ValorTotalOrca" value="<?php echo $orcatrata['ValorTotalOrca'] ?>">
+															<input type="text" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>"/>
+															<input type="text" name="ValorSomaOrca" id="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>"/>
+															<input type="text" name="ValorTotalOrca" id="ValorTotalOrca" value="<?php echo $orcatrata['ValorTotalOrca'] ?>">
 															<input type="hidden" id="Hidden_TipoExtraOrca" value="<?php echo $orcatrata['TipoExtraOrca'] ?>">
 														</div>
 													</div>
@@ -1433,7 +1433,7 @@
 													<input type="hidden" name="DescValorOrca" id="DescValorOrca" value="<?php echo $orcatrata['DescValorOrca'] ?>"/>
 													<input type="hidden" name="DescPercOrca" id="DescPercOrca" value="<?php echo $orcatrata['DescPercOrca'] ?>"/>
 												<?php } ?>
-												<input type="hidden" name="SubValorFinal" id="SubValorFinal" value="<?php echo $orcatrata['SubValorFinal'] ?>"/>
+												<input type="text" name="SubValorFinal" id="SubValorFinal" value="<?php echo $orcatrata['SubValorFinal'] ?>"/>
 												<input type="hidden" id="Hidden_TipoDescOrca" value="<?php echo $orcatrata['TipoDescOrca'] ?>">
 												<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 													<div class="col-md-4">
@@ -1536,7 +1536,7 @@
 																<div class="col-md-12">
 																	<label for="FormaPagamento">Forma de Pagamento</label>
 																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
-																		data-toggle="collapse" onchange="calculaParcelas(),exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
+																		data-toggle="collapse" onchange="exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
 																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																			id="FormaPagamento" name="FormaPagamento">
 																		<option value="">-- Selecione uma opção --</option>
