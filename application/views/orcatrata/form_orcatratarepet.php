@@ -961,10 +961,10 @@
 														</div>
 													</div>
 												</div>
-												<input type="text" class="form-control " name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>" readonly=''>	
-												<input type="text" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
+												<input type="hidden" class="form-control " name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>" readonly=''>	
+												<input type="hidden" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
 											<?php }else{ ?>	
-												<input type="text" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
+												<input type="hidden" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
 												<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
 											<?php } ?>
 										</div>
