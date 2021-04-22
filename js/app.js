@@ -2966,13 +2966,13 @@ function tipoFrete(tipofrete){
 
 function comentrega(valor2) {
 	
-	console.log('valor2 = '+valor2);
+	//console.log('valor2 = '+valor2);
 	
 	var id_Cliente = $('#idApp_Cliente').val();
-	console.log('id_Cliente = '+id_Cliente);
+	//console.log('id_Cliente = '+id_Cliente);
 
 	var tipofrete = $('#ValorTipoFrete').val();
-	console.log('tipofrete = '+tipofrete);
+	//console.log('tipofrete = '+tipofrete);
 	
 	$('#Hidden_Entrega_Orca').val(valor2);	
 	
@@ -3009,13 +3009,13 @@ function comentrega(valor2) {
 
 function comentrega_for(valor2) {
 	
-	console.log('valor2 = '+valor2);
+	//console.log('valor2 = '+valor2);
 	
 	var id_Fornecedor = $('#idApp_Fornecedor').val();
-	console.log('id_Fornecedor = '+id_Fornecedor);
+	//console.log('id_Fornecedor = '+id_Fornecedor);
 
 	var tipofrete = $('#ValorTipoFrete').val();
-	console.log('tipofrete = '+tipofrete);
+	//console.log('tipofrete = '+tipofrete);
 	
 	$('#Hidden_Entrega_Orca').val(valor2);	
 	
@@ -4895,7 +4895,7 @@ function comcliente(valor2) {
 
 function comfornecedor(valor2) {
 	
-	console.log('valor2 = '+valor2);
+	//console.log('valor2 = '+valor2);
 	
 	var id_Fornecedor = $('#idApp_Fornecedor').val();
 	//console.log('id_Fornecedor = '+id_Fornecedor);
