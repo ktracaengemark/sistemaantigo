@@ -3524,24 +3524,35 @@ class Orcatrata extends CI_Controller {
 		
 			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_OrcaTrata ####
-			if ($data['orcatrata']['TipoFrete'] == '1') {
-				$data['orcatrata']['Cep'] = $data['empresa']['CepEmpresa'];
-				$data['orcatrata']['Logradouro'] = $data['empresa']['EnderecoEmpresa'];
-				$data['orcatrata']['Numero'] = $data['empresa']['NumeroEmpresa'];
-				$data['orcatrata']['Complemento'] = $data['empresa']['ComplementoEmpresa'];
-				$data['orcatrata']['Bairro'] = $data['empresa']['BairroEmpresa'];
-				$data['orcatrata']['Cidade'] = $data['empresa']['MunicipioEmpresa'];
-				$data['orcatrata']['Estado'] = $data['empresa']['EstadoEmpresa'];
+			if ($data['orcatrata']['Entrega_Orca'] == "S") {	
+				if ($data['orcatrata']['TipoFrete'] == '1') {
+					$data['orcatrata']['Cep'] = $data['empresa']['CepEmpresa'];
+					$data['orcatrata']['Logradouro'] = $data['empresa']['EnderecoEmpresa'];
+					$data['orcatrata']['Numero'] = $data['empresa']['NumeroEmpresa'];
+					$data['orcatrata']['Complemento'] = $data['empresa']['ComplementoEmpresa'];
+					$data['orcatrata']['Bairro'] = $data['empresa']['BairroEmpresa'];
+					$data['orcatrata']['Cidade'] = $data['empresa']['MunicipioEmpresa'];
+					$data['orcatrata']['Estado'] = $data['empresa']['EstadoEmpresa'];
+					$data['orcatrata']['Referencia'] = '';
+				} else {	
+					$data['orcatrata']['Cep'] = $data['orcatrata']['Cep'];
+					$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
+					$data['orcatrata']['Numero'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
+					$data['orcatrata']['Complemento'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
+					$data['orcatrata']['Bairro'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
+					$data['orcatrata']['Cidade'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
+					$data['orcatrata']['Estado'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
+					$data['orcatrata']['Referencia'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
+				}
+			} else {
+				$data['orcatrata']['Cep'] = '';
+				$data['orcatrata']['Logradouro'] = '';
+				$data['orcatrata']['Numero'] = '';
+				$data['orcatrata']['Complemento'] = '';
+				$data['orcatrata']['Bairro'] = '';
+				$data['orcatrata']['Cidade'] = '';
+				$data['orcatrata']['Estado'] = '';
 				$data['orcatrata']['Referencia'] = '';
-			} else {	
-				$data['orcatrata']['Cep'] = $data['orcatrata']['Cep'];
-				$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
-				$data['orcatrata']['Numero'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
-				$data['orcatrata']['Complemento'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
-				$data['orcatrata']['Bairro'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
-				$data['orcatrata']['Cidade'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
-				$data['orcatrata']['Estado'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
-				$data['orcatrata']['Referencia'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
 			}
 			$data['orcatrata']['NomeRec'] = trim(mb_strtoupper($data['orcatrata']['NomeRec'], 'ISO-8859-1'));
 			$data['orcatrata']['ParentescoRec'] = trim(mb_strtoupper($data['orcatrata']['ParentescoRec'], 'ISO-8859-1'));

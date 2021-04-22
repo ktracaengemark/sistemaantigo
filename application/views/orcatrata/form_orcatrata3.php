@@ -111,7 +111,7 @@
 															</div>
 														</div>
 														<div class="col-md-4 text-left">
-															<label for="Entrega_Orca">Entrega?</label><br>
+															<label for="Entrega_Orca">Com Entrega?</label><br>
 															<div class="btn-group" data-toggle="buttons">
 																<?php
 																foreach ($select['Entrega_Orca'] as $key => $row) {
@@ -122,7 +122,7 @@
 																		echo ''
 																		. '<label class="btn btn-warning active" name="Entrega_Orca_' . $hideshow . '">'
 																		. '<input type="radio" name="Entrega_Orca" id="' . $hideshow . '" '
-																		//. 'onchange="calculacashback(0,this.value)" '
+																		. 'onchange="comentrega(this.value)" '
 																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																		. '</label>'
 																		;
@@ -130,7 +130,7 @@
 																		echo ''
 																		. '<label class="btn btn-default" name="Entrega_Orca_' . $hideshow . '">'
 																		. '<input type="radio" name="Entrega_Orca" id="' . $hideshow . '" '
-																		//. 'onchange="calculacashback(0,this.value)" '
+																		. 'onchange="comentrega(this.value)" '
 																		. 'autocomplete="off" value="' . $key . '" >' . $row
 																		. '</label>'
 																		;
@@ -148,6 +148,7 @@
 											<?php } ?>
 										</div>
 										<input type="hidden" id="Hidden_Cli_Forn_Orca" value="<?php echo $orcatrata['Cli_Forn_Orca']; ?>"/>
+										<input type="hidden" id="Hidden_Entrega_Orca" value="<?php echo $orcatrata['Entrega_Orca']; ?>"/>
 									</div>
 									<input type="hidden" id="Caminho2" name="Caminho2" value="<?php echo $caminho2; ?>">
 									<div <?php echo $visivel; ?>>

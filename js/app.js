@@ -2964,6 +2964,49 @@ function tipoFrete(tipofrete){
 
 }
 
+function comentrega(valor2) {
+	
+	console.log('valor2 = '+valor2);
+	
+	var id_Cliente = $('#idApp_Cliente').val();
+	console.log('id_Cliente = '+id_Cliente);
+
+	var tipofrete = $('#ValorTipoFrete').val();
+	console.log('tipofrete = '+tipofrete);
+	
+	$('#Hidden_Entrega_Orca').val(valor2);	
+	
+	if(valor2 == 'S'){
+	
+		if(id_Cliente && id_Cliente!=0 && id_Cliente!= ''){
+			buscaEnderecoCliente(id_Cliente);
+		}else{
+			$('#Cep').val('');
+			$('#Logradouro').val('');
+			$('#Numero').val('');
+			$('#Complemento').val('');
+			$('#Bairro').val('');
+			$('#Cidade').val('');
+			$('#Estado').val('');
+			$('#Referencia').val('');
+			$('#ValorFrete').val('0,00');
+			calculaTotal();
+		}
+		
+	}else{
+		$('#Cep').val('');
+		$('#Logradouro').val('');
+		$('#Numero').val('');
+		$('#Complemento').val('');
+		$('#Bairro').val('');
+		$('#Cidade').val('');
+		$('#Estado').val('');
+		$('#Referencia').val('');
+		$('#ValorFrete').val('0,00');
+		calculaTotal();
+	}
+}
+
 function buscaEnderecoCliente(id) {
 	//console.log(id);
 	//exit();
@@ -3077,7 +3120,7 @@ function valorTipoFrete(valor, nome) {
 	$('#ValorTipoFrete').val(valor);
 	if(valor == 1){
 		$('#PrazoCorreios').val('0');
-		$('#ValorFrete').val('');
+		$('#ValorFrete').val('0,00');
 	}else if(valor == 2){
 		$('#PrazoCorreios').val('0');
 		$('#ValorFrete').val(taxaentrega1);
