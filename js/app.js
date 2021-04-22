@@ -3007,6 +3007,49 @@ function comentrega(valor2) {
 	}
 }
 
+function comentrega_for(valor2) {
+	
+	console.log('valor2 = '+valor2);
+	
+	var id_Fornecedor = $('#idApp_Fornecedor').val();
+	console.log('id_Fornecedor = '+id_Fornecedor);
+
+	var tipofrete = $('#ValorTipoFrete').val();
+	console.log('tipofrete = '+tipofrete);
+	
+	$('#Hidden_Entrega_Orca').val(valor2);	
+	
+	if(valor2 == 'S'){
+	
+		if(id_Fornecedor && id_Fornecedor!=0 && id_Fornecedor!= ''){
+			buscaEnderecoFornecedor(id_Fornecedor);
+		}else{
+			$('#Cep').val('');
+			$('#Logradouro').val('');
+			$('#Numero').val('');
+			$('#Complemento').val('');
+			$('#Bairro').val('');
+			$('#Cidade').val('');
+			$('#Estado').val('');
+			$('#Referencia').val('');
+			$('#ValorFrete').val('0,00');
+			calculaTotal();
+		}
+		
+	}else{
+		$('#Cep').val('');
+		$('#Logradouro').val('');
+		$('#Numero').val('');
+		$('#Complemento').val('');
+		$('#Bairro').val('');
+		$('#Cidade').val('');
+		$('#Estado').val('');
+		$('#Referencia').val('');
+		$('#ValorFrete').val('0,00');
+		calculaTotal();
+	}
+}
+
 function buscaEnderecoCliente(id) {
 	//console.log(id);
 	//exit();
@@ -4840,6 +4883,28 @@ function comcliente(valor2) {
 	if(valor2 == 'S'){
 		if(id_Cliente && id_Cliente!=0 && id_Cliente!= ''){
 			calculacashback(id_Cliente);
+		}else{
+			$('#CashBackOrca').val('0,00');
+			usarcashback();
+		}
+	}else{
+		$('#CashBackOrca').val('0,00');
+		usarcashback();
+	}
+}
+
+function comfornecedor(valor2) {
+	
+	console.log('valor2 = '+valor2);
+	
+	var id_Fornecedor = $('#idApp_Fornecedor').val();
+	//console.log('id_Fornecedor = '+id_Fornecedor);
+
+	$('#Hidden_Cli_Forn_Orca').val(valor2);	
+	
+	if(valor2 == 'S'){
+		if(id_Fornecedor && id_Fornecedor!=0 && id_Fornecedor!= ''){
+			calculacashback(id_Fornecedor);
 		}else{
 			$('#CashBackOrca').val('0,00');
 			usarcashback();

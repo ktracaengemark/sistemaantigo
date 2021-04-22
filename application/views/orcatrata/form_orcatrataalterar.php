@@ -1027,8 +1027,8 @@
 														</div>
 													</div>
 												</div>
-												<input type="text" class="form-control" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>" readonly=''>
-												<input type="text" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
+												<input type="hidden" class="form-control" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>" readonly=''>
+												<input type="hidden" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
 											<?php }else{ ?>	
 												<input type="hidden" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
 												<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
@@ -1333,9 +1333,7 @@
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon " id="basic-addon1">R$</span>
 																				<input type="text" class="form-control Valor" id="ValorFrete" maxlength="10" placeholder="0,00" 
-																					   data-toggle="collapse" onkeyup="calculaTotal()"
-																						data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-																					   name="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>">
+																					   onkeyup="calculaTotal()" name="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>">
 																			</div>
 																		</div>
 																	</div>	
@@ -1347,7 +1345,8 @@
 											</div>
 										</div>
 									<?php }else{ ?>
-										<input type="hidden" name="ValorFrete" id="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>"/>
+										<input type="hidden" class="form-control Valor" name="ValorFrete" id="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>"/>
+										<input type="hidden" name="DataEntregaOrca" id="DataEntregaOrca" value="<?php echo $orcatrata['DataEntregaOrca']; ?>">
 									<?php } ?>													
 									<br>	
 									<div class="panel panel-success">

@@ -1070,9 +1070,7 @@
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon " id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" id="ValorFrete" maxlength="10" placeholder="0,00" 
-																			   data-toggle="collapse" onkeyup="calculaTotal()"
-																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-																			   name="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>">
+																			   onkeyup="calculaTotal()" name="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>">
 																	</div>
 																</div>
 															</div>	
@@ -1082,9 +1080,10 @@
 											</div>
 										</div>
 									</div>
-								</div>	
+								</div>
 							<?php }else{ ?>
-								<input type="hidden" name="ValorFrete" id="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>"/>
+								<input type="hidden" class="form-control Valor" name="ValorFrete" id="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>"/>
+								<input type="hidden" name="DataEntregaOrca" id="DataEntregaOrca" value="<?php echo $orcatrata['DataEntregaOrca']; ?>">
 							<?php } ?>
 							<br>	
 							<div class="panel panel-success">

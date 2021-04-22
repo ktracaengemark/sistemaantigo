@@ -1200,9 +1200,7 @@
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon " id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" id="ValorFrete" maxlength="10" placeholder="0,00" 
-																			   data-toggle="collapse" onkeyup="calculaTotal()"
-																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-																			   name="ValorFrete" value="<?php echo $orcatrata['ValorFrete']; ?>">
+																			  onkeyup="calculaTotal()" name="ValorFrete" value="<?php echo $orcatrata['ValorFrete']; ?>">
 																	</div>
 																</div>
 															</div>	
