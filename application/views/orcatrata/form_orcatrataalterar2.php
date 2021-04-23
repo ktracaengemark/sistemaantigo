@@ -419,7 +419,7 @@
 																					 id="listadinamica_prof_1<?php echo $i ?>" name="ProfissionalServico_1<?php echo $i ?>">
 																				<option value="">-- Sel.Profis. --</option>
 																				<?php
-																				foreach ($select['ProfissionalServico_1'] as $key => $row) {
+																				foreach ($select[$i]['ProfissionalServico_1'] as $key => $row) {
 																					//(!$servico['ProfissionalServico_1']) ? $servico['ProfissionalServico_1'] = $_SESSION['log']['ProfissionalServico_1']: FALSE;
 																					if ($servico[$i]['ProfissionalProduto_1'] == $key) {
 																						echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -438,7 +438,7 @@
 																					 id="listadinamica_prof_2<?php echo $i ?>" name="ProfissionalServico_2<?php echo $i ?>">
 																				<option value="">-- Sel.Profis. --</option>
 																				<?php
-																				foreach ($select['ProfissionalServico_2'] as $key => $row) {
+																				foreach ($select[$i]['ProfissionalServico_2'] as $key => $row) {
 																					//(!$servico['ProfissionalServico_2']) ? $servico['ProfissionalServico_2'] = $_SESSION['log']['ProfissionalServico_1']: FALSE;
 																					if ($servico[$i]['ProfissionalProduto_2'] == $key) {
 																						echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -457,7 +457,7 @@
 																					 id="listadinamica_prof_3<?php echo $i ?>" name="ProfissionalServico_3<?php echo $i ?>">
 																				<option value="">-- Sel.Profis. --</option>
 																				<?php
-																				foreach ($select['ProfissionalServico_3'] as $key => $row) {
+																				foreach ($select[$i]['ProfissionalServico_3'] as $key => $row) {
 																					//(!$servico['ProfissionalServico_3']) ? $servico['ProfissionalServico_3'] = $_SESSION['log']['ProfissionalServico_1']: FALSE;
 																					if ($servico[$i]['ProfissionalProduto_3'] == $key) {
 																						echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -476,7 +476,7 @@
 																					 id="listadinamica_prof_4<?php echo $i ?>" name="ProfissionalServico_4<?php echo $i ?>">
 																				<option value="">-- Sel.Profis. --</option>
 																				<?php
-																				foreach ($select['ProfissionalServico_4'] as $key => $row) {
+																				foreach ($select[$i]['ProfissionalServico_4'] as $key => $row) {
 																					//(!$servico['ProfissionalServico_3']) ? $servico['ProfissionalServico_4'] = $_SESSION['log']['ProfissionalServico_1']: FALSE;
 																					if ($servico[$i]['ProfissionalProduto_4'] == $key) {
 																						echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';

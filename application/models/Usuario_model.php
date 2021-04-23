@@ -295,6 +295,119 @@ class Usuario_model extends CI_Model {
         return $array;
     }	
 
+	public function select_usuario_entregador($data = FALSE) {
+		/*		
+		//echo $this->db->last_query();
+	  echo "<pre>";
+	  print_r($data);
+	  echo "<br>";
+	  //print_r($data['Entregador']);
+	  echo "<br>";
+	  //print_r($date_inicio_orca);
+	  echo "<br>";
+	 // print_r($date_fim_orca);
+	  echo "</pre>";
+	  exit();
+		*/
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
+		$entregadar = ($data) ? 'P.idSis_Usuario = ' . $data . ' OR ' : FALSE;
+        if ($data === TRUE) {
+            $array = $this->db->query('					
+				SELECT
+					P.idSis_Usuario,
+					CONCAT(IFNULL(P.Nome,""), " -- ", IFNULL(F.Funcao,"")) AS Nome
+				FROM
+					Sis_Usuario AS P
+						LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
+				WHERE 
+					' . $permissao . '
+					P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+					' . $entregadar . '
+					(P.Inativo = "0" AND
+					P.Entregas = "S")  
+				ORDER BY 
+					F.Funcao ASC,
+					P.Nome ASC
+			');
+					
+        } else {
+            $query = $this->db->query('
+				SELECT
+					P.idSis_Usuario,
+					CONCAT(IFNULL(P.Nome,""), " -- ", IFNULL(F.Funcao,"")) AS Nome
+				FROM
+					Sis_Usuario AS P
+						LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
+				WHERE
+					' . $permissao . '
+					P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+					' . $entregadar . '
+					(P.Inativo = "0" AND
+					P.Entregas = "S")  
+				ORDER BY 
+					F.Funcao ASC,
+					P.Nome ASC
+			');
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Usuario] = $row->Nome;
+            }
+        }
+
+        return $array;
+    }	
+
+	public function select_usuario_servicos($data = FALSE) {
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
+        $servico = ($data) ? 'P.idSis_Usuario = ' . $data . ' OR ' : FALSE;
+		if ($data === TRUE) {
+            $array = $this->db->query('					
+            SELECT
+				P.idSis_Usuario,
+				CONCAT(IFNULL(P.Nome,""), " -- ", IFNULL(F.Funcao,"")) AS Nome
+            FROM
+                Sis_Usuario AS P
+					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
+            WHERE 
+				' . $permissao . '
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				' . $servico . '
+				P.Inativo = "0" AND
+				P.Servicos = "S"
+			ORDER BY 
+				F.Funcao ASC,
+				P.Nome ASC
+    ');
+					
+        } else {
+            $query = $this->db->query('
+            SELECT
+				P.idSis_Usuario,
+				CONCAT(IFNULL(P.Nome,""), " -- ", IFNULL(F.Funcao,"")) AS Nome
+            FROM
+                Sis_Usuario AS P
+					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
+            WHERE
+				' . $permissao . '
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				' . $servico . '
+				P.Inativo = "0" AND
+				P.Servicos = "S"  
+			ORDER BY 
+				F.Funcao ASC,
+				P.Nome ASC
+    ');
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Usuario] = $row->Nome;
+            }
+        }
+
+        return $array;
+    }	
+
 	public function select_compartilhar($data = FALSE) {
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 		$permissao2 = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? $array[0] = '::Todos::' : FALSE;

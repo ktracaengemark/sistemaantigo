@@ -68,6 +68,34 @@ elseif ($_GET['q'] == 3) {
 
 }
 
+elseif ($_GET['q'] == 30) {
+
+    $result = mysql_query('
+            SELECT
+				P.idSis_Usuario,
+				CONCAT(IFNULL(P.Nome,""), " -- ", IFNULL(F.Funcao,"")) AS Nome
+            FROM
+                Sis_Usuario AS P
+					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
+            WHERE
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.Inativo = "0" AND
+				P.Servicos = "S"  
+			ORDER BY 
+				F.Funcao ASC,
+				P.Nome ASC
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array2[] = array(
+            'id' => $row['idSis_Usuario'],
+            'name' => utf8_encode($row['Nome']),
+        );
+    }
+
+}
+
 elseif ($_GET['q'] == 14) {
 	
     $result = mysql_query('
