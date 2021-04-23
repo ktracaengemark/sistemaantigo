@@ -12,6 +12,9 @@
 						<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
 							<th class="active">Pet</th>
 						<?php } ?>
+						<?php if($_SESSION['Empresa']['CadastrarDep'] == "S"){?>
+							<th class="active">Dep</th>
+						<?php } ?>
 						<th class="active">Cliente</th>
 						<th class="active">Evento</th>							
 					</tr>
@@ -34,6 +37,9 @@
 								echo '<td>' . $row['NomeClientePet'] . ' / Especie: ' . $row['Especie'] . ' / Raca: ' . $row['RacaPet'] . '
 											/ Gen: ' . $row['Sexo'] . ' / Pelo: ' . $row['Pelo'] . ' / Porte: ' . $row['Porte'] . ' 
 											/ Obs: ' . $row['ObsPet'] . '</td>';
+							}
+							if($_SESSION['Empresa']['CadastrarDep'] == "S"){	
+								echo '<td>' . $row['NomeClientePet'] . '</td>';
 							}				
 							echo '<td>' . $row['NomeCliente'] . '</td>';
 							echo '<td>' . $row['Obs'] . '</td>';

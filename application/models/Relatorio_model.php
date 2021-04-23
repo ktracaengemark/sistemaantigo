@@ -16,7 +16,8 @@ class Relatorio_model extends CI_Model {
 	public function list_agendamentos($data, $completo) {
 
 		$cliente 	= ($data['idApp_Cliente']) ? ' AND CO.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;
-		$clientepet = ($data['idApp_ClientePet']) ? ' AND CO.idApp_ClientePet = ' . $data['idApp_ClientePet'] : FALSE;
+		$clientepet = ($_SESSION['Empresa']['CadastrarPet'] == "S" && $data['idApp_ClientePet']) ? ' AND CO.idApp_ClientePet = ' . $data['idApp_ClientePet'] : FALSE;
+		$clientedep = ($_SESSION['Empresa']['CadastrarDep'] == "S" && $data['idApp_ClienteDep']) ? ' AND CO.idApp_ClienteDep = ' . $data['idApp_ClienteDep'] : FALSE;
 
 		$campo 			= (!$data['Campo']) ? 'CO.DataInicio' : $data['Campo'];
         $ordenamento 	= (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
@@ -30,15 +31,15 @@ class Relatorio_model extends CI_Model {
 		/*
 		//echo $this->db->last_query();
 	  echo "<pre>";
-	  print_r($date_inicio);
+	  print_r($clientepet);
 	  echo "<br>";
-	  print_r($date_fim);
+	  print_r($clientedep);
 	  echo "<br>";
-	  print_r($date_inicio_orca);
+	  //print_r($date_inicio_orca);
 	  echo "<br>";
-	  print_r($date_fim_orca);
+	  //print_r($date_fim_orca);
 	  echo "</pre>";
-	  exit();
+	  //exit();
 		*/
 		
 		$query = $this->db->query('
@@ -50,11 +51,14 @@ class Relatorio_model extends CI_Model {
 				DATE_FORMAT(CO.DataFim, "%H:%i") AS HoraFim,
 				CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,"")) AS NomeCliente,
 				CP.*,
-				CONCAT(IFNULL(CP.idApp_ClientePet,""), " - " ,IFNULL(CP.NomeClientePet,"")) AS NomeClientePet
+				CONCAT(IFNULL(CP.idApp_ClientePet,""), " - " ,IFNULL(CP.NomeClientePet,"")) AS NomeClientePet,
+				CD.*,
+				CONCAT(IFNULL(CD.idApp_ClienteDep,""), " - " ,IFNULL(CD.NomeClienteDep,"")) AS NomeClienteDep
             FROM
                 App_Consulta AS CO
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = CO.idApp_Cliente
 					LEFT JOIN App_ClientePet AS CP ON CP.idApp_ClientePet = CO.idApp_ClientePet
+					LEFT JOIN App_ClienteDep AS CD ON CD.idApp_ClienteDep = CO.idApp_ClienteDep
             WHERE
 				' . $date_inicio_orca . '
 				' . $date_fim_orca . '
@@ -62,6 +66,7 @@ class Relatorio_model extends CI_Model {
 				CO.Tipo = 2
 				' . $cliente . '
 				' . $clientepet . '
+				' . $clientedep . '
 			ORDER BY
 				' . $campo . '
 				' . $ordenamento . '
@@ -5284,6 +5289,30 @@ exit();*/
         $array[0] = ':: Todos os Pets ::';
         foreach ($query->result() as $row) {
 			$array[$row->idApp_ClientePet] = $row->NomeClientePet;
+        }
+
+        return $array;
+    }
+	
+    public function select_clientedep() {
+
+        $query = $this->db->query('
+            SELECT
+                CP.idApp_ClienteDep,
+                CONCAT(IFNULL(CP.idApp_ClienteDep, ""), " --- ", IFNULL(CP.NomeClienteDep, ""), " || Tutor: ", IFNULL(C.NomeCliente, "")) As NomeClienteDep
+            FROM
+                App_ClienteDep AS CP
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = CP.idApp_Cliente
+            WHERE
+                CP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+            ORDER BY
+                CP.NomeClienteDep ASC	
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos os Deps ::';
+        foreach ($query->result() as $row) {
+			$array[$row->idApp_ClienteDep] = $row->NomeClienteDep;
         }
 
         return $array;

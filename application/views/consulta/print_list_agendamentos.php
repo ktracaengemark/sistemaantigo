@@ -52,7 +52,10 @@
 						<th class="col-md-1" scope="col">Hora</th>
 						<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
 							<th class="col-md-5" scope="col">Pet</th>
-						<?php } ?>	
+						<?php } ?>
+						<?php if($_SESSION['Empresa']['CadastrarDep'] == "S"){?>
+							<th class="col-md-5" scope="col">Dep</th>
+						<?php } ?>		
 						<th class="col-md-2" scope="col">Cliente</th>
 						<th class="col-md-2" scope="col">Evento</th>
 					</tr>
@@ -69,6 +72,11 @@
 								<td class="col-md-5" scope="col">
 									<?php echo $consulta[$i]['NomeClientePet'] ?>/ Especie: <?php echo $consulta[$i]['Especie'] ?>/ Raca: <?php echo $consulta[$i]['RacaPet'] ?>/ Gen: <?php echo $consulta[$i]['Sexo'] ?>/ 
 									Pelo: <?php echo $consulta[$i]['Pelo'] ?>/ Porte: <?php echo $consulta[$i]['Porte'] ?>/ Obs: <?php echo $consulta[$i]['ObsPet'] ?>
+								</td>
+							<?php } ?>
+							<?php if($_SESSION['Empresa']['CadastrarDep'] == "S"){?>
+								<td class="col-md-5" scope="col">
+									<?php echo $consulta[$i]['NomeClientePet'] ?>
 								</td>
 							<?php } ?>	
 							<td class="col-md-2" scope="col"><?php echo $consulta[$i]['NomeCliente'] ?></td>

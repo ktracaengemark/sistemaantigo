@@ -120,6 +120,7 @@ class Relatorio extends CI_Controller {
             'idApp_Consulta',
 			'idApp_Cliente',
 			'idApp_ClientePet',
+			'idApp_ClienteDep',
             'DataInicio',
             'DataFim',
 			'Ordenamento',
@@ -130,6 +131,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['Agendamentos']['DataFim'] 	= $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 		$_SESSION['Agendamentos']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['Agendamentos']['idApp_ClientePet'] = $data['query']['idApp_ClientePet'];
+		$_SESSION['Agendamentos']['idApp_ClienteDep'] = $data['query']['idApp_ClienteDep'];
 		$_SESSION['Agendamentos']['Campo'] = $data['query']['Campo'];
 		$_SESSION['Agendamentos']['Ordenamento'] = $data['query']['Ordenamento'];	
 
@@ -152,6 +154,7 @@ class Relatorio extends CI_Controller {
 
 		$data['select']['idApp_Cliente'] = $this->Relatorio_model->select_cliente();
 		$data['select']['idApp_ClientePet'] = $this->Relatorio_model->select_clientepet();
+		$data['select']['idApp_ClienteDep'] = $this->Relatorio_model->select_clientedep();
 
 		$data['query']['nome'] = 'Cliente';
         $data['titulo1'] = 'Lista de Agendamentos';
@@ -176,6 +179,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 			$data['bd']['idApp_ClientePet'] = $data['query']['idApp_ClientePet'];
+			$data['bd']['idApp_ClienteDep'] = $data['query']['idApp_ClienteDep'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 			
