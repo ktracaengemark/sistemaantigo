@@ -788,6 +788,102 @@ class Usuario extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
+    public function atuacoes($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+       
+		$data['query'] = $this->input->post(array(
+			'idSis_Empresa',
+			'idSis_Usuario',
+			'DataEmUsuario',
+			'Agenda',
+			'Vendas',
+			'Servicos',
+			'Entregas',
+			'Sac',
+			'Marketing',
+			'Procedimentos',
+			'Tarefas',
+        ), TRUE);
+
+		(!$data['query']['Agenda']) ? $data['query']['Agenda'] = 'N' : FALSE;
+		(!$data['query']['Vendas']) ? $data['query']['Vendas'] = 'N' : FALSE;
+		(!$data['query']['Servicos']) ? $data['query']['Servicos'] = 'N' : FALSE;
+		(!$data['query']['Entregas']) ? $data['query']['Entregas'] = 'N' : FALSE;
+		(!$data['query']['Sac']) ? $data['query']['Sac'] = 'N' : FALSE;
+		(!$data['query']['Marketing']) ? $data['query']['Marketing'] = 'N' : FALSE;
+		(!$data['query']['Procedimentos']) ? $data['query']['Procedimentos'] = 'N' : FALSE;
+		(!$data['query']['Tarefas']) ? $data['query']['Tarefas'] = 'N' : FALSE;
+		
+        if ($id) {
+            $data['query'] = $this->Usuario_model->get_usuario($id);
+        }
+
+        $data['select']['Agenda'] = $this->Basico_model->select_status_sn();
+        $data['select']['Vendas'] = $this->Basico_model->select_status_sn();
+        $data['select']['Servicos'] = $this->Basico_model->select_status_sn();
+        $data['select']['Entregas'] = $this->Basico_model->select_status_sn();
+        $data['select']['Sac'] = $this->Basico_model->select_status_sn();
+        $data['select']['Marketing'] = $this->Basico_model->select_status_sn();
+        $data['select']['Procedimentos'] = $this->Basico_model->select_status_sn();
+        $data['select']['Tarefas'] = $this->Basico_model->select_status_sn();
+		
+        $data['titulo'] = 'Atuações do Usuário';
+        $data['form_open_path'] = 'usuario/atuacoes';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        if ($data['query']['Agenda'])
+            $data['collapse'] = '';
+        else
+            $data['collapse'] = 'class="collapse"';
+
+        $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
+        $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
+
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
+		
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('usuario/form_atuacoes', $data);
+        } else {
+
+
+            $data['anterior'] = $this->Usuario_model->get_usuario($data['query']['idSis_Usuario']);
+            $data['campos'] = array_keys($data['query']);
+
+            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Usuario'], TRUE);
+
+            if ($data['auditoriaitem'] && $this->Usuario_model->update_usuario($data['query'], $data['query']['idSis_Usuario']) === FALSE) {
+                $data['msg'] = '?m=1';
+                redirect(base_url() . 'usuario/prontuario/' . $data['query']['idSis_Usuario'] . $data['msg']);
+                exit();
+            } else {
+
+                if ($data['auditoriaitem'] === FALSE) {
+                    $data['msg'] = '';
+                } else {
+                    $data['auditoria'] = $this->Basico_model->set_auditoriaempresa($data['auditoriaitem'], 'Sis_Usuario', 'UPDATE', $data['auditoriaitem']);
+                    $data['msg'] = '?m=1';
+                }
+
+                redirect(base_url() . 'usuario/prontuario/' . $data['query']['idSis_Usuario'] . $data['msg']);
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+
     public function permissoes($id = FALSE) {
 
         if ($this->input->get('m') == 1)

@@ -49,6 +49,14 @@
 									</li>
 									<li role="separator" class="divider"></li>
 									<li>
+										<a <?php if (preg_match("/usuario\/atuacoes\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+											<a href="<?php echo base_url() . 'usuario/atuacoes/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
+												<span class="glyphicon glyphicon-edit"></span> Editar Atuações do Usuário
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
 										<a <?php if (preg_match("/usuario\/permissoes\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
 											<a href="<?php echo base_url() . 'usuario/permissoes/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
 												<span class="glyphicon glyphicon-edit"></span> Editar Permissões do Usuário
