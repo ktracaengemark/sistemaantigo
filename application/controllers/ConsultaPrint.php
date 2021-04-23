@@ -60,7 +60,52 @@ class ConsultaPrint extends CI_Controller {
 						
 						$data['consulta'][$j]['idApp_Consulta'] = $data['consulta'][$j]['idApp_Consulta'];
 						$data['consulta'][$j]['DataInicio'] = $this->basico->mascara_data($data['consulta'][$j]['DataInicio'], 'barras');
-
+						
+						if($data['consulta'][$j]['PeloPet'] == 1){
+							$data['consulta'][$j]['Pelo'] = "CURTO";
+						}elseif($data['consulta'][$j]['PeloPet'] == 2){
+							$data['consulta'][$j]['Pelo'] = "MÉDIO";
+						}elseif($data['consulta'][$j]['PeloPet'] == 3){
+							$data['consulta'][$j]['Pelo'] = "LONGO";
+						}elseif($data['consulta'][$j]['PeloPet'] == 4){
+							$data['consulta'][$j]['Pelo'] = "CACHEADO";
+						}else{
+							$data['consulta'][$j]['Pelo'] = "N.I.";
+						}
+						
+						if($data['consulta'][$j]['PortePet'] == 1){
+							$data['consulta'][$j]['Porte'] = "MINI";
+						}elseif($data['consulta'][$j]['PortePet'] == 2){
+							$data['consulta'][$j]['Porte'] = "PEQUENO";
+						}elseif($data['consulta'][$j]['PortePet'] == 3){
+							$data['consulta'][$j]['Porte'] = "MÉDIO";
+						}elseif($data['consulta'][$j]['PortePet'] == 4){
+							$data['consulta'][$j]['Porte'] = "GRANDE";
+						}elseif($data['consulta'][$j]['PortePet'] == 5){
+							$data['consulta'][$j]['Porte'] = "GIGANTE";
+						}else{
+							$data['consulta'][$j]['Porte'] = "N.I.";
+						}
+										
+						if($data['consulta'][$j]['EspeciePet'] == 1){
+							$data['consulta'][$j]['Especie'] = "CÃO";
+						}elseif($data['consulta'][$j]['EspeciePet'] == 2){
+							$data['consulta'][$j]['Especie'] = "GATO";
+						}elseif($data['consulta'][$j]['EspeciePet'] == 3){
+							$data['consulta'][$j]['Especie'] = "AVE";
+						}else{
+							$data['consulta'][$j]['Especie'] = "N.I.";
+						}
+										
+						if($data['consulta'][$j]['SexoPet'] == "M"){
+							$data['consulta'][$j]['Sexo'] = "MACHO";
+						}elseif($data['consulta'][$j]['SexoPet'] == "F"){
+							$data['consulta'][$j]['Sexo'] = "FEMEA";
+						}elseif($data['consulta'][$j]['SexoPet'] == "O"){
+							$data['consulta'][$j]['Sexo'] = "OUT";
+						}else{
+							$data['consulta'][$j]['Sexo'] = "N.I.";
+						}
 					}
 				}	
 			}
