@@ -69,6 +69,12 @@ class Clientepet extends CI_Controller {
 		//$data['select']['SexoPet'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVidaPet'] = $this->Clientepet_model->select_status_vida();
 		$data['select']['AtivoPet'] = $this->Basico_model->select_status_sn();
+		$data['select']['EspeciePet'] = array (
+            '0' => '',
+            '1' => 'CÃO',
+            '2' => 'GATO',
+			'3' => 'AVE',
+        );
 		$data['select']['SexoPet'] = array(
 			'O' => '',
 			'M' => 'MACHO',
@@ -176,6 +182,12 @@ class Clientepet extends CI_Controller {
 		//$data['select']['SexoPet'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVidaPet'] = $this->Clientepet_model->select_status_vida();      
 		$data['select']['AtivoPet'] = $this->Basico_model->select_status_sn();
+		$data['select']['EspeciePet'] = array (
+            '0' => '',
+            '1' => 'CÃO',
+            '2' => 'GATO',
+			'3' => 'AVE',
+        );
 		$data['select']['SexoPet'] = array(
 			'O' => '',
 			'M' => 'MACHO',
