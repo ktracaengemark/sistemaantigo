@@ -760,8 +760,8 @@
 												</div>
 											</div>
 										</div>
-										<input type="text" class="form-control " name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>" readonly=''/>	
-										<input type="text" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
+										<input type="hidden" class="form-control " name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>" readonly=''/>	
+										<input type="hidden" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
 									<?php }else{ ?>	
 										<input type="hidden" class="form-control Valor" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>" readonly=''/>
 										<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>" readonly=''/>
@@ -1698,7 +1698,7 @@
 																		<?php echo $_SESSION['Procedimento'][$i]['Nome'];?>
 																	<?php } ?>
 																</label>
-																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
+																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
 																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 															</div>
 															<div class="col-md-4">
@@ -1709,7 +1709,7 @@
 																		 id="listadinamica_comp<?php echo $i ?>" name="Compartilhar<?php echo $i ?>">
 																	<option value="">-- Selecione uma opção --</option>
 																	<?php
-																	foreach ($select['Compartilhar'] as $key => $row) {
+																	foreach ($select[$i]['Compartilhar'] as $key => $row) {
 																		if ($procedimento[$i]['Compartilhar'] == $key) {
 																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																		} else {
@@ -1727,7 +1727,7 @@
 																	<span class="input-group-addon" disabled>
 																		<span class="glyphicon glyphicon-calendar"></span>
 																	</span>
-																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA" readonly=""
 																		   name="DataProcedimento<?php echo $i ?>" id="DataProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimento']; ?>">
 																</div>
 															</div>
@@ -1737,7 +1737,7 @@
 																	<span class="input-group-addon" disabled>
 																		<span class="glyphicon glyphicon-time"></span>
 																	</span>
-																	<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5" placeholder="HH:MM"
+																	<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5" placeholder="HH:MM" readonly=""
 																		   name="HoraProcedimento<?php echo $i ?>" id="HoraProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['HoraProcedimento']; ?>">
 																</div>
 															</div>
@@ -1793,7 +1793,7 @@
 																				<span class="input-group-addon" disabled>
 																					<span class="glyphicon glyphicon-calendar"></span>
 																				</span>
-																				<input type="text" class="form-control Date" readonly="" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																				<input type="text" class="form-control Date" readonly="" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA" readonly=""
 																					   name="DataConcluidoProcedimento<?php echo $i ?>" id="DataConcluidoProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataConcluidoProcedimento']; ?>">
 																			</div>
 																		</div>
@@ -1803,19 +1803,21 @@
 																				<span class="input-group-addon" disabled>
 																					<span class="glyphicon glyphicon-time"></span>
 																				</span>
-																				<input type="text" class="form-control Time" readonly="" <?php echo $readonly; ?> maxlength="5" placeholder="HH:MM"
+																				<input type="text" class="form-control Time" readonly="" <?php echo $readonly; ?> maxlength="5" placeholder="HH:MM" readonly=""
 																					   name="HoraConcluidoProcedimento<?php echo $i ?>" id="HoraConcluidoProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['HoraConcluidoProcedimento']; ?>">
 																			</div>
 																		</div>
 																	</div>
 																</div>
 															</div>
+															<!--
 															<div class="col-md-1">
 																<label><br></label><br>
 																<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
 																	<span class="glyphicon glyphicon-trash"></span>
 																</button>
-															</div>																
+															</div>
+															-->
 														</div>
 														<!--
 														<div class="row">

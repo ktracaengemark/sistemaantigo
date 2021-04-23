@@ -5716,7 +5716,7 @@ function adicionaProcedimento() {
 
 	//request the JSON data and parse into the select element
 	$.ajax({
-		url: window.location.origin+ '/' + app + '/Getvalues_json3.php?q=3',
+		url: window.location.origin+ '/' + app + '/Getvalues_json3.php?q=30',
 		dataType: 'JSON',
 		type: "GET",
 		success: function (data) {

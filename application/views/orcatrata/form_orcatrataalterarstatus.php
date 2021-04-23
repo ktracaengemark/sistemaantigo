@@ -1628,7 +1628,7 @@
 																				 id="listadinamica_comp<?php echo $i ?>" name="Compartilhar<?php echo $i ?>">
 																			<option value="">-- Selecione uma opção --</option>
 																			<?php
-																			foreach ($select['Compartilhar'] as $key => $row) {
+																			foreach ($select[$i]['Compartilhar'] as $key => $row) {
 																				if ($procedimento[$i]['Compartilhar'] == $key) {
 																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																				} else {

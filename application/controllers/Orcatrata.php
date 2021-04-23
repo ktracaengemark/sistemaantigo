@@ -498,7 +498,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario_servicos();
 		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
+		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos();
         $data['select']['Produto'] = $this->Basico_model->select_produtos3($data['orcatrata']['Tipo_Orca']);
 		$data['select']['Servico'] = $this->Basico_model->select_servicos3($data['orcatrata']['Tipo_Orca']);
 		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
@@ -2054,7 +2054,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario_servicos();
 		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
+		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos();
         $data['select']['Produto'] = $this->Basico_model->select_produtos3($data['orcatrata']['Tipo_Orca']);
 		$data['select']['Servico'] = $this->Basico_model->select_servicos3($data['orcatrata']['Tipo_Orca']);
 		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
@@ -3294,7 +3294,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario_servicos();
 		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
+		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos();
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario_entregador();
         $data['select']['Produto'] = $this->Basico_model->select_produtos3($data['orcatrata']['Tipo_Orca']);
 		$data['select']['Servico'] = $this->Basico_model->select_servicos3($data['orcatrata']['Tipo_Orca']);
@@ -4391,6 +4391,8 @@ class Orcatrata extends CI_Controller {
 				);
 				($data['procedimento'][$j]['ConcluidoProcedimento'] == 'S') ? $data['div']['ConcluidoProcedimento' . $j] = '' : $data['div']['ConcluidoProcedimento' . $j] = 'style="display: none;"';	
 
+				$data['select'][$j]['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos($data['procedimento'][$j]['Compartilhar']);
+				
                 $j++;
             }
 
@@ -4601,6 +4603,9 @@ class Orcatrata extends CI_Controller {
 							'ConcluidoProcedimento' . $j => $this->basico->radio_checked($data['procedimento'][$j]['ConcluidoProcedimento'], 'ConcluidoProcedimento' . $j, 'NS'),
 						);
 						($data['procedimento'][$j]['ConcluidoProcedimento'] == 'S') ? $data['div']['ConcluidoProcedimento' . $j] = '' : $data['div']['ConcluidoProcedimento' . $j] = 'style="display: none;"';
+						
+						$_SESSION['Procedimento'][$j]['Compartilhar'] = $data['procedimento'][$j]['Compartilhar'];
+						$data['select'][$j]['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos($_SESSION['Procedimento'][$j]['Compartilhar']);
 					}
                 }
             }
@@ -4673,8 +4678,8 @@ class Orcatrata extends CI_Controller {
 		//$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario_servicos();
 		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
-		$data['select']['Entregador'] = $this->Usuario_model->select_usuario_entregador();
+		//$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos();
+		$data['select']['Entregador'] = $this->Usuario_model->select_usuario_entregador($_SESSION['Orcatrata']['Entregador']);
 		$data['select']['Produto'] = $this->Basico_model->select_produtos3($data['orcatrata']['Tipo_Orca']);
 		$data['select']['Servico'] = $this->Basico_model->select_servicos3($data['orcatrata']['Tipo_Orca']);
 		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
@@ -6217,8 +6222,10 @@ class Orcatrata extends CI_Controller {
 					'ConcluidoProcedimento' . $j => $this->basico->radio_checked($data['procedimento'][$j]['ConcluidoProcedimento'], 'ConcluidoProcedimento' . $j, 'NS'),
 				);
 				($data['procedimento'][$j]['ConcluidoProcedimento'] == 'S') ? $data['div']['ConcluidoProcedimento' . $j] = '' : $data['div']['ConcluidoProcedimento' . $j] = 'style="display: none;"';	
-
-                $j++;
+				
+				$data['select'][$j]['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos($data['procedimento'][$j]['Compartilhar']);
+                
+				$j++;
             }
 
         }
@@ -6387,6 +6394,9 @@ class Orcatrata extends CI_Controller {
 							'ConcluidoProcedimento' . $j => $this->basico->radio_checked($data['procedimento'][$j]['ConcluidoProcedimento'], 'ConcluidoProcedimento' . $j, 'NS'),
 						);
 						($data['procedimento'][$j]['ConcluidoProcedimento'] == 'S') ? $data['div']['ConcluidoProcedimento' . $j] = '' : $data['div']['ConcluidoProcedimento' . $j] = 'style="display: none;"';
+						
+						$_SESSION['Procedimento'][$j]['Compartilhar'] = $data['procedimento'][$j]['Compartilhar'];
+						$data['select'][$j]['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos($_SESSION['Procedimento'][$j]['Compartilhar']);
 					}
                 }
             }
@@ -6450,8 +6460,8 @@ class Orcatrata extends CI_Controller {
 		//$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario_servicos();
 		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
-		$data['select']['Entregador'] = $this->Usuario_model->select_usuario_entregador();
+		//$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos();
+		$data['select']['Entregador'] = $this->Usuario_model->select_usuario_entregador($_SESSION['Orcatrata']['Entregador']);
 		$data['select']['Produto'] = $this->Basico_model->select_produtos3($data['orcatrata']['Tipo_Orca']);
 		$data['select']['Servico'] = $this->Basico_model->select_servicos3($data['orcatrata']['Tipo_Orca']);
 		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
@@ -7940,8 +7950,10 @@ class Orcatrata extends CI_Controller {
 					'ConcluidoProcedimento' . $j => $this->basico->radio_checked($data['procedimento'][$j]['ConcluidoProcedimento'], 'ConcluidoProcedimento' . $j, 'NS'),
 				);
 				($data['procedimento'][$j]['ConcluidoProcedimento'] == 'S') ? $data['div']['ConcluidoProcedimento' . $j] = '' : $data['div']['ConcluidoProcedimento' . $j] = 'style="display: none;"';	
-
-                $j++;
+				
+				$data['select'][$j]['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos($data['procedimento'][$j]['Compartilhar']);
+                
+				$j++;
             }
 
         }
@@ -8121,6 +8133,10 @@ class Orcatrata extends CI_Controller {
 							'ConcluidoProcedimento' . $j => $this->basico->radio_checked($data['procedimento'][$j]['ConcluidoProcedimento'], 'ConcluidoProcedimento' . $j, 'NS'),
 						);
 						($data['procedimento'][$j]['ConcluidoProcedimento'] == 'S') ? $data['div']['ConcluidoProcedimento' . $j] = '' : $data['div']['ConcluidoProcedimento' . $j] = 'style="display: none;"';
+					
+						$_SESSION['Procedimento'][$j]['Compartilhar'] = $data['procedimento'][$j]['Compartilhar'];
+						$data['select'][$j]['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos($_SESSION['Procedimento'][$j]['Compartilhar']);
+					
 					}
                 }
             }
@@ -8171,7 +8187,7 @@ class Orcatrata extends CI_Controller {
 		//$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario_servicos();
 		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
+		//$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos();
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario_entregador($_SESSION['Orcatrata']['Entregador']);
 		$data['select']['Produto'] = $this->Basico_model->select_produtos3($data['orcatrata']['Tipo_Orca']);
 		$data['select']['Servico'] = $this->Basico_model->select_servicos3($data['orcatrata']['Tipo_Orca']);
@@ -9505,7 +9521,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario_servicos();
 		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
+		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos();
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario_entregador();
         $data['select']['Produto'] = $this->Basico_model->select_produto2();
 		$data['select']['Servico'] = $this->Basico_model->select_servico2();
@@ -10572,6 +10588,8 @@ class Orcatrata extends CI_Controller {
 				);
 				($data['procedimento'][$j]['ConcluidoProcedimento'] == 'S') ? $data['div']['ConcluidoProcedimento' . $j] = '' : $data['div']['ConcluidoProcedimento' . $j] = 'style="display: none;"';	
 
+				$data['select'][$j]['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos($data['procedimento'][$j]['Compartilhar']);
+				
                 $j++;
             }
 
@@ -10741,6 +10759,9 @@ class Orcatrata extends CI_Controller {
 							'ConcluidoProcedimento' . $j => $this->basico->radio_checked($data['procedimento'][$j]['ConcluidoProcedimento'], 'ConcluidoProcedimento' . $j, 'NS'),
 						);
 						($data['procedimento'][$j]['ConcluidoProcedimento'] == 'S') ? $data['div']['ConcluidoProcedimento' . $j] = '' : $data['div']['ConcluidoProcedimento' . $j] = 'style="display: none;"';
+						
+						$_SESSION['Procedimento'][$j]['Compartilhar'] = $data['procedimento'][$j]['Compartilhar'];
+						$data['select'][$j]['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos($_SESSION['Procedimento'][$j]['Compartilhar']);
 					}
                 }
             }
@@ -10794,8 +10815,8 @@ class Orcatrata extends CI_Controller {
 		//$data['select']['ProfissionalServico_4'] = $this->Usuario_model->select_usuario_servicos();
 		$data['select']['ProfissionalProduto_1'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-		$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario();
-		$data['select']['Entregador'] = $this->Usuario_model->select_usuario_entregador();
+		//$data['select']['Compartilhar'] = $this->Usuario_model->select_usuario_procedimentos();
+		$data['select']['Entregador'] = $this->Usuario_model->select_usuario_entregador($_SESSION['Orcatrata']['Entregador']);
 		$data['select']['Produto'] = $this->Basico_model->select_produto2();
 		$data['select']['Servico'] = $this->Basico_model->select_servico2();
 		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();

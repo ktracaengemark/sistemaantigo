@@ -408,6 +408,56 @@ class Usuario_model extends CI_Model {
         return $array;
     }	
 
+	public function select_usuario_procedimentos($data = FALSE) {
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
+        $procedimentos = ($data) ? 'P.idSis_Usuario = ' . $data . ' OR ' : FALSE;
+		if ($data === TRUE) {
+            $array = $this->db->query('					
+            SELECT
+				P.idSis_Usuario,
+				CONCAT(IFNULL(P.Nome,""), " -- ", IFNULL(F.Funcao,"")) AS Nome
+            FROM
+                Sis_Usuario AS P
+					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
+            WHERE 
+				' . $permissao . '
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				' . $procedimentos . '
+				P.Inativo = "0" AND
+				P.Procedimentos = "S"
+			ORDER BY 
+				F.Funcao ASC,
+				P.Nome ASC
+    ');
+					
+        } else {
+            $query = $this->db->query('
+            SELECT
+				P.idSis_Usuario,
+				CONCAT(IFNULL(P.Nome,""), " -- ", IFNULL(F.Funcao,"")) AS Nome
+            FROM
+                Sis_Usuario AS P
+					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
+            WHERE
+				' . $permissao . '
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				' . $procedimentos . '
+				P.Inativo = "0" AND
+				P.Procedimentos = "S"  
+			ORDER BY 
+				F.Funcao ASC,
+				P.Nome ASC
+    ');
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Usuario] = $row->Nome;
+            }
+        }
+
+        return $array;
+    }	
+
 	public function select_compartilhar($data = FALSE) {
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 		$permissao2 = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? $array[0] = '::Todos::' : FALSE;
