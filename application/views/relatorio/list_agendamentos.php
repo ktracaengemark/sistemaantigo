@@ -9,7 +9,9 @@
 						<th class="active">id</th>
 						<th class="active">Data</th>
 						<th class="active">Inicio</th>
-						<th class="active">Pet</th>
+						<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
+							<th class="active">Pet</th>
+						<?php } ?>
 						<th class="active">Cliente</th>
 						<th class="active">Evento</th>							
 					</tr>
@@ -27,8 +29,12 @@
 							echo '<td>' . $count . '</td>';	
 							echo '<td>' . $row['idApp_Consulta'] . '</td>';
 							echo '<td>' . $row['DataInicio'] . '</td>';
-							echo '<td>' . $row['HoraInicio'] . ' / ' . $row['HoraFim'] . '</td>';
-							echo '<td>' . $row['NomeClientePet'] . '</td>';
+							echo '<td>' . $row['HoraInicio'] . '/' . $row['HoraFim'] . '</td>';
+							if($_SESSION['Empresa']['CadastrarPet'] == "S"){	
+								echo '<td>' . $row['NomeClientePet'] . ' / Especie: ' . $row['Especie'] . ' / Raca: ' . $row['RacaPet'] . '
+											/ Gen: ' . $row['Sexo'] . ' / Pelo: ' . $row['Pelo'] . ' / Porte: ' . $row['Porte'] . ' 
+											/ Obs: ' . $row['ObsPet'] . '</td>';
+							}				
 							echo '<td>' . $row['NomeCliente'] . '</td>';
 							echo '<td>' . $row['Obs'] . '</td>';
 						echo '</tr>';

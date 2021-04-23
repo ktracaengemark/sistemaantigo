@@ -49,6 +49,7 @@ class Relatorio_model extends CI_Model {
 				DATE_FORMAT(CO.DataFim, "%Y-%m-%d") AS DataFim,
 				DATE_FORMAT(CO.DataFim, "%H:%i") AS HoraFim,
 				CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,"")) AS NomeCliente,
+				CP.*,
 				CONCAT(IFNULL(CP.idApp_ClientePet,""), " - " ,IFNULL(CP.NomeClientePet,"")) AS NomeClientePet
             FROM
                 App_Consulta AS CO
@@ -86,7 +87,52 @@ class Relatorio_model extends CI_Model {
 				$row->DataFim = $this->basico->mascara_data($row->DataFim, 'barras');
                 //$row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
 				
+				if($row->PeloPet == 1){
+					$row->Pelo = "CURTO";
+				}elseif($row->PeloPet == 2){
+					$row->Pelo = "MÉDIO";
+				}elseif($row->PeloPet == 3){
+					$row->Pelo = "LONGO";
+				}elseif($row->PeloPet == 4){
+					$row->Pelo = "CACHEADO";
+				}else{
+					$row->Pelo = "N.I.";
+				}
 				
+				if($row->PortePet == 1){
+					$row->Porte = "MINI";
+				}elseif($row->PortePet == 2){
+					$row->Porte = "PEQUENO";
+				}elseif($row->PortePet == 3){
+					$row->Porte = "MÉDIO";
+				}elseif($row->PortePet == 4){
+					$row->Porte = "GRANDE";
+				}elseif($row->PortePet == 5){
+					$row->Porte = "GIGANTE";
+				}else{
+					$row->Porte = "N.I.";
+				}
+								
+				if($row->EspeciePet == 1){
+					$row->Especie = "CÃO";
+				}elseif($row->EspeciePet == 2){
+					$row->Especie = "GATO";
+				}elseif($row->EspeciePet == 3){
+					$row->Especie = "AVE";
+				}else{
+					$row->Especie = "N.I.";
+				}
+								
+				if($row->SexoPet == "M"){
+					$row->Sexo = "MACHO";
+				}elseif($row->SexoPet == "F"){
+					$row->Sexo = "FEMEA";
+				}elseif($row->SexoPet == "O"){
+					$row->Sexo = "OUT";
+				}else{
+					$row->Sexo = "N.I.";
+				}				
+
 				/*
 				$data = DateTime::createFromFormat('d/m/Y H:i:s', $data);
 				$data = $data->format('Y-m-d H:i:s');

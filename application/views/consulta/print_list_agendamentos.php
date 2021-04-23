@@ -43,16 +43,18 @@
 						-->
 					</tr>
 				</thead>
-			</table>
+				</table>
 			<table class="table table-bordered table-condensed table-striped">	
 				<thead>
 					<tr>
 						<th class="col-md-1" scope="col"><?php echo $count['POCount'] ?> Eventos</th>
 						<th class="col-md-1" scope="col">Data</th>
-						<th class="col-md-2" scope="col">Hora</th>
-						<th class="col-md-2" scope="col">Pet</th>
-						<th class="col-md-3" scope="col">Cliente</th>
-						<th class="col-md-3" scope="col">Evento</th>
+						<th class="col-md-1" scope="col">Hora</th>
+						<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
+							<th class="col-md-5" scope="col">Pet</th>
+						<?php } ?>	
+						<th class="col-md-2" scope="col">Cliente</th>
+						<th class="col-md-2" scope="col">Evento</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -62,10 +64,15 @@
 						<tr>
 							<td class="col-md-1" scope="col"><?php echo $i ?> - <?php echo $consulta[$i]['idApp_Consulta'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $consulta[$i]['DataInicio'] ?></td>
-							<td class="col-md-2" scope="col"><?php echo $consulta[$i]['HoraInicio'] ?> / <?php echo $consulta[$i]['HoraFim'] ?></td>
-							<td class="col-md-2" scope="col"><?php echo $consulta[$i]['NomeClientePet'] ?></td>
-							<td class="col-md-3" scope="col"><?php echo $consulta[$i]['NomeCliente'] ?></td>
-							<td class="col-md-3" scope="col"><?php echo $consulta[$i]['Obs'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $consulta[$i]['HoraInicio'] ?> / <?php echo $consulta[$i]['HoraFim'] ?></td>
+							<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
+								<td class="col-md-5" scope="col">
+									<?php echo $consulta[$i]['NomeClientePet'] ?>/ Especie: <?php echo $consulta[$i]['Especie'] ?>/ Raca: <?php echo $consulta[$i]['RacaPet'] ?>/ Gen: <?php echo $consulta[$i]['Sexo'] ?>/ 
+									Pelo: <?php echo $consulta[$i]['Pelo'] ?>/ Porte: <?php echo $consulta[$i]['Porte'] ?>/ Obs: <?php echo $consulta[$i]['ObsPet'] ?>
+								</td>
+							<?php } ?>	
+							<td class="col-md-2" scope="col"><?php echo $consulta[$i]['NomeCliente'] ?></td>
+							<td class="col-md-2" scope="col"><?php echo $consulta[$i]['Obs'] ?></td>
 						</tr>
 						<?php
 						}
