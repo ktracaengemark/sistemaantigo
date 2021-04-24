@@ -1666,7 +1666,7 @@
 																				echo ''
 																				. '<label class="btn btn-warning active" name="radiobutton_Modalidade" id="radiobutton_Modalidade' .  $key . '">'
 																				. '<input type="radio" name="Modalidade" id="radiobuttondinamico" ' 
-																				. 'onchange="calculaParcelas(this.value)" '
+																				//. 'onchange="calculaParcelas(this.value)" '
 																				. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																				. '</label>'
 																				;
@@ -1674,7 +1674,7 @@
 																				echo ''
 																				. '<label class="btn btn-default" name="radiobutton_Modalidade" id="radiobutton_Modalidade' .  $key . '">'
 																				. '<input type="radio" name="Modalidade" id="radiobuttondinamico" '
-																				. 'onchange="calculaParcelas(this.value)" '
+																				//. 'onchange="calculaParcelas(this.value)" '
 																				. 'autocomplete="off" value="' . $key . '" >' . $row
 																				. '</label>'
 																				;

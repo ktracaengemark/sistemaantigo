@@ -4994,6 +4994,10 @@ function usarcashback(usarcash) {
 		var Hidden_UsarCashBack	= $('#Hidden_UsarCashBack').val();
 	}
 
+	
+	var metodo = $('#metodo').val();
+	//console.log('metodo = ' + metodo);	
+	
 	var recorrencias = $('#Recorrencias').val();
 	recorrencias		= parseFloat(recorrencias);
 	//console.log('Total de Recorrencias = ' + recorrencias);	
@@ -5050,7 +5054,10 @@ function usarcashback(usarcash) {
 	$('#Valor_C_Desc').val(valor_c_desc);
 	$('#Valor_S_Desc').val(valor_s_desc);
 	
-	calculaParcelas();
+	if(metodo == 1){
+		//console.log('calculaParcelas = SIM');
+		calculaParcelas();
+	}
 	calculaTroco();	
 	
 }

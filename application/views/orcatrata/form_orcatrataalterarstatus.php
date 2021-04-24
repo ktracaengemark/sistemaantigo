@@ -932,7 +932,7 @@
 															<div class="col-md-2 mb-3 ">	
 																<!--<label >Buscar End.</label>
 																
-																<button class=" form-control btn btn-lg btn-success" type="button" onclick="Procuraendereco(), calculaTotal(), calculaParcelas()" >Buscar</button>-->
+																<button class=" form-control btn btn-lg btn-success" type="button" onclick="Procuraendereco(), calculaTotal()" >Buscar</button>-->
 															</div>
 															<div class="col-md-2 ">
 																<label class="" for="Cep">Cep:</label>

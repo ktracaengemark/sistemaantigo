@@ -888,7 +888,7 @@
 																echo ''
 																. '<label class="btn btn-warning active" name="DetalhadaEntrega_' . $hideshow . '">'
 																. '<input type="radio" name="DetalhadaEntrega" id="' . $hideshow . '" '
-																. 'onchange="calculaParcelas(),formaPag(this.value)" '
+																//. 'onchange="calculaParcelas(),formaPag(this.value)" '
 																. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																. '</label>'
 																;
@@ -896,7 +896,7 @@
 																echo ''
 																. '<label class="btn btn-default" name="DetalhadaEntrega_' . $hideshow . '">'
 																. '<input type="radio" name="DetalhadaEntrega" id="' . $hideshow . '" '
-																. 'onchange="calculaParcelas(),formaPag(this.value)" '
+																//. 'onchange="calculaParcelas(),formaPag(this.value)" '
 																. 'autocomplete="off" value="' . $key . '" >' . $row
 																. '</label>'
 																;
@@ -926,8 +926,8 @@
 												<div class="row ">
 													<div class="col-md-2 mb-3 ">	
 														<label >Buscar End.</label>
-														<!--<button class=" form-control btn btn-lg btn-success" type="button" onclick="Procuraendereco(), LoadFrete(), calculaTotal(), calculaParcelas()" >Buscar</button>-->
-														<button class=" form-control btn btn-lg btn-success" type="button" onclick="Procuraendereco(), calculaTotal(), calculaParcelas()" >Buscar</button>
+														<!--<button class=" form-control btn btn-lg btn-success" type="button" onclick="Procuraendereco(), LoadFrete(), calculaTotal()" >Buscar</button>-->
+														<button class=" form-control btn btn-lg btn-success" type="button" onclick="Procuraendereco(), calculaTotal()" >Buscar</button>
 													</div>
 													<div class="col-md-2 ">
 														<label class="" for="Cep">Cep:</label>
@@ -1471,7 +1471,7 @@
 																		echo ''
 																		. '<label class="btn btn-warning active" name="radiobutton_Modalidade" id="radiobutton_Modalidade' .  $key . '">'
 																		. '<input type="radio" name="Modalidade" id="radiobuttondinamico" ' 
-																		. 'onchange="calculaParcelas(this.value)" '
+																		//. 'onchange="calculaParcelas(this.value)" '
 																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																		. '</label>'
 																		;
@@ -1479,7 +1479,7 @@
 																		echo ''
 																		. '<label class="btn btn-default" name="radiobutton_Modalidade" id="radiobutton_Modalidade' .  $key . '">'
 																		. '<input type="radio" name="Modalidade" id="radiobuttondinamico" '
-																		. 'onchange="calculaParcelas(this.value)" '
+																		//. 'onchange="calculaParcelas(this.value)" '
 																		. 'autocomplete="off" value="' . $key . '" >' . $row
 																		. '</label>'
 																		;
