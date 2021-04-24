@@ -44,6 +44,9 @@ class Agenda extends CI_Controller {
 			'NomeCliente',
 			'NomeClientePet',
 			'NomeClienteDep',
+			'idApp_Cliente',
+			'idApp_ClientePet',
+			'idApp_ClienteDep',
 			'NomeEmpresa',
 			'NomeEmpresaCli',
             'DataInicio',
@@ -92,7 +95,10 @@ class Agenda extends CI_Controller {
 		$_SESSION['FiltroAlteraProcedimento']['Concluidocli'] = $data['query']['Concluidocli'];
 		$_SESSION['FiltroAlteraProcedimento']['NomeCliente'] = $data['query']['NomeCliente'];
 		$_SESSION['FiltroAlteraProcedimento']['NomeClientePet'] = $data['query']['NomeClientePet'];
-		$_SESSION['FiltroAlteraProcedimento']['NomeClienteDep'] = $data['query']['NomeClienteDep'];		
+		$_SESSION['FiltroAlteraProcedimento']['NomeClienteDep'] = $data['query']['NomeClienteDep'];
+		$_SESSION['FiltroAlteraProcedimento']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
+		$_SESSION['FiltroAlteraProcedimento']['idApp_ClientePet'] = $data['query']['idApp_ClientePet'];
+		$_SESSION['FiltroAlteraProcedimento']['idApp_ClienteDep'] = $data['query']['idApp_ClienteDep'];			
         $_SESSION['FiltroAlteraProcedimento']['Diaemp'] = $data['query']['Diaemp'];
         $_SESSION['FiltroAlteraProcedimento']['Mesvencemp'] = $data['query']['Mesvencemp'];
         $_SESSION['FiltroAlteraProcedimento']['Anoemp'] = $data['query']['Anoemp'];		
@@ -181,7 +187,10 @@ class Agenda extends CI_Controller {
 		$data['select']['Mesvencemp'] = $this->Agenda_model->select_mes();		
 		$data['select']['NomeCliente'] = $this->Agenda_model->select_cliente();
 		$data['select']['NomeClientePet'] = $this->Agenda_model->select_clientepet();
-		$data['select']['NomeClienteDep'] = $this->Agenda_model->select_clientedep();
+		$data['select']['NomeClienteDep'] = $this->Agenda_model->select_clientedep();		
+		$data['select']['idApp_Cliente'] = $this->Agenda_model->select_cliente();
+		$data['select']['idApp_ClientePet'] = $this->Agenda_model->select_clientepet();
+		$data['select']['idApp_ClienteDep'] = $this->Agenda_model->select_clientedep();
 		$data['select']['NomeEmpresa'] = $this->Agenda_model->select_empresarec();
 		$data['select']['NomeEmpresaCli'] = $this->Agenda_model->select_empresaenv();
         $data['select']['NomeUsuario'] = $this->Agenda_model->select_usuario();
@@ -211,6 +220,9 @@ class Agenda extends CI_Controller {
 			$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
 			$data['bd']['NomeClienteDep'] = $data['query']['NomeClienteDep'];
 			$data['bd']['NomeClientePet'] = $data['query']['NomeClientePet'];
+			$data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
+			$data['bd']['idApp_ClienteDep'] = $data['query']['idApp_ClienteDep'];
+			$data['bd']['idApp_ClientePet'] = $data['query']['idApp_ClientePet'];
 			$data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
 			$data['bd']['NomeProfissional'] = $data['query']['NomeProfissional'];
 			$data['bd']['Categoria'] = $data['query']['Categoria'];

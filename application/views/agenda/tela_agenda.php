@@ -25,9 +25,53 @@
 						</div>
 					<?php } ?>
 					<div class="col-md-4 text-left">
+						<label>Cliente</label>
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button class="btn btn-info btn-md" type="submit">
+									<span class="glyphicon glyphicon-search"></span> 
+								</button>
+							</span>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="clientePet(this.value),clienteDep(this.value),this.form.submit()"
+									id="idApp_Cliente" name="idApp_Cliente">
+								<?php
+								foreach ($select['idApp_Cliente'] as $key => $row) {
+									if ($query['idApp_Cliente'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+					</div>
+					<?php if($_SESSION['Empresa']['CadastrarDep'] == "S"){?>
+						<input type="hidden" id="Hidden_idApp_ClienteDep" name="Hidden_idApp_ClienteDep" value="<?php echo $query['idApp_ClienteDep']; ?>" />
+						<div class="col-md-3 text-left">
+							<label  for="idApp_ClienteDep">Dep</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_ClienteDep" name="idApp_ClienteDep">
+								<option value=""></option>
+							</select>
+							<span class="modal-title" id="Dep"></span>
+						</div>
+					<?php } ?>
+					<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
+						<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $query['idApp_ClientePet']; ?>" />
+						<div class="col-md-3 text-left">
+							<label  for="idApp_ClientePet">Pet</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_ClientePet" name="idApp_ClientePet">
+								<option value=""></option>
+							</select>
+							<span class="modal-title" id="Pet"></span>
+						</div>
+					<?php } ?>
+					<!--
+					<div class="col-md-4 text-left">
 						<label class="" for="Ordenamento">Cliente:</label><br>
 						<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()" id="NomeCliente" name="NomeCliente">
 							<?php
+							/*
 							foreach ($select['NomeCliente'] as $key => $row) {
 								if ($query['NomeCliente'] == $key) {
 									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -35,16 +79,18 @@
 									echo '<option value="' . $key . '">' . $row . '</option>';
 								}
 							}
+							*/
 							?>
 						</select>
-					</div>	
+					</div>
+					-->
 				<?php } ?>
 				<!--
 				<div class=" btn btn-success" type="button" data-toggle="collapse" data-target="#Agenda" aria-expanded="false" aria-controls="Agenda">
 					<span class="glyphicon glyphicon-chevron-up"></span> Agenda
 				</div>
 				-->
-				<div class="col-md-4 text-left">	
+				<div class="col-md-1 text-left">	
 					<label class="" for="Ordenamento">Calendário</label><br>
 					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Calendario" aria-expanded="false" aria-controls="Calendario">
 						<span class="glyphicon glyphicon-calendar"></span>

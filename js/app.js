@@ -2172,10 +2172,15 @@ function clientePet(id = null){
 	//console.log('<br> Hidden_idApp_ClientePet = '+ $('#Hidden_idApp_ClientePet').val());
 	
 	if(id_cliente) {
-		//console.log(id);
+		//console.log(id_cliente);
+		
+		$('#idApp_ClientePet').val('0');
+		if(id_cliente == 0){
+			$('#idApp_ClientePet').hide();
+		}
+		
 		var exibir_id = $('#exibir_id').val();
 		//console.log('exibir_id = '+exibir_id);
-		
 		if(exibir_id == 1){
 			$('#idApp_ClientePet').hide();
 			$('#idApp_ClientePet').val('0');
@@ -2206,6 +2211,7 @@ function clientePet(id = null){
 			
 	} else {
 		$('#idApp_ClientePet').html('<option value="">– Selecione um Cliente –</option>');
+		//console.log('Nenhum Cliente');
 	}
 
 }
@@ -2230,6 +2236,12 @@ function clienteDep(id = null){
 	
 	if(id_cliente) {
 		//console.log(id);
+		
+		$('#idApp_ClienteDep').val('0');
+		if(id_cliente == 0){
+			$('#idApp_ClienteDep').hide();
+		}
+		
 		var exibir_id = $('#exibir_id').val();
 		//console.log('exibir_id = '+exibir_id);
 		if(exibir_id == 1){

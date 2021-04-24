@@ -19,7 +19,10 @@ if (!$db) {
 //Acho que as próximas linhas são redundantes, verificar
 
 $query = ($_SESSION['FiltroAlteraProcedimento']['NomeUsuario'] && isset($_SESSION['FiltroAlteraProcedimento']['NomeUsuario'])) ? 'AND A.idSis_Usuario = ' . $_SESSION['FiltroAlteraProcedimento']['NomeUsuario'] . '  ' : FALSE;	
-$query3 = ($_SESSION['FiltroAlteraProcedimento']['NomeCliente'] && isset($_SESSION['FiltroAlteraProcedimento']['NomeCliente'])) ? 'AND C.idApp_Cliente = ' . $_SESSION['FiltroAlteraProcedimento']['NomeCliente'] . '  ' : FALSE;
+//$query3 = ($_SESSION['FiltroAlteraProcedimento']['NomeCliente'] && isset($_SESSION['FiltroAlteraProcedimento']['NomeCliente'])) ? 'AND C.idApp_Cliente = ' . $_SESSION['FiltroAlteraProcedimento']['NomeCliente'] . '  ' : FALSE;	
+$query3 = ($_SESSION['FiltroAlteraProcedimento']['idApp_Cliente'] && isset($_SESSION['FiltroAlteraProcedimento']['idApp_Cliente'])) ? 'AND C.idApp_Cliente = ' . $_SESSION['FiltroAlteraProcedimento']['idApp_Cliente'] . '  ' : FALSE;
+$query4 = ($_SESSION['FiltroAlteraProcedimento']['idApp_ClientePet'] && isset($_SESSION['FiltroAlteraProcedimento']['idApp_ClientePet'])) ? 'AND C.idApp_ClientePet = ' . $_SESSION['FiltroAlteraProcedimento']['idApp_ClientePet'] . '  ' : FALSE;
+$query5 = ($_SESSION['FiltroAlteraProcedimento']['idApp_ClienteDep'] && isset($_SESSION['FiltroAlteraProcedimento']['idApp_ClienteDep'])) ? 'AND C.idApp_ClienteDep = ' . $_SESSION['FiltroAlteraProcedimento']['idApp_ClienteDep'] . '  ' : FALSE;
 #$query2 = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'C.idApp_Cliente = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;
 																				
 $permissao = ($_SESSION['log']['Permissao'] >= 3 ) ? 'AND A.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
@@ -82,6 +85,8 @@ $result = mysql_query(
 				
 				' . $query . '
 				' . $query3 . '
+				' . $query4 . '
+				' . $query5 . '
 				' . $permissao . '
 				' . $permissao3 . '
 				' . $permissao5 . '

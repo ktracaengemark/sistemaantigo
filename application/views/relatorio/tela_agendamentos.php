@@ -16,7 +16,7 @@
 										<span class="glyphicon glyphicon-search"></span> 
 									</button>
 								</span>
-								<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="clientePet(this.value),clienteDep(this.value)"
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="clientePet(this.value),clienteDep(this.value),this.form.submit()"
 										id="idApp_Cliente" name="idApp_Cliente">
 									<?php
 									foreach ($select['idApp_Cliente'] as $key => $row) {
