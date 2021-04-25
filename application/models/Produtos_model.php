@@ -238,6 +238,8 @@ class Produtos_model extends CI_Model {
 				TPS.Arquivo,
 				TPS.Cod_Prod,
 				TPS.Cod_Barra,
+				TPS.ContarEstoque,
+				TPS.Produtos_Descricao,
 				TPS.Estoque
 			FROM 
 				Tab_Valor AS TV

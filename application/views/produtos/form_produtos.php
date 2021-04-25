@@ -175,22 +175,67 @@
 															<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Produtos']['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'>
 														</a>
 													</div>		
-													<div class="col-md-4">
+													<div class="col-md-5">
 														<label for="Nome_Prod">Nome Produto*</label>
 														<input type="text" class="form-control" readonly="" id="Nome_Prod" name="Nome_Prod" value="<?php echo $produtos['Nome_Prod']; ?>">
 														<?php echo form_error('Nome_Prod'); ?>
 													</div>		
-													<div class="col-md-1">
-														<label for="Estoque">Estoque</label>
-														<input type="text" class="form-control Numero" <?php echo $readonly ?> id="Estoque" name="Estoque" value="<?php echo $produtos['Estoque']; ?>">
-														<?php echo form_error('Estoque'); ?>
-													</div>		
-													<div class="col-md-6">
+													<div class="col-md-3">
 														<label for="Produtos_Descricao">Descrição</label>
 														<textarea type="text" class="form-control " <?php echo $readonly ?> id="Produtos_Descricao" name="Produtos_Descricao" 
 															maxlength="200" value="<?php echo $produtos['Produtos_Descricao']; ?>"><?php echo $produtos['Produtos_Descricao']; ?></textarea>
 														<?php echo form_error('Produtos_Descricao'); ?>
 													</div>
+													<div class="col-md-3 text-left">
+														<?php if ($metodo == 2 || $metodo == 3) { ?>	
+															<div class="col-md-6 text-left">
+																<label for="ContarEstoque">Contar Estoque?</label><br>
+																<div class="btn-group" data-toggle="buttons">
+																	<?php
+																		foreach ($select['ContarEstoque'] as $key => $row) {
+																			if (!$produtos['ContarEstoque']) $produtos['ContarEstoque'] = 'S';
+																			
+																			($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																			
+																			if ($produtos['ContarEstoque'] == $key) {
+																				echo ''
+																				. '<label class="btn btn-warning active" name="ContarEstoque_' . $hideshow . '">'
+																				. '<input type="radio" name="ContarEstoque" id="' . $hideshow . '" '
+																				. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																				. '</label>'
+																				;
+																				} else {
+																				echo ''
+																				. '<label class="btn btn-default" name="ContarEstoque_' . $hideshow . '">'
+																				. '<input type="radio" name="ContarEstoque" id="' . $hideshow . '" '
+																				. 'autocomplete="off" value="' . $key . '" >' . $row
+																				. '</label>'
+																				;
+																			}
+																		}
+																	?>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div id="ContarEstoque" <?php echo $div['ContarEstoque']; ?>>
+																	<label for="Estoque">Estoque</label>
+																	<input type="text" class="form-control Numero" <?php echo $readonly ?> id="Estoque" name="Estoque" value="<?php echo $produtos['Estoque']; ?>">
+																	<?php echo form_error('Estoque'); ?>
+																</div>
+															</div>
+														<?php }else{ ?>
+															<div class="col-md-6 text-left">
+																<label for="ContarEstoque">Contar Estoque?</label><br>
+																<input type="text" class="form-control" <?php echo $readonly ?> id="ContarEstoque" name="ContarEstoque" value="<?php echo $_SESSION['Produtos']['ContarEstoque']; ?>">
+															</div>
+															<?php if ($_SESSION['Produtos']['ContarEstoque'] == "S") { ?>
+																<div class="col-md-6 text-left">
+																	<label for="Estoque">Estoque</label><br>
+																	<input type="text" class="form-control" <?php echo $readonly ?> id="Estoque" name="Estoque" value="<?php echo $_SESSION['Produtos']['Estoque']; ?>">
+																</div>
+															<?php } ?>	
+														<?php } ?>
+													</div>	
 												</div>	
 												<div class="row">
 													<div class="col-md-1"></div>

@@ -49,16 +49,33 @@
 														<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Valor']['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'>
 													</a>
 												</div>		
-												<div class="col-md-4">
+												<div class="col-md-5">
 													<label for="Nome_Prod">Nome Produto*</label>
 													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Nome_Prod']; ?>">
 													<?php echo form_error('Nome_Prod'); ?>
 												</div>		
-												<div class="col-md-1">
-													<label for="Estoque">Estoque</label>
-													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Estoque']; ?>">
-													<?php echo form_error('Estoque'); ?>
+												<div class="col-md-3">
+													<label for="Produtos_Descricao">Descrição</label>
+													<textarea type="text" class="form-control " readonly="" value="<?php echo $_SESSION['Valor']['Produtos_Descricao']; ?>"><?php echo $_SESSION['Valor']['Produtos_Descricao']; ?></textarea>
+													<?php echo form_error('Produtos_Descricao'); ?>
 												</div>
+												<div class="col-md-3">
+													<div class="col-md-6">
+														<label for="ContarEstoque">Contar Estoque?</label>
+														<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['ContarEstoque']; ?>">
+														<?php echo form_error('ContarEstoque'); ?>
+													</div>
+													<?php if ($_SESSION['Valor']['ContarEstoque'] == "S") { ?>
+														<div class="col-md-6">
+															<label for="Estoque">Estoque</label>
+															<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Estoque']; ?>">
+															<?php echo form_error('Estoque'); ?>
+														</div>
+													<?php } ?>	
+												</div>	
+											</div>	
+											<div class="row">	
+												<div class="col-md-1"></div>	
 												<div class="col-md-1">
 													<label for="id">id_Produto</label>
 													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['idTab_Produtos']; ?>">
@@ -73,6 +90,7 @@
 													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Cod_Barra']; ?>">
 													<?php echo form_error('Cod_Barra'); ?>
 												</div>
+												
 											</div>
 										</div>
 										<div class="row">
