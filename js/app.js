@@ -4666,7 +4666,7 @@ function valorExtraOrca(){
 	valorsomaorca 	= valorsomaorca.replace(".","").replace(",",".");
 	valorsomaorca	= parseFloat(valorsomaorca);
 	//valorsomaorca	= valorsomaorca.toFixed(2);
-	console.log('ValorExtra. valorsomaorca = ' + valorsomaorca);
+	//console.log('ValorExtra. valorsomaorca = ' + valorsomaorca);
 
 
 	if($('#ValorExtraOrca').val() == ''){

@@ -3316,15 +3316,16 @@ class Orcatrata extends CI_Controller {
         $data['caminho2'] = '../';
 		$data['Recorrencias'] = 1;
 		
-		$data['exibir_id'] = 1;
-		
 		$data['exibirExtraOrca'] = 1;
 		$data['exibirDescOrca'] = 1;
+		
+		$data['exibir_id'] = 1;
 		if($_SESSION['log']['idSis_Empresa'] == 5){
 			$data['AtivoCashBack'] = 'N';
 		}else{
 			$data['AtivoCashBack'] = 'S';
 		}
+		
 		$data['vinculadas'] = 0;
         if ($data['vinculadas'] > 0){
 			$data['textoEntregues'] = '';
@@ -9544,6 +9545,13 @@ class Orcatrata extends CI_Controller {
 		
 		$data['exibirExtraOrca'] = 1;
 		$data['exibirDescOrca'] = 1;		
+		
+		$data['exibir_id'] = 1;
+		if($_SESSION['log']['idSis_Empresa'] == 5){
+			$data['AtivoCashBack'] = 'N';
+		}else{
+			$data['AtivoCashBack'] = 'S';
+		}		
 		
 		$data['vinculadas'] = 0;
         if ($data['vinculadas'] > 0){
