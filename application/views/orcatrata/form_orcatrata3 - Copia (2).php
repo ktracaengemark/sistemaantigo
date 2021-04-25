@@ -156,21 +156,12 @@
 											<div class="row">
 												<div class="col-md-12">
 													<div class="row">
-														<!--
-														<div class="col-md-4 text-left">
-															<label  for="idApp_Cliente">Cliente</label>
-															<input type="text" name="idApp_Cliente" id="idApp_Cliente" value="<?php echo $orcatrata['idApp_Cliente']; ?>" class="form-control" placeholder="Pesquisar Cliente"
-																onchange="buscaEnderecoCliente(this.value),dateDiff(),clientePet(this.value),clienteDep(this.value),calculacashback(this.value)">
-															<?php echo form_error('idApp_Cliente'); ?>
-														</div>
-														-->
 														<div class="col-md-4 text-left">
 															<label  for="idApp_Cliente">Cliente</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value),dateDiff(),clientePet(this.value),clienteDep(this.value),calculacashback(this.value)" <?php echo $readonly; ?>
 																	id="idApp_Cliente" autofocus name="idApp_Cliente">
 																<option value="">-- Sel. Cliente --</option>
 																<?php
-																
 																foreach ($select['idApp_Cliente'] as $key => $row) {
 																		(!$orcatrata['idApp_Cliente']) ? $orcatrata['idApp_Cliente'] = '0' : FALSE;
 																	if ($orcatrata['idApp_Cliente'] == $key) {
@@ -179,12 +170,10 @@
 																		echo '<option value="' . $key . '">' . $row . '</option>';
 																	}
 																}
-																
 																?>
 															</select>
 															<?php echo form_error('idApp_Cliente'); ?>
 														</div>
-														
 														<input type="hidden" id="Hidden_idApp_Cliente" name="Hidden_idApp_Cliente" value="<?php echo $orcatrata['idApp_Cliente']; ?>" />
 														<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
 															<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $orcatrata['idApp_ClientePet']; ?>" />

@@ -27,7 +27,7 @@ class Orcatrata extends CI_Controller {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-			elseif ($this->input->get('m') == 2)
+        elseif ($this->input->get('m') == 2)
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
 			else
             $data['msg'] = '';

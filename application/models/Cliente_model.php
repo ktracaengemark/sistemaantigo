@@ -437,7 +437,50 @@ class Cliente_model extends CI_Model {
             }
         }
     }
-	
+	/*
+	public function select_cliente_Limit($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+				SELECT                
+					idApp_Cliente,
+					CelularCliente,
+					RegistroFicha,
+					CONCAT(IFNULL(idApp_Cliente,""), " - ", IFNULL(NomeCliente,""), " - ", IFNULL(CelularCliente,""), " - ", IFNULL(Telefone,""), " - ", IFNULL(Telefone2,""), " - FCH:", IFNULL(RegistroFicha,"")) AS NomeCliente
+				FROM
+					App_Cliente					
+				WHERE
+					idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				ORDER BY 
+					idApp_Cliente DESC
+				LIMIT 30	
+			');
+					
+        } else {
+            $query = $this->db->query('
+				SELECT                
+					idApp_Cliente,
+					CelularCliente,
+					RegistroFicha,
+					CONCAT(IFNULL(idApp_Cliente,""), " - ", IFNULL(NomeCliente,""), " - ", IFNULL(CelularCliente,""), " - ", IFNULL(Telefone,""), " - ", IFNULL(Telefone2,""), " - FCH:", IFNULL(RegistroFicha,"")) AS NomeCliente		
+				FROM
+					App_Cliente					
+				WHERE
+					idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				ORDER BY 
+					idApp_Cliente DESC
+				LIMIT 30
+			');
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idApp_Cliente] = $row->NomeCliente;
+            }
+        }
+
+        return $array;
+    }
+	*/
 	public function select_cliente($data = FALSE) {
 
         if ($data === TRUE) {

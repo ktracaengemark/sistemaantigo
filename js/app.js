@@ -32,7 +32,13 @@ exibirDescOrca();
 dataehora();
 qtd_ocorrencias();
 calculacashback();
-
+/*
+$(function () {
+	$("#idApp_Cliente").autocomplete({
+		source: window.location.origin+ '/' + app + '/cadastros/pesquisar/Cliente_Autocomplete.php'
+	});
+});
+*/
 function codigo(id, tabela){
 	//alert('ok codigo');
 	var categoria = $('#idTab_Catprod').val();
@@ -4581,7 +4587,6 @@ function percExtraOrca(){
 	}else{
 		percextraorca	= 0;
 	}
-	
 	//console.log('PercExtra. percextraorca = ' + percextraorca);
 	if(valorsomaorca > 0){
 	
@@ -4601,9 +4606,11 @@ function percExtraOrca(){
 			var valortotalorca = valorsomaorca;
 		}
 		
-		//valortotalorca	= parseFloat(valortotalorca);
+		//console.log('PercExtra. valorextraorca = ' + valorextraorca);
+		valortotalorca	= parseFloat(valortotalorca);
+		valorextraorca	= parseFloat(valorextraorca);
 		//valortotalorca	= valortotalorca.toFixed(2);
-		
+		//console.log('PercExtra. valortotalorca = ' + valortotalorca);
 		var valor_s_extra = recorrencias*valorsomaorca;
 		valor_s_extra	= parseFloat(valor_s_extra);
 		valor_s_extra 	= mascaraValorReal(valor_s_extra);
@@ -4622,10 +4629,17 @@ function percExtraOrca(){
 
 		
 		//valorextraorca 	= valorextraorca.replace('.',',');
-		//valortotalorca 	= valortotalorca.replace(".",",");
+		//
+		valortotalorca	= valortotalorca.toFixed(2);
+		valortotalorca 	= valortotalorca.replace(".",",");
 		
-		valorextraorca = mascaraValorReal(valorextraorca);
-		valortotalorca = mascaraValorReal(valortotalorca);
+		valorextraorca	= valorextraorca.toFixed(2);
+		valorextraorca 	= valorextraorca.replace(".",",");
+		//valorextraorca = mascaraValorReal(valorextraorca);
+		//console.log('PercExtra. valorextraorca = ' + valorextraorca);
+		//valortotalorca = mascaraValorReal(valortotalorca);
+		//console.log('PercExtra. valortotalorca = ' + valortotalorca);
+		
 		
 		$('#ValorExtraOrca').val(valorextraorca);
 		$('#ValorTotalOrca').val(valortotalorca);
@@ -4652,7 +4666,7 @@ function valorExtraOrca(){
 	valorsomaorca 	= valorsomaorca.replace(".","").replace(",",".");
 	valorsomaorca	= parseFloat(valorsomaorca);
 	//valorsomaorca	= valorsomaorca.toFixed(2);
-	//console.log('ValorExtra. valorsomaorca = ' + valorsomaorca);
+	console.log('ValorExtra. valorsomaorca = ' + valorsomaorca);
 
 
 	if($('#ValorExtraOrca').val() == ''){
