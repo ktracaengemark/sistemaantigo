@@ -21,13 +21,15 @@
 							<div class="row">
 								<div class="col-md-12">
 									<label for=""><h4><b>Agenda</b></h4></label>
-									<div class="form-group col-md-12 text-left">
-										<div class="row">
-											<a  type="button" class="btn btn-md btn-default btn-block text-left" href="<?php echo base_url() ?>relatorio/list_agendamentos" role="button"> 
-												<span class="glyphicon glyphicon-pencil"></span> Relatório de Agendamentos
-											</a>											
-										</div>	
-									</div>
+									<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
+										<div class="form-group col-md-12 text-left">
+											<div class="row">
+												<a  type="button" class="btn btn-md btn-default btn-block text-left" href="<?php echo base_url() ?>relatorio/list_agendamentos" role="button"> 
+													<span class="glyphicon glyphicon-pencil"></span> Relatório de Agendamentos
+												</a>											
+											</div>	
+										</div>
+									<?php }?>	
 								</div>
 								<div class="col-md-12">
 									<label for=""><h4><b>Tarefas</b></h4></label>
