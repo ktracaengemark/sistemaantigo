@@ -96,6 +96,37 @@ elseif ($_GET['q'] == 30) {
 
     $result = mysql_query('
             SELECT
+				AF.idApp_Funcao,
+				CONCAT(IFNULL(TF.Abrev,""), " || ", IFNULL(U.Nome,"")) AS Nome
+            FROM
+                App_Funcao AS AF
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = AF.idSis_Usuario
+					LEFT JOIN Tab_Funcao AS TF ON TF.idTab_Funcao = AF.idTab_Funcao
+            WHERE
+				AF.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				U.Inativo = "0" AND
+				U.Servicos = "S"  
+			
+			ORDER BY 
+				TF.Abrev ASC,
+				U.Nome ASC
+				
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array2[] = array(
+            'id' => $row['idApp_Funcao'],
+            'name' => utf8_encode($row['Nome']),
+        );
+    }
+
+}
+
+elseif ($_GET['q'] == 300) {
+
+    $result = mysql_query('
+            SELECT
 				P.idSis_Usuario,
 				CONCAT(IFNULL(P.Nome,""), " -- ", IFNULL(F.Funcao,"")) AS Nome
             FROM

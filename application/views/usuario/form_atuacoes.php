@@ -375,32 +375,40 @@
 																	</div>
 																	<div class="col-md-3">
 																		<label for="Ativo_Funcao">Ativo? </label><br>
-																			<div class="btn-group" data-toggle="buttons">
-																				<?php
-																				foreach ($select['Ativo_Funcao'] as $key => $row) {
-																					if (!$funcao[$i]['Ativo_Funcao'])$funcao[$i]['Ativo_Funcao'] = 'S';
-																					($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-																					if ($funcao[$i]['Ativo_Funcao'] == $key) {
-																						echo ''
-																						. '<label class="btn btn-warning active" name="Ativo_Funcao' . $i . '_' . $hideshow . '">'
-																						. '<input type="radio" name="Ativo_Funcao' . $i . '" id="' . $hideshow . '" '
-																						. 'onchange="carregaAtivoFuncao(this.value,this.name,'.$i.',0)" '
-																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																						. '</label>'
-																						;
-																					} else {
-																						echo ''
-																						. '<label class="btn btn-default" name="Ativo_Funcao' . $i . '_' . $hideshow . '">'
-																						. '<input type="radio" name="Ativo_Funcao' . $i . '" id="' . $hideshow . '" '
-																						. 'onchange="carregaAtivoFuncao(this.value,this.name,'.$i.',0)" '
-																						. 'autocomplete="off" value="' . $key . '" >' . $row
-																						. '</label>'
-																						;
-																					}
+																		<div class="btn-group" data-toggle="buttons">
+																			<?php
+																			foreach ($select['Ativo_Funcao'] as $key => $row) {
+																				if (!$funcao[$i]['Ativo_Funcao'])$funcao[$i]['Ativo_Funcao'] = 'S';
+																				($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																				if ($funcao[$i]['Ativo_Funcao'] == $key) {
+																					echo ''
+																					. '<label class="btn btn-warning active" name="Ativo_Funcao' . $i . '_' . $hideshow . '">'
+																					. '<input type="radio" name="Ativo_Funcao' . $i . '" id="' . $hideshow . '" '
+																					. 'onchange="carregaAtivoFuncao(this.value,this.name,'.$i.',0)" '
+																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																					. '</label>'
+																					;
+																				} else {
+																					echo ''
+																					. '<label class="btn btn-default" name="Ativo_Funcao' . $i . '_' . $hideshow . '">'
+																					. '<input type="radio" name="Ativo_Funcao' . $i . '" id="' . $hideshow . '" '
+																					. 'onchange="carregaAtivoFuncao(this.value,this.name,'.$i.',0)" '
+																					. 'autocomplete="off" value="' . $key . '" >' . $row
+																					. '</label>'
+																					;
 																				}
-																				?>
-																			</div>
+																			}
+																			?>
+																		</div>
 																	</div>
+																	<!--
+																	<div class="col-md-1">
+																		<label><br></label><br>
+																		<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
+																			<span class="glyphicon glyphicon-trash"></span>
+																		</button>
+																	</div>
+																	-->
 																</div>	
 																<div class="row">
 																	<!--
@@ -429,14 +437,6 @@
 																				</div>
 																			</div>
 																		</div>
-																	</div>
-																	-->
-																	<!--
-																	<div class="col-md-1">
-																		<label><br></label><br>
-																		<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
-																			<span class="glyphicon glyphicon-trash"></span>
-																		</button>
 																	</div>
 																	-->
 																</div>

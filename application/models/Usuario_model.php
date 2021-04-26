@@ -406,6 +406,58 @@ class Usuario_model extends CI_Model {
     }	
 
 	public function select_usuario_servicos($data = FALSE) {
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'AF.idApp_Funcao = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
+        $servico = ($data) ? 'AF.idApp_Funcao = ' . $data . ' OR ' : FALSE;
+		if ($data === TRUE) {
+            $array = $this->db->query('					
+				SELECT
+					AF.idApp_Funcao,
+					CONCAT(IFNULL(TF.Abrev,""), " || ", IFNULL(U.Nome,"")) AS Nome
+				FROM
+					App_Funcao AS AF
+						LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = AF.idSis_Usuario
+						LEFT JOIN Tab_Funcao AS TF ON TF.idTab_Funcao = AF.idTab_Funcao
+				WHERE 
+					' . $permissao . '
+					AF.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+					' . $servico . '
+					U.Inativo = "0" AND
+					U.Servicos = "S"
+				ORDER BY 
+					TF.Abrev ASC,
+					U.Nome ASC
+			');
+					
+        } else {
+            $query = $this->db->query('
+				SELECT
+					AF.idApp_Funcao,
+					CONCAT(IFNULL(TF.Abrev,""), " || ", IFNULL(U.Nome,"")) AS Nome
+				FROM
+					App_Funcao AS AF
+						LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = AF.idSis_Usuario
+						LEFT JOIN Tab_Funcao AS TF ON TF.idTab_Funcao = AF.idTab_Funcao
+				WHERE 
+					' . $permissao . '
+					AF.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+					' . $servico . '
+					U.Inativo = "0" AND
+					U.Servicos = "S"
+				ORDER BY 
+					TF.Abrev ASC,
+					U.Nome ASC
+			');
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idApp_Funcao] = $row->Nome;
+            }
+        }
+
+        return $array;
+    }	
+
+	public function select_usuario_servicos_orig($data = FALSE) {
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
         $servico = ($data) ? 'P.idSis_Usuario = ' . $data . ' OR ' : FALSE;
 		if ($data === TRUE) {

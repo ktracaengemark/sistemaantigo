@@ -818,7 +818,7 @@ class Usuario extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
-            if ($this->input->post('idApp_Funcao' . $i) || $this->input->post('idTab_Funcao' . $i) || $this->input->post('Comissao_Funcao' . $i)) {
+            if ($this->input->post('idTab_Funcao' . $i) || $this->input->post('Comissao_Funcao' . $i)) {
                 
 				$data['funcao'][$j]['idApp_Funcao'] = $this->input->post('idApp_Funcao' . $i);
 				$data['funcao'][$j]['idTab_Funcao'] = $this->input->post('idTab_Funcao' . $i);

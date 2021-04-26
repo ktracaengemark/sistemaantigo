@@ -264,7 +264,7 @@ class Relatoriocomissoes extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-		$data['select']['Funcionario'] = $this->Relatorio_model->select_funcionario();
+		$data['select']['Funcionario'] = $this->Relatoriocomissoes_model->select_funcionario();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Categoria'] = $this->Relatorio_model->select_catprod();
 		$data['select']['Orcarec'] = $this->Relatorio_model->select_orcarec();

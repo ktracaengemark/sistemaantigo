@@ -102,11 +102,21 @@ class Relatoriocomissoes_model extends CI_Model {
 				PRDS.ProfissionalProduto_2,
 				PRDS.ProfissionalProduto_3,
 				PRDS.ProfissionalProduto_4,
+
+				AF1.idTab_Funcao AS id_Fun_Prof_1,
+				AF2.idTab_Funcao AS id_Fun_Prof_2,
+				AF3.idTab_Funcao AS id_Fun_Prof_3,
+				AF4.idTab_Funcao AS id_Fun_Prof_4,				
 				
-				UP1.Nome AS NomeProf1,
-				UP2.Nome AS NomeProf2,
-				UP3.Nome AS NomeProf3,
-				UP4.Nome AS NomeProf4,
+				AF1.Comissao_Funcao AS ComProf1,
+				AF2.Comissao_Funcao AS ComProf2,
+				AF3.Comissao_Funcao AS ComProf3,
+				AF4.Comissao_Funcao AS ComProf4,
+				
+				CONCAT(IFNULL(TF1.Abrev,""), " || " ,IFNULL(UP1.Nome,"")) AS NomeProf1,				
+				CONCAT(IFNULL(TF2.Abrev,""), " || " ,IFNULL(UP2.Nome,"")) AS NomeProf2,				
+				CONCAT(IFNULL(TF3.Abrev,""), " || " ,IFNULL(UP3.Nome,"")) AS NomeProf3,				
+				CONCAT(IFNULL(TF4.Abrev,""), " || " ,IFNULL(UP4.Nome,"")) AS NomeProf4,
 				
 				TPRDS.idTab_Produtos,
 				TPRDS.Nome_Prod,
@@ -120,11 +130,22 @@ class Relatoriocomissoes_model extends CI_Model {
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Produto AS PRDS ON PRDS.idApp_OrcaTrata = OT.idApp_OrcaTrata
+
+					LEFT JOIN App_Funcao AS AF1 ON AF1.idApp_Funcao = PRDS.ProfissionalProduto_1
+					LEFT JOIN App_Funcao AS AF2 ON AF2.idApp_Funcao = PRDS.ProfissionalProduto_2
+					LEFT JOIN App_Funcao AS AF3 ON AF3.idApp_Funcao = PRDS.ProfissionalProduto_3
+					LEFT JOIN App_Funcao AS AF4 ON AF4.idApp_Funcao = PRDS.ProfissionalProduto_4
 					
-					LEFT JOIN Sis_Usuario AS UP1 ON UP1.idSis_Usuario = PRDS.ProfissionalProduto_1
-					LEFT JOIN Sis_Usuario AS UP2 ON UP2.idSis_Usuario = PRDS.ProfissionalProduto_2
-					LEFT JOIN Sis_Usuario AS UP3 ON UP3.idSis_Usuario = PRDS.ProfissionalProduto_3
-					LEFT JOIN Sis_Usuario AS UP4 ON UP4.idSis_Usuario = PRDS.ProfissionalProduto_4
+					LEFT JOIN Tab_Funcao AS TF1 ON TF1.idTab_Funcao = AF1.idTab_Funcao
+					LEFT JOIN Tab_Funcao AS TF2 ON TF2.idTab_Funcao = AF2.idTab_Funcao
+					LEFT JOIN Tab_Funcao AS TF3 ON TF3.idTab_Funcao = AF3.idTab_Funcao
+					LEFT JOIN Tab_Funcao AS TF4 ON TF4.idTab_Funcao = AF4.idTab_Funcao					
+					
+					
+					LEFT JOIN Sis_Usuario AS UP1 ON UP1.idSis_Usuario = AF1.idSis_Usuario
+					LEFT JOIN Sis_Usuario AS UP2 ON UP2.idSis_Usuario = AF2.idSis_Usuario
+					LEFT JOIN Sis_Usuario AS UP3 ON UP3.idSis_Usuario = AF3.idSis_Usuario
+					LEFT JOIN Sis_Usuario AS UP4 ON UP4.idSis_Usuario = AF4.idSis_Usuario
 					
 					LEFT JOIN Tab_Produtos AS TPRDS ON TPRDS.idTab_Produtos = PRDS.idTab_Produtos_Produto
 					LEFT JOIN Tab_Produto AS TPRD ON TPRD.idTab_Produto = TPRDS.idTab_Produto
@@ -210,10 +231,20 @@ class Relatoriocomissoes_model extends CI_Model {
 				PRDS.ProfissionalProduto_3,
 				PRDS.ProfissionalProduto_4,
 				
-				UP1.Nome AS NomeProf1,
-				UP2.Nome AS NomeProf2,
-				UP3.Nome AS NomeProf3,
-				UP4.Nome AS NomeProf4,
+				AF1.idTab_Funcao AS id_Fun_Prof_1,
+				AF2.idTab_Funcao AS id_Fun_Prof_2,
+				AF3.idTab_Funcao AS id_Fun_Prof_3,
+				AF4.idTab_Funcao AS id_Fun_Prof_4,
+				
+				AF1.Comissao_Funcao AS ComProf1,
+				AF2.Comissao_Funcao AS ComProf2,
+				AF3.Comissao_Funcao AS ComProf3,
+				AF4.Comissao_Funcao AS ComProf4,
+				
+				CONCAT(IFNULL(TF1.Abrev,""), " || " ,IFNULL(UP1.Nome,"")) AS NomeProf1,				
+				CONCAT(IFNULL(TF2.Abrev,""), " || " ,IFNULL(UP2.Nome,"")) AS NomeProf2,				
+				CONCAT(IFNULL(TF3.Abrev,""), " || " ,IFNULL(UP3.Nome,"")) AS NomeProf3,				
+				CONCAT(IFNULL(TF4.Abrev,""), " || " ,IFNULL(UP4.Nome,"")) AS NomeProf4,
 				
 				TPRDS.idTab_Produtos,
 				TPRDS.Nome_Prod,
@@ -225,10 +256,20 @@ class Relatoriocomissoes_model extends CI_Model {
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Produto AS PRDS ON PRDS.idApp_OrcaTrata = OT.idApp_OrcaTrata
 					
-					LEFT JOIN Sis_Usuario AS UP1 ON UP1.idSis_Usuario = PRDS.ProfissionalProduto_1
-					LEFT JOIN Sis_Usuario AS UP2 ON UP2.idSis_Usuario = PRDS.ProfissionalProduto_2
-					LEFT JOIN Sis_Usuario AS UP3 ON UP3.idSis_Usuario = PRDS.ProfissionalProduto_3
-					LEFT JOIN Sis_Usuario AS UP4 ON UP4.idSis_Usuario = PRDS.ProfissionalProduto_4
+					LEFT JOIN App_Funcao AS AF1 ON AF1.idApp_Funcao = PRDS.ProfissionalProduto_1
+					LEFT JOIN App_Funcao AS AF2 ON AF2.idApp_Funcao = PRDS.ProfissionalProduto_2
+					LEFT JOIN App_Funcao AS AF3 ON AF3.idApp_Funcao = PRDS.ProfissionalProduto_3
+					LEFT JOIN App_Funcao AS AF4 ON AF4.idApp_Funcao = PRDS.ProfissionalProduto_4
+					
+					LEFT JOIN Tab_Funcao AS TF1 ON TF1.idTab_Funcao = AF1.idTab_Funcao
+					LEFT JOIN Tab_Funcao AS TF2 ON TF2.idTab_Funcao = AF2.idTab_Funcao
+					LEFT JOIN Tab_Funcao AS TF3 ON TF3.idTab_Funcao = AF3.idTab_Funcao
+					LEFT JOIN Tab_Funcao AS TF4 ON TF4.idTab_Funcao = AF4.idTab_Funcao
+					
+					LEFT JOIN Sis_Usuario AS UP1 ON UP1.idSis_Usuario = AF1.idSis_Usuario
+					LEFT JOIN Sis_Usuario AS UP2 ON UP2.idSis_Usuario = AF2.idSis_Usuario
+					LEFT JOIN Sis_Usuario AS UP3 ON UP3.idSis_Usuario = AF3.idSis_Usuario
+					LEFT JOIN Sis_Usuario AS UP4 ON UP4.idSis_Usuario = AF4.idSis_Usuario
 					
 					LEFT JOIN Tab_Produtos AS TPRDS ON TPRDS.idTab_Produtos = PRDS.idTab_Produtos_Produto
 					LEFT JOIN Tab_Produto AS TPRD ON TPRD.idTab_Produto = TPRDS.idTab_Produto
@@ -320,6 +361,58 @@ class Relatoriocomissoes_model extends CI_Model {
                     $row->DataEntradaOrca = FALSE;
                 }
 				
+				$cont_id_Fun_1=0;
+				if(isset($row->id_Fun_Prof_1)){
+					for ($i = 1; $i <= 4; $i++) {
+						$p = 'id_Fun_Prof_'.$i;
+						if($row->$p == $row->id_Fun_Prof_1){
+							$cont_id_Fun_1++;
+						}
+					}
+				}
+				$row->cont_id_Fun_1 = $cont_id_Fun_1;
+				
+				$cont_id_Fun_2=0;
+				if(isset($row->id_Fun_Prof_2)){
+					for ($i = 1; $i <= 4; $i++) {
+						$p = 'id_Fun_Prof_'.$i;
+						if($row->$p == $row->id_Fun_Prof_2){
+							$cont_id_Fun_2++;
+						}
+					}
+				}	
+				$row->cont_id_Fun_2 = $cont_id_Fun_2;				
+				
+				$cont_id_Fun_3=0;
+				if(isset($row->id_Fun_Prof_3)){
+					for ($i = 1; $i <= 4; $i++) {
+						$p = 'id_Fun_Prof_'.$i;
+						if($row->$p == $row->id_Fun_Prof_3){
+							$cont_id_Fun_3++;
+						}
+					}	
+				}	
+				$row->cont_id_Fun_3 = $cont_id_Fun_3;				
+				
+				$cont_id_Fun_4=0;
+				if(isset($row->id_Fun_Prof_4)){
+					for ($i = 1; $i <= 4; $i++) {
+						$p = 'id_Fun_Prof_'.$i;
+						if($row->$p == $row->id_Fun_Prof_4){
+							$cont_id_Fun_4++;
+						}
+					}
+				}	
+				$row->cont_id_Fun_4 = $cont_id_Fun_4;				
+				
+				/*
+				  //echo $this->db->last_query();
+				  echo "<pre>";
+				  print_r($cont_id_Fun_1);          
+				  echo "</pre>";
+				  //exit();
+				*/
+				
 				$contagem=0;
 				for ($i = 1; $i <= 4; $i++) {
 					$p = 'ProfissionalProduto_'.$i;
@@ -338,6 +431,59 @@ class Relatoriocomissoes_model extends CI_Model {
 				
 				$valortotalproduto = $row->QtdProduto*$row->ValorProduto;
 				//$comissao_total = $valortotalproduto*$row->ComissaoProduto/100;
+				
+				if(isset($row->ComProf1)){
+					$com_Prof_1 = $row->ComProf1;
+					if($cont_id_Fun_1 != 0){
+						$valor_com_Prof_1 = $valortotalproduto*$com_Prof_1/$cont_id_Fun_1/100;
+					}else{
+						$valor_com_Prof_1 = 0.00;
+					}	
+				}else{
+					$valor_com_Prof_1 = 0.00;
+				}
+				
+				if(isset($row->ComProf2)){
+					$com_Prof_2 = $row->ComProf2;
+					if($cont_id_Fun_2 != 0){
+						$valor_com_Prof_2 = $valortotalproduto*$com_Prof_2/$cont_id_Fun_2/100;
+					}else{
+						$valor_com_Prof_2 = 0.00;
+					}	
+				}else{
+					$valor_com_Prof_2 = 0.00;
+				}
+				
+				if(isset($row->ComProf3)){
+					$com_Prof_3 = $row->ComProf3;
+					if($cont_id_Fun_3 != 0){
+						$valor_com_Prof_3 = $valortotalproduto*$com_Prof_3/$cont_id_Fun_3/100;
+					}else{
+						$valor_com_Prof_3 = 0.00;
+					}	
+				}else{
+					$valor_com_Prof_3 = 0.00;
+				}
+								
+				if(isset($row->ComProf4)){
+					$com_Prof_4 = $row->ComProf4;
+					if($cont_id_Fun_4 != 0){
+						$valor_com_Prof_4 = $valortotalproduto*$com_Prof_4/$cont_id_Fun_4/100;
+					}else{
+						$valor_com_Prof_4 = 0.00;
+					}	
+				}else{
+					$valor_com_Prof_4 = 0.00;
+				}
+				
+				$Valor_Com_Total = ($valor_com_Prof_1 + $valor_com_Prof_2 + $valor_com_Prof_3 + $valor_com_Prof_4);
+				
+				$row->valor_com_Prof_1 = number_format($valor_com_Prof_1, 2, ',', '.');
+				$row->valor_com_Prof_2 = number_format($valor_com_Prof_2, 2, ',', '.');
+				$row->valor_com_Prof_3 = number_format($valor_com_Prof_3, 2, ',', '.');
+				$row->valor_com_Prof_4 = number_format($valor_com_Prof_4, 2, ',', '.');
+				$row->Valor_Com_Total = number_format($Valor_Com_Total, 2, ',', '.');						
+				
 				$comissao_total = $row->ValorComissaoServico;
 				$pro_prof = $comissao_total/$divisor;
 				$somacomissaototal 	+= $comissao_total;
@@ -395,5 +541,34 @@ class Relatoriocomissoes_model extends CI_Model {
         }
 
     }
-		
+
+    public function select_funcionario() {
+
+        $query = $this->db->query('
+            SELECT
+				AF.idApp_Funcao,
+				CONCAT(IFNULL(TF.Abrev,""), " || ", IFNULL(U.Nome,"")) AS Nome
+            FROM
+                App_Funcao AS AF
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = AF.idSis_Usuario
+					LEFT JOIN Tab_Funcao AS TF ON TF.idTab_Funcao = AF.idTab_Funcao
+            WHERE
+				AF.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				U.Inativo = "0" AND
+				U.Servicos = "S"  
+			
+			ORDER BY 
+				TF.Abrev ASC,
+				U.Nome ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idApp_Funcao] = $row->Nome;
+        }
+
+        return $array;
+    }
+	
 }
