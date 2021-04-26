@@ -5808,9 +5808,6 @@ function adicionaFuncao() {
 
 }
 
-
-
-
 /*
  * Função responsável por adicionar novos campos de Procedimento dinamicamente no
  * formulário de orçamento/tratametno
