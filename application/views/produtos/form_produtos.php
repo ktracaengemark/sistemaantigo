@@ -558,15 +558,15 @@
 														<?php } ?>
 														<?php if ($metodo == 4) { ?>
 															<div class="col-md-2">
-																<label >Produto</label><br>
-																<a class="btn btn-warning btn-block" href="<?php echo base_url() . 'produtos/alterar2/' . $produtos['idTab_Produtos'] ?>" role="button">
-																	<span class="glyphicon glyphicon-edit"></span> Editar
-																</a>
-															</div>
-															<div class="col-md-2">
 																<label >Preço, Prazo e Promoção</label><br>
 																<a class="btn btn-success btn-block" href="<?php echo base_url() . 'produtos/tela_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
 																	<span class="glyphicon glyphicon-usd"></span> Ver
+																</a>
+															</div>
+															<div class="col-md-2">
+																<label >Produto</label><br>
+																<a class="btn btn-warning btn-block" href="<?php echo base_url() . 'produtos/alterar2/' . $produtos['idTab_Produtos'] ?>" role="button">
+																	<span class="glyphicon glyphicon-edit"></span> Editar
 																</a>
 															</div>
 														<?php }elseif($metodo == 6){ ?>
