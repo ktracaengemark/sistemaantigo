@@ -38,14 +38,14 @@
 				<label for="DataFim">Comissão Total</label>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somacomissaototal ?>">
+					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->Soma_Valor_Com_Total ?>">
 				</div>
 			</div>
 			<div class="col-md-2">
 				<label for="DataFim">Comissão Profis</label>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somacomissaoprof ?>">
+					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->Soma_Valor_Com_Total_Prof ?>">
 				</div>
 			</div>				
 		</div>	
@@ -82,6 +82,7 @@
 							<th class="active">Prof4.</th>
 							<th class="active">Com4.</th>
 							<th class="active">ComTotal.</th>
+							<th class="active">ComProf.</th>
 							<!--<th class="active">Comb.</th>
 							<th class="active">Apro.</th>
 							<th class="active">Entr.</th>
@@ -163,6 +164,7 @@
 								echo '<td>' . $row['NomeProf4'] . '</td>';
 								echo '<td>' . $row['ValorTotalProduto'] . '/' . $row['cont_id_Fun_4'] . ' x' . $row['ComProf4'] . '% =R$' . $row['valor_com_Prof_4'] . '</td>';
 								echo '<td>R$' . $row['Valor_Com_Total'] . '</td>';
+								echo '<td>R$' . $row['Valor_Com_Total_Prof'] . '</td>';
 								//echo '<td>' . $row['CombinadoFrete'] . '</td>';
 								//echo '<td>' . $row['AprovadoOrca'] . '</td>';
 								//echo '<td>' . $row['ConcluidoOrca'] . '</td>';

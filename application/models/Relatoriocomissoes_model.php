@@ -27,7 +27,8 @@ class Relatoriocomissoes_model extends CI_Model {
 		$date_inicio_prd_entr 	= ($data['DataInicio8']) ? 'PRDS.DataConcluidoProduto >= "' . $data['DataInicio8'] . '" AND ' : FALSE;
 		$date_fim_prd_entr 		= ($data['DataFim8']) ? 'PRDS.DataConcluidoProduto <= "' . $data['DataFim8'] . '" AND ' : FALSE;
 		
-		$Funcionario 			= ($data['Funcionario']) ? ' AND (PRDS.ProfissionalProduto_1 = ' . $data['Funcionario'] . ' OR PRDS.ProfissionalProduto_2 = ' . $data['Funcionario'] . ' OR PRDS.ProfissionalProduto_3 = ' . $data['Funcionario'] . ' OR PRDS.ProfissionalProduto_4 = ' . $data['Funcionario'] . ' )' : FALSE;
+		//$Funcionario 			= ($data['Funcionario']) ? ' AND (PRDS.ProfissionalProduto_1 = ' . $data['Funcionario'] . ' OR PRDS.ProfissionalProduto_2 = ' . $data['Funcionario'] . ' OR PRDS.ProfissionalProduto_3 = ' . $data['Funcionario'] . ' OR PRDS.ProfissionalProduto_4 = ' . $data['Funcionario'] . ' )' : FALSE;
+		$Funcionario 			= ($data['Funcionario']) ? ' AND (UP1.idSis_Usuario = ' . $data['Funcionario'] . ' OR UP2.idSis_Usuario = ' . $data['Funcionario'] . ' OR UP3.idSis_Usuario = ' . $data['Funcionario'] . ' OR UP4.idSis_Usuario = ' . $data['Funcionario'] . ' )' : FALSE;
 		$Orcamento 				= ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$Cliente 				= ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
 		$Fornecedor 			= ($data['Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['Fornecedor'] : FALSE;
@@ -103,6 +104,11 @@ class Relatoriocomissoes_model extends CI_Model {
 				PRDS.ProfissionalProduto_3,
 				PRDS.ProfissionalProduto_4,
 
+				UP1.idSis_Usuario AS id_Usu_Prof_1,
+				UP2.idSis_Usuario AS id_Usu_Prof_2,
+				UP3.idSis_Usuario AS id_Usu_Prof_3,
+				UP4.idSis_Usuario AS id_Usu_Prof_4,				
+				
 				AF1.idTab_Funcao AS id_Fun_Prof_1,
 				AF2.idTab_Funcao AS id_Fun_Prof_2,
 				AF3.idTab_Funcao AS id_Fun_Prof_3,
@@ -230,6 +236,12 @@ class Relatoriocomissoes_model extends CI_Model {
 				PRDS.ProfissionalProduto_2,
 				PRDS.ProfissionalProduto_3,
 				PRDS.ProfissionalProduto_4,
+
+
+				UP1.idSis_Usuario AS id_Usu_Prof_1,
+				UP2.idSis_Usuario AS id_Usu_Prof_2,
+				UP3.idSis_Usuario AS id_Usu_Prof_3,
+				UP4.idSis_Usuario AS id_Usu_Prof_4,					
 				
 				AF1.idTab_Funcao AS id_Fun_Prof_1,
 				AF2.idTab_Funcao AS id_Fun_Prof_2,
@@ -331,7 +343,7 @@ class Relatoriocomissoes_model extends CI_Model {
             return TRUE;
         } else {
 
-            $somacomissaoprof=$somacomissaototal=$diferenca=$somaentregar=$somaentregue=$somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somapago=$somapagar=$somareal=$balanco=$ant=0;
+             $Soma_Valor_Com_Total=$Soma_Valor_Com_Total_Prof=$somacomissaoprof=$somacomissaototal=$diferenca=$somaentregar=$somaentregue=$somaentrada=$balanco=$ant=0;
             foreach ($query->result() as $row) {
 				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
                 $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
@@ -477,12 +489,46 @@ class Relatoriocomissoes_model extends CI_Model {
 				}
 				
 				$Valor_Com_Total = ($valor_com_Prof_1 + $valor_com_Prof_2 + $valor_com_Prof_3 + $valor_com_Prof_4);
+				$Soma_Valor_Com_Total += $Valor_Com_Total;				
+				
+				if(isset($data['Funcionario']) && $data['Funcionario'] !=0){
+	
+					if($row->id_Usu_Prof_1 == $data['Funcionario']){
+						$valor_com_filtro_Prof_1 = $valor_com_Prof_1;	
+					}else{
+						$valor_com_filtro_Prof_1 = 0.00;	
+					}
+					if($row->id_Usu_Prof_2 == $data['Funcionario']){
+						$valor_com_filtro_Prof_2 = $valor_com_Prof_2;	
+					}else{
+						$valor_com_filtro_Prof_2 = 0.00;	
+					}
+					if($row->id_Usu_Prof_3 == $data['Funcionario']){
+						$valor_com_filtro_Prof_3 = $valor_com_Prof_3;	
+					}else{
+						$valor_com_filtro_Prof_3 = 0.00;	
+					}
+					if($row->id_Usu_Prof_4 == $data['Funcionario']){
+						$valor_com_filtro_Prof_4 = $valor_com_Prof_4;	
+					}else{
+						$valor_com_filtro_Prof_4 = 0.00;	
+					}
+				}else{
+					$valor_com_filtro_Prof_1 = $valor_com_Prof_1;
+					$valor_com_filtro_Prof_2 = $valor_com_Prof_2;
+					$valor_com_filtro_Prof_3 = $valor_com_Prof_3;
+					$valor_com_filtro_Prof_4 = $valor_com_Prof_4;	
+				}
+				
+				$Valor_Com_Total_Prof = ($valor_com_filtro_Prof_1 + $valor_com_filtro_Prof_2 + $valor_com_filtro_Prof_3 + $valor_com_filtro_Prof_4);
+				$Soma_Valor_Com_Total_Prof += $Valor_Com_Total_Prof;
 				
 				$row->valor_com_Prof_1 = number_format($valor_com_Prof_1, 2, ',', '.');
 				$row->valor_com_Prof_2 = number_format($valor_com_Prof_2, 2, ',', '.');
 				$row->valor_com_Prof_3 = number_format($valor_com_Prof_3, 2, ',', '.');
 				$row->valor_com_Prof_4 = number_format($valor_com_Prof_4, 2, ',', '.');
-				$row->Valor_Com_Total = number_format($Valor_Com_Total, 2, ',', '.');						
+				$row->Valor_Com_Total = number_format($Valor_Com_Total, 2, ',', '.');	
+				$row->Valor_Com_Total_Prof = number_format($Valor_Com_Total_Prof, 2, ',', '.');						
 				
 				$comissao_total = $row->ValorComissaoServico;
 				$pro_prof = $comissao_total/$divisor;
@@ -536,13 +582,15 @@ class Relatoriocomissoes_model extends CI_Model {
             $query->soma->somaentregar = $somaentregar;
             $query->soma->somaentregue = $somaentregue;
             $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
+            $query->soma->Soma_Valor_Com_Total = number_format($Soma_Valor_Com_Total, 2, ',', '.');
+            $query->soma->Soma_Valor_Com_Total_Prof = number_format($Soma_Valor_Com_Total_Prof, 2, ',', '.');
 			
             return $query;
         }
 
     }
 
-    public function select_funcionario() {
+    public function select_funcao() {
 
         $query = $this->db->query('
             SELECT
@@ -570,5 +618,30 @@ class Relatoriocomissoes_model extends CI_Model {
 
         return $array;
     }
+	
+
+    public function select_funcionario() {
+
+        $query = $this->db->query('
+            SELECT
+                F.idSis_Usuario,
+                F.Nome
+            FROM
+                Sis_Usuario AS F
+            WHERE
+                F.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+            ORDER BY
+                F.Nome ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idSis_Usuario] = $row->Nome;
+        }
+
+        return $array;
+    }
+	
 	
 }
