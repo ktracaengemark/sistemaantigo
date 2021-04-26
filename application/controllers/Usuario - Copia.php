@@ -811,33 +811,6 @@ class Usuario extends CI_Controller {
 			'Tarefas',
         ), TRUE);
 
-		
-		
-        (!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
-
-        $j = 1;
-        for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
-
-            if ($this->input->post('idApp_Funcao' . $i) || $this->input->post('idTab_Funcao' . $i) || $this->input->post('Comissao_Funcao' . $i)) {
-                
-				$data['funcao'][$j]['idApp_Funcao'] = $this->input->post('idApp_Funcao' . $i);
-				$data['funcao'][$j]['idTab_Funcao'] = $this->input->post('idTab_Funcao' . $i);
-                //$data['funcao'][$j]['DataConcluidoFuncao'] = $this->input->post('DataConcluidoFuncao' . $i);
-                //$data['funcao'][$j]['HoraConcluidoFuncao'] = $this->input->post('HoraConcluidoFuncao' . $i);
-				$data['funcao'][$j]['Comissao_Funcao'] = $this->input->post('Comissao_Funcao' . $i);
-				$data['funcao'][$j]['Ativo_Funcao'] = $this->input->post('Ativo_Funcao' . $i);
-				(!$data['funcao'][$j]['Ativo_Funcao']) ? $data['funcao'][$j]['Ativo_Funcao'] = 'S' : FALSE;
-				$data['radio'] = array(
-					'Ativo_Funcao' . $j => $this->basico->radio_checked($data['funcao'][$j]['Ativo_Funcao'], 'Ativo_Funcao' . $j, 'NS'),
-				);
-				($data['funcao'][$j]['Ativo_Funcao'] == 'S') ? $data['div']['Ativo_Funcao' . $j] = '' : $data['div']['Ativo_Funcao' . $j] = 'style="display: none;"';
-                
-				$j++;
-            }
-
-        }
-        $data['count']['PTCount'] = $j - 1;
-				
 		(!$data['query']['Agenda']) ? $data['query']['Agenda'] = 'N' : FALSE;
 		(!$data['query']['Vendas']) ? $data['query']['Vendas'] = 'N' : FALSE;
 		(!$data['query']['Servicos']) ? $data['query']['Servicos'] = 'N' : FALSE;
@@ -846,35 +819,10 @@ class Usuario extends CI_Controller {
 		(!$data['query']['Marketing']) ? $data['query']['Marketing'] = 'N' : FALSE;
 		(!$data['query']['Procedimentos']) ? $data['query']['Procedimentos'] = 'N' : FALSE;
 		(!$data['query']['Tarefas']) ? $data['query']['Tarefas'] = 'N' : FALSE;
-
+		
         if ($id) {
-            $_SESSION['Query'] = $data['query'] = $this->Usuario_model->get_usuario($id);
-        
-			
-            #### App_Funcao ####
-            $_SESSION['Funcao'] = $data['funcao'] = $this->Usuario_model->get_funcao($id);
-            if (count($data['funcao']) > 0) {
-                $data['funcao'] = array_combine(range(1, count($data['funcao'])), array_values($data['funcao']));
-                $data['count']['PTCount'] = count($data['funcao']);
-
-                if (isset($data['funcao'])) {
-
-                    for($j=1; $j <= $data['count']['PTCount']; $j++) {
-                        /*
-						$data['funcao'][$j]['DataFuncao'] = $this->basico->mascara_data($data['funcao'][$j]['DataFuncao'], 'barras');
-						$data['funcao'][$j]['DataConcluidoFuncao'] = $this->basico->mascara_data($data['funcao'][$j]['DataConcluidoFuncao'], 'barras');
-						$_SESSION['Funcao'][$j]['NomeCadastrou'] = $data['funcao'][$j]['NomeCadastrou'];				
-						*/
-						$data['radio'] = array(
-							'Ativo_Funcao' . $j => $this->basico->radio_checked($data['funcao'][$j]['Ativo_Funcao'], 'Ativo_Funcao' . $j, 'NS'),
-						);
-						($data['funcao'][$j]['Ativo_Funcao'] == 'S') ? $data['div']['Ativo_Funcao' . $j] = '' : $data['div']['Ativo_Funcao' . $j] = 'style="display: none;"';
-						
-					}
-                }
-            }		
-			
-		}
+            $data['query'] = $this->Usuario_model->get_usuario($id);
+        }
 
         $data['select']['Agenda'] = $this->Basico_model->select_status_sn();
         $data['select']['Vendas'] = $this->Basico_model->select_status_sn();
@@ -884,8 +832,6 @@ class Usuario extends CI_Controller {
         $data['select']['Marketing'] = $this->Basico_model->select_status_sn();
         $data['select']['Procedimentos'] = $this->Basico_model->select_status_sn();
         $data['select']['Tarefas'] = $this->Basico_model->select_status_sn();
-        $data['select']['Ativo_Funcao'] = $this->Basico_model->select_status_sn();
-		$data['select']['idTab_Funcao'] = $this->Funcao_model->select_funcao();
 		
         $data['titulo'] = 'Atuações do Usuário';
         $data['form_open_path'] = 'usuario/atuacoes';
@@ -917,49 +863,7 @@ class Usuario extends CI_Controller {
 
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Usuario'], TRUE);
 
-			$data['update']['query']['bd']  = $this->Usuario_model->update_usuario($data['query'], $data['query']['idSis_Usuario']);
-
-			
-            #### App_Funcao ####
-            $data['update']['funcao']['anterior'] = $this->Usuario_model->get_funcao($data['query']['idSis_Usuario']);
-            if (isset($data['funcao']) || (!isset($data['funcao']) && isset($data['update']['funcao']['anterior']) ) ) {
-
-                if (isset($data['funcao']))
-                    $data['funcao'] = array_values($data['funcao']);
-                else
-                    $data['funcao'] = array();
-
-                //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
-                $data['update']['funcao'] = $this->basico->tratamento_array_multidimensional($data['funcao'], $data['update']['funcao']['anterior'], 'idApp_Funcao');
-
-                $max = count($data['update']['funcao']['inserir']);
-                for($j=0;$j<$max;$j++) {
-                    $data['update']['funcao']['inserir'][$j]['idSis_Empresa'] = $_SESSION['Query']['idSis_Empresa'];
-                    $data['update']['funcao']['inserir'][$j]['idSis_Usuario'] = $data['query']['idSis_Usuario'];
-                    //$data['update']['funcao']['inserir'][$j]['DataFuncao'] = $this->basico->mascara_data($data['update']['funcao']['inserir'][$j]['DataFuncao'], 'mysql');
-					//$data['update']['funcao']['inserir'][$j]['DataConcluidoFuncao'] = $this->basico->mascara_data($data['update']['funcao']['inserir'][$j]['DataConcluidoFuncao'], 'mysql');
-                }
-
-                $max = count($data['update']['funcao']['alterar']);
-                for($j=0;$j<$max;$j++) {
-                    //$data['update']['funcao']['alterar'][$j]['DataFuncao'] = $this->basico->mascara_data($data['update']['funcao']['alterar'][$j]['DataFuncao'], 'mysql');
-					//$data['update']['funcao']['alterar'][$j]['DataConcluidoFuncao'] = $this->basico->mascara_data($data['update']['funcao']['alterar'][$j]['DataConcluidoFuncao'], 'mysql');
-				}
-
-                if (count($data['update']['funcao']['inserir']))
-                    $data['update']['funcao']['bd']['inserir'] = $this->Usuario_model->set_funcao($data['update']['funcao']['inserir']);
-
-                if (count($data['update']['funcao']['alterar']))
-                    $data['update']['funcao']['bd']['alterar'] =  $this->Usuario_model->update_funcao($data['update']['funcao']['alterar']);
-
-                if (count($data['update']['funcao']['excluir']))
-                    $data['update']['funcao']['bd']['excluir'] = $this->Usuario_model->delete_funcao($data['update']['funcao']['excluir']);
-
-            }
-						
-			
-			
-            if ($data['auditoriaitem'] && $data['update']['query']['bd'] === FALSE) {
+            if ($data['auditoriaitem'] && $this->Usuario_model->update_usuario($data['query'], $data['query']['idSis_Usuario']) === FALSE) {
                 $data['msg'] = '?m=1';
                 redirect(base_url() . 'usuario/prontuario/' . $data['query']['idSis_Usuario'] . $data['msg']);
                 exit();

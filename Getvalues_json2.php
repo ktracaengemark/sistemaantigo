@@ -41,6 +41,30 @@ if ($_GET['q']==1) {
 
 }
 
+elseif ($_GET['q'] == 2) {
+
+    $result = mysql_query('
+            SELECT
+				P.idTab_Funcao,
+				CONCAT(IFNULL(P.Funcao,"")) AS Funcao
+            FROM
+                Tab_Funcao AS P
+            WHERE
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY 
+				P.Funcao ASC
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array2[] = array(
+            'id' => $row['idTab_Funcao'],
+            'name' => utf8_encode($row['Funcao']),
+        );
+    }
+
+}
+
 elseif ($_GET['q'] == 3) {
 
     $result = mysql_query('

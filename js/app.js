@@ -3868,6 +3868,30 @@ function carregaQuitado(value, name, i, cadastrar = 0) {
 	
 }
 
+ /*Carrega a Data e Hora da Conclusão do procedimento*/
+ function carregaAtivoFuncao(value, name, i, cadastrar = 0) {
+	//alert('carregando');
+	/*
+    if (value == "S") {
+
+        if (!$("#DataConcluidoProcedimento"+i).val()) {
+            if (cadastrar == 1){
+				$("#DataConcluidoProcedimento"+i).val($("#DataProcedimento"+i).val());
+				$("#HoraConcluidoProcedimento"+i).val($("#HoraProcedimento"+i).val());
+			}else{
+				$("#DataConcluidoProcedimento"+i).val(currentDate.format('DD/MM/YYYY'));
+				$("#HoraConcluidoProcedimento"+i).val(currentDate.format('HH:mm'));
+			}  
+        }
+    }else{
+		
+        $("#DataConcluidoProcedimento"+i).val("");
+        $("#HoraConcluidoProcedimento"+i).val("");
+		
+    }
+	*/
+}
+
  /*Carrega a Data e Hora da Entrega do Produto*/
  function carregaConclSubProc(value, name, i, cadastrar = 0) {
 
@@ -5450,7 +5474,7 @@ function adicionaParcelas() {
  * Função responsável por calcular as parcelas do orçamento em função do dados
  * informados no formulário (valor restante / parcelas e datas do vencimento)
  */
- 
+
 function adicionaDias(mod) {
     //alert();
 	
@@ -5627,6 +5651,165 @@ function adicionaTamanhos() {
     });
 
 }
+
+function adicionaFuncao() {
+
+    var pt = $("#PTCount").val(); //initlal text box count
+
+    //alert( $("#SCount").val() );
+    pt++; //text box increment
+    $("#PTCount").val(pt);
+    //console.log(pt);
+	
+    if (pt >= 2) {
+        //console.log( $("#listadinamicad"+(pt-1)).val() );
+        var chosen;
+        chosen = $("#listadinamicad"+(pt-1)).val();
+        //console.log( chosen + ' :: ' + pt );
+    }
+	
+    //Captura a data do dia e carrega no campo correspondente
+    //var currentDate = moment();
+
+    $(".input_fields_wrap3").append('\
+        <div class="form-group" id="3div'+pt+'">\
+			<div class="panel panel-info">\
+				<div class="panel-heading">\
+					<div class="row">\
+						<div class="col-md-4">\
+							<label for="idTab_Funcao'+pt+'">Função '+pt+':</label>\
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen3"\
+									 id="listadinamicad'+pt+'" name="idTab_Funcao'+pt+'">\
+								<option value=""></option>\
+							</select>\
+						</div>\
+						<div class="col-md-3">\
+							<label for="Comissao_Funcao'+pt+'">Comissao_Funcao :</label><br>\
+							<div class="input-group id="Comissao_Funcao'+pt+'">\
+								<span class="input-group-addon" id="basic-addon1">R$</span>\
+								<input type="text" class="form-control Valor" id="Comissao_Funcao'+pt+'" maxlength="10" placeholder="0,00" \
+									name="Comissao_Funcao'+pt+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-3">\
+							<label for="Ativo_Funcao">Ativo?</label><br>\
+							<div class="btn-group" data-toggle="buttons">\
+								<label class="btn btn-default" name="radio_Ativo_Funcao'+pt+'" id="radio_Ativo_Funcao'+pt+'N">\
+								<input type="radio" name="Ativo_Funcao'+pt+'" id="radiogeraldinamico_subproc"\
+									onchange="carregaAtivoFuncao(this.value,this.name,'+pt+',0)" autocomplete="off" value="N">Não\
+								</label>\
+								<label class="btn btn-warning active" name="radio_Ativo_Funcao'+pt+'" id="radio_Ativo_Funcao'+pt+'S">\
+								<input type="radio" name="Ativo_Funcao'+pt+'" id="radiogeraldinamico_subproc"\
+									onchange="carregaAtivoFuncao(this.value,this.name,'+pt+',0)" autocomplete="off" value="S" checked>Sim\
+								</label>\
+							</div>\
+						</div>\
+						<div class="col-md-1">\
+							<label><br></label><br>\
+							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
+								<span class="glyphicon glyphicon-trash"></span>\
+							</button>\
+						</div>\
+					</div>\
+					<div class="row">\
+					</div>\
+				</div>\
+			</div>\
+        </div>'
+    ); //add input box
+    //habilita o botão de calendário após a geração dos campos dinâmicos
+    $('.DatePicker').datetimepicker(dateTimePickerOptions);
+	
+	
+	//get a reference to the select element
+	$select3 = $('#listadinamicad'+pt);
+
+	//request the JSON data and parse into the select element
+	$.ajax({
+		url: window.location.origin+ '/' + app + '/Getvalues_json2.php?q=2',
+		dataType: 'JSON',
+		type: "GET",
+		success: function (data) {
+			//clear the current content of the select
+			$select3.html('');
+			//iterate over the data and append a select option
+			$select3.append('<option value="">-- Sel. Função --</option>');
+			$.each(data, function (key, val) {
+				//alert(val.id);
+				$select3.append('<option value="' + val.id + '">' + val.name + '</option>');
+			})
+			$('.Chosen3').chosen({
+				disable_search_threshold: 10,
+				multiple_text: "Selecione uma ou mais opções",
+				single_text: "Selecione uma opção",
+				no_results_text: "Nenhum resultado para",
+				width: "100%"
+			});
+		},
+		error: function () {
+			//alert('erro listadinamicaB');
+			//if there is an error append a 'none available' option
+			$select3.html('<option id="-1">ERRO</option>');
+		}
+
+	});	
+	
+	/*
+	// o modo abaixo,  de buscar funções, traz a opção selecionada no campo anterior//
+    //get a reference to the select element
+    $select = $('#listadinamicad'+pt);
+
+    //request the JSON data and parse into the select element
+    $.ajax({
+        url: window.location.origin+ '/' + app + '/Getvalues_json2.php?q=2',
+        dataType: 'JSON',
+        type: "GET",
+        success: function (data) {
+            //clear the current content of the select
+            $select.html('');
+            //iterate over the data and append a select option
+            $select.append('<option value="">-- Selecione uma opção --</option>');
+            $.each(data, function (key, val) {
+                //alert(val.id);
+                if (val.id == chosen)
+                    $select.append('<option value="' + val.id + '" selected="selected">' + val.name + '</option>');
+                else
+                    $select.append('<option value="' + val.id + '">' + val.name + '</option>');
+            })
+        },
+        error: function () {
+            //alert('erro listadinamicaB');
+            //if there is an error append a 'none available' option
+            $select.html('<option id="-1">ERRO</option>');
+        }
+
+    });
+	*/
+    //permite o uso de radio buttons nesse bloco dinâmico
+    $('input:radio[id="radiogeraldinamico_subproc"]').change(function() {
+
+        var value_subproc = $(this).val();
+        var name_subproc = $(this).attr("name");
+
+        //console.log(value_subproc + ' <<>> ' + name_subproc);
+
+        $('label[name="radio_' + name_subproc + '"]').removeClass();
+        $('label[name="radio_' + name_subproc + '"]').addClass("btn btn-default");
+        $('#radio_' + name_subproc + value_subproc).addClass("btn btn-warning active");
+        //$('#radiogeral'+ value_subproc).addClass("btn btn-warning active");
+		
+		if(value_subproc == "S"){
+			$("#"+name_subproc).css("display","");
+		}else{
+			$("#"+name_subproc).css("display","none");
+		}
+		
+	});
+
+}
+
+
+
 
 /*
  * Função responsável por adicionar novos campos de Procedimento dinamicamente no

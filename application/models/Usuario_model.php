@@ -29,6 +29,18 @@ class Usuario_model extends CI_Model {
         }
     }
 
+    public function set_funcao($data) {
+
+        $query = $this->db->insert_batch('App_Funcao', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+
     public function set_agenda($data) {
         #unset($data['idSisgef_Fila']);
         /*
@@ -80,6 +92,22 @@ class Usuario_model extends CI_Model {
 
         return $query[0];
     }
+
+    public function get_funcao($data) {
+		$query = $this->db->query('
+			SELECT 
+				PC.*,
+				PC.idSis_Usuario
+			FROM 
+				App_Funcao AS PC
+					LEFT JOIN Sis_Usuario AS USC ON USC.idSis_Usuario = PC.idSis_Usuario
+			WHERE 
+				PC.idSis_Usuario = ' . $data . '
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }
 	
     public function get_arquivo($data) {
         $query = $this->db->query('SELECT * FROM Sis_Arquivo WHERE idSis_Arquivo = ' . $data);
@@ -126,6 +154,13 @@ class Usuario_model extends CI_Model {
             return TRUE;
         }
     }
+
+    public function update_funcao($data) {
+
+        $query = $this->db->update_batch('App_Funcao', $data, 'idApp_Funcao');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
 	
     public function delete_usuario($data) {
 
@@ -165,6 +200,18 @@ class Usuario_model extends CI_Model {
 
         $this->db->delete('App_OrcaTrata', array('idSis_Usuario' => $data));
         $this->db->delete('Sis_Usuario', array('idSis_Usuario' => $data));
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    public function delete_funcao($data) {
+
+        $this->db->where_in('idApp_Funcao', $data);
+        $this->db->delete('App_Funcao');
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;

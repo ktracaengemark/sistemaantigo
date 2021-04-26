@@ -312,6 +312,156 @@
 											</div>
 										</div>
 									</div>
+									
+					
+									<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
+										<div class="panel panel-primary">
+											 <div class="panel-heading" role="tab" id="heading3" data-toggle="collapse" data-parent="#accordion3" data-target="#collapse3">
+												<h4 class="panel-title">
+													<a class="accordion-toggle">
+														<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+														Funções
+													</a>
+												</h4>
+											</div>
+
+											
+												<div class="panel-body">
+
+													<input type="hidden" name="PTCount" id="PTCount" value="<?php echo $count['PTCount']; ?>"/>
+
+													<div class="input_fields_wrap3">
+
+													<?php
+													for ($i=1; $i <= $count['PTCount']; $i++) {
+													?>
+													
+													<?php if ($metodo == 2) { ?>
+														<input type="hidden" name="idApp_Funcao<?php echo $i ?>" id="idApp_Funcao<?php echo $i ?>" value="<?php echo $funcao[$i]['idApp_Funcao']; ?>"/>
+													<?php } ?>
+
+													<div class="form-group" id="3div<?php echo $i ?>">
+														<div class="panel panel-info">
+															<div class="panel-heading">			
+																<div class="row">
+																	<input type="hidden" name="idSis_Usuario<?php echo $i ?>" id="idSis_Usuario<?php echo $i ?>" value="<?php echo $funcao[$i]['idSis_Usuario']; ?>"/>
+																	
+																	<div class="col-md-4">
+																		<label for="idTab_Funcao<?php echo $i ?>">Funcao <?php echo $i ?>:</label>
+																		<?php if ($i == 1) { ?>
+																		<?php } ?>
+																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen3"
+																				 id="listadinamicad<?php echo $i ?>" name="idTab_Funcao<?php echo $i ?>">
+																			<option value="">-- Sel.Profis. --</option>
+																			<?php
+																			foreach ($select['idTab_Funcao'] as $key => $row) {
+																				//(!$funcao['idTab_Funcao']) ? $funcao['idTab_Funcao'] = $_SESSION['log']['idTab_Funcao']: FALSE;
+																				if ($funcao[$i]['idTab_Funcao'] == $key) {
+																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																				} else {
+																					echo '<option value="' . $key . '">' . $row . '</option>';
+																				}
+																			}
+																			?>
+																		</select>
+																	</div>
+																	<div class="col-md-3">
+																		<label for="Comissao_Funcao">Comissao_Funcao</label>
+																		<div class="input-group">
+																			<span class="input-group-addon" id="basic-addon1">R$</span>
+																			<input type="text" class="form-control Valor" id="Comissao_Funcao <?php echo $i ?>" maxlength="10" placeholder="0,00"
+																				name="Comissao_Funcao<?php echo $i ?>" value="<?php echo $funcao[$i]['Comissao_Funcao'] ?>">
+																		</div>
+																	</div>
+																	<div class="col-md-3">
+																		<label for="Ativo_Funcao">Ativo? </label><br>
+																			<div class="btn-group" data-toggle="buttons">
+																				<?php
+																				foreach ($select['Ativo_Funcao'] as $key => $row) {
+																					if (!$funcao[$i]['Ativo_Funcao'])$funcao[$i]['Ativo_Funcao'] = 'S';
+																					($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																					if ($funcao[$i]['Ativo_Funcao'] == $key) {
+																						echo ''
+																						. '<label class="btn btn-warning active" name="Ativo_Funcao' . $i . '_' . $hideshow . '">'
+																						. '<input type="radio" name="Ativo_Funcao' . $i . '" id="' . $hideshow . '" '
+																						. 'onchange="carregaAtivoFuncao(this.value,this.name,'.$i.',0)" '
+																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																						. '</label>'
+																						;
+																					} else {
+																						echo ''
+																						. '<label class="btn btn-default" name="Ativo_Funcao' . $i . '_' . $hideshow . '">'
+																						. '<input type="radio" name="Ativo_Funcao' . $i . '" id="' . $hideshow . '" '
+																						. 'onchange="carregaAtivoFuncao(this.value,this.name,'.$i.',0)" '
+																						. 'autocomplete="off" value="' . $key . '" >' . $row
+																						. '</label>'
+																						;
+																					}
+																				}
+																				?>
+																			</div>
+																	</div>
+																</div>	
+																<div class="row">
+																	<!--
+																	<div class="col-md-4">
+																		<div id="ConcluidoFuncao<?php echo $i ?>" <?php echo $div['ConcluidoFuncao' . $i]; ?>>
+																			<div class="row">	
+																				<div class="col-md-6">
+																					<label for="DataConcluidoFuncao<?php echo $i ?>">Data Concl</label>
+																					<div class="input-group <?php echo $datepicker; ?>">
+																						<span class="input-group-addon" disabled>
+																							<span class="glyphicon glyphicon-calendar"></span>
+																						</span>
+																						<input type="text" class="form-control Date" <?php echo $readonly; ?> readonly="" maxlength="10" placeholder="DD/MM/AAAA"
+																							   name="DataConcluidoFuncao<?php echo $i ?>" id="DataConcluidoFuncao<?php echo $i ?>" value="<?php echo $funcao[$i]['DataConcluidoFuncao']; ?>">
+																					</div>
+																				</div>
+																				<div class="col-md-6">
+																					<label for="HoraConcluidoFuncao<?php echo $i ?>">Hora Concl</label>
+																					<div class="input-group <?php echo $timepicker; ?>">
+																						<span class="input-group-addon" disabled>
+																							<span class="glyphicon glyphicon-time"></span>
+																						</span>
+																						<input type="text" class="form-control Time" <?php echo $readonly; ?> readonly="" maxlength="5" placeholder="HH:MM"
+																							   name="HoraConcluidoFuncao<?php echo $i ?>" id="HoraConcluidoFuncao<?php echo $i ?>" value="<?php echo $funcao[$i]['HoraConcluidoFuncao']; ?>">
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	-->
+																	<!--
+																	<div class="col-md-1">
+																		<label><br></label><br>
+																		<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
+																			<span class="glyphicon glyphicon-trash"></span>
+																		</button>
+																	</div>
+																	-->
+																</div>
+															</div>	
+														</div>		
+													</div>
+
+													<?php
+													}
+													?>
+
+													</div>
+
+													<div class="row">
+														<div class="col-md-4">
+															<a class="btn btn-xs btn-warning" onclick="adicionaFuncao()">
+																<span class="glyphicon glyphicon-plus"></span> Adicionar Função
+															</a>
+														</div>
+													</div>
+												</div>
+											
+										</div>
+									</div>									
+									
 									<div class="form-group">
 										<div class="row">
 											<input type="hidden" name="idSis_Usuario" value="<?php echo $query['idSis_Usuario']; ?>">
