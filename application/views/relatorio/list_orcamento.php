@@ -84,7 +84,7 @@
 			<table class="table table-bordered table-condensed table-striped">
 				<thead>						
 					<tr>
-						<!--<th class="active">EdtOrç</th>-->
+						<!--<th class="active">Excluir</th>-->
 						<th class="active">Imp.</th>
 						<?php if($editar == 1) { ?>
 							<?php if($metodo == 3) { ?>

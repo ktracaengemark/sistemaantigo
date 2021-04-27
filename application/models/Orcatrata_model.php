@@ -599,7 +599,21 @@ class Orcatrata_model extends CI_Model {
 
         return $query;
     }
-		
+
+    public function get_produto_cashback_pedido($data) {
+		$query = $this->db->query('SELECT * 
+									FROM 
+										App_Produto 
+									WHERE 
+										idApp_OrcaTrata = ' . $data . ' AND
+										StatusComissaoCashBack = "N" AND
+										id_Orca_CashBack = 0
+								');
+        $query = $query->result_array();
+
+        return $query;
+    }
+			
     public function get_tab_produtos($data) {
 		$query = $this->db->query('SELECT * FROM Tab_Produtos WHERE idTab_Produtos = ' . $data . '');
         $query = $query->result_array();
