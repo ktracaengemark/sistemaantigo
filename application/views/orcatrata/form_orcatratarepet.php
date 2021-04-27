@@ -1499,7 +1499,8 @@
 																	<?php if($Recorrencias > 1) { ?>
 																		<div class="row">
 																			<input type="hidden" id="Valor_S_Desc" name="Valor_S_Desc" value="<?php echo $cadastrar['Valor_S_Desc'] ?>" />
-																			<div class="col-md-12">
+																			<div class="col-md-6"></div>
+																			<div class="col-md-6">
 																				<label>Valor Final P/ <?php echo $Recorrencias; ?> O.S.</label><br>
 																				<div class="input-group" id="txtHint">
 																					<span class="input-group-addon">R$</span>

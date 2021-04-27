@@ -67,7 +67,7 @@ class Orcatrata_model extends CI_Model {
         } else {
             #return TRUE;
             return $this->db->insert_id();
-        }
+			}
     }
 	
     public function set_comissao($data) {

@@ -2353,12 +2353,14 @@
 																						</span>
 																					<?php } ?>
 																				</div>
+																				<!--
 																				<div id="ConcluidoOrca" <?php echo $div['ConcluidoOrca']; ?>>
 																					<div <?php echo $textoEntregues; ?>>
 																						<div class="col-md-6 text-left">
 																							<label for="StatusProdutos">Todas as OS?</label><br>
 																							<div class="btn-group" data-toggle="buttons">
 																								<?php
+																								/*
 																								foreach ($select['StatusProdutos'] as $key => $row) {
 																									if (!$cadastrar['StatusProdutos'])$cadastrar['StatusProdutos'] = 'N';
 
@@ -2380,6 +2382,7 @@
 																										;
 																									}
 																								}
+																								*/
 																								?>
 																							</div>
 																						</div>
@@ -2390,6 +2393,7 @@
 																						</div>
 																					</div>
 																				</div>
+																				-->
 																			</div>
 																			<div class="row">		
 																				<div class="col-md-6 text-left">
@@ -2436,12 +2440,14 @@
 																						</span>
 																					<?php } ?>
 																				</div>
+																				<!--
 																				<div id="QuitadoOrca" <?php echo $div['QuitadoOrca']; ?>>
 																					<div <?php echo $textoPagas; ?> >
 																						<div class="col-md-6 text-left">
 																							<label for="StatusParcelas">Todas as OS?</label><br>
 																							<div class="btn-group" data-toggle="buttons">
 																								<?php
+																								/*
 																								foreach ($select['StatusParcelas'] as $key => $row) {
 																									if (!$cadastrar['StatusParcelas'])$cadastrar['StatusParcelas'] = 'N';
 
@@ -2463,6 +2469,7 @@
 																										;
 																									}
 																								}
+																								*/
 																								?>
 																							</div>
 																						</div>
@@ -2472,7 +2479,8 @@
 																							</div>
 																						</div>
 																					</div>
-																				</div>	
+																				</div>
+																				-->
 																			</div>
 																		</div>
 																	</div>

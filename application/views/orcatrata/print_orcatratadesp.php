@@ -345,10 +345,12 @@
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-3" scope="col">Parcela</th>
-									<th class="col-md-3" scope="col">R$</th>											
-									<th class="col-md-3" scope="col">Venc Prc</th>
-									<th class="col-md-3" scope="col">Prc.Qt?</th>
+									<th class="col-md-1" scope="col">Parcela</th>
+									<th class="col-md-3" scope="col">FormaPag</th>
+									<th class="col-md-1" scope="col">R$</th>
+									<th class="col-md-3" scope="col">Venc. </th>
+									<th class="col-md-1" scope="col">Pago?</th>
+									<th class="col-md-3" scope="col">Dt.Pago</th>
 								</tr>
 							</thead>
 
@@ -361,9 +363,11 @@
 
 								<tr>
 									<td><?php echo $parcelasrec[$i]['Parcela'] ?></td>
-									<td><?php echo number_format($parcelasrec[$i]['ValorParcela'], 2, ',', '.') ?></td>											
+									<td><?php echo $parcelasrec[$i]['FormaPag'] ?></td>
+									<td><?php echo number_format($parcelasrec[$i]['ValorParcela'], 2, ',', '.') ?></td>
 									<td><?php echo $parcelasrec[$i]['DataVencimento'] ?></td>
-									<td><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$i]['Quitado'], 'NS') ?></td>									
+									<td><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$i]['Quitado'], 'NS') ?></td>
+									<td><?php echo $parcelasrec[$i]['DataPago'] ?></td>										
 								</tr>
 
 								<?php
