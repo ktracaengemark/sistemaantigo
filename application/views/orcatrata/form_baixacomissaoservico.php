@@ -55,8 +55,8 @@
 																		<label for="ValorComissaoServico">Valor Comissao </label><br>
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
-																			<input type="text" class="form-control Valor"  id="ValorComissaoServico<?php echo $i ?>" 
-																				   name="ValorComissaoServico<?php echo $i ?>"  value="<?php echo $produto[$i]['ValorComissaoServico'] ?>">
+																			<input type="text" class="form-control Valor"  id="ValorComissaoServico<?php echo $i ?>" readonly=""
+																				   name="ValorComissaoServico<?php echo $i ?>"  value="<?php echo $_SESSION['Produto'][$i]['Valor_Com_Total'] ?>">
 																		</div>
 																	</div>
 																	<div class="col-md-2">

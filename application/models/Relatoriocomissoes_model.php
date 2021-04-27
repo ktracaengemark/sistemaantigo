@@ -415,15 +415,7 @@ class Relatoriocomissoes_model extends CI_Model {
 						}
 					}
 				}	
-				$row->cont_id_Fun_4 = $cont_id_Fun_4;				
-				
-				/*
-				  //echo $this->db->last_query();
-				  echo "<pre>";
-				  print_r($cont_id_Fun_1);          
-				  echo "</pre>";
-				  //exit();
-				*/
+				$row->cont_id_Fun_4 = $cont_id_Fun_4;
 				
 				$contagem=0;
 				for ($i = 1; $i <= 4; $i++) {

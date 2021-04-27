@@ -14790,21 +14790,129 @@ class Orcatrata extends CI_Controller {
 						$data['produto'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['produto'][$j]['DataConcluidoProduto'], 'barras');
                         $data['produto'][$j]['DataPagoComissaoServico'] = $this->basico->mascara_data($data['produto'][$j]['DataPagoComissaoServico'], 'barras');
 						$_SESSION['Produto'][$j]['Receita'] = $data['produto'][$j]['Receita'];
-						$_SESSION['Produto'][$j]['Valor'] = $data['produto'][$j]['Valor'];
+						//$_SESSION['Produto'][$j]['Valor'] = $data['produto'][$j]['Valor'];
 						
 						$data['radio'] = array(
 							'StatusComissaoServico' . $j => $this->basico->radio_checked($data['produto'][$j]['StatusComissaoServico'], 'StatusComissaoServico' . $j, 'NS'),
 						);
 						($data['produto'][$j]['StatusComissaoServico'] == 'S') ? $data['div']['StatusComissaoServico' . $j] = '' : $data['div']['StatusComissaoServico' . $j] = 'style="display: none;"';
 						
-						/*        
+						
+						$cont_id_Fun_1[$j]=0;
+						if(isset($data['produto'][$j]['id_Fun_Prof_1'])){
+							for ($i = 1; $i <= 4; $i++) {
+								$p[$j] = $data['produto'][$j]['id_Fun_Prof_'.$i];
+								if($p[$j] == $data['produto'][$j]['id_Fun_Prof_1']){
+									$cont_id_Fun_1[$j]++;
+								}
+							}
+						}
+						$cont_id_Fun_2[$j]=0;
+						if(isset($data['produto'][$j]['id_Fun_Prof_2'])){
+							for ($i = 1; $i <= 4; $i++) {
+								$p[$j] = $data['produto'][$j]['id_Fun_Prof_'.$i];
+								if($p[$j] == $data['produto'][$j]['id_Fun_Prof_2']){
+									$cont_id_Fun_2[$j]++;
+								}
+							}
+						}
+						$cont_id_Fun_3[$j]=0;
+						if(isset($data['produto'][$j]['id_Fun_Prof_3'])){
+							for ($i = 1; $i <= 4; $i++) {
+								$p[$j] = $data['produto'][$j]['id_Fun_Prof_'.$i];
+								if($p[$j] == $data['produto'][$j]['id_Fun_Prof_3']){
+									$cont_id_Fun_3[$j]++;
+								}
+							}
+						}
+						$cont_id_Fun_4[$j]=0;
+						if(isset($data['produto'][$j]['id_Fun_Prof_4'])){
+							for ($i = 1; $i <= 4; $i++) {
+								$p[$j] = $data['produto'][$j]['id_Fun_Prof_'.$i];
+								if($p[$j] == $data['produto'][$j]['id_Fun_Prof_4']){
+									$cont_id_Fun_4[$j]++;
+								}
+							}
+						}
+						
+						$valortotalproduto[$j] = $data['produto'][$j]['QtdProduto']*$data['produto'][$j]['ValorProduto'];
+						
+						if(isset($data['produto'][$j]['ComProf1'])){
+							$com_Prof_1[$j] = $data['produto'][$j]['ComProf1'];
+							if($cont_id_Fun_1[$j] != 0){
+								$valor_com_Prof_1[$j] = $valortotalproduto[$j]*$com_Prof_1[$j]/$cont_id_Fun_1[$j]/100;
+							}else{
+								$valor_com_Prof_1[$j] = 0.00;
+							}	
+						}else{
+							$valor_com_Prof_1[$j] = 0.00;
+						}
+						
+						if(isset($data['produto'][$j]['ComProf2'])){
+							$com_Prof_2[$j] = $data['produto'][$j]['ComProf2'];
+							if($cont_id_Fun_2[$j] != 0){
+								$valor_com_Prof_2[$j] = $valortotalproduto[$j]*$com_Prof_2[$j]/$cont_id_Fun_2[$j]/100;
+							}else{
+								$valor_com_Prof_2[$j] = 0.00;
+							}	
+						}else{
+							$valor_com_Prof_2[$j] = 0.00;
+						}
+						
+						if(isset($data['produto'][$j]['ComProf3'])){
+							$com_Prof_3[$j] = $data['produto'][$j]['ComProf3'];
+							if($cont_id_Fun_3[$j] != 0){
+								$valor_com_Prof_3[$j] = $valortotalproduto[$j]*$com_Prof_3[$j]/$cont_id_Fun_3[$j]/100;
+							}else{
+								$valor_com_Prof_3[$j] = 0.00;
+							}	
+						}else{
+							$valor_com_Prof_3[$j] = 0.00;
+						}
+						
+						if(isset($data['produto'][$j]['ComProf4'])){
+							$com_Prof_4[$j] = $data['produto'][$j]['ComProf4'];
+							if($cont_id_Fun_4[$j] != 0){
+								$valor_com_Prof_4[$j] = $valortotalproduto[$j]*$com_Prof_4[$j]/$cont_id_Fun_4[$j]/100;
+							}else{
+								$valor_com_Prof_4[$j] = 0.00;
+							}	
+						}else{
+							$valor_com_Prof_4[$j] = 0.00;
+						}
+						
+						$Valor_Com_Total[$j] = ($valor_com_Prof_1[$j] + $valor_com_Prof_2[$j] + $valor_com_Prof_3[$j] + $valor_com_Prof_4[$j]);
+						//$Soma_Valor_Com_Total[$j] += $Valor_Com_Total[$j];
+						$_SESSION['Produto'][$j]['Valor_Com_Total'] = number_format($Valor_Com_Total[$j], 2, ',', '.');
+						$valor_com_Prof_1[$j] = number_format($valor_com_Prof_1[$j], 2, ',', '.');
+						$valor_com_Prof_2[$j] = number_format($valor_com_Prof_2[$j], 2, ',', '.');
+						$valor_com_Prof_3[$j] = number_format($valor_com_Prof_3[$j], 2, ',', '.');
+						$valor_com_Prof_4[$j] = number_format($valor_com_Prof_4[$j], 2, ',', '.');
+						$_SESSION['Produto'][$j]['Valor'] = $valor_com_Prof_1[$j] . '+' . $valor_com_Prof_2[$j] . '+' . $valor_com_Prof_3[$j] . '+' . $valor_com_Prof_4[$j];
+						/*
 						echo '<br>';
 						echo "<pre>";
-						print_r($data['produto'][$j]['Modalidade']);
+						//print_r($data['produto'][$j]['id_Fun_Prof_1']);
 						echo '<br>';
-						print_r($data['readonly'][$j]);
+						print_r($cont_id_Fun_1[$j]);
+						echo '<br>';
+						print_r($valor_com_Prof_1[$j]);
+						echo '<br>';
+						print_r($cont_id_Fun_2[$j]);
+						echo '<br>';
+						print_r($valor_com_Prof_2[$j]);
+						echo '<br>';
+						print_r($cont_id_Fun_3[$j]);
+						echo '<br>';
+						print_r($valor_com_Prof_3[$j]);
+						echo '<br>';
+						print_r($cont_id_Fun_4[$j]);
+						echo '<br>';
+						print_r($valor_com_Prof_4[$j]);
+						echo '<br>';
+						print_r($Valor_Com_Total[$j]);
 						echo "</pre>";
-						*/	
+						*/
                     }
 					//exit ();
 
