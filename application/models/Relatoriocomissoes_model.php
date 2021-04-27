@@ -343,7 +343,7 @@ class Relatoriocomissoes_model extends CI_Model {
             return TRUE;
         } else {
 
-             $Soma_Valor_Com_Total=$Soma_Valor_Com_Total_Prof=$somacomissaoprof=$somacomissaototal=$diferenca=$somaentregar=$somaentregue=$somaentrada=$balanco=$ant=0;
+             $Soma_valor_Total_Servicos=$Soma_Valor_Com_Total=$Soma_Valor_Com_Total_Prof=$somacomissaoprof=$somacomissaototal=$diferenca=$somaentregar=$somaentregue=$somaentrada=$balanco=$ant=0;
             foreach ($query->result() as $row) {
 				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
                 $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
@@ -434,6 +434,7 @@ class Relatoriocomissoes_model extends CI_Model {
 				}
 				
 				$valortotalproduto = $row->QtdProduto*$row->ValorProduto;
+				$Soma_valor_Total_Servicos += $valortotalproduto;
 				//$comissao_total = $valortotalproduto*$row->ComissaoProduto/100;
 				
 				if(isset($row->ComProf1)){
@@ -576,6 +577,7 @@ class Relatoriocomissoes_model extends CI_Model {
             $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
             $query->soma->Soma_Valor_Com_Total = number_format($Soma_Valor_Com_Total, 2, ',', '.');
             $query->soma->Soma_Valor_Com_Total_Prof = number_format($Soma_Valor_Com_Total_Prof, 2, ',', '.');
+            $query->soma->Soma_valor_Total_Servicos = number_format($Soma_valor_Total_Servicos, 2, ',', '.');
 			
             return $query;
         }
