@@ -605,9 +605,7 @@ class Orcatrata_model extends CI_Model {
 									FROM 
 										App_Produto 
 									WHERE 
-										idApp_OrcaTrata = ' . $data . ' AND
-										StatusComissaoCashBack = "N" AND
-										id_Orca_CashBack = 0
+										idApp_OrcaTrata = ' . $data . ' 
 								');
         $query = $query->result_array();
 

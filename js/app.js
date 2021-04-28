@@ -5001,7 +5001,7 @@ function calculacashback(id_Cliente) {
 						//console.log('data = '+data);
 						//console.log('sucesso');
 						CashBackOrca	= parseFloat(data);
-						CashBackOrca	= CashBackOrca/ocorrencias;
+						//CashBackOrca	= CashBackOrca/ocorrencias;
 						CashBackOrca 	= mascaraValorReal(CashBackOrca);
 						
 						//CashBackOrca	= CashBackOrca.toFixed(2);

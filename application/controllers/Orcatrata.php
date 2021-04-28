@@ -1354,18 +1354,7 @@ class Orcatrata extends CI_Controller {
 					$quitado = "S";
 					$datapago = $data['orcatrata']['DataOrca'];
 				}
-				/*
-				if($data['cadastrar']['StatusParcelas'] == "S"){
-					$valorparcela[$k] 	= $data['update']['parcelas']['baixa'][$k]['ValorParcela']; 
-				}else{
-					$valorparcela[$k] 	= $data['orcatrata']['SubValorFinal']/$data['orcatrata']['QtdParcelasOrca'];
-				}
-				*/
-				
-				
-				
-				
-				
+
 				if($concluidoorca == "S"){
 					$combinadofrete = "S";
 					$aprovadoorca = "S";
@@ -1391,16 +1380,18 @@ class Orcatrata extends CI_Controller {
 						$enviadooorca = "N";
 					}
 				}
-				
-				if($data['cadastrar']['StatusParcelas'] == "S"){
-					$usarcashback			= $data['orcatrata']['UsarCashBack'];
-					$valorfinalorca 		= $data['orcatrata']['ValorFinalOrca'];
-					$cashbackorca 			= $data['orcatrata']['CashBackOrca'];
-				}else{
+
+				if($data['orcatrata']['UsarCashBack'] == "S"){
 					$usarcashback			= "N";
 					$valorfinalorca 		= $data['orcatrata']['SubValorFinal'];
 					$cashbackorca  			= 0.00;
+					
+				}else{
+					$usarcashback			= $data['orcatrata']['UsarCashBack'];
+					$valorfinalorca 		= $data['orcatrata']['ValorFinalOrca'];
+					$cashbackorca 			= 0.00;
 				}
+								
 				
 				if ($data['cadastrar']['Repetir'] == 'S' && $data['orcatrata']['RecorrenciasOrca'] > 1) {
 					for($j=1; $j<$qtd; $j++) {
@@ -1569,13 +1560,20 @@ class Orcatrata extends CI_Controller {
 
 							if (isset($data['update']['parcelas']['baixa'])){
 								for($k=1;$k<=$max_parcelas;$k++) {
-									
-									if($data['cadastrar']['StatusParcelas'] == "S"){
-										$valorparcela[$k] 	= $data['update']['parcelas']['baixa'][$k]['ValorParcela']; 
-									}else{
+									if($data['orcatrata']['UsarCashBack'] == "S"){
 										$valorparcela[$k] 	= $data['orcatrata']['SubValorFinal']/$data['orcatrata']['QtdParcelasOrca'];
+										$valorpago[$k]		= $data['orcatrata']['SubValorFinal']/$data['orcatrata']['QtdParcelasOrca'];
+										/*
+										if($data['cadastrar']['StatusParcelas'] == "S"){
+											$valorparcela[$k] 	= $data['update']['parcelas']['baixa'][$k]['ValorParcela']; 
+										}else{
+											$valorparcela[$k] 	= $data['orcatrata']['SubValorFinal']/$data['orcatrata']['QtdParcelasOrca'];
+										}
+										*/
+									}else{
+										$valorparcela[$k] 	= $data['update']['parcelas']['baixa'][$k]['ValorParcela'];
+										$valorpago[$k] 		= $data['update']['parcelas']['baixa'][$k]['ValorParcela'];
 									}
-									
 									$data['update']['parcelas']['baixa'][$k] = array(
 										'idApp_OrcaTrata' 		=> $data['id_Repeticao'],
 										'idApp_Cliente' 		=> $data['update']['parcelas']['baixa'][$k]['idApp_Cliente'],
@@ -1589,7 +1587,7 @@ class Orcatrata extends CI_Controller {
 										'ValorParcela' 			=> $valorparcela[$k],
 										
 										'DataVencimento'		=> $data['update']['parcelas']['baixa'][$k]['DataVencimento'],
-										'ValorPago' 			=> $data['update']['parcelas']['baixa'][$k]['ValorPago'],
+										'ValorPago' 			=> $valorpago[$k],
 										'Quitado' 				=> $quitado,
 										'DataPago' 				=> $datapago,
 										'idApp_Fornecedor' 		=> $data['update']['parcelas']['baixa'][$k]['idApp_Fornecedor']
@@ -1652,32 +1650,48 @@ class Orcatrata extends CI_Controller {
 
 				//Se existir Cliente  Atualizo ou não o valor do cashback no campo CashBackCliente do Cliente
 				if(isset($data['orcatrata']['idApp_Cliente']) && $data['orcatrata']['idApp_Cliente'] !=0){
+					
 					if($data['orcatrata']['UsarCashBack'] == "S"){
+					
 						if($data['orcatrata']['QuitadoOrca'] == "S"){
+							
 							if($data['cadastrar']['StatusParcelas'] == "S"){
+								
 								//CashBackCliente = novo valor; x Recorrências
 								$data['cliente']['CashBackCliente'] = $data['CashBackNovo']*$data['orcatrata']['RecorrenciasOrca'];
 							}else{
+							
 								//CashBackCliente = novo valor; 1 vez
-								$data['cliente']['CashBackCliente'] = $data['CashBackNovo'] + ($data['CashBackAtual']*$data['orcatrata']['RecorrenciasOrca']*(($data['orcatrata']['RecorrenciasOrca'] - 1)/$data['orcatrata']['RecorrenciasOrca']));
+								//$data['cliente']['CashBackCliente'] = $data['CashBackNovo'] + ($data['CashBackAtual']*$data['orcatrata']['RecorrenciasOrca']*(($data['orcatrata']['RecorrenciasOrca'] - 1)/$data['orcatrata']['RecorrenciasOrca']));
+								$data['cliente']['CashBackCliente'] = $data['CashBackNovo'];
 							}
+							
 						}else{
+						
 							//CashBackCliente = o troco do que ficou para as outras;
-							$data['cliente']['CashBackCliente'] = ($data['CashBackAtual']*$data['orcatrata']['RecorrenciasOrca']*(($data['orcatrata']['RecorrenciasOrca'] - 1)/$data['orcatrata']['RecorrenciasOrca']));
+							//$data['cliente']['CashBackCliente'] = ($data['CashBackAtual']*$data['orcatrata']['RecorrenciasOrca']*(($data['orcatrata']['RecorrenciasOrca'] - 1)/$data['orcatrata']['RecorrenciasOrca']));
+							$data['cliente']['CashBackCliente'] = 0.00;
 						}
+						
 					}else{
 						if($data['orcatrata']['QuitadoOrca'] == "S"){
+							
 							if($data['cadastrar']['StatusParcelas'] == "S"){
+							
 								//CashBackCliente = novo valor; x Recorrências
-								$data['cliente']['CashBackCliente'] = ($data['CashBackNovo'] + $data['CashBackAtual'])*$data['orcatrata']['RecorrenciasOrca'];
+								$data['cliente']['CashBackCliente'] = $data['CashBackAtual'] + ($data['CashBackNovo']*$data['orcatrata']['RecorrenciasOrca']);
+								
 							}else{
+							
 								//CashBackCliente = novo valor; 1 vez
-								$data['cliente']['CashBackCliente'] = $data['CashBackNovo'] + ($data['CashBackAtual']*$data['orcatrata']['RecorrenciasOrca']);
+								$data['cliente']['CashBackCliente'] = $data['CashBackAtual'] + $data['CashBackNovo'];
 							}
+							
 						}else{
 							//CashBackCliente = velho valor;
-							$data['cliente']['CashBackCliente'] = $data['CashBackAtual']*$data['orcatrata']['RecorrenciasOrca'];
+							$data['cliente']['CashBackCliente'] = $data['CashBackAtual'];
 						}
+						
 					}
 					//faço o update no cliente
 		
