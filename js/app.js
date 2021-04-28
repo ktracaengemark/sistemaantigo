@@ -5078,7 +5078,8 @@ function usarcashback(usarcash) {
 	//valor_s_desc	= valor_s_desc.toFixed(2);
 	//valor_s_desc 	= valor_s_desc.replace('.',',');
 	
-	var valor_c_desc = recorrencias*valorfinalorca;
+	//var valor_c_desc = recorrencias*valorfinalorca;
+	var valor_c_desc = valorfinalorca + (recorrencias - 1)*subvalorfinal;
 	valor_c_desc	= parseFloat(valor_c_desc);
 	valor_c_desc 	= mascaraValorReal(valor_c_desc);
 	
