@@ -1354,6 +1354,17 @@ class Orcatrata extends CI_Controller {
 					$quitado = "S";
 					$datapago = $data['orcatrata']['DataOrca'];
 				}
+				/*
+				if($data['cadastrar']['StatusParcelas'] == "S"){
+					$valorparcela[$k] 	= $data['update']['parcelas']['baixa'][$k]['ValorParcela']; 
+				}else{
+					$valorparcela[$k] 	= $data['orcatrata']['SubValorFinal']/$data['orcatrata']['QtdParcelasOrca'];
+				}
+				*/
+				
+				
+				
+				
 				
 				if($concluidoorca == "S"){
 					$combinadofrete = "S";
@@ -1379,6 +1390,16 @@ class Orcatrata extends CI_Controller {
 						$prontooorca = "N";
 						$enviadooorca = "N";
 					}
+				}
+				
+				if($data['cadastrar']['StatusParcelas'] == "S"){
+					$usarcashback			= $data['orcatrata']['UsarCashBack'];
+					$valorfinalorca 		= $data['orcatrata']['ValorFinalOrca'];
+					$cashbackorca 			= $data['orcatrata']['CashBackOrca'];
+				}else{
+					$usarcashback			= "N";
+					$valorfinalorca 		= $data['orcatrata']['SubValorFinal'];
+					$cashbackorca  			= 0.00;
 				}
 				
 				if ($data['cadastrar']['Repetir'] == 'S' && $data['orcatrata']['RecorrenciasOrca'] > 1) {
@@ -1434,10 +1455,11 @@ class Orcatrata extends CI_Controller {
 							'TipoDescOrca' 			=> $data['orcatrata']['TipoDescOrca'],
 							'DescPercOrca' 			=> $data['orcatrata']['DescPercOrca'],
 							'DescValorOrca' 		=> $data['orcatrata']['DescValorOrca'],
-							'UsarCashBack' 			=> $data['orcatrata']['UsarCashBack'],
-							'CashBackOrca' 			=> $data['orcatrata']['CashBackOrca'],
 							'SubValorFinal' 		=> $data['orcatrata']['SubValorFinal'],
-							'ValorFinalOrca' 		=> $data['orcatrata']['ValorFinalOrca'],
+							
+							'UsarCashBack' 			=> $usarcashback,
+							'ValorFinalOrca' 		=> $valorfinalorca,
+							'CashBackOrca' 			=> $cashbackorca,
 							
 							'BrindeOrca' 			=> $data['orcatrata']['BrindeOrca'],
 							'PrazoEntrega' 			=> $data['orcatrata']['PrazoEntrega'],
@@ -1547,6 +1569,13 @@ class Orcatrata extends CI_Controller {
 
 							if (isset($data['update']['parcelas']['baixa'])){
 								for($k=1;$k<=$max_parcelas;$k++) {
+									
+									if($data['cadastrar']['StatusParcelas'] == "S"){
+										$valorparcela[$k] 	= $data['update']['parcelas']['baixa'][$k]['ValorParcela']; 
+									}else{
+										$valorparcela[$k] 	= $data['orcatrata']['SubValorFinal']/$data['orcatrata']['QtdParcelasOrca'];
+									}
+									
 									$data['update']['parcelas']['baixa'][$k] = array(
 										'idApp_OrcaTrata' 		=> $data['id_Repeticao'],
 										'idApp_Cliente' 		=> $data['update']['parcelas']['baixa'][$k]['idApp_Cliente'],
@@ -1556,7 +1585,9 @@ class Orcatrata extends CI_Controller {
 										'idTab_TipoRD' 			=> $data['update']['parcelas']['baixa'][$k]['idTab_TipoRD'],
 										'Parcela' 				=> $data['update']['parcelas']['baixa'][$k]['Parcela'],
 										'FormaPagamentoParcela' => $data['update']['parcelas']['baixa'][$k]['FormaPagamentoParcela'],
-										'ValorParcela' 			=> $data['update']['parcelas']['baixa'][$k]['ValorParcela'],
+										
+										'ValorParcela' 			=> $valorparcela[$k],
+										
 										'DataVencimento'		=> $data['update']['parcelas']['baixa'][$k]['DataVencimento'],
 										'ValorPago' 			=> $data['update']['parcelas']['baixa'][$k]['ValorPago'],
 										'Quitado' 				=> $quitado,
@@ -1631,8 +1662,8 @@ class Orcatrata extends CI_Controller {
 								$data['cliente']['CashBackCliente'] = $data['CashBackNovo'] + ($data['CashBackAtual']*$data['orcatrata']['RecorrenciasOrca']*(($data['orcatrata']['RecorrenciasOrca'] - 1)/$data['orcatrata']['RecorrenciasOrca']));
 							}
 						}else{
-							//CashBackCliente = 0.00;
-							$data['cliente']['CashBackCliente'] = '0.00';
+							//CashBackCliente = o troco do que ficou para as outras;
+							$data['cliente']['CashBackCliente'] = ($data['CashBackAtual']*$data['orcatrata']['RecorrenciasOrca']*(($data['orcatrata']['RecorrenciasOrca'] - 1)/$data['orcatrata']['RecorrenciasOrca']));
 						}
 					}else{
 						if($data['orcatrata']['QuitadoOrca'] == "S"){
