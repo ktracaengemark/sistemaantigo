@@ -891,7 +891,7 @@
 																if($orcatrata['TipoFrete'] == 1){
 																	$tipofrete = 'Retirar na Loja';
 																}elseif($orcatrata['TipoFrete'] == 2){
-																	$tipofrete = 'Casa / Moto Boy';
+																	$tipofrete = 'Casa / Pela Loja';
 																}elseif($orcatrata['TipoFrete'] == 3){
 																	$tipofrete = 'Casa / Correios';
 																}
