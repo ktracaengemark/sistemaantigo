@@ -865,6 +865,7 @@ class Usuario extends CI_Controller {
 						$data['funcao'][$j]['DataConcluidoFuncao'] = $this->basico->mascara_data($data['funcao'][$j]['DataConcluidoFuncao'], 'barras');
 						$_SESSION['Funcao'][$j]['NomeCadastrou'] = $data['funcao'][$j]['NomeCadastrou'];				
 						*/
+						
 						$data['radio'] = array(
 							'Ativo_Funcao' . $j => $this->basico->radio_checked($data['funcao'][$j]['Ativo_Funcao'], 'Ativo_Funcao' . $j, 'NS'),
 						);
@@ -936,12 +937,16 @@ class Usuario extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
                     $data['update']['funcao']['inserir'][$j]['idSis_Empresa'] = $_SESSION['Query']['idSis_Empresa'];
                     $data['update']['funcao']['inserir'][$j]['idSis_Usuario'] = $data['query']['idSis_Usuario'];
+					
+					$data['update']['funcao']['inserir'][$j]['Comissao_Funcao'] = str_replace(',', '.', str_replace('.', '', $data['update']['funcao']['inserir'][$j]['Comissao_Funcao']));
                     //$data['update']['funcao']['inserir'][$j]['DataFuncao'] = $this->basico->mascara_data($data['update']['funcao']['inserir'][$j]['DataFuncao'], 'mysql');
 					//$data['update']['funcao']['inserir'][$j]['DataConcluidoFuncao'] = $this->basico->mascara_data($data['update']['funcao']['inserir'][$j]['DataConcluidoFuncao'], 'mysql');
                 }
 
                 $max = count($data['update']['funcao']['alterar']);
                 for($j=0;$j<$max;$j++) {
+					
+					$data['update']['funcao']['alterar'][$j]['Comissao_Funcao'] = str_replace(',', '.', str_replace('.', '', $data['update']['funcao']['alterar'][$j]['Comissao_Funcao']));
                     //$data['update']['funcao']['alterar'][$j]['DataFuncao'] = $this->basico->mascara_data($data['update']['funcao']['alterar'][$j]['DataFuncao'], 'mysql');
 					//$data['update']['funcao']['alterar'][$j]['DataConcluidoFuncao'] = $this->basico->mascara_data($data['update']['funcao']['alterar'][$j]['DataConcluidoFuncao'], 'mysql');
 				}
