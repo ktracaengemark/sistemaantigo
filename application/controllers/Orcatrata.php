@@ -3012,6 +3012,7 @@ class Orcatrata extends CI_Controller {
 			'EspeciePet',
 			'RelacaoDep',
 			'Hidden_idApp_Cliente',
+			'id_Cliente_Auto',
         ), TRUE));
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 		$data['orcatrata'] = quotes_to_entities($this->input->post(array(
@@ -3114,7 +3115,7 @@ class Orcatrata extends CI_Controller {
 		
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
         //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
-
+		
         (!$this->input->post('SCount')) ? $data['count']['SCount'] = 0 : $data['count']['SCount'] = $this->input->post('SCount');
         (!$this->input->post('PCount')) ? $data['count']['PCount'] = 0 : $data['count']['PCount'] = $this->input->post('PCount');
         (!$this->input->post('P2Count')) ? $data['count']['P2Count'] = 0 : $data['count']['P2Count'] = $this->input->post('P2Count');
@@ -3683,7 +3684,7 @@ class Orcatrata extends CI_Controller {
 		}
 		
 		if ($_SESSION['log']['NivelEmpresa'] >= '4' && $data['orcatrata']['Cli_Forn_Orca'] == "S") {
-			$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
+			$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim|valid_cliente');
 			$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
 		} else {
 			$data['cadastrar']['Cadastrar'] = 'S';

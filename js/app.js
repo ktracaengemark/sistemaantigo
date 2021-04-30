@@ -32,13 +32,58 @@ exibirDescOrca();
 dataehora();
 qtd_ocorrencias();
 calculacashback();
-/*
+
 $(function () {
-	$("#idApp_Cliente").autocomplete({
-		source: window.location.origin+ '/' + app + '/cadastros/pesquisar/Cliente_Autocomplete.php'
+	// Atribui evento e função para limpeza dos campos
+    $('#id_Cliente_Auto').on('input', limpaCampos);
+	
+	$("#id_Cliente_Auto").autocomplete({
+		source: window.location.origin+ '/' + app + '/cadastros/pesquisar/Cliente_Autocomplete.php',
+		select: function(event, ui){
+			var pegar = ui.item.value;
+
+			var pegarSplit = pegar.split('#');
+			var id_Cliente = pegarSplit[0];
+			
+			//console.log('id cliente Autocomplete = '+id_Cliente);
+			
+			$('#idApp_Cliente').val(id_Cliente);
+			clienteDep(id_Cliente);
+			clientePet(id_Cliente);
+			calculacashback(id_Cliente);
+			buscaEnderecoCliente(id_Cliente);
+			clienteOT(id_Cliente);
+		}
+		
 	});
+	
+    // Função para limpar os campos caso a busca esteja vazia
+    function limpaCampos(){
+       var busca = $('#id_Cliente_Auto').val();
+
+       if(busca == ""){
+			
+			$('#idApp_Cliente').val('');
+			$('#idApp_ClienteDep').val('0');
+			$('#idApp_ClienteDep').hide();
+			$('#Dep').val('');
+			$('#Dep').hide();
+			
+			$('#CashBackOrca').val('0,00');
+			
+			$('#Cep').val('');
+			$('#Logradouro').val('');
+			$('#Numero').val('');
+			$('#Complemento').val('');
+			$('#Bairro').val('');
+			$('#Cidade').val('');
+			$('#Estado').val('');
+			$('#Referencia').val('');
+	   }
+    }	
+	
 });
-*/
+
 function codigo(id, tabela){
 	//alert('ok codigo');
 	var categoria = $('#idTab_Catprod').val();
@@ -2162,8 +2207,13 @@ function clientePet(id = null){
 	//alert('carregando clientepets: ' + id);
 	
 	$("#Pet").html('');
-
-	var id_cliente = $('#idApp_Cliente').val();
+	
+	if(id && id!= 'null'){
+		var id_cliente = id;
+	}else{
+		var id_cliente = $('#idApp_Cliente').val();
+	}
+	//var id_cliente = $('#idApp_Cliente').val();
 	//var id_pet = $('#idApp_ClientePet').val();
 	
 	var caminho2 = $('#Caminho2').val();
@@ -2228,7 +2278,13 @@ function clienteDep(id = null){
 	
 	$("#Dep").html('');
 
-	var id_cliente = $('#idApp_Cliente').val();
+	if(id && id!= 'null'){
+		var id_cliente = id;
+	}else{
+		var id_cliente = $('#idApp_Cliente').val();
+	}
+	
+	//var id_cliente = $('#idApp_Cliente').val();
 	
 	var caminho2 = $('#Caminho2').val();
 	//console.log(caminho2);
@@ -2349,7 +2405,13 @@ function quais(){
 //Função que busca O.S. do cliente.
 function clienteOT(id = null){
 	
-	var id_cliente = $('#idApp_Cliente').val();
+	if(id && id!= 'null'){
+		var id_cliente = id;
+	}else{
+		var id_cliente = $('#idApp_Cliente').val();
+	}
+	
+	//var id_cliente = $('#idApp_Cliente').val();
 	
 	var caminho2 = $('#Caminho2').val();
 	//console.log(caminho2);

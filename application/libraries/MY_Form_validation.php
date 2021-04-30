@@ -127,6 +127,16 @@ class MY_Form_validation extends CI_Form_validation {
 		}
        
     }
+		
+    function valid_cliente($data) {
+        $CI = & get_instance();
+
+        $CI->form_validation->set_message('valid_cliente', 'O <b>%s</b> informado não é válido!<br>Selecione um Cliente!');
+		if (($data) == 0) {
+			return FALSE;
+		}
+       
+    }
 	
     function valid_promocao($data) {
         $CI = & get_instance();

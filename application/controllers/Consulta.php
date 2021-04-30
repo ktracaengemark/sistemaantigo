@@ -56,6 +56,7 @@ class Consulta extends CI_Controller {
 			'Vincular',
 			'NovaOS',
 			'PorConsulta',
+			'id_Cliente_Auto',
         ), TRUE));
 
         $data['query'] = quotes_to_entities($this->input->post(array(
@@ -553,6 +554,7 @@ class Consulta extends CI_Controller {
 			'PeloPet',
 			'PortePet',
 			'EspeciePet',
+			'id_Cliente_Auto',
         ), TRUE));
 
         $data['query'] = quotes_to_entities($this->input->post(array(
@@ -846,7 +848,7 @@ class Consulta extends CI_Controller {
         #$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
 		$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour');
         #$this->form_validation->set_rules('idTab_TipoConsulta', 'Tipo de Consulta', 'required|trim');
-        $this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
+        $this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim|valid_cliente');
 		$this->form_validation->set_rules('idApp_Agenda', 'Profissional', 'required|trim');
 		#$this->form_validation->set_rules('idSis_EmpresaFilial', 'Unidade', 'required|trim');
 		

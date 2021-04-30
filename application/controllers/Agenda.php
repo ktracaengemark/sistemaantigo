@@ -38,6 +38,10 @@ class Agenda extends CI_Controller {
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';
 		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+        ), TRUE));		
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'NomeProfissional',
 			'NomeUsuario',
