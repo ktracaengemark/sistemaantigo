@@ -36,6 +36,7 @@ calculacashback();
 $(function () {
 	// Atribui evento e função para limpeza dos campos
     $('#id_Cliente_Auto').on('input', limpaCampos);
+	$('#id_Cliente_Auto').on('change', limpaCampos);
 	
 	$("#id_Cliente_Auto").autocomplete({
 		source: window.location.origin+ '/' + app + '/cadastros/pesquisar/Cliente_Autocomplete.php',
@@ -47,6 +48,26 @@ $(function () {
 			
 			//console.log('id cliente Autocomplete = '+id_Cliente);
 			
+			$.ajax({
+				url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Cliente.php?id=' + id_Cliente,
+				dataType: "json",
+				success: function (data) {
+					
+					var idcliente = data[0]['id'];
+					var nomecliente = data[0]['nome'];
+					var celularcliente = data[0]['celular'];
+					
+					$("#NomeClienteAuto1").html('<label>Cliente: '+idcliente+ ' | ' + nomecliente + ' | Cel: ' + celularcliente + '</label>');
+					$("#NomeClienteAuto").val(''+idcliente+ ' | ' + nomecliente + ' | Cel: ' + celularcliente + '');
+					
+				},
+				error:function(data){
+					$("#NomeClienteAuto1").html('<label>Nenhum Cliente Selecionado!</label>');
+					$("#NomeClienteAuto").val('Nenhum Cliente Selecionado!');
+				}
+				
+			});
+
 			$('#idApp_Cliente').val(id_Cliente);
 			clienteDep(id_Cliente);
 			clientePet(id_Cliente);
@@ -70,6 +91,9 @@ $(function () {
 			$('#Dep').hide();
 			
 			$('#CashBackOrca').val('0,00');
+			
+			$("#NomeClienteAuto1").html('<label>Nenhum Cliente Selecionado!</label>');
+			$("#NomeClienteAuto").val('Nenhum Cliente Selecionado!');
 			
 			$('#Cep').val('');
 			$('#Logradouro').val('');

@@ -555,6 +555,7 @@ class Consulta extends CI_Controller {
 			'PortePet',
 			'EspeciePet',
 			'id_Cliente_Auto',
+			'NomeClienteAuto',
         ), TRUE));
 
         $data['query'] = quotes_to_entities($this->input->post(array(
