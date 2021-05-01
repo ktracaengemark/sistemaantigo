@@ -1820,6 +1820,7 @@ class Consulta extends CI_Controller {
 			'Vincular',
 			'NovaOS',
 			'PorConsulta',
+			'EspeciePet',
         ), TRUE));
 		
 		$data['alterar'] = quotes_to_entities($this->input->post(array(
@@ -1913,8 +1914,13 @@ class Consulta extends CI_Controller {
 
         ($data['query']['Paciente'] == 'D') ?
             $data['div']['Paciente'] = '' : $data['div']['Paciente'] = 'style="display: none;"';
-
 		
+		$data['select']['EspeciePet'] = array (
+            '0' => '',
+            '1' => 'CÃO',
+            '2' => 'GATO',
+			'3' => 'AVE',
+        );	
 		$data['select']['PeloPet'] = array (
             '0' => '',
             '1' => 'CURTO',

@@ -2841,12 +2841,12 @@
 										?>
 									</select>
 								</div>
-								<!--
 								<div class="col-md-3">
-									<label for="PeloPet">Pelo: *</label>
-									<input name="PeloPet" type="text" class="form-control" id="PeloPet" maxlength="45" placeholder="Pelo do Pet">
+									<label for="CorPet">Cor: *</label>
+									<input name="CorPet" type="text" class="form-control" id="CorPet" maxlength="45" placeholder="Cor do Pet">
 								</div>
-								-->
+							</div>
+							<div class="row">
 								<div class="col-md-3 text-left">
 									<label for="PortePet">Porte?</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control"
@@ -2863,23 +2863,33 @@
 										?>
 									</select>
 								</div>
-								<!--
 								<div class="col-md-3">
-									<label for="PortePet">Porte: *</label>
-									<input name="PortePet" type="text" class="form-control" id="PortePet" maxlength="45" placeholder="Porte do Pet">
+									<label for="PesoPet">Peso: </label>
+									<div class="input-group">
+										<input name="PesoPet" type="text" class="form-control ValorPeso" id="PesoPet" maxlength="10" placeholder="0,000">
+										<span class="input-group-addon">kg</span>
+									</div>
 								</div>
-								-->
-							</div>
-							<div class="row">
+								<div class="col-lg-3 ">
+									<h4 class="mb-3">Alérgico</h4>
+									<div class="row">
+										<div class="col-md-6 mb-3 ">	
+											<div class="custom-control custom-radio">
+												<input type="radio" name="AlergicoPet" class="custom-control-input "  id="AlergicoPet_Nao" value="N" checked>
+												<label class="custom-control-label" for="Nao">Não</label>
+											</div>
+										</div>
+										<div class="col-md-6 mb-3 ">	
+											<div class="custom-control custom-radio">
+												<input type="radio" name="AlergicoPet" class="custom-control-input " id="AlergicoPet_Sim" value="S">
+												<label class="custom-control-label" for="Sim">Sim</label>
+											</div>
+										</div>
+									</div>
+								</div>
 								<div class="col-md-3">
-									<label for="CorPet">Cor: *</label>
-									<input name="CorPet" type="text" class="form-control" id="CorPet" maxlength="45" placeholder="Cor do Pet">
-								</div>
-								<div class="col-md-3">
-								</div>
-								<div class="col-md-6">
 									<label for="ObsPet">Obs: *</label>
-									<input name="ObsPet" type="text" class="form-control" id="ObsPet" maxlength="255" placeholder="Observacao">
+									<textarea name="ObsPet" type="text" class="form-control" id="ObsPet" maxlength="255" placeholder="Observacao"></textarea>
 								</div>
 							</div>								
 						</div>

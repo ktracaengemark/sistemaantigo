@@ -266,6 +266,11 @@
 											?>   
 										</select>
 									</div>
+									<div class="col-md-4">
+										<label for="CorPet">Cor: *</label>
+										<input type="text" class="form-control" id="CorPet" maxlength="45" <?php echo $readonly; ?>
+											   name="CorPet" value="<?php echo $query['CorPet']; ?>">
+									</div>
 									<!--
 									<div class="col-md-4">
 										<label for="PeloPet">Pelo: *</label>
@@ -297,19 +302,44 @@
 									</div>
 									-->
 									<div class="col-md-4">
-										<label for="CorPet">Cor: *</label>
-										<input type="text" class="form-control" id="CorPet" maxlength="45" <?php echo $readonly; ?>
-											   name="CorPet" value="<?php echo $query['CorPet']; ?>">
-									</div>
-									<div class="col-md-4">
-										<label for="ObsPet">OBS:</label>
-										<textarea class="form-control" id="ObsPet" <?php echo $readonly; ?>
-												  name="ObsPet"><?php echo $query['ObsPet']; ?></textarea>
+										<label for="PesoPet">Peso:</label>
+										<div class="input-group" id="txtHint">
+											<input type="text" class="form-control ValorPeso" id="PesoPet" maxlength="10" placeholder="0,000" <?php echo $readonly; ?>
+												   name="PesoPet" value="<?php echo $query['PesoPet']; ?>">
+											<span class="input-group-addon" id="basic-addon1">kg</span>
+										</div>  
 									</div>
 								</div>
 							</div>	
 							<div class="form-group">
 								<div class="row">
+									<div class="col-md-2">
+										<label for="AlergicoPet">Alergico?</label><br>
+										<div class="form-group">
+											<div class="btn-group" data-toggle="buttons">
+												<?php
+												foreach ($select['AlergicoPet'] as $key => $row) {
+													(!$query['AlergicoPet']) ? $query['AlergicoPet'] = 'N' : FALSE;
+													if ($query['AlergicoPet'] == $key) {
+														echo ''
+														. '<label class="btn btn-warning active" name="radiobutton_AlergicoPet" id="radiobutton_AlergicoPet' . $key . '">'
+														. '<input type="radio" name="AlergicoPet" id="radiobutton" '
+														. 'autocomplete="off" value="' . $key . '" checked>' . $row
+														. '</label>'
+														;
+													} else {
+														echo ''
+														. '<label class="btn btn-default" name="radiobutton_AlergicoPet" id="radiobutton_AlergicoPet' . $key . '">'
+														. '<input type="radio" name="AlergicoPet" id="radiobutton" '
+														. 'autocomplete="off" value="' . $key . '" >' . $row
+														. '</label>'
+														;
+													}
+												}
+												?>
+											</div>
+										</div>
+									</div>
 									<div class="col-md-2">
 										<label for="AtivoPet">AtivoPet?</label><br>
 										<div class="form-group">
@@ -317,7 +347,6 @@
 												<?php
 												foreach ($select['AtivoPet'] as $key => $row) {
 													(!$query['AtivoPet']) ? $query['AtivoPet'] = 'S' : FALSE;
-
 													if ($query['AtivoPet'] == $key) {
 														echo ''
 														. '<label class="btn btn-warning active" name="radiobutton_AtivoPet" id="radiobutton_AtivoPet' . $key . '">'
@@ -337,6 +366,11 @@
 												?>
 											</div>
 										</div>
+									</div>
+									<div class="col-md-4">
+										<label for="ObsPet">OBS:</label>
+										<textarea class="form-control" id="ObsPet" <?php echo $readonly; ?>
+												  name="ObsPet"><?php echo $query['ObsPet']; ?></textarea>
 									</div>
 								</div>
 							</div> 

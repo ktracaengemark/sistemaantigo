@@ -14,6 +14,11 @@ $corpet0 = filter_var($dados['CorPet'], FILTER_SANITIZE_STRING);
 $portepet0 = filter_var($dados['PortePet'], FILTER_SANITIZE_STRING);
 $obspet0 = filter_var($dados['ObsPet'], FILTER_SANITIZE_STRING);
 
+$alergicopet0 = filter_var($dados['AlergicoPet'], FILTER_SANITIZE_STRING);
+$pesopet0 = filter_var($dados['PesoPet'], FILTER_SANITIZE_STRING);
+
+$pesopet1 = str_replace(',', '.', str_replace('.', '', $pesopet0));	
+
 $datanascimento = $dados['DataNascimentoPet'];
         
 if (preg_match("/[0-9]{2,4}(\/|-)[0-9]{2,4}(\/|-)[0-9]{2,4}/", $datanascimento)) {
@@ -35,6 +40,9 @@ $corpet = trim(mb_strtoupper($corpet0, 'ISO-8859-1'));
 $portepet = trim(mb_strtoupper($portepet0, 'ISO-8859-1'));
 $obspet = trim(mb_strtoupper($obspet0, 'ISO-8859-1'));
 
+$alergicopet = trim(mb_strtoupper($alergicopet0, 'ISO-8859-1'));
+$pesopet = trim(mb_strtoupper($pesopet1, 'ISO-8859-1'));
+
 $usuario 	= $_SESSION['log']['idSis_Usuario'];
 $empresa 	= $_SESSION['log']['idSis_Empresa'];
 $modulo 	= $_SESSION['log']['idTab_Modulo'];
@@ -54,7 +62,9 @@ $result_clientepet = "INSERT INTO App_ClientePet (
 													PeloPet,
 													CorPet,
 													PortePet,
-													ObsPet
+													ObsPet,
+													AlergicoPet,
+													PesoPet
 												) 
 												VALUES (
 													'" .$empresa. "',
@@ -69,7 +79,9 @@ $result_clientepet = "INSERT INTO App_ClientePet (
 													'" .$pelopet. "',
 													'" .$corpet. "',
 													'" .$portepet. "',
-													'" .$obspet. "'
+													'" .$obspet. "',
+													'" .$alergicopet. "',
+													'" .$pesopet. "'
 												)";
 $resultado_clientepet = mysqli_query($conn, $result_clientepet);
 $id_clientepet = mysqli_insert_id($conn);

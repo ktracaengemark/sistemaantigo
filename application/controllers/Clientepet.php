@@ -62,13 +62,16 @@ class Clientepet extends CI_Controller {
             'CorPet',
             'PortePet',
             'ObsPet',
-                        ), TRUE));
+            'AlergicoPet',
+            'PesoPet',
+		), TRUE));
 
         //echo '<br><br><br><br><br>==========================================='.$data['query']['StatusVidaPet']='V';
 
 		//$data['select']['SexoPet'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVidaPet'] = $this->Clientepet_model->select_status_vida();
 		$data['select']['AtivoPet'] = $this->Basico_model->select_status_sn();
+		$data['select']['AlergicoPet'] = $this->Basico_model->select_status_sn();
 		$data['select']['EspeciePet'] = array (
             '0' => '',
             '1' => 'CÃO',
@@ -112,7 +115,8 @@ class Clientepet extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('clientepet/form_clientepet', $data);
         } else {
-
+			
+			$data['query']['PesoPet'] = str_replace(',', '.', str_replace('.', '', $data['query']['PesoPet']));
             $data['query']['NomeClientePet'] = trim(mb_strtoupper($data['query']['NomeClientePet'], 'ISO-8859-1'));
             $data['query']['DataNascimentoPet'] = $this->basico->mascara_data($data['query']['DataNascimentoPet'], 'mysql');
             $data['query']['ObsPet'] = trim(mb_strtoupper($data['query']['ObsPet'], 'ISO-8859-1'));
@@ -171,7 +175,9 @@ class Clientepet extends CI_Controller {
             'PortePet',
             'ObsPet',
 			'AtivoPet',
-                ), TRUE);
+            'AlergicoPet',
+            'PesoPet',
+		), TRUE);
 
         if ($id) {
             $_SESSION['ClientePet'] = $data['query'] = $this->Clientepet_model->get_clientepet($id);
@@ -181,7 +187,8 @@ class Clientepet extends CI_Controller {
 		
 		//$data['select']['SexoPet'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVidaPet'] = $this->Clientepet_model->select_status_vida();      
-		$data['select']['AtivoPet'] = $this->Basico_model->select_status_sn();
+		$data['select']['AtivoPet'] = $this->Basico_model->select_status_sn();    
+		$data['select']['AlergicoPet'] = $this->Basico_model->select_status_sn();
 		$data['select']['EspeciePet'] = array (
             '0' => '',
             '1' => 'CÃO',
@@ -226,6 +233,7 @@ class Clientepet extends CI_Controller {
             $this->load->view('clientepet/form_clientepet', $data);
         } else {
 
+			$data['query']['PesoPet'] = str_replace(',', '.', str_replace('.', '', $data['query']['PesoPet']));		
             $data['query']['NomeClientePet'] = trim(mb_strtoupper($data['query']['NomeClientePet'], 'ISO-8859-1'));
             $data['query']['DataNascimentoPet'] = $this->basico->mascara_data($data['query']['DataNascimentoPet'], 'mysql');
             $data['query']['ObsPet'] = trim(mb_strtoupper($data['query']['ObsPet'], 'ISO-8859-1'));

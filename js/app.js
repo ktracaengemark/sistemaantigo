@@ -38,11 +38,19 @@ $(function () {
     $('#id_Cliente_Auto').on('input', limpaCampos);
 	$('#id_Cliente_Auto').on('change', limpaCampos);
 	
+	$('#id_Cliente_Auto').on('keyup', function(event){		
+		
+		var id_Cliente_Auto =  $('#id_Cliente_Auto').val();
+		console.log(id_Cliente_Auto);
+
+	});	
+	
 	$("#id_Cliente_Auto").autocomplete({
 		source: window.location.origin+ '/' + app + '/cadastros/pesquisar/Cliente_Autocomplete.php',
+
 		select: function(event, ui){
 			var pegar = ui.item.value;
-
+			console.log('pegar = '+pegar);
 			var pegarSplit = pegar.split('#');
 			var id_Cliente = pegarSplit[0];
 			
@@ -7784,6 +7792,7 @@ $(document).ready(function () {
 	$(".Rg").mask("999999999");
     $(".TituloEleitor").mask("9999.9999.9999");
     $(".Valor").mask("#.##0,00", {reverse: true});
+    $(".ValorPeso").mask("#.##0,000", {reverse: true});
 	$(".Peso").mask("#.##0,000", {reverse: true});
     $('.Numero').mask('0#');
 
