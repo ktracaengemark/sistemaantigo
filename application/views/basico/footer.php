@@ -2,6 +2,7 @@
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
+        <script src='<?php echo base_url(); ?>js/jquery-ui.js'></script>
         <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
 
         <script src='<?php echo base_url(); ?>js/moment.min.js'></script>
@@ -24,8 +25,6 @@
         <script src='<?php echo base_url(); ?>js/pt-br.js'></script>        
         <script src='<?php echo base_url(); ?>js/jquery.calendrical.js'></script>
         <script src='<?php echo base_url(); ?>js/knockout-min.js'></script>
-        <script src='<?php echo base_url(); ?>js/jquery-ui.min.js'></script>
-        <!--<script src='<?php echo base_url(); ?>js/jquery-ui.js'></script>-->
         <!--<script type='text/javascript" src="js/main.js'></script>
         <script src='<?php echo base_url(); ?>js/main.js'></script>-->
         
@@ -38,8 +37,6 @@
         <script src="<?php echo base_url(); ?>js/ie10-viewport-bug-workaround.js"></script>
         
         <script src="<?php echo base_url(); ?>js/select2.min.js"></script>
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>-->
 
     </body>
 

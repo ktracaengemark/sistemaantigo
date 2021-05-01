@@ -60,9 +60,6 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/font-awesome/css/font-awesome.min.css">
 
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/select2.min.css" rel="stylesheet" />
-		
-        <!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">-->
-
     </head>
 
     <body>
