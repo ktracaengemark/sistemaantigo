@@ -82,24 +82,7 @@ class Usuario extends CI_Controller {
 		#$this->load->model('Empresa_model');
 		#$_SESSION['Empresa'] = $this->Empresa_model->get_empresa($idSis_Empresa, TRUE);
 		#$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
-			
-			
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-		#$this->form_validation->set_rules('CpfUsuario', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		#$this->form_validation->set_rules('Usuario', 'Usuario', 'required|trim|is_unique_duplo[Sis_Usuario.Usuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
-        //$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
-		$this->form_validation->set_rules('CelularUsuario', 'Celular do Usuário', 'required|trim|is_unique_duplo[Sis_Usuario.CelularUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');		
-		$this->form_validation->set_rules('Permissao', 'Acesso Ás Agendas', 'required|trim');		
-		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
-        $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');		
-		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email|is_unique_duplo[Sis_Usuario.Email.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-        $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
-
+					
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();	
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Inativo'] = $this->Basico_model->select_inativo();
@@ -134,7 +117,26 @@ class Usuario extends CI_Controller {
         $data['main'] = 'col-sm-7 col-md-8';
 
         $data['tela'] = $this->load->view('usuario/form_usuario', $data, TRUE);
+		
+		$data['q3'] = $this->Usuario_model->list_funcao(TRUE);
+		$data['list3'] = $this->load->view('usuario/list_funcao', $data, TRUE);
+					
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
+		#$this->form_validation->set_rules('CpfUsuario', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		#$this->form_validation->set_rules('Usuario', 'Usuario', 'required|trim|is_unique_duplo[Sis_Usuario.Usuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
+        //$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
+		$this->form_validation->set_rules('CelularUsuario', 'Celular do Usuário', 'required|trim|is_unique_duplo[Sis_Usuario.CelularUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');		
+		$this->form_validation->set_rules('Permissao', 'Acesso Ás Agendas', 'required|trim');		
+		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
+        $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');		
+		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email|is_unique_duplo[Sis_Usuario.Email.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+        $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('usuario/form_usuario', $data);
@@ -236,19 +238,6 @@ class Usuario extends CI_Controller {
 			$data['query']['DataEmUsuario'] = $this->basico->mascara_data($data['query']['DataEmUsuario'], 'barras');
         }
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #$this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim|is_unique_duplo[Sis_Usuario.Nome.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim');
-        $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
-		//$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
-		$this->form_validation->set_rules('CelularUsuario', 'Celular do Usuario', 'required|trim|is_unique_by_id_empresa[Sis_Usuario.CelularUsuario.' . $data['query']['idSis_Usuario'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-        $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-		$this->form_validation->set_rules('Permissao', 'Nível', 'required|trim');
-		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
-
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();	
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
@@ -284,6 +273,22 @@ class Usuario extends CI_Controller {
 
         $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
         $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
+		
+		$data['q3'] = $this->Usuario_model->list_funcao(TRUE);
+		$data['list3'] = $this->load->view('usuario/list_funcao', $data, TRUE);
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #$this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim|is_unique_duplo[Sis_Usuario.Nome.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
+        $this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim');
+        $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
+		//$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
+		$this->form_validation->set_rules('CelularUsuario', 'Celular do Usuario', 'required|trim|is_unique_by_id_empresa[Sis_Usuario.CelularUsuario.' . $data['query']['idSis_Usuario'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+        $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
+		$this->form_validation->set_rules('Permissao', 'Nível', 'required|trim');
+		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {

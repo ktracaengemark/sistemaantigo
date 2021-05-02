@@ -265,6 +265,59 @@ class Usuario_model extends CI_Model {
             }
         }
     }
+    
+	public function list_funcao($x) {
+		
+        $query = $this->db->query('
+			SELECT 
+				TA.*,
+				TOP.idSis_Usuario,
+				AF.idApp_Funcao
+			FROM 
+				Tab_Funcao AS TA
+					LEFT JOIN Sis_Usuario AS TOP ON TOP.Funcao = TA.idTab_Funcao
+					LEFT JOIN App_Funcao AS AF ON AF.idTab_Funcao = TA.idTab_Funcao
+			WHERE 
+                TA.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			GROUP BY
+				TA.idTab_Funcao
+			ORDER BY  
+				TA.Funcao ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+		  echo "<br>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                foreach ($query->result() as $row) {
+					
+					if($row->idSis_Usuario || $row->idApp_Funcao){
+						$row->VariacaoUsada = "S";
+					}else{
+						$row->VariacaoUsada = "N";
+					}
+					
+				
+				#    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                }
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
 
     public function lista_contatousuario($id, $bool) {
 

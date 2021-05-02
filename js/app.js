@@ -181,6 +181,7 @@ function Aguardar () {
 	$('.aguardarCatprod').hide();
 	$('.aguardarAtributo').hide();
 	$('.aguardarRacaPet').hide();
+	$('.aguardarFuncao').hide();
 	$('.aguardarOpcao').hide();
 	$('.aguardarAlterarMotivo').hide();
 	$('.aguardarAlterarCategoria').hide();
@@ -190,10 +191,12 @@ function Aguardar () {
 	$('.aguardarAlterarProduto').hide();
 	$('.aguardarAlterarAtributo').hide();
 	$('.aguardarAlterarRacaPet').hide();
+	$('.aguardarAlterarFuncao').hide();
 	$('.aguardarAlterarOpcao').hide();
 	$('.aguardarExcluirCatprod').hide();
 	$('.aguardarExcluirAtributo').hide();
 	$('.aguardarExcluirRacaPet').hide();
+	$('.aguardarExcluirFuncao').hide();
 	$('.aguardarExcluirOpcao').hide();
 	$('.aguardarExcluirProduto').hide();
 	$('.aguardarExcluirCatprom').hide();
@@ -834,7 +837,7 @@ $('#alterarRacaPet').on('show.bs.modal', function (event) {
 	var recipientracapet = button.data('whateverracapet')
 	//console.log(recipientracapet);
 	var modal = $(this)
-	modal.find('.modal-title').text('id da Variacao: ' + recipientidracapet)
+	modal.find('.modal-title').text('id da Raca: ' + recipientidracapet)
 	modal.find('#id_RacaPet').val(recipientidracapet)
 	modal.find('#Nome_RacaPet').val(recipientracapet)
 })
@@ -911,7 +914,7 @@ $('#excluirRacaPet').on('show.bs.modal', function (event) {
 	var recipientracapet = button.data('whateverracapet')
 	//console.log(recipientracapet);
 	var modal = $(this)
-	modal.find('.modal-title').text('id da Variacao: ' + recipientidracapet)
+	modal.find('.modal-title').text('id da Raca: ' + recipientidracapet)
 	modal.find('#id_ExcluirRacaPet').val(recipientidracapet)
 	modal.find('#ExcluirRacaPet').val(recipientracapet)
 })
@@ -1035,6 +1038,221 @@ $('#insert_fornecedor_form').on('submit', function(event){
 		}else{
 			$("#msg-error-fornecedor").html('<div class="alert alert-danger" role="alert">O Celular deve conter 11 números!</div>');
 		}
+	}
+	
+});	
+
+$('#insert_funcao_form').on('submit', function(event){
+	//alert('ok');
+	event.preventDefault();
+	if($('#Novo_Funcao').val() == ""){
+		//Alerta de campo  vazio
+		$("#msg-error-funcao").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+	}else{
+		//Fechar o botão cadastrar
+		$('#botaoCadFuncao').hide();
+							
+		//Fechar o botão fechar
+		$('#botaoFecharFuncao').hide();
+		
+		//Abre o Aguardar
+		$('.aguardarFuncao').show();	
+		
+		//Receber os dados do formulário
+		var dados = $("#insert_funcao_form").serialize();
+		//console.log(dados);
+		
+		$.post(window.location.origin+ '/' + app + '/cadastros/inserir/Funcao.php?', dados, function (retorna){
+		 //console.log(retorna);
+			
+			if(retorna == 1){
+			
+				//Limpar os campo
+				$('#insert_funcao_form')[0].reset();
+				
+				//Fechar a janela modal cadastrar
+				$('#addFuncaoModal').modal('hide');
+				
+				$('#addClientePetModal').modal('hide');
+				
+				//Alerta de cadastro realizado com sucesso
+				//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+				$('#msgCadSucesso').modal('show');
+				
+				//Limpar mensagem de erro
+				$("#msg-error-funcao").html('');
+				
+				//listar_usuario(1, 50);
+			}else{
+				$("#msg-error-funcao").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar funcao!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+							
+				//Abre o botão fechar
+				$('#botaoFecharFuncao').show();
+				
+				//Fecha o Aguardar
+				$('.aguardarFuncao').hide();				
+			
+			}
+			
+			
+		});
+		
+		
+	}	
+});
+
+$('#alterarFuncao').on('show.bs.modal', function (event) {
+	var button = $(event.relatedTarget)
+	var recipientidfuncao = button.data('whateveridfuncao')
+	var recipientfuncao = button.data('whateverfuncao')
+	//console.log(recipientfuncao);
+	var modal = $(this)
+	modal.find('.modal-title').text('id da Funcao: ' + recipientidfuncao)
+	modal.find('#id_Funcao').val(recipientidfuncao)
+	modal.find('#Nome_Funcao').val(recipientfuncao)
+})
+
+$('#alterar_funcao_form').on('submit', function(event){
+	//alert('ok - Alterar o Funcao');
+	
+	event.preventDefault();
+	var funcao = $('#Nome_Funcao').val();
+	//console.log(funcao);
+	//exit();
+	
+	if($('#Nome_Funcao').val() == ""){
+		//Alerta de campo  vazio
+		$("#msg-error-alterar-funcao").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+	}else{
+		
+		//Fechar a mensagem de erro
+		$('#msg-error-alterar-funcao').hide();
+		//Fechar o botão Alterar
+		$('#AlterarFuncao').hide();
+		//Fechar o botão Cancelar
+		$('#CancelarFuncao').hide();
+		//Abre o Aguardar
+		$('.aguardarAlterarFuncao').show();
+		//Fechar a janela modal alterar
+		$('#addFuncaoModal').modal('hide');
+		
+		//Receber os dados do formulário
+		var dados = $("#alterar_funcao_form").serialize();
+		//console.log(dados);
+		
+		$.post(window.location.origin+ '/' + app + '/cadastros/alterar/Funcao.php?', dados, function (retorna){
+		 
+			//console.log(retorna);
+			
+			if(retorna == 1){
+			
+				//Limpar os campo
+				$('#alterar_funcao_form')[0].reset();
+				
+				//Fechar a janela modal alterar
+				$('#alterarFuncao').modal('hide');
+				
+				$('#addClientePetModal').modal('hide');
+							
+				//Alerta de cadastro realizado com sucesso
+				//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+				$('#msgCadSucesso').modal('show');
+				
+				//Limpar mensagem de erro
+				$("#msg-error-alterar-funcao").html('');
+				
+				//listar_usuario(1, 50);
+			}else{
+				$("#msg-error-alterar-funcao").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Funcao!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				
+				//Abre o botão Cancelar
+				$('#CancelarFuncao').show();
+				
+				//Fecha o Aguardar
+				$('.aguardarAlterarFuncao').hide();				
+			}
+			
+		});
+		
+	}
+	
+});	
+
+$('#excluirFuncao').on('show.bs.modal', function (event) {
+	var button = $(event.relatedTarget)
+	var recipientidfuncao = button.data('whateveridfuncao')
+	var recipientfuncao = button.data('whateverfuncao')
+	//console.log(recipientfuncao);
+	var modal = $(this)
+	modal.find('.modal-title').text('id da Funcao: ' + recipientidfuncao)
+	modal.find('#id_ExcluirFuncao').val(recipientidfuncao)
+	modal.find('#ExcluirFuncao').val(recipientfuncao)
+})
+
+$('#excluir_funcao_form').on('submit', function(event){
+	//alert('ok - Excluir o Funcao');
+	
+	event.preventDefault();
+	var funcao = $('#id_ExcluirFuncao').val();
+	//console.log(funcao);
+	//exit();
+	
+	if($('#id_ExcluirFuncao').val() == ""){
+		//Alerta de campo  vazio
+		$("#msg-error-excluir-funcao").html('<div class="alert alert-danger" role="alert">Necessário Informar o Funcao!</div>');						
+	}else{
+		//$("#msg-error-excluir-funcao").html('<div class="alert alert-success" role="alert">Funcao Informado!</div>');
+		
+		//Fechar a mensagem de erro
+		$('#msg-error-excluir-funcao').hide();
+		//Fechar o botão Excluir
+		$('#ExcluirFuncao').hide();
+		//Fechar o botão Cancelar
+		$('#CancelarExcluirFuncao').hide();
+		//Abre o Aguardar
+		$('.aguardarExcluirFuncao').show();
+		//Fechar a janela modal excluir
+		$('#addFuncaoModal').modal('hide');
+		
+		//Receber os dados do formulário
+		var dados = $("#excluir_funcao_form").serialize();
+		//console.log(dados);
+		
+		$.post(window.location.origin+ '/' + app + '/cadastros/excluir/Funcao.php?', dados, function (retorna){
+		 
+			//console.log(retorna);
+			
+			if(retorna == 1){
+			
+				//Limpar os campo
+				$('#excluir_funcao_form')[0].reset();
+				
+				//Fechar a janela modal excluir
+				$('#excluirFuncao').modal('hide');
+				
+				$('#addClientePetModal').modal('hide');
+							
+				//Alerta de cadastro realizado com sucesso
+				//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+				$('#msgCadSucesso').modal('show');
+				
+				//Limpar mensagem de erro
+				$("#msg-error-excluir-funcao").html('');
+				
+				//listar_usuario(1, 50);
+			}else{
+				$("#msg-error-excluir-funcao").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao Excluir a Variação!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+			
+				//Abre o botão Cancelar
+				$('#CancelarExcluirFuncao').show();
+				
+				//Fecha o Aguardar
+				$('.aguardarExcluirFuncao').hide();				
+			
+			}
+			
+		});
+		
 	}
 	
 });	

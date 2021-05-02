@@ -3,7 +3,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-offset-2 col-md-8">
+		<div class="col-sm-offset-1 col-md-10">
 		<?php echo form_open_multipart($form_open_path); ?>
 			<div class="panel panel-primary">
 				<?php if ( !isset($evento) && isset($_SESSION['Empresa'])) { ?>
@@ -198,8 +198,24 @@
 																</div>
 																<?php echo form_error('Funcao'); ?>
 															</div>
-																												
+														</div>	
+														<div class="row">														
 															<div class="col-md-6 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+																<div class="row">	
+																	<div class="col-md-6 text-left">	
+																		<label >Funcao</label><br>
+																		<button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#addFuncaoModal">
+																			Cad./Edit./Excl.
+																		</button>
+																	</div>
+																	<div class="col-md-6 text-left">
+																		<label >Recarregar</label><br>
+																		<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+																				<span class="glyphicon glyphicon-refresh"></span>Recarregar
+																		</button>
+																	</div>	
+																</div>
+																<!--
 																<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>funcao2/cadastrar3/" role="button"> 
 																	<span class="glyphicon glyphicon-plus"></span>Fu
 																</a>
@@ -207,6 +223,7 @@
 																<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
 																		<span class="glyphicon glyphicon-refresh"></span>
 																</button>
+																-->
 																<?php echo form_error('Cadastrar'); ?>
 															</div>
 														</div>
@@ -446,17 +463,142 @@
 												</div>
 											<?php } ?>
 										</div>
+										<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header bg-success text-center">
+														<h4 class="modal-title" id="visulClienteModalLabel">Cadastrado com sucesso!</h4>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														  <span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<!--
+													<div class="modal-body">
+														Cliente cadastrado com sucesso!
+													</div>
+													-->
+													<div class="modal-footer">
+														<div class="col-md-6">	
+															<button class="btn btn-success btn-block" name="botaoFechar2" id="botaoFechar2" onclick="DesabilitaBotaoFechar(this.name)" value="0" type="submit">
+																<span class="glyphicon glyphicon-filter"></span> Fechar
+															</button>
+															<div class="col-md-12 alert alert-warning aguardar2" role="alert" >
+																Aguarde um instante! Estamos processando sua solicitação!
+															</div>
+														</div>
+														<!--<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>-->
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
-								
 								</div>
 							</div>							
 						</div>	
 					</div>
-				
 				</div>
-				
-			</div>		
+			</div>
+		</form>	
 		</div>
 	</div>	
 </div>
+
+<div id="addFuncaoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addFuncaoModalLabel">Cadastrar Funcao</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-funcao"></span>
+				<form method="post" id="insert_funcao_form">
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Funcao</label>
+						<div class="col-sm-10">
+							<input name="Novo_Funcao" type="text" class="form-control" id="Novo_Funcao" placeholder="Funcao">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<br>
+							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFecharFuncao" id="botaoFecharFuncao">
+								<span class="glyphicon glyphicon-remove"></span> Fechar
+							</button>
+						</div>	
+						<div class="col-sm-6">
+							<br>
+							<button type="submit" class="btn btn-success btn-block" name="botaoCadFuncao" id="botaoCadFuncao" >
+								<span class="glyphicon glyphicon-plus"></span> Cadastrar
+							</button>
+						</div>	
+						<div class="col-md-12 alert alert-warning aguardarFuncao" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+				<?php if (isset($list3)) echo $list3; ?>
+			</div>
+		</div>
+	</div>
+</div>	
+
+<div id="alterarFuncao" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alterarFuncaoLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="alterarFuncaoLabel">Raca</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-alterar-funcao"></span>
+				<form method="post" id="alterar_funcao_form">
+					<div class="form-group">
+						<label for="Nome_Funcao" class="control-label">Raca:</label>
+						<input type="text" class="form-control" name="Nome_Funcao" id="Nome_Funcao">
+					</div>
+					<input type="hidden" name="id_Funcao" id="id_Funcao">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarFuncao" id="CancelarFuncao" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="AlterarFuncao" id="AlterarFuncao" >Alterar</button>	
+						<div class="col-md-12 alert alert-warning aguardarAlterarFuncao" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="excluirFuncao" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="excluirFuncaoLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="excluirFuncaoLabel">Raca</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-excluir-funcao"></span>
+				<form method="post" id="excluir_funcao_form">
+					<div class="form-group">
+						<label for="ExcluirFuncao" class="control-label">Raca:</label>
+						<input type="text" class="form-control" name="ExcluirFuncao" id="ExcluirFuncao" readonly="">
+					</div>
+					<input type="hidden" name="id_ExcluirFuncao" id="id_ExcluirFuncao">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarExcluirFuncao" id="CancelarExcluirFuncao" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="Excluirtributo" id="ExcluirFuncao" >Apagar</button>	
+						<div class="col-md-12 alert alert-warning aguardarExcluirFuncao" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 <?php } ?>
