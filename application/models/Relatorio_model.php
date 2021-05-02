@@ -49,6 +49,7 @@ class Relatorio_model extends CI_Model {
 				DATE_FORMAT(CO.DataInicio, "%H:%i") AS HoraInicio,
 				DATE_FORMAT(CO.DataFim, "%Y-%m-%d") AS DataFim,
 				DATE_FORMAT(CO.DataFim, "%H:%i") AS HoraFim,
+				C.idApp_Cliente AS id_Cliente,
 				CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,"")) AS NomeCliente,
 				CP.*,
 				CONCAT(IFNULL(CP.idApp_ClientePet,""), " - " ,IFNULL(CP.NomeClientePet,"")) AS NomeClientePet,

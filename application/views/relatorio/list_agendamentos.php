@@ -25,7 +25,7 @@
 					foreach ($report->result_array() as $row) {
 						echo '<tr>';
 							echo '<td class="notclickable">
-									<a class="btn btn-md btn-' . $panel . ' notclickable" href="' . base_url() . $edit . $row['idApp_Cliente'] . '/' . $row['idApp_Consulta'] . '">
+									<a class="btn btn-md btn-' . $panel . ' notclickable" href="' . base_url() . $edit . $row['id_Cliente'] . '/' . $row['idApp_Consulta'] . '">
 										<span class="glyphicon glyphicon-calendar notclickable"></span>
 									</a>
 								</td>';
