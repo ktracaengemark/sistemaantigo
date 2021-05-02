@@ -40,6 +40,7 @@ class Agenda extends CI_Controller {
 		
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'id_Cliente_Auto',
+			'NomeClienteAuto',
         ), TRUE));		
 		
         $data['query'] = quotes_to_entities($this->input->post(array(

@@ -245,11 +245,29 @@
 											?>   
 										</select>
 									</div>
+									<div class="col-md-4 text-left">
+										<label for="RacaPet">Raca:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control"
+												id="RacaPet" name="RacaPet">
+											<option value="">-- Selecione uma opção --</option>
+											<?php
+											foreach ($select['RacaPet'] as $key => $row) {
+												if ($query['RacaPet'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>
+									<!--
 									<div class="col-md-4">
 										<label for="RacaPet">Raca: *</label>
 										<input type="text" class="form-control" id="RacaPet" maxlength="45" <?php echo $readonly; ?>
 											   name="RacaPet" value="<?php echo $query['RacaPet']; ?>">
-									</div> 
+									</div>
+									-->
 									<div class="col-md-4">
 										<label for="PeloPet">Pelo:</label>
 										<select data-placeholder="Selecione uma Opção..." class="form-control" 
@@ -372,6 +390,52 @@
 										<textarea class="form-control" id="ObsPet" <?php echo $readonly; ?>
 												  name="ObsPet"><?php echo $query['ObsPet']; ?></textarea>
 									</div>
+									<div class="col-md-2 text-left">
+										<label for="Cadastrar">Raca Encontrada?</label><br>
+										<div class="btn-group" data-toggle="buttons">
+											<?php
+											foreach ($select['Cadastrar'] as $key => $row) {
+												if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
+
+												($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+												if ($cadastrar['Cadastrar'] == $key) {
+													echo ''
+													. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+													. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+													. 'autocomplete="off" value="' . $key . '" checked>' . $row
+													. '</label>'
+													;
+												} else {
+													echo ''
+													. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+													. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+													. 'autocomplete="off" value="' . $key . '" >' . $row
+													. '</label>'
+													;
+												}
+											}
+											?>
+
+										</div>
+									</div>
+									<div class="col-md-4 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+										<div class="row">	
+											<div class="col-md-6 text-left">	
+												<label >Raca</label><br>
+												<button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#addRacaPetModal">
+													Cadastrar/Edit./Excl.
+												</button>
+											</div>
+											<div class="col-md-6 text-left">
+												<label >Recarregar</label><br>
+												<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+														<span class="glyphicon glyphicon-refresh"></span>Recarregar
+												</button>
+											</div>	
+										</div>	
+										<?php echo form_error('Cadastrar'); ?>
+									</div>
 								</div>
 							</div> 
 							
@@ -462,6 +526,34 @@
 										</div>
 									<?php } ?>
 								</div>
+								<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header bg-success text-center">
+												<h4 class="modal-title" id="visulClienteModalLabel">Cadastrado com sucesso!</h4>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												  <span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<!--
+											<div class="modal-body">
+												Cliente cadastrado com sucesso!
+											</div>
+											-->
+											<div class="modal-footer">
+												<div class="col-md-6">	
+													<button class="btn btn-success btn-block" name="botaoFechar2" id="botaoFechar2" onclick="DesabilitaBotaoFechar(this.name)" value="0" type="submit">
+														<span class="glyphicon glyphicon-filter"></span> Fechar
+													</button>
+													<div class="col-md-12 alert alert-warning aguardar2" role="alert" >
+														Aguarde um instante! Estamos processando sua solicitação!
+													</div>
+												</div>
+												<!--<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>-->
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>									
 							</form>
 						</div>
@@ -473,5 +565,101 @@
 		<div class="col-md-2"></div>
 	</div>	
 </div>
-	
+<div id="addRacaPetModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addRacaPetModalLabel">Cadastrar RacaPet</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-racapet"></span>
+				<form method="post" id="insert_racapet_form">
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">RacaPet</label>
+						<div class="col-sm-10">
+							<input name="Novo_RacaPet" type="text" class="form-control" id="Novo_RacaPet" placeholder="RacaPet">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<br>
+							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFecharRacaPet" id="botaoFecharRacaPet">
+								<span class="glyphicon glyphicon-remove"></span> Fechar
+							</button>
+						</div>	
+						<div class="col-sm-6">
+							<br>
+							<button type="submit" class="btn btn-success btn-block" name="botaoCadRacaPet" id="botaoCadRacaPet" >
+								<span class="glyphicon glyphicon-plus"></span> Cadastrar
+							</button>
+						</div>	
+						<div class="col-md-12 alert alert-warning aguardarRacaPet" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+				<?php if (isset($list3)) echo $list3; ?>
+			</div>
+		</div>
+	</div>
+</div>	
+
+<div id="alterarRacaPet" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alterarRacaPetLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="alterarRacaPetLabel">Raca</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-alterar-racapet"></span>
+				<form method="post" id="alterar_racapet_form">
+					<div class="form-group">
+						<label for="Nome_RacaPet" class="control-label">Raca:</label>
+						<input type="text" class="form-control" name="Nome_RacaPet" id="Nome_RacaPet">
+					</div>
+					<input type="hidden" name="id_RacaPet" id="id_RacaPet">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarRacaPet" id="CancelarRacaPet" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="AlterarRacaPet" id="AlterarRacaPet" >Alterar</button>	
+						<div class="col-md-12 alert alert-warning aguardarAlterarRacaPet" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="excluirRacaPet" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="excluirRacaPetLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="excluirRacaPetLabel">Raca</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-excluir-racapet"></span>
+				<form method="post" id="excluir_racapet_form">
+					<div class="form-group">
+						<label for="ExcluirRacaPet" class="control-label">Raca:</label>
+						<input type="text" class="form-control" name="ExcluirRacaPet" id="ExcluirRacaPet" readonly="">
+					</div>
+					<input type="hidden" name="id_ExcluirRacaPet" id="id_ExcluirRacaPet">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarExcluirRacaPet" id="CancelarExcluirRacaPet" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="Excluirtributo" id="ExcluirRacaPet" >Apagar</button>	
+						<div class="col-md-12 alert alert-warning aguardarExcluirRacaPet" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 

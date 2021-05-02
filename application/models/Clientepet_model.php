@@ -130,6 +130,57 @@ class Clientepet_model extends CI_Model {
             }
         }
     }
+    
+	public function list_racapet($x) {
+		
+        $query = $this->db->query('
+			SELECT 
+				TA.*,
+				TOP.idApp_ClientePet
+			FROM 
+				Tab_RacaPet AS TA
+					LEFT JOIN App_ClientePet AS TOP ON TOP.RacaPet = TA.idTab_RacaPet
+			WHERE 
+                TA.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			GROUP BY
+				TA.idTab_RacaPet
+			ORDER BY  
+				TA.RacaPet ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+		  echo "<br>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                foreach ($query->result() as $row) {
+					
+					if($row->idApp_ClientePet){
+						$row->VariacaoUsada = "S";
+					}else{
+						$row->VariacaoUsada = "N";
+					}
+					
+				
+				#    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                }
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
 
     public function select_status_vida($data = FALSE) {
 

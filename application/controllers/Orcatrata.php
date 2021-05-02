@@ -1731,6 +1731,7 @@ class Orcatrata extends CI_Controller {
 			'PeloPet',
 			'PortePet',
 			'EspeciePet',
+			'RacaPet',
 			'RelacaoDep',
         ), TRUE));
 
@@ -2114,6 +2115,7 @@ class Orcatrata extends CI_Controller {
             'P' => '.%',
             'V' => 'R$',
         );
+		$data['select']['RacaPet'] = $this->Cliente_model->select_racapet();
 		$data['select']['RelacaoDep'] = $this->Cliente_model->select_relacao();			
         $data['select']['UsarCashBack'] = $this->Basico_model->select_status_sn();
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
@@ -2383,6 +2385,9 @@ class Orcatrata extends CI_Controller {
 		$data['somatotal'] = floatval ($data['somatotal']);
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
         $data['diferenca'] = floatval ($data['diferenca']);		  
+		
+		$data['q3'] = $this->Clientepet_model->list_racapet(TRUE);
+		$data['list3'] = $this->load->view('clientepet/list_racapet', $data, TRUE);
 		  
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
@@ -3010,6 +3015,7 @@ class Orcatrata extends CI_Controller {
 			'PeloPet',
 			'PortePet',
 			'EspeciePet',
+			'RacaPet',
 			'RelacaoDep',
 			'Hidden_idApp_Cliente',
 			'id_Cliente_Auto',
@@ -3361,20 +3367,20 @@ class Orcatrata extends CI_Controller {
         //Fim do trecho de código que dá pra melhorar
 		
 		$data['select']['EspeciePet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'CÃO',
             '2' => 'GATO',
 			'3' => 'AVE',
         );	
 		$data['select']['PeloPet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'CURTO',
             '2' => 'MÉDIO',
 			'3' => 'LONGO',
 			'4' => 'CACHEADO',
         );		
 		$data['select']['PortePet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'MINI',
             '2' => 'PEQUENO',
 			'3' => 'MÉDIO',
@@ -3389,6 +3395,7 @@ class Orcatrata extends CI_Controller {
             'P' => '.%',
             'V' => 'R$',
         );
+		$data['select']['RacaPet'] = $this->Cliente_model->select_racapet();	
 		$data['select']['RelacaoDep'] = $this->Cliente_model->select_relacao();			
         $data['select']['UsarCashBack'] = $this->Basico_model->select_status_sn();
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
@@ -3665,6 +3672,10 @@ class Orcatrata extends CI_Controller {
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
         $data['diferenca'] = floatval ($data['diferenca']);  
 		
+		
+		$data['q3'] = $this->Clientepet_model->list_racapet(TRUE);
+		$data['list3'] = $this->load->view('clientepet/list_racapet', $data, TRUE);
+
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_OrcaTrata ####
@@ -4324,6 +4335,7 @@ class Orcatrata extends CI_Controller {
 			'PeloPet',
 			'PortePet',
 			'EspeciePet',
+			'RacaPet',
 			'RelacaoDep',
         ), TRUE));
 
@@ -4814,6 +4826,7 @@ class Orcatrata extends CI_Controller {
             'P' => '.%',
             'V' => 'R$',
         );
+		$data['select']['RacaPet'] = $this->Cliente_model->select_racapet();
 		$data['select']['RelacaoDep'] = $this->Cliente_model->select_relacao();			
         $data['select']['UsarCashBack'] = $this->Basico_model->select_status_sn();
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
@@ -5104,6 +5117,9 @@ class Orcatrata extends CI_Controller {
 		$data['somatotal'] = floatval ($data['somatotal']);
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
         $data['diferenca'] = floatval ($data['diferenca']);		
+		
+		$data['q3'] = $this->Clientepet_model->list_racapet(TRUE);
+		$data['list3'] = $this->load->view('clientepet/list_racapet', $data, TRUE);
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 

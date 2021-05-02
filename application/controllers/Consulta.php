@@ -12,7 +12,7 @@ class Consulta extends CI_Controller {
         #load libraries
         $this->load->helper(array('form', 'url', 'date', 'string'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Consulta_model', 'Orcatrata_model', 'Empresafilial_model', 'Cliente_model', 'Agenda_model'));
+        $this->load->model(array('Basico_model', 'Consulta_model', 'Orcatrata_model', 'Empresafilial_model', 'Cliente_model', 'Clientepet_model', 'Agenda_model'));
         $this->load->driver('session');
 
         #load header view
@@ -53,6 +53,7 @@ class Consulta extends CI_Controller {
 			'PeloPet',
 			'PortePet',
 			'EspeciePet',
+			'RacaPet',
 			'Vincular',
 			'NovaOS',
 			'PorConsulta',
@@ -151,26 +152,27 @@ class Consulta extends CI_Controller {
 
 		
 		$data['select']['EspeciePet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'CÃO',
             '2' => 'GATO',
 			'3' => 'AVE',
         );		
 		$data['select']['PeloPet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'CURTO',
             '2' => 'MÉDIO',
 			'3' => 'LONGO',
 			'4' => 'CACHEADO',
         );		
 		$data['select']['PortePet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'MINI',
             '2' => 'PEQUENO',
 			'3' => 'MÉDIO',
 			'4' => 'GRANDE',
 			'5' => 'GIGANTE',
         );
+		$data['select']['RacaPet'] = $this->Cliente_model->select_racapet();
 		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['Repetir'] = $this->Basico_model->select_status_sn();
 		$data['select']['Vincular'] = $this->Basico_model->select_status_sn();
@@ -262,6 +264,9 @@ class Consulta extends CI_Controller {
         $data['timepicker'] = 'TimePicker';
 
         #$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+		
+		$data['q3'] = $this->Clientepet_model->list_racapet(TRUE);
+		$data['list3'] = $this->load->view('clientepet/list_racapet', $data, TRUE);
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
@@ -554,6 +559,7 @@ class Consulta extends CI_Controller {
 			'PeloPet',
 			'PortePet',
 			'EspeciePet',
+			'RacaPet',
 			'id_Cliente_Auto',
 			'NomeClienteAuto',
         ), TRUE));
@@ -686,26 +692,27 @@ class Consulta extends CI_Controller {
 
 		
 		$data['select']['EspeciePet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'CÃO',
             '2' => 'GATO',
 			'3' => 'AVE',
         );		
 		$data['select']['PeloPet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'CURTO',
             '2' => 'MÉDIO',
 			'3' => 'LONGO',
 			'4' => 'CACHEADO',
         );		
 		$data['select']['PortePet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'MINI',
             '2' => 'PEQUENO',
 			'3' => 'MÉDIO',
 			'4' => 'GRANDE',
 			'5' => 'GIGANTE',
         );
+		$data['select']['RacaPet'] = $this->Cliente_model->select_racapet();
 		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['Repetir'] = $this->Basico_model->select_status_sn(); 
 		$data['select']['Vincular'] = $this->Basico_model->select_status_sn();
@@ -827,6 +834,10 @@ class Consulta extends CI_Controller {
 		echo "</pre>";
 		exit();	
 		*/
+
+		
+		$data['q3'] = $this->Clientepet_model->list_racapet(TRUE);
+		$data['list3'] = $this->load->view('clientepet/list_racapet', $data, TRUE);		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
@@ -1817,6 +1828,7 @@ class Consulta extends CI_Controller {
 			'Cadastrar',
 			'PeloPet',
 			'PortePet',
+			'RacaPet',
 			'Vincular',
 			'NovaOS',
 			'PorConsulta',
@@ -1916,26 +1928,27 @@ class Consulta extends CI_Controller {
             $data['div']['Paciente'] = '' : $data['div']['Paciente'] = 'style="display: none;"';
 		
 		$data['select']['EspeciePet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'CÃO',
             '2' => 'GATO',
 			'3' => 'AVE',
         );	
 		$data['select']['PeloPet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'CURTO',
             '2' => 'MÉDIO',
 			'3' => 'LONGO',
 			'4' => 'CACHEADO',
         );		
 		$data['select']['PortePet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'MINI',
             '2' => 'PEQUENO',
 			'3' => 'MÉDIO',
 			'4' => 'GRANDE',
 			'5' => 'GIGANTE',
-        );	
+        );
+		$data['select']['RacaPet'] = $this->Cliente_model->select_racapet();	
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['DeletarOS'] = $this->Basico_model->select_status_sn();
 		$data['select']['Vincular'] = $this->Basico_model->select_status_sn();
@@ -2018,6 +2031,9 @@ class Consulta extends CI_Controller {
             $data['div']['PorConsulta'] = '' : $data['div']['PorConsulta'] = 'style="display: none;"';
 
         $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+		
+		$data['q3'] = $this->Clientepet_model->list_racapet(TRUE);
+		$data['list3'] = $this->load->view('clientepet/list_racapet', $data, TRUE);
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');

@@ -722,4 +722,41 @@ class Cliente_model extends CI_Model {
         return $array;
     }
 
+	public function select_racapet($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+                SELECT 
+                    TR.idTab_RacaPet,
+                    CONCAT(IFNULL(TR.RacaPet,"")) AS RacaPet
+				FROM
+                    Tab_RacaPet AS TR
+				WHERE
+					TR.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				ORDER BY 
+					TR.RacaPet ASC
+			');
+
+        } else {
+            $query = $this->db->query('
+                SELECT 
+                    TR.idTab_RacaPet,
+                    CONCAT(IFNULL(TR.RacaPet,"")) AS RacaPet
+				FROM
+                    Tab_RacaPet AS TR
+				WHERE
+					TR.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				ORDER BY 
+					RacaPet ASC
+			');
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_RacaPet] = $row->RacaPet;
+				#$array[$row->Relacao] = $row->Relacao;
+            }
+        }
+
+        return $array;
+    }
+
 }

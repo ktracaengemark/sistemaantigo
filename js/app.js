@@ -97,6 +97,10 @@ $(function () {
 			$('#idApp_ClienteDep').hide();
 			$('#Dep').val('');
 			$('#Dep').hide();
+			$('#idApp_ClientePet').val('0');
+			$('#idApp_ClientePet').hide();
+			$('#Pet').val('');
+			$('#Pet').hide();
 			
 			$('#CashBackOrca').val('0,00');
 			
@@ -176,6 +180,7 @@ function Aguardar () {
 	$('.aguardarCatprom').hide();
 	$('.aguardarCatprod').hide();
 	$('.aguardarAtributo').hide();
+	$('.aguardarRacaPet').hide();
 	$('.aguardarOpcao').hide();
 	$('.aguardarAlterarMotivo').hide();
 	$('.aguardarAlterarCategoria').hide();
@@ -184,9 +189,11 @@ function Aguardar () {
 	$('.aguardarAlterarCatprod').hide();
 	$('.aguardarAlterarProduto').hide();
 	$('.aguardarAlterarAtributo').hide();
+	$('.aguardarAlterarRacaPet').hide();
 	$('.aguardarAlterarOpcao').hide();
 	$('.aguardarExcluirCatprod').hide();
 	$('.aguardarExcluirAtributo').hide();
+	$('.aguardarExcluirRacaPet').hide();
 	$('.aguardarExcluirOpcao').hide();
 	$('.aguardarExcluirProduto').hide();
 	$('.aguardarExcluirCatprom').hide();
@@ -758,6 +765,221 @@ $('#insert_clientepet_form').on('submit', function(event){
 			});
 			
 		}
+	}
+	
+});	
+
+$('#insert_racapet_form').on('submit', function(event){
+	//alert('ok');
+	event.preventDefault();
+	if($('#Novo_RacaPet').val() == ""){
+		//Alerta de campo  vazio
+		$("#msg-error-racapet").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+	}else{
+		//Fechar o botão cadastrar
+		$('#botaoCadRacaPet').hide();
+							
+		//Fechar o botão fechar
+		$('#botaoFecharRacaPet').hide();
+		
+		//Abre o Aguardar
+		$('.aguardarRacaPet').show();	
+		
+		//Receber os dados do formulário
+		var dados = $("#insert_racapet_form").serialize();
+		//console.log(dados);
+		
+		$.post(window.location.origin+ '/' + app + '/cadastros/inserir/RacaPet.php?', dados, function (retorna){
+		 //console.log(retorna);
+			
+			if(retorna == 1){
+			
+				//Limpar os campo
+				$('#insert_racapet_form')[0].reset();
+				
+				//Fechar a janela modal cadastrar
+				$('#addRacaPetModal').modal('hide');
+				
+				$('#addClientePetModal').modal('hide');
+				
+				//Alerta de cadastro realizado com sucesso
+				//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+				$('#msgCadSucesso').modal('show');
+				
+				//Limpar mensagem de erro
+				$("#msg-error-racapet").html('');
+				
+				//listar_usuario(1, 50);
+			}else{
+				$("#msg-error-racapet").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar RacaPet!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+							
+				//Abre o botão fechar
+				$('#botaoFecharRacaPet').show();
+				
+				//Fecha o Aguardar
+				$('.aguardarRacaPet').hide();				
+			
+			}
+			
+			
+		});
+		
+		
+	}	
+});
+
+$('#alterarRacaPet').on('show.bs.modal', function (event) {
+	var button = $(event.relatedTarget)
+	var recipientidracapet = button.data('whateveridracapet')
+	var recipientracapet = button.data('whateverracapet')
+	//console.log(recipientracapet);
+	var modal = $(this)
+	modal.find('.modal-title').text('id da Variacao: ' + recipientidracapet)
+	modal.find('#id_RacaPet').val(recipientidracapet)
+	modal.find('#Nome_RacaPet').val(recipientracapet)
+})
+
+$('#alterar_racapet_form').on('submit', function(event){
+	//alert('ok - Alterar o RacaPet');
+	
+	event.preventDefault();
+	var racapet = $('#Nome_RacaPet').val();
+	//console.log(racapet);
+	//exit();
+	
+	if($('#Nome_RacaPet').val() == ""){
+		//Alerta de campo  vazio
+		$("#msg-error-alterar-racapet").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+	}else{
+		
+		//Fechar a mensagem de erro
+		$('#msg-error-alterar-racapet').hide();
+		//Fechar o botão Alterar
+		$('#AlterarRacaPet').hide();
+		//Fechar o botão Cancelar
+		$('#CancelarRacaPet').hide();
+		//Abre o Aguardar
+		$('.aguardarAlterarRacaPet').show();
+		//Fechar a janela modal alterar
+		$('#addRacaPetModal').modal('hide');
+		
+		//Receber os dados do formulário
+		var dados = $("#alterar_racapet_form").serialize();
+		//console.log(dados);
+		
+		$.post(window.location.origin+ '/' + app + '/cadastros/alterar/RacaPet.php?', dados, function (retorna){
+		 
+			//console.log(retorna);
+			
+			if(retorna == 1){
+			
+				//Limpar os campo
+				$('#alterar_racapet_form')[0].reset();
+				
+				//Fechar a janela modal alterar
+				$('#alterarRacaPet').modal('hide');
+				
+				$('#addClientePetModal').modal('hide');
+							
+				//Alerta de cadastro realizado com sucesso
+				//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+				$('#msgCadSucesso').modal('show');
+				
+				//Limpar mensagem de erro
+				$("#msg-error-alterar-racapet").html('');
+				
+				//listar_usuario(1, 50);
+			}else{
+				$("#msg-error-alterar-racapet").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o RacaPet!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				
+				//Abre o botão Cancelar
+				$('#CancelarRacaPet').show();
+				
+				//Fecha o Aguardar
+				$('.aguardarAlterarRacaPet').hide();				
+			}
+			
+		});
+		
+	}
+	
+});	
+
+$('#excluirRacaPet').on('show.bs.modal', function (event) {
+	var button = $(event.relatedTarget)
+	var recipientidracapet = button.data('whateveridracapet')
+	var recipientracapet = button.data('whateverracapet')
+	//console.log(recipientracapet);
+	var modal = $(this)
+	modal.find('.modal-title').text('id da Variacao: ' + recipientidracapet)
+	modal.find('#id_ExcluirRacaPet').val(recipientidracapet)
+	modal.find('#ExcluirRacaPet').val(recipientracapet)
+})
+
+$('#excluir_racapet_form').on('submit', function(event){
+	//alert('ok - Excluir o RacaPet');
+	
+	event.preventDefault();
+	var racapet = $('#id_ExcluirRacaPet').val();
+	//console.log(racapet);
+	//exit();
+	
+	if($('#id_ExcluirRacaPet').val() == ""){
+		//Alerta de campo  vazio
+		$("#msg-error-excluir-racapet").html('<div class="alert alert-danger" role="alert">Necessário Informar o RacaPet!</div>');						
+	}else{
+		//$("#msg-error-excluir-racapet").html('<div class="alert alert-success" role="alert">RacaPet Informado!</div>');
+		
+		//Fechar a mensagem de erro
+		$('#msg-error-excluir-racapet').hide();
+		//Fechar o botão Excluir
+		$('#ExcluirRacaPet').hide();
+		//Fechar o botão Cancelar
+		$('#CancelarExcluirRacaPet').hide();
+		//Abre o Aguardar
+		$('.aguardarExcluirRacaPet').show();
+		//Fechar a janela modal excluir
+		$('#addRacaPetModal').modal('hide');
+		
+		//Receber os dados do formulário
+		var dados = $("#excluir_racapet_form").serialize();
+		//console.log(dados);
+		
+		$.post(window.location.origin+ '/' + app + '/cadastros/excluir/RacaPet.php?', dados, function (retorna){
+		 
+			//console.log(retorna);
+			
+			if(retorna == 1){
+			
+				//Limpar os campo
+				$('#excluir_racapet_form')[0].reset();
+				
+				//Fechar a janela modal excluir
+				$('#excluirRacaPet').modal('hide');
+				
+				$('#addClientePetModal').modal('hide');
+							
+				//Alerta de cadastro realizado com sucesso
+				//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+				$('#msgCadSucesso').modal('show');
+				
+				//Limpar mensagem de erro
+				$("#msg-error-excluir-racapet").html('');
+				
+				//listar_usuario(1, 50);
+			}else{
+				$("#msg-error-excluir-racapet").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao Excluir a Variação!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+			
+				//Abre o botão Cancelar
+				$('#CancelarExcluirRacaPet').show();
+				
+				//Fecha o Aguardar
+				$('.aguardarExcluirRacaPet').hide();				
+			
+			}
+			
+		});
+		
 	}
 	
 });	

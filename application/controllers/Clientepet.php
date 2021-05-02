@@ -47,6 +47,10 @@ class Clientepet extends CI_Controller {
         else
             $data['msg'] = '';
 
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idApp_ClientePet',
             'idApp_Cliente',
@@ -68,30 +72,34 @@ class Clientepet extends CI_Controller {
 
         //echo '<br><br><br><br><br>==========================================='.$data['query']['StatusVidaPet']='V';
 
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		//$data['select']['SexoPet'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVidaPet'] = $this->Clientepet_model->select_status_vida();
 		$data['select']['AtivoPet'] = $this->Basico_model->select_status_sn();
 		$data['select']['AlergicoPet'] = $this->Basico_model->select_status_sn();
+		$data['select']['RacaPet'] = $this->Cliente_model->select_racapet();
 		$data['select']['EspeciePet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'CÃO',
             '2' => 'GATO',
 			'3' => 'AVE',
         );
 		$data['select']['SexoPet'] = array(
-			'O' => '',
+			//'O' => '',
 			'M' => 'MACHO',
 			'F' => 'FÊMEA',
         );
 		$data['select']['PeloPet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'CURTO',
             '2' => 'MÉDIO',
 			'3' => 'LONGO',
 			'4' => 'CACHEADO',
         );		
 		$data['select']['PortePet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'MINI',
             '2' => 'PEQUENO',
 			'3' => 'MÉDIO',
@@ -104,13 +112,22 @@ class Clientepet extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
-
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		
         $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
-
+		
+		$data['q3'] = $this->Clientepet_model->list_racapet(TRUE);
+		$data['list3'] = $this->load->view('clientepet/list_racapet', $data, TRUE);
+		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         $this->form_validation->set_rules('NomeClientePet', 'Nome do Pet', 'required|trim');
         $this->form_validation->set_rules('DataNascimentoPet', 'Data de Nascimento', 'trim|valid_date');
-		
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('clientepet/form_clientepet', $data);
@@ -161,6 +178,10 @@ class Clientepet extends CI_Controller {
         else
             $data['msg'] = '';
 
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+		
         $data['query'] = $this->input->post(array(
             'idApp_ClientePet',
             'idApp_Cliente',
@@ -185,10 +206,12 @@ class Clientepet extends CI_Controller {
             //$_SESSION['ClientePet']['idApp_ClientePet'] = $id;
         }
 		
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		//$data['select']['SexoPet'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVidaPet'] = $this->Clientepet_model->select_status_vida();      
 		$data['select']['AtivoPet'] = $this->Basico_model->select_status_sn();    
 		$data['select']['AlergicoPet'] = $this->Basico_model->select_status_sn();
+		$data['select']['RacaPet'] = $this->Cliente_model->select_racapet();
 		$data['select']['EspeciePet'] = array (
             '0' => '',
             '1' => 'CÃO',
@@ -221,12 +244,22 @@ class Clientepet extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
-
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		
         $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+		
+		$data['q3'] = $this->Clientepet_model->list_racapet(TRUE);
+		$data['list3'] = $this->load->view('clientepet/list_racapet', $data, TRUE);
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         $this->form_validation->set_rules('NomeClientePet', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimentoPet', 'Data de Nascimento', 'trim|valid_date');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
