@@ -193,7 +193,8 @@
 									<?php echo form_error('idApp_Agenda'); ?>
 								</div>
 								<?php if($alterarcliente == 1){?>
-									<div class="col-md-4 text-left">
+									<!--
+										<div class="col-md-4 text-left">
 										<label  id="NomeClienteAuto1">Cliente: <?php echo $cadastrar['NomeClienteAuto']; ?></label>
 										<input type="text" name="id_Cliente_Auto" id="id_Cliente_Auto" value="<?php echo $cadastrar['id_Cliente_Auto']; ?>" class="form-control" placeholder="Pesquisar Cliente">
 										<?php echo form_error('idApp_Cliente'); ?>
@@ -201,7 +202,8 @@
 									<input type="hidden" id="NomeClienteAuto" name="NomeClienteAuto" value="<?php echo $cadastrar['NomeClienteAuto']; ?>" />
 									<input type="hidden" id="Hidden_id_Cliente_Auto" name="Hidden_id_Cliente_Auto" value="<?php echo $query['idApp_Cliente']; ?>" />
 									<input type="hidden" name="idApp_Cliente" id="idApp_Cliente" value="<?php echo $query['idApp_Cliente']; ?>" class="form-control" readonly= "">	
-									<!--
+									-->
+									
 									<div class="col-md-4">
 										<div class="row">
 											<div class="col-md-12 text-left">	
@@ -210,7 +212,7 @@
 														id="idApp_Cliente" name="idApp_Cliente">
 													<option value="">-- Sel. Cliente --</option>
 													<?php
-													/*
+													
 													foreach ($select['idApp_Cliente'] as $key => $row) {
 														if ($query['idApp_Cliente'] == $key) {
 															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -218,14 +220,14 @@
 															echo '<option value="' . $key . '">' . $row . '</option>';
 														}
 													}
-													*/
+													
 													?>
 												</select>
 												<?php #echo form_error('idApp_Cliente'); ?>
 											</div>
 										</div>
 									</div>
-									-->
+									
 									<?php if($_SESSION['Empresa']['CadastrarDep'] == "S"){?>
 										<input type="hidden" id="Hidden_idApp_ClienteDep" name="Hidden_idApp_ClienteDep" value="<?php echo $query['idApp_ClienteDep']; ?>" />
 										<div class="col-md-4 text-left">

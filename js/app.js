@@ -33,10 +33,11 @@ dataehora();
 qtd_ocorrencias();
 calculacashback();
 
+//a função de autocomplete está temporariamente desligada até se conseguir resolver a questão dos caracteres especiais
+/*
 $(function () {
 	// Atribui evento e função para limpeza dos campos
     $('#id_Cliente_Auto').on('input', limpaCampos);
-	$('#id_Cliente_Auto').on('change', limpaCampos);
 	
 	$('#id_Cliente_Auto').on('keyup', function(event){		
 		
@@ -119,7 +120,7 @@ $(function () {
     }	
 	
 });
-
+*/
 function codigo(id, tabela){
 	//alert('ok codigo');
 	var categoria = $('#idTab_Catprod').val();
@@ -712,19 +713,19 @@ $('#insert_clientepet_form').on('submit', function(event){
 	var id_cliente =  $('#idApp_Cliente').val();
 	$('#id_Cliente').val(id_cliente);
 
-	console.log(id_cliente);
+	//console.log(id_cliente);
 	//Limpar mensagem de erro
 	$("#msg-error-clientepet").html('');
 	
 	event.preventDefault();
 	if(id_cliente == "" || id_cliente == "0"){
-		console.log($('#id_Cliente').val());
+		//console.log($('#id_Cliente').val());
 		$("#msg-error-clientepet").html('<div class="alert alert-danger" role="alert">Cliente Não informado!</div>');						
 	}else{
 		//Limpar mensagem de erro
 		$("#msg-error-clientepet").html('');
 		
-		console.log($('#id_Cliente').val());
+		//console.log($('#id_Cliente').val());
 		if($('#NomeClientePet').val() == ""){
 			//Alerta de campo  vazio
 			$("#msg-error-clientepet").html('<div class="alert alert-danger" role="alert">Necessário prencher Nome do Pet!</div>');						
@@ -740,10 +741,10 @@ $('#insert_clientepet_form').on('submit', function(event){
 			
 			//Receber os dados do formulário
 			var dados = $("#insert_clientepet_form").serialize();
-			console.log(dados);
+			//console.log(dados);
 			
 			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/ClientePet.php?', dados, function (retorna){
-			 console.log(retorna);
+			 //console.log(retorna);
 				
 				if(retorna == 1){
 					//Limpar os campo
