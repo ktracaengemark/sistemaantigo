@@ -213,25 +213,25 @@ class Clientepet extends CI_Controller {
 		$data['select']['AlergicoPet'] = $this->Basico_model->select_status_sn();
 		$data['select']['RacaPet'] = $this->Cliente_model->select_racapet();
 		$data['select']['EspeciePet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'CÃO',
             '2' => 'GATO',
 			'3' => 'AVE',
         );
 		$data['select']['SexoPet'] = array(
-			'O' => '',
+			//'O' => '',
 			'M' => 'MACHO',
 			'F' => 'FÊMEA',
         );
 		$data['select']['PeloPet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'CURTO',
             '2' => 'MÉDIO',
 			'3' => 'LONGO',
 			'4' => 'CACHEADO',
         );		
 		$data['select']['PortePet'] = array (
-            '0' => '',
+            //'0' => '',
             '1' => 'MINI',
             '2' => 'PEQUENO',
 			'3' => 'MÉDIO',

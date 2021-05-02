@@ -4,7 +4,14 @@ include_once '../../conexao.php';
 
 if ($_GET['id']) {
 	//echo $_GET['id'];
-	$result = "SELECT * FROM App_ClientePet WHERE idApp_ClientePet='". $_GET['id'] ."'";
+	$result = "SELECT 
+					CP.*,
+					RP.RacaPet
+				FROM 
+					App_ClientePet AS CP
+						LEFT JOIN Tab_RacaPet AS RP ON RP.idTab_RacaPet = CP.RacaPet
+				WHERE 
+					CP.idApp_ClientePet='". $_GET['id'] ."'";
 	//echo $result;
 	$resultado = mysqli_query($conn, $result);
 	//echo $resultado;
@@ -20,6 +27,8 @@ if ($_GET['id']) {
 		'pelo' => utf8_encode($row_resultado['PeloPet']),
 		'cor' => utf8_encode($row_resultado['CorPet']),
 		'porte' => utf8_encode($row_resultado['PortePet']),
+		'peso' => utf8_encode($row_resultado['PesoPet']),
+		'alergico' => utf8_encode($row_resultado['AlergicoPet']),
 		'obs' => utf8_encode($row_resultado['ObsPet']),
 	);
 	echo json_encode($event_array);

@@ -241,7 +241,23 @@ function buscaPet(){
 				var pelo 		= data[0]['pelo'];
 				var cor 		= data[0]['cor'];
 				var porte 		= data[0]['porte'];
+				var peso 		= data[0]['peso'];
+				var alergico	= data[0]['alergico'];
 				var obs 		= data[0]['obs'];
+				
+				if(alergico == "S"){
+					var alergicopet = 'Sim';
+				}else{
+					var alergicopet = 'Não';
+				}
+				
+				if(sexo == "M"){
+					var sexopet = 'Macho';
+				}else if(sexo == "F"){
+					var sexopet = 'Fêmea';
+				}else{
+					var sexopet = 'NI';
+				}
 				
 				if(especie == 0 || especie == ''){
 					var especiepet = 'N.I.';
@@ -285,7 +301,7 @@ function buscaPet(){
 					var pelopet = 'N.I.';
 				}
 				
-				$("#Pet").html('<p>' + especiepet + '/ ' + raca + '/ ' + portepet + '/ ' + pelopet + '/ ' + obs + '</p>');
+				$("#Pet").html('<p>' + especiepet + '/ ' + raca + '/ ' + sexopet + '/ ' + portepet + '/ ' + peso + '/ Pelo: ' + pelopet + '/ Aler: ' + alergicopet + '/ Obs: ' + obs + '</p>');
 				//$("#Pet").html('<div class="alert alert-warning" role="alert">' + nome + '/ ' + especiepet + '/ ' + portepet + '/<br>' + raca + '/ ' + pelopet + '</div>');
 				
 			},
@@ -411,8 +427,24 @@ $('#idApp_ClientePet').on('change', function(event){
 			var pelo 		= data[0]['pelo'];
 			var cor 		= data[0]['cor'];
 			var porte 		= data[0]['porte'];
+			var peso 		= data[0]['peso'];
+			var alergico	= data[0]['alergico'];
 			var obs 		= data[0]['obs'];
 			
+			if(alergico == "S"){
+				var alergicopet = 'Sim';
+			}else{
+				var alergicopet = 'Não';
+			}
+							
+			if(sexo == "M"){
+				var sexopet = 'Macho';
+			}else if(sexo == "F"){
+				var sexopet = 'Fêmea';
+			}else{
+				var sexopet = 'NI';
+			}
+				
 			if(especie == 0 || especie == ''){
 				var especiepet = 'N.I.';
 			}else if(especie == 1){
@@ -455,7 +487,7 @@ $('#idApp_ClientePet').on('change', function(event){
 				var pelopet = 'N.I.';
 			}
 			
-			$("#Pet").html('<p>' + especiepet + '/ ' + raca + '/ ' + portepet + '/ ' + pelopet + '/ ' + obs + '</p>');
+			$("#Pet").html('<p>' + especiepet + '/ ' + raca + '/ ' + sexopet + '/ ' + portepet + '/ ' + peso + '/ Pelo: ' + pelopet + '/ Aler: ' + alergicopet + '/ Obs: ' + obs + '</p>');
 			
 		},
 		error:function(data){

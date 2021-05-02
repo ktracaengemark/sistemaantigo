@@ -52,12 +52,14 @@ class Relatorio_model extends CI_Model {
 				CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,"")) AS NomeCliente,
 				CP.*,
 				CONCAT(IFNULL(CP.idApp_ClientePet,""), " - " ,IFNULL(CP.NomeClientePet,"")) AS NomeClientePet,
+				RP.RacaPet,
 				CD.*,
 				CONCAT(IFNULL(CD.idApp_ClienteDep,""), " - " ,IFNULL(CD.NomeClienteDep,"")) AS NomeClienteDep
             FROM
                 App_Consulta AS CO
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = CO.idApp_Cliente
 					LEFT JOIN App_ClientePet AS CP ON CP.idApp_ClientePet = CO.idApp_ClientePet
+					LEFT JOIN Tab_RacaPet AS RP ON RP.idTab_RacaPet = CP.RacaPet
 					LEFT JOIN App_ClienteDep AS CD ON CD.idApp_ClienteDep = CO.idApp_ClienteDep
             WHERE
 				' . $date_inicio_orca . '
