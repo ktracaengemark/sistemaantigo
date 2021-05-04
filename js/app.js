@@ -32,6 +32,7 @@ exibirDescOrca();
 dataehora();
 qtd_ocorrencias();
 calculacashback();
+//calculaTotalOS();
 
 //a função de autocomplete está temporariamente desligada até se conseguir resolver a questão dos caracteres especiais
 /*
@@ -5605,7 +5606,7 @@ function usarcashback(usarcash) {
 	
 	var recorrencias = $('#Recorrencias').val();
 	recorrencias		= parseFloat(recorrencias);
-	//console.log('Total de Recorrencias = ' + recorrencias);	
+	console.log('Total de Recorrencias = ' + recorrencias);	
 	
 	var valortotalorca 	= $('#ValorTotalOrca').val();
 	valortotalorca 		= valortotalorca.replace(".","").replace(",",".");
@@ -5620,10 +5621,10 @@ function usarcashback(usarcash) {
 	var cashbackorca 	= $('#CashBackOrca').val();
 	cashbackorca 		= cashbackorca.replace(".","").replace(",",".");
 	cashbackorca		= parseFloat(cashbackorca);	
+	console.log('CashBack-cashbackorca = ' + cashbackorca);
 	
 	//console.log('CashBack-valortotalorca = ' + valortotalorca);
-	//console.log('CashBack-subvalorfinal = ' + subvalorfinal);
-	//console.log('CashBack-cashbackorca = ' + cashbackorca);	
+	//console.log('CashBack-subvalorfinal = ' + subvalorfinal);	
 	
 	if(Hidden_UsarCashBack == 'S'){
 		if(subvalorfinal >= cashbackorca){
@@ -5637,37 +5638,180 @@ function usarcashback(usarcash) {
 	
 	valorfinalorca	= parseFloat(valorfinalorca);
 	//valorfinalorca	= valorfinalorca.toFixed(2);
+	/*
+	if(recorrencias > 1){	
+		if(metodo == 1){
+			var valor_s_desc = valorfinalorca + (recorrencias - 1)*subvalorfinal;
+			var valor_c_desc = (recorrencias - 1)*subvalorfinal;	
+			
+			valor_s_desc	= parseFloat(valor_s_desc);
+			valor_s_desc 	= mascaraValorReal(valor_s_desc);
+
+			valor_c_desc	= parseFloat(valor_c_desc);
+			valor_c_desc 	= mascaraValorReal(valor_c_desc);		
+			
+			$('#Valor_C_Desc').val(valor_c_desc);
+			$('#Valor_S_Desc').val(valor_s_desc);
+		
+		
+		}else if(metodo == 2){
+			
+			var valor_c_desc = $('#Valor_C_Desc').val();
+			valor_c_desc 	= valor_c_desc.replace(".","").replace(",",".");
+			valor_c_desc	= parseFloat(valor_c_desc);	
+			
+			console.log(valor_c_desc);
+			var valor_s_desc = valorfinalorca + valor_c_desc;
+			valor_s_desc	= parseFloat(valor_s_desc);
+			valor_s_desc 	= mascaraValorReal(valor_s_desc);
+			console.log(valor_s_desc);
+			$('#Valor_S_Desc').val(valor_s_desc);
+			
+		}else{
+			var valor_s_desc = 0.00;
+			var valor_c_desc = 0.00;
+			
+			valor_s_desc	= parseFloat(valor_s_desc);
+			valor_s_desc 	= mascaraValorReal(valor_s_desc);
+
+			valor_c_desc	= parseFloat(valor_c_desc);
+			valor_c_desc 	= mascaraValorReal(valor_c_desc);		
+			
+			$('#Valor_C_Desc').val(valor_c_desc);
+			$('#Valor_S_Desc').val(valor_s_desc);			
+			
+		}
+	}else{
+		var valor_s_desc = valorfinalorca;
+		var valor_c_desc = 0.00;
+			
+		valor_s_desc	= parseFloat(valor_s_desc);
+		valor_s_desc 	= mascaraValorReal(valor_s_desc);
+
+		valor_c_desc	= parseFloat(valor_c_desc);
+		valor_c_desc 	= mascaraValorReal(valor_c_desc);		
+		
+		$('#Valor_C_Desc').val(valor_c_desc);
+		$('#Valor_S_Desc').val(valor_s_desc);	
+	}
+	*/
 	
-	var valor_s_desc = recorrencias*valortotalorca;
-	valor_s_desc	= parseFloat(valor_s_desc);
-	valor_s_desc 	= mascaraValorReal(valor_s_desc);
-	
-	//valor_s_desc	= valor_s_desc.toFixed(2);
-	//valor_s_desc 	= valor_s_desc.replace('.',',');
-	
-	//var valor_c_desc = recorrencias*valorfinalorca;
-	var valor_c_desc = valorfinalorca + (recorrencias - 1)*subvalorfinal;
-	valor_c_desc	= parseFloat(valor_c_desc);
-	valor_c_desc 	= mascaraValorReal(valor_c_desc);
-	
-	//valor_c_desc	= valor_c_desc.toFixed(2);
-	//valor_c_desc 	= valor_c_desc.replace('.',',');	
 
 	//valorfinalorca 	= valorfinalorca.replace('.',',');
+	subvalorfinal 	= mascaraValorReal(subvalorfinal);
 	valorfinalorca 	= mascaraValorReal(valorfinalorca);	
 	
 	$('#ValorFinalOrca').val(valorfinalorca);		
+
+	/*
+	valor_s_desc	= parseFloat(valor_s_desc);
+	valor_s_desc 	= mascaraValorReal(valor_s_desc);
+
+	valor_c_desc	= parseFloat(valor_c_desc);
+	valor_c_desc 	= mascaraValorReal(valor_c_desc);
+	
 	$('#Valor_C_Desc').val(valor_c_desc);
 	$('#Valor_S_Desc').val(valor_s_desc);
+	*/	
 	
 	if(metodo == 1){
 		//console.log('calculaParcelas = SIM');
 		calculaParcelas();
 	}
 	calculaTroco();	
-	
+	calculaTotalOS(subvalorfinal, valorfinalorca);
 }
 
+function calculaTotalOS(subvalorfinal, valorfinalorca) {
+	
+	if(subvalorfinal && valorfinalorca){
+		
+		subvalorfinal 	= subvalorfinal.replace(".","").replace(",",".");
+		subvalorfinal	= parseFloat(subvalorfinal);
+		subvalorfinal	= subvalorfinal.toFixed(2);
+	
+		valorfinalorca 	= valorfinalorca.replace(".","").replace(",",".");
+		valorfinalorca	= parseFloat(valorfinalorca);
+		valorfinalorca	= valorfinalorca.toFixed(2);
+		
+		console.log('subvalorfinal = ' + subvalorfinal);	
+		console.log('valorfinalorca = ' + valorfinalorca);	
+		
+		var metodo = $('#metodo').val();
+		console.log('metodo = ' + metodo);
+		
+		var recorrencias = $('#Recorrencias').val();
+		recorrencias		= parseFloat(recorrencias);
+		console.log('Total de Recorrencias = ' + recorrencias);	
+
+		if(recorrencias > 1){	
+			if(metodo == 1){
+				var valor_s_desc = -(-valorfinalorca -(recorrencias - 1)*subvalorfinal);
+				var valor_c_desc = (recorrencias - 1)*subvalorfinal;	
+				
+				valor_s_desc	= parseFloat(valor_s_desc);
+				valor_s_desc 	= mascaraValorReal(valor_s_desc);
+
+				valor_c_desc	= parseFloat(valor_c_desc);
+				valor_c_desc 	= mascaraValorReal(valor_c_desc);		
+				
+				console.log('valor_c_desc = ' + valor_c_desc);
+				console.log('valor_s_desc = ' + valor_s_desc);
+				
+				$('#Valor_C_Desc').val(valor_c_desc);
+				$('#Valor_S_Desc').val(valor_s_desc);
+			
+			
+			}else if(metodo == 2){
+				
+				var valor_c_desc = $('#Valor_C_Desc').val();
+				
+				valor_c_desc 	= valor_c_desc.replace(".","").replace(",",".");
+				
+				valor_c_desc	= parseFloat(valor_c_desc);
+				
+				valor_c_desc		= valor_c_desc.toFixed(2);	
+				
+				console.log('valor_c_desc = ' + valor_c_desc);
+				
+				var valor_s_desc = -(-valorfinalorca -valor_c_desc);
+				
+				valor_s_desc	= parseFloat(valor_s_desc);
+				valor_s_desc 	= mascaraValorReal(valor_s_desc);
+				
+				console.log('valor_s_desc = ' + valor_s_desc);
+				
+				$('#Valor_S_Desc').val(valor_s_desc);
+				
+			}else{
+				var valor_s_desc = 0.00;
+				var valor_c_desc = 0.00;
+				
+				valor_s_desc	= parseFloat(valor_s_desc);
+				valor_s_desc 	= mascaraValorReal(valor_s_desc);
+
+				valor_c_desc	= parseFloat(valor_c_desc);
+				valor_c_desc 	= mascaraValorReal(valor_c_desc);		
+				
+				$('#Valor_C_Desc').val(valor_c_desc);
+				$('#Valor_S_Desc').val(valor_s_desc);			
+				
+			}
+		}else{
+			var valor_s_desc = valorfinalorca;
+			var valor_c_desc = 0.00;
+				
+			valor_s_desc	= parseFloat(valor_s_desc);
+			valor_s_desc 	= mascaraValorReal(valor_s_desc);
+
+			valor_c_desc	= parseFloat(valor_c_desc);
+			valor_c_desc 	= mascaraValorReal(valor_c_desc);		
+			
+			$('#Valor_C_Desc').val(valor_c_desc);
+			$('#Valor_S_Desc').val(valor_s_desc);	
+		}
+	}
+}
 function calculaTroco(entrada) {
 
     //recebe o valor do orçamento
