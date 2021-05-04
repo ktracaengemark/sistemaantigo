@@ -5606,7 +5606,7 @@ function usarcashback(usarcash) {
 	
 	var recorrencias = $('#Recorrencias').val();
 	recorrencias		= parseFloat(recorrencias);
-	console.log('Total de Recorrencias = ' + recorrencias);	
+	//console.log('Total de Recorrencias = ' + recorrencias);	
 	
 	var valortotalorca 	= $('#ValorTotalOrca').val();
 	valortotalorca 		= valortotalorca.replace(".","").replace(",",".");
@@ -5621,7 +5621,7 @@ function usarcashback(usarcash) {
 	var cashbackorca 	= $('#CashBackOrca').val();
 	cashbackorca 		= cashbackorca.replace(".","").replace(",",".");
 	cashbackorca		= parseFloat(cashbackorca);	
-	console.log('CashBack-cashbackorca = ' + cashbackorca);
+	//console.log('CashBack-cashbackorca = ' + cashbackorca);
 	
 	//console.log('CashBack-valortotalorca = ' + valortotalorca);
 	//console.log('CashBack-subvalorfinal = ' + subvalorfinal);	
@@ -5734,15 +5734,15 @@ function calculaTotalOS(subvalorfinal, valorfinalorca) {
 		valorfinalorca	= parseFloat(valorfinalorca);
 		valorfinalorca	= valorfinalorca.toFixed(2);
 		
-		console.log('subvalorfinal = ' + subvalorfinal);	
-		console.log('valorfinalorca = ' + valorfinalorca);	
+		//console.log('subvalorfinal = ' + subvalorfinal);	
+		//console.log('valorfinalorca = ' + valorfinalorca);	
 		
 		var metodo = $('#metodo').val();
-		console.log('metodo = ' + metodo);
+		//console.log('metodo = ' + metodo);
 		
 		var recorrencias = $('#Recorrencias').val();
 		recorrencias		= parseFloat(recorrencias);
-		console.log('Total de Recorrencias = ' + recorrencias);	
+		//console.log('Total de Recorrencias = ' + recorrencias);	
 
 		if(recorrencias > 1){	
 			if(metodo == 1){
@@ -5755,8 +5755,8 @@ function calculaTotalOS(subvalorfinal, valorfinalorca) {
 				valor_c_desc	= parseFloat(valor_c_desc);
 				valor_c_desc 	= mascaraValorReal(valor_c_desc);		
 				
-				console.log('valor_c_desc = ' + valor_c_desc);
-				console.log('valor_s_desc = ' + valor_s_desc);
+				//console.log('valor_c_desc = ' + valor_c_desc);
+				//console.log('valor_s_desc = ' + valor_s_desc);
 				
 				$('#Valor_C_Desc').val(valor_c_desc);
 				$('#Valor_S_Desc').val(valor_s_desc);
@@ -5772,14 +5772,14 @@ function calculaTotalOS(subvalorfinal, valorfinalorca) {
 				
 				valor_c_desc		= valor_c_desc.toFixed(2);	
 				
-				console.log('valor_c_desc = ' + valor_c_desc);
+				//console.log('valor_c_desc = ' + valor_c_desc);
 				
 				var valor_s_desc = -(-valorfinalorca -valor_c_desc);
 				
 				valor_s_desc	= parseFloat(valor_s_desc);
 				valor_s_desc 	= mascaraValorReal(valor_s_desc);
 				
-				console.log('valor_s_desc = ' + valor_s_desc);
+				//console.log('valor_s_desc = ' + valor_s_desc);
 				
 				$('#Valor_S_Desc').val(valor_s_desc);
 				

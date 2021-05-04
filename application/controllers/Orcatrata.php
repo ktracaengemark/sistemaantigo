@@ -8582,7 +8582,7 @@ class Orcatrata extends CI_Controller {
 		$data['valorfinal_soma_os'] = number_format($data['valorfinal_soma_os'],2,",",".");
 		
 		(!$data['cadastrar']['Valor_S_Desc']) ? $data['cadastrar']['Valor_S_Desc'] = $data['valorfinal_soma_os'] : FALSE;
-		
+		/*
 		echo '<br>';
 		echo "<pre>";
 		echo '<br>';
@@ -8597,7 +8597,7 @@ class Orcatrata extends CI_Controller {
 		print_r($data['valorfinal_soma_os']);
 		echo "</pre>";
 		//exit();		
-		
+		*/
 		if($data['count_orcatratas'] <= 0){
 			$data['vinculadas'] = 0;
 		}else{
