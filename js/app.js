@@ -5812,6 +5812,7 @@ function calculaTotalOS(subvalorfinal, valorfinalorca) {
 		}
 	}
 }
+
 function calculaTroco(entrada) {
 
     //recebe o valor do orçamento
