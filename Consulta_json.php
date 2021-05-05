@@ -103,7 +103,7 @@ while ($row = mysql_fetch_assoc($result)) {
         $c = '_evento';
 		
         //(strlen(utf8_encode($row['Obs'])) > 20) ? $title = substr(utf8_encode($row['Obs']), 0, 20).'...' : $title = utf8_encode($row['Obs']);
-        $title = 'Prof: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1") . ' - Obs: ' . mb_convert_encoding($row['Obs'], "UTF-8", "ISO-8859-1");
+        $title = 'Prof: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1") . ' - Evento: ' . mb_convert_encoding($row['Obs'], "UTF-8", "ISO-8859-1");
         $titlecliente = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
 		$subtitle = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
 		$profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
@@ -117,7 +117,7 @@ while ($row = mysql_fetch_assoc($result)) {
         $c = '/' . $row['idApp_Cliente'];
 
         if ($row['Paciente'] == 'D') {
-            $title = 'Prf: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1") . ' - Cli: ' . mb_convert_encoding($row['NomeContatoCliente'], "UTF-8", "ISO-8859-1");
+            $title = 'Cli: ' . mb_convert_encoding($row['NomeContatoCliente'], "UTF-8", "ISO-8859-1") . ' - Prf: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
             $titlecliente = mb_convert_encoding($row['NomeContatoCliente'], "UTF-8", "ISO-8859-1");
 			$subtitle = mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
 			#$profissional = utf8_encode($row['NomeUsuario']);
@@ -131,7 +131,7 @@ while ($row = mysql_fetch_assoc($result)) {
         } else {
 
             #$title = utf8_encode($row['NomeCliente']);
-            $title = 'Prf: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1") . ' - Cli: ' . mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
+            $title = 'Cli: ' . mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1") . ' - Prf: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
             $titlecliente = mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
             $subtitle = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
             $profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
