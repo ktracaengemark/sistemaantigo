@@ -4922,6 +4922,34 @@ class Orcatrata extends CI_Controller {
 		$data['count_orca'] = count($_SESSION['Consultas_orca']);// conta quantos idApp_OrcaTrata existem na tabela de APP_Consultas,  na posicao idApp_OrcaTrata
 		$data['count_orcatratas'] = count($_SESSION['Orcatratas']);// conta quantos RepeticaoOrca, que está anotado nesta O.S., existem na tabela App_OrcaTrata, na posição RepeticaoOrca
 		
+		$data['orcatratas_total'] = $this->Orcatrata_model->get_orcatratas_repet_total($_SESSION['Orcatrata']['RepeticaoOrca'], $_SESSION['Orcatrata']['idApp_OrcaTrata']);	
+		$data['count_orcatratas_total'] = count($data['orcatratas_total']);
+		
+		$data['soma_cashback_repet_total_outras'] = 0;
+		if ($data['count_orcatratas_total'] > 0) {
+			$data['orcatratas_total'] = array_combine(range(1, count($data['orcatratas_total'])), array_values($data['orcatratas_total']));
+
+			if (isset($data['orcatratas_total'])) {
+
+				for($j=1; $j <= $data['count_orcatratas_total']; $j++) {
+					$data['soma_cashback_repet_total_outras'] += $data['orcatratas_total'][$j]['ValorComissaoCashBack'];
+					
+				}
+			}
+		}		
+				
+		echo '<br>';
+		echo "<pre>";
+		echo '<br>';
+		print_r($data['Recorrencias']);
+		echo '<br>';
+		print_r($data['count_orcatratas_total']);
+		echo '<br>';
+		print_r($data['soma_cashback_repet_total_outras']);
+		echo '<br>';
+		print_r($data['orcatratas_total']);
+		echo "</pre>";
+		//exit();		
 		
 		$data['orcatratas_s_pago'] = $this->Orcatrata_model->get_orcatratas_repet_s_pago($_SESSION['Orcatrata']['RepeticaoOrca'], $_SESSION['Orcatrata']['idApp_OrcaTrata']);	
 		$data['count_orcatratas_s_pago'] = count($data['orcatratas_s_pago']);
@@ -4938,21 +4966,7 @@ class Orcatrata extends CI_Controller {
 				}
 			}
 		}		
-		
-		
-		echo '<br>';
-		echo "<pre>";
-		echo '<br>';
-		print_r($data['Recorrencias']);
-		echo '<br>';
-		print_r($data['count_orcatratas_s_pago']);
-		echo '<br>';
-		print_r($data['soma_cashback_repet_s_pago_outras']);
-		echo '<br>';
-		print_r($data['orcatratas_s_pago']);
-		echo "</pre>";
-		//exit();		
-				
+	
 		$data['orcatratas_n_pago'] = $this->Orcatrata_model->get_orcatratas_repet_n_pago($_SESSION['Orcatrata']['RepeticaoOrca'], $_SESSION['Orcatrata']['idApp_OrcaTrata']);	
 		$data['count_orcatratas_n_pago'] = count($data['orcatratas_n_pago']);
 
@@ -4978,33 +4992,6 @@ class Orcatrata extends CI_Controller {
 		
 		(!$data['cadastrar']['Valor_S_Desc']) ? $data['cadastrar']['Valor_S_Desc'] = $data['valorfinal_soma_os'] : FALSE;
 		
-		/*
-		echo '<br>';
-		echo "<pre>";
-		echo '<br>';
-		print_r($data['count_orcatratas_n_pago']);
-		echo '<br>';
-		print_r($data['Recorrencias']);
-		echo '<br>';
-		print_r($data['orcatratas_n_pago']);
-		echo '<br>';
-		print_r($data['soma_repet_n_pago']);
-		echo "</pre>";
-		exit();		
-		*/		
-			/*	
-			echo '<br>';
-			echo "<pre>";
-			print_r('na App_Consulta, idApp_OrcaTrata = ' . $data['orcatrata']['idApp_OrcaTrata']);
-			echo '<br>';
-			print_r('Quantos aparecem na App_Consulta = ' . $data['count_orca']);
-			echo '<br>';
-			print_r('na App_Orcatrata, RepeticaoOrca = ' . $_SESSION['Orcatrata']['RepeticaoOrca']);
-			echo '<br>';
-			print_r('Quantos aparecem na App_Orcatrata = ' . $data['count_orcatratas']);
-			echo "</pre>";
-			exit ();
-			*/
 			
 		if($data['count_orcatratas'] <= 0){
 			$data['vinculadas'] = 0;
@@ -6270,7 +6257,7 @@ class Orcatrata extends CI_Controller {
 								
 							if ($data['cadastrar']['StatusParcelas'] == 'S') {		
 								//Somo o valorcashbackpedido + valorcashbackoutrasos + valoratualcashbackcliente
-								$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] + $data['valorcashbackpedido'] + $data['soma_cashback_repet_s_pago_outras'];
+								$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] + $data['valorcashbackpedido'] + $data['soma_cashback_repet_total_outras'];
 			
 								if($data['cliente_cashback']['CashBackCliente'] >= 0){
 									$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
@@ -6331,11 +6318,33 @@ class Orcatrata extends CI_Controller {
 			}			
 			
 			if($data['count_orcatratas'] > 0){
-				if($data['orcatrata']['QuitadoOrca'] == "S" && $data['cadastrar']['StatusParcelas'] == "S"){
-					for($j=0;$j<$data['count_orcatratas'];$j++) {
-						$data['update']['orcamentos']['bd'][$j] = $this->baixaparcelasrepet($_SESSION['Orcatratas'][$j]['idApp_OrcaTrata']);
+			
+				if($data['orcatrata']['QuitadoOrca'] == "S"){	
+					
+					if($data['cadastrar']['StatusParcelas'] == "S"){
+						
+						for($j=0;$j<$data['count_orcatratas'];$j++) {
+							$data['update']['orcamentos']['bd'][$j] = $this->baixaparcelasrepet($_SESSION['Orcatratas'][$j]['idApp_OrcaTrata']);
+						}
+						
+					}else{
+					
 					}
+					
+				}else{
+					
+					if($data['cadastrar']['StatusParcelas'] == "S"){
+						
+						for($j=0;$j<$data['count_orcatratas'];$j++) {
+							$data['update']['orcamentos']['bd'][$j] = $this->revert_baixaparcelasrepet($_SESSION['Orcatratas'][$j]['idApp_OrcaTrata']);
+						}
+						
+					}else{
+					
+					}
+									
 				}
+				
 				/*
 				if($data['orcatrata']['ConcluidoOrca'] == "S" && $data['cadastrar']['StatusProdutos'] == "S"){
 					for($j=0;$j<$data['count_orcatratas'];$j++) {
@@ -8672,6 +8681,35 @@ class Orcatrata extends CI_Controller {
 		$data['Recorrencias'] = $_SESSION['Orcatrata']['RecorrenciasOrca'];
 		$data['Recorrencias_outras'] = $data['Recorrencias'] - 1;
 		
+		$data['orcatratas_total'] = $this->Orcatrata_model->get_orcatratas_repet_total($_SESSION['Orcatrata']['RepeticaoOrca'], $_SESSION['Orcatrata']['idApp_OrcaTrata']);	
+		$data['count_orcatratas_total'] = count($data['orcatratas_total']);
+		
+		$data['soma_cashback_repet_total_outras'] = 0;
+		if ($data['count_orcatratas_total'] > 0) {
+			$data['orcatratas_total'] = array_combine(range(1, count($data['orcatratas_total'])), array_values($data['orcatratas_total']));
+
+			if (isset($data['orcatratas_total'])) {
+
+				for($j=1; $j <= $data['count_orcatratas_total']; $j++) {
+					$data['soma_cashback_repet_total_outras'] += $data['orcatratas_total'][$j]['ValorComissaoCashBack'];
+					
+				}
+			}
+		}		
+
+		echo '<br>';
+		echo "<pre>";
+		echo '<br>';
+		print_r($data['Recorrencias']);
+		echo '<br>';
+		print_r($data['count_orcatratas_total']);
+		echo '<br>';
+		print_r($data['soma_cashback_repet_total_outras']);
+		echo '<br>';
+		print_r($data['orcatratas_total']);
+		echo "</pre>";
+		//exit();		
+					
 		$data['orcatratas_s_pago'] = $this->Orcatrata_model->get_orcatratas_repet_s_pago($_SESSION['Orcatrata']['RepeticaoOrca'], $_SESSION['Orcatrata']['idApp_OrcaTrata']);	
 		$data['count_orcatratas_s_pago'] = count($data['orcatratas_s_pago']);
 		
@@ -8687,21 +8725,7 @@ class Orcatrata extends CI_Controller {
 				}
 			}
 		}		
-		
-		
-		echo '<br>';
-		echo "<pre>";
-		echo '<br>';
-		print_r($data['Recorrencias']);
-		echo '<br>';
-		print_r($data['count_orcatratas_s_pago']);
-		echo '<br>';
-		print_r($data['soma_cashback_repet_s_pago_outras']);
-		echo '<br>';
-		print_r($data['orcatratas_s_pago']);
-		echo "</pre>";
-		//exit();		
-				
+	
 		
 		$data['orcatratas_n_pago'] = $this->Orcatrata_model->get_orcatratas_repet_n_pago($_SESSION['Orcatrata']['RepeticaoOrca'], $_SESSION['Orcatrata']['idApp_OrcaTrata']);	
 		$data['count_orcatratas_n_pago'] = count($data['orcatratas_n_pago']);
@@ -9682,7 +9706,7 @@ class Orcatrata extends CI_Controller {
 								
 							if ($data['cadastrar']['StatusParcelas'] == 'S') {		
 								//Somo o valorcashbackpedido + valorcashbackoutrasos + valoratualcashbackcliente
-								$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] + $data['valorcashbackpedido'] + $data['soma_cashback_repet_s_pago_outras'];
+								$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] + $data['valorcashbackpedido'] + $data['soma_cashback_repet_total_outras'];
 			
 								if($data['cliente_cashback']['CashBackCliente'] >= 0){
 									$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
@@ -9743,11 +9767,33 @@ class Orcatrata extends CI_Controller {
 			}			
 			
 			if($data['count_orcatratas'] > 0){
-				if($data['orcatrata']['QuitadoOrca'] == "S" && $data['cadastrar']['StatusParcelas'] == "S"){
-					for($j=0;$j<$data['count_orcatratas'];$j++) {
-						$data['update']['orcamentos']['bd'][$j] = $this->baixaparcelasrepet($_SESSION['Orcatratas'][$j]['idApp_OrcaTrata']);
+			
+				if($data['orcatrata']['QuitadoOrca'] == "S"){	
+					
+					if($data['cadastrar']['StatusParcelas'] == "S"){
+						
+						for($j=0;$j<$data['count_orcatratas'];$j++) {
+							$data['update']['orcamentos']['bd'][$j] = $this->baixaparcelasrepet($_SESSION['Orcatratas'][$j]['idApp_OrcaTrata']);
+						}
+						
+					}else{
+					
 					}
+					
+				}else{
+					
+					if($data['cadastrar']['StatusParcelas'] == "S"){
+						
+						for($j=0;$j<$data['count_orcatratas'];$j++) {
+							$data['update']['orcamentos']['bd'][$j] = $this->revert_baixaparcelasrepet($_SESSION['Orcatratas'][$j]['idApp_OrcaTrata']);
+						}
+						
+					}else{
+					
+					}
+									
 				}
+				
 				/*
 				if($data['orcatrata']['ConcluidoOrca'] == "S" && $data['cadastrar']['StatusProdutos'] == "S"){
 					for($j=0;$j<$data['count_orcatratas'];$j++) {
@@ -13684,6 +13730,50 @@ class Orcatrata extends CI_Controller {
 					if(!$data['update']['parcelasrec']['alterar'][$j]['DataPago'] || $data['update']['parcelasrec']['alterar'][$j]['DataPago'] == "0000-00-00"){
 						$data['update']['parcelasrec']['alterar'][$j]['DataPago'] = $data['update']['parcelasrec']['alterar'][$j]['DataVencimento'];
 					}				
+				}
+				if (count($data['update']['parcelasrec']['alterar']))
+					$data['update']['parcelasrec']['bd']['alterar'] =  $this->Orcatrata_model->update_parcelas($data['update']['parcelasrec']['alterar']);
+
+			}
+		
+		}
+		
+		return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+		
+    }
+
+    public function revert_baixaparcelasrepet($id = FALSE) {
+        
+		if ($id) {
+            #### App_OrcaTrata ####
+            $_SESSION['Orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);		
+
+			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+			#### App_OrcaTrata ####
+			$data['orcatrata']['CombinadoFrete'] = "S";
+			$data['orcatrata']['AprovadoOrca'] = "S";
+			$data['orcatrata']['QuitadoOrca'] = "N";
+			$data['orcatrata']['FinalizadoOrca'] = "N";
+			
+			$data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata_baixa($id);
+			$data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+			$data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+				$data['update']['orcatrata']['anterior'],
+				$data['orcatrata'],
+				$data['update']['orcatrata']['campos'],
+				$id, 
+			TRUE);
+			$data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $id);
+
+
+			#### App_ParcelasRec ####
+			$data['update']['parcelasrec']['alterar'] = $this->Orcatrata_model->get_parcelas_posterior_sim($id);
+			if (isset($data['update']['parcelasrec']['alterar'])){
+			
+				$max = count($data['update']['parcelasrec']['alterar']);
+				for($j=0;$j<$max;$j++) {
+					$data['update']['parcelasrec']['alterar'][$j]['Quitado'] = 'N';	
+					$data['update']['parcelasrec']['alterar'][$j]['DataPago'] = "0000-00-00";
 				}
 				if (count($data['update']['parcelasrec']['alterar']))
 					$data['update']['parcelasrec']['bd']['alterar'] =  $this->Orcatrata_model->update_parcelas($data['update']['parcelasrec']['alterar']);

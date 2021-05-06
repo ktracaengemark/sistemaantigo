@@ -307,7 +307,41 @@ class Orcatrata_model extends CI_Model {
         */
         return $query;
     }
-			
+	
+    public function get_orcatratas_repet_total($data, $data2) {
+        $query = $this->db->query('
+			SELECT
+				OT.RepeticaoOrca,
+				OT.idApp_OrcaTrata,
+				PRD.idApp_Produto,
+				PRD.ValorComissaoCashBack
+			FROM 
+				App_OrcaTrata AS OT
+					LEFT JOIN App_Produto AS PRD ON PRD.idApp_OrcaTrata = OT.idApp_OrcaTrata
+			WHERE 
+				OT.RepeticaoOrca = ' . $data . ' AND
+				OT.idApp_OrcaTrata != ' . $data2 . ' AND
+				OT.RepeticaoOrca != 0 
+			ORDER BY
+				OT.idApp_OrcaTrata ASC
+		');
+        $query = $query->result_array();
+		
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($data);
+        echo '<br>';
+		print_r($data2);
+        echo '<br>';
+		print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+        return $query;
+    }
+				
     public function get_orcatrata_baixa($data) {
         $query = $this->db->query('
 			SELECT * 
