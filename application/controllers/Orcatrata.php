@@ -4970,7 +4970,7 @@ class Orcatrata extends CI_Controller {
 			}
 		}
 		
-				
+		/*		
 		echo '<br>';
 		echo "<pre>";
 		echo '<br>';
@@ -4983,7 +4983,7 @@ class Orcatrata extends CI_Controller {
 		print_r($data['orcatratas_n_pago']);
 		echo "</pre>";
 		//exit();		
-		
+		*/
 		
 		$data['valorfinal_os'] = $_SESSION['Orcatrata']['ValorFinalOrca'];
 		
@@ -8731,7 +8731,7 @@ class Orcatrata extends CI_Controller {
 				}
 			}
 		}
-		
+		/*
 		echo '<br>';
 		echo "<pre>";
 		echo '<br>';
@@ -8744,7 +8744,7 @@ class Orcatrata extends CI_Controller {
 		print_r($data['orcatratas_n_pago']);
 		echo "</pre>";
 		//exit();		
-		
+		*/
 		$data['valorfinal_os'] = $_SESSION['Orcatrata']['ValorFinalOrca'];
 		
 		$data['valorfinal_soma_os'] = $data['valorfinal_os'] + $data['soma_repet_n_pago']; 

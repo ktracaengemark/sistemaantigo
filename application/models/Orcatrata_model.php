@@ -136,6 +136,55 @@ class Orcatrata_model extends CI_Model {
         return $query[0];
     }
 
+    public function get_orcatrata_delete($data) {
+        $query = $this->db->query('
+			SELECT 
+				OT.idApp_Cliente,
+				OT.CanceladoOrca,
+				OT.QuitadoOrca
+			FROM 
+				App_OrcaTrata AS OT
+			WHERE 
+				OT.idApp_OrcaTrata = ' . $data . '
+		');
+        $query = $query->result_array();
+		
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
+    }
+
+    public function get_orcatrata_delete_produtos($data) {
+        $query = $this->db->query('
+			SELECT 
+				PRD.ValorComissaoCashBack
+			FROM 
+				App_OrcaTrata AS OT
+					LEFT JOIN App_Produto AS PRD ON PRD.idApp_OrcaTrata = OT.idApp_OrcaTrata
+			WHERE 
+				OT.idApp_OrcaTrata = ' . $data . '
+		');
+        $query = $query->result_array();
+		
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query;
+    }
+
     public function get_orcatrata($data) {
         $query = $this->db->query('
 			SELECT 
@@ -398,6 +447,14 @@ class Orcatrata_model extends CI_Model {
 
     public function get_cliente($data) {
         $query = $this->db->query('SELECT * FROM App_Cliente WHERE idApp_Cliente = ' . $data);
+
+        $query = $query->result_array();
+
+        return $query[0];
+    }
+
+    public function get_cliente_delete($data) {
+        $query = $this->db->query('SELECT CashBackCliente FROM App_Cliente WHERE idApp_Cliente = ' . $data);
 
         $query = $query->result_array();
 
@@ -3057,24 +3114,87 @@ class Orcatrata_model extends CI_Model {
     }
 
     public function delete_orcatrata($id) {
+		/*
+		echo '<br>';
+		echo "<pre>";
+		echo '<br>';
+		print_r($id);
+		echo "</pre>";
+		exit();	
+		*/
+		if(isset($id) && $id != 0 && $id != ''){
+			
+			$data['orcatrata'] = $this->Orcatrata_model->get_orcatrata_delete($id);
+			
+			$data['orcatrata_produtos'] = $this->Orcatrata_model->get_orcatrata_delete_produtos($id);
+			$data['count_orcatrata_produtos'] = count($data['orcatrata_produtos']);
+			
+			$data['soma_cashback_produtos'] = 0;
+			if ($data['count_orcatrata_produtos'] > 0) {
+				$data['orcatrata_produtos'] = array_combine(range(1, count($data['orcatrata_produtos'])), array_values($data['orcatrata_produtos']));
 
-        /*
-        $tables = array('App_Servico', 'App_Produto', 'App_Parcelas', 'App_Procedimento', 'App_OrcaTrata');
-        $this->db->where('idApp_Orcatrata', $id);
-        $this->db->delete($tables);
-        */
+				if (isset($data['orcatrata_produtos'])) {
 
-        $query = $this->db->delete('App_Servico', array('idApp_Orcatrata' => $id));
-        $query = $this->db->delete('App_Produto', array('idApp_Orcatrata' => $id));
-        $query = $this->db->delete('App_Parcelas', array('idApp_Orcatrata' => $id));
-        $query = $this->db->delete('App_Procedimento', array('idApp_Orcatrata' => $id));
-        $query = $this->db->delete('App_OrcaTrata', array('idApp_Orcatrata' => $id));
+					for($j=1; $j <= $data['count_orcatrata_produtos']; $j++) {
+						$data['soma_cashback_produtos'] += $data['orcatrata_produtos'][$j]['ValorComissaoCashBack'];
+						
+					}
+				}
+			}		
+
+			if(isset($data['orcatrata']['idApp_Cliente']) && $data['orcatrata']['idApp_Cliente'] != 0 && $data['orcatrata']['idApp_Cliente'] != ''){
+				
+				$data['cliente'] = $this->Orcatrata_model->get_cliente_delete($data['orcatrata']['idApp_Cliente'], TRUE);
+
+				if($data['orcatrata']['CanceladoOrca'] == "N"){
+					
+					if($data['orcatrata']['QuitadoOrca'] == "S"){
+						//muda o cashback		
+						$data['cliente_cashback']['CashBackCliente'] = $data['cliente']['CashBackCliente'] - $data['soma_cashback_produtos'];
+
+						if($data['cliente_cashback']['CashBackCliente'] >= 0){
+							$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
+						}else{
+							$data['cliente_cashback']['CashBackCliente'] = 0.00;
+						}
+						$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']); 
+					
+					}else{
+						//não muda o cashback
+					}
+				}else{
+					if($data['orcatrata']['QuitadoOrca'] == "S"){
+						//não muda o cashback
+					}else{
+						//não muda o cashback
+					}
+				}
+				
+
+			}else{
+				//não existe cliente - não faz nada		
+			}
+
+			
+			/*
+			$tables = array('App_Servico', 'App_Produto', 'App_Parcelas', 'App_Procedimento', 'App_OrcaTrata');
+			$this->db->where('idApp_Orcatrata', $id);
+			$this->db->delete($tables);
+			*/
+		
+			$query = $this->db->delete('App_Servico', array('idApp_Orcatrata' => $id));
+			$query = $this->db->delete('App_Produto', array('idApp_Orcatrata' => $id));
+			$query = $this->db->delete('App_Parcelas', array('idApp_Orcatrata' => $id));
+			$query = $this->db->delete('App_Procedimento', array('idApp_Orcatrata' => $id));
+			$query = $this->db->delete('App_OrcaTrata', array('idApp_Orcatrata' => $id));			
+		}
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
         } else {
             return TRUE;
         }
+		
     }
 
     public function delete_arquivos($id) {
