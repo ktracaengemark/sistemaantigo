@@ -4936,20 +4936,7 @@ class Orcatrata extends CI_Controller {
 					
 				}
 			}
-		}		
-				
-		echo '<br>';
-		echo "<pre>";
-		echo '<br>';
-		print_r($data['Recorrencias']);
-		echo '<br>';
-		print_r($data['count_orcatratas_total']);
-		echo '<br>';
-		print_r($data['soma_cashback_repet_total_outras']);
-		echo '<br>';
-		print_r($data['orcatratas_total']);
-		echo "</pre>";
-		//exit();		
+		}				
 		
 		$data['orcatratas_s_pago'] = $this->Orcatrata_model->get_orcatratas_repet_s_pago($_SESSION['Orcatrata']['RepeticaoOrca'], $_SESSION['Orcatrata']['idApp_OrcaTrata']);	
 		$data['count_orcatratas_s_pago'] = count($data['orcatratas_s_pago']);
@@ -4977,11 +4964,26 @@ class Orcatrata extends CI_Controller {
 			if (isset($data['orcatratas_n_pago'])) {
 
 				for($j=1; $j <= $data['count_orcatratas_n_pago']; $j++) {
-					$data['soma_repet_n_pago'] += $data['orcatratas_n_pago'][$j]['ValorFinalOrca'];
+					$data['soma_repet_n_pago'] += $data['orcatratas_n_pago'][$j]['ValorParcela'];
 					
 				}
 			}
 		}
+		
+				
+		echo '<br>';
+		echo "<pre>";
+		echo '<br>';
+		print_r($data['Recorrencias']);
+		echo '<br>';
+		print_r($data['count_orcatratas_n_pago']);
+		echo '<br>';
+		print_r($data['soma_repet_n_pago']);
+		echo '<br>';
+		print_r($data['orcatratas_n_pago']);
+		echo "</pre>";
+		//exit();		
+		
 		
 		$data['valorfinal_os'] = $_SESSION['Orcatrata']['ValorFinalOrca'];
 		
@@ -8697,19 +8699,6 @@ class Orcatrata extends CI_Controller {
 			}
 		}		
 
-		echo '<br>';
-		echo "<pre>";
-		echo '<br>';
-		print_r($data['Recorrencias']);
-		echo '<br>';
-		print_r($data['count_orcatratas_total']);
-		echo '<br>';
-		print_r($data['soma_cashback_repet_total_outras']);
-		echo '<br>';
-		print_r($data['orcatratas_total']);
-		echo "</pre>";
-		//exit();		
-					
 		$data['orcatratas_s_pago'] = $this->Orcatrata_model->get_orcatratas_repet_s_pago($_SESSION['Orcatrata']['RepeticaoOrca'], $_SESSION['Orcatrata']['idApp_OrcaTrata']);	
 		$data['count_orcatratas_s_pago'] = count($data['orcatratas_s_pago']);
 		
@@ -8737,11 +8726,24 @@ class Orcatrata extends CI_Controller {
 			if (isset($data['orcatratas_n_pago'])) {
 
 				for($j=1; $j <= $data['count_orcatratas_n_pago']; $j++) {
-					$data['soma_repet_n_pago'] += $data['orcatratas_n_pago'][$j]['ValorFinalOrca'];
+					$data['soma_repet_n_pago'] += $data['orcatratas_n_pago'][$j]['ValorParcela'];
 					
 				}
 			}
 		}
+		
+		echo '<br>';
+		echo "<pre>";
+		echo '<br>';
+		print_r($data['Recorrencias']);
+		echo '<br>';
+		print_r($data['count_orcatratas_n_pago']);
+		echo '<br>';
+		print_r($data['soma_repet_n_pago']);
+		echo '<br>';
+		print_r($data['orcatratas_n_pago']);
+		echo "</pre>";
+		//exit();		
 		
 		$data['valorfinal_os'] = $_SESSION['Orcatrata']['ValorFinalOrca'];
 		

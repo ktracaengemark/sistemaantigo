@@ -244,16 +244,21 @@ class Orcatrata_model extends CI_Model {
     public function get_orcatratas_repet_n_pago($data, $data2) {
         $query = $this->db->query('
 			SELECT
-				ValorFinalOrca
+				OT.RepeticaoOrca,
+				OT.idApp_OrcaTrata,
+				PRC.idApp_Parcelas,
+				PRC.ValorParcela
 			FROM 
-				App_OrcaTrata
+				App_OrcaTrata AS OT
+				 LEFT JOIN App_Parcelas AS PRC ON PRC.idApp_OrcaTrata = OT.idApp_OrcaTrata
 			WHERE 
-				RepeticaoOrca = ' . $data . ' AND
-				idApp_OrcaTrata != ' . $data2 . ' AND
-				QuitadoOrca = "N" AND
-				RepeticaoOrca != 0 
+				OT.RepeticaoOrca = ' . $data . ' AND
+				OT.idApp_OrcaTrata != ' . $data2 . ' AND
+				OT.QuitadoOrca = "N" AND
+				OT.RepeticaoOrca != 0 AND
+				PRC.Quitado = "N" 
 			ORDER BY
-				idApp_OrcaTrata ASC
+				PRC.idApp_Parcelas ASC
 		');
         $query = $query->result_array();
 		
