@@ -506,15 +506,6 @@ class Procedimento extends CI_Controller {
         }
         $data['count']['PTCount'] = $j - 1;		
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #### App_Procedimento ####
-        $this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
-        $this->form_validation->set_rules('Sac', 'Sac', 'required|trim');
-        $this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
-		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
-			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
-		}
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['Compartilhar'] = $this->Procedimento_model->select_compartilhar();
@@ -601,6 +592,16 @@ class Procedimento extends CI_Controller {
           exit ();
           */
 
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### App_Procedimento ####
+        $this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
+        $this->form_validation->set_rules('Sac', 'Sac', 'required|trim');
+        $this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
+		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
+			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
+		}
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             //if (1 == 1) {
@@ -725,7 +726,7 @@ class Procedimento extends CI_Controller {
 		
         if ($id) {
             #### App_Procedimento ####
-            $_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Procedimento_model->get_orcatrata($id);
+            $_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Procedimento_model->get_procedimento2($id);
             $data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'barras');
 			$data['orcatrata']['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataConcluidoProcedimento'], 'barras');
 			#### Carrega os dados do cliente nas variáves de sessão ####
@@ -755,19 +756,13 @@ class Procedimento extends CI_Controller {
                 }
             }
 		}
-
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #### App_Procedimento ####
-        $this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
-        $this->form_validation->set_rules('Sac', 'Sac', 'required|trim');
-        $this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
-		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
-			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
-		}else{
-			$data['orcatrata']['DataConcluidoProcedimento'] = "00/00/0000";
-		}
-
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r($_SESSION['Orcatrata']);
+			echo "</pre>";
+			//exit ();
+			*/
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
@@ -850,7 +845,18 @@ class Procedimento extends CI_Controller {
           echo "</pre>";
           exit ();
         */
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
+        #### App_Procedimento ####
+        $this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
+        $this->form_validation->set_rules('Sac', 'Sac', 'required|trim');
+        $this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
+		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
+			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
+		}else{
+			$data['orcatrata']['DataConcluidoProcedimento'] = "00/00/0000";
+		}
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('procedimento/form_procedcli', $data);
@@ -864,7 +870,7 @@ class Procedimento extends CI_Controller {
             #$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             #$data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
-            $data['update']['orcatrata']['anterior'] = $this->Procedimento_model->get_orcatrata($data['orcatrata']['idApp_Procedimento']);
+            $data['update']['orcatrata']['anterior'] = $this->Procedimento_model->get_procedimento2($data['orcatrata']['idApp_Procedimento']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
             $data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
                 $data['update']['orcatrata']['anterior'],
@@ -1278,18 +1284,6 @@ class Procedimento extends CI_Controller {
         }
         $data['count']['PTCount'] = $j - 1;		
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #### App_Procedimento ####
-        //$this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
-        $this->form_validation->set_rules('Marketing', 'Marketing', 'required|trim');
-        $this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
-		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
-			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
-		}else{
-			$data['orcatrata']['DataConcluidoProcedimento'] = "00/00/0000";
-		}
-
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
@@ -1378,6 +1372,18 @@ class Procedimento extends CI_Controller {
           echo "</pre>";
           exit ();
           */
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### App_Procedimento ####
+        //$this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
+        $this->form_validation->set_rules('Marketing', 'Marketing', 'required|trim');
+        $this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
+		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
+			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
+		}else{
+			$data['orcatrata']['DataConcluidoProcedimento'] = "00/00/0000";
+		}
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -1499,7 +1505,7 @@ class Procedimento extends CI_Controller {
 		
         if ($id) {
             #### App_Procedimento ####
-            $_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Procedimento_model->get_orcatrata($id);
+            $_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Procedimento_model->get_procedimento2($id);
             $data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'barras');
 			$data['orcatrata']['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataConcluidoProcedimento'], 'barras');
             #### Carrega os dados do cliente nas variáves de sessão ####
@@ -1528,18 +1534,6 @@ class Procedimento extends CI_Controller {
 					}
                 }
             }
-		}
-
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #### App_Procedimento ####
-        //$this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
-        $this->form_validation->set_rules('Marketing', 'Marketing', 'required|trim');
-        $this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
-		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
-			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
-		}else{
-			$data['orcatrata']['DataConcluidoProcedimento'] = "00/00/0000";
 		}
 
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
@@ -1628,6 +1622,18 @@ class Procedimento extends CI_Controller {
           exit ();
         */
 
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### App_Procedimento ####
+        //$this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
+        $this->form_validation->set_rules('Marketing', 'Marketing', 'required|trim');
+        $this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
+		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
+			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
+		}else{
+			$data['orcatrata']['DataConcluidoProcedimento'] = "00/00/0000";
+		}
+
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('procedimento/form_procedcli', $data);
@@ -1641,7 +1647,7 @@ class Procedimento extends CI_Controller {
             #$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             #$data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
-            $data['update']['orcatrata']['anterior'] = $this->Procedimento_model->get_orcatrata($data['orcatrata']['idApp_Procedimento']);
+            $data['update']['orcatrata']['anterior'] = $this->Procedimento_model->get_procedimento2($data['orcatrata']['idApp_Procedimento']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
             $data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
                 $data['update']['orcatrata']['anterior'],

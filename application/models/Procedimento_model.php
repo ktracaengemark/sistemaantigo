@@ -33,6 +33,23 @@ class Procedimento_model extends CI_Model {
         return $query[0];
     }
 
+    public function get_procedimento2($data) {
+        $query = $this->db->query('
+			SELECT 
+				PC.*,
+				USC.Nome AS NomeCadastrou
+			FROM 
+				App_Procedimento PC
+					LEFT JOIN Sis_Usuario AS USC ON USC.idSis_Usuario = PC.idSis_Usuario
+			WHERE 
+				PC.idApp_Procedimento = ' . $data . '
+		');
+
+        $query = $query->result_array();
+
+        return $query[0];
+    }
+
     public function get_subprocedimento($data) {
         $query = $this->db->query('SELECT * FROM App_SubProcedimento WHERE idApp_Procedimento = ' . $data);
 
