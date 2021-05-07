@@ -1232,13 +1232,16 @@ class Orcatrata extends CI_Controller {
 				}
 
 				$data['orcatrata']['RepeticaoOrca'] = $data['orcatrata']['idApp_OrcaTrata'];
-
+				$data['orcatrata']['RecorrenciaOrca'] = '1/' . $data['orcatrata']['RecorrenciasOrca'];
+				
+				/*
 				if ($data['cadastrar']['Repetir'] == 'S') {
 				
 					$data['orcatrata']['RecorrenciaOrca'] = '1/' . $data['orcatrata']['RecorrenciasOrca'];
 				}else{
 					$data['orcatrata']['RecorrenciaOrca'] = '1/1';
 				}
+				*/
 				
 				//exit ();
 				////Fim da Criação das Repetições///////				
