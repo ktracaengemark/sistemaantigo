@@ -131,8 +131,15 @@ while ($row = mysql_fetch_assoc($result)) {
         } else {
 
             #$title = utf8_encode($row['NomeCliente']);
-            $title = 'Cli: ' . mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1") . ' - Prf: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
-            $titlecliente = mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
+            if($row['CadastrarPet'] == "S"){
+				$title = 'Pet: ' . mb_convert_encoding($row['NomeClientePet'], "UTF-8", "ISO-8859-1") . ' - Cli: ' . mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1") . ' - Prf: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
+			}else if($row['CadastrarDep'] == "S"){
+				$title = 'Dep: ' . mb_convert_encoding($row['NomeClienteDep'], "UTF-8", "ISO-8859-1") . ' - Cli: ' . mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1") . ' - Prf: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
+			}else{
+				$title = 'Cli: ' . mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1") . ' - Prf: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
+			}
+				
+			$titlecliente = mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
             $subtitle = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
             $profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
 			$recorrencia = mb_convert_encoding($row['Recorrencia'], "UTF-8", "ISO-8859-1");
