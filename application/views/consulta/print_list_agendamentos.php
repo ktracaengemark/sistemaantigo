@@ -71,7 +71,7 @@
 							<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
 								<td class="col-md-5" scope="col">
 									<?php echo $consulta[$i]['NomeClientePet'] ?>/ Especie: <?php echo $consulta[$i]['Especie'] ?>/ Raca: <?php echo $consulta[$i]['RacaPet'] ?>/ Gen: <?php echo $consulta[$i]['Sexo'] ?>/ 
-									Pelo: <?php echo $consulta[$i]['Pelo'] ?>/ Porte: <?php echo $consulta[$i]['Porte'] ?>/ Obs: <?php echo $consulta[$i]['ObsPet'] ?>
+									Pelo: <?php echo $consulta[$i]['Pelo'] ?>/ Porte: <?php echo $consulta[$i]['Porte'] ?>/ Alrg: <?php echo $consulta[$i]['Alergico'] ?>/ Obs: <?php echo $consulta[$i]['ObsPet'] ?>
 								</td>
 							<?php } ?>
 							<?php if($_SESSION['Empresa']['CadastrarDep'] == "S"){?>

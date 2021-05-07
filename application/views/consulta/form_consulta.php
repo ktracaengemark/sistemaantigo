@@ -389,7 +389,7 @@
 										<div class="panel-heading">
 											<div class="row">	
 												<div class="col-md-12 text-left">
-													<label for="Obs">Obs:</label>
+													<label for="Obs">Evento:</label>
 													<textarea class="form-control" id="Obs" name="Obs"><?php echo $query['Obs']; ?></textarea>
 												</div>
 											</div>	

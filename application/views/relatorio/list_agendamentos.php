@@ -36,7 +36,7 @@
 							if($_SESSION['Empresa']['CadastrarPet'] == "S"){	
 								echo '<td>' . $row['NomeClientePet'] . ' / Especie: ' . $row['Especie'] . ' / Raca: ' . $row['RacaPet'] . '
 											/ Gen: ' . $row['Sexo'] . ' / Pelo: ' . $row['Pelo'] . ' / Porte: ' . $row['Porte'] . ' 
-											/ Obs: ' . $row['ObsPet'] . '</td>';
+											/ Alrg: ' . $row['AlergicoPet'] . ' / Obs: ' . $row['ObsPet'] . '</td>';
 							}
 							if($_SESSION['Empresa']['CadastrarDep'] == "S"){	
 								echo '<td>' . $row['NomeClientePet'] . '</td>';

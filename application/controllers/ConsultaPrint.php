@@ -61,6 +61,12 @@ class ConsultaPrint extends CI_Controller {
 						$data['consulta'][$j]['idApp_Consulta'] = $data['consulta'][$j]['idApp_Consulta'];
 						$data['consulta'][$j]['DataInicio'] = $this->basico->mascara_data($data['consulta'][$j]['DataInicio'], 'barras');
 						
+						if($data['consulta'][$j]['AlergicoPet'] == "S"){
+							$data['consulta'][$j]['Alergico'] = "Sim";
+						}else{
+							$data['consulta'][$j]['Alergico'] = "Não";
+						}
+						
 						if($data['consulta'][$j]['PeloPet'] == 1){
 							$data['consulta'][$j]['Pelo'] = "CURTO";
 						}elseif($data['consulta'][$j]['PeloPet'] == 2){

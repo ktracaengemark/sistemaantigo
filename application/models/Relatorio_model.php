@@ -93,7 +93,7 @@ class Relatorio_model extends CI_Model {
 				$row->DataInicio = $this->basico->mascara_data($row->DataInicio, 'barras');
 				//$row->HoraFim = $this->basico->mascara_hora($row->DataFim, 'hora');
 				$row->DataFim = $this->basico->mascara_data($row->DataFim, 'barras');
-                //$row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
+                $row->AlergicoPet = $this->basico->mascara_palavra_completa($row->AlergicoPet, 'NS');
 				
 				if($row->PeloPet == 1){
 					$row->Pelo = "CURTO";
