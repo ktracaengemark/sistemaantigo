@@ -885,6 +885,13 @@ class Orcatrata_model extends CI_Model {
         return $query[0];
     }
 	
+    public function get_parcelas_orcamento($data) {
+		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data . '');
+        $query = $query->result_array();
+
+        return $query;
+    }	
+	
     public function get_parcelas_posterior($data) {
 		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data . ' AND Quitado = "N"');
         $query = $query->result_array();

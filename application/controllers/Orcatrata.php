@@ -237,8 +237,10 @@ class Orcatrata extends CI_Controller {
 		
 		//$data['orcatrata']['RecorrenciasOrca'] = 2;
 		$dataini = explode(' ', $_SESSION['Consulta']['DataInicio']);
+		$data['orcatrata']['DataOrca']			=	$this->basico->mascara_data($dataini[0], 'barras');
 		$data['orcatrata']['DataEntregaOrca']	=	$this->basico->mascara_data($dataini[0], 'barras');
 		$data['orcatrata']['HoraEntregaOrca']	=	substr($dataini[1], 0, 5);
+		$data['orcatrata']['DataVencimentoOrca']=	$this->basico->mascara_data($dataini[0], 'barras');
 		$data['orcatrata']['RecorrenciasOrca'] 	= 	$_SESSION['Consulta']['OS'];
 		$data['orcatrata']['RepeticaoCons'] 	= 	$_SESSION['Consulta']['Repeticao'];
 		
@@ -1651,14 +1653,29 @@ class Orcatrata extends CI_Controller {
 				if ($cont_orcamentos > 0) {
 					for($j=0;$j<$cont_orcamentos;$j++) {
 						if($cont_consultas == $cont_orcamentos){
+							$data['update']['orcamentos'][$j]['DataOrca'] = $dia[$j];
+							$data['update']['orcamentos'][$j]['DataVencimentoOrca'] = $dia[$j];
 							$data['update']['orcamentos'][$j]['DataEntregaOrca'] = $dia[$j];
 							$data['update']['orcamentos'][$j]['HoraEntregaOrca'] = $hora[$j];
 						}else{
+							$data['update']['orcamentos'][$j]['DataOrca'] = $dia['0'];
+							$data['update']['orcamentos'][$j]['DataVencimentoOrca'] = $dia['0'];
 							$data['update']['orcamentos'][$j]['DataEntregaOrca'] = $dia['0'];
 							$data['update']['orcamentos'][$j]['HoraEntregaOrca'] = $hora['0'];
 						}
 						$data['update']['orcamentos']['bd'][$j] = $this->Orcatrata_model->update_orcatrata($data['update']['orcamentos'][$j], $data['update']['orcamentos'][$j]['idApp_OrcaTrata']);
 					}				
+				}
+				
+				if ($cont_orcamentos > 0) {
+					for($j=0;$j<$cont_orcamentos;$j++) {
+						$data['update']['parcelas_orcamento'][$j] = $this->Orcatrata_model->get_parcelas_orcamento($data['idApp_OrcaTrata'][$j]);
+						$cont_parcelas_orcamento = count($data['update']['parcelas_orcamento'][$j]);
+						for($k=0;$k<$cont_parcelas_orcamento;$k++) {
+							$data['update']['parcelas_orcamento'][$j][$k]['DataVencimento'] = $data['update']['orcamentos'][$j]['DataVencimentoOrca'];
+							$data['update']['parcelas_orcamento']['bd'][$j][$k] = $this->Orcatrata_model->update_parcelas_id($data['update']['parcelas_orcamento'][$j][$k], $data['update']['parcelas_orcamento'][$j][$k]['idApp_Parcelas']);
+						}
+					}
 				}
 				
 				////Fim da Criação das Repetições///////				
