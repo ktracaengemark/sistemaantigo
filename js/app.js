@@ -4358,9 +4358,9 @@ function carregaQuitado(value, name, i, cadastrar = 0) {
 
  /*Carrega a Data e Hora da Entrega do Produto*/
  function carregaEntreguePrd(value, name, i, cadastrar = 0) {
-
+	/*
     if (value == "S") {
-
+		
         if (!$("#DataConcluidoProduto"+i).val() || !$("#HoraConcluidoProduto"+i).val()) {
             if (cadastrar == 1){
 				$("#DataConcluidoProduto"+i).val("");
@@ -4370,16 +4370,19 @@ function carregaQuitado(value, name, i, cadastrar = 0) {
 				$("#HoraConcluidoProduto"+i).val(currentDate.format('HH:mm'));
 			}  
         }
+		
     }else{
+		
         $("#DataConcluidoProduto"+i).val("");
         $("#HoraConcluidoProduto"+i).val("");
+		
     }
-	
+	*/
 }
 
  /*Carrega a Data e Hora da Entrega do Serviço*/
  function carregaEntregueSrv(value, name, i, cadastrar = 0) {
-
+	/*
     if (value == "S") {
 
         if (!$("#DataConcluidoServico"+i).val() || !$("#HoraConcluidoServico"+i).val()) {
@@ -4395,7 +4398,7 @@ function carregaQuitado(value, name, i, cadastrar = 0) {
         $("#DataConcluidoServico"+i).val("");
         $("#HoraConcluidoServico"+i).val("");
     }
-
+	*/
 }
 
  /*Carrega a Data e Hora da Conclusão da Tarefa*/
@@ -4544,8 +4547,10 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2, recorrencias) {
 						$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
 						$('#Prod_Serv_'+campo2+num).val(data[i].prod_serv);
 						$('#idTab_Valor_'+campo2+num).val(data[i].id_valor);
-						$('#DataConcluido'+campo2+num).val(currentDate.format('DD/MM/YYYY'));
-						$('#HoraConcluido'+campo2+num).val(currentDate.format('HH:mm'));
+						//$('#DataConcluido'+campo2+num).val(currentDate.format('DD/MM/YYYY'));
+						//$('#HoraConcluido'+campo2+num).val(currentDate.format('HH:mm'));
+						$('#DataConcluido'+campo2+num).val("");
+						$('#HoraConcluido'+campo2+num).val("");
 						//console.log( data[i].comissaoprod +' valor da comissão da venda');
 						//console.log( data[i].comissaoservico +' valor da comissão do servico');
 						//console.log( data[i].comissaocashback +' valor da comissão do cash');
@@ -4576,8 +4581,8 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2, recorrencias) {
 					$('#idTab_Produtos_'+campo2+num).val("0");
 					$('#Prod_Serv_'+campo2+num).val("0");
 					$('#idTab_Valor_'+campo2+num).val("0");
-					$('#DataConcluido'+campo2+num).val("00/00/0000");
-					$('#HoraConcluido'+campo2+num).val("00:00");
+					$('#DataConcluido'+campo2+num).val("");
+					$('#HoraConcluido'+campo2+num).val("");
 					//console.log( data[i].comissaoprod +' valor da comissão da venda');
 					//console.log( data[i].comissaoservico +' valor da comissão do servico');
 					//console.log( data[i].comissaocashback +' valor da comissão do cash');
@@ -4626,6 +4631,8 @@ function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
 						$('#Comissao'+campo2+num).val(data[i].comissaoprod);
 						$('#ComissaoServico'+campo2+num).val(data[i].comissaoservico);
 						$('#ComissaoCashBack'+campo2+num).val(data[i].comissaocashback);
+						$('#DataConcluido'+campo2+num).val("");
+						$('#HoraConcluido'+campo2+num).val("");
 						//console.log( data[i].id_produto );
 					
 						//carrega o valor no campo de acordo com a opção selecionada
@@ -4655,8 +4662,8 @@ function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
 					$('#idTab_Produtos_'+campo2+num).val("0");
 					$('#Prod_Serv_'+campo2+num).val("0");
 					$('#idTab_Valor_'+campo2+num).val("0");
-					$('#DataConcluido'+campo2+num).val("00/00/0000");
-					$('#HoraConcluido'+campo2+num).val("00:00");
+					$('#DataConcluido'+campo2+num).val("");
+					$('#HoraConcluido'+campo2+num).val("");
 					//console.log( data[i].comissaoprod +' valor da comissão do produto');
 					//carrega o valor no campo de acordo com a opção selecionada
 					$('#'+campo).val("0");
@@ -8616,6 +8623,28 @@ $(document).ready(function () {
 								<div id="EntregueProduto'+pc+'" style="display:none">\
 									<div class="row">\
 										<div class="col-md-6">\
+											<label for="DataConcluidoProduto">Data Entrega</label>\
+											<div class="input-group DatePicker">\
+												<span class="input-group-addon" disabled>\
+													<span class="glyphicon glyphicon-calendar"></span>\
+												</span>\
+												<input type="text" class="form-control Date" id="DataConcluidoProduto'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
+													   name="DataConcluidoProduto'+pc+'" value="">\
+											</div>\
+										</div>\
+										<div class="col-md-6">\
+											<label for="HoraConcluidoProduto">Hora Entrega</label>\
+											<div class="input-group TimePicker">\
+												<span class="input-group-addon" disabled>\
+													<span class="glyphicon glyphicon-time"></span>\
+												</span>\
+												<input type="text" class="form-control Time" id="HoraConcluidoProduto'+pc+'" maxlength="5" placeholder="HH:MM"\
+													   name="HoraConcluidoProduto'+pc+'" value="">\
+											</div>\
+										</div>\
+									</div>\
+									<div class="row">\
+										<div class="col-md-6">\
 											<label for="ConcluidoProduto">Entregue? </label><br>\
 											<div class="btn-group" data-toggle="buttons">\
 												<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
@@ -8630,28 +8659,6 @@ $(document).ready(function () {
 										</div>\
 									</div>\
 									<div id="ConcluidoProduto'+pc+'" style="display:none">\
-										<div class="row">\
-											<div class="col-md-6">\
-												<label for="DataConcluidoProduto">Data Entregue</label>\
-												<div class="input-group DatePicker">\
-													<span class="input-group-addon" disabled>\
-														<span class="glyphicon glyphicon-calendar"></span>\
-													</span>\
-													<input type="text" class="form-control Date" id="DataConcluidoProduto'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
-														   name="DataConcluidoProduto'+pc+'" value="">\
-												</div>\
-											</div>\
-											<div class="col-md-6">\
-												<label for="HoraConcluidoProduto">Hora Entregue</label>\
-												<div class="input-group TimePicker">\
-													<span class="input-group-addon" disabled>\
-														<span class="glyphicon glyphicon-time"></span>\
-													</span>\
-													<input type="text" class="form-control Time" id="HoraConcluidoProduto'+pc+'" maxlength="5" placeholder="HH:MM"\
-														   name="HoraConcluidoProduto'+pc+'" value="">\
-												</div>\
-											</div>\
-										</div>\
 									</div>\
 								</div>\
 							</div>\
@@ -8898,6 +8905,28 @@ $(document).ready(function () {
 								<div id="EntregueServico'+ps+'" style="display:none">\
 									<div class="row">\
 										<div class="col-md-6">\
+											<label for="DataConcluidoServico">Data Entrega</label>\
+											<div class="input-group DatePicker">\
+												<span class="input-group-addon" disabled>\
+													<span class="glyphicon glyphicon-calendar"></span>\
+												</span>\
+												<input type="text" class="form-control Date" id="DataConcluidoServico'+ps+'" maxlength="10" placeholder="DD/MM/AAAA"\
+													   name="DataConcluidoServico'+ps+'" value="">\
+											</div>\
+										</div>\
+										<div class="col-md-6">\
+											<label for="HoraConcluidoServico">Hora Entrega</label>\
+											<div class="input-group TimePicker">\
+												<span class="input-group-addon" disabled>\
+													<span class="glyphicon glyphicon-time"></span>\
+												</span>\
+												<input type="text" class="form-control Time" id="HoraConcluidoServico'+ps+'" maxlength="5" placeholder="HH:MM"\
+													   name="HoraConcluidoServico'+ps+'" value="">\
+											</div>\
+										</div>\
+									</div>\
+									<div class="row">\
+										<div class="col-md-6">\
 											<label for="ConcluidoServico">Entregue? </label><br>\
 											<div class="btn-group" data-toggle="buttons">\
 												<label class="btn btn-warning active" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'N">\
@@ -8912,28 +8941,6 @@ $(document).ready(function () {
 										</div>\
 									</div>\
 									<div id="ConcluidoServico'+ps+'" style="display:none">\
-										<div class="row">\
-											<div class="col-md-6">\
-												<label for="DataConcluidoServico">Data Entregue</label>\
-												<div class="input-group DatePicker">\
-													<span class="input-group-addon" disabled>\
-														<span class="glyphicon glyphicon-calendar"></span>\
-													</span>\
-													<input type="text" class="form-control Date" id="DataConcluidoServico'+ps+'" maxlength="10" placeholder="DD/MM/AAAA"\
-														   name="DataConcluidoServico'+ps+'" value="">\
-												</div>\
-											</div>\
-											<div class="col-md-6">\
-												<label for="HoraConcluidoServico">Hora Entregue</label>\
-												<div class="input-group TimePicker">\
-													<span class="input-group-addon" disabled>\
-														<span class="glyphicon glyphicon-time"></span>\
-													</span>\
-													<input type="text" class="form-control Time" id="HoraConcluidoServico'+ps+'" maxlength="5" placeholder="HH:MM"\
-														   name="HoraConcluidoServico'+ps+'" value="">\
-												</div>\
-											</div>\
-										</div>\
 									</div>\
 								</div>\
 							</div>\

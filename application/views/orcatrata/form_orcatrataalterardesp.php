@@ -314,6 +314,28 @@
 																	</div>
 																	<div id="EntregueProduto<?php echo $i ?>">
 																		<div class="row">
+																			<div class="col-md-6">
+																				<label for="DataConcluidoProduto">Data Entrega</label>
+																				<div class="input-group DatePicker">
+																					<span class="input-group-addon" disabled>
+																						<span class="glyphicon glyphicon-calendar"></span>
+																					</span>
+																					<input type="text" class="form-control Date" id="DataConcluidoProduto<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																						   name="DataConcluidoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataConcluidoProduto'] ?>">
+																				</div>
+																			</div>	
+																			<div class="col-md-6">
+																				<label for="HoraConcluidoProduto">Hora Entrega:</label>
+																				<div class="input-group <?php echo $timepicker; ?>">
+																					<span class="input-group-addon">
+																						<span class="glyphicon glyphicon-time"></span>
+																					</span>
+																					<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5"  placeholder="HH:MM"
+																						   accept="" name="HoraConcluidoProduto<?php echo $i ?>" id="HoraConcluidoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['HoraConcluidoProduto']; ?>">
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
 																			<div class="col-md-6 text-left">
 																				<label for="ConcluidoProduto">Entregue? </label><br>
 																				<?php if ($_SESSION['Usuario']['Bx_Prd'] == "S") { ?>
@@ -359,28 +381,6 @@
 																			</div>
 																		</div>
 																		<div id="ConcluidoProduto<?php echo $i ?>" <?php echo $div['ConcluidoProduto' . $i]; ?>>
-																			<div class="row">
-																				<div class="col-md-6">
-																					<label for="DataConcluidoProduto">Data Entregue</label>
-																					<div class="input-group DatePicker">
-																						<span class="input-group-addon" disabled>
-																							<span class="glyphicon glyphicon-calendar"></span>
-																						</span>
-																						<input type="text" class="form-control Date" id="DataConcluidoProduto<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
-																							   name="DataConcluidoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataConcluidoProduto'] ?>">
-																					</div>
-																				</div>	
-																				<div class="col-md-6">
-																					<label for="HoraConcluidoProduto">Hora Entregue:</label>
-																					<div class="input-group <?php echo $timepicker; ?>">
-																						<span class="input-group-addon">
-																							<span class="glyphicon glyphicon-time"></span>
-																						</span>
-																						<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5"  placeholder="HH:MM"
-																							   accept="" name="HoraConcluidoProduto<?php echo $i ?>" id="HoraConcluidoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['HoraConcluidoProduto']; ?>">
-																					</div>
-																				</div>
-																			</div>
 																		</div>
 																	</div>
 																</div>
@@ -599,6 +599,28 @@
 																	</div>
 																	<div id="EntregueServico<?php echo $i ?>">
 																		<div class="row">
+																			<div class="col-md-6">
+																				<label for="DataConcluidoServico">Data Entrega</label>
+																				<div class="input-group DatePicker">
+																					<span class="input-group-addon" disabled>
+																						<span class="glyphicon glyphicon-calendar"></span>
+																					</span>
+																					<input type="text" class="form-control Date" id="DataConcluidoServico<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																						   name="DataConcluidoServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataConcluidoProduto'] ?>">
+																				</div>
+																			</div>
+																			<div class="col-md-6">
+																				<label for="HoraConcluidoServico">Hora Entrega</label>
+																				<div class="input-group <?php echo $timepicker; ?>">
+																					<span class="input-group-addon">
+																						<span class="glyphicon glyphicon-time"></span>
+																					</span>
+																					<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5"  placeholder="HH:MM"
+																						   accept="" name="HoraConcluidoServico<?php echo $i ?>" id="HoraConcluidoServico<?php echo $i ?>" value="<?php echo $servico[$i]['HoraConcluidoProduto']; ?>">
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
 																			<div class="col-md-6 text-left">
 																				<label for="ConcluidoServico">Entregue? </label><br>
 																				<?php if ($_SESSION['Usuario']['Bx_Prd'] == "S") { ?>
@@ -644,28 +666,6 @@
 																			</div>
 																		</div>
 																		<div id="ConcluidoServico<?php echo $i ?>" <?php echo $div['ConcluidoServico' . $i]; ?>>
-																			<div class="row">
-																				<div class="col-md-6">
-																					<label for="DataConcluidoServico">Data Entregue</label>
-																					<div class="input-group DatePicker">
-																						<span class="input-group-addon" disabled>
-																							<span class="glyphicon glyphicon-calendar"></span>
-																						</span>
-																						<input type="text" class="form-control Date" id="DataConcluidoServico<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
-																							   name="DataConcluidoServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataConcluidoProduto'] ?>">
-																					</div>
-																				</div>
-																				<div class="col-md-6">
-																					<label for="HoraConcluidoServico">Hora Entregue</label>
-																					<div class="input-group <?php echo $timepicker; ?>">
-																						<span class="input-group-addon">
-																							<span class="glyphicon glyphicon-time"></span>
-																						</span>
-																						<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5"  placeholder="HH:MM"
-																							   accept="" name="HoraConcluidoServico<?php echo $i ?>" id="HoraConcluidoServico<?php echo $i ?>" value="<?php echo $servico[$i]['HoraConcluidoProduto']; ?>">
-																					</div>
-																				</div>
-																			</div>
 																		</div>
 																	</div>
 																</div>
