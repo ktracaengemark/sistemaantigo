@@ -47,6 +47,7 @@ class Consulta extends CI_Controller {
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
 			'Repetir',
+			'Adicionar',
 			'Prazo',
 			'DataMinima',
 			'RelacaoDep',
@@ -91,6 +92,7 @@ class Consulta extends CI_Controller {
 		
  		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
  		(!$data['cadastrar']['Repetir']) ? $data['cadastrar']['Repetir'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['Adicionar']) ? $data['cadastrar']['Adicionar'] = 'N' : FALSE;
  		(!$data['cadastrar']['Vincular']) ? $data['cadastrar']['Vincular'] = 'S' : FALSE;
  		(!$data['cadastrar']['NovaOS']) ? $data['cadastrar']['NovaOS'] = 'S' : FALSE;
  		(!$data['cadastrar']['PorConsulta']) ? $data['cadastrar']['PorConsulta'] = 'S' : FALSE;
@@ -175,6 +177,7 @@ class Consulta extends CI_Controller {
 		$data['select']['RacaPet'] = $this->Cliente_model->select_racapet();
 		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['Repetir'] = $this->Basico_model->select_status_sn();
+		$data['select']['Adicionar'] = $this->Basico_model->select_status_sn();
 		$data['select']['Vincular'] = $this->Basico_model->select_status_sn();
 		$data['select']['NovaOS'] = $this->Basico_model->select_status_sn();
 		$data['select']['PorConsulta'] = $this->Basico_model->select_status_sn();         
@@ -241,6 +244,12 @@ class Consulta extends CI_Controller {
         );
         ($data['cadastrar']['Repetir'] == 'S') ?
             $data['div']['Repetir'] = '' : $data['div']['Repetir'] = 'style="display: none;"';
+		
+		$data['radio'] = array(
+            'Adicionar' => $this->basico->radio_checked($data['cadastrar']['Adicionar'], 'Adicionar', 'NS'),
+        );
+        ($data['cadastrar']['Adicionar'] == 'S') ?
+            $data['div']['Adicionar'] = '' : $data['div']['Adicionar'] = 'style="display: none;"';
 			
 		$data['radio'] = array(
             'Vincular' => $this->basico->radio_checked($data['cadastrar']['Vincular'], 'Vincular', 'NS'),
@@ -513,24 +522,29 @@ class Consulta extends CI_Controller {
 				}
 				*/
 				
-				
-				if($data['cadastrar']['PorConsulta'] == "S"){
-					//Gera O.S. Replicadas pelo número de ocorrências
-					redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
-				}else{
-					if($data['query']['Recorrencias'] > 1){
-						if($data['cadastrar']['NovaOS'] == "S"){
-							//Gera uma única O.S.
-							redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+				if($data['cadastrar']['Adicionar'] == "S"){
+					if($data['cadastrar']['PorConsulta'] == "S"){
+						//Gera O.S. Replicadas pelo número de ocorrências
+						redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+					}else{
+						if($data['query']['Recorrencias'] > 1){
+							if($data['cadastrar']['NovaOS'] == "S"){
+								//Gera uma única O.S.
+								redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+							}else{
+								//Não Gera O.S. 
+								redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+							}
 						}else{
 							//Não Gera O.S. 
 							redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 						}
-					}else{
-						//Não Gera O.S. 
-						redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 					}
+				}else{
+					//Não Gera O.S. 
+					redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 				}
+					
                 exit();
             }
         }
@@ -550,6 +564,7 @@ class Consulta extends CI_Controller {
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
 			'Repetir',
+			'Adicionar',
 			'Vincular',
 			'NovaOS',
 			'PorConsulta',
@@ -596,6 +611,7 @@ class Consulta extends CI_Controller {
 		
  		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
  		(!$data['cadastrar']['Repetir']) ? $data['cadastrar']['Repetir'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['Adicionar']) ? $data['cadastrar']['Adicionar'] = 'N' : FALSE;
  		(!$data['cadastrar']['Vincular']) ? $data['cadastrar']['Vincular'] = 'S' : FALSE;
  		(!$data['cadastrar']['NovaOS']) ? $data['cadastrar']['NovaOS'] = 'S' : FALSE;
  		(!$data['cadastrar']['PorConsulta']) ? $data['cadastrar']['PorConsulta'] = 'S' : FALSE;
@@ -714,7 +730,8 @@ class Consulta extends CI_Controller {
         );
 		$data['select']['RacaPet'] = $this->Cliente_model->select_racapet();
 		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
-		$data['select']['Repetir'] = $this->Basico_model->select_status_sn(); 
+		$data['select']['Repetir'] = $this->Basico_model->select_status_sn();
+		$data['select']['Adicionar'] = $this->Basico_model->select_status_sn();  
 		$data['select']['Vincular'] = $this->Basico_model->select_status_sn();
 		$data['select']['NovaOS'] = $this->Basico_model->select_status_sn();
 		$data['select']['PorConsulta'] = $this->Basico_model->select_status_sn();        
@@ -779,6 +796,12 @@ class Consulta extends CI_Controller {
         );
         ($data['cadastrar']['Repetir'] == 'S') ?
             $data['div']['Repetir'] = '' : $data['div']['Repetir'] = 'style="display: none;"';
+		
+		$data['radio'] = array(
+            'Adicionar' => $this->basico->radio_checked($data['cadastrar']['Adicionar'], 'Adicionar', 'NS'),
+        );
+        ($data['cadastrar']['Adicionar'] == 'S') ?
+            $data['div']['Adicionar'] = '' : $data['div']['Adicionar'] = 'style="display: none;"';
 			
 		$data['radio'] = array(
             'Vincular' => $this->basico->radio_checked($data['cadastrar']['Vincular'], 'Vincular', 'NS'),
@@ -1085,25 +1108,28 @@ class Consulta extends CI_Controller {
 					redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 				}
 				*/
-				
-				if($data['cadastrar']['PorConsulta'] == "S"){
-					//Gera O.S. Replicadas pelo número de ocorrências
-					redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
-				}else{
-					if($data['query']['Recorrencias'] > 1){
-						if($data['cadastrar']['NovaOS'] == "S"){
-							//Gera uma única O.S.
-							redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+				if($data['cadastrar']['Adicionar'] == "S"){	
+					if($data['cadastrar']['PorConsulta'] == "S"){
+						//Gera O.S. Replicadas pelo número de ocorrências
+						redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+					}else{
+						if($data['query']['Recorrencias'] > 1){
+							if($data['cadastrar']['NovaOS'] == "S"){
+								//Gera uma única O.S.
+								redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+							}else{
+								//Não Gera O.S. 
+								redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+							}
 						}else{
 							//Não Gera O.S. 
 							redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 						}
-					}else{
-						//Não Gera O.S. 
-						redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 					}
+				}else{
+					//Não Gera O.S. 
+					redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 				}
-				
 				exit();
             }
         }
@@ -1826,6 +1852,7 @@ class Consulta extends CI_Controller {
 
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
+			'Adicionar',
 			'PeloPet',
 			'PortePet',
 			'RacaPet',
@@ -1864,6 +1891,7 @@ class Consulta extends CI_Controller {
 
  		(!$data['alterar']['Quais']) ? $data['alterar']['Quais'] = 1 : FALSE;
  		(!$data['alterar']['DeletarOS']) ? $data['alterar']['DeletarOS'] = 'S' : FALSE;
+ 		(!$data['cadastrar']['Adicionar']) ? $data['cadastrar']['Adicionar'] = 'N' : FALSE;
  		(!$data['cadastrar']['Vincular']) ? $data['cadastrar']['Vincular'] = 'S' : FALSE;
  		(!$data['cadastrar']['NovaOS']) ? $data['cadastrar']['NovaOS'] = 'S' : FALSE;
  		(!$data['cadastrar']['PorConsulta']) ? $data['cadastrar']['PorConsulta'] = 'S' : FALSE;
@@ -1950,6 +1978,7 @@ class Consulta extends CI_Controller {
         );
 		$data['select']['RacaPet'] = $this->Cliente_model->select_racapet();	
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+        $data['select']['Adicionar'] = $this->Basico_model->select_status_sn();
 		$data['select']['DeletarOS'] = $this->Basico_model->select_status_sn();
 		$data['select']['Vincular'] = $this->Basico_model->select_status_sn();
 		$data['select']['NovaOS'] = $this->Basico_model->select_status_sn();
@@ -2004,8 +2033,13 @@ class Consulta extends CI_Controller {
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
-			
-			
+		
+		$data['radio'] = array(
+            'Adicionar' => $this->basico->radio_checked($data['cadastrar']['Adicionar'], 'Adicionar', 'NS'),
+        );
+        ($data['cadastrar']['Adicionar'] == 'S') ?
+            $data['div']['Adicionar'] = '' : $data['div']['Adicionar'] = 'style="display: none;"';
+
 		$data['radio'] = array(
             'DeletarOS' => $this->basico->radio_checked($data['alterar']['DeletarOS'], 'DeletarOS', 'NS'),
         );
@@ -2336,29 +2370,34 @@ class Consulta extends CI_Controller {
 					redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 				}
 				*/
-				
-				
-				
-				if($data['cadastrar']['PorConsulta'] == "S"){
-					//Gera O.S. Replicadas pelo número de ocorrências
-					unset($_SESSION['Agenda'], $_SESSION['Cliente'], $_SESSION['Consulta'], $_SESSION['Consultas_Repet'], $_SESSION['Repeticao']);
-					redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['query']['idApp_Consulta'] . $data['msg']);
-				}else{
-					if($data['query']['Recorrencias'] > 1){
-						if($data['cadastrar']['NovaOS'] == "S"){
-							//Gera uma única O.S.
-							unset($_SESSION['Agenda'], $_SESSION['Cliente'], $_SESSION['Consulta'], $_SESSION['Consultas_Repet'], $_SESSION['Repeticao']);
-							redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['query']['idApp_Consulta'] . $data['msg']);
+				if($data['cadastrar']['Adicionar'] == "S"){
+					if($data['cadastrar']['PorConsulta'] == "S"){
+						//Gera O.S. Replicadas pelo número de ocorrências
+						unset($_SESSION['Agenda'], $_SESSION['Cliente'], $_SESSION['Consulta'], $_SESSION['Consultas_Repet'], $_SESSION['Repeticao']);
+						redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['query']['idApp_Consulta'] . $data['msg']);
+					}else{
+						if($data['query']['Recorrencias'] > 1){
+							if($data['cadastrar']['NovaOS'] == "S"){
+								//Gera uma única O.S.
+								unset($_SESSION['Agenda'], $_SESSION['Cliente'], $_SESSION['Consulta'], $_SESSION['Consultas_Repet'], $_SESSION['Repeticao']);
+								redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['query']['idApp_Consulta'] . $data['msg']);
+							}else{
+								//Busca na lista de O.S. do cliente
+								unset($_SESSION['Agenda'], $_SESSION['Cliente'], $_SESSION['Consulta'], $_SESSION['Consultas_Repet'], $_SESSION['Repeticao']);
+								redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+							}
 						}else{
-							//Busca na lista de O.S. do cliente
+							//Não Gera O.S. 
 							unset($_SESSION['Agenda'], $_SESSION['Cliente'], $_SESSION['Consulta'], $_SESSION['Consultas_Repet'], $_SESSION['Repeticao']);
 							redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 						}
-					}else{
-						//Não Gera O.S. 
-						redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 					}
+				}else{
+					//Não Gera O.S.
+					unset($_SESSION['Agenda'], $_SESSION['Cliente'], $_SESSION['Consulta'], $_SESSION['Consultas_Repet'], $_SESSION['Repeticao']);
+					redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 				}
+				
 			}else{
 				//Não Gera O.S.
 				unset($_SESSION['Agenda'], $_SESSION['Cliente'], $_SESSION['Consulta'], $_SESSION['Consultas_Repet'], $_SESSION['Repeticao']);
