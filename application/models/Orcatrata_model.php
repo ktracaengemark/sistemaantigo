@@ -886,7 +886,14 @@ class Orcatrata_model extends CI_Model {
     }
 	
     public function get_parcelas_orcamento($data) {
-		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data . '');
+		$query = $this->db->query('SELECT idApp_Parcelas, DataVencimento FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data . '');
+        $query = $query->result_array();
+
+        return $query;
+    }	
+	
+    public function get_produtos_orcamento($data) {
+		$query = $this->db->query('SELECT idApp_Produto, DataConcluidoProduto, HoraConcluidoProduto  FROM App_Produto WHERE idApp_OrcaTrata = ' . $data . '');
         $query = $query->result_array();
 
         return $query;

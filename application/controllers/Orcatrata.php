@@ -1419,6 +1419,7 @@ class Orcatrata extends CI_Controller {
 							'QuitadoOrca' 			=> $quitadoorca,
 							'Cli_Forn_Orca' 		=> $data['orcatrata']['Cli_Forn_Orca'],
 							'Prd_Srv_Orca' 			=> $data['orcatrata']['Prd_Srv_Orca'],
+							'Entrega_Orca' 			=> $data['orcatrata']['Entrega_Orca'],
 							'DataOrca' 				=> $data['orcatrata']['DataOrca'],
 							'HoraOrca' 				=> $data['orcatrata']['HoraOrca'],
 							'ProfissionalOrca' 		=> $data['orcatrata']['ProfissionalOrca'],
@@ -1669,6 +1670,18 @@ class Orcatrata extends CI_Controller {
 					}
 				}
 				
+				if ($cont_orcamentos > 0) {
+					for($j=0;$j<$cont_orcamentos;$j++) {
+						$data['update']['produtos_orcamento'][$j] = $this->Orcatrata_model->get_produtos_orcamento($data['idApp_OrcaTrata'][$j]);
+						$cont_produtos_orcamento = count($data['update']['produtos_orcamento'][$j]);
+						for($k=0;$k<$cont_produtos_orcamento;$k++) {
+							$data['update']['produtos_orcamento'][$j][$k]['DataConcluidoProduto'] = $data['update']['orcamentos'][$j]['DataEntregaOrca'];
+							$data['update']['produtos_orcamento'][$j][$k]['HoraConcluidoProduto'] = $data['update']['orcamentos'][$j]['HoraEntregaOrca'];
+							$data['update']['produtos_orcamento']['bd'][$j][$k] = $this->Orcatrata_model->update_produto_id($data['update']['produtos_orcamento'][$j][$k], $data['update']['produtos_orcamento'][$j][$k]['idApp_Produto']);
+						}
+					}
+				}
+								
 				////Fim da Criação das Repetições///////				
 
 				$data['CashBackNovo'] = $data['CashBackServicos'] + $data['CashBackProdutos'];
