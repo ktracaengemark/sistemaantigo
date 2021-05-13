@@ -156,7 +156,7 @@
 											<div class="row">
 												<div class="col-md-12">
 													<div class="row">
-														<!--
+														
 														<div class="col-md-4 text-left">
 															<label  id="NomeClienteAuto1">Cliente: <?php echo $cadastrar['NomeClienteAuto']; ?></label>
 															<input type="text" name="id_Cliente_Auto" id="id_Cliente_Auto" value="<?php echo $cadastrar['id_Cliente_Auto']; ?>" class="form-control" placeholder="Pesquisar Cliente">
@@ -165,15 +165,15 @@
 														<input type="hidden" id="NomeClienteAuto" name="NomeClienteAuto" value="<?php echo $cadastrar['NomeClienteAuto']; ?>" />
 														<input type="hidden" id="Hidden_id_Cliente_Auto" name="Hidden_id_Cliente_Auto" value="<?php echo $orcatrata['idApp_Cliente']; ?>" />
 														<input type="hidden" name="idApp_Cliente" id="idApp_Cliente" value="<?php echo $orcatrata['idApp_Cliente']; ?>" class="form-control" readonly= "">
-														-->
 														
+														<!--
 														<div class="col-md-4 text-left">
 															<label  for="idApp_Cliente">Cliente</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value),dateDiff(),clientePet(this.value),clienteDep(this.value),calculacashback(this.value)" <?php echo $readonly; ?>
 																	id="idApp_Cliente" autofocus name="idApp_Cliente">
 																<option value="">-- Sel. Cliente --</option>
 																<?php
-																
+																/*
 																foreach ($select['idApp_Cliente'] as $key => $row) {
 																		(!$orcatrata['idApp_Cliente']) ? $orcatrata['idApp_Cliente'] = '0' : FALSE;
 																	if ($orcatrata['idApp_Cliente'] == $key) {
@@ -182,12 +182,12 @@
 																		echo '<option value="' . $key . '">' . $row . '</option>';
 																	}
 																}
-																
+																*/
 																?>
 															</select>
-															<?php echo form_error('idApp_Cliente'); ?>
+															<?php #echo form_error('idApp_Cliente'); ?>
 														</div>
-														
+														-->
 														<input type="hidden" id="Hidden_idApp_Cliente" name="Hidden_idApp_Cliente" value="<?php echo $orcatrata['idApp_Cliente']; ?>" />
 														<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
 															<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $orcatrata['idApp_ClientePet']; ?>" />

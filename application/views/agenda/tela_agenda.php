@@ -32,17 +32,17 @@
 									<span class="glyphicon glyphicon-search"></span> 
 								</button>
 							</span>
-							<!--
+							
 							<input type="text" name="id_Cliente_Auto" id="id_Cliente_Auto" value="<?php echo $cadastrar['id_Cliente_Auto']; ?>" class="form-control" placeholder="Pesquisar Cliente">
 							<input type="hidden" id="NomeClienteAuto" name="NomeClienteAuto" value="<?php echo $cadastrar['NomeClienteAuto']; ?>" />
 							<input type="hidden" id="Hidden_id_Cliente_Auto" name="Hidden_id_Cliente_Auto" value="<?php echo $query['idApp_Cliente']; ?>" />
 							<input type="hidden" name="idApp_Cliente" id="idApp_Cliente" value="<?php echo $query['idApp_Cliente']; ?>" class="form-control" readonly= "">
-							-->
 							
+							<!--
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="clientePet(this.value),clienteDep(this.value),this.form.submit()"
 									id="idApp_Cliente" name="idApp_Cliente">
 								<?php
-								
+								/*
 								foreach ($select['idApp_Cliente'] as $key => $row) {
 									if ($query['idApp_Cliente'] == $key) {
 										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -50,10 +50,10 @@
 										echo '<option value="' . $key . '">' . $row . '</option>';
 									}
 								}
-								
+								*/
 								?>
 							</select>
-							
+							-->
 						</div>
 					</div>
 					<?php if($_SESSION['Empresa']['CadastrarDep'] == "S"){?>

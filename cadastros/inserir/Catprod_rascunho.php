@@ -9,8 +9,22 @@ $tipocategoria0 = filter_var($Dados['TipoCatprod'], FILTER_SANITIZE_STRING);
 $site_cat0 = filter_var($Dados['Site_Catprod_Cadastrar'], FILTER_SANITIZE_STRING);
 $balcao_cat0 = filter_var($Dados['Balcao_Catprod_Cadastrar'], FILTER_SANITIZE_STRING);
 
+/*
+	private function limpar_string($string) {
+        if($string !== mb_convert_encoding(mb_convert_encoding($string, 'UTF-32', 'UTF-8'), 'UTF-8', 'UTF-32'))
+            $string = mb_convert_encoding($string, 'UTF-8', mb_detect_encoding($string));
+        $string = htmlentities($string, ENT_NOQUOTES, 'UTF-8');
+        $string = preg_replace('`&([a-z]{1,2})(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig);`i', '\1', $string);
+        $string = html_entity_decode($string, ENT_NOQUOTES, 'UTF-8');
+        $string = preg_replace(array('`[^a-z0-9]`i','`[-]+`'), ' ', $string);
+        $string = preg_replace('/( ){2,}/', '$1', $string);
+        $string = strtoupper(trim($string));
+        return $string;
+	}
+*/
+
 $caracteres_sem_acento = array(
-    'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+    'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','�'=>'Z', '�'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
     'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
     'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
     'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',

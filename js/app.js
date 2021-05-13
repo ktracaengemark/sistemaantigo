@@ -35,7 +35,7 @@ calculacashback();
 //calculaTotalOS();
 
 //a função de autocomplete está temporariamente desligada até se conseguir resolver a questão dos caracteres especiais
-/*
+
 $(function () {
 	// Atribui evento e função para limpeza dos campos
     $('#id_Cliente_Auto').on('input', limpaCampos);
@@ -43,7 +43,7 @@ $(function () {
 	$('#id_Cliente_Auto').on('keyup', function(event){		
 		
 		var id_Cliente_Auto =  $('#id_Cliente_Auto').val();
-		console.log(id_Cliente_Auto);
+		//console.log(id_Cliente_Auto);
 
 	});	
 	
@@ -52,7 +52,7 @@ $(function () {
 
 		select: function(event, ui){
 			var pegar = ui.item.value;
-			console.log('pegar = '+pegar);
+			//console.log('pegar = '+pegar);
 			var pegarSplit = pegar.split('#');
 			var id_Cliente = pegarSplit[0];
 			
@@ -121,7 +121,7 @@ $(function () {
     }	
 	
 });
-*/
+
 function codigo(id, tabela){
 	//alert('ok codigo');
 	var categoria = $('#idTab_Catprod').val();

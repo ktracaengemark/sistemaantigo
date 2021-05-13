@@ -61,7 +61,7 @@ class Basico {
 
     function check_date($data) {
         if ($data) {
-            #if ($data && preg_match("/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.]\d\d\d\d$/", $data)) {
+            #($data && preg_match("/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.]\d\d\d\d$/", $data)) 
             if (preg_match("/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](1[89][0-9][0-9]|2[0189][0-9][0-9])$/", $data) &&
                     checkdate(substr($data, 3, 2), substr($data, 0, 2), substr($data, 6, 4)))
                 return TRUE;
@@ -592,7 +592,6 @@ class Basico {
 		$data = 'clientedep' . '_' . $_SESSION['ClienteDep']['idApp_ClienteDep'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . '_' . rand() . $extensao;
 		return $data;
     }
-
 	
     function renomeiaempresa1($data, $path) {
 		$extensao	= explode('.', $data);
