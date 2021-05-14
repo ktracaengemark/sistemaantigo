@@ -105,7 +105,9 @@ class Promocao_model extends CI_Model {
 		$query = $this->db->query('
 			SELECT 
 				TV.*,
-				TPS.Nome_Prod
+				TPS.Nome_Prod,
+				TPS.idTab_Catprod,
+				TPS.idTab_Produto
 			FROM 
 				Tab_Valor AS TV
 					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Produtos = TV.idTab_Produtos
@@ -113,7 +115,12 @@ class Promocao_model extends CI_Model {
 				TV.idTab_Promocao = ' . $data . '
 		');
         $query = $query->result_array();
-
+        /*
+		echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+		*/
         return $query;
     }
 

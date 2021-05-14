@@ -47,6 +47,19 @@ class Promocao extends CI_Controller {
         else
             $data['msg'] = '';
 		
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		//$convdesc1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['valor']['Convdesc'], $caracteres_sem_acento));		
+				
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
 			//'TipoCatprod',
@@ -83,7 +96,8 @@ class Promocao extends CI_Controller {
 				$data['item_promocao'][$j]['ComissaoServico'] = $this->input->post('ComissaoServico' . $i);
 				$data['item_promocao'][$j]['ComissaoCashBack'] = $this->input->post('ComissaoCashBack' . $i);
 				$data['item_promocao'][$j]['TempoDeEntrega'] = $this->input->post('TempoDeEntrega' . $i);
-				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
+				//$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
+				$data['item_promocao'][$j]['Convdesc'] = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($this->input->post('Convdesc' . $i), $caracteres_sem_acento));
 				//$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
 				//$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
 				//$data['item_promocao'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
@@ -297,7 +311,20 @@ class Promocao extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-		
+
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		//$convdesc1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['valor']['Convdesc'], $caracteres_sem_acento));		
+				
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
 			//'TipoCatprod',
@@ -334,7 +361,7 @@ class Promocao extends CI_Controller {
 				$data['item_promocao'][$j]['ComissaoServico'] = $this->input->post('ComissaoServico' . $i);
 				$data['item_promocao'][$j]['ComissaoCashBack'] = $this->input->post('ComissaoCashBack' . $i);
 				$data['item_promocao'][$j]['TempoDeEntrega'] = $this->input->post('TempoDeEntrega' . $i);
-				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
+				$data['item_promocao'][$j]['Convdesc'] = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($this->input->post('Convdesc' . $i), $caracteres_sem_acento));
 				//$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
 				//$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
 				//$data['item_promocao'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
@@ -373,7 +400,7 @@ class Promocao extends CI_Controller {
 			$_SESSION['Promocao']['DataFimProm'] = $data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'barras');
             
 			#### Tab_Valor ####
-            $data['item_promocao'] = $this->Promocao_model->get_item_promocao($id, "2");
+            $_SESSION['Item_Promocao'] = $data['item_promocao'] = $this->Promocao_model->get_item_promocao($id, "2");
             if (count($data['item_promocao']) > 0) {
                 $data['item_promocao'] = array_combine(range(1, count($data['item_promocao'])), array_values($data['item_promocao']));
                 $data['count']['PTCount'] = count($data['item_promocao']);
@@ -510,18 +537,18 @@ class Promocao extends CI_Controller {
                 $max = count($data['update']['item_promocao']['inserir']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['item_promocao']['inserir'][$j]['Item_Promocao'] = "1";
-					$data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['item_promocao']['inserir'][$j]['Desconto'] = 2;
 					$data['update']['item_promocao']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['item_promocao']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['item_promocao']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['item_promocao']['inserir'][$j]['idTab_Promocao'] = $data['promocao']['idTab_Promocao'];
-					//$data['update']['item_promocao']['inserir'][$j]['idTab_Catprod'] = $_SESSION['Promocao']['idTab_Catprod'];
-					//$data['update']['item_promocao']['inserir'][$j]['idTab_Produto'] = $_SESSION['Promocao']['idTab_Produto'];
+					//$data['update']['item_promocao']['inserir'][$j]['idTab_Catprod'] = $_SESSION['Item_Promocao']['idTab_Catprod'];
+					//$data['update']['item_promocao']['inserir'][$j]['idTab_Produto'] = $_SESSION['Item_Promocao']['idTab_Produto'];
 					$data['update']['item_promocao']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ValorProduto']));
 					$data['update']['item_promocao']['inserir'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoVenda']));
 					$data['update']['item_promocao']['inserir'][$j]['ComissaoServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoServico']));
 					$data['update']['item_promocao']['inserir'][$j]['ComissaoCashBack'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoCashBack']));
+					$data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'UTF-8'));
 				}
 
                 $max = count($data['update']['item_promocao']['alterar']);
@@ -648,7 +675,19 @@ class Promocao extends CI_Controller {
         else
             $data['msg'] = '';
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		//$convdesc1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['valor']['Convdesc'], $caracteres_sem_acento));		
+		
         $data['promocao'] = quotes_to_entities($this->input->post(array(
             #### Tab_Promocao ####
             'idTab_Promocao',			
@@ -685,7 +724,7 @@ class Promocao extends CI_Controller {
 				$data['item_promocao'][$j]['ComissaoServico'] = $this->input->post('ComissaoServico' . $i);
 				$data['item_promocao'][$j]['ComissaoCashBack'] = $this->input->post('ComissaoCashBack' . $i);
 				$data['item_promocao'][$j]['TempoDeEntrega'] = $this->input->post('TempoDeEntrega' . $i);
-				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
+				$data['item_promocao'][$j]['Convdesc'] = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($this->input->post('Convdesc' . $i), $caracteres_sem_acento));
 				//$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
 				//$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
 				//data['item_promocao'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
@@ -844,18 +883,18 @@ class Promocao extends CI_Controller {
                 $max = count($data['update']['item_promocao']['inserir']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['item_promocao']['inserir'][$j]['Item_Promocao'] = "1";
-					$data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['item_promocao']['inserir'][$j]['Desconto'] = 2;
 					$data['update']['item_promocao']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['item_promocao']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['item_promocao']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['item_promocao']['inserir'][$j]['idTab_Promocao'] = $data['promocao']['idTab_Promocao'];
-					//$data['update']['item_promocao']['inserir'][$j]['idTab_Catprod'] = $_SESSION['Promocao']['idTab_Catprod'];
-					//$data['update']['item_promocao']['inserir'][$j]['idTab_Produto'] = $_SESSION['Promocao']['idTab_Produto'];
+					//$data['update']['item_promocao']['inserir'][$j]['idTab_Catprod'] = $_SESSION['Item_Promocao']['idTab_Catprod'];
+					//$data['update']['item_promocao']['inserir'][$j]['idTab_Produto'] = $_SESSION['Item_Promocao']['idTab_Produto'];
 					$data['update']['item_promocao']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ValorProduto']));
 					$data['update']['item_promocao']['inserir'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoVenda']));
 					$data['update']['item_promocao']['inserir'][$j]['ComissaoServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoServico']));
 					$data['update']['item_promocao']['inserir'][$j]['ComissaoCashBack'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoCashBack']));
+					$data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'UTF-8'));
 				}
 
                 $max = count($data['update']['item_promocao']['alterar']);

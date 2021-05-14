@@ -304,9 +304,9 @@
 													<?php if ($metodo > 1) { ?>
 														<?php if ($metodo != 4 && $metodo != 6) { ?>
 															<div class="col-md-2">
-																<label >Salvar Alterações.</label><br>
+																<label >Salvar Alterações</label><br>
 																<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
-																	<span class="glyphicon glyphicon-save"></span> Salvar
+																	<span class="glyphicon glyphicon-save"></span> Próximo Passo
 																</button>
 															</div>
 														<?php } ?>

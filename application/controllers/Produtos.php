@@ -1003,7 +1003,18 @@ class Produtos extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-		
+
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
 		#### Tab_Produtos ####
         $data['produtos'] = quotes_to_entities($this->input->post(array(
             'idTab_Produtos',
@@ -1024,7 +1035,7 @@ class Produtos extends CI_Controller {
 				$data['valor'][$j]['ComissaoServico'] = $this->input->post('ComissaoServico' . $i);
 				$data['valor'][$j]['ComissaoCashBack'] = $this->input->post('ComissaoCashBack' . $i);
 				$data['valor'][$j]['TempoDeEntrega'] = $this->input->post('TempoDeEntrega' . $i);
-				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
+				$data['valor'][$j]['Convdesc'] = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($this->input->post('Convdesc' . $i), $caracteres_sem_acento));
 				//$data['valor'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
 				$data['valor'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
 				$data['valor'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
@@ -1209,6 +1220,19 @@ class Produtos extends CI_Controller {
 			$_SESSION['Valor'] = $data['valor'] = $this->Produtos_model->get_valor($id);
 		}
 
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		$convdesc1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['valor']['Convdesc'], $caracteres_sem_acento));		
+				
 		//$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();		
@@ -1257,7 +1281,8 @@ class Produtos extends CI_Controller {
 			$data['valor']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ValorProduto']));
 			$data['valor']['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ComissaoVenda']));
 			$data['valor']['ComissaoServico'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ComissaoServico']));
-			$data['valor']['ComissaoCashBack'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ComissaoCashBack']));			
+			$data['valor']['ComissaoCashBack'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ComissaoCashBack']));
+			$data['valor']['Convdesc'] = trim(mb_strtoupper($convdesc1, 'UTF-8'));			
 			
 			$data['update']['valor']['anterior'] = $this->Produtos_model->get_valor($data['valor']['idTab_Valor']);
             $data['update']['valor']['campos'] = array_keys($data['valor']);
