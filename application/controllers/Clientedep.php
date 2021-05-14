@@ -62,6 +62,19 @@ class Clientedep extends CI_Controller {
 
         //echo '<br><br><br><br><br>==========================================='.$data['query']['StatusVidaDep']='V';
 		
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		$clientedep1 = preg_replace("/[^a-zA-Z]/", " ", strtr($data['query']['NomeClienteDep'], $caracteres_sem_acento));		
+				
 		$data['select']['RelacaoDep'] = $this->Cliente_model->select_relacao();
 		$data['select']['SexoDep'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVidaDep'] = $this->Clientedep_model->select_status_vida();
@@ -87,7 +100,7 @@ class Clientedep extends CI_Controller {
             $this->load->view('clientedep/form_clientedep', $data);
         } else {
 
-            $data['query']['NomeClienteDep'] = trim(mb_strtoupper($data['query']['NomeClienteDep'], 'ISO-8859-1'));
+            $data['query']['NomeClienteDep'] = trim(mb_strtoupper($clientedep1, 'ISO-8859-1'));
             $data['query']['DataNascimentoDep'] = $this->basico->mascara_data($data['query']['DataNascimentoDep'], 'mysql');
             $data['query']['ObsDep'] = nl2br($data['query']['ObsDep']);
 			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
@@ -145,6 +158,19 @@ class Clientedep extends CI_Controller {
             //$_SESSION['ClienteDep']['idApp_ClienteDep'] = $id;
         }
 		
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		$clientedep1 = preg_replace("/[^a-zA-Z]/", " ", strtr($data['query']['NomeClienteDep'], $caracteres_sem_acento));		
+				
 		$data['select']['RelacaoDep'] = $this->Cliente_model->select_relacao();
 		$data['select']['SexoDep'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVidaDep'] = $this->Clientedep_model->select_status_vida();      
@@ -170,7 +196,7 @@ class Clientedep extends CI_Controller {
             $this->load->view('clientedep/form_clientedep', $data);
         } else {
 
-            $data['query']['NomeClienteDep'] = trim(mb_strtoupper($data['query']['NomeClienteDep'], 'ISO-8859-1'));
+            $data['query']['NomeClienteDep'] = trim(mb_strtoupper($clientedep1, 'ISO-8859-1'));
             $data['query']['DataNascimentoDep'] = $this->basico->mascara_data($data['query']['DataNascimentoDep'], 'mysql');
             $data['query']['ObsDep'] = nl2br($data['query']['ObsDep']);
             //$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];

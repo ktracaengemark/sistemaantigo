@@ -161,6 +161,33 @@ class Orcatrata extends CI_Controller {
 			'EstadoCliente',
 			'ReferenciaCliente',
         ), TRUE);
+
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		$endereco1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Logradouro'], $caracteres_sem_acento));
+
+		$cep1 = preg_replace("/[^0-9]/", " ", strtr($data['orcatrata']['Cep'], $caracteres_sem_acento));
+
+		$numero1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Numero'], $caracteres_sem_acento));
+
+		$complemento1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Complemento'], $caracteres_sem_acento));
+
+		$bairro1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Bairro'], $caracteres_sem_acento));
+
+		$cidade1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Cidade'], $caracteres_sem_acento));
+
+		$estado1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Estado'], $caracteres_sem_acento));
+
+		$referencia1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Referencia'], $caracteres_sem_acento));
 		
 		if ($idApp_Cliente) {
             $data['query']['idApp_Cliente'] = $idApp_Cliente;
@@ -788,13 +815,13 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['Referencia'] = '';
 				} else {	
 					$data['orcatrata']['Cep'] = $data['orcatrata']['Cep'];
-					$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
-					$data['orcatrata']['Numero'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
-					$data['orcatrata']['Complemento'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
-					$data['orcatrata']['Bairro'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
-					$data['orcatrata']['Cidade'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
-					$data['orcatrata']['Estado'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
-					$data['orcatrata']['Referencia'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
+					$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($endereco1, 'ISO-8859-1'));
+					$data['orcatrata']['Numero'] = trim(mb_strtoupper($numero1, 'ISO-8859-1'));
+					$data['orcatrata']['Complemento'] = trim(mb_strtoupper($complemento1, 'ISO-8859-1'));
+					$data['orcatrata']['Bairro'] = trim(mb_strtoupper($bairro1, 'ISO-8859-1'));
+					$data['orcatrata']['Cidade'] = trim(mb_strtoupper($cidade1, 'ISO-8859-1'));
+					$data['orcatrata']['Estado'] = trim(mb_strtoupper($estado1, 'ISO-8859-1'));
+					$data['orcatrata']['Referencia'] = trim(mb_strtoupper($referencia1, 'ISO-8859-1'));
 				}
 			} else {
 				$data['orcatrata']['Cep'] = '';
@@ -1873,7 +1900,34 @@ class Orcatrata extends CI_Controller {
 			'EstadoCliente',
 			'ReferenciaCliente',
         ), TRUE);
-		
+
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		$endereco1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Logradouro'], $caracteres_sem_acento));
+
+		$cep1 = preg_replace("/[^0-9]/", " ", strtr($data['orcatrata']['Cep'], $caracteres_sem_acento));
+
+		$numero1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Numero'], $caracteres_sem_acento));
+
+		$complemento1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Complemento'], $caracteres_sem_acento));
+
+		$bairro1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Bairro'], $caracteres_sem_acento));
+
+		$cidade1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Cidade'], $caracteres_sem_acento));
+
+		$estado1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Estado'], $caracteres_sem_acento));
+
+		$referencia1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Referencia'], $caracteres_sem_acento));
+				
 		if ($idApp_Cliente) {
             $data['query']['idApp_Cliente'] = $idApp_Cliente;
 			$_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
@@ -2482,13 +2536,13 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['Referencia'] = '';
 				} else {	
 					$data['orcatrata']['Cep'] = $data['orcatrata']['Cep'];
-					$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
-					$data['orcatrata']['Numero'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
-					$data['orcatrata']['Complemento'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
-					$data['orcatrata']['Bairro'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
-					$data['orcatrata']['Cidade'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
-					$data['orcatrata']['Estado'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
-					$data['orcatrata']['Referencia'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
+					$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($endereco1, 'ISO-8859-1'));
+					$data['orcatrata']['Numero'] = trim(mb_strtoupper($numero1, 'ISO-8859-1'));
+					$data['orcatrata']['Complemento'] = trim(mb_strtoupper($complemento1, 'ISO-8859-1'));
+					$data['orcatrata']['Bairro'] = trim(mb_strtoupper($bairro1, 'ISO-8859-1'));
+					$data['orcatrata']['Cidade'] = trim(mb_strtoupper($cidade1, 'ISO-8859-1'));
+					$data['orcatrata']['Estado'] = trim(mb_strtoupper($estado1, 'ISO-8859-1'));
+					$data['orcatrata']['Referencia'] = trim(mb_strtoupper($referencia1, 'ISO-8859-1'));
 				}
 			} else {
 				$data['orcatrata']['Cep'] = '';
@@ -3153,7 +3207,34 @@ class Orcatrata extends CI_Controller {
 			'EstadoCliente',
 			'ReferenciaCliente',
         ), TRUE);
-		
+
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		$endereco1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Logradouro'], $caracteres_sem_acento));
+
+		$cep1 = preg_replace("/[^0-9]/", " ", strtr($data['orcatrata']['Cep'], $caracteres_sem_acento));
+
+		$numero1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Numero'], $caracteres_sem_acento));
+
+		$complemento1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Complemento'], $caracteres_sem_acento));
+
+		$bairro1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Bairro'], $caracteres_sem_acento));
+
+		$cidade1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Cidade'], $caracteres_sem_acento));
+
+		$estado1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Estado'], $caracteres_sem_acento));
+
+		$referencia1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Referencia'], $caracteres_sem_acento));
+				
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
         //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
 		
@@ -3766,13 +3847,13 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['Referencia'] = '';
 				} else {	
 					$data['orcatrata']['Cep'] = $data['orcatrata']['Cep'];
-					$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
-					$data['orcatrata']['Numero'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
-					$data['orcatrata']['Complemento'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
-					$data['orcatrata']['Bairro'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
-					$data['orcatrata']['Cidade'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
-					$data['orcatrata']['Estado'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
-					$data['orcatrata']['Referencia'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
+					$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($endereco1, 'ISO-8859-1'));
+					$data['orcatrata']['Numero'] = trim(mb_strtoupper($numero1, 'ISO-8859-1'));
+					$data['orcatrata']['Complemento'] = trim(mb_strtoupper($complemento1, 'ISO-8859-1'));
+					$data['orcatrata']['Bairro'] = trim(mb_strtoupper($bairro1, 'ISO-8859-1'));
+					$data['orcatrata']['Cidade'] = trim(mb_strtoupper($cidade1, 'ISO-8859-1'));
+					$data['orcatrata']['Estado'] = trim(mb_strtoupper($estado1, 'ISO-8859-1'));
+					$data['orcatrata']['Referencia'] = trim(mb_strtoupper($referencia1, 'ISO-8859-1'));
 				}
 			} else {
 				$data['orcatrata']['Cep'] = '';
@@ -4466,6 +4547,33 @@ class Orcatrata extends CI_Controller {
 			'ReferenciaCliente',
         ), TRUE);
 
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		$endereco1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Logradouro'], $caracteres_sem_acento));
+
+		$cep1 = preg_replace("/[^0-9]/", " ", strtr($data['orcatrata']['Cep'], $caracteres_sem_acento));
+
+		$numero1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Numero'], $caracteres_sem_acento));
+
+		$complemento1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Complemento'], $caracteres_sem_acento));
+
+		$bairro1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Bairro'], $caracteres_sem_acento));
+
+		$cidade1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Cidade'], $caracteres_sem_acento));
+
+		$estado1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Estado'], $caracteres_sem_acento));
+
+		$referencia1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Referencia'], $caracteres_sem_acento));
+		
 		//Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
         //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
 
@@ -5375,13 +5483,13 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['Referencia'] = '';
 				} else {	
 					$data['orcatrata']['Cep'] = $data['orcatrata']['Cep'];
-					$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
-					$data['orcatrata']['Numero'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
-					$data['orcatrata']['Complemento'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
-					$data['orcatrata']['Bairro'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
-					$data['orcatrata']['Cidade'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
-					$data['orcatrata']['Estado'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
-					$data['orcatrata']['Referencia'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
+					$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($endereco1, 'ISO-8859-1'));
+					$data['orcatrata']['Numero'] = trim(mb_strtoupper($numero1, 'ISO-8859-1'));
+					$data['orcatrata']['Complemento'] = trim(mb_strtoupper($complemento1, 'ISO-8859-1'));
+					$data['orcatrata']['Bairro'] = trim(mb_strtoupper($bairro1, 'ISO-8859-1'));
+					$data['orcatrata']['Cidade'] = trim(mb_strtoupper($cidade1, 'ISO-8859-1'));
+					$data['orcatrata']['Estado'] = trim(mb_strtoupper($estado1, 'ISO-8859-1'));
+					$data['orcatrata']['Referencia'] = trim(mb_strtoupper($referencia1, 'ISO-8859-1'));
 				}
 			} else {
 				$data['orcatrata']['Cep'] = '';
@@ -6260,6 +6368,33 @@ class Orcatrata extends CI_Controller {
 			'ReferenciaCliente',
         ), TRUE);
 
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		$endereco1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Logradouro'], $caracteres_sem_acento));
+
+		$cep1 = preg_replace("/[^0-9]/", " ", strtr($data['orcatrata']['Cep'], $caracteres_sem_acento));
+
+		$numero1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Numero'], $caracteres_sem_acento));
+
+		$complemento1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Complemento'], $caracteres_sem_acento));
+
+		$bairro1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Bairro'], $caracteres_sem_acento));
+
+		$cidade1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Cidade'], $caracteres_sem_acento));
+
+		$estado1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Estado'], $caracteres_sem_acento));
+
+		$referencia1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Referencia'], $caracteres_sem_acento));
+		
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
         //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
 
@@ -6989,13 +7124,13 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['Referencia'] = '';
 				} else {	
 					$data['orcatrata']['Cep'] = $data['orcatrata']['Cep'];
-					$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
-					$data['orcatrata']['Numero'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
-					$data['orcatrata']['Complemento'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
-					$data['orcatrata']['Bairro'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
-					$data['orcatrata']['Cidade'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
-					$data['orcatrata']['Estado'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
-					$data['orcatrata']['Referencia'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
+					$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($endereco1, 'ISO-8859-1'));
+					$data['orcatrata']['Numero'] = trim(mb_strtoupper($numero1, 'ISO-8859-1'));
+					$data['orcatrata']['Complemento'] = trim(mb_strtoupper($complemento1, 'ISO-8859-1'));
+					$data['orcatrata']['Bairro'] = trim(mb_strtoupper($bairro1, 'ISO-8859-1'));
+					$data['orcatrata']['Cidade'] = trim(mb_strtoupper($cidade1, 'ISO-8859-1'));
+					$data['orcatrata']['Estado'] = trim(mb_strtoupper($estado1, 'ISO-8859-1'));
+					$data['orcatrata']['Referencia'] = trim(mb_strtoupper($referencia1, 'ISO-8859-1'));
 				}
 			} else {
 				$data['orcatrata']['Cep'] = '';
@@ -7767,6 +7902,33 @@ class Orcatrata extends CI_Controller {
 			'ReferenciaCliente',
         ), TRUE);
 
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		$endereco1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Logradouro'], $caracteres_sem_acento));
+
+		$cep1 = preg_replace("/[^0-9]/", " ", strtr($data['orcatrata']['Cep'], $caracteres_sem_acento));
+
+		$numero1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Numero'], $caracteres_sem_acento));
+
+		$complemento1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Complemento'], $caracteres_sem_acento));
+
+		$bairro1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Bairro'], $caracteres_sem_acento));
+
+		$cidade1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Cidade'], $caracteres_sem_acento));
+
+		$estado1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Estado'], $caracteres_sem_acento));
+
+		$referencia1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Referencia'], $caracteres_sem_acento));
+		
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
         //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
 
@@ -8597,13 +8759,13 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['Referencia'] = '';
 				} else {	
 					$data['orcatrata']['Cep'] = $data['orcatrata']['Cep'];
-					$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
-					$data['orcatrata']['Numero'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
-					$data['orcatrata']['Complemento'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
-					$data['orcatrata']['Bairro'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
-					$data['orcatrata']['Cidade'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
-					$data['orcatrata']['Estado'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
-					$data['orcatrata']['Referencia'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
+					$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($endereco1, 'ISO-8859-1'));
+					$data['orcatrata']['Numero'] = trim(mb_strtoupper($numero1, 'ISO-8859-1'));
+					$data['orcatrata']['Complemento'] = trim(mb_strtoupper($complemento1, 'ISO-8859-1'));
+					$data['orcatrata']['Bairro'] = trim(mb_strtoupper($bairro1, 'ISO-8859-1'));
+					$data['orcatrata']['Cidade'] = trim(mb_strtoupper($cidade1, 'ISO-8859-1'));
+					$data['orcatrata']['Estado'] = trim(mb_strtoupper($estado1, 'ISO-8859-1'));
+					$data['orcatrata']['Referencia'] = trim(mb_strtoupper($referencia1, 'ISO-8859-1'));
 				}
 			} else {
 				$data['orcatrata']['Cep'] = '';
@@ -9442,7 +9604,34 @@ class Orcatrata extends CI_Controller {
 			'EstadoFornecedor',
 			'ReferenciaFornecedor',
         ), TRUE);
-		
+
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		$endereco1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Logradouro'], $caracteres_sem_acento));
+
+		$cep1 = preg_replace("/[^0-9]/", " ", strtr($data['orcatrata']['Cep'], $caracteres_sem_acento));
+
+		$numero1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Numero'], $caracteres_sem_acento));
+
+		$complemento1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Complemento'], $caracteres_sem_acento));
+
+		$bairro1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Bairro'], $caracteres_sem_acento));
+
+		$cidade1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Cidade'], $caracteres_sem_acento));
+
+		$estado1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Estado'], $caracteres_sem_acento));
+
+		$referencia1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Referencia'], $caracteres_sem_acento));
+				
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
         //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
 
@@ -10642,6 +10831,33 @@ class Orcatrata extends CI_Controller {
 			'ReferenciaFornecedor',
         ), TRUE);
 
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		$endereco1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Logradouro'], $caracteres_sem_acento));
+
+		$cep1 = preg_replace("/[^0-9]/", " ", strtr($data['orcatrata']['Cep'], $caracteres_sem_acento));
+
+		$numero1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Numero'], $caracteres_sem_acento));
+
+		$complemento1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Complemento'], $caracteres_sem_acento));
+
+		$bairro1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Bairro'], $caracteres_sem_acento));
+
+		$cidade1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Cidade'], $caracteres_sem_acento));
+
+		$estado1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Estado'], $caracteres_sem_acento));
+
+		$referencia1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($data['orcatrata']['Referencia'], $caracteres_sem_acento));
+		
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
         //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
 

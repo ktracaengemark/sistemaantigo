@@ -83,18 +83,18 @@ class Usuario2 extends CI_Controller {
 			$data['query']['DataEmUsuario'] = $this->basico->mascara_data($data['query']['DataEmUsuario'], 'barras');
         }
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ğ'=>'Dj',''=>'Z', ''=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'İ'=>'Y', 'Ş'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ğ'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ı'=>'y', 'ı'=>'y', 'ş'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
 
-        #$this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim|is_unique_duplo[Sis_Usuario.Nome.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
-        $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
-		//$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
-		//$this->form_validation->set_rules('CelularUsuario', 'Celular do Usuario', 'required|trim|is_unique_by_id_empresa[Sis_Usuario.CelularUsuario.' . $data['query']['idSis_Usuario'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-        $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-		//$this->form_validation->set_rules('Permissao', 'Nível', 'required|trim');
-		//$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
-		//$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
+		$nomeusuario1 = preg_replace("/[^a-zA-Z]/", " ", strtr($data['query']['Nome'], $caracteres_sem_acento));		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();	
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
@@ -132,12 +132,25 @@ class Usuario2 extends CI_Controller {
         $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
         $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
 
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #$this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim|is_unique_duplo[Sis_Usuario.Nome.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
+        $this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
+        $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
+		//$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
+		//$this->form_validation->set_rules('CelularUsuario', 'Celular do Usuario', 'required|trim|is_unique_by_id_empresa[Sis_Usuario.CelularUsuario.' . $data['query']['idSis_Usuario'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+        $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
+		//$this->form_validation->set_rules('Permissao', 'Nível', 'required|trim');
+		//$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
+		//$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
+
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('usuario/form_associadoalterar', $data);
         } else {
 
-            $data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
+            $data['query']['Nome'] = trim(mb_strtoupper(nomeusuario1, 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
 			$data['query']['DataEmUsuario'] = $this->basico->mascara_data($data['query']['DataEmUsuario'], 'mysql');
             #$data['query']['Obs'] = nl2br($data['query']['Obs']);
@@ -190,12 +203,18 @@ class Usuario2 extends CI_Controller {
             $data['query'] = $this->Usuario_model->get_usuario($id);
         }
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ğ'=>'Dj',''=>'Z', ''=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'İ'=>'Y', 'Ş'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ğ'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ı'=>'y', 'ı'=>'y', 'ş'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
 
-        $this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim');
-        $this->form_validation->set_rules('CelularUsuario', 'Celular do Usuario', 'required|trim|is_unique_by_id_empresa[Sis_Usuario.CelularUsuario.' . $data['query']['idSis_Usuario'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-        $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
-        $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');		
+		$nomeusuario1 = preg_replace("/[^a-zA-Z]/", " ", strtr($data['query']['Nome'], $caracteres_sem_acento));		
 
         $data['titulo'] = 'Editar Senha';
         $data['form_open_path'] = 'usuario2/alterarsenha';
@@ -214,12 +233,19 @@ class Usuario2 extends CI_Controller {
         $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
         $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
 
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        $this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim');
+        $this->form_validation->set_rules('CelularUsuario', 'Celular do Usuario', 'required|trim|is_unique_by_id_empresa[Sis_Usuario.CelularUsuario.' . $data['query']['idSis_Usuario'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+        $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
+        $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');		
+
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('usuario/form_usuariosenha', $data);
         } else {
 
-            $data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
+            $data['query']['Nome'] = trim(mb_strtoupper($nomeusuario1, 'ISO-8859-1'));
             $data['query']['Senha'] = md5($data['query']['Senha']);	
 
 
@@ -271,12 +297,19 @@ class Usuario2 extends CI_Controller {
             $data['query'] = $this->Usuario_model->get_usuario($id);
         }
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ğ'=>'Dj',''=>'Z', ''=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'İ'=>'Y', 'Ş'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ğ'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ı'=>'y', 'ı'=>'y', 'ş'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
 
-        $this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
-        $this->form_validation->set_rules('Conta', 'Chave Pix / Conta', 'required|trim');
+		$nomeusuario1 = preg_replace("/[^a-zA-Z]/", " ", strtr($data['query']['Nome'], $caracteres_sem_acento));		
 
-		
         $data['titulo'] = 'Editar Conta';
         $data['form_open_path'] = 'usuario2/alterarconta';
         $data['readonly'] = '';
@@ -294,12 +327,17 @@ class Usuario2 extends CI_Controller {
         $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
         $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
 
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        $this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
+        $this->form_validation->set_rules('Conta', 'Chave Pix / Conta', 'required|trim');
+
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('usuario/form_usuarioconta', $data);
         } else {
 
-            $data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
+            $data['query']['Nome'] = trim(mb_strtoupper($nomeusuario1, 'ISO-8859-1'));
 
 
             $data['anterior'] = $this->Usuario_model->get_usuario($data['query']['idSis_Usuario']);

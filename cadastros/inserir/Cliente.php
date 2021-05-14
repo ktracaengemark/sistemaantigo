@@ -44,18 +44,33 @@ $caracteres_sem_acento = array(
 );
 
 $cliente1 = preg_replace("/[^a-zA-Z]/", " ", strtr($cliente0, $caracteres_sem_acento));
-
 $cliente = trim(mb_strtoupper($cliente1, 'ISO-8859-1'));
 
+$endereco1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($endereco0, $caracteres_sem_acento));
+$endereco = trim(mb_strtoupper($endereco1, 'ISO-8859-1'));
+
+$cep1 = preg_replace("/[^0-9]/", " ", strtr($cep0, $caracteres_sem_acento));
+$cep = trim(mb_strtoupper($cep1, 'ISO-8859-1'));
+
+$numero1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($numero0, $caracteres_sem_acento));
+$numero = trim(mb_strtoupper($numero1, 'ISO-8859-1'));
+
+$complemento1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($complemento0, $caracteres_sem_acento));
+$complemento = trim(mb_strtoupper($complemento1, 'ISO-8859-1'));
+
+$bairro1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($bairro0, $caracteres_sem_acento));
+$bairro = trim(mb_strtoupper($bairro1, 'ISO-8859-1'));
+
+$cidade1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($cidade0, $caracteres_sem_acento));
+$cidade = trim(mb_strtoupper($cidade1, 'ISO-8859-1'));
+
+$estado1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($estado0, $caracteres_sem_acento));
+$estado = trim(mb_strtoupper($estado1, 'ISO-8859-1'));
+
+$referencia1 = preg_replace("/[^a-zA-Z0-9]/", " ", strtr($referencia0, $caracteres_sem_acento));
+$referencia = trim(mb_strtoupper($referencia1, 'ISO-8859-1'));
+
 $sexo = trim(mb_strtoupper($sexo0, 'ISO-8859-1'));
-$cep = trim(mb_strtoupper($cep0, 'ISO-8859-1'));
-$endereco = trim(mb_strtoupper($endereco0, 'ISO-8859-1'));
-$numero = trim(mb_strtoupper($numero0, 'ISO-8859-1'));
-$complemento = trim(mb_strtoupper($complemento0, 'ISO-8859-1'));
-$bairro = trim(mb_strtoupper($bairro0, 'ISO-8859-1'));
-$cidade = trim(mb_strtoupper($cidade0, 'ISO-8859-1'));
-$estado = trim(mb_strtoupper($estado0, 'ISO-8859-1'));
-$referencia = trim(mb_strtoupper($referencia0, 'ISO-8859-1'));
 
 $usuario 	= $_SESSION['log']['idSis_Usuario'];
 $empresa 	= $_SESSION['log']['idSis_Empresa'];

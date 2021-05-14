@@ -185,8 +185,21 @@ class Loginempresa extends CI_Controller {
 			'DataDeValidade',
 			'NumUsuarios',
 			'Site',
-                ), TRUE);
+		), TRUE);
 
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		$nomeadmin1 = preg_replace("/[^a-zA-Z]/", " ", strtr($data['query']['NomeAdmin'], $caracteres_sem_acento));		
+				
 		(!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
 		(!$data['query']['DataDeValidade']) ? $data['query']['DataDeValidade'] = date('d/m/Y', strtotime('+1 month')) : FALSE;
         
@@ -233,7 +246,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['MunicipioEmpresa'] = trim(mb_strtoupper($data['query']['MunicipioEmpresa'], 'ISO-8859-1'));
 			$data['query']['EstadoEmpresa'] = trim(mb_strtoupper($data['query']['EstadoEmpresa'], 'ISO-8859-1'));
 			$data['query']['CepEmpresa'] = trim(mb_strtoupper($data['query']['CepEmpresa'], 'ISO-8859-1'));
-			$data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));
+			$data['query']['NomeAdmin'] = trim(mb_strtoupper($nomeadmin1, 'ISO-8859-1'));
 			//$data['query']['Site'] = trim(mb_strtoupper($data['query']['Site'], 'UTF-8'));
 			$data['query']['idSis_EmpresaMatriz'] = 2;
 			$data['query']['Associado'] = 2;
@@ -675,8 +688,21 @@ class Loginempresa extends CI_Controller {
 			'NumUsuarios',
 			'Associado',
 			'Site',
-                ), TRUE);
+		), TRUE);
 
+		$caracteres_sem_acento = array(
+			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+			'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+			'Ï'=>'I', 'Ñ'=>'N', 'N'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+			'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+			'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+			'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'n'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+			'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+			'a'=>'a', 'î'=>'i', 'â'=>'a', '?'=>'s', '?'=>'t', 'A'=>'A', 'Î'=>'I', 'Â'=>'A', '?'=>'S', '?'=>'T',
+		);
+
+		$nomeadmin1 = preg_replace("/[^a-zA-Z]/", " ", strtr($data['query']['NomeAdmin'], $caracteres_sem_acento));		
+		
 		(!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
 		(!$data['query']['DataDeValidade']) ? $data['query']['DataDeValidade'] = date('d/m/Y', strtotime('+1 month')) : FALSE;
 		
@@ -724,7 +750,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['MunicipioEmpresa'] = trim(mb_strtoupper($data['query']['MunicipioEmpresa'], 'ISO-8859-1'));
 			$data['query']['EstadoEmpresa'] = trim(mb_strtoupper($data['query']['EstadoEmpresa'], 'ISO-8859-1'));
 			$data['query']['CepEmpresa'] = trim(mb_strtoupper($data['query']['CepEmpresa'], 'ISO-8859-1'));
-			$data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));			
+			$data['query']['NomeAdmin'] = trim(mb_strtoupper($nomeadmin1, 'ISO-8859-1'));			
 			$data['query']['idSis_EmpresaMatriz'] = 2;
 			$data['query']['Associado'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['PermissaoEmpresa'] = 1;
