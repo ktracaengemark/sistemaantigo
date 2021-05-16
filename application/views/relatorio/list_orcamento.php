@@ -9,14 +9,7 @@
 						<input type="text" class="form-control" disabled aria-label="Contagem" value="<?php echo $report->num_rows(); ?> Resultados">
 					</div>
 				</div>
-				<?php if($_SESSION['Usuario']['Rel_Pag'] == "S") {?>	
-					<div class="col-md-2">
-						<label for="DataFim">Extra:</label>
-						<div class="input-group">
-							<span class="input-group-addon">R$</span>
-							<input type="text" class="form-control" disabled aria-label="Orcamento" value="<?php echo $report->soma->somaextra; ?>">
-						</div>
-					</div>
+				<?php if($_SESSION['Usuario']['Rel_Pag'] == "S") {?>
 					<div class="col-md-2">
 						<label for="DataFim">Prod + Serv:</label>
 						<div class="input-group">
@@ -29,6 +22,13 @@
 						<div class="input-group">
 							<span class="input-group-addon">R$</span>
 							<input type="text" class="form-control" disabled aria-label="Frete" value="<?php echo $report->soma->somafrete ?>">
+						</div>
+					</div>	
+					<div class="col-md-2">
+						<label for="DataFim">Extra:</label>
+						<div class="input-group">
+							<span class="input-group-addon">R$</span>
+							<input type="text" class="form-control" disabled aria-label="Orcamento" value="<?php echo $report->soma->somaextra; ?>">
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -43,6 +43,13 @@
 						<div class="input-group">
 							<span class="input-group-addon">R$</span>
 							<input type="text" class="form-control" disabled aria-label="Total" value="<?php echo $report->soma->somadesc ?>">
+						</div>
+					</div>
+					<div class="col-md-2">
+						<label for="DataFim">CashBack:</label>
+						<div class="input-group">
+							<span class="input-group-addon">R$</span>
+							<input type="text" class="form-control" disabled aria-label="Total" value="<?php echo $report->soma->somacashback ?>">
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -105,11 +112,12 @@
 						<th class="active"><?php echo $nome ?></th>
 						<th class="active">Tipo</th>
 						<?php if($_SESSION['Usuario']['Rel_Pag'] == "S") {?>
-							<th class="active">ExtraR$</th>
 							<th class="active">Prd.SrvR$</th>
 							<th class="active">FreteR$</th>
+							<th class="active">ExtraR$</th>
 							<th class="active">TotalR$</th>
 							<th class="active">DescR$</th>
+							<th class="active">CashR$</th>
 							<th class="active">FinalR$</th>
 						<?php } ?>	
 						<th class="active"><?php echo $nomeusuario ?></th>
@@ -195,11 +203,12 @@
 							echo '<td>' . $row['Nome' . $nome] . '</td>';
 							echo '<td>' . $row['TipoFinanceiro'] . '</td>';
 							if($_SESSION['Usuario']['Rel_Pag'] == "S") {
-								echo '<td>' . $row['ValorExtraOrca'] . '</td>';
 								echo '<td>' . $row['ValorRestanteOrca'] . '</td>';
 								echo '<td>' . $row['ValorFrete'] . '</td>';
+								echo '<td>' . $row['ValorExtraOrca'] . '</td>';
 								echo '<td>' . $row['TotalOrca'] . '</td>';
 								echo '<td>' . $row['DescValorOrca'] . '</td>';
+								echo '<td>' . $row['CashBackOrca'] . '</td>';
 								echo '<td>' . $row['ValorFinalOrca'] . '</td>';
 							}	
 							echo '<td>' . $row[$nomeusuario] . '</td>';

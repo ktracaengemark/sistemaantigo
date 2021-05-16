@@ -328,8 +328,8 @@ class OrcatrataPrint extends CI_Controller {
 			  echo "<pre>";
 			  print_r($data['orcatrata']);
 			  echo "</pre>";
-			  exit ();
-			  */
+			  //exit ();
+			*/ 
 
         }
 

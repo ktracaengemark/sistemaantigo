@@ -65,7 +65,8 @@ class Pedidos_model extends CI_Model {
 		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
-		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
+		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
+		$data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;			
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -117,6 +118,7 @@ class Pedidos_model extends CI_Model {
 				OT.idTab_TipoRD = "2" 
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['idApp_Cliente'] . '
                 ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
@@ -210,7 +212,8 @@ class Pedidos_model extends CI_Model {
 		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
-		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
+		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
+		$data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;		
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -264,6 +267,7 @@ class Pedidos_model extends CI_Model {
 				OT.CombinadoFrete = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['idApp_Cliente'] . '
                 ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
@@ -359,7 +363,8 @@ class Pedidos_model extends CI_Model {
 		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
-		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
+		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
+		$data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;		
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -414,6 +419,7 @@ class Pedidos_model extends CI_Model {
 				OT.AprovadoOrca = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['idApp_Cliente'] . '
                 ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
@@ -509,7 +515,8 @@ class Pedidos_model extends CI_Model {
 		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
-		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
+		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
+		$data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;		
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -568,6 +575,7 @@ class Pedidos_model extends CI_Model {
 				
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['idApp_Cliente'] . '
                 ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
@@ -663,7 +671,8 @@ class Pedidos_model extends CI_Model {
 		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
-		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
+		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
+		$data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;		
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -722,6 +731,7 @@ class Pedidos_model extends CI_Model {
 				PRD.ConcluidoProduto = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['idApp_Cliente'] . '
                 ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
@@ -817,7 +827,8 @@ class Pedidos_model extends CI_Model {
 		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
-		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
+		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
+		$data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;		
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -876,6 +887,7 @@ class Pedidos_model extends CI_Model {
 				PRD.ConcluidoProduto = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['idApp_Cliente'] . '
                 ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
@@ -971,7 +983,8 @@ class Pedidos_model extends CI_Model {
 		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
-		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
+		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
+		$data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;		
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -1028,6 +1041,7 @@ class Pedidos_model extends CI_Model {
 				PR.Quitado = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['idApp_Cliente'] . '
                 ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
@@ -1121,7 +1135,8 @@ class Pedidos_model extends CI_Model {
 		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
-		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
+		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
+		$data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;		
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -1174,6 +1189,7 @@ class Pedidos_model extends CI_Model {
 				OT.CanceladoOrca = "S"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['idApp_Cliente'] . '
                 ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata

@@ -94,12 +94,17 @@
 																	</div>
 																</div>
 																<input type="hidden" name="HoraEntregaOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['HoraEntregaOrca']; ?>"/>
+																<input type="hidden" name="CombinadoFrete<?php echo $i ?>" value="<?php echo $orcamento[$i]['CombinadoFrete']; ?>"/>
+																<input type="hidden" name="AprovadoOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['AprovadoOrca']; ?>"/>
+																<input type="hidden" name="QuitadoOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['QuitadoOrca']; ?>"/>
+																<input type="hidden" name="CanceladoOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['CanceladoOrca']; ?>"/>
+																<input type="hidden" name="idApp_<?php echo $nome; ?><?php echo $i ?>" value="<?php echo $orcamento[$i]['idApp_' . $nome]; ?>"/>
 																<div class="col-md-2">
-																	<label for="ValorTotalOrca">Valor:</label><br>
+																	<label for="ValorFinalOrca">Valor:</label><br>
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
-																		<input type="text" class="form-control Valor" readonly="" maxlength="10" placeholder="0,00" id="ValorTotalOrca<?php echo $i ?>"
-																			   name="ValorTotalOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['ValorTotalOrca'] ?>">
+																		<input type="text" class="form-control Valor" readonly="" maxlength="10" placeholder="0,00" id="ValorFinalOrca<?php echo $i ?>"
+																			   name="ValorFinalOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['ValorFinalOrca'] ?>">
 																	</div>
 																</div>
 																<div class="col-md-2">

@@ -115,7 +115,12 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+        ), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idApp_Consulta',
 			'idApp_Cliente',
@@ -210,11 +215,18 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+        ), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'Orcamento',
 			'Cliente',
+			'idApp_Cliente',
 			'Fornecedor',
+			'idApp_Fornecedor',
 			'idApp_OrcaTrata',
 			'NomeAssociado',
 			'idSis_Usuario',
@@ -329,7 +341,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Agrupar'] = $data['query']['Agrupar'];
 		$_SESSION['FiltroAlteraParcela']['Ultimo'] = $data['query']['Ultimo'];
@@ -538,7 +552,9 @@ class Relatorio extends CI_Controller {
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
             $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
@@ -620,11 +636,18 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Fornecedor_Auto',
+			'NomeFornecedorAuto',
+        ), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'Orcamento',
 			'Cliente',
+			'idApp_Cliente',
 			'Fornecedor',
+			'idApp_Fornecedor',
 			'idApp_OrcaTrata',
 			'NomeAssociado',
 			'idSis_Usuario',
@@ -738,7 +761,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
@@ -922,7 +947,9 @@ class Relatorio extends CI_Controller {
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
             $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
@@ -1004,11 +1031,18 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+        ), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'Orcamento',
 			'Cliente',
+			'idApp_Cliente',
 			'Fornecedor',
+			'idApp_Fornecedor',
 			'idApp_OrcaTrata',
 			'NomeAssociado',
 			'idSis_Usuario',
@@ -1122,7 +1156,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
@@ -1306,7 +1342,9 @@ class Relatorio extends CI_Controller {
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
             $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
@@ -1388,11 +1426,18 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Fornecedor_Auto',
+			'NomeFornecedorAuto',
+        ), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'Orcamento',
 			'Cliente',
+			'idApp_Cliente',
 			'Fornecedor',
+			'idApp_Fornecedor',
 			'idApp_OrcaTrata',
 			'NomeAssociado',
 			'idSis_Usuario',
@@ -1506,7 +1551,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
@@ -1689,7 +1736,9 @@ class Relatorio extends CI_Controller {
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
             $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
@@ -1771,11 +1820,18 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+        ), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'Orcamento',
 			'Cliente',
+			'idApp_Cliente',
 			'Fornecedor',
+			'idApp_Fornecedor',
 			'idApp_OrcaTrata',
 			'NomeAssociado',
 			'idSis_Usuario',
@@ -1890,7 +1946,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
@@ -2079,7 +2137,9 @@ class Relatorio extends CI_Controller {
             //$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
             $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
@@ -2161,11 +2221,18 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+        ), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'Orcamento',
 			'Cliente',
+			'idApp_Cliente',
 			'Fornecedor',
+			'idApp_Fornecedor',
 			'idApp_OrcaTrata',
 			'NomeAssociado',
 			'idSis_Usuario',
@@ -2279,7 +2346,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
@@ -2464,6 +2533,7 @@ class Relatorio extends CI_Controller {
             //$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
@@ -2546,11 +2616,18 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+        ), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Orcamento',
             'Cliente',
+            'idApp_Cliente',
 			'Fornecedor',
+            'idApp_Fornecedor',
 			'Dia',
 			'Ano',
 			'Mesvenc',
@@ -2648,7 +2725,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
@@ -2816,7 +2895,9 @@ class Relatorio extends CI_Controller {
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
@@ -2887,11 +2968,18 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Fornecedor_Auto',
+			'NomeFornecedorAuto',
+        ), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Orcamento',
             'Cliente',
+            'idApp_Cliente',
 			'Fornecedor',
+            'idApp_Fornecedor',
 			'Dia',
 			'Ano',
 			'Mesvenc',
@@ -2992,7 +3080,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
@@ -3163,7 +3253,9 @@ class Relatorio extends CI_Controller {
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
@@ -3234,11 +3326,18 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+        ), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Orcamento',
             'Cliente',
+			'idApp_Cliente',
 			'Fornecedor',
+			'idApp_Fornecedor',
 			'Produtos',
 			'Categoria',
 			'Dia',
@@ -3344,7 +3443,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
@@ -3506,7 +3607,9 @@ class Relatorio extends CI_Controller {
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Categoria'] = $data['query']['Categoria'];
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
@@ -3578,11 +3681,18 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Fornecedor_Auto',
+			'NomeFornecedorAuto',
+        ), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Orcamento',
             'Cliente',
+			'idApp_Cliente',
 			'Fornecedor',
+			'idApp_Fornecedor',
 			'Produtos',
 			'Categoria',
 			'Dia',
@@ -3688,7 +3798,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
@@ -3850,7 +3962,9 @@ class Relatorio extends CI_Controller {
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Categoria'] = $data['query']['Categoria'];
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
@@ -3914,176 +4028,6 @@ class Relatorio extends CI_Controller {
 
     }
 
-    public function proc_despesas() {
-
-        if ($this->input->get('m') == 1)
-            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
-        else
-            $data['msg'] = '';
-
-        $data['query'] = quotes_to_entities($this->input->post(array(
-            'idApp_Procedimento',
-            'Sac',
-            'Marketing',
-            'Orcamento',
-			'idTab_TipoRD',
-            'Cliente',
-			'Fornecedor',
-			'NomeUsuario',
-			'Compartilhar',
-			'DataInicio9',
-            'DataFim9',
-			'DataInicio10',
-            'DataFim10',
-			'HoraInicio9',
-            'HoraFim9',
-			'HoraInicio10',
-            'HoraFim10',			
-			'Dia',
-			'Mesvenc',
-			'Ano',
-			'ConcluidoProcedimento',
-            'Ordenamento',
-            'Campo',
-            'TipoProcedimento',
-			'Agrupar',
-        ), TRUE));			
-		
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
-		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
-		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
-
-        $data['select']['ConcluidoProcedimento'] = array(
-			'#' => 'TODOS',
-            'N' => 'Não',
-            'S' => 'Sim',
-        );
-
-		$data['select']['Sac'] = array (
-            '0' => 'Todos',
-            '1' => 'Solicitação',
-            '2' => 'Elogio',
-			'3' => 'Reclamação',
-        );
-		
-		$data['select']['Marketing'] = array (
-            '0' => 'Todos',
-            '1' => 'Atualização',
-            '2' => 'Pesquisa',
-			'3' => 'Retorno',
-            '4' => 'Promoções',
-			'5' => 'Felicitações',
-        );
-		
-        $data['select']['Agrupar'] = array(
-			'0' => '::Nenhum::',
-			'idApp_Procedimento' => 'Procedimento',
-			'idApp_OrcaTrata' => 'Orçamento',
-			'idApp_Fornecedor' => 'Fornecedor',
-        );
-
-		$data['select']['Campo'] = array(
-			'PRC.DataProcedimento' => 'Data',
-            'PRC.idApp_Procedimento' => 'id',
-			'PRC.ConcluidoProcedimento' => 'Concl.',
-        );
-
-        $data['select']['Ordenamento'] = array(
-            'DESC' => 'Decrescente',
-			'ASC' => 'Crescente',
-        );
-
-        $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
-		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
-		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
-		$data['select']['Compartilhar'] = $this->Relatorio_model->select_compartilhar();
-
-		$data['query']['TipoProcedimento'] = 1;
-		$data['query']['Sac'] = 0;
-		$data['query']['Marketing'] = 0;
-        $data['titulo1'] = 'Despesa';
-		$data['tipoproc'] = 1;
-		$data['metodo'] = 1;
-		$data['form_open_path'] = 'relatorio/proc_despesas';
-		$data['panel'] = 'danger';
-		$data['TipoFinanceiro'] = 'Despesas';
-		$data['TipoRD'] = 1;
-        $data['nome'] = 'Fornecedor';
-		$data['editar'] = 0;
-		$data['print'] = 0;
-		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
-		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
-		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
-		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
-		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
-
-		$_SESSION['FiltroAlteraParcela']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
-		$_SESSION['FiltroAlteraParcela']['Sac'] = $data['query']['Sac'];
-		$_SESSION['FiltroAlteraParcela']['Marketing'] = $data['query']['Marketing'];
-		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
-		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
-		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
-		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
-		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
-		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
-
-        #run form validation
-        if ($this->form_validation->run() !== FALSE) {
-            
-			$data['bd']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
-			$data['bd']['Sac'] = $data['query']['Sac'];
-			$data['bd']['Marketing'] = $data['query']['Marketing'];
-			$data['bd']['Orcamento'] = $data['query']['Orcamento'];
-            $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
-            $data['bd']['Cliente'] = $data['query']['Cliente'];
-            $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
-            $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
-			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
-			$data['bd']['Dia'] = $data['query']['Dia'];
-			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
-			$data['bd']['Ano'] = $data['query']['Ano'];
-			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
-			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
-            $data['bd']['Campo'] = $data['query']['Campo'];
-			$data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
-			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
-			$data['bd']['DataInicio9'] = $this->basico->mascara_data($data['query']['DataInicio9'], 'mysql');
-            $data['bd']['DataFim9'] = $this->basico->mascara_data($data['query']['DataFim9'], 'mysql');
-			$data['bd']['DataInicio10'] = $this->basico->mascara_data($data['query']['DataInicio10'], 'mysql');
-            $data['bd']['DataFim10'] = $this->basico->mascara_data($data['query']['DataFim10'], 'mysql');
-			$data['bd']['HoraInicio9'] = $this->basico->mascara_data($data['query']['HoraInicio9'], 'mysql');
-            $data['bd']['HoraFim9'] = $this->basico->mascara_data($data['query']['HoraFim9'], 'mysql');
-			$data['bd']['HoraInicio10'] = $this->basico->mascara_data($data['query']['HoraInicio10'], 'mysql');
-            $data['bd']['HoraFim10'] = $this->basico->mascara_data($data['query']['HoraFim10'], 'mysql');
-
-            $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
-
-            /*
-              echo "<pre>";
-              print_r($data['report']);
-              echo "</pre>";
-              exit();
-              */
-
-            $data['list'] = $this->load->view('relatorio/list_procedimentos', $data, TRUE);
-            //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
-        }
-
-        $this->load->view('relatorio/tela_procedimentos', $data);
-
-        $this->load->view('basico/footer');
-
-    }
-
     public function proc_receitas() {
 
         if ($this->input->get('m') == 1)
@@ -4092,6 +4036,11 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+        ), TRUE));	
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idApp_Procedimento',
@@ -4100,7 +4049,9 @@ class Relatorio extends CI_Controller {
             'Orcamento',
 			'idTab_TipoRD',
             'Cliente',
+			'idApp_Cliente',
 			'Fornecedor',
+			'idApp_Fornecedor',
 			'NomeUsuario',
 			'Compartilhar',
 			'DataInicio9',
@@ -4202,7 +4153,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
 		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
 
@@ -4215,7 +4168,190 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
+            $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
+			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
+			$data['bd']['Dia'] = $data['query']['Dia'];
+			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
+			$data['bd']['Ano'] = $data['query']['Ano'];
+			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+			$data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
+			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
+			$data['bd']['DataInicio9'] = $this->basico->mascara_data($data['query']['DataInicio9'], 'mysql');
+            $data['bd']['DataFim9'] = $this->basico->mascara_data($data['query']['DataFim9'], 'mysql');
+			$data['bd']['DataInicio10'] = $this->basico->mascara_data($data['query']['DataInicio10'], 'mysql');
+            $data['bd']['DataFim10'] = $this->basico->mascara_data($data['query']['DataFim10'], 'mysql');
+			$data['bd']['HoraInicio9'] = $this->basico->mascara_data($data['query']['HoraInicio9'], 'mysql');
+            $data['bd']['HoraFim9'] = $this->basico->mascara_data($data['query']['HoraFim9'], 'mysql');
+			$data['bd']['HoraInicio10'] = $this->basico->mascara_data($data['query']['HoraInicio10'], 'mysql');
+            $data['bd']['HoraFim10'] = $this->basico->mascara_data($data['query']['HoraFim10'], 'mysql');
+
+            $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list'] = $this->load->view('relatorio/list_procedimentos', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+        }
+
+        $this->load->view('relatorio/tela_procedimentos', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+
+    public function proc_despesas() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Fornecedor_Auto',
+			'NomeFornecedorAuto',
+        ), TRUE));	
+		
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            'idApp_Procedimento',
+            'Sac',
+            'Marketing',
+            'Orcamento',
+			'idTab_TipoRD',
+            'Cliente',
+			'idApp_Cliente',
+			'Fornecedor',
+			'idApp_Fornecedor',
+			'NomeUsuario',
+			'Compartilhar',
+			'DataInicio9',
+            'DataFim9',
+			'DataInicio10',
+            'DataFim10',
+			'HoraInicio9',
+            'HoraFim9',
+			'HoraInicio10',
+            'HoraFim10',			
+			'Dia',
+			'Mesvenc',
+			'Ano',
+			'ConcluidoProcedimento',
+            'Ordenamento',
+            'Campo',
+            'TipoProcedimento',
+			'Agrupar',
+        ), TRUE));			
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
+
+        $data['select']['ConcluidoProcedimento'] = array(
+			'#' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
+        );
+
+		$data['select']['Sac'] = array (
+            '0' => 'Todos',
+            '1' => 'Solicitação',
+            '2' => 'Elogio',
+			'3' => 'Reclamação',
+        );
+		
+		$data['select']['Marketing'] = array (
+            '0' => 'Todos',
+            '1' => 'Atualização',
+            '2' => 'Pesquisa',
+			'3' => 'Retorno',
+            '4' => 'Promoções',
+			'5' => 'Felicitações',
+        );
+		
+        $data['select']['Agrupar'] = array(
+			'0' => '::Nenhum::',
+			'idApp_Procedimento' => 'Procedimento',
+			'idApp_OrcaTrata' => 'Orçamento',
+			'idApp_Fornecedor' => 'Fornecedor',
+        );
+
+		$data['select']['Campo'] = array(
+			'PRC.DataProcedimento' => 'Data',
+            'PRC.idApp_Procedimento' => 'id',
+			'PRC.ConcluidoProcedimento' => 'Concl.',
+        );
+
+        $data['select']['Ordenamento'] = array(
+            'DESC' => 'Decrescente',
+			'ASC' => 'Crescente',
+        );
+
+        $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
+		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
+		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
+		$data['select']['Compartilhar'] = $this->Relatorio_model->select_compartilhar();
+
+		$data['query']['TipoProcedimento'] = 1;
+		$data['query']['Sac'] = 0;
+		$data['query']['Marketing'] = 0;
+        $data['titulo1'] = 'Despesa';
+		$data['tipoproc'] = 1;
+		$data['metodo'] = 1;
+		$data['form_open_path'] = 'relatorio/proc_despesas';
+		$data['panel'] = 'danger';
+		$data['TipoFinanceiro'] = 'Despesas';
+		$data['TipoRD'] = 1;
+        $data['nome'] = 'Fornecedor';
+		$data['editar'] = 0;
+		$data['print'] = 0;
+		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
+		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
+		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
+		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
+		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
+
+		$_SESSION['FiltroAlteraParcela']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
+		$_SESSION['FiltroAlteraParcela']['Sac'] = $data['query']['Sac'];
+		$_SESSION['FiltroAlteraParcela']['Marketing'] = $data['query']['Marketing'];
+		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
+		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
+		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
+		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
+		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
+
+        #run form validation
+        if ($this->form_validation->run() !== FALSE) {
+            
+			$data['bd']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
+			$data['bd']['Sac'] = $data['query']['Sac'];
+			$data['bd']['Marketing'] = $data['query']['Marketing'];
+			$data['bd']['Orcamento'] = $data['query']['Orcamento'];
+            $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
+            $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
+            $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
             $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
 			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
@@ -4262,6 +4398,11 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+        ), TRUE));	
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idApp_Procedimento',
@@ -4270,7 +4411,9 @@ class Relatorio extends CI_Controller {
             'Orcamento',
 			'idTab_TipoRD',
             'Cliente',
+			'idApp_Cliente',
 			'Fornecedor',
+			'idApp_Fornecedor',
 			'NomeUsuario',
 			'Compartilhar',
 			'DataInicio9',
@@ -4373,7 +4516,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
 		$_SESSION['FiltroAlteraParcela']['Compartilhar'] = $data['query']['Compartilhar'];
 		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
@@ -4399,7 +4544,9 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
             $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
 			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
@@ -4446,6 +4593,11 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+        ), TRUE));	
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idApp_Procedimento',
@@ -4454,7 +4606,9 @@ class Relatorio extends CI_Controller {
             'Orcamento',
 			'idTab_TipoRD',
             'Cliente',
+			'idApp_Cliente',
 			'Fornecedor',
+			'idApp_Fornecedor',
 			'NomeUsuario',
 			'Compartilhar',
 			'DataInicio9',
@@ -4557,7 +4711,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
 		$_SESSION['FiltroAlteraParcela']['Compartilhar'] = $data['query']['Compartilhar'];
 		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
@@ -4583,7 +4739,9 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
             $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
 			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
 			$data['bd']['Dia'] = $data['query']['Dia'];

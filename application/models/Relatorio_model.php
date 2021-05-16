@@ -203,7 +203,9 @@ class Relatorio_model extends CI_Model {
 		
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] . '  ': FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] . '' : FALSE;
-		$data['Fornecedor'] = ($data['Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['Fornecedor'] . '' : FALSE;		
+		$data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['idApp_Cliente'] . '' : FALSE;
+		$data['Fornecedor'] = ($data['Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['Fornecedor'] . '' : FALSE;
+		$data['idApp_Fornecedor'] = ($data['idApp_Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['idApp_Fornecedor'] . '' : FALSE;		
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -264,11 +266,11 @@ class Relatorio_model extends CI_Model {
 		}
 		/*
 		//echo $this->db->last_query();
-          echo "<pre>";
-          print_r($data['metodo']);
-          echo "</pre>";
-          exit();
-		  */
+		echo "<pre>";
+		print_r($data['idApp_Cliente']);
+		echo "</pre>";
+		//exit();
+		*/
 		$comissao1 = ($data['metodo'] == 1 && $_SESSION['Usuario']['Permissao_Comissao'] < 2 ) ? 'AND OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
 		$comissao2 = ($data['metodo'] == 2 && $_SESSION['log']['idSis_Empresa'] == 5 ) ? 'AND OT.Associado = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
 		$comissao3 = ($data['metodo'] == 2 && $_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['Usuario']['Permissao_Comissao'] < 2 ) ? 'AND OT.Associado = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
@@ -321,6 +323,7 @@ class Relatorio_model extends CI_Model {
 				OT.Tipo_Orca,
 				OT.Associado,
 				OT.ValorComissao,
+				OT.CashBackOrca,
 				OT.StatusComissaoOrca,
 				OT.StatusComissaoOrca_Online,
 				OT.DataPagoComissaoOrca,
@@ -386,6 +389,8 @@ class Relatorio_model extends CI_Model {
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
                 ' . $data['Fornecedor'] . '
+                ' . $data['idApp_Cliente'] . '
+                ' . $data['idApp_Fornecedor'] . '
                 ' . $data['TipoFinanceiro'] . ' 
                 ' . $data['idTab_TipoRD'] . '
 				' . $ultimopedido2 . '
@@ -422,7 +427,9 @@ class Relatorio_model extends CI_Model {
 			$somafrete=0;
 			$somatotal=0;
 			$somadesc=0;
+			$somacashback=0;
 			$somafinal=0;
+			
             foreach ($query->result() as $row) {
 				
 				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
@@ -474,6 +481,8 @@ class Relatorio_model extends CI_Model {
 				$row->ValorComissao = number_format($row->ValorComissao, 2, ',', '.');
 				$somadesc += $row->DescValorOrca;
 				$row->DescValorOrca = number_format($row->DescValorOrca, 2, ',', '.');
+				$somacashback += $row->CashBackOrca;
+				$row->CashBackOrca = number_format($row->CashBackOrca, 2, ',', '.');
 				$somafinal += $row->ValorFinalOrca;
 				$row->ValorFinalOrca = number_format($row->ValorFinalOrca, 2, ',', '.');
 				
@@ -517,6 +526,7 @@ class Relatorio_model extends CI_Model {
             $query->soma->somatotal = number_format($somatotal, 2, ',', '.');
 			$query->soma->somacomissao = number_format($somacomissao, 2, ',', '.');
             $query->soma->somadesc = number_format($somadesc, 2, ',', '.');
+            $query->soma->somacashback = number_format($somacashback, 2, ',', '.');
             $query->soma->somafinal = number_format($somafinal, 2, ',', '.');
 			//$query->soma->contagem = number_format($contagem, 2, ',', '.');
 			/*
@@ -549,7 +559,9 @@ class Relatorio_model extends CI_Model {
 		
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
+		$data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;
 		$data['Fornecedor'] = ($data['Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['Fornecedor'] : FALSE;
+		$data['idApp_Fornecedor'] = ($data['idApp_Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['idApp_Fornecedor'] : FALSE;
 		$data['Produtos'] = ($data['Produtos']) ? ' AND PRDS.idTab_Produtos_Produto = ' . $data['Produtos'] : FALSE;
 		$data['Categoria'] = ($data['Categoria']) ? ' AND TCAT.idTab_Catprod = ' . $data['Categoria'] : FALSE;
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
@@ -676,6 +688,8 @@ class Relatorio_model extends CI_Model {
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
                 ' . $data['Fornecedor'] . '
+                ' . $data['idApp_Cliente'] . '
+                ' . $data['idApp_Fornecedor'] . '
 				' . $data['TipoFinanceiro'] . '
 				' . $data['idTab_TipoRD'] . '
                 ' . $data['Produtos'] . '
@@ -750,6 +764,8 @@ class Relatorio_model extends CI_Model {
 				' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
                 ' . $data['Fornecedor'] . '
+                ' . $data['idApp_Cliente'] . '
+                ' . $data['idApp_Fornecedor'] . '
 				' . $data['TipoFinanceiro'] . '	
 				' . $data['idTab_TipoRD'] . '
                 ' . $data['Produtos'] . '
@@ -911,7 +927,9 @@ class Relatorio_model extends CI_Model {
 		
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Cliente'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
+		$data['idApp_Cliente'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $data['idApp_Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;
 		$data['Fornecedor'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $data['Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['Fornecedor'] : FALSE;
+		$data['idApp_Fornecedor'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $data['idApp_Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['idApp_Fornecedor'] : FALSE;
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -1051,6 +1069,8 @@ class Relatorio_model extends CI_Model {
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
                 ' . $data['Fornecedor'] . '
+                ' . $data['idApp_Cliente'] . '
+                ' . $data['idApp_Fornecedor'] . '
 				' . $data['TipoFinanceiro'] . '
 				' . $data['idTab_TipoRD'] . '
 				' . $ultimopedido2 . '
@@ -1104,6 +1124,8 @@ class Relatorio_model extends CI_Model {
 				' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
                 ' . $data['Fornecedor'] . '
+                ' . $data['idApp_Cliente'] . '
+                ' . $data['idApp_Fornecedor'] . '
 				' . $data['TipoFinanceiro'] . '	
 				' . $data['idTab_TipoRD'] . '
 				' . $ultimopedido2 . '
@@ -1232,7 +1254,9 @@ class Relatorio_model extends CI_Model {
 		$data['Marketing'] = ($data['Marketing']) ? ' AND PRC.Marketing = ' . $data['Marketing'] . '  ': FALSE;
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND PRC.idApp_OrcaTrata = ' . $data['Orcamento'] . '  ': FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND PRC.idApp_Cliente = ' . $data['Cliente'] . '' : FALSE;
-		$data['Fornecedor'] = ($data['Fornecedor']) ? ' AND PRC.idApp_Fornecedor = ' . $data['Fornecedor'] . '' : FALSE;        
+		$data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND PRC.idApp_Cliente = ' . $data['idApp_Cliente'] . '' : FALSE;
+		$data['Fornecedor'] = ($data['Fornecedor']) ? ' AND PRC.idApp_Fornecedor = ' . $data['Fornecedor'] . '' : FALSE;
+		$data['idApp_Fornecedor'] = ($data['idApp_Fornecedor']) ? ' AND PRC.idApp_Cliente = ' . $data['idApp_Fornecedor'] . '' : FALSE;        
 		$filtro17 = ($data['NomeUsuario']) ? 'PRC.idSis_Usuario = "' . $data['NomeUsuario'] . '" AND ' : FALSE;        
 		$filtro18 = ($data['Compartilhar']) ? 'PRC.Compartilhar = "' . $data['Compartilhar'] . '" AND ' : FALSE;		
 		
@@ -1313,6 +1337,8 @@ class Relatorio_model extends CI_Model {
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
                 ' . $data['Fornecedor'] . '
+                ' . $data['idApp_Cliente'] . '
+                ' . $data['idApp_Fornecedor'] . '
 			' . $groupby . '
             ORDER BY
                 ' . $data['Campo'] . ' 

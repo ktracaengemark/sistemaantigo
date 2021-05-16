@@ -13,7 +13,7 @@
 								<h5 class="text-center"><b> Selecione o Pedido</b><?php #echo $titulo; ?></h5>
 							</div>
 							-->
-							<div class="col-md-3 text-left">
+							<div class="col-md-2 text-left">
 							<label>Gestor de Despesas</label>
 								<div class="input-group">
 									<span class="input-group-btn">
@@ -25,7 +25,7 @@
 								</div>
 							</div>
 							<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
-								<div class="col-md-3 text-left">
+								<div class="col-md-5 text-left">
 								<label>.</label>	
 									<div class="input-group">
 										<span class="input-group-btn">
@@ -39,7 +39,7 @@
 							<?php }else{ ?>
 								<input type="hidden" name="Fornecedor" id="Fornecedor" value=""/>
 							<?php } ?>
-							<div class="col-md-6">
+							<div class="col-md-5">
 								<div class="col-md-4">
 								<label>Filtros</label>	
 									<button class="btn btn-warning btn-md btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">

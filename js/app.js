@@ -34,19 +34,11 @@ qtd_ocorrencias();
 calculacashback();
 //calculaTotalOS();
 
-//a função de autocomplete está temporariamente desligada até se conseguir resolver a questão dos caracteres especiais
-
+//função autocomplete 
 $(function () {
-	// Atribui evento e função para limpeza dos campos
-    $('#id_Cliente_Auto').on('input', limpaCampos);
-	
-	$('#id_Cliente_Auto').on('keyup', function(event){		
-		
-		var id_Cliente_Auto =  $('#id_Cliente_Auto').val();
-		//console.log(id_Cliente_Auto);
-
-	});	
-	
+	// função para limpeza dos campos do Cliente
+    $('#id_Cliente_Auto').on('input', limpaCampos_Cliente);
+	// função que busca os nomes do Cliente
 	$("#id_Cliente_Auto").autocomplete({
 		source: window.location.origin+ '/' + app + '/cadastros/pesquisar/Cliente_Autocomplete.php',
 
@@ -87,9 +79,8 @@ $(function () {
 		}
 		
 	});
-	
     // Função para limpar os campos caso a busca esteja vazia
-    function limpaCampos(){
+    function limpaCampos_Cliente(){
        var busca = $('#id_Cliente_Auto').val();
 
        if(busca == ""){
@@ -120,6 +111,81 @@ $(function () {
 	   }
     }	
 	
+	// função para limpeza dos campos do Fornecedor
+    $('#id_Fornecedor_Auto').on('input', limpaCampos_Fornecedor);
+	// função que busca os nomes do Fornecedor
+	$("#id_Fornecedor_Auto").autocomplete({
+		source: window.location.origin+ '/' + app + '/cadastros/pesquisar/Fornecedor_Autocomplete.php',
+
+		select: function(event, ui){
+			var pegar = ui.item.value;
+			//console.log('pegar = '+pegar);
+			var pegarSplit = pegar.split('#');
+			var id_Fornecedor = pegarSplit[0];
+			
+			//console.log('id fornecedor Autocomplete = '+id_Fornecedor);
+			
+			$.ajax({
+				url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Fornecedor.php?id=' + id_Fornecedor,
+				dataType: "json",
+				success: function (data) {
+					
+					var idfornecedor = data[0]['id'];
+					var nomefornecedor = data[0]['nome'];
+					var celularfornecedor = data[0]['celular'];
+					
+					$("#NomeFornecedorAuto1").html('<label>Fornecedor: '+idfornecedor+ ' | ' + nomefornecedor + ' | Cel: ' + celularfornecedor + '</label>');
+					$("#NomeFornecedorAuto").val(''+idfornecedor+ ' | ' + nomefornecedor + ' | Cel: ' + celularfornecedor + '');
+					
+				},
+				error:function(data){
+					$("#NomeFornecedorAuto1").html('<label>Nenhum Fornecedor Selecionado!</label>');
+					$("#NomeFornecedorAuto").val('Nenhum Fornecedor Selecionado!');
+				}
+				
+			});
+
+			$('#idApp_Fornecedor').val(id_Fornecedor);
+			//fornecedorDep(id_Fornecedor);
+			//fornecedorPet(id_Fornecedor);
+			//calculacashback(id_Fornecedor);
+			buscaEnderecoFornecedor(id_Fornecedor);
+			//fornecedorOT(id_Fornecedor);
+		}
+		
+	});
+    // Função para limpar os campos caso a busca esteja vazia
+    function limpaCampos_Fornecedor(){
+       var busca = $('#id_Fornecedor_Auto').val();
+
+       if(busca == ""){
+			
+			$('#idApp_Fornecedor').val('');
+			//$('#idApp_FornecedorDep').val('0');
+			//$('#idApp_FornecedorDep').hide();
+			//$('#Dep').val('');
+			//$('#Dep').hide();
+			//$('#idApp_FornecedorPet').val('0');
+			//$('#idApp_FornecedorPet').hide();
+			//$('#Pet').val('');
+			//$('#Pet').hide();
+			
+			$('#CashBackOrca').val('0,00');
+			
+			$("#NomeFornecedorAuto1").html('<label>Nenhum Fornecedor Selecionado!</label>');
+			$("#NomeFornecedorAuto").val('Nenhum Fornecedor Selecionado!');
+			
+			$('#Cep').val('');
+			$('#Logradouro').val('');
+			$('#Numero').val('');
+			$('#Complemento').val('');
+			$('#Bairro').val('');
+			$('#Cidade').val('');
+			$('#Estado').val('');
+			$('#Referencia').val('');
+	   }
+    }	
+		
 });
 
 function codigo(id, tabela){
@@ -9989,7 +10055,8 @@ $('#calendar').fullCalendar({
             url: 'Consulta_json.php', // use the `url` property
         }],
     //allDayDefault: true,
-    defaultView: 'agendaWeek',
+    //defaultView: 'agendaWeek',
+    defaultView: 'month',
     //contentHeight: 700,
     //height: 'auto',
     height: 500,
@@ -9999,7 +10066,8 @@ $('#calendar').fullCalendar({
 	fixedWeekCount: false,
     firstDay: '0',
     scrollTime: '06:00',
-	eventLimit: false,
+	//eventLimit: false,
+	eventLimit: 6,
 
 	minTime: $('#AgendaI').val(),
     maxTime: $('#AgendaF').val(),	

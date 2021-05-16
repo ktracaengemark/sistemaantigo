@@ -13,7 +13,7 @@
 								<h5 class="text-center"><b> Selecione o Pedido</b><?php #echo $titulo; ?></h5>
 							</div>
 							-->
-							<div class="col-md-3 text-left">
+							<div class="col-md-2 text-left">
 								<label><?php echo $titulo;?></label>
 								<div class="input-group">
 									<span class="input-group-btn">
@@ -21,10 +21,11 @@
 											<span class="glyphicon glyphicon-search"></span> 
 										</button>
 									</span>
-									<input type="text" class="form-control Numero" placeholder="Pesquisar Pedido" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
+									<input type="text" class="form-control Numero" placeholder="Nº Pedido" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
 								</div>
 							</div>
 							<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+								<!--
 								<div class="col-md-3 text-left">
 									<label>.</label>
 									<div class="input-group">
@@ -33,13 +34,29 @@
 												<span class="glyphicon glyphicon-search"></span> 
 											</button>
 										</span>
-										<input type="text" class="form-control Numero" placeholder="Pesquisar Cliente"  name="Cliente" value="<?php echo set_value('Cliente', $query['Cliente']); ?>">
+										<input type="text" class="form-control Numero" placeholder="Pesquisar Cliente"  name="Cliente" value="<?php #echo set_value('Cliente', $query['Cliente']); ?>">
+									</div>
+								</div>
+								-->
+								<input type="hidden" class="form-control Numero" placeholder="Pesquisar Cliente"  name="Cliente" value="<?php echo set_value('Cliente', $query['Cliente']); ?>">
+								<div class="col-md-5 text-left">
+									<label  id="NomeClienteAuto1">Cliente: <?php echo $cadastrar['NomeClienteAuto']; ?></label>
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button class="btn btn-primary btn-md" type="submit">
+												<span class="glyphicon glyphicon-search"></span> 
+											</button>
+										</span>
+										<input type="text" name="id_Cliente_Auto" id="id_Cliente_Auto" value="<?php echo $cadastrar['id_Cliente_Auto']; ?>" class="form-control" placeholder="Pesquisar Cliente">
+										<input type="hidden" id="NomeClienteAuto" name="NomeClienteAuto" value="<?php echo $cadastrar['NomeClienteAuto']; ?>" />
+										<input type="hidden" id="Hidden_id_Cliente_Auto" name="Hidden_id_Cliente_Auto" value="<?php echo $query['idApp_Cliente']; ?>" />
+										<input type="hidden" name="idApp_Cliente" id="idApp_Cliente" value="<?php echo $query['idApp_Cliente']; ?>" class="form-control" readonly= "">
 									</div>
 								</div>
 							<?php }else{ ?>
 								<input type="hidden" name="Cliente" id="Cliente" value=""/>
 							<?php } ?>
-							<div class="col-md-6">
+							<div class="col-md-5">
 								<div class="col-md-4">
 									<label>Filtros</label>
 									<button class="btn btn-warning btn-md btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">

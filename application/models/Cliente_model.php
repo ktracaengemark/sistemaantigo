@@ -339,7 +339,7 @@ class Cliente_model extends CI_Model {
 				}
 			}			
         }else{
-			$query = '(NomeCliente like "' . $data . '%" )';
+			$query = '(NomeCliente like "%' . $data . '%" )';
 		}
             
 

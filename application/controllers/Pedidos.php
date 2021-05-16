@@ -60,12 +60,18 @@ class Pedidos extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+        ), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Orcamento',
 			'Campo',
 			'Ordenamento',
             'Cliente',
+            'idApp_Cliente',
 			'NomeFornecedor',
 			'Dia',
 			'Ano',
@@ -250,7 +256,7 @@ class Pedidos extends CI_Controller {
 		$data['select']['FormaPagamento'] = $this->Relatorio_model->select_formapag();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();		
 		
-        $data['titulo'] = 'Gestor de Pedidos Dinâmico';
+        $data['titulo'] = 'Gestor Dinâmico';
         $data['form_open_path'] = 'Pedidos/pedidos';
 		$data['comissao'] = 'relatorio/comissao/';
         $data['status'] = 'Orcatrata/alterarstatus/';
@@ -266,6 +272,7 @@ class Pedidos extends CI_Controller {
 		
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['TipoFinanceiroR'] = $data['query']['TipoFinanceiroR'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
