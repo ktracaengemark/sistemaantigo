@@ -60,11 +60,18 @@ class Relatoriocomissoes extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+        ), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Orcamento',
             'Cliente',
+			'idApp_Cliente',
 			'Fornecedor',
+			'idApp_Fornecedor',
 			'Funcionario',
 			'Produtos',
 			'Categoria',
@@ -148,7 +155,9 @@ class Relatoriocomissoes extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['Funcionario'] = $data['query']['Funcionario'];
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Produtos'] = $data['query']['Produtos'];
@@ -298,7 +307,9 @@ class Relatoriocomissoes extends CI_Controller {
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Categoria'] = $data['query']['Categoria'];
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];

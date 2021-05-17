@@ -1359,7 +1359,9 @@ class Orcatrata_model extends CI_Model {
 		$Funcionario 			= ($_SESSION['FiltroAlteraParcela']['Funcionario']) ? ' AND (UP1.idSis_Usuario = ' . $_SESSION['FiltroAlteraParcela']['Funcionario'] . ' OR UP2.idSis_Usuario = ' . $_SESSION['FiltroAlteraParcela']['Funcionario'] . ' OR UP3.idSis_Usuario = ' . $_SESSION['FiltroAlteraParcela']['Funcionario'] . ' OR UP4.idSis_Usuario = ' . $_SESSION['FiltroAlteraParcela']['Funcionario'] . ' )' : FALSE;
 		$Orcamento 				= ($_SESSION['FiltroAlteraParcela']['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $_SESSION['FiltroAlteraParcela']['Orcamento'] : FALSE;
 		$Cliente 				= ($_SESSION['FiltroAlteraParcela']['Cliente']) ? ' AND OT.idApp_Cliente = ' . $_SESSION['FiltroAlteraParcela']['Cliente'] : FALSE;
+		$idApp_Cliente 			= ($_SESSION['FiltroAlteraParcela']['idApp_Cliente']) ? ' AND OT.idApp_Cliente = ' . $_SESSION['FiltroAlteraParcela']['idApp_Cliente'] : FALSE;
 		$Fornecedor 			= ($_SESSION['FiltroAlteraParcela']['Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $_SESSION['FiltroAlteraParcela']['Fornecedor'] : FALSE;
+		$idApp_Fornecedor 		= ($_SESSION['FiltroAlteraParcela']['idApp_Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] : FALSE;
 		$Produtos 				= ($_SESSION['FiltroAlteraParcela']['Produtos']) ? ' AND PRDS.idTab_Produtos_Produto = ' . $_SESSION['FiltroAlteraParcela']['Produtos'] : FALSE;
 		$Categoria 				= ($_SESSION['FiltroAlteraParcela']['Categoria']) ? ' AND TCAT.idTab_Catprod = ' . $_SESSION['FiltroAlteraParcela']['Categoria'] : FALSE;
 		$TipoFinanceiro 		= ($_SESSION['FiltroAlteraParcela']['TipoFinanceiro']) ? ' AND TR.idTab_TipoFinanceiro = ' . $_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] : FALSE;
@@ -1521,6 +1523,8 @@ class Orcatrata_model extends CI_Model {
                 ' . $Orcamento . '
                 ' . $Cliente . '
                 ' . $Fornecedor . '
+                ' . $idApp_Cliente . '
+                ' . $idApp_Fornecedor . '
 				' . $TipoFinanceiro . '
 				' . $idTab_TipoRD . '
                 ' . $Produtos . '

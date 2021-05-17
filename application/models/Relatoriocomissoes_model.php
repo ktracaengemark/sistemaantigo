@@ -31,7 +31,9 @@ class Relatoriocomissoes_model extends CI_Model {
 		$Funcionario 			= ($data['Funcionario']) ? ' AND (UP1.idSis_Usuario = ' . $data['Funcionario'] . ' OR UP2.idSis_Usuario = ' . $data['Funcionario'] . ' OR UP3.idSis_Usuario = ' . $data['Funcionario'] . ' OR UP4.idSis_Usuario = ' . $data['Funcionario'] . ' )' : FALSE;
 		$Orcamento 				= ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$Cliente 				= ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
+		$idApp_Cliente 			= ($data['idApp_Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;
 		$Fornecedor 			= ($data['Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['Fornecedor'] : FALSE;
+		$idApp_Fornecedor 		= ($data['idApp_Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['idApp_Fornecedor'] : FALSE;
 		$Produtos 				= ($data['Produtos']) ? ' AND PRDS.idTab_Produtos_Produto = ' . $data['Produtos'] : FALSE;
 		$Categoria 				= ($data['Categoria']) ? ' AND TCAT.idTab_Catprod = ' . $data['Categoria'] : FALSE;
 		$TipoFinanceiro 		= ($data['TipoFinanceiro']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
@@ -194,6 +196,8 @@ class Relatoriocomissoes_model extends CI_Model {
                 ' . $Orcamento . '
                 ' . $Cliente . '
                 ' . $Fornecedor . '
+                ' . $idApp_Cliente . '
+                ' . $idApp_Fornecedor . '
 				' . $TipoFinanceiro . '
 				' . $idTab_TipoRD . '
                 ' . $Produtos . '
@@ -319,6 +323,8 @@ class Relatoriocomissoes_model extends CI_Model {
 				' . $Orcamento . '
                 ' . $Cliente . '
                 ' . $Fornecedor . '
+                ' . $idApp_Cliente . '
+                ' . $idApp_Fornecedor . '
 				' . $TipoFinanceiro . '	
 				' . $idTab_TipoRD . '
                 ' . $Produtos . '
