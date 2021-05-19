@@ -54,7 +54,7 @@
 															<span class="glyphicon glyphicon-calendar"></span>
 														</span>
 														<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-															   name="Data" id="Data" value="<?php echo $query['Data']; ?>" onchange="dateTermina()" onkeyup="dateTermina()">
+															   name="Data" id="Data" value="<?php echo $query['Data']; ?>" onchange="ocorrencias(), dataehora(this.value, 'null')" onkeyup="ocorrencias(), dataehora(this.value, 'null')">
 													</div>
 													<?php echo form_error('Data'); ?>	
 												</div>
@@ -65,7 +65,7 @@
 															<span class="glyphicon glyphicon-time"></span>
 														</span>
 														<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5"  placeholder="HH:MM"
-															   accept=""name="HoraInicio" value="<?php echo $query['HoraInicio']; ?>">
+															   accept=""name="HoraInicio" value="<?php echo $query['HoraInicio']; ?>" onchange="dataehora('null', this.value)" onkeyup="dataehora('null', this.value)" >
 													</div>
 													<?php echo form_error('HoraInicio'); ?>
 												</div>
