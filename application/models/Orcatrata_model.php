@@ -1147,7 +1147,7 @@ class Orcatrata_model extends CI_Model {
             ORDER BY
 				' . $permissao60 . '
 				' . $permissao61 . '
-			LIMIT 100
+			LIMIT 50
 		');
         $query = $query->result_array();
  
