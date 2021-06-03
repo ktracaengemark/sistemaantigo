@@ -1145,7 +1145,7 @@ $('#insert_fornecedor_form').on('submit', function(event){
 $('#insert_funcao_form').on('submit', function(event){
 	//alert('ok');
 	event.preventDefault();
-	if($('#Novo_Funcao').val() == ""){
+	if($('#Novo_Funcao').val() == "" || $('#Novo_Abrev').val() == ""){
 		//Alerta de campo  vazio
 		$("#msg-error-funcao").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
 	}else{
@@ -1205,11 +1205,13 @@ $('#alterarFuncao').on('show.bs.modal', function (event) {
 	var button = $(event.relatedTarget)
 	var recipientidfuncao = button.data('whateveridfuncao')
 	var recipientfuncao = button.data('whateverfuncao')
+	var recipientabrev = button.data('whateverabrev')
 	//console.log(recipientfuncao);
 	var modal = $(this)
 	modal.find('.modal-title').text('id da Funcao: ' + recipientidfuncao)
 	modal.find('#id_Funcao').val(recipientidfuncao)
 	modal.find('#Nome_Funcao').val(recipientfuncao)
+	modal.find('#Nome_Abrev').val(recipientabrev)
 })
 
 $('#alterar_funcao_form').on('submit', function(event){
@@ -1217,10 +1219,11 @@ $('#alterar_funcao_form').on('submit', function(event){
 	
 	event.preventDefault();
 	var funcao = $('#Nome_Funcao').val();
+	var abrev = $('#Nome_Abrev').val();
 	//console.log(funcao);
 	//exit();
 	
-	if($('#Nome_Funcao').val() == ""){
+	if($('#Nome_Funcao').val() == "" || $('#Nome_Abrev').val() == ""){
 		//Alerta de campo  vazio
 		$("#msg-error-alterar-funcao").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
 	}else{
@@ -1282,11 +1285,13 @@ $('#excluirFuncao').on('show.bs.modal', function (event) {
 	var button = $(event.relatedTarget)
 	var recipientidfuncao = button.data('whateveridfuncao')
 	var recipientfuncao = button.data('whateverfuncao')
+	var recipientabrev = button.data('whateverabrev')
 	//console.log(recipientfuncao);
 	var modal = $(this)
 	modal.find('.modal-title').text('id da Funcao: ' + recipientidfuncao)
 	modal.find('#id_ExcluirFuncao').val(recipientidfuncao)
 	modal.find('#ExcluirFuncao').val(recipientfuncao)
+	modal.find('#ExcluirAbrev').val(recipientabrev)
 })
 
 $('#excluir_funcao_form').on('submit', function(event){
