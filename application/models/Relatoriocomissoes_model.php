@@ -53,7 +53,7 @@ class Relatoriocomissoes_model extends CI_Model {
 		$CombinadoFrete 		= ($data['CombinadoFrete']) ? 'OT.CombinadoFrete = "' . $data['CombinadoFrete'] . '" AND ' : FALSE;
 		$permissao 				= ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 		$groupby 				= (1 == 1) ? 'GROUP BY PRDS.idApp_Produto' : FALSE;
-		$Campo 					= (!$data['Campo']) ? 'OT.DataOrca' : $data['Campo'];
+		$Campo 					= (!$data['Campo']) ? 'PRDS.DataConcluidoProduto' : $data['Campo'];
         $Ordenamento 			= (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];        
 
 		$query = $this->db->query(

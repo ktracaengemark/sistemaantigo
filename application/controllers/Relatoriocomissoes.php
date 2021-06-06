@@ -259,13 +259,12 @@ class Relatoriocomissoes extends CI_Controller {
         );
 
 		$data['select']['Campo'] = array(
-			'OT.DataOrca' => 'Data do Pedido',
-			'OT.DataEntregaOrca' => 'Data da Entrega',
+			'PRDS.DataConcluidoProduto' => 'Dta Entrega Serviço',
+            'OT.idApp_OrcaTrata' => 'Nº Pedido',
 			'OT.Modalidade' => 'Modalidade',
-            'OT.idApp_OrcaTrata' => 'Pedido',
 			'OT.TipoFinanceiro' => 'Tipo',
 			'OT.Tipo_Orca' => 'Compra',
-			'OT.TipoFrete' => 'Entrega',
+			'OT.TipoFrete' => 'Tipo de Entrega',
         );
 
         $data['select']['Ordenamento'] = array(
