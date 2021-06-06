@@ -184,9 +184,14 @@
 													</div>	
 													<?php if (isset($_SESSION['Consulta']['idApp_Consulta']) && $_SESSION['Consulta']['idApp_Consulta'] != 0){ ?>	
 														<div class="col-md-4 ">
-															<label >Agendamento</label>
-															<a class="btn btn-md btn-info btn-block"  name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() ?>consulta/alterar/<?php echo $_SESSION['Consulta']['idApp_Cliente'];?>/<?php echo $_SESSION['Consulta']['idApp_Consulta'];?>" role="button">
-																<span class="glyphicon glyphicon-pencil"></span> <?php echo $_SESSION['Consulta']['idApp_Consulta'];?>
+															<label >Agendamentos</label>
+															<!--
+															<a class="btn btn-md btn-info btn-block"  name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php #echo base_url() ?>consulta/alterar/<?php #echo $_SESSION['Consulta']['idApp_Cliente'];?>/<?php #echo $_SESSION['Consulta']['idApp_Consulta'];?>" role="button">
+																<span class="glyphicon glyphicon-pencil"></span> <?php #echo $_SESSION['Consulta']['idApp_Consulta'];?>
+															</a>
+															-->
+															<a class="btn btn-md btn-info btn-block"  name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() ?>agenda" role="button">
+																<span class="glyphicon glyphicon-calendar"></span> 
 															</a>
 															<div class="col-md-12 alert alert-warning aguardar" role="alert" >
 																Aguarde um instante! Estamos processando sua solicitação!

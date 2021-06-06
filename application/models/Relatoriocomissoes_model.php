@@ -58,8 +58,10 @@ class Relatoriocomissoes_model extends CI_Model {
 
 		$query = $this->db->query(
             'SELECT
-				CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,""), " - " ,IFNULL(C.CelularCliente,""), " - " ,IFNULL(C.Telefone,""), " - " ,IFNULL(C.Telefone2,""), " - " ,IFNULL(C.Telefone3,"") ) AS NomeCliente,
-                OT.idApp_OrcaTrata,
+				CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,"")) AS NomeCliente,
+                CP.NomeClientePet,
+				CD.NomeClienteDep,
+				OT.idApp_OrcaTrata,
 				OT.Tipo_Orca,
 				OT.idSis_Usuario,
 				OT.idTab_TipoRD,
@@ -136,6 +138,8 @@ class Relatoriocomissoes_model extends CI_Model {
             FROM
                 App_OrcaTrata AS OT
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN App_ClientePet AS CP ON CP.idApp_Cliente = C.idApp_Cliente
+					LEFT JOIN App_ClienteDep AS CD ON CD.idApp_Cliente = C.idApp_Cliente
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Produto AS PRDS ON PRDS.idApp_OrcaTrata = OT.idApp_OrcaTrata
 
@@ -269,6 +273,8 @@ class Relatoriocomissoes_model extends CI_Model {
             FROM
                 App_OrcaTrata AS OT
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN App_ClientePet AS CP ON CP.idApp_Cliente = C.idApp_Cliente
+					LEFT JOIN App_ClienteDep AS CD ON CD.idApp_Cliente = C.idApp_Cliente
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Produto AS PRDS ON PRDS.idApp_OrcaTrata = OT.idApp_OrcaTrata
 					
