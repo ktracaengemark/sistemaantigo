@@ -5263,89 +5263,109 @@ class Relatorio extends CI_Controller {
 
 	public function rankingvendas() {
 
-	if ($this->input->get('m') == 1)
-		$data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-	elseif ($this->input->get('m') == 2)
-		$data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
-	else
-		$data['msg'] = '';
+		if ($this->input->get('m') == 1)
+			$data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+		elseif ($this->input->get('m') == 2)
+			$data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+		else
+			$data['msg'] = '';
+			
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+		), TRUE));	
+			
+		$data['query'] = quotes_to_entities($this->input->post(array(
+			'ValorOrca',
+			'NomeCliente',
+			'idApp_Cliente',
+			'DataInicio',
+			'DataFim',
+			'DataInicio2',
+			'DataFim2',
+			'Ordenamento',
+			'Campo',
+			'Pedidos_de',
+			'Pedidos_ate',
+			'Valor_de',
+			'Valor_ate',
+			'Ultimo',
+		), TRUE));
+
+			$_SESSION['FiltroRankingVendas']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
+			$_SESSION['FiltroRankingVendas']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+			$_SESSION['FiltroRankingVendas']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$_SESSION['FiltroRankingVendas']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
+			$_SESSION['FiltroRankingVendas']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
+			$_SESSION['FiltroRankingVendas']['Ordenamento'] = $data['query']['Ordenamento'];
+			$_SESSION['FiltroRankingVendas']['Campo'] = $data['query']['Campo'];
+			$_SESSION['FiltroRankingVendas']['Pedidos_de'] = $data['query']['Pedidos_de'];
+			$_SESSION['FiltroRankingVendas']['Pedidos_ate'] = $data['query']['Pedidos_ate'];
+			$_SESSION['FiltroRankingVendas']['Valor_de'] = $data['query']['Valor_de'];
+			$_SESSION['FiltroRankingVendas']['Valor_ate'] = $data['query']['Valor_ate'];
+			$_SESSION['FiltroRankingVendas']['Ultimo'] = $data['query']['Ultimo'];	
 		
-	$data['cadastrar'] = quotes_to_entities($this->input->post(array(
-		'id_Cliente_Auto',
-		'NomeClienteAuto',
-	), TRUE));	
+		$data['select']['Campo'] = array(
+			'Valor' => 'Valor',
+			'ContPedidos' => 'Pedidos',
+			'F.NomeCliente' => 'Cliente',
+			'F.idApp_Cliente' => 'Id',
+		);
+
+		$data['select']['Ordenamento'] = array(
+			'DESC' => 'Decrescente',
+			'ASC' => 'Crescente',
+		);
 		
-	$data['query'] = quotes_to_entities($this->input->post(array(
-		'ValorOrca',
-		'NomeCliente',
-		'idApp_Cliente',
-		'DataInicio',
-		'DataFim',
-		'Ordenamento',
-		'Campo',
-		'Pedidos_de',
-		'Pedidos_ate',
-		'Valor_de',
-		'Valor_ate',
-	), TRUE));
+        $data['select']['Ultimo'] = array(
+			'0' => '::Nenhum::',			
+			'1' => 'Último Pedido',
+        );		
 
-	$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-	#$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
-	$this->form_validation->set_rules('DataInicio', 'Data Inicio', 'trim|valid_date');
-	$this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
+		$data['titulo'] = 'Ranking de Vendas';
+		
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		#$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+		$this->form_validation->set_rules('DataInicio', 'Data Inicio', 'trim|valid_date');
+		$this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio2', 'Data Inicio', 'trim|valid_date');
+		$this->form_validation->set_rules('DataFim2', 'Data Fim', 'trim|valid_date');
 
-	$data['select']['Campo'] = array(
-		'Valor' => 'Valor',
-		'ContPedidos' => 'Pedidos',
-		'F.NomeCliente' => 'Cliente',
-		'F.idApp_Cliente' => 'Id',
-	);
+		#run form validation
+		if ($this->form_validation->run() !== FALSE) {
 
-	$data['select']['Ordenamento'] = array(
-		'DESC' => 'Decrescente',
-		'ASC' => 'Crescente',
-	);
+			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+			$data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
+			$data['bd']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
+			$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+			$data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
+			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+			$data['bd']['Campo'] = $data['query']['Campo'];
+			$data['bd']['Valor_de'] = $data['query']['Valor_de'];
+			$data['bd']['Valor_ate'] = $data['query']['Valor_ate'];
+			$data['bd']['Pedidos_de'] = $data['query']['Pedidos_de'];
+			$data['bd']['Pedidos_ate'] = $data['query']['Pedidos_ate'];
+			$data['bd']['Ultimo'] = $data['query']['Ultimo'];
 
+			$data['report'] = $this->Relatorio_model->list_rankingvendas($data['bd'],TRUE);
 
+			/*
+			  echo "<pre>";
+			  print_r($data['report']);
+			  echo "</pre>";
+			  #exit();
+			  */
 
-	//$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
-	//$data['select']['idApp_Cliente'] = $this->Relatorio_model->select_cliente();
+			$data['list'] = $this->load->view('relatorio/list_rankingvendas', $data, TRUE);
+			//$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+		}
 
+		$this->load->view('relatorio/tela_rankingvendas', $data);
 
-	$data['titulo'] = 'Ranking de Vendas';
+		$this->load->view('basico/footer');
 
-	#run form validation
-	if ($this->form_validation->run() !== FALSE) {
-
-		$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
-		$data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
-		$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
-		$data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
-		$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
-		$data['bd']['Campo'] = $data['query']['Campo'];
-		$data['bd']['Valor_de'] = $data['query']['Valor_de'];
-		$data['bd']['Valor_ate'] = $data['query']['Valor_ate'];
-		$data['bd']['Pedidos_de'] = $data['query']['Pedidos_de'];
-		$data['bd']['Pedidos_ate'] = $data['query']['Pedidos_ate'];
-
-		$data['report'] = $this->Relatorio_model->list_rankingvendas($data['bd'],TRUE);
-
-		/*
-		  echo "<pre>";
-		  print_r($data['report']);
-		  echo "</pre>";
-		  #exit();
-		  */
-
-		$data['list'] = $this->load->view('relatorio/list_rankingvendas', $data, TRUE);
-		//$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
 	}
-
-	$this->load->view('relatorio/tela_rankingvendas', $data);
-
-	$this->load->view('basico/footer');
-
-}
 
 	public function rankingcompras() {
 
@@ -5688,9 +5708,15 @@ class Relatorio extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+		), TRUE));	
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
             //'NomeCliente',
+			'idApp_Cliente',
 			'Ativo',
 			'Motivo',
             'Ordenamento',
@@ -5750,6 +5776,7 @@ class Relatorio extends CI_Controller {
         if ($this->form_validation->run() !== TRUE) {
 
             //$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+			$data['bd']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
 			$data['bd']['Ativo'] = $data['query']['Ativo'];
 			$data['bd']['Motivo'] = $data['query']['Motivo'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];

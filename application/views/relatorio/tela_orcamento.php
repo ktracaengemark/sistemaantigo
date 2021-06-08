@@ -402,6 +402,7 @@
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 										id="Entregador" name="Entregador">
 									<?php
+									/*
 									foreach ($select['Entregador'] as $key => $row) {
 										if ($query['Entregador'] == $key) {
 											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -409,6 +410,7 @@
 											echo '<option value="' . $key . '">' . $row . '</option>';
 										}
 									}
+									*/
 									?>
 								</select>
 							</div>
@@ -672,6 +674,7 @@
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 										id="Produtos" name="Produtos">
 									<?php
+									/*
 									foreach ($select['Produtos'] as $key => $row) {
 										if ($query['Produtos'] == $key) {
 											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -679,6 +682,7 @@
 											echo '<option value="' . $key . '">' . $row . '</option>';
 										}
 									}
+									*/
 									?>
 								</select>
 							</div>								

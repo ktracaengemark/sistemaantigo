@@ -2553,6 +2553,9 @@ exit();
 		$date_inicio_orca = ($data['DataInicio']) ? 'TOT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
 		$date_fim_orca = ($data['DataFim']) ? 'TOT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
 
+		$date_inicio_cash = ($data['DataInicio2']) ? 'TC.ValidadeCashBack >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
+		$date_fim_cash = ($data['DataFim2']) ? 'TC.ValidadeCashBack <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
 		$data['Pedidos_de'] = ($data['Pedidos_de']) ? 'F.ContPedidos >= "' . $data['Pedidos_de'] . '" AND ' : FALSE;
 		$data['Pedidos_ate'] = ($data['Pedidos_ate']) ? 'F.ContPedidos <= "' . $data['Pedidos_ate'] . '" AND ' : FALSE;	
 		
@@ -2564,29 +2567,56 @@ exit();
         $data['Campo'] = (!$data['Campo']) ? 'F.Valor' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
         
+		if($_SESSION['log']['idSis_Empresa'] != 5){
+			if($data['Ultimo'] != 0){	
+				if($data['Ultimo'] == 1){	
+					$ultimopedido1 = 'LEFT JOIN App_OrcaTrata AS TOT2 ON (TOT.idApp_Cliente = TOT2.idApp_Cliente AND TOT.idApp_OrcaTrata < TOT2.idApp_OrcaTrata)';
+					$ultimopedido2 = 'AND TOT2.idApp_OrcaTrata IS NULL';
+				}else{
+					$ultimopedido1 = FALSE;
+					$ultimopedido2 = FALSE;
+				}
+			}else{
+				$ultimopedido1 = FALSE;
+				$ultimopedido2 = FALSE;
+			}	
+		}else{
+			$ultimopedido1 = FALSE;
+			$ultimopedido2 = FALSE;
+		}		
+		
+		
         #LISTA DE CLIENTES
         $query['NomeCliente'] = $this->db->query('
 			SELECT
 				F.idApp_Cliente,
 				F.NomeCliente,
+				F.CashBackCliente,
+				F.ValidadeCashBack,
 				F.ContPedidos,
 				F.Valor
 			FROM
 				(SELECT
 					TC.idApp_Cliente,
 					TC.NomeCliente,
+					TC.CashBackCliente,
+					TC.ValidadeCashBack,
 					TOT.DataOrca,
 					COUNT(TOT.idApp_OrcaTrata) AS ContPedidos,
 					SUM(TOT.ValorFinalOrca) AS Valor
 				FROM
 					App_Cliente AS TC
 						INNER JOIN App_OrcaTrata AS TOT ON TOT.idApp_Cliente = TC.idApp_Cliente
+						' . $ultimopedido1 . '
 				WHERE
-                ' . $date_inicio_orca . '
-                ' . $date_fim_orca . '
+					' . $date_inicio_orca . '
+					' . $date_fim_orca . '
+					' . $date_inicio_cash . '
+					' . $date_fim_cash . '
 					TOT.CanceladoOrca = "N" AND
 					TC.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
-					' . $data['idApp_Cliente'] . ' 
+					' . $data['idApp_Cliente'] . '
+					' . $ultimopedido2 . '
 				GROUP BY
 					TC.idApp_Cliente
 				) AS F
@@ -2598,6 +2628,7 @@ exit();
 				F.idApp_Cliente != 0
 			ORDER BY
 				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
+				
         ');
         $query['NomeCliente'] = $query['NomeCliente']->result();
 
@@ -2608,6 +2639,8 @@ exit();
             $rankingvendas->{$row->idApp_Cliente} = new stdClass();
             $rankingvendas->{$row->idApp_Cliente}->idApp_Cliente = $row->idApp_Cliente;
             $rankingvendas->{$row->idApp_Cliente}->NomeCliente = $row->NomeCliente;
+            $rankingvendas->{$row->idApp_Cliente}->CashBackCliente = $row->CashBackCliente;
+            $rankingvendas->{$row->idApp_Cliente}->ValidadeCashBack = $row->ValidadeCashBack;
 			$rankingvendas->{$row->idApp_Cliente}->ContPedidos = $row->ContPedidos;
 			$rankingvendas->{$row->idApp_Cliente}->Valor = $row->Valor;
 			$data['contagem']++;
@@ -2621,9 +2654,16 @@ exit();
 			
 			$row->ContPedidos = (!isset($row->ContPedidos)) ? 0 : $row->ContPedidos;
 			$row->Valor = (!isset($row->Valor)) ? 0 : $row->Valor;
+			$row->CashBackCliente = (!isset($row->CashBackCliente)) ? 0 : $row->CashBackCliente;
+			
+			$row->ValidadeCashBack = (!isset($row->ValidadeCashBack)) ? "0000-00-00" : $row->ValidadeCashBack;
+			
 			$somaqtdpedidos += $row->ContPedidos;
 			$somaqtdparc += $row->Valor;
-			$row->Valor2 = number_format($row->Valor, 2, ',', '.');																
+			$row->Valor2 = number_format($row->Valor, 2, ',', '.');	
+			$row->CashBackCliente = number_format($row->CashBackCliente, 2, ',', '.');																
+			
+			$row->ValidadeCashBack = $this->basico->mascara_data($row->ValidadeCashBack, 'barras');
 			
 		}
 		$rankingvendas->soma->somaqtdclientes = $data['contagem'];
@@ -2633,7 +2673,9 @@ exit();
         /*
         #echo $this->db->last_query();
         echo "<pre>";
-        print_r($data['contagem']);
+        print_r($ultimopedido1);
+		 echo "<br>";
+        print_r($ultimopedido2);
         echo "</pre>";
         #echo "<pre>";
         #print_r($query);
@@ -3296,6 +3338,7 @@ exit();*/
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(C.DataNascimento) = ' . $data['Ano'] : FALSE;
 		
         //$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+        $data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND C.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'C.NomeCliente' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$filtro10 = ($data['Ativo'] != '#') ? 'C.Ativo = "' . $data['Ativo'] . '" AND ' : FALSE;
@@ -3342,6 +3385,7 @@ exit();*/
 				' . $filtro10 . '
 				' . $filtro20 . '
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+				' . $data['idApp_Cliente'] . ' 
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . '
 				' . $data['Ano'] . '
