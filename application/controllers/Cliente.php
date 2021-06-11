@@ -1649,7 +1649,7 @@ class Cliente extends CI_Controller {
 			$data['bd']['AlterarTodos'] = $data['query']['AlterarTodos'];
 			$data['bd']['PrazoGeralCashBack'] = $data['query']['PrazoGeralCashBack'];
 			$data['bd']['ValorAddCashBack'] = str_replace(',', '.', str_replace('.', '', $data['query']['ValorAddCashBack']));
-			
+			$data['bd']['ValidadeGeralCashBack'] = $this->basico->mascara_data($data['query']['ValidadeGeralCashBack'], 'mysql');
 			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
 
             #### App_OrcaTrata ####
@@ -1669,28 +1669,20 @@ class Cliente extends CI_Controller {
 
 					$data['update']['orcamento']['alterar'][$j]['Valor'] = str_replace(',', '.', str_replace('.', '', $data['update']['orcamento']['alterar'][$j]['Valor']));
 					$data['update']['orcamento']['alterar'][$j]['addCashBackCliente'] = str_replace(',', '.', str_replace('.', '', $data['update']['orcamento']['alterar'][$j]['addCashBackCliente']));
-					$data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'] = $this->basico->mascara_data($data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'], 'mysql');
 
-					
-					
-					
 					if($data['update']['orcamento']['alterar'][$j]['CashBackCliente'] == "" || $data['update']['orcamento']['alterar'][$j]['CashBackCliente'] == 0){
 						$data['update']['orcamento']['alterar'][$j]['CashBackCliente'] = "0.00";
 					}else{
 						$data['update']['orcamento']['alterar'][$j]['CashBackCliente'] = str_replace(',', '.', str_replace('.', '', $data['update']['orcamento']['alterar'][$j]['CashBackCliente']));
 					}
 					
-					if(isset($data['update']['orcamento']['alterar'][$j]['addCashBackCliente']) && $data['update']['orcamento']['alterar'][$j]['addCashBackCliente'] != 0 && $data['update']['orcamento']['alterar'][$j]['addCashBackCliente'] != ""){
+					if(isset($data['update']['orcamento']['alterar'][$j]['addCashBackCliente']) && $data['update']['orcamento']['alterar'][$j]['addCashBackCliente'] != ""){
 						$data['addValor'][$j] = $data['update']['orcamento']['alterar'][$j]['addCashBackCliente'];
 					}else{					
 						if($data['bd']['AlterarTodos'] == "S"){
-						
 							$data['addValor'][$j] = $data['bd']['ValorAddCashBack'];
-							
 						}else{
-						
 							$data['addValor'][$j] = "0.00";
-							
 						}
 					}
 					
@@ -1703,45 +1695,31 @@ class Cliente extends CI_Controller {
 					$data['alterar']['orcamento'][$j]['CashBackCliente'] = $data['update']['orcamento']['alterar'][$j]['CashBackCliente'] + $data['addCashBack'][$j];
 					
 					
-					if(isset($data['update']['orcamento']['alterar'][$j]['ValidadeCashBack']) && $data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'] != "0000-00-00" && $data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'] != "" ){
-						if($data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'] >= $data['hoje']){
-							$data['date'] = $data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'];
-						}else{
-							$data['date'] = $data['hoje'];
-						}
+					if(isset($data['update']['orcamento']['alterar'][$j]['ValidadeCashBack']) && $data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'] != "00/00/0000" && $data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'] != "" ){
+						$data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'] = $this->basico->mascara_data($data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'], 'mysql');
 					}else{
-						$data['date'] = $data['hoje'];
-					}
-					
-					if(isset($data['update']['orcamento']['alterar'][$j]['PrazoCashBack']) && $data['update']['orcamento']['alterar'][$j]['PrazoCashBack'] != 0 && $data['update']['orcamento']['alterar'][$j]['PrazoCashBack'] != ""){
-						$data['prazo'][$j] = $data['update']['orcamento']['alterar'][$j]['PrazoCashBack'];
-					}else{					
-						if($data['bd']['AlterarTodos'] == "S"){
-						
-							$data['prazo'][$j] = $data['bd']['PrazoGeralCashBack'];
-							
-						}else{
-						
-							$data['prazo'][$j] = "0";
-							
-						}
+						$data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'] = $data['hoje'];
 					}					
 					
-					$data['alterar']['orcamento'][$j]['PrazoCashBack'] = $data['update']['orcamento']['alterar'][$j]['PrazoCashBack'];
+					if(isset($data['update']['orcamento']['alterar'][$j]['PrazoCashBack']) && $data['update']['orcamento']['alterar'][$j]['PrazoCashBack'] != ""){
+						$data['prazo'][$j] = $data['update']['orcamento']['alterar'][$j]['PrazoCashBack'];
+						$data['alterar']['orcamento'][$j]['ValidadeCashBack'] = date('Y-m-d', strtotime($data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'] . '+'.$data['prazo'][$j].'day'));
+					}else{					
+						if($data['bd']['AlterarTodos'] == "S"){
+							if($data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'] >= $data['bd']['ValidadeGeralCashBack']){
+								$data['alterar']['orcamento'][$j]['ValidadeCashBack'] = $data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'];
+							}else{
+								$data['alterar']['orcamento'][$j]['ValidadeCashBack'] = $data['bd']['ValidadeGeralCashBack'];
+							}
+						}else{
+							$data['alterar']['orcamento'][$j]['ValidadeCashBack'] = $data['update']['orcamento']['alterar'][$j]['ValidadeCashBack'];
+						}
+					}
 
-					$data['alterar']['orcamento'][$j]['ValidadeCashBack'] = date('Y-m-d', strtotime($data['date'] . '+'.$data['prazo'][$j].'day'));
-					
 					$data['update']['orcamento']['bd'] = $this->Cliente_model->update_cliente($data['alterar']['orcamento'][$j], $data['update']['orcamento']['alterar'][$j]['idApp_Cliente']);
-					/*
-					echo '<br>';
-					echo "<pre>";
-					print_r($data['perCashBack'][$j]);
-					echo "</pre>";
-					*/
+
 				}
-				
-			//exit ();	
-				
+	
             }
 
 			$data['msg'] = '?m=1';

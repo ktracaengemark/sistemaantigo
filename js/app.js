@@ -35,158 +35,192 @@ calculacashback();
 //calculaTotalOS();
 
 //função autocomplete 
-$(function () {
-	// função para limpeza dos campos do Cliente
-    $('#id_Cliente_Auto').on('input', limpaCampos_Cliente);
-	// função que busca os nomes do Cliente
-	$("#id_Cliente_Auto").autocomplete({
-		source: window.location.origin+ '/' + app + '/cadastros/pesquisar/Cliente_Autocomplete.php',
 
-		select: function(event, ui){
-			var pegar = ui.item.value;
-			//console.log('pegar = '+pegar);
-			var pegarSplit = pegar.split('#');
-			var id_Cliente = pegarSplit[0];
-			
-			//console.log('id cliente Autocomplete = '+id_Cliente);
-			
-			$.ajax({
-				url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Cliente.php?id=' + id_Cliente,
-				dataType: "json",
-				success: function (data) {
-					
-					var idcliente = data[0]['id'];
-					var nomecliente = data[0]['nome'];
-					var celularcliente = data[0]['celular'];
-					
-					$("#NomeClienteAuto1").html('<label>Cliente: '+idcliente+ ' | ' + nomecliente + ' | Cel: ' + celularcliente + '</label>');
-					$("#NomeClienteAuto").val(''+idcliente+ ' | ' + nomecliente + ' | Cel: ' + celularcliente + '');
-					
-				},
-				error:function(data){
-					$("#NomeClienteAuto1").html('<label>Nenhum Cliente Selecionado!</label>');
-					$("#NomeClienteAuto").val('Nenhum Cliente Selecionado!');
-				}
-				
-			});
+// função para limpeza dos campos do Cliente
+$('#id_Cliente_Auto').on('input', limpaCampos_Cliente);
+// função que busca os nomes do Cliente
+$("#id_Cliente_Auto").autocomplete({
+	source: window.location.origin+ '/' + app + '/cadastros/pesquisar/Cliente_Autocomplete.php',
 
-			$('#idApp_Cliente').val(id_Cliente);
-			clienteDep(id_Cliente);
-			clientePet(id_Cliente);
-			calculacashback(id_Cliente);
-			buscaEnderecoCliente(id_Cliente);
-			clienteOT(id_Cliente);
-		}
+	select: function(event, ui){
+		var pegar = ui.item.value;
+		//console.log('pegar = '+pegar);
+		var pegarSplit = pegar.split('#');
+		var id_Cliente = pegarSplit[0];
 		
-	});
-    // Função para limpar os campos caso a busca esteja vazia
-    function limpaCampos_Cliente(){
-       var busca = $('#id_Cliente_Auto').val();
+		//console.log('id cliente Autocomplete = '+id_Cliente);
+		
+		$.ajax({
+			url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Cliente.php?id=' + id_Cliente,
+			dataType: "json",
+			success: function (data) {
+				
+				var idcliente = data[0]['id'];
+				var nomecliente = data[0]['nome'];
+				var celularcliente = data[0]['celular'];
+				
+				$("#NomeClienteAuto1").html('<label>Cliente: '+idcliente+ ' | ' + nomecliente + ' | Cel: ' + celularcliente + '</label>');
+				$("#NomeClienteAuto").val(''+idcliente+ ' | ' + nomecliente + ' | Cel: ' + celularcliente + '');
+				
+			},
+			error:function(data){
+				$("#NomeClienteAuto1").html('<label>Nenhum Cliente Selecionado!</label>');
+				$("#NomeClienteAuto").val('Nenhum Cliente Selecionado!');
+			}
+			
+		});
 
-       if(busca == ""){
-			
-			$('#idApp_Cliente').val('');
-			$('#idApp_ClienteDep').val('0');
-			$('#idApp_ClienteDep').hide();
-			$('#Dep').val('');
-			$('#Dep').hide();
-			$('#idApp_ClientePet').val('0');
-			$('#idApp_ClientePet').hide();
-			$('#Pet').val('');
-			$('#Pet').hide();
-			
-			$('#CashBackOrca').val('0,00');
-			
-			$("#NomeClienteAuto1").html('<label>Nenhum Cliente Selecionado!</label>');
-			$("#NomeClienteAuto").val('Nenhum Cliente Selecionado!');
-			
-			$('#Cep').val('');
-			$('#Logradouro').val('');
-			$('#Numero').val('');
-			$('#Complemento').val('');
-			$('#Bairro').val('');
-			$('#Cidade').val('');
-			$('#Estado').val('');
-			$('#Referencia').val('');
-	   }
-    }	
+		$('#idApp_Cliente').val(id_Cliente);
+		clienteDep(id_Cliente);
+		clientePet(id_Cliente);
+		calculacashback(id_Cliente);
+		buscaEnderecoCliente(id_Cliente);
+		clienteOT(id_Cliente);
+	}
 	
-	// função para limpeza dos campos do Fornecedor
-    $('#id_Fornecedor_Auto').on('input', limpaCampos_Fornecedor);
-	// função que busca os nomes do Fornecedor
-	$("#id_Fornecedor_Auto").autocomplete({
-		source: window.location.origin+ '/' + app + '/cadastros/pesquisar/Fornecedor_Autocomplete.php',
-
-		select: function(event, ui){
-			var pegar = ui.item.value;
-			//console.log('pegar = '+pegar);
-			var pegarSplit = pegar.split('#');
-			var id_Fornecedor = pegarSplit[0];
-			
-			//console.log('id fornecedor Autocomplete = '+id_Fornecedor);
-			
-			$.ajax({
-				url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Fornecedor.php?id=' + id_Fornecedor,
-				dataType: "json",
-				success: function (data) {
-					
-					var idfornecedor = data[0]['id'];
-					var nomefornecedor = data[0]['nome'];
-					var celularfornecedor = data[0]['celular'];
-					
-					$("#NomeFornecedorAuto1").html('<label>Fornecedor: '+idfornecedor+ ' | ' + nomefornecedor + ' | Cel: ' + celularfornecedor + '</label>');
-					$("#NomeFornecedorAuto").val(''+idfornecedor+ ' | ' + nomefornecedor + ' | Cel: ' + celularfornecedor + '');
-					
-				},
-				error:function(data){
-					$("#NomeFornecedorAuto1").html('<label>Nenhum Fornecedor Selecionado!</label>');
-					$("#NomeFornecedorAuto").val('Nenhum Fornecedor Selecionado!');
-				}
-				
-			});
-
-			$('#idApp_Fornecedor').val(id_Fornecedor);
-			//fornecedorDep(id_Fornecedor);
-			//fornecedorPet(id_Fornecedor);
-			//calculacashback(id_Fornecedor);
-			buscaEnderecoFornecedor(id_Fornecedor);
-			//fornecedorOT(id_Fornecedor);
-		}
-		
-	});
-    // Função para limpar os campos caso a busca esteja vazia
-    function limpaCampos_Fornecedor(){
-       var busca = $('#id_Fornecedor_Auto').val();
-
-       if(busca == ""){
-			
-			$('#idApp_Fornecedor').val('');
-			//$('#idApp_FornecedorDep').val('0');
-			//$('#idApp_FornecedorDep').hide();
-			//$('#Dep').val('');
-			//$('#Dep').hide();
-			//$('#idApp_FornecedorPet').val('0');
-			//$('#idApp_FornecedorPet').hide();
-			//$('#Pet').val('');
-			//$('#Pet').hide();
-			
-			$('#CashBackOrca').val('0,00');
-			
-			$("#NomeFornecedorAuto1").html('<label>Nenhum Fornecedor Selecionado!</label>');
-			$("#NomeFornecedorAuto").val('Nenhum Fornecedor Selecionado!');
-			
-			$('#Cep').val('');
-			$('#Logradouro').val('');
-			$('#Numero').val('');
-			$('#Complemento').val('');
-			$('#Bairro').val('');
-			$('#Cidade').val('');
-			$('#Estado').val('');
-			$('#Referencia').val('');
-	   }
-    }	
-		
 });
+// Função para limpar os campos caso a busca esteja vazia
+function limpaCampos_Cliente(){
+   var busca = $('#id_Cliente_Auto').val();
+
+   if(busca == ""){
+		
+		$('#idApp_Cliente').val('');
+		$('#idApp_ClienteDep').val('0');
+		$('#idApp_ClienteDep').hide();
+		$('#Dep').val('');
+		$('#Dep').hide();
+		$('#idApp_ClientePet').val('0');
+		$('#idApp_ClientePet').hide();
+		$('#Pet').val('');
+		$('#Pet').hide();
+		
+		$('#CashBackOrca').val('0,00');
+		
+		$("#NomeClienteAuto1").html('<label>Nenhum Cliente Selecionado!</label>');
+		$("#NomeClienteAuto").val('Nenhum Cliente Selecionado!');
+		
+		$('#Cep').val('');
+		$('#Logradouro').val('');
+		$('#Numero').val('');
+		$('#Complemento').val('');
+		$('#Bairro').val('');
+		$('#Cidade').val('');
+		$('#Estado').val('');
+		$('#Referencia').val('');
+   }
+}	
+
+// função para limpeza dos campos do Fornecedor
+$('#id_Fornecedor_Auto').on('input', limpaCampos_Fornecedor);
+// função que busca os nomes do Fornecedor
+$("#id_Fornecedor_Auto").autocomplete({
+	source: window.location.origin+ '/' + app + '/cadastros/pesquisar/Fornecedor_Autocomplete.php',
+
+	select: function(event, ui){
+		var pegar = ui.item.value;
+		//console.log('pegar = '+pegar);
+		var pegarSplit = pegar.split('#');
+		var id_Fornecedor = pegarSplit[0];
+		
+		//console.log('id fornecedor Autocomplete = '+id_Fornecedor);
+		
+		$.ajax({
+			url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Fornecedor.php?id=' + id_Fornecedor,
+			dataType: "json",
+			success: function (data) {
+				
+				var idfornecedor = data[0]['id'];
+				var nomefornecedor = data[0]['nome'];
+				var celularfornecedor = data[0]['celular'];
+				
+				$("#NomeFornecedorAuto1").html('<label>Fornecedor: '+idfornecedor+ ' | ' + nomefornecedor + ' | Cel: ' + celularfornecedor + '</label>');
+				$("#NomeFornecedorAuto").val(''+idfornecedor+ ' | ' + nomefornecedor + ' | Cel: ' + celularfornecedor + '');
+				
+			},
+			error:function(data){
+				$("#NomeFornecedorAuto1").html('<label>Nenhum Fornecedor Selecionado!</label>');
+				$("#NomeFornecedorAuto").val('Nenhum Fornecedor Selecionado!');
+			}
+			
+		});
+
+		$('#idApp_Fornecedor').val(id_Fornecedor);
+		//fornecedorDep(id_Fornecedor);
+		//fornecedorPet(id_Fornecedor);
+		//calculacashback(id_Fornecedor);
+		buscaEnderecoFornecedor(id_Fornecedor);
+		//fornecedorOT(id_Fornecedor);
+	}
+	
+});
+// Função para limpar os campos caso a busca esteja vazia
+function limpaCampos_Fornecedor(){
+   var busca = $('#id_Fornecedor_Auto').val();
+
+   if(busca == ""){
+		
+		$('#idApp_Fornecedor').val('');
+		//$('#idApp_FornecedorDep').val('0');
+		//$('#idApp_FornecedorDep').hide();
+		//$('#Dep').val('');
+		//$('#Dep').hide();
+		//$('#idApp_FornecedorPet').val('0');
+		//$('#idApp_FornecedorPet').hide();
+		//$('#Pet').val('');
+		//$('#Pet').hide();
+		
+		$('#CashBackOrca').val('0,00');
+		
+		$("#NomeFornecedorAuto1").html('<label>Nenhum Fornecedor Selecionado!</label>');
+		$("#NomeFornecedorAuto").val('Nenhum Fornecedor Selecionado!');
+		
+		$('#Cep').val('');
+		$('#Logradouro').val('');
+		$('#Numero').val('');
+		$('#Complemento').val('');
+		$('#Bairro').val('');
+		$('#Cidade').val('');
+		$('#Estado').val('');
+		$('#Referencia').val('');
+   }
+}	
+	
+
+function SomaDias(dias){
+
+	if(dias){
+		var qtd_dias = dias;
+		var qtd_dias = parseInt(dias);
+	}else{
+		var qtd_dias = 0;
+	}
+
+	var data = new Date();
+
+	data.setDate(data.getDate() + qtd_dias);
+
+	var dia = data.getDate();
+	var mes = (data.getMonth() + 1);
+	var ano = data.getFullYear();
+
+	if(mes < 10){
+		var novo_mes = "0" + mes;
+	}else{
+		var novo_mes = mes;
+	}
+	
+	
+	if(dia < 10){
+		var novo_dia = "0" + dia;
+	}else{
+		var novo_dia = dia;
+	}	
+	
+	var nova_data = novo_dia + "/" + novo_mes + "/" + ano;
+	$('#ValidadeGeralCashBack').val(nova_data);
+
+}
 
 function codigo(id, tabela){
 	//alert('ok codigo');

@@ -71,7 +71,7 @@
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon" id="basic-addon1">% / R$</span>
 																		<input type="text" class="form-control Valor" id="addCashBackCliente<?php echo $i ?>" maxlength="10" placeholder="0,00" 
-																			   name="addCashBackCliente<?php echo $i ?>" value="">
+																			   name="addCashBackCliente<?php echo $i ?>" value="<?php echo $orcamento[$i]['addCashBackCliente'] ?>">
 																	</div>
 																</div>
 																<div class="col-md-2">
@@ -86,7 +86,7 @@
 																	<label for="PrazoCashBack">PrazoCashBack:</label><br>
 																	<div class="input-group" id="txtHint">
 																		<input type="text" class="form-control Numero" id="PrazoCashBack<?php echo $i ?>" maxlength="2" placeholder="Ex.: 7 dias" 
-																			   name="PrazoCashBack<?php echo $i ?>" value="">
+																			   name="PrazoCashBack<?php echo $i ?>" value="<?php echo $orcamento[$i]['PrazoCashBack'] ?>">
 																		<span class="input-group-addon" id="basic-addon1">Dias</span>
 																	</div>
 																</div>
@@ -97,7 +97,7 @@
 																			<span class="glyphicon glyphicon-calendar"></span>
 																		</span>
 																		<input type="text" class="form-control Date" id="ValidadeCashBack<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
-																			   name="ValidadeCashBack<?php echo $i ?>" value="<?php echo $orcamento[$i]['ValidadeCashBack'] ?>">																
+																			   name="ValidadeCashBack<?php echo $i ?>" value="<?php echo $orcamento[$i]['ValidadeCashBack'] ?>" >																
 																	</div>
 																</div>
 															</div>
@@ -145,38 +145,6 @@
 										</div>
 										<?php echo form_error('AlterarTodos'); ?>
 									</div>
-									<div id="AlterarTodos" <?php echo $div['AlterarTodos']; ?>>
-										<div class="col-md-2">
-											<label for="ValorAddCashBack">ValorAddCashBack:</label><br>
-											<div class="input-group">
-												<span class="input-group-addon">% / R$</span>
-												<input type="text" class="form-control Valor" id="ValorAddCashBack" maxlength="10" placeholder="0,00" 
-													   name="ValorAddCashBack" value="<?php echo $query['ValorAddCashBack'] ?>">
-											</div>
-											<?php echo form_error('ValorAddCashBack'); ?>
-										</div>
-										<div class="col-md-2">
-											<label for="PrazoGeralCashBack">PrazoGeralCashBack:</label><br>
-											<div class="input-group">
-												<input type="text" class="form-control Numero" id="PrazoGeralCashBack" maxlength="2" placeholder="Ex.: 7 dias" 
-													   name="PrazoGeralCashBack" value="<?php echo $query['PrazoGeralCashBack'] ?>">
-												<span class="input-group-addon" >Dias</span>
-											</div>
-											<?php echo form_error('PrazoGeralCashBack'); ?>
-										</div>
-										<!--
-										<div class="col-md-2">
-											<label for="ValidadeGeralCashBack">ValidadeGeral:</label>
-											<div class="input-group DatePicker">
-												<span class="input-group-addon" disabled>
-													<span class="glyphicon glyphicon-calendar"></span>
-												</span>
-												<input type="text" class="form-control Date" id="ValidadeGeralCashBack" maxlength="10" placeholder="DD/MM/AAAA"
-													   name="ValidadeGeralCashBack" value="<?php #echo $query['ValidadeGeralCashBack'] ?>">																
-											</div>
-										</div>
-										-->
-									</div>
 									<div class="col-md-2 text-left">
 										<label for="TipoAdd">Tipo de Add</label><br>
 										<div class="btn-group" data-toggle="buttons">
@@ -202,6 +170,38 @@
 											}
 											?>
 										</div>
+									</div>
+									<div id="AlterarTodos" <?php echo $div['AlterarTodos']; ?>>
+										<div class="col-md-2">
+											<label for="ValorAddCashBack">ValorAddCashBack:</label><br>
+											<div class="input-group">
+												<span class="input-group-addon">% / R$</span>
+												<input type="text" class="form-control Valor" id="ValorAddCashBack" maxlength="10" placeholder="0,00" 
+													   name="ValorAddCashBack" value="<?php echo $query['ValorAddCashBack'] ?>">
+											</div>
+											<?php echo form_error('ValorAddCashBack'); ?>
+										</div>
+										<div class="col-md-2">
+											<label for="PrazoGeralCashBack">PrazoGeralCashBack:</label><br>
+											<div class="input-group">
+												<input type="text" class="form-control Numero" id="PrazoGeralCashBack" maxlength="2" placeholder="Ex.: 7 dias" 
+													   name="PrazoGeralCashBack" value="<?php echo $query['PrazoGeralCashBack'] ?>" onkeyup="SomaDias(this.value)">
+												<span class="input-group-addon" >Dias</span>
+											</div>
+											<?php echo form_error('PrazoGeralCashBack'); ?>
+										</div>
+										
+										<div class="col-md-2">
+											<label for="ValidadeGeralCashBack">ValidadeGeral:</label>
+											<div class="input-group DatePicker">
+												<span class="input-group-addon" disabled>
+													<span class="glyphicon glyphicon-calendar"></span>
+												</span>
+												<input type="text" class="form-control Date" id="ValidadeGeralCashBack" maxlength="10" placeholder="DD/MM/AAAA"
+													   name="ValidadeGeralCashBack" value="<?php echo $query['ValidadeGeralCashBack'] ?>" readonly="">																
+											</div>
+										</div>
+										
 									</div>
 									<div class="col-md-2 text-left">
 										<label>Salvar:</label><br>
