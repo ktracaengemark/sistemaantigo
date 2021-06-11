@@ -7,6 +7,7 @@ var y = date.getFullYear();
 var n = date.toISOString();
 var tam = n.length - 5;
 var agora = n.substring(0, tam);
+var data_hoje = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 //sequencia de comandos necessária para estrair a pasta raiz do endereço,
 //ou seja, qual módulo está sendo utilizado (ex: salao, odonto, etc)
 app = window.location.pathname;
@@ -5678,9 +5679,24 @@ function calculacashback(id_Cliente) {
 					dataType: "json",
 					
 					success: function (data) {
-						//console.log('data = '+data);
-						//console.log('sucesso');
-						CashBackOrca	= parseFloat(data);
+						var cashback_0	= data[0]['cashtotal'];
+						var validade_0	= data[0]['validade'];
+						var partesData = validade_0.split("-");
+						
+						var dia = parseInt(partesData[2]);
+						var mes = parseInt(partesData[1]);
+						var ano = parseInt(partesData[0]);
+						
+						var validade_2 	= new Date(ano, mes - 1, dia);
+						//var data_hoje	= new Date();
+						
+						if(validade_2 >= data_hoje){
+							//CashBackOrca	= parseFloat(data);
+							CashBackOrca	= parseFloat(cashback_0);
+						}else{
+							CashBackOrca	= 0.00;
+						}
+						
 						//CashBackOrca	= CashBackOrca/ocorrencias;
 						CashBackOrca 	= mascaraValorReal(CashBackOrca);
 						
