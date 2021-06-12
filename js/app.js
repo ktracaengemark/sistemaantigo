@@ -97,6 +97,7 @@ function limpaCampos_Cliente(){
 		$('#Pet').hide();
 		
 		$('#CashBackOrca').val('0,00');
+		$('#ValidadeCashBackOrca').val('');
 		
 		$("#NomeClienteAuto1").html('<label>Nenhum Cliente Selecionado!</label>');
 		$("#NomeClienteAuto").val('Nenhum Cliente Selecionado!');
@@ -5686,7 +5687,8 @@ function calculacashback(id_Cliente) {
 						var dia = parseInt(partesData[2]);
 						var mes = parseInt(partesData[1]);
 						var ano = parseInt(partesData[0]);
-						
+						var validade 	= partesData[2]+'/'+partesData[1]+'/'+partesData[0];
+
 						var validade_2 	= new Date(ano, mes - 1, dia);
 						//var data_hoje	= new Date();
 						
@@ -5704,12 +5706,14 @@ function calculacashback(id_Cliente) {
 						//CashBackOrca 	= CashBackOrca.replace(".",",");
 						
 						$('#CashBackOrca').val(CashBackOrca);
+						$('#ValidadeCashBackOrca').val(validade);
 						//console.log('CashBackOrca = '+CashBackOrca);
 						usarcashback();
 						
 					},
 					error:function(data){
 						//console.log('Nada encontrado');
+						$('#ValidadeCashBackOrca').val('');
 						$('#CashBackOrca').val('0,00');
 						usarcashback();
 					}

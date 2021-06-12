@@ -140,6 +140,7 @@ class Orcatrata extends CI_Controller {
 			'DescPercOrca',
 			'DescValorOrca',
 			'CashBackOrca',
+            'ValidadeCashBackOrca',
 			'UsarCashBack',
 			'SubValorFinal',
 			'ValorFinalOrca',
@@ -304,6 +305,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['DescPercOrca']) ? $data['orcatrata']['DescPercOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['DescValorOrca']) ? $data['orcatrata']['DescValorOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['CashBackOrca']) ? $data['orcatrata']['CashBackOrca'] = '0.00' : FALSE;
+		(!$data['orcatrata']['ValidadeCashBackOrca']) ? $data['orcatrata']['ValidadeCashBackOrca'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['SubValorFinal']) ? $data['orcatrata']['SubValorFinal'] = '0.00' : FALSE;
 		(!$data['orcatrata']['ValorFinalOrca']) ? $data['orcatrata']['ValorFinalOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
@@ -887,9 +889,12 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['DescPercOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescPercOrca']));
 			$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
 			$data['orcatrata']['CashBackOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['CashBackOrca']));
+			$data['orcatrata']['ValidadeCashBackOrca'] = $this->basico->mascara_data($data['orcatrata']['ValidadeCashBackOrca'], 'mysql');
 			$data['CashBackAtual'] = $data['orcatrata']['CashBackOrca'];
+			$data['ValidadeAtual'] = $data['orcatrata']['ValidadeCashBackOrca'];
 			if($data['orcatrata']['UsarCashBack'] == "N"){
 				$data['orcatrata']['CashBackOrca'] = 0.00;
+				$data['orcatrata']['ValidadeCashBackOrca'] = "0000-00-00";
 			}
 			/*
 			if($data['orcatrata']['UsarCashBack'] == "S"){
@@ -1422,11 +1427,13 @@ class Orcatrata extends CI_Controller {
 					$usarcashback			= "N";
 					$valorfinalorca 		= $data['orcatrata']['SubValorFinal'];
 					$cashbackorca  			= 0.00;
+					$validadecashbackorca  	= "0000-00-00";
 					
 				}else{
 					$usarcashback			= $data['orcatrata']['UsarCashBack'];
 					$valorfinalorca 		= $data['orcatrata']['ValorFinalOrca'];
 					$cashbackorca 			= 0.00;
+					$validadecashbackorca  	= "0000-00-00";
 				}
 								
 				
@@ -1489,6 +1496,7 @@ class Orcatrata extends CI_Controller {
 							'UsarCashBack' 			=> $usarcashback,
 							'ValorFinalOrca' 		=> $valorfinalorca,
 							'CashBackOrca' 			=> $cashbackorca,
+							'ValidadeCashBackOrca' 	=> $validadecashbackorca,
 							
 							'BrindeOrca' 			=> $data['orcatrata']['BrindeOrca'],
 							'PrazoEntrega' 			=> $data['orcatrata']['PrazoEntrega'],
@@ -1730,7 +1738,8 @@ class Orcatrata extends CI_Controller {
 								//$data['cliente_cashback']['CashBackCliente'] = $data['CashBackNovo'] + ($data['CashBackAtual']*$data['orcatrata']['RecorrenciasOrca']*(($data['orcatrata']['RecorrenciasOrca'] - 1)/$data['orcatrata']['RecorrenciasOrca']));
 								$data['cliente_cashback']['CashBackCliente'] = $data['CashBackNovo'];
 							}
-							
+							$data['cliente_cashback']['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
+						
 						}else{
 						
 							//CashBackCliente = o troco do que ficou para as outras;
@@ -1751,6 +1760,7 @@ class Orcatrata extends CI_Controller {
 								//CashBackCliente = novo valor; 1 vez
 								$data['cliente_cashback']['CashBackCliente'] = $data['CashBackAtual'] + $data['CashBackNovo'];
 							}
+							$data['cliente_cashback']['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
 							
 						}else{
 							//CashBackCliente = velho valor;
@@ -1883,6 +1893,7 @@ class Orcatrata extends CI_Controller {
 			'DescPercOrca',
 			'DescValorOrca',
 			'CashBackOrca',
+            'ValidadeCashBackOrca',
 			'UsarCashBack',
 			'SubValorFinal',
 			'ValorFinalOrca',
@@ -2002,6 +2013,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['DescPercOrca']) ? $data['orcatrata']['DescPercOrca'] = '0.00' : FALSE;
 		//(!$data['orcatrata']['DescValorOrca']) ? $data['orcatrata']['DescValorOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['CashBackOrca']) ? $data['orcatrata']['CashBackOrca'] = '0.00' : FALSE;
+		(!$data['orcatrata']['ValidadeCashBackOrca']) ? $data['orcatrata']['ValidadeCashBackOrca'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['SubValorFinal']) ? $data['orcatrata']['SubValorFinal'] = '0.00' : FALSE;
 		(!$data['orcatrata']['ValorFinalOrca']) ? $data['orcatrata']['ValorFinalOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
@@ -2610,9 +2622,12 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['DescPercOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescPercOrca']));
 			$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
 			$data['orcatrata']['CashBackOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['CashBackOrca']));
+			$data['orcatrata']['ValidadeCashBackOrca'] = $this->basico->mascara_data($data['orcatrata']['ValidadeCashBackOrca'], 'mysql');
 			$data['CashBackAtual'] = $data['orcatrata']['CashBackOrca'];
+			$data['ValidadeAtual'] = $data['orcatrata']['ValidadeCashBackOrca'];
 			if($data['orcatrata']['UsarCashBack'] == "N"){
 				$data['orcatrata']['CashBackOrca'] = 0.00;
+				$data['orcatrata']['ValidadeCashBackOrca'] = "0000-00-00";
 			}
 			/*
 			if($data['orcatrata']['UsarCashBack'] == "S"){
@@ -2977,6 +2992,7 @@ class Orcatrata extends CI_Controller {
 						if($data['orcatrata']['QuitadoOrca'] == "S"){
 							//CashBackCliente = novo valor;
 							$data['cliente_cashback']['CashBackCliente'] = $data['CashBackNovo'];
+							$data['cliente_cashback']['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
 						}else{
 							//CashBackCliente = 0.00;
 							$data['cliente_cashback']['CashBackCliente'] = '0.00';
@@ -2985,6 +3001,7 @@ class Orcatrata extends CI_Controller {
 						if($data['orcatrata']['QuitadoOrca'] == "S"){
 							//CashBackCliente = velho valor + novo valor;
 							$data['cliente_cashback']['CashBackCliente'] = $data['CashBackAtual'] + $data['CashBackNovo'];
+							$data['cliente_cashback']['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
 						}else{
 							//CashBackCliente = velho valor;
 							$data['cliente_cashback']['CashBackCliente'] = $data['CashBackAtual'];
@@ -3190,6 +3207,7 @@ class Orcatrata extends CI_Controller {
 			'DescPercOrca',
 			'DescValorOrca',
 			'CashBackOrca',
+            'ValidadeCashBackOrca',
 			'UsarCashBack',
 			'SubValorFinal',
 			'ValorFinalOrca',
@@ -3283,6 +3301,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['DescPercOrca']) ? $data['orcatrata']['DescPercOrca'] = '0.00' : FALSE;
 		//(!$data['orcatrata']['DescValorOrca']) ? $data['orcatrata']['DescValorOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['CashBackOrca']) ? $data['orcatrata']['CashBackOrca'] = '0.00' : FALSE;
+		(!$data['orcatrata']['ValidadeCashBackOrca']) ? $data['orcatrata']['ValidadeCashBackOrca'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['SubValorFinal']) ? $data['orcatrata']['SubValorFinal'] = '0.00' : FALSE;
 		(!$data['orcatrata']['ValorFinalOrca']) ? $data['orcatrata']['ValorFinalOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = 1 : FALSE;
@@ -3782,7 +3801,7 @@ class Orcatrata extends CI_Controller {
 
         #$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
 
-		$_SESSION['Empresa'] = $data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
+		$data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
 
 		$data['somatotal'] = floatval ($data['somatotal']);
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
@@ -3927,9 +3946,12 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['ValorTotalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
 			$data['orcatrata']['SubValorFinal'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['SubValorFinal']));
 			$data['orcatrata']['CashBackOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['CashBackOrca']));
+			$data['orcatrata']['ValidadeCashBackOrca'] = $this->basico->mascara_data($data['orcatrata']['ValidadeCashBackOrca'], 'mysql');
 			$data['CashBackAtual'] = $data['orcatrata']['CashBackOrca'];
+			$data['ValidadeAtual'] = $data['orcatrata']['ValidadeCashBackOrca'];
 			if($data['orcatrata']['UsarCashBack'] == "N"){
 				$data['orcatrata']['CashBackOrca'] = 0.00;
+				$data['orcatrata']['ValidadeCashBackOrca'] = "0000-00-00";
 			}
 			/*
 			if($data['orcatrata']['UsarCashBack'] == "S"){
@@ -4317,6 +4339,7 @@ class Orcatrata extends CI_Controller {
 						if($data['orcatrata']['QuitadoOrca'] == "S"){
 							//CashBackCliente = novo valor;
 							$data['cliente_cashback']['CashBackCliente'] = $data['CashBackNovo'];
+							$data['cliente_cashback']['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
 						}else{
 							//CashBackCliente = 0.00;
 							$data['cliente_cashback']['CashBackCliente'] = '0.00';
@@ -4325,9 +4348,11 @@ class Orcatrata extends CI_Controller {
 						if($data['orcatrata']['QuitadoOrca'] == "S"){
 							//CashBackCliente = velho valor + novo valor;
 							$data['cliente_cashback']['CashBackCliente'] = $data['CashBackAtual'] + $data['CashBackNovo'];
+							$data['cliente_cashback']['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
 						}else{
 							//CashBackCliente = velho valor;
 							$data['cliente_cashback']['CashBackCliente'] = $data['CashBackAtual'];
+							
 						}
 					}
 					//faço o update no cliente
@@ -4529,6 +4554,7 @@ class Orcatrata extends CI_Controller {
 			'DescPercOrca',
 			'DescValorOrca',
 			'CashBackOrca',
+            'ValidadeCashBackOrca',
 			'UsarCashBack',
 			'SubValorFinal',
 			'ValorFinalOrca',
@@ -4588,6 +4614,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['Prd_Srv_Orca']) ? $data['orcatrata']['Prd_Srv_Orca'] = 'S' : FALSE; 
 		(!$data['orcatrata']['Entrega_Orca']) ? $data['orcatrata']['Entrega_Orca'] = 'S' : FALSE;		
 		(!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;
+		(!$data['orcatrata']['ValidadeCashBackOrca']) ? $data['orcatrata']['ValidadeCashBackOrca'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['DataEntregaOrca']) ? $data['orcatrata']['DataEntregaOrca'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['HoraEntregaOrca']) ? $data['orcatrata']['HoraEntregaOrca'] = date('H:i:s', strtotime('+1 hour')) : FALSE;
 		//(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
@@ -4786,6 +4813,7 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['Tipo_Orca'] = $data['orcatrata']['Tipo_Orca'];
 			$data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
+			$data['orcatrata']['ValidadeCashBackOrca'] = $this->basico->mascara_data($data['orcatrata']['ValidadeCashBackOrca'], 'barras');
 			$data['orcatrata']['DataEntregaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntregaOrca'], 'barras');
             $data['orcatrata']['Descricao'] = $data['orcatrata']['Descricao'];
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'barras');
@@ -5555,6 +5583,12 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
 			
 			$data['orcatrata']['CashBackOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['CashBackOrca']));
+			$data['orcatrata']['ValidadeCashBackOrca'] = $this->basico->mascara_data($data['orcatrata']['ValidadeCashBackOrca'], 'mysql');
+			if(isset($data['orcatrata']['ValidadeCashBackOrca']) && $data['orcatrata']['ValidadeCashBackOrca'] != "0000-00-00" && $data['orcatrata']['ValidadeCashBackOrca'] != ""){
+				$data['orcatrata']['ValidadeCashBackOrca'] = $data['orcatrata']['ValidadeCashBackOrca'];
+			}else{
+				$data['orcatrata']['ValidadeCashBackOrca'] = "0000-00-00";
+			}
 			
 			$data['orcatrata']['ValorFinalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFinalOrca']));
 			
@@ -6127,6 +6161,9 @@ class Orcatrata extends CI_Controller {
 								}else{
 									$data['cliente_cashback']['CashBackCliente'] = 0.00;
 								}
+								if($_SESSION['Orcatrata']['QuitadoOrca'] == 'N'){
+									$data['cliente_cashback']['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
+								}
 								$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);
 							
 							}else{
@@ -6138,10 +6175,12 @@ class Orcatrata extends CI_Controller {
 								}else{
 									$data['cliente_cashback']['CashBackCliente'] = 0.00;
 								}
+								if($_SESSION['Orcatrata']['QuitadoOrca'] == 'N'){
+									$data['cliente_cashback']['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
+								}
 								$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);
 												
 							}
-							
 						}else{
 								
 							if ($data['cadastrar']['StatusParcelas'] == 'S') {		
@@ -6350,6 +6389,7 @@ class Orcatrata extends CI_Controller {
 			'DescPercOrca',
 			'DescValorOrca',
 			'CashBackOrca',
+            'ValidadeCashBackOrca',
 			'UsarCashBack',
 			'SubValorFinal',
 			'ValorFinalOrca',
@@ -6616,6 +6656,7 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['Tipo_Orca'] = $data['orcatrata']['Tipo_Orca'];
 			$data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
+			$data['orcatrata']['ValidadeCashBackOrca'] = $this->basico->mascara_data($data['orcatrata']['ValidadeCashBackOrca'], 'barras');
 			$data['orcatrata']['DataEntregaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntregaOrca'], 'barras');
             $data['orcatrata']['Descricao'] = $data['orcatrata']['Descricao'];
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'barras');
@@ -7195,6 +7236,12 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
 			
 			$data['orcatrata']['CashBackOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['CashBackOrca']));
+			$data['orcatrata']['ValidadeCashBackOrca'] = $this->basico->mascara_data($data['orcatrata']['ValidadeCashBackOrca'], 'mysql');
+			if(isset($data['orcatrata']['ValidadeCashBackOrca']) && $data['orcatrata']['ValidadeCashBackOrca'] != "0000-00-00" && $data['orcatrata']['ValidadeCashBackOrca'] != ""){
+				$data['orcatrata']['ValidadeCashBackOrca'] = $data['orcatrata']['ValidadeCashBackOrca'];
+			}else{
+				$data['orcatrata']['ValidadeCashBackOrca'] = "0000-00-00";
+			}
 			
 			$data['orcatrata']['ValorFinalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFinalOrca']));
 			
@@ -7884,6 +7931,7 @@ class Orcatrata extends CI_Controller {
 			'DescPercOrca',
 			'DescValorOrca',
 			'CashBackOrca',
+            'ValidadeCashBackOrca',
 			//'UsarCashBack',
 			'SubValorFinal',
 			'ValorFinalOrca',
@@ -7943,6 +7991,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['Prd_Srv_Orca']) ? $data['orcatrata']['Prd_Srv_Orca'] = 'S' : FALSE;
 		(!$data['orcatrata']['Entrega_Orca']) ? $data['orcatrata']['Entrega_Orca'] = 'S' : FALSE;
 		(!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;
+		(!$data['orcatrata']['ValidadeCashBackOrca']) ? $data['orcatrata']['ValidadeCashBackOrca'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['DataEntregaOrca']) ? $data['orcatrata']['DataEntregaOrca'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['HoraEntregaOrca']) ? $data['orcatrata']['HoraEntregaOrca'] = date('H:i:s', strtotime('+1 hour')) : FALSE;
 		//(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
@@ -8114,6 +8163,7 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['NomeTipoFinanceiro'] = $data['orcatrata']['NomeTipoFinanceiro'];
 			$data['orcatrata']['FormaPag'] = $data['orcatrata']['FormaPag'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
+			$data['orcatrata']['ValidadeCashBackOrca'] = $this->basico->mascara_data($data['orcatrata']['ValidadeCashBackOrca'], 'barras');
 			$data['orcatrata']['DataEntregaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntregaOrca'], 'barras');
             $data['orcatrata']['Descricao'] = $data['orcatrata']['Descricao'];
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'barras');
@@ -8675,28 +8725,45 @@ class Orcatrata extends CI_Controller {
 						$data['get']['valorcashback'][$j] = $data['busca']['cashback']['anterior'][$j]['ValorComissaoCashBack'];
 						$data['valorcashbackpedido'] += $data['get']['valorcashback'][$j];
 					}
-						
-					$data['update']['cliente_cashback']['anterior'] = $this->Orcatrata_model->get_cliente($data['orcatrata']['idApp_Cliente']);
-					$data['valorcashbackcliente'] = $data['update']['cliente_cashback']['anterior']['CashBackCliente'];
+					
+					if(isset($data['orcatrata']['idApp_Cliente']) && $data['orcatrata']['idApp_Cliente'] != 0 && $data['orcatrata']['idApp_Cliente'] != ""){	
 
-					if ($_SESSION['Orcatrata']['CanceladoOrca'] == 'N') {	
-						
-						if($_SESSION['Orcatrata']['QuitadoOrca'] == 'S'){
-						
-							//subtraio o valorcashbackpedido e o valordocashbackoutrasos do valor atual do cashbackcliente
+						$data['update']['cliente_cashback']['anterior'] = $this->Orcatrata_model->get_cliente($data['orcatrata']['idApp_Cliente']);
+						$data['valorcashbackcliente'] = $data['update']['cliente_cashback']['anterior']['CashBackCliente'];
+
+						if ($_SESSION['Orcatrata']['CanceladoOrca'] == 'N') {	
 							
-							$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] - ($data['valorcashbackpedido'] + $data['soma_cashback_repet_s_pago_outras']);
+							if($_SESSION['Orcatrata']['QuitadoOrca'] == 'S'){
+							
+								//subtraio o valorcashbackpedido e o valordocashbackoutrasos do valor atual do cashbackcliente
+								
+								$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] - ($data['valorcashbackpedido'] + $data['soma_cashback_repet_s_pago_outras']);
+			
+								if($data['cliente_cashback']['CashBackCliente'] >= 0){
+									$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
+								}else{
+									$data['cliente_cashback']['CashBackCliente'] = 0.00;
+								}
+
+								$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);
 		
-							if($data['cliente_cashback']['CashBackCliente'] >= 0){
-								$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
 							}else{
-								$data['cliente_cashback']['CashBackCliente'] = 0.00;
-							}
+								
+								//subtraio o valordocashbackoutrasos do valor atual do cashbackcliente
+								
+								$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] - $data['soma_cashback_repet_s_pago_outras'];
+			
+								if($data['cliente_cashback']['CashBackCliente'] >= 0){
+									$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
+								}else{
+									$data['cliente_cashback']['CashBackCliente'] = 0.00;
+								}
 
-							$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);
-	
-						}else{
+								$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);						
+							}
 							
+						}else{
+						
 							//subtraio o valordocashbackoutrasos do valor atual do cashbackcliente
 							
 							$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] - $data['soma_cashback_repet_s_pago_outras'];
@@ -8707,25 +8774,10 @@ class Orcatrata extends CI_Controller {
 								$data['cliente_cashback']['CashBackCliente'] = 0.00;
 							}
 
-							$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);						
+							$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);					
+											
 						}
-						
-					}else{
-					
-						//subtraio o valordocashbackoutrasos do valor atual do cashbackcliente
-						
-						$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] - $data['soma_cashback_repet_s_pago_outras'];
-	
-						if($data['cliente_cashback']['CashBackCliente'] >= 0){
-							$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
-						}else{
-							$data['cliente_cashback']['CashBackCliente'] = 0.00;
-						}
-
-						$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);					
-										
 					}
-					
 				}
 				
 			}			
@@ -8835,6 +8887,12 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
 			
 			$data['orcatrata']['CashBackOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['CashBackOrca']));
+			$data['orcatrata']['ValidadeCashBackOrca'] = $this->basico->mascara_data($data['orcatrata']['ValidadeCashBackOrca'], 'mysql');
+			if(isset($data['orcatrata']['ValidadeCashBackOrca']) && $data['orcatrata']['ValidadeCashBackOrca'] != "0000-00-00" && $data['orcatrata']['ValidadeCashBackOrca'] != ""){
+				$data['orcatrata']['ValidadeCashBackOrca'] = $data['orcatrata']['ValidadeCashBackOrca'];
+			}else{
+				$data['orcatrata']['ValidadeCashBackOrca'] = "0000-00-00";
+			}
 			
 			$data['orcatrata']['ValorFinalOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFinalOrca']));
 			$data['orcatrata']['SubValorFinal'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['SubValorFinal']));
@@ -9346,72 +9404,82 @@ class Orcatrata extends CI_Controller {
 						$data['get']['valorcashback'][$j] = $data['busca']['cashback']['anterior'][$j]['ValorComissaoCashBack'];
 						$data['valorcashbackpedido'] += $data['get']['valorcashback'][$j];
 					}
-					
-					$data['update']['cliente_cashback']['anterior'] = $this->Orcatrata_model->get_cliente($data['orcatrata']['idApp_Cliente']);
-					$data['valorcashbackcliente'] = $data['update']['cliente_cashback']['anterior']['CashBackCliente'];
-						
-					if ($data['orcatrata']['CanceladoOrca'] == 'N') {
-						
-						if ($data['orcatrata']['QuitadoOrca'] == 'S') {	
-								
-							if ($data['cadastrar']['StatusParcelas'] == 'S') {		
-								//Somo o valorcashbackpedido + valorcashbackoutrasos + valoratualcashbackcliente
-								$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] + $data['valorcashbackpedido'] + $data['soma_cashback_repet_total_outras'];
-			
-								if($data['cliente_cashback']['CashBackCliente'] >= 0){
-									$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
-								}else{
-									$data['cliente_cashback']['CashBackCliente'] = 0.00;
-								}
-								$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);
-							
-							}else{
-								//Somo o valorcashbackpedido + valorcashbackoutrasos  + valoratualcashbackcliente
-								$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] + $data['valorcashbackpedido'] + $data['soma_cashback_repet_s_pago_outras'];
-			
-								if($data['cliente_cashback']['CashBackCliente'] >= 0){
-									$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
-								}else{
-									$data['cliente_cashback']['CashBackCliente'] = 0.00;
-								}
-								$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);
-												
-							}
-							
-						}else{
-								
-							if ($data['cadastrar']['StatusParcelas'] == 'S') {		
-								//Mantenho, apenas, o valoratualcashbackcliente
 
-							}else{
-								//Somo o valorcashbackoutrasos + valoratualcashbackcliente
-								$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] + $data['soma_cashback_repet_s_pago_outras'];
-			
-								if($data['cliente_cashback']['CashBackCliente'] >= 0){
-									$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
+					if(isset($data['orcatrata']['idApp_Cliente']) && $data['orcatrata']['idApp_Cliente'] != 0 && $data['orcatrata']['idApp_Cliente'] != ""){
+
+						$data['update']['cliente_cashback']['anterior'] = $this->Orcatrata_model->get_cliente($data['orcatrata']['idApp_Cliente']);
+
+						$data['valorcashbackcliente'] = $data['update']['cliente_cashback']['anterior']['CashBackCliente'];
+							
+						if ($data['orcatrata']['CanceladoOrca'] == 'N') {
+							
+							if ($data['orcatrata']['QuitadoOrca'] == 'S') {	
+									
+								if ($data['cadastrar']['StatusParcelas'] == 'S') {		
+									//Somo o valorcashbackpedido + valorcashbackoutrasos + valoratualcashbackcliente
+									$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] + $data['valorcashbackpedido'] + $data['soma_cashback_repet_total_outras'];
+				
+									if($data['cliente_cashback']['CashBackCliente'] >= 0){
+										$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
+									}else{
+										$data['cliente_cashback']['CashBackCliente'] = 0.00;
+									}
+									if($_SESSION['Orcatrata']['QuitadoOrca'] == 'N'){
+										$data['cliente_cashback']['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
+									}
+									$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);
+								
 								}else{
-									$data['cliente_cashback']['CashBackCliente'] = 0.00;
+									//Somo o valorcashbackpedido + valorcashbackoutrasos  + valoratualcashbackcliente
+									$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] + $data['valorcashbackpedido'] + $data['soma_cashback_repet_s_pago_outras'];
+				
+									if($data['cliente_cashback']['CashBackCliente'] >= 0){
+										$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
+									}else{
+										$data['cliente_cashback']['CashBackCliente'] = 0.00;
+									}
+									if($_SESSION['Orcatrata']['QuitadoOrca'] == 'N'){
+										$data['cliente_cashback']['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
+									}
+									$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);
+													
 								}
-								$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);
-												
+								
+								
+							}else{
+									
+								if ($data['cadastrar']['StatusParcelas'] == 'S') {		
+									//Mantenho, apenas, o valoratualcashbackcliente
+
+								}else{
+									//Somo o valorcashbackoutrasos + valoratualcashbackcliente
+									$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] + $data['soma_cashback_repet_s_pago_outras'];
+				
+									if($data['cliente_cashback']['CashBackCliente'] >= 0){
+										$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
+									}else{
+										$data['cliente_cashback']['CashBackCliente'] = 0.00;
+									}
+									$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);
+													
+								}
+								
 							}
 							
-						}
-						
-					}else{
-					
-						//Somo o valorcashbackoutrasos + valoratualcashbackcliente
-						$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] + $data['soma_cashback_repet_s_pago_outras'];
-	
-						if($data['cliente_cashback']['CashBackCliente'] >= 0){
-							$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
 						}else{
-							$data['cliente_cashback']['CashBackCliente'] = 0.00;
+						
+							//Somo o valorcashbackoutrasos + valoratualcashbackcliente
+							$data['cliente_cashback']['CashBackCliente'] = $data['valorcashbackcliente'] + $data['soma_cashback_repet_s_pago_outras'];
+		
+							if($data['cliente_cashback']['CashBackCliente'] >= 0){
+								$data['cliente_cashback']['CashBackCliente'] = $data['cliente_cashback']['CashBackCliente'];
+							}else{
+								$data['cliente_cashback']['CashBackCliente'] = 0.00;
+							}
+							$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);
+												
 						}
-						$data['update']['cliente_cashback']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente_cashback'], $data['orcatrata']['idApp_Cliente']);
-											
 					}
-					
 				}
 				
 			}			
@@ -9587,6 +9655,7 @@ class Orcatrata extends CI_Controller {
 			'DescPercOrca',
 			'DescValorOrca',
 			'CashBackOrca',
+            'ValidadeCashBackOrca',
 			'UsarCashBack',
 			'SubValorFinal',
 			'ValorFinalOrca',
@@ -9673,6 +9742,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['DescPercOrca']) ? $data['orcatrata']['DescPercOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['DescValorOrca']) ? $data['orcatrata']['DescValorOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['CashBackOrca']) ? $data['orcatrata']['CashBackOrca'] = '0.00' : FALSE;
+		(!$data['orcatrata']['ValidadeCashBackOrca']) ? $data['orcatrata']['ValidadeCashBackOrca'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['SubValorFinal']) ? $data['orcatrata']['SubValorFinal'] = '0.00' : FALSE;
 		(!$data['orcatrata']['ValorFinalOrca']) ? $data['orcatrata']['ValorFinalOrca'] = '0.00' : FALSE;
 		//(!$data['orcatrata']['ValorFrete']) ? $data['orcatrata']['ValorFrete'] = '0.00' : FALSE;
@@ -10162,7 +10232,7 @@ class Orcatrata extends CI_Controller {
           */
 		
 
-		$_SESSION['Empresa'] = $data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
+		$data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
 		/*	 
 		echo '<br>';
 		echo "<pre>";
@@ -10295,9 +10365,17 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['DescPercOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescPercOrca']));
 			$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
 			$data['orcatrata']['CashBackOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['CashBackOrca']));
+			$data['orcatrata']['ValidadeCashBackOrca'] = $this->basico->mascara_data($data['orcatrata']['ValidadeCashBackOrca'], 'mysql');
+			if(isset($data['orcatrata']['ValidadeCashBackOrca']) && $data['orcatrata']['ValidadeCashBackOrca'] != "0000-00-00" && $data['orcatrata']['ValidadeCashBackOrca'] != ""){
+				$data['orcatrata']['ValidadeCashBackOrca'] = $data['orcatrata']['ValidadeCashBackOrca'];
+			}else{
+				$data['orcatrata']['ValidadeCashBackOrca'] = "0000-00-00";
+			}
 			$data['CashBackAtual'] = $data['orcatrata']['CashBackOrca'];
+			$data['ValidadeAtual'] = $data['orcatrata']['ValidadeCashBackOrca'];
 			if($data['orcatrata']['UsarCashBack'] == "N"){
 				$data['orcatrata']['CashBackOrca'] = 0.00;
+				$data['orcatrata']['ValidadeCashBackOrca'] = "0000-00-00";
 			}
 			/*
 			if($data['orcatrata']['UsarCashBack'] == "S"){
@@ -10813,6 +10891,7 @@ class Orcatrata extends CI_Controller {
 			'DescPercOrca',
 			'DescValorOrca',
 			'CashBackOrca',
+            'ValidadeCashBackOrca',
 			'UsarCashBack',
 			'ValorFinalOrca',
 			'SubValorFinal',
@@ -11073,6 +11152,7 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['Tipo_Orca'] = $data['orcatrata']['Tipo_Orca'];
 			$data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
+			$data['orcatrata']['ValidadeCashBackOrca'] = $this->basico->mascara_data($data['orcatrata']['ValidadeCashBackOrca'], 'barras');
 			$data['orcatrata']['DataEntregaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntregaOrca'], 'barras');
             $data['orcatrata']['Descricao'] = $data['orcatrata']['Descricao'];
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'barras');
@@ -11646,9 +11726,17 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['DescPercOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescPercOrca']));
 			$data['orcatrata']['DescValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['DescValorOrca']));
 			$data['orcatrata']['CashBackOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['CashBackOrca']));
+			$data['orcatrata']['ValidadeCashBackOrca'] = $this->basico->mascara_data($data['orcatrata']['ValidadeCashBackOrca'], 'mysql');
+			if(isset($data['orcatrata']['ValidadeCashBackOrca']) && $data['orcatrata']['ValidadeCashBackOrca'] != "0000-00-00" && $data['orcatrata']['ValidadeCashBackOrca'] != ""){
+				$data['orcatrata']['ValidadeCashBackOrca'] = $data['orcatrata']['ValidadeCashBackOrca'];
+			}else{
+				$data['orcatrata']['ValidadeCashBackOrca'] = "0000-00-00";
+			}
 			$data['CashBackAtual'] = $data['orcatrata']['CashBackOrca'];
+			$data['ValidadeAtual'] = $data['orcatrata']['ValidadeCashBackOrca'];
 			if($data['orcatrata']['UsarCashBack'] == "N"){
 				$data['orcatrata']['CashBackOrca'] = 0.00;
+				$data['orcatrata']['ValidadeCashBackOrca'] = "0000-00-00";
 			}
 			/*
 			if($data['orcatrata']['UsarCashBack'] == "S"){
@@ -13395,6 +13483,9 @@ class Orcatrata extends CI_Controller {
 						}
 					}
 					$data['novo_cashback']['id_cliente']['CashBackCliente'] = $data['cashback_cliente_antigo'] + $data['cashback_produtos_receita'];
+					$data['novo_cashback']['id_cliente']['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
+					
+					
 					$data['novo_cashback']['id_cliente']['bd'] = $this->Cliente_model->update_cliente($data['novo_cashback']['id_cliente'], $_SESSION['Orcatrata']['idApp_Cliente']);
 					unset($data['cashback_cliente_antigo']);
 					unset($data['cashback_produtos_receita']);
@@ -13794,6 +13885,8 @@ class Orcatrata extends CI_Controller {
 							}
 							
 							$data['update_cashback']['id_cliente']['CashBackCliente'] = $cashback_antigo_cliente + $cashback_produtos;
+							$data['update_cashback']['id_cliente']['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
+							
 							$data['update_cashback']['id_cliente']['bd'] = $this->Cliente_model->update_cliente($data['update_cashback']['id_cliente'], $data['ID_Orcamento']['idApp_Cliente']);
 							
 							unset($cashback_antigo_cliente);
@@ -14230,6 +14323,7 @@ class Orcatrata extends CI_Controller {
 								$somacashback_produtos[$j] = floatval ($somacashback_produtos[$j]);
 								
 								$data['update']['id_cliente'][$j]['CashBackCliente'] = $cashback_anterior_cliente[$j] + $somacashback_produtos[$j];
+								$data['update']['id_cliente'][$j]['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
 								
 								$data['update']['id_cliente']['bd'][$j] = $this->Cliente_model->update_cliente($data['update']['id_cliente'][$j], $data['update']['orcamento']['alterar'][$j]['idApp_Cliente']);
 								
@@ -15673,6 +15767,8 @@ class Orcatrata extends CI_Controller {
 										
 									}
 									$data['update_cashback']['id_cliente'][$j]['CashBackCliente'] = $cashback_antigo_cliente[$j] + $cashback_produtos[$j];
+									$data['update_cashback']['id_cliente'][$j]['ValidadeCashBack'] = date('Y-m-d', strtotime('+' . $_SESSION['Empresa']['PrazoCashBackEmpresa'] . ' day'));
+									
 									$data['update_cashback']['id_cliente']['bd'][$j] = $this->Cliente_model->update_cliente($data['update_cashback']['id_cliente'][$j], $data['ID_Orcamento'][$j]['idApp_Cliente']);
 									/*
 									echo '<br>';
