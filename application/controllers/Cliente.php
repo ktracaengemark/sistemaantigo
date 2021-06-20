@@ -12,7 +12,7 @@ class Cliente extends CI_Controller {
         #load libraries
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
-        $this->load->library(array('basico', 'form_validation'));
+        $this->load->library(array('basico', 'form_validation', 'pagination'));
         $this->load->model(array('Basico_model', 'Cliente_model', 'Contatocliente_model', 'Clientedep_model', 'Clientepet_model'));
         #$this->load->model(array('Basico_model', 'Cliente_model'));
         $this->load->driver('session');
@@ -1520,7 +1520,6 @@ class Cliente extends CI_Controller {
         else
             $data['msg'] = '';
 
-		
 		$data['query'] = quotes_to_entities($this->input->post(array(
 			'AlterarTodos',
 			'TipoAdd',
@@ -1556,14 +1555,52 @@ class Cliente extends CI_Controller {
             }
 		}
 		$data['count']['PRCount'] = $j - 1;
-		
-		
+
+		//$this->load->library('pagination');
+		$config['per_page'] = 10;
+		$config["uri_segment"] = 4;
+		$config['reuse_query_string'] = TRUE;
+		$config['num_links'] = 2;
+		$config['use_page_numbers'] = TRUE;
+		$config['full_tag_open'] = "<ul class='pagination'>";
+		$config['full_tag_close'] = "</ul>";
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+		$config['next_tag_open'] = "<li>";
+		$config['next_tagl_close'] = "</li>";
+		$config['prev_tag_open'] = "<li>";
+		$config['prev_tagl_close'] = "</li>";
+		$config['first_tag_open'] = "<li>";
+		$config['first_tagl_close'] = "</li>";
+		$config['last_tag_open'] = "<li>";
+		$config['last_tagl_close'] = "</li>";
+		$data['Pesquisa'] = '';
+				
         if ($id) {
+		
+			$config['base_url'] = base_url() . 'cliente/alterarcashback/' . $id . '/';
+			$config['total_rows'] = $this->Cliente_model->get_alterarcashback($id, TRUE);
+		   
+			if($config['total_rows'] >= 1){
+				$data['total_rows'] = $config['total_rows'];
+			}else{
+				$data['total_rows'] = 0;
+			}
+			
+			$this->pagination->initialize($config);
+
+			$_SESSION['Pagina'] = $data['pagina'] = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+			$_SESSION['Per_Page'] = $data['per_page'] = $config['per_page'];
+			
+			$data['pagination'] = $this->pagination->create_links();		
+				
             #### Sis_Empresa ####
             $data['empresa'] = $this->Cliente_model->get_empresa($id);
 			
             #### App_OrcaTrata ####
-            $_SESSION['Orcamento'] = $data['orcamento'] = $this->Cliente_model->get_alterarcashback($id);
+            $_SESSION['Orcamento'] = $data['orcamento'] = $this->Cliente_model->get_alterarcashback($id, FALSE, $config['per_page'], ($data['pagina'] * $config['per_page']));
             
 			if (count($data['orcamento']) > 0) {
                 $data['orcamento'] = array_combine(range(1, count($data['orcamento'])), array_values($data['orcamento']));
@@ -1653,7 +1690,7 @@ class Cliente extends CI_Controller {
 			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
 
             #### App_OrcaTrata ####
-            $data['update']['orcamento']['anterior'] = $this->Cliente_model->get_alterarcashback($data['empresa']['idSis_Empresa']);
+            $data['update']['orcamento']['anterior'] = $this->Cliente_model->get_alterarcashback($data['empresa']['idSis_Empresa'], FALSE, $_SESSION['Per_Page'], ($_SESSION['Pagina'] * $_SESSION['Per_Page']));
             if (isset($data['orcamento']) || (!isset($data['orcamento']) && isset($data['update']['orcamento']['anterior']) ) ) {
 
                 if (isset($data['orcamento']))

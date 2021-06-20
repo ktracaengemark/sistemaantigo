@@ -135,7 +135,7 @@ class Cliente_model extends CI_Model {
 
     }
 
-	public function get_alterarcashback($data) {
+	public function get_alterarcashback($data, $total = FALSE, $limit = FALSE, $start = FALSE, $date = FALSE) {
 
 		$date_inicio_orca = ($_SESSION['FiltroRankingVendas']['DataInicio']) ? 'TOT.DataOrca >= "' . $_SESSION['FiltroRankingVendas']['DataInicio'] . '" AND ' : FALSE;
 		$date_fim_orca = ($_SESSION['FiltroRankingVendas']['DataFim']) ? 'TOT.DataOrca <= "' . $_SESSION['FiltroRankingVendas']['DataFim'] . '" AND ' : FALSE;
@@ -172,8 +172,12 @@ class Cliente_model extends CI_Model {
 			$ultimopedido2 = FALSE;
 		}		
 		
-		
-        #LISTA DE CLIENTES
+        if ($limit){
+			$querylimit = 'LIMIT ' . $start . ', ' . $limit;
+		}else{
+			$querylimit = '';
+		}
+
         $query = $this->db->query('
 			SELECT
 				F.idApp_Cliente,
@@ -218,10 +222,15 @@ class Cliente_model extends CI_Model {
 				' . $valor_ate . '
 				F.idApp_Cliente != 0
 			ORDER BY
-				' . $campo . ' ' . $ordenamento . '
-			LIMIT 50	
+				' . $campo . '
+				' . $ordenamento . '
+			' . $querylimit . '
         ');
-		
+	
+		if($total == TRUE) {
+			return $query->num_rows();
+		}	
+			
         $query = $query->result_array();
  
         return $query;		

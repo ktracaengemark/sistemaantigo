@@ -19,7 +19,7 @@ class Orcatrata_model extends CI_Model {
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
-			} else {
+        } else {
             #return TRUE;
             return $this->db->insert_id();
         }
@@ -971,8 +971,8 @@ class Orcatrata_model extends CI_Model {
 
         return $query;
     }
-
-	public function get_alterarorcamentos($data, $total = FALSE, $limit = FALSE, $start = FALSE, $date = FALSE) {
+	
+    public function get_alterarorcamentos($data) {
 
 		if ($_SESSION['FiltroAlteraParcela']['DataFim']) {
             $consulta =
@@ -1053,14 +1053,8 @@ class Orcatrata_model extends CI_Model {
 		$permissao60 = (!$_SESSION['FiltroAlteraParcela']['Campo']) ? 'OT.idApp_OrcaTrata' : $_SESSION['FiltroAlteraParcela']['Campo'];
         $permissao61 = (!$_SESSION['FiltroAlteraParcela']['Ordenamento']) ? 'ASC' : $_SESSION['FiltroAlteraParcela']['Ordenamento'];
 
-        if ($limit){
-			$querylimit = 'LIMIT ' . $start . ', ' . $limit;
-		}else{
-			$querylimit = '';
-		}
-
 		$query = $this->db->query('
-			SELECT
+            SELECT
 				C.idApp_Cliente,
 				C.NomeCliente,
 				F.idApp_Fornecedor,
@@ -1101,7 +1095,7 @@ class Orcatrata_model extends CI_Model {
 				
 				US.Nome AS NomeColaborador,
 				USA.Nome AS NomeAssociado
-			FROM
+            FROM
 				App_OrcaTrata AS OT
 				LEFT JOIN Sis_Empresa AS EF ON EF.idSis_Empresa = OT.idSis_Empresa
 				LEFT JOIN Tab_FormaPag AS FP ON FP.idTab_FormaPag = OT.FormaPagamento
@@ -1113,7 +1107,7 @@ class Orcatrata_model extends CI_Model {
 				LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = OT.idSis_Usuario
 				LEFT JOIN Sis_Usuario AS USA ON USA.idSis_Usuario = OT.Associado
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
-			WHERE
+            WHERE
 				' . $permissao . '
 				' . $permissao30 . '
 				' . $permissao31 . '
@@ -1138,31 +1132,25 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao36 . '
 				' . $permissao37 . '
 				' . $permissao38 . '
-				' . $date_inicio_orca . '
-				' . $date_fim_orca . '
-				' . $date_inicio_entrega . '
-				' . $date_fim_entrega . '
-				' . $date_inicio_vnc . '
-				' . $date_fim_vnc . '
-				
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
+                ' . $date_inicio_entrega . '
+                ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
+                
 				OT.FinalizadoOrca = "N" AND 
 				OT.CanceladoOrca = "N" AND			
 				OT.idSis_Empresa = ' . $data . '
 			GROUP BY
-				OT.idApp_OrcaTrata	
-			ORDER BY
+                OT.idApp_OrcaTrata	
+            ORDER BY
 				' . $permissao60 . '
 				' . $permissao61 . '
-				' . $querylimit . '
-		');		
-	
-		if($total == TRUE) {
-			return $query->num_rows();
-		}	
-	
-		$query = $query->result_array();
-	
-		
+			LIMIT 50
+		');
+        $query = $query->result_array();
+ 
         return $query;
     }
 	
@@ -1793,7 +1781,7 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 	
-    public function get_alterarparcela($data, $total = FALSE, $limit = FALSE, $start = FALSE, $date = FALSE) {
+    public function get_alterarparcela($data) {
 
         if ($_SESSION['FiltroAlteraParcela']['DataFim']) {
             $consulta =
@@ -1853,12 +1841,6 @@ class Orcatrata_model extends CI_Model {
 		//$permissao5 = (($_SESSION['log']['idSis_Empresa'] != 5) && ($_SESSION['FiltroAlteraParcela']['NomeCliente'] != "0" )) ? 'OT.idApp_Cliente = "' . $_SESSION['FiltroAlteraParcela']['NomeCliente'] . '" AND ' : FALSE;
 		$permissao60 = (!$_SESSION['FiltroAlteraParcela']['Campo']) ? 'OT.idApp_OrcaTrata' : $_SESSION['FiltroAlteraParcela']['Campo'];
         $permissao61 = (!$_SESSION['FiltroAlteraParcela']['Ordenamento']) ? 'ASC' : $_SESSION['FiltroAlteraParcela']['Ordenamento'];
-
-        if ($limit){
-			$querylimit = 'LIMIT ' . $start . ', ' . $limit;
-		}else{
-			$querylimit = '';
-		}
 		
 		$query = $this->db->query('
 			SELECT
@@ -1936,14 +1918,8 @@ class Orcatrata_model extends CI_Model {
 				PR.Quitado = "N"
 			ORDER BY
 				' . $permissao60 . '
-				' . $permissao61 . '
-				' . $querylimit . ' 
+				' . $permissao61 . ' 
 		');
-	
-		if($total == TRUE) {
-			return $query->num_rows();
-		}
-		
         $query = $query->result_array();
           
         return $query;

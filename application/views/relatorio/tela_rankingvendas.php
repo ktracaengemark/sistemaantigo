@@ -1,43 +1,46 @@
 <?php if ($msg) echo $msg; ?>
+<!--<?php #echo form_open('relatorio/rankingvendas', 'role="form"'); ?>-->
+<?php echo form_open($form_open_path, 'role="form"'); ?>
 <div class="col-md-12 ">
-<?php echo form_open('relatorio/rankingvendas', 'role="form"'); ?>
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<div class="btn-group " role="group" aria-label="...">
-				<div class="row text-left">	
-					<div class="col-md-12">
-						<div class="col-md-8 text-left">
-							<label  id="NomeClienteAuto1">Cliente: <?php echo $cadastrar['NomeClienteAuto']; ?></label>
-							<div class="input-group">
-								<span class="input-group-btn">
-									<button class="btn btn-info btn-md" type="submit">
-										<span class="glyphicon glyphicon-search"></span> 
+			<?php if($paginacao == "N") { ?>
+				<div class="btn-group " role="group" aria-label="...">
+					<div class="row text-left">	
+						<div class="col-md-12">
+							<div class="col-md-8 text-left">
+								<label  id="NomeClienteAuto1">Cliente: <?php echo $cadastrar['NomeClienteAuto']; ?></label>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-info btn-md" type="submit">
+											<span class="glyphicon glyphicon-search"></span> 
+										</button>
+									</span>
+									<input type="text" autofocus name="id_Cliente_Auto" id="id_Cliente_Auto" value="<?php echo $cadastrar['id_Cliente_Auto']; ?>" class="form-control" placeholder="Pesquisar Cliente">
+									<input type="hidden" id="NomeClienteAuto" name="NomeClienteAuto" value="<?php echo $cadastrar['NomeClienteAuto']; ?>" />
+									<input type="hidden" id="Hidden_id_Cliente_Auto" name="Hidden_id_Cliente_Auto" value="<?php echo $query['idApp_Cliente']; ?>" />
+									<input type="hidden" name="idApp_Cliente" id="idApp_Cliente" value="<?php echo $query['idApp_Cliente']; ?>" class="form-control" readonly= "">
+								</div>
+							</div>
+							<div class="col-md-2 text-left">
+								<label>Filtros</label><br>
+								<button  class="btn btn-warning btn-md btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+									<span class="glyphicon glyphicon-filter"></span>
+								</button>
+							</div>
+							<div class="col-md-2">
+								<label>CashBack</label><br>
+								<a href="<?php echo base_url() . 'cliente/alterarcashback/' . $_SESSION['log']['idSis_Empresa']; ?>">
+									<button class="btn btn-success btn-md btn-block" type="button">
+										<span class="glyphicon glyphicon-pencil"></span>
 									</button>
-								</span>
-								<input type="text" autofocus name="id_Cliente_Auto" id="id_Cliente_Auto" value="<?php echo $cadastrar['id_Cliente_Auto']; ?>" class="form-control" placeholder="Pesquisar Cliente">
-								<input type="hidden" id="NomeClienteAuto" name="NomeClienteAuto" value="<?php echo $cadastrar['NomeClienteAuto']; ?>" />
-								<input type="hidden" id="Hidden_id_Cliente_Auto" name="Hidden_id_Cliente_Auto" value="<?php echo $query['idApp_Cliente']; ?>" />
-								<input type="hidden" name="idApp_Cliente" id="idApp_Cliente" value="<?php echo $query['idApp_Cliente']; ?>" class="form-control" readonly= "">
+								</a>
 							</div>
 						</div>
-						<div class="col-md-2 text-left">
-							<label>Filtros</label><br>
-							<button  class="btn btn-warning btn-md btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-								<span class="glyphicon glyphicon-filter"></span>
-							</button>
-						</div>
-						<div class="col-md-2">
-							<label>CashBack</label><br>
-							<a href="<?php echo base_url() . 'cliente/alterarcashback/' . $_SESSION['log']['idSis_Empresa']; ?>">
-								<button class="btn btn-success btn-md btn-block" type="button">
-									<span class="glyphicon glyphicon-pencil"></span>
-								</button>
-							</a>
-						</div>
-					</div>
-				</div>	
-			</div>			
+					</div>	
+				</div>
+			<?php } ?>	
 		</div>		
 		<?php echo (isset($list)) ? $list : FALSE ?>	
 	</div>
