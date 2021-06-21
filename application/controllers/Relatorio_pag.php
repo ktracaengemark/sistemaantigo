@@ -66,9 +66,6 @@ class Relatorio_pag extends CI_Controller {
 			'NomeClienteAuto',
         ), TRUE));	
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-		
         $data['titulo'] = 'Receitas';
 		$data['form_open_path'] = 'relatorio_pag/receitas_pag';
 		$data['baixatodas'] = 'Orcatrata/alterarreceitas/';
@@ -91,7 +88,9 @@ class Relatorio_pag extends CI_Controller {
 		
 		$data['paginacao'] = 'S';
 		$data['caminho'] = 'relatorio/receitas/';
-
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
 
@@ -140,6 +139,105 @@ class Relatorio_pag extends CI_Controller {
             $data['list1'] = $this->load->view('relatorio/list_orcamento', $data, TRUE);
         }		
 
+        $this->load->view('relatorio/tela_orcamento', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+
+	public function despesas_pag() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Fornecedor_Auto',
+			'NomeFornecedorAuto',
+        ), TRUE));	
+
+        $data['titulo'] = 'Despesas';
+		$data['form_open_path'] = 'relatorio_pag/despesas_pag';
+		$data['baixatodas'] = 'Orcatrata/alterardespesas/';
+		$data['baixa'] = 'Orcatrata/baixadadespesa/';
+        $data['nomeusuario'] = 'NomeColaborador';
+        $data['status'] = 'StatusComissaoOrca';
+		$data['alterar'] = 'relatorio/alterardespesas/';
+		$data['editar'] = 2;
+		$data['metodo'] = 3;
+		$data['panel'] = 'danger';
+		$data['TipoFinanceiro'] = 'Despesas';
+		$data['TipoRD'] = 1;
+        $data['nome'] = 'Fornecedor';
+		$data['print'] = 2;
+		$data['imprimir'] = 'OrcatrataPrint/imprimirdesp/';
+		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistadesp/';
+		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirrecibodesp/';
+		$data['edit'] = 'Orcatrata/alterardesp/';
+		$data['alterarparc'] = 'Orcatrata/alterarparceladesp/';	
+		$data['paginacao'] = 'S';
+		$data['caminho'] = 'relatorio/despesas/';		
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+
+			//$this->load->library('pagination');
+			$config['per_page'] = 10;
+			$config["uri_segment"] = 3;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+			$data['Pesquisa'] = '';
+			
+			$config['base_url'] = base_url() . 'relatorio_pag/despesas_pag/';
+			$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE, TRUE, TRUE);
+           
+			if($config['total_rows'] >= 1){
+				$data['total_rows'] = $config['total_rows'];
+			}else{
+				$data['total_rows'] = 0;
+			}
+			
+            $this->pagination->initialize($config);
+            
+			$page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+            $data['pagina'] = $page;
+			$data['per_page'] = $config['per_page'];
+			$data['report'] = $this->Relatorio_model->list_orcamento(FALSE, TRUE, FALSE, $config['per_page'], ($page * $config['per_page']));			
+			$data['pagination'] = $this->pagination->create_links();
+			
+            /*
+              echo "<pre>";
+              print_r($data['query']['Produtos']);
+              echo "</pre>";
+              exit();
+              */
+
+            //$data['list1'] = $this->load->view('relatorio/list1_comissao', $data, TRUE);
+            $data['list1'] = $this->load->view('relatorio/list_orcamento', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+        }		
+
+        //$this->load->view('relatorio/tela_comissao', $data);
         $this->load->view('relatorio/tela_orcamento', $data);
 
         $this->load->view('basico/footer');
@@ -228,6 +326,97 @@ class Relatorio_pag extends CI_Controller {
 			$data['report'] = $this->Relatorio_model->list_orcamento(FALSE, TRUE, FALSE, $config['per_page'], ($page * $config['per_page']));			
 			$data['pagination'] = $this->pagination->create_links();
 			
+            $data['list1'] = $this->load->view('relatorio/list_orcamento', $data, TRUE);
+        }		
+
+        $this->load->view('relatorio/tela_orcamento', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+
+	public function alterardespesas_pag() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Fornecedor_Auto',
+			'NomeFornecedorAuto',
+        ), TRUE));	
+
+		$data['query']['nome'] = 'Fornecedor';
+        $data['titulo'] = 'Baixa das Despesas';
+		$data['form_open_path'] = 'relatorio_pag/alterardespesas_pag';
+		$data['baixatodas'] = 'Orcatrata/alterardespesas/';
+		$data['baixa'] = 'Orcatrata/baixadadespesa/';
+        $data['nomeusuario'] = 'NomeColaborador';
+        $data['status'] = 'StatusComissaoOrca';
+		$data['alterar'] = 'relatorio/alterardespesas/';
+		$data['editar'] = 1;
+		$data['metodo'] = 3;
+		$data['panel'] = 'danger';
+		$data['TipoFinanceiro'] = 'Despesas';
+		$data['TipoRD'] = 1;
+        $data['nome'] = 'Fornecedor';
+		$data['print'] = 2;
+		$data['imprimir'] = 'OrcatrataPrint/imprimirdesp/';
+		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistadesp/';
+		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirrecibodesp/';
+		$data['edit'] = 'Orcatrata/alterardesp/';
+		$data['alterarparc'] = 'Orcatrata/alterarparceladesp/';
+		
+		$data['paginacao'] = 'S';
+		$data['caminho'] = 'relatorio/alterardespesas/';
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+
+			//$this->load->library('pagination');
+			$config['per_page'] = 10;
+			$config["uri_segment"] = 3;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+			$data['Pesquisa'] = '';
+			
+			$config['base_url'] = base_url() . 'relatorio_pag/alterardespesas_pag/';
+			$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE, TRUE, TRUE);
+           
+			if($config['total_rows'] >= 1){
+				$data['total_rows'] = $config['total_rows'];
+			}else{
+				$data['total_rows'] = 0;
+			}
+			
+            $this->pagination->initialize($config);
+            
+			$page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+            $data['pagina'] = $page;
+			$data['per_page'] = $config['per_page'];
+			$data['report'] = $this->Relatorio_model->list_orcamento(FALSE, TRUE, FALSE, $config['per_page'], ($page * $config['per_page']));			
+			$data['pagination'] = $this->pagination->create_links();
+
             $data['list1'] = $this->load->view('relatorio/list_orcamento', $data, TRUE);
         }		
 
@@ -361,6 +550,143 @@ class Relatorio_pag extends CI_Controller {
 			$data['pagination'] = $this->pagination->create_links();
 						
 			
+            $data['list1'] = $this->load->view('relatorio/list_parcelas', $data, TRUE);
+        }
+
+        $this->load->view('relatorio/tela_parcelas', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+
+	public function debitos_pag() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Fornecedor_Auto',
+			'NomeFornecedorAuto',
+        ), TRUE));	
+		
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            'Orcamento',
+            'Cliente',
+            'idApp_Cliente',
+			'Fornecedor',
+            'idApp_Fornecedor',
+			'Dia',
+			'Ano',
+			'Mesvenc',
+			'Mespag',
+			'Tipo_Orca',
+			'AVAP',
+			'TipoFinanceiro',
+			'idTab_TipoRD',
+			'TipoFinanceiroD',
+            'DataInicio',
+            'DataFim',
+			'DataInicio2',
+            'DataFim2',
+			'DataInicio3',
+            'DataFim3',
+			'DataInicio4',
+            'DataFim4',
+			'DataInicio5',
+            'DataFim5',
+			'DataInicio6',
+            'DataFim6',
+			'DataInicio7',
+            'DataFim7',
+			'DataInicio5',
+            'DataFim5',
+			'DataInicio6',
+            'DataFim6',
+			'Ordenamento',
+            'Campo',
+			'ObsOrca',
+            'AprovadoOrca',
+            'QuitadoOrca',
+			'ConcluidoOrca',
+			'FinalizadoOrca',
+			'CanceladoOrca',
+			'CombinadoFrete',
+			'Quitado',
+			'Modalidade',
+			'Orcarec',
+			'Orcades',
+			'FormaPagamento',
+			'TipoFrete',
+			'Agrupar',
+			'Ultimo',
+			'nome',
+        ), TRUE));
+		
+        $data['titulo1'] = 'Parcelas das Despesas';
+		$data['metodo'] = 1;
+		$data['form_open_path'] = 'relatorio_pag/debitos_pag';
+		$data['panel'] = 'danger';
+		$data['TipoFinanceiro'] = 'Despesas';
+		$data['TipoRD'] = 1;
+        $data['nome'] = 'Fornecedor';
+		$data['editar'] = 1;
+		$data['print'] = 1;
+		$data['imprimir'] = 'OrcatrataPrint/imprimirdesp/';
+		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistadesp/';
+		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirrecibodesp/';
+		$data['edit'] = 'Orcatrata/baixadaparceladesp/';
+		$data['alterarparc'] = 'Orcatrata/alterarparceladesp/';	
+		$data['paginacao'] = 'S';
+		$data['caminho'] = 'relatorio/debitos/';
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+
+			//$this->load->library('pagination');
+			$config['per_page'] = 10;
+			$config["uri_segment"] = 3;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+			$data['Pesquisa'] = '';
+			
+			$config['base_url'] = base_url() . 'relatorio_pag/debitos_pag/';
+			$config['total_rows'] = $this->Relatorio_model->list_parcelas(FALSE, TRUE, TRUE);
+           
+			if($config['total_rows'] >= 1){
+				$data['total_rows'] = $config['total_rows'];
+			}else{
+				$data['total_rows'] = 0;
+			}
+			
+            $this->pagination->initialize($config);
+            
+			$page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+            $data['pagina'] = $page;
+			$data['per_page'] = $config['per_page'];
+			$data['report'] = $this->Relatorio_model->list_parcelas(FALSE, TRUE, FALSE, $config['per_page'], ($page * $config['per_page']));			
+			$data['pagination'] = $this->pagination->create_links();
+
             $data['list1'] = $this->load->view('relatorio/list_parcelas', $data, TRUE);
         }
 

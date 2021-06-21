@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="col-md-12 ">
 				<div class="panel panel-<?php echo $panel; ?>">
-					<div class="panel-heading">
+					<div class="panel-heading">	
 						<div class="row">
 							<div class="col-md-2 text-left">
 								<label><?php echo $titulo1;?></label>
@@ -109,6 +109,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -561,4 +562,4 @@
 		</div>									
 	</div>
 </div>
-</form>
+
