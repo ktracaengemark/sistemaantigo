@@ -13,16 +13,36 @@
 
 					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading">
-							<div class="btn-line">
-								<a class="btn btn-md btn-warning" href="<?php echo base_url() . $relatorio; ?>" role="button">
-									<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo; ?>
-								</a>
-								<a class="btn btn-md btn-warning" type="button" href="<?php echo base_url() . $imprimir . $_SESSION['log']['idSis_Empresa']; ?>">
-									<span class="glyphicon glyphicon-print"></span> Print.
-								</a>
-								<a class="btn btn-md btn-warning" href="" role="button">
-									<span class="glyphicon glyphicon-usd"></span>R$ <?php echo $somatotal; ?>
-								</a>
+							<div class="row">
+								<div class="col-md-12 ">
+									<div class="col-md-2 text-left">
+										<br>
+										<a type= "button" class="btn btn-md btn-warning btn-block" href="<?php echo base_url() . $relatorio; ?>" role="button">
+											<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo; ?>
+										</a>
+									</div>
+									<div class="col-md-2 text-left">	
+										<br>
+										<a type= "button" class="btn btn-md btn-warning btn-block" role="button">
+											<?php echo $_SESSION['Total_Rows'];?> Resultados
+										</a>
+									</div>
+									<div class="col-md-2 text-left">	
+										<br>
+										<a type= "button" class="btn btn-md btn-warning btn-block" type="button" href="<?php echo base_url() . $imprimir . $_SESSION['log']['idSis_Empresa']; ?>">
+											<span class="glyphicon glyphicon-print"></span> Print.
+										</a>
+									</div>
+									<div class="col-md-2 text-left">	
+										<br>
+										<a type= "button" class="btn btn-md btn-warning btn-block" role="button">
+											<span class="glyphicon glyphicon-usd"></span>R$ <?php echo $_SESSION['SomaTotal']; ?>
+										</a>
+									</div>
+									<div class="col-md-4 text-left">
+										<?php echo $_SESSION['Pagination']; ?>
+									</div>
+								</div>
 							</div>	
 						</div>
 						<div class="panel-body">
@@ -40,19 +60,18 @@
 											<div class="input_fields_wrap21">
 
 											<?php
+											$linha =  $_SESSION['Per_Page']*$_SESSION['Pagina'];
 											for ($i=1; $i <= $count['PRCount']; $i++) {
+												$contagem = ($linha + $i);
 											?>
-
-												
 												<input type="hidden" name="idApp_OrcaTrata<?php echo $i ?>" value="<?php echo $orcamento[$i]['idApp_OrcaTrata']; ?>"/>
-												
 												<div class="form-group" id="21div<?php echo $i ?>">
 													<div class="panel panel-warning">
 														<div class="panel-heading">
 															<div class="row">
 																<div class="col-md-2">
 																	<label >Cont - Pedido - Local:</label><br>
-																	<span><?php echo $i ?>/<?php echo $count['PRCount'] ?>
+																	<span><?php echo $contagem ?>
 																		- <?php echo $orcamento[$i]['idApp_OrcaTrata'] ?>
 																		
 																		- <?php if($_SESSION['Orcamento'][$i]['Tipo_Orca'] == "O") {

@@ -4,7 +4,7 @@
 		<div class="col-md-12 ">
 			<div class="row">
 				<div class="col-md-12 col-lg-12">
-					<?php #echo validation_errors(); ?>
+					<?php echo validation_errors(); ?>
 					<?php echo form_open_multipart($form_open_path); ?>
 
 					<div class="panel panel-<?php echo $panel; ?>">
@@ -20,11 +20,11 @@
 									<div class="col-md-2 text-left">	
 										<br>
 										<a type= "button" class="btn btn-md btn-warning btn-block" role="button">
-											<?php echo $total_rows;?> Resultados
+											<?php echo $_SESSION['Total_Rows'];?> Resultados
 										</a>
 									</div>
 									<div class="col-md-6 text-left">
-										<?php echo $pagination; ?>
+										<?php echo $_SESSION['Pagination']; ?>
 									</div>
 								</div>
 							</div>
@@ -45,7 +45,7 @@
 											<div class="input_fields_wrap21">
 
 											<?php
-											$linha =  $per_page*$pagina;
+											$linha =  $_SESSION['Per_Page']*$_SESSION['Pagina'];
 											for ($i=1; $i <= $count['PRCount']; $i++) {
 												$contagem = ($linha + $i);
 											?>

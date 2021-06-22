@@ -13,6 +13,7 @@ class Orcatrataprintcobranca_model extends CI_Model {
 
     //public function get_orcatrata($data) {
     public function get_orcatrata($data, $total = FALSE, $limit = FALSE, $start = FALSE, $date = FALSE) {		
+		
 		if ($_SESSION['FiltroAlteraParcela']['DataFim']) {
             $consulta =
 				'(OT.DataOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND OT.DataOrca <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '")';

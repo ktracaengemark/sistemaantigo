@@ -1584,9 +1584,9 @@ class Cliente extends CI_Controller {
 			$config['total_rows'] = $this->Cliente_model->get_alterarcashback($id, TRUE);
 		   
 			if($config['total_rows'] >= 1){
-				$data['total_rows'] = $config['total_rows'];
+				$_SESSION['Total_Rows'] = $data['total_rows'] = $config['total_rows'];
 			}else{
-				$data['total_rows'] = 0;
+				$_SESSION['Total_Rows'] = $data['total_rows'] = 0;
 			}
 			
 			$this->pagination->initialize($config);
@@ -1594,13 +1594,13 @@ class Cliente extends CI_Controller {
 			$_SESSION['Pagina'] = $data['pagina'] = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
 			$_SESSION['Per_Page'] = $data['per_page'] = $config['per_page'];
 			
-			$data['pagination'] = $this->pagination->create_links();		
+			$_SESSION['Pagination'] = $data['pagination'] = $this->pagination->create_links();		
 				
             #### Sis_Empresa ####
             $data['empresa'] = $this->Cliente_model->get_empresa($id);
 			
             #### App_OrcaTrata ####
-            $_SESSION['Orcamento'] = $data['orcamento'] = $this->Cliente_model->get_alterarcashback($id, FALSE, $config['per_page'], ($data['pagina'] * $config['per_page']));
+            $_SESSION['Orcamento'] = $data['orcamento'] = $this->Cliente_model->get_alterarcashback($id, FALSE, $_SESSION['Per_Page'], ($_SESSION['Pagina'] * $_SESSION['Per_Page']));
             
 			if (count($data['orcamento']) > 0) {
                 $data['orcamento'] = array_combine(range(1, count($data['orcamento'])), array_values($data['orcamento']));

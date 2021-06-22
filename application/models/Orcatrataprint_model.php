@@ -13,7 +13,7 @@ class Orcatrataprint_model extends CI_Model {
         $this->load->model(array('Basico_model'));
     }
 
-    public function get_orcatrata_cliente($data) {
+    public function get_orcatrata_cliente($data, $total = FALSE, $limit = FALSE, $start = FALSE, $date = FALSE) {
 		
 		if ($_SESSION['FiltroAlteraParcela']['DataFim']) {
             $consulta =
@@ -127,6 +127,13 @@ class Orcatrataprint_model extends CI_Model {
         echo "</pre>";
         //exit ();		
 		*/
+
+        if ($limit){
+			$querylimit = 'LIMIT ' . $start . ', ' . $limit;
+		}else{
+			$querylimit = '';
+		}
+		
 		$query = $this->db->query(
             'SELECT
 				C.NomeCliente,
@@ -221,8 +228,14 @@ class Orcatrataprint_model extends CI_Model {
 			' . $groupby . '
             ORDER BY
 				' . $permissao60 . '
-				' . $permissao61 . ' 		
+				' . $permissao61 . ' 
+			' . $querylimit . ' 		
         ');
+	
+		if($total == TRUE) {
+			return $query->num_rows();
+		}
+				
         $query = $query->result_array();
 
         /*

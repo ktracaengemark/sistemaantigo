@@ -89,6 +89,6 @@
 				</tbody>
 			</table>
 		</div>
-		<?php } else echo '<h3 class="text-center">Nenhum Orçamento Filtrado!</h3>';{?>
+	<?php } else echo '<h3 class="text-center">Nenhum Orçamento Filtrado!</h3>';{?>
 	<?php } ?>
 </div>	

@@ -40,10 +40,10 @@
 					<span class="input-group-addon">R$</span>
 					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somareceber ?>">
 				</div>
-			</div>
+			</div>	
 		</div>	
-		<div class="row">	
-			<div class="col-md-5 text-left">
+		<div class="row">
+			<div class="col-md-4 text-left">
 				<?php echo $pagination; ?>
 			</div>
 			<?php if($paginacao == "S") { ?>

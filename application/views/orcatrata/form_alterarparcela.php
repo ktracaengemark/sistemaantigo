@@ -32,11 +32,11 @@
 									<div class="col-md-2 text-left">	
 										<br>
 										<a type= "button" class="btn btn-md btn-warning btn-block" role="button">
-											<?php echo $total_rows;?> Resultados
+											<?php echo $_SESSION['Total_Rows'];?> Resultados
 										</a>
 									</div>
 									<div class="col-md-6 text-left">
-										<?php echo $pagination; ?>
+										<?php echo $_SESSION['Pagination']; ?>
 									</div>
 								</div>
 							</div>
@@ -52,7 +52,7 @@
 												<input type="hidden" name="PRCount" id="PRCount" value="<?php echo $count['PRCount']; ?>"/>
 
 												<?php
-												$linha =  $per_page*$pagina;
+												$linha =  $_SESSION['Per_Page']*$_SESSION['Pagina'];
 												for ($i=1; $i <= $count['PRCount']; $i++) {
 													$contagem = ($linha + $i);
 												?>

@@ -14173,7 +14173,7 @@ class Orcatrata extends CI_Controller {
             $data['empresa'] = $this->Orcatrata_model->get_orcatrataalterar($id);
 
             #### App_OrcaTrata ####
-            $_SESSION['Orcamento'] = $data['orcamento'] = $this->Orcatrata_model->get_alterarorcamentos($id, FALSE, $config['per_page'], ($data['pagina'] * $config['per_page']));
+            $_SESSION['Orcamento'] = $data['orcamento'] = $this->Orcatrata_model->get_alterarorcamentos($id, FALSE, $_SESSION['Per_Page'], ($_SESSION['Pagina'] * $_SESSION['Per_Page']));
             if (count($data['orcamento']) > 0) {
                 $data['orcamento'] = array_combine(range(1, count($data['orcamento'])), array_values($data['orcamento']));
 				$data['count']['PRCount'] = count($data['orcamento']);
@@ -14753,8 +14753,6 @@ class Orcatrata extends CI_Controller {
 			
         ), TRUE));
 
-        //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
-        //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
 		//(!$data['query']['DataPagoComissãoPadrao']) ? $data['query']['DataPagoComissãoPadrao'] = date('d/m/Y', time()) : FALSE;
 		(!$this->input->post('PRCount')) ? $data['count']['PRCount'] = 0 : $data['count']['PRCount'] = $this->input->post('PRCount');
 		
@@ -14782,15 +14780,52 @@ class Orcatrata extends CI_Controller {
 		
 		$data['count']['PRCount'] = $j - 1;
 
-        //Fim do trecho de código que dá pra melhorar
+		//$this->load->library('pagination');
+		$config['per_page'] = 10;
+		$config["uri_segment"] = 4;
+		$config['reuse_query_string'] = TRUE;
+		$config['num_links'] = 2;
+		$config['use_page_numbers'] = TRUE;
+		$config['full_tag_open'] = "<ul class='pagination'>";
+		$config['full_tag_close'] = "</ul>";
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+		$config['next_tag_open'] = "<li>";
+		$config['next_tagl_close'] = "</li>";
+		$config['prev_tag_open'] = "<li>";
+		$config['prev_tagl_close'] = "</li>";
+		$config['first_tag_open'] = "<li>";
+		$config['first_tagl_close'] = "</li>";
+		$config['last_tag_open'] = "<li>";
+		$config['last_tagl_close'] = "</li>";
+		$data['Pesquisa'] = '';
+		
 		$data['somatotal'] = 0;
         if ($id) {
-            
+		
+			$config['base_url'] = base_url() . 'Orcatrata/baixadacomissao/' . $id . '/';
+			$config['total_rows'] = $this->Orcatrata_model->get_baixadacomissao($id, TRUE);
+		   
+			if($config['total_rows'] >= 1){
+				$_SESSION['Total_Rows'] = $data['total_rows'] = $config['total_rows'];
+			}else{
+				$_SESSION['Total_Rows'] = $data['total_rows'] = 0;
+			}
+			
+			$this->pagination->initialize($config);
+			
+			$_SESSION['Pagina'] = $data['pagina'] = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+			$_SESSION['Per_Page'] = $data['per_page'] = $config['per_page'];
+			
+			$_SESSION['Pagination'] = $data['pagination'] = $this->pagination->create_links();		
+		            
 			#### Sis_Empresa ####
             $data['empresa'] = $this->Orcatrata_model->get_orcatrataalterar($id);
 
             #### App_Parcelas ####
-            $_SESSION['Orcamento'] = $data['orcamento'] = $this->Orcatrata_model->get_baixadacomissao($id);
+            $_SESSION['Orcamento'] = $data['orcamento'] = $this->Orcatrata_model->get_baixadacomissao($id, FALSE, $_SESSION['Per_Page'], ($_SESSION['Pagina'] * $_SESSION['Per_Page']));
             if (count($data['orcamento']) > 0) {
                 $data['orcamento'] = array_combine(range(1, count($data['orcamento'])), array_values($data['orcamento']));
 				$data['count']['PRCount'] = count($data['orcamento']);
@@ -14815,7 +14850,7 @@ class Orcatrata extends CI_Controller {
                     
 					}
 					
-					$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+					$_SESSION['SomaTotal'] = $data['somatotal'] = number_format($data['somatotal'],2,",",".");
                 }
             }
 
@@ -14827,13 +14862,7 @@ class Orcatrata extends CI_Controller {
           echo "</pre>";
           exit ();
 		*/
-		
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-        #### Sis_Empresa ####
-        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'trim');
-		$this->form_validation->set_rules('DataPagoComissãoPadrao', 'Data do Pagamento', 'required|trim|valid_date');
-		
 		$data['select']['QuitadoComissão'] = $this->Basico_model->select_status_sn();
         $data['select']['StatusComissaoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
@@ -14869,7 +14898,12 @@ class Orcatrata extends CI_Controller {
 
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
-
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #### Sis_Empresa ####
+        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'trim');
+		$this->form_validation->set_rules('DataPagoComissãoPadrao', 'Data do Pagamento', 'required|trim|valid_date');
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('orcatrata/form_baixadacomissao', $data);
@@ -14891,7 +14925,7 @@ class Orcatrata extends CI_Controller {
 			$data['query']['DataPagoComissãoPadrao'] = $this->basico->mascara_data($data['query']['DataPagoComissãoPadrao'], 'mysql');            
 
             #### App_ParcelasRec ####
-            $data['update']['orcamento']['anterior'] = $this->Orcatrata_model->get_baixadacomissao($data['empresa']['idSis_Empresa']);
+            $data['update']['orcamento']['anterior'] = $this->Orcatrata_model->get_baixadacomissao($data['empresa']['idSis_Empresa'], FALSE, $_SESSION['Per_Page'], ($_SESSION['Pagina'] * $_SESSION['Per_Page']));
             if (isset($data['orcamento']) || (!isset($data['orcamento']) && isset($data['update']['orcamento']['anterior']) ) ) {
 
                 if (isset($data['orcamento']))
@@ -15003,8 +15037,6 @@ class Orcatrata extends CI_Controller {
 			
         ), TRUE));
 
-        //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
-        //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
 		//(!$data['query']['DataPagoComissãoPadrao']) ? $data['query']['DataPagoComissãoPadrao'] = date('d/m/Y', time()) : FALSE;
 		(!$this->input->post('PRCount')) ? $data['count']['PRCount'] = 0 : $data['count']['PRCount'] = $this->input->post('PRCount');
 		
@@ -15031,15 +15063,52 @@ class Orcatrata extends CI_Controller {
 		
 		$data['count']['PRCount'] = $j - 1;
 
-        //Fim do trecho de código que dá pra melhorar
+		//$this->load->library('pagination');
+		$config['per_page'] = 10;
+		$config["uri_segment"] = 4;
+		$config['reuse_query_string'] = TRUE;
+		$config['num_links'] = 2;
+		$config['use_page_numbers'] = TRUE;
+		$config['full_tag_open'] = "<ul class='pagination'>";
+		$config['full_tag_close'] = "</ul>";
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+		$config['next_tag_open'] = "<li>";
+		$config['next_tagl_close'] = "</li>";
+		$config['prev_tag_open'] = "<li>";
+		$config['prev_tagl_close'] = "</li>";
+		$config['first_tag_open'] = "<li>";
+		$config['first_tagl_close'] = "</li>";
+		$config['last_tag_open'] = "<li>";
+		$config['last_tagl_close'] = "</li>";
+		$data['Pesquisa'] = '';
+		
 		$data['somatotal'] = 0;
         if ($id) {
+		
+			$config['base_url'] = base_url() . 'Orcatrata/baixadacomissao_online/' . $id . '/';
+			$config['total_rows'] = $this->Orcatrata_model->get_baixadacomissao($id, TRUE);
+		   
+			if($config['total_rows'] >= 1){
+				$_SESSION['Total_Rows'] = $data['total_rows'] = $config['total_rows'];
+			}else{
+				$_SESSION['Total_Rows'] = $data['total_rows'] = 0;
+			}
+			
+			$this->pagination->initialize($config);
+			
+			$_SESSION['Pagina'] = $data['pagina'] = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+			$_SESSION['Per_Page'] = $data['per_page'] = $config['per_page'];
+			
+			$_SESSION['Pagination'] = $data['pagination'] = $this->pagination->create_links();		
+		     		
             #### Sis_Empresa ####
             $data['empresa'] = $this->Orcatrata_model->get_orcatrataalterar($id);
 
-
             #### App_Parcelas ####
-            $_SESSION['Orcamento'] = $data['orcamento'] = $this->Orcatrata_model->get_baixadacomissao($id);
+            $_SESSION['Orcamento'] = $data['orcamento'] = $this->Orcatrata_model->get_baixadacomissao($id, FALSE, $_SESSION['Per_Page'], ($_SESSION['Pagina'] * $_SESSION['Per_Page']));
             if (count($data['orcamento']) > 0) {
                 $data['orcamento'] = array_combine(range(1, count($data['orcamento'])), array_values($data['orcamento']));
 				$data['count']['PRCount'] = count($data['orcamento']);
@@ -15064,7 +15133,7 @@ class Orcatrata extends CI_Controller {
                     
 					}
 					
-					$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+					$_SESSION['SomaTotal'] = $data['somatotal'] = number_format($data['somatotal'],2,",",".");
                 }
             }
 
@@ -15148,7 +15217,7 @@ class Orcatrata extends CI_Controller {
 			$data['query']['DataPagoComissãoPadrao'] = $this->basico->mascara_data($data['query']['DataPagoComissãoPadrao'], 'mysql'); 
 
             #### App_OrcaTrata ####
-            $data['update']['orcamento']['anterior'] = $this->Orcatrata_model->get_baixadacomissao($data['empresa']['idSis_Empresa']);
+            $data['update']['orcamento']['anterior'] = $this->Orcatrata_model->get_baixadacomissao($data['empresa']['idSis_Empresa'], FALSE, $_SESSION['Per_Page'], ($_SESSION['Pagina'] * $_SESSION['Per_Page']));
             if (isset($data['orcamento']) || (!isset($data['orcamento']) && isset($data['update']['orcamento']['anterior']) ) ) {
 
                 if (isset($data['orcamento']))
@@ -15646,9 +15715,9 @@ class Orcatrata extends CI_Controller {
 			$config['total_rows'] = $this->Orcatrata_model->get_alterarparcela($id, TRUE);
 		   
 			if($config['total_rows'] >= 1){
-				$data['total_rows'] = $config['total_rows'];
+				$_SESSION['Total_Rows'] = $data['total_rows'] = $config['total_rows'];
 			}else{
-				$data['total_rows'] = 0;
+				$_SESSION['Total_Rows'] = $data['total_rows'] = 0;
 			}
 			
 			$this->pagination->initialize($config);
@@ -15656,7 +15725,7 @@ class Orcatrata extends CI_Controller {
 			$_SESSION['Pagina'] = $data['pagina'] = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
 			$_SESSION['Per_Page'] = $data['per_page'] = $config['per_page'];
 			
-			$data['pagination'] = $this->pagination->create_links();		
+			$_SESSION['Pagination'] = $data['pagination'] = $this->pagination->create_links();		
 		
 			#### Sis_Empresa ####
             $data['empresa'] = $this->Orcatrata_model->get_orcatrataalterar($id);
@@ -16093,9 +16162,9 @@ class Orcatrata extends CI_Controller {
 			$config['total_rows'] = $this->Orcatrata_model->get_alterarparcela($id, TRUE);
 		   
 			if($config['total_rows'] >= 1){
-				$data['total_rows'] = $config['total_rows'];
+				$_SESSION['Total_Rows'] = $data['total_rows'] = $config['total_rows'];
 			}else{
-				$data['total_rows'] = 0;
+				$_SESSION['Total_Rows'] = $data['total_rows'] = 0;
 			}
 			
 			$this->pagination->initialize($config);
@@ -16103,7 +16172,7 @@ class Orcatrata extends CI_Controller {
 			$_SESSION['Pagina'] = $data['pagina'] = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
 			$_SESSION['Per_Page'] = $data['per_page'] = $config['per_page'];
 			
-			$data['pagination'] = $this->pagination->create_links();		
+			$_SESSION['Pagination'] = $data['pagination'] = $this->pagination->create_links();		
 				
             #### Sis_Empresa ####
             $data['empresa'] = $this->Orcatrata_model->get_orcatrataalterar($id);

@@ -518,7 +518,7 @@ class Relatorio_model extends CI_Model {
             ORDER BY
 				' . $data['Campo'] . '
 				' . $data['Ordenamento'] . '
-				' . $querylimit . '
+			' . $querylimit . '
         ');
 		
 		#echo $this->db->last_query();

@@ -4,42 +4,26 @@
 <div class="col-md-3"></div>
 <div class="col-md-6">	
 	<nav class="navbar navbar-inverse navbar-fixed" role="banner">
-	  <div class="container-fluid">
-		<div class="navbar-header">
-			<div class="btn-line " role="group" aria-label="...">	
+		<div class="container-fluid">
+			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				</button>
-				<a type="button" class="btn btn-md btn-default " href="javascript:window.print()">
-					<span class="glyphicon glyphicon-print"></span> Imprimir
-				</a>
-				<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . $form_open_path . $_SESSION['log']['idSis_Empresa']; ?>">
-					<span class="glyphicon glyphicon-pencil"></span> Editar
-				</a>
+				<div class="navbar-brand btn-group">
+					<a type="button" class="col-md-4 btn btn-md btn-default " href="javascript:window.print()">
+						<span class="glyphicon glyphicon-print"></span>
+					</a>
+					<a type="button" class="col-md-8 btn btn-md btn-warning "  href="<?php echo base_url() . $form_open_path . $_SESSION['log']['idSis_Empresa'];?>">
+						<span class="glyphicon glyphicon-pencil"></span> Editar
+					</a>
+				</div>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<?php echo $pagination; ?>
 			</div>
 		</div>
-		<div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav navbar-center">
-				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
-					<div class="btn-group " role="group" aria-label="...">
-						<!--
-						<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . $comissao; ?>">
-							<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo; ?>
-						</a>
-						
-						<a href="javascript:window.print()">
-							<button type="button" class="btn btn-md btn-default ">
-								<span class="glyphicon glyphicon-print"></span> Imprimir
-							</button>
-						</a>
-						-->
-					</div>
-				</li>
-			</ul>
-		</div>
-	  </div>
 	</nav>	
 	<?php if( isset($count['POCount']) ) { ?>
 		<div style="overflow: auto; height: auto; ">
@@ -55,7 +39,7 @@
 			<table class="table table-bordered table-condensed table-striped">
 				<thead>
 					<tr>
-						<th class="col-md-1" scope="col">cont: <?php echo $count['POCount'] ?></th>
+						<th class="col-md-1" scope="col">cont: <?php echo $total_rows;?></th>
 						<th class="col-md-1" scope="col">Pedido</th>
 						<th class="col-md-1" scope="col">Local</th>
 						<th class="col-md-2" scope="col">Nome</th>
@@ -65,11 +49,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php 
-					for ($i=1; $i <= $count['POCount']; $i++) { 
-					?>
+					<?php
+						$linha =  $per_page*$pagina;
+						for ($i=1; $i <= $count['POCount']; $i++) {
+							$contagem = ($linha + $i);
+						?>
 						<tr>
-							<td class="col-md-1" scope="col"><?php echo $i ?></td>
+							<td class="col-md-1" scope="col"><?php echo $contagem ?></td>
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['idApp_OrcaTrata'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['Tipo_Orca'] ?></td>
 							<td class="col-md-2" scope="col"><?php echo $orcatrata[$i][$nome] ?></td>
@@ -77,14 +63,14 @@
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['ValorComissao'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i][$status] ?></td>
 						</tr>
-					
-					<?php
-					}
+						
+						<?php
+						}
 					?>
 				</tbody>
 			</table>
 		</div>
-	<?php } else echo '<h3 class="text-center">Nenhum Orçamento Filtrado!</h3>';{?>
+		<?php } else echo '<h3 class="text-center">Nenhum Orçamento Filtrado!</h3>';{?>
 	<?php } ?>		
-
-</div>	
+	
+</div>					

@@ -55,7 +55,6 @@
 											for ($i=1; $i <= $count['PRCount']; $i++) {
 												$contagem = ($linha + $i);
 											?>
-
 												<input type="hidden" name="idApp_OrcaTrata<?php echo $i ?>" value="<?php echo $orcamento[$i]['idApp_OrcaTrata']; ?>"/>
 												<div class="form-group" id="21div<?php echo $i ?>">
 													<div class="panel panel-warning">
