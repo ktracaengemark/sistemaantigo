@@ -1368,7 +1368,8 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 	
-    public function get_baixadacomissaoservico($data) {
+    public function get_baixadacomissaoservico($data, $total = FALSE, $limit = FALSE, $start = FALSE, $date = FALSE) {
+		
 		$date_inicio_orca 		= ($_SESSION['FiltroAlteraParcela']['DataInicio']) ? 'OT.DataOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND ' : FALSE;
 		$date_fim_orca 			= ($_SESSION['FiltroAlteraParcela']['DataFim']) ? 'OT.DataOrca <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '" AND ' : FALSE;
 		
@@ -1409,6 +1410,12 @@ class Orcatrata_model extends CI_Model {
 		$groupby 				= (1 == 1) ? 'GROUP BY PRDS.idApp_Produto' : FALSE;
 		$Campo 					= (!$_SESSION['FiltroAlteraParcela']['Campo']) ? 'OT.DataOrca' : $_SESSION['FiltroAlteraParcela']['Campo'];
         $Ordenamento 			= (!$_SESSION['FiltroAlteraParcela']['Ordenamento']) ? 'ASC' : $_SESSION['FiltroAlteraParcela']['Ordenamento'];        
+
+        if ($limit){
+			$querylimit = 'LIMIT ' . $start . ', ' . $limit;
+		}else{
+			$querylimit = '';
+		}
 
 		$query = $this->db->query(
             'SELECT
@@ -1560,8 +1567,13 @@ class Orcatrata_model extends CI_Model {
 			ORDER BY
 				' . $Campo . '
                 ' . $Ordenamento . '
+			' . $querylimit . '
 		');
-
+	
+		if($total == TRUE) {
+			return $query->num_rows();
+		}	
+			
         $query = $query->result_array();
 
         return $query;

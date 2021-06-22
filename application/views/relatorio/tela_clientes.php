@@ -1,12 +1,19 @@
 <?php if (isset($msg)) echo $msg; ?>
 <div class="col-md-12 ">
-<?php echo form_open('relatorio/clientes', 'role="form"'); ?>	
+<?php #echo form_open('relatorio/clientes', 'role="form"'); ?>
+<?php echo form_open($form_open_path, 'role="form"'); ?>	
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<div class="btn-group " role="group" aria-label="...">
-				<div class="row text-left">	
-					<div class="col-md-12">
+		<?php if($paginacao == "N") { ?>
+			<div class="panel-heading">
+				<div class="btn-group " role="group" aria-label="...">
+					<div class="row text-left">
+						<div class="col-md-2 text-left">
+							<label></label><br>
+							<button  class="btn btn-md btn-warning btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+								<span class="glyphicon glyphicon-filter"></span>Filtros
+							</button>
+						</div>
 						<div class="col-md-8 text-left">
 							<label  id="NomeClienteAuto1">Cliente: <?php echo $cadastrar['NomeClienteAuto']; ?></label>
 							<div class="input-group">
@@ -21,25 +28,17 @@
 								<input type="hidden" name="idApp_Cliente" id="idApp_Cliente" value="<?php echo $query['idApp_Cliente']; ?>" class="form-control" readonly= "">
 							</div>
 						</div>
-						<div class="col-md-4 text-left">
-							<label></label><br>
-							<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-								<span class="glyphicon glyphicon-filter"></span>Filtro de Clientes
-							</button>
-						</div>
-						
 						<!--
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 							<span class="glyphicon glyphicon-plus"></span> Novo Cliente
 						</button>
 						-->
 					</div>
-				</div>	
-			</div>			
-		</div>		
+				</div>
+			</div>
+		<?php } ?>
 		<?php echo (isset($list)) ? $list : FALSE ?>	
 	</div>
-
 </div>
 
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">

@@ -52,6 +52,190 @@ class Relatorio_pag extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
+	public function agendamentos_pag() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+        ), TRUE));	
+		
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            'idApp_Consulta',
+			'idApp_Cliente',
+			'idApp_ClientePet',
+			'idApp_ClienteDep',
+            'DataInicio',
+            'DataFim',
+			'Ordenamento',
+            'Campo',
+        ), TRUE));
+
+		$data['query']['nome'] = 'Cliente';
+        $data['titulo1'] = 'Lista de Agendamentos';
+		$data['metodo'] = 2;
+		$data['form_open_path'] = 'relatorio_pag/agendamentos_pag';
+		$data['panel'] = 'info';
+		$data['Data'] = 'Data';
+		$data['TipoRD'] = 2;
+        $data['nome'] = 'Cliente';
+		$data['editar'] = 1;
+		$data['print'] = 1;
+		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
+		$data['imprimirlista'] = 'ConsultaPrint/imprimirlista/';
+		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
+		$data['edit'] = 'Consulta/alterar/';
+		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
+		$data['paginacao'] = 'S';
+		$data['caminho'] = 'relatorio/list_agendamentos/';	
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+
+			//$this->load->library('pagination');
+			$config['per_page'] = 10;
+			$config["uri_segment"] = 3;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+			$data['Pesquisa'] = '';
+			
+			$config['base_url'] = base_url() . 'relatorio_pag/agendamentos_pag/';
+			$config['total_rows'] = $this->Relatorio_model->list_agendamentos(FALSE, TRUE, TRUE);
+           
+			if($config['total_rows'] >= 1){
+				$data['total_rows'] = $config['total_rows'];
+			}else{
+				$data['total_rows'] = 0;
+			}
+			
+            $this->pagination->initialize($config);
+            
+			$page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+            $data['pagina'] = $page;
+			$data['per_page'] = $config['per_page'];
+			$data['report'] = $this->Relatorio_model->list_agendamentos(FALSE, TRUE, FALSE, $config['per_page'], ($page * $config['per_page']));			
+			$data['pagination'] = $this->pagination->create_links();
+			
+            $data['list1'] = $this->load->view('relatorio/list_agendamentos', $data, TRUE);
+        }
+
+        $this->load->view('relatorio/tela_agendamentos', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+
+    public function clientes_pag() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'id_Cliente_Auto',
+			'NomeClienteAuto',
+		), TRUE));	
+		
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            //'NomeCliente',
+			'idApp_Cliente',
+			'Ativo',
+			'Motivo',
+            'Ordenamento',
+            'Campo',
+			'DataInicio',
+            'DataFim',
+			'Dia',
+			'Mesvenc',
+			'Ano',
+        ), TRUE));
+
+        $data['titulo'] = 'Clientes';
+		$data['form_open_path'] = 'relatorio_pag/clientes_pag';
+		
+		$data['paginacao'] = 'S';
+		$data['caminho'] = 'relatorio/clientes/';
+        
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+
+			//$this->load->library('pagination');
+			$config['per_page'] = 10;
+			$config["uri_segment"] = 3;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+			$data['Pesquisa'] = '';
+			
+			$config['base_url'] = base_url() . 'relatorio_pag/clientes_pag/';
+			$config['total_rows'] = $this->Relatorio_model->list_clientes(FALSE, TRUE, TRUE);
+           
+			if($config['total_rows'] >= 1){
+				$data['total_rows'] = $config['total_rows'];
+			}else{
+				$data['total_rows'] = 0;
+			}
+			
+            $this->pagination->initialize($config);
+            
+			$page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+            $data['pagina'] = $page;
+			$data['per_page'] = $config['per_page'];
+			$data['report'] = $this->Relatorio_model->list_clientes(FALSE, TRUE, FALSE, $config['per_page'], ($page * $config['per_page']));			
+			$data['pagination'] = $this->pagination->create_links();
+
+
+            $data['list'] = $this->load->view('relatorio/list_clientes', $data, TRUE);
+        }
+
+        $this->load->view('relatorio/tela_clientes', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+
 	public function receitas_pag() {
 
         if ($this->input->get('m') == 1)

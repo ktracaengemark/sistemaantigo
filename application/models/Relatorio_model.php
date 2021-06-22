@@ -13,35 +13,44 @@ class Relatorio_model extends CI_Model {
         $this->load->model(array('Basico_model'));
     }
 
-	public function list_agendamentos($data, $completo) {
+	public function list_agendamentos($data, $completo, $total = FALSE, $limit = FALSE, $start = FALSE, $date = FALSE) {
 
-		$cliente 	= ($data['idApp_Cliente']) ? ' AND CO.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;
-		$clientepet = ($_SESSION['Empresa']['CadastrarPet'] == "S" && $data['idApp_ClientePet']) ? ' AND CO.idApp_ClientePet = ' . $data['idApp_ClientePet'] : FALSE;
-		$clientedep = ($_SESSION['Empresa']['CadastrarDep'] == "S" && $data['idApp_ClienteDep']) ? ' AND CO.idApp_ClienteDep = ' . $data['idApp_ClienteDep'] : FALSE;
+		if($data != FALSE){
+	
+			$cliente 	= ($data['idApp_Cliente']) ? ' AND CO.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;
+			$clientepet = ($_SESSION['Empresa']['CadastrarPet'] == "S" && $data['idApp_ClientePet']) ? ' AND CO.idApp_ClientePet = ' . $data['idApp_ClientePet'] : FALSE;
+			$clientedep = ($_SESSION['Empresa']['CadastrarDep'] == "S" && $data['idApp_ClienteDep']) ? ' AND CO.idApp_ClienteDep = ' . $data['idApp_ClienteDep'] : FALSE;
 
-		$campo 			= (!$data['Campo']) ? 'CO.DataInicio' : $data['Campo'];
-        $ordenamento 	= (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+			$campo 			= (!$data['Campo']) ? 'CO.DataInicio' : $data['Campo'];
+			$ordenamento 	= (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 
-		($data['DataInicio']) ? $date_inicio = $data['DataInicio'] : FALSE;
-		($data['DataFim']) ? $date_fim = date('Y-m-d', strtotime('+1 days', strtotime($data['DataFim']))) : FALSE;
+			($data['DataInicio']) ? $date_inicio = $data['DataInicio'] : FALSE;
+			($data['DataFim']) ? $date_fim = date('Y-m-d', strtotime('+1 days', strtotime($data['DataFim']))) : FALSE;
+			
+			$date_inicio_orca 	= ($data['DataInicio']) ? 'DataInicio >= "' . $date_inicio . '" AND ' : FALSE;
+			$date_fim_orca 		= ($data['DataFim']) ? 'DataInicio <= "' . $date_fim . '" AND ' : FALSE;		
 		
-		$date_inicio_orca 	= ($data['DataInicio']) ? 'DataInicio >= "' . $date_inicio . '" AND ' : FALSE;
-		$date_fim_orca 		= ($data['DataFim']) ? 'DataInicio <= "' . $date_fim . '" AND ' : FALSE;		
-		
-		/*
-		//echo $this->db->last_query();
-	  echo "<pre>";
-	  print_r($clientepet);
-	  echo "<br>";
-	  print_r($clientedep);
-	  echo "<br>";
-	  //print_r($date_inicio_orca);
-	  echo "<br>";
-	  //print_r($date_fim_orca);
-	  echo "</pre>";
-	  //exit();
-		*/
-		
+		}else{
+	
+			$cliente 	= ($_SESSION['Agendamentos']['idApp_Cliente']) ? ' AND CO.idApp_Cliente = ' . $_SESSION['Agendamentos']['idApp_Cliente'] : FALSE;
+			$clientepet = ($_SESSION['Empresa']['CadastrarPet'] == "S" && $_SESSION['Agendamentos']['idApp_ClientePet']) ? ' AND CO.idApp_ClientePet = ' . $_SESSION['Agendamentos']['idApp_ClientePet'] : FALSE;
+			$clientedep = ($_SESSION['Empresa']['CadastrarDep'] == "S" && $_SESSION['Agendamentos']['idApp_ClienteDep']) ? ' AND CO.idApp_ClienteDep = ' . $_SESSION['Agendamentos']['idApp_ClienteDep'] : FALSE;
+
+			$campo 			= (!$_SESSION['Agendamentos']['Campo']) ? 'CO.DataInicio' : $_SESSION['Agendamentos']['Campo'];
+			$ordenamento 	= (!$_SESSION['Agendamentos']['Ordenamento']) ? 'ASC' : $_SESSION['Agendamentos']['Ordenamento'];
+
+			($_SESSION['Agendamentos']['DataInicio']) ? $date_inicio = $_SESSION['Agendamentos']['DataInicio'] : FALSE;
+			($_SESSION['Agendamentos']['DataFim']) ? $date_fim = date('Y-m-d', strtotime('+1 days', strtotime($_SESSION['Agendamentos']['DataFim']))) : FALSE;
+			
+			$date_inicio_orca 	= ($_SESSION['Agendamentos']['DataInicio']) ? 'DataInicio >= "' . $date_inicio . '" AND ' : FALSE;
+			$date_fim_orca 		= ($_SESSION['Agendamentos']['DataFim']) ? 'DataInicio <= "' . $date_fim . '" AND ' : FALSE;		
+				
+		}	
+
+		$querylimit = '';
+        if ($limit)
+            $querylimit = 'LIMIT ' . $start . ', ' . $limit;
+				
 		$query = $this->db->query('
             SELECT
 				CO.*,
@@ -73,7 +82,12 @@ class Relatorio_model extends CI_Model {
 			ORDER BY
 				' . $campo . '
 				' . $ordenamento . '
-		');
+			' . $querylimit . '
+        ');
+
+		if($total == TRUE) {
+			return $query->num_rows();
+		}
 		
 			/*
 			  echo $this->db->last_query();
@@ -3603,25 +3617,47 @@ exit();*/
 
     }
 
-	public function list_clientes($data, $completo, $limit = null, $offset = null) {
+	public function list_clientes($data, $completo, $total = FALSE, $limit = FALSE, $start = FALSE, $date = FALSE) {
 
-		$date_inicio_orca = ($data['DataInicio']) ? 'C.DataCadastroCliente >= "' . $data['DataInicio'] . '" AND ' : FALSE;
-		$date_fim_orca = ($data['DataFim']) ? 'C.DataCadastroCliente <= "' . $data['DataFim'] . '" AND ' : FALSE;		
+		if($data != FALSE){
+				
+			$date_inicio_orca = ($data['DataInicio']) ? 'C.DataCadastroCliente >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+			$date_fim_orca = ($data['DataFim']) ? 'C.DataCadastroCliente <= "' . $data['DataFim'] . '" AND ' : FALSE;		
+			
+			$data['Dia'] = ($data['Dia']) ? ' AND DAY(C.DataNascimento) = ' . $data['Dia'] : FALSE;
+			$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(C.DataNascimento) = ' . $data['Mesvenc'] : FALSE;
+			$data['Ano'] = ($data['Ano']) ? ' AND YEAR(C.DataNascimento) = ' . $data['Ano'] : FALSE;
+			
+			//$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+			$data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND C.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;
+			$data['Campo'] = (!$data['Campo']) ? 'C.NomeCliente' : $data['Campo'];
+			$data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+			$filtro10 = ($data['Ativo'] != '#') ? 'C.Ativo = "' . $data['Ativo'] . '" AND ' : FALSE;
+			$filtro20 = ($data['Motivo'] != '0') ? 'C.Motivo = "' . $data['Motivo'] . '" AND ' : FALSE;
+			#$q = ($_SESSION['log']['Permissao'] > 2) ? ' C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
+	
+	}else{
+			
+			$date_inicio_orca = ($_SESSION['FiltroAlteraParcela']['DataInicio']) ? 'C.DataCadastroCliente >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND ' : FALSE;
+			$date_fim_orca = ($_SESSION['FiltroAlteraParcela']['DataFim']) ? 'C.DataCadastroCliente <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '" AND ' : FALSE;		
+			
+			$data['Dia'] = ($_SESSION['FiltroAlteraParcela']['Dia']) ? ' AND DAY(C.DataNascimento) = ' . $_SESSION['FiltroAlteraParcela']['Dia'] : FALSE;
+			$data['Mesvenc'] = ($_SESSION['FiltroAlteraParcela']['Mesvenc']) ? ' AND MONTH(C.DataNascimento) = ' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] : FALSE;
+			$data['Ano'] = ($_SESSION['FiltroAlteraParcela']['Ano']) ? ' AND YEAR(C.DataNascimento) = ' . $_SESSION['FiltroAlteraParcela']['Ano'] : FALSE;
+			
+			//$data['NomeCliente'] = ($_SESSION['FiltroAlteraParcela']['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $_SESSION['FiltroAlteraParcela']['NomeCliente'] : FALSE;
+			$data['idApp_Cliente'] = ($_SESSION['FiltroAlteraParcela']['idApp_Cliente']) ? ' AND C.idApp_Cliente = ' . $_SESSION['FiltroAlteraParcela']['idApp_Cliente'] : FALSE;
+			$data['Campo'] = (!$_SESSION['FiltroAlteraParcela']['Campo']) ? 'C.NomeCliente' : $_SESSION['FiltroAlteraParcela']['Campo'];
+			$data['Ordenamento'] = (!$_SESSION['FiltroAlteraParcela']['Ordenamento']) ? 'ASC' : $_SESSION['FiltroAlteraParcela']['Ordenamento'];
+			$filtro10 = ($_SESSION['FiltroAlteraParcela']['Ativo'] != '#') ? 'C.Ativo = "' . $_SESSION['FiltroAlteraParcela']['Ativo'] . '" AND ' : FALSE;
+			$filtro20 = ($_SESSION['FiltroAlteraParcela']['Motivo'] != '0') ? 'C.Motivo = "' . $_SESSION['FiltroAlteraParcela']['Motivo'] . '" AND ' : FALSE;
+			#$q = ($_SESSION['log']['Permissao'] > 2) ? ' C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
+	
+	}
 		
-		$data['Dia'] = ($data['Dia']) ? ' AND DAY(C.DataNascimento) = ' . $data['Dia'] : FALSE;
-		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(C.DataNascimento) = ' . $data['Mesvenc'] : FALSE;
-		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(C.DataNascimento) = ' . $data['Ano'] : FALSE;
-		
-        //$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-        $data['idApp_Cliente'] = ($data['idApp_Cliente']) ? ' AND C.idApp_Cliente = ' . $data['idApp_Cliente'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'C.NomeCliente' : $data['Campo'];
-        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-		$filtro10 = ($data['Ativo'] != '#') ? 'C.Ativo = "' . $data['Ativo'] . '" AND ' : FALSE;
-		$filtro20 = ($data['Motivo'] != '0') ? 'C.Motivo = "' . $data['Motivo'] . '" AND ' : FALSE;
-        #$q = ($_SESSION['log']['Permissao'] > 2) ? ' C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
-		
-		if($limit)
-			$this->db->limit($limit,$offset);
+		$querylimit = '';
+        if ($limit)
+            $querylimit = 'LIMIT ' . $start . ', ' . $limit;
 		
 		$query = $this->db->query('
             SELECT
@@ -3664,24 +3700,16 @@ exit();*/
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . '
 				' . $data['Ano'] . '
-
             ORDER BY
-                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
-			
-			
+                ' . $data['Campo'] . '
+				' . $data['Ordenamento'] . '
+			' . $querylimit . '
         ');
-        /*
-		limit 3
-        #AND
-        #C.idApp_Cliente = OT.idApp_Cliente
 
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-        */
-
+		if($total == TRUE) {
+			return $query->num_rows();
+		}
+		
         if ($completo === FALSE) {
             return TRUE;
         } else {

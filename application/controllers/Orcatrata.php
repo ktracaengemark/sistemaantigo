@@ -15337,21 +15337,51 @@ class Orcatrata extends CI_Controller {
         }
 		$data['count']['PRCount'] = $j - 1;
 		
-
+		//$this->load->library('pagination');
+		$config['per_page'] = 10;
+		$config["uri_segment"] = 4;
+		$config['reuse_query_string'] = TRUE;
+		$config['num_links'] = 2;
+		$config['use_page_numbers'] = TRUE;
+		$config['full_tag_open'] = "<ul class='pagination'>";
+		$config['full_tag_close'] = "</ul>";
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+		$config['next_tag_open'] = "<li>";
+		$config['next_tagl_close'] = "</li>";
+		$config['prev_tag_open'] = "<li>";
+		$config['prev_tagl_close'] = "</li>";
+		$config['first_tag_open'] = "<li>";
+		$config['first_tagl_close'] = "</li>";
+		$config['last_tag_open'] = "<li>";
+		$config['last_tagl_close'] = "</li>";
+		$data['Pesquisa'] = '';
+		
         if ($id) {
-
+		
+			$config['base_url'] = base_url() . 'Orcatrata/baixadacomissaoservico/' . $id . '/';
+			$config['total_rows'] = $this->Orcatrata_model->get_baixadacomissaoservico($id, TRUE);
+		   
+			if($config['total_rows'] >= 1){
+				$_SESSION['Total_Rows'] = $data['total_rows'] = $config['total_rows'];
+			}else{
+				$_SESSION['Total_Rows'] = $data['total_rows'] = 0;
+			}
+			
+			$this->pagination->initialize($config);
+			
+			$_SESSION['Pagina'] = $data['pagina'] = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+			$_SESSION['Per_Page'] = $data['per_page'] = $config['per_page'];
+			
+			$_SESSION['Pagination'] = $data['pagination'] = $this->pagination->create_links();		
+		     	
 			#### Sis_Empresa ####
             $data['empresa'] = $this->Orcatrata_model->get_orcatrataalterar($id);
 			
             #### App_Produto ####
-            $data['produto'] = $this->Orcatrata_model->get_baixadacomissaoservico($id);
-         /*   
-		echo '<br>';
-		echo "<pre>";
-		print_r($data['produto']);
-		echo "</pre>";
-		exit();
-		*/
+            $data['produto'] = $this->Orcatrata_model->get_baixadacomissaoservico($id, FALSE, $_SESSION['Per_Page'], ($_SESSION['Pagina'] * $_SESSION['Per_Page']));
 			if (count($data['produto']) > 0) {
                 $data['produto'] = array_combine(range(1, count($data['produto'])), array_values($data['produto']));
 				$data['count']['PRCount'] = count($data['produto']);
@@ -15493,14 +15523,7 @@ class Orcatrata extends CI_Controller {
             }
 
         }
-		
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-        #### Sis_Empresa ####
-        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'trim');
-		if($data['query']['MostrarDataPagamento'] == 'S'){
-			$this->form_validation->set_rules('DataPagamento', 'Data do Pagamento', 'required|trim|valid_date');
-		}
 		$data['select']['QuitadoParcelas'] = $this->Basico_model->select_status_sn();
 		$data['select']['MostrarDataPagamento'] = $this->Basico_model->select_status_sn();
         $data['select']['StatusComissaoServico'] = $this->Basico_model->select_status_sn();
@@ -15551,7 +15574,15 @@ class Orcatrata extends CI_Controller {
         ($data['query']['MostrarDataPagamento'] == 'S') ?
             $data['div']['MostrarDataPagamento'] = '' : $data['div']['MostrarDataPagamento'] = 'style="display: none;"';
 
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
+        #### Sis_Empresa ####
+        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'trim');
+		if($data['query']['MostrarDataPagamento'] == 'S'){
+			$this->form_validation->set_rules('DataPagamento', 'Data do Pagamento', 'required|trim|valid_date');
+		}
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('orcatrata/form_baixacomissaoservico', $data);
@@ -15575,7 +15606,7 @@ class Orcatrata extends CI_Controller {
 			$data['query']['DataPagamento'] = $this->basico->mascara_data($data['query']['DataPagamento'], 'mysql');  
 
             #### App_Produto ####
-            $data['update']['produto']['anterior'] = $this->Orcatrata_model->get_baixadacomissaoservico($data['empresa']['idSis_Empresa']);
+            $data['update']['produto']['anterior'] = $this->Orcatrata_model->get_baixadacomissaoservico($data['empresa']['idSis_Empresa'], FALSE, $_SESSION['Per_Page'], ($_SESSION['Pagina'] * $_SESSION['Per_Page']));
 			if (isset($data['produto']) || (!isset($data['produto']) && isset($data['update']['produto']['anterior']) ) ) {
 
                 if (isset($data['produto']))
@@ -15615,7 +15646,7 @@ class Orcatrata extends CI_Controller {
 			}
 			
 			$data['msg'] = '?m=1';
-			//redirect(base_url() . 'relatorio/cobrancas/' . $data['msg']);
+			
 			redirect(base_url() . 'orcatrata/baixadacomissaoservico/' . $_SESSION['log']['idSis_Empresa'] . $data['msg']);
 
 			exit();
