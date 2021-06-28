@@ -3,7 +3,6 @@
 <?php echo validation_errors(); ?>
 <div class="col-md-12">
 	<nav class="navbar navbar-inverse navbar-fixed" role="banner">
-		
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">

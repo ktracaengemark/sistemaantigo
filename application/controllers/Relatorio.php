@@ -4455,17 +4455,6 @@ class Relatorio extends CI_Controller {
             'TipoProcedimento',
 			'Agrupar',
         ), TRUE));		
-		
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
-		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
-		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
 
         $data['select']['ConcluidoProcedimento'] = array(
 			'#' => 'TODOS',
@@ -4530,7 +4519,16 @@ class Relatorio extends CI_Controller {
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
+		$data['paginacao'] = 'N';
 
+        $_SESSION['FiltroAlteraParcela']['DataInicio9'] = $this->basico->mascara_data($data['query']['DataInicio9'], 'mysql');
+		$_SESSION['FiltroAlteraParcela']['DataFim9'] = $this->basico->mascara_data($data['query']['DataFim9'], 'mysql');
+        $_SESSION['FiltroAlteraParcela']['DataInicio10'] = $this->basico->mascara_data($data['query']['DataInicio10'], 'mysql');
+		$_SESSION['FiltroAlteraParcela']['DataFim10'] = $this->basico->mascara_data($data['query']['DataFim10'], 'mysql');
+        $_SESSION['FiltroAlteraParcela']['HoraInicio9'] = $data['query']['HoraInicio9'];
+		$_SESSION['FiltroAlteraParcela']['HoraFim9'] = $data['query']['HoraFim9'];
+        $_SESSION['FiltroAlteraParcela']['HoraInicio10'] = $data['query']['HoraInicio10'];
+		$_SESSION['FiltroAlteraParcela']['HoraFim10'] = $data['query']['HoraFim10'];
 		$_SESSION['FiltroAlteraParcela']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
 		$_SESSION['FiltroAlteraParcela']['Sac'] = $data['query']['Sac'];
 		$_SESSION['FiltroAlteraParcela']['Marketing'] = $data['query']['Marketing'];
@@ -4541,7 +4539,26 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
-		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
+		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
+		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];	
+		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];	
+		$_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];
+		$_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
+		$_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
+		$_SESSION['FiltroAlteraParcela']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+		$_SESSION['FiltroAlteraParcela']['Compartilhar'] = $data['query']['Compartilhar'];	
+		$_SESSION['FiltroAlteraParcela']['Agrupar'] = $data['query']['Agrupar'];	
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
@@ -4574,15 +4591,45 @@ class Relatorio extends CI_Controller {
 			$data['bd']['HoraInicio10'] = $this->basico->mascara_data($data['query']['HoraInicio10'], 'mysql');
             $data['bd']['HoraFim10'] = $this->basico->mascara_data($data['query']['HoraFim10'], 'mysql');
 
-            $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
-
-            /*
-              echo "<pre>";
-              print_r($data['report']);
-              echo "</pre>";
-              exit();
-              */
-
+			//$this->load->library('pagination');
+			$config['per_page'] = 10;
+			$config["uri_segment"] = 3;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+			$data['Pesquisa'] = '';
+			
+			$config['base_url'] = base_url() . 'relatorio_pag/proc_receitas_pag/';
+			$config['total_rows'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE, TRUE);
+           
+			if($config['total_rows'] >= 1){
+				$data['total_rows'] = $config['total_rows'];
+			}else{
+				$data['total_rows'] = 0;
+			}
+			
+            $this->pagination->initialize($config);
+            
+			$page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+            $data['pagina'] = $page;
+			$data['per_page'] = $config['per_page'];
+			$data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'], TRUE, FALSE, $config['per_page'], ($page * $config['per_page']));			
+			$data['pagination'] = $this->pagination->create_links();
+			
             $data['list'] = $this->load->view('relatorio/list_procedimentos', $data, TRUE);
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
         }
@@ -4636,17 +4683,6 @@ class Relatorio extends CI_Controller {
             'TipoProcedimento',
 			'Agrupar',
         ), TRUE));			
-		
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
-		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
-		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
 
         $data['select']['ConcluidoProcedimento'] = array(
 			'#' => 'TODOS',
@@ -4711,7 +4747,16 @@ class Relatorio extends CI_Controller {
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
-
+		$data['paginacao'] = 'N';
+		
+        $_SESSION['FiltroAlteraParcela']['DataInicio9'] = $this->basico->mascara_data($data['query']['DataInicio9'], 'mysql');
+		$_SESSION['FiltroAlteraParcela']['DataFim9'] = $this->basico->mascara_data($data['query']['DataFim9'], 'mysql');
+        $_SESSION['FiltroAlteraParcela']['DataInicio10'] = $this->basico->mascara_data($data['query']['DataInicio10'], 'mysql');
+		$_SESSION['FiltroAlteraParcela']['DataFim10'] = $this->basico->mascara_data($data['query']['DataFim10'], 'mysql');
+        $_SESSION['FiltroAlteraParcela']['HoraInicio9'] = $data['query']['HoraInicio9'];
+		$_SESSION['FiltroAlteraParcela']['HoraFim9'] = $data['query']['HoraFim9'];
+        $_SESSION['FiltroAlteraParcela']['HoraInicio10'] = $data['query']['HoraInicio10'];
+		$_SESSION['FiltroAlteraParcela']['HoraFim10'] = $data['query']['HoraFim10'];
 		$_SESSION['FiltroAlteraParcela']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
 		$_SESSION['FiltroAlteraParcela']['Sac'] = $data['query']['Sac'];
 		$_SESSION['FiltroAlteraParcela']['Marketing'] = $data['query']['Marketing'];
@@ -4722,7 +4767,26 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['idApp_Fornecedor'] = $data['query']['idApp_Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
-		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
+		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
+		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];	
+		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];	
+		$_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];
+		$_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
+		$_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
+		$_SESSION['FiltroAlteraParcela']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+		$_SESSION['FiltroAlteraParcela']['Compartilhar'] = $data['query']['Compartilhar'];	
+		$_SESSION['FiltroAlteraParcela']['Agrupar'] = $data['query']['Agrupar'];		
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
@@ -4755,8 +4819,45 @@ class Relatorio extends CI_Controller {
 			$data['bd']['HoraInicio10'] = $this->basico->mascara_data($data['query']['HoraInicio10'], 'mysql');
             $data['bd']['HoraFim10'] = $this->basico->mascara_data($data['query']['HoraFim10'], 'mysql');
 
-            $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
-
+			//$this->load->library('pagination');
+			$config['per_page'] = 10;
+			$config["uri_segment"] = 3;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+			$data['Pesquisa'] = '';
+			
+			$config['base_url'] = base_url() . 'relatorio_pag/proc_despesas_pag/';
+			$config['total_rows'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE, TRUE);
+           
+			if($config['total_rows'] >= 1){
+				$data['total_rows'] = $config['total_rows'];
+			}else{
+				$data['total_rows'] = 0;
+			}
+			
+            $this->pagination->initialize($config);
+            
+			$page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+            $data['pagina'] = $page;
+			$data['per_page'] = $config['per_page'];
+			$data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'], TRUE, FALSE, $config['per_page'], ($page * $config['per_page']));			
+			$data['pagination'] = $this->pagination->create_links();
+			
             /*
               echo "<pre>";
               print_r($data['report']);
@@ -4817,17 +4918,6 @@ class Relatorio extends CI_Controller {
             'TipoProcedimento',
 			'Agrupar',
         ), TRUE));		
-		
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
-		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
-		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
 
         $data['select']['ConcluidoProcedimento'] = array(
 			'#' => 'TODOS',
@@ -4893,6 +4983,7 @@ class Relatorio extends CI_Controller {
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
+		$data['paginacao'] = 'N';
 
 		$_SESSION['FiltroAlteraParcela']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
 		$_SESSION['FiltroAlteraParcela']['Sac'] = $data['query']['Sac'];
@@ -4917,7 +5008,21 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['HoraFim10'] = $data['query']['HoraFim10'];
 		$_SESSION['FiltroAlteraParcela']['Agrupar'] = $data['query']['Agrupar'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
-		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];			
+		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
+		$_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
+		$_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
+		$_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];			
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
@@ -4950,15 +5055,47 @@ class Relatorio extends CI_Controller {
 			$data['bd']['HoraInicio10'] = $this->basico->mascara_data($data['query']['HoraInicio10'], 'mysql');
             $data['bd']['HoraFim10'] = $this->basico->mascara_data($data['query']['HoraFim10'], 'mysql');
 
-            $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
+            //$data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 
-            /*
-              echo "<pre>";
-              print_r($data['report']);
-              echo "</pre>";
-              exit();
-              */
-
+			//$this->load->library('pagination');
+			$config['per_page'] = 10;
+			$config["uri_segment"] = 3;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+			$data['Pesquisa'] = '';
+			
+			$config['base_url'] = base_url() . 'relatorio_pag/proc_Sac_pag/';
+			$config['total_rows'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE, TRUE);
+           
+			if($config['total_rows'] >= 1){
+				$data['total_rows'] = $config['total_rows'];
+			}else{
+				$data['total_rows'] = 0;
+			}
+			
+            $this->pagination->initialize($config);
+            
+			$page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+            $data['pagina'] = $page;
+			$data['per_page'] = $config['per_page'];
+			$data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'], TRUE, FALSE, $config['per_page'], ($page * $config['per_page']));			
+			$data['pagination'] = $this->pagination->create_links();
+			
             $data['list'] = $this->load->view('relatorio/list_procedimentos', $data, TRUE);
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
         }
@@ -5012,17 +5149,6 @@ class Relatorio extends CI_Controller {
             'TipoProcedimento',
 			'Agrupar',
         ), TRUE));		
-		
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
-		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
-		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
-		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
 
         $data['select']['ConcluidoProcedimento'] = array(
 			'#' => 'TODOS',
@@ -5088,6 +5214,7 @@ class Relatorio extends CI_Controller {
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
+		$data['paginacao'] = 'N';
 
 		$_SESSION['FiltroAlteraParcela']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
 		$_SESSION['FiltroAlteraParcela']['Sac'] = $data['query']['Sac'];
@@ -5112,7 +5239,21 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['HoraFim10'] = $data['query']['HoraFim10'];
 		$_SESSION['FiltroAlteraParcela']['Agrupar'] = $data['query']['Agrupar'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
-		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];		
+		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
+		$_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
+		$_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
+		$_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];		
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
@@ -5145,15 +5286,47 @@ class Relatorio extends CI_Controller {
 			$data['bd']['HoraInicio10'] = $this->basico->mascara_data($data['query']['HoraInicio10'], 'mysql');
             $data['bd']['HoraFim10'] = $this->basico->mascara_data($data['query']['HoraFim10'], 'mysql');
 
-            $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
+            //$data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 
-            /*
-              echo "<pre>";
-              print_r($data['report']);
-              echo "</pre>";
-              exit();
-              */
-
+			//$this->load->library('pagination');
+			$config['per_page'] = 10;
+			$config["uri_segment"] = 3;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+			$data['Pesquisa'] = '';
+			
+			$config['base_url'] = base_url() . 'relatorio_pag/proc_Marketing_pag/';
+			$config['total_rows'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE, TRUE);
+           
+			if($config['total_rows'] >= 1){
+				$data['total_rows'] = $config['total_rows'];
+			}else{
+				$data['total_rows'] = 0;
+			}
+			
+            $this->pagination->initialize($config);
+            
+			$page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+            $data['pagina'] = $page;
+			$data['per_page'] = $config['per_page'];
+			$data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'], TRUE, FALSE, $config['per_page'], ($page * $config['per_page']));			
+			$data['pagination'] = $this->pagination->create_links();
+			
             $data['list'] = $this->load->view('relatorio/list_procedimentos', $data, TRUE);
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
         }
