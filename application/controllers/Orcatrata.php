@@ -758,6 +758,15 @@ class Orcatrata extends CI_Controller {
 		
 		$data['somatotal'] = floatval ($data['somatotal']);
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
+		
+		$epsilon = 0.001;
+
+		if(abs($data['diferenca']) < $epsilon){
+			$data['diferenca'] = 0.00;
+		}else{
+			$data['diferenca'] = $data['diferenca'];
+		}
+		
         $data['diferenca'] = floatval ($data['diferenca']);		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -767,11 +776,11 @@ class Orcatrata extends CI_Controller {
 		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
 			if($data['diferenca'] < 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
 			}elseif($data['diferenca'] > 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
 			}
 		}
@@ -2491,6 +2500,15 @@ class Orcatrata extends CI_Controller {
 
 		$data['somatotal'] = floatval ($data['somatotal']);
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
+		
+		$epsilon = 0.001;
+
+		if(abs($data['diferenca']) < $epsilon){
+			$data['diferenca'] = 0.00;
+		}else{
+			$data['diferenca'] = $data['diferenca'];
+		}
+		
         $data['diferenca'] = floatval ($data['diferenca']);		  
 		
 		$data['q3'] = $this->Clientepet_model->list_racapet(TRUE);
@@ -2503,11 +2521,11 @@ class Orcatrata extends CI_Controller {
 		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
 			if($data['diferenca'] < 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
 			}elseif($data['diferenca'] > 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
 			}
 		}
@@ -3805,8 +3823,16 @@ class Orcatrata extends CI_Controller {
 
 		$data['somatotal'] = floatval ($data['somatotal']);
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
-        $data['diferenca'] = floatval ($data['diferenca']);  
 		
+		$epsilon = 0.001;
+
+		if(abs($data['diferenca']) < $epsilon){
+			$data['diferenca'] = 0.00;
+		}else{
+			$data['diferenca'] = $data['diferenca'];
+		}
+		
+        $data['diferenca'] = floatval ($data['diferenca']);  
 		
 		$data['q3'] = $this->Clientepet_model->list_racapet(TRUE);
 		$data['list3'] = $this->load->view('clientepet/list_racapet', $data, TRUE);
@@ -3818,11 +3844,11 @@ class Orcatrata extends CI_Controller {
 		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
 			if($data['diferenca'] < 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
 			}elseif($data['diferenca'] > 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
 			}
 		}
@@ -4752,34 +4778,36 @@ class Orcatrata extends CI_Controller {
 		$data['valortotalorca'] = floatval ($data['valortotalorca']);
 		$data['somatotal'] = 0;	
 
-        $j = 1;
-        for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
+		if ($data['valortotalorca'] > 0.00) {
+			$j = 1;
+			for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
 
-				$data['valoredit'][$i] =  str_replace(',', '.', str_replace('.', '', $this->input->post('ValorParcela' . $i)));
-				$data['somatotal'] += $data['valoredit'][$i];            
-			
-			if ($data['valoredit'][$i] > 0.00){
-                $data['parcelasrec'][$j]['idApp_Parcelas'] = $this->input->post('idApp_Parcelas' . $i);
-                $data['parcelasrec'][$j]['Parcela'] = $this->input->post('Parcela' . $i);
-                $data['parcelasrec'][$j]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
-                $data['parcelasrec'][$j]['DataVencimento'] = $this->input->post('DataVencimento' . $i);
-                $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
-                $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
-                $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
-                $data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
-				//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+					$data['valoredit'][$i] =  str_replace(',', '.', str_replace('.', '', $this->input->post('ValorParcela' . $i)));
+					$data['somatotal'] += $data['valoredit'][$i];            
 				
-				(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
-				$data['radio'] = array(
-					'Quitado' . $j => $this->basico->radio_checked($data['parcelasrec'][$j]['Quitado'], 'Quitado' . $j, 'NS'),
-				);
-				($data['parcelasrec'][$j]['Quitado'] == 'S') ? $data['div']['Quitado' . $j] = '' : $data['div']['Quitado' . $j] = 'style="display: none;"';				
+				if ($data['valoredit'][$i] > 0.00){
+					$data['parcelasrec'][$j]['idApp_Parcelas'] = $this->input->post('idApp_Parcelas' . $i);
+					$data['parcelasrec'][$j]['Parcela'] = $this->input->post('Parcela' . $i);
+					$data['parcelasrec'][$j]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
+					$data['parcelasrec'][$j]['DataVencimento'] = $this->input->post('DataVencimento' . $i);
+					$data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
+					$data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
+					$data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
+					$data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
+					//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+					
+					(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
+					$data['radio'] = array(
+						'Quitado' . $j => $this->basico->radio_checked($data['parcelasrec'][$j]['Quitado'], 'Quitado' . $j, 'NS'),
+					);
+					($data['parcelasrec'][$j]['Quitado'] == 'S') ? $data['div']['Quitado' . $j] = '' : $data['div']['Quitado' . $j] = 'style="display: none;"';				
 
-				$j++;
-            }
-        }
-		$data['count']['PRCount'] = $j - 1;
-				
+					$j++;
+				}
+			}
+			$data['count']['PRCount'] = $j - 1;
+		}
+		
 		/*
         $j = 1;
         for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
@@ -4822,7 +4850,7 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['DataQuitado'] = $this->basico->mascara_data($data['orcatrata']['DataQuitado'], 'barras');
 			$data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'barras');
             //$data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'barras');
-			$data['valortotalorca'] = ($data['orcatrata']['ValorRestanteOrca'] + $data['orcatrata']['ValorExtraOrca'] + $data['orcatrata']['ValorFrete']) ;
+			//$data['valortotalorca'] = ($data['orcatrata']['ValorRestanteOrca'] + $data['orcatrata']['ValorExtraOrca'] + $data['orcatrata']['ValorFrete']) ;
 			$_SESSION['Orcatrata']['valortotalorca'] = ($data['orcatrata']['ValorRestanteOrca'] + $data['orcatrata']['ValorExtraOrca'] + $data['orcatrata']['ValorFrete']) ;
 			
             #### Carrega os dados do cliente nas variáves de sessão ####
@@ -5340,8 +5368,17 @@ class Orcatrata extends CI_Controller {
 
 		$data['somatotal'] = floatval ($data['somatotal']);
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
-        $data['diferenca'] = floatval ($data['diferenca']);		
 		
+		$epsilon = 0.001;
+
+		if(abs($data['diferenca']) < $epsilon){
+			$data['diferenca'] = 0.00;
+		}else{
+			$data['diferenca'] = $data['diferenca'];
+		}
+
+		$data['diferenca'] = floatval ($data['diferenca']);	
+
 		$data['q3'] = $this->Clientepet_model->list_racapet(TRUE);
 		$data['list3'] = $this->load->view('clientepet/list_racapet', $data, TRUE);
 		
@@ -5352,11 +5389,11 @@ class Orcatrata extends CI_Controller {
 		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
 			if($data['diferenca'] < 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
 			}elseif($data['diferenca'] > 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
 			}
 		}
@@ -6619,35 +6656,36 @@ class Orcatrata extends CI_Controller {
 		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorFinalOrca']));
 		$data['valortotalorca'] = floatval ($data['valortotalorca']);
 		$data['somatotal'] = 0;	
+		
+		if ($data['valortotalorca'] > 0.00) {
+			$j = 1;
+			for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
 
-        $j = 1;
-        for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
-
-			$data['valoredit'][$i] =  str_replace(',', '.', str_replace('.', '', $this->input->post('ValorParcela' . $i)));
-			$data['somatotal'] += $data['valoredit'][$i];            
-				
-			if ($data['valoredit'][$i] > 0.00){
-                $data['parcelasrec'][$j]['idApp_Parcelas'] = $this->input->post('idApp_Parcelas' . $i);
-                $data['parcelasrec'][$j]['Parcela'] = $this->input->post('Parcela' . $i);
-                $data['parcelasrec'][$j]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
-                $data['parcelasrec'][$j]['DataVencimento'] = $this->input->post('DataVencimento' . $i);
-                $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
-                $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
-                $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
-                $data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
-				//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				
-				(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
-				$data['radio'] = array(
-					'Quitado' . $j => $this->basico->radio_checked($data['parcelasrec'][$j]['Quitado'], 'Quitado' . $j, 'NS'),
-				);
-				($data['parcelasrec'][$j]['Quitado'] == 'S') ? $data['div']['Quitado' . $j] = '' : $data['div']['Quitado' . $j] = 'style="display: none;"';				
-				
-				$j++;
+				$data['valoredit'][$i] =  str_replace(',', '.', str_replace('.', '', $this->input->post('ValorParcela' . $i)));
+				$data['somatotal'] += $data['valoredit'][$i];            
+					
+				if ($data['valoredit'][$i] > 0.00){
+					$data['parcelasrec'][$j]['idApp_Parcelas'] = $this->input->post('idApp_Parcelas' . $i);
+					$data['parcelasrec'][$j]['Parcela'] = $this->input->post('Parcela' . $i);
+					$data['parcelasrec'][$j]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
+					$data['parcelasrec'][$j]['DataVencimento'] = $this->input->post('DataVencimento' . $i);
+					$data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
+					$data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
+					$data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
+					$data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
+					//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+					
+					(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
+					$data['radio'] = array(
+						'Quitado' . $j => $this->basico->radio_checked($data['parcelasrec'][$j]['Quitado'], 'Quitado' . $j, 'NS'),
+					);
+					($data['parcelasrec'][$j]['Quitado'] == 'S') ? $data['div']['Quitado' . $j] = '' : $data['div']['Quitado' . $j] = 'style="display: none;"';				
+					
+					$j++;
+				}
 			}
-        }
-		$data['count']['PRCount'] = $j - 1;
-
+			$data['count']['PRCount'] = $j - 1;
+		}
 		//Fim do trecho de código que dá pra melhorar
 
         if ($id) {
@@ -6665,7 +6703,7 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['DataQuitado'] = $this->basico->mascara_data($data['orcatrata']['DataQuitado'], 'barras');
 			$data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'barras');
             //$data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'barras');
-			$data['valortotalorca'] = ($data['orcatrata']['ValorRestanteOrca'] + $data['orcatrata']['ValorExtraOrca'] + $data['orcatrata']['ValorFrete']) ;
+			//$data['valortotalorca'] = ($data['orcatrata']['ValorRestanteOrca'] + $data['orcatrata']['ValorExtraOrca'] + $data['orcatrata']['ValorFrete']) ;
 			$_SESSION['Orcatrata']['valortotalorca'] = ($data['orcatrata']['ValorRestanteOrca'] + $data['orcatrata']['ValorExtraOrca'] + $data['orcatrata']['ValorFrete']) ;
 			
 
@@ -7066,6 +7104,15 @@ class Orcatrata extends CI_Controller {
 		
 		$data['somatotal'] = floatval ($data['somatotal']);
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
+		
+		$epsilon = 0.001;
+
+		if(abs($data['diferenca']) < $epsilon){
+			$data['diferenca'] = 0.00;
+		}else{
+			$data['diferenca'] = $data['diferenca'];
+		}
+		
         $data['diferenca'] = floatval ($data['diferenca']);		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -7075,11 +7122,11 @@ class Orcatrata extends CI_Controller {
 		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
 			if($data['diferenca'] < 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
 			}elseif($data['diferenca'] > 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
 			}
 		}
@@ -10243,6 +10290,15 @@ class Orcatrata extends CI_Controller {
 		
 		$data['somatotal'] = floatval ($data['somatotal']);
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
+		
+		$epsilon = 0.001;
+
+		if(abs($data['diferenca']) < $epsilon){
+			$data['diferenca'] = 0.00;
+		}else{
+			$data['diferenca'] = $data['diferenca'];
+		}
+		
         $data['diferenca'] = floatval ($data['diferenca']);		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -10252,11 +10308,11 @@ class Orcatrata extends CI_Controller {
 		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
 			if($data['diferenca'] < 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
 			}elseif($data['diferenca'] > 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
 			}
 		}
@@ -11116,34 +11172,35 @@ class Orcatrata extends CI_Controller {
 		$data['valortotalorca'] = floatval ($data['valortotalorca']);
 		$data['somatotal'] = 0;	
 
-        $j = 1;
-        for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
+		if ($data['valortotalorca'] > 0.00) {
+			$j = 1;
+			for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
 
-				$data['valoredit'][$i] =  str_replace(',', '.', str_replace('.', '', $this->input->post('ValorParcela' . $i)));
-				$data['somatotal'] += $data['valoredit'][$i];            
-			
-			if ($data['valoredit'][$i] > 0.00){
-                $data['parcelasrec'][$j]['idApp_Parcelas'] = $this->input->post('idApp_Parcelas' . $i);
-                $data['parcelasrec'][$j]['Parcela'] = $this->input->post('Parcela' . $i);
-                $data['parcelasrec'][$j]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
-                $data['parcelasrec'][$j]['DataVencimento'] = $this->input->post('DataVencimento' . $i);
-                $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
-                $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
-                $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
-                $data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
-				//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+					$data['valoredit'][$i] =  str_replace(',', '.', str_replace('.', '', $this->input->post('ValorParcela' . $i)));
+					$data['somatotal'] += $data['valoredit'][$i];            
 				
-				(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
-				$data['radio'] = array(
-					'Quitado' . $j => $this->basico->radio_checked($data['parcelasrec'][$j]['Quitado'], 'Quitado' . $j, 'NS'),
-				);
-				($data['parcelasrec'][$j]['Quitado'] == 'S') ? $data['div']['Quitado' . $j] = '' : $data['div']['Quitado' . $j] = 'style="display: none;"';				
+				if ($data['valoredit'][$i] > 0.00){
+					$data['parcelasrec'][$j]['idApp_Parcelas'] = $this->input->post('idApp_Parcelas' . $i);
+					$data['parcelasrec'][$j]['Parcela'] = $this->input->post('Parcela' . $i);
+					$data['parcelasrec'][$j]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
+					$data['parcelasrec'][$j]['DataVencimento'] = $this->input->post('DataVencimento' . $i);
+					$data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
+					$data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
+					$data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
+					$data['parcelasrec'][$j]['FormaPagamentoParcela'] = $this->input->post('FormaPagamentoParcela' . $i);
+					//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+					
+					(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
+					$data['radio'] = array(
+						'Quitado' . $j => $this->basico->radio_checked($data['parcelasrec'][$j]['Quitado'], 'Quitado' . $j, 'NS'),
+					);
+					($data['parcelasrec'][$j]['Quitado'] == 'S') ? $data['div']['Quitado' . $j] = '' : $data['div']['Quitado' . $j] = 'style="display: none;"';				
 
-				$j++;
-            }
-        }
-		$data['count']['PRCount'] = $j - 1;
-
+					$j++;
+				}
+			}
+			$data['count']['PRCount'] = $j - 1;
+		}
         //Fim do trecho de código que dá pra melhorar
 
         if ($id) {
@@ -11561,6 +11618,15 @@ class Orcatrata extends CI_Controller {
 
 		$data['somatotal'] = floatval ($data['somatotal']);
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
+		
+		$epsilon = 0.001;
+
+		if(abs($data['diferenca']) < $epsilon){
+			$data['diferenca'] = 0.00;
+		}else{
+			$data['diferenca'] = $data['diferenca'];
+		}
+		
         $data['diferenca'] = floatval ($data['diferenca']);		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -11570,11 +11636,11 @@ class Orcatrata extends CI_Controller {
 		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
 			if($data['diferenca'] < 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
 			}elseif($data['diferenca'] > 0.00){
 				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				//$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
 				$this->form_validation->set_rules('ValorFinalOrca', 'O Valor Final é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
 			}
 		}
