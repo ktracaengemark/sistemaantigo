@@ -963,7 +963,7 @@ class Relatorio_pag extends CI_Controller {
         if ($this->form_validation->run() !== TRUE) {
 
 			//$this->load->library('pagination');
-			$config['per_page'] = 10;
+			$config['per_page'] = 12;
 			$config["uri_segment"] = 3;
 			$config['reuse_query_string'] = TRUE;
 			$config['num_links'] = 2;
@@ -1101,7 +1101,7 @@ class Relatorio_pag extends CI_Controller {
         if ($this->form_validation->run() !== TRUE) {
 
 			//$this->load->library('pagination');
-			$config['per_page'] = 10;
+			$config['per_page'] = 12;
 			$config["uri_segment"] = 3;
 			$config['reuse_query_string'] = TRUE;
 			$config['num_links'] = 2;
