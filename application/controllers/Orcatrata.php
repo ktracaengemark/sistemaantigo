@@ -14195,33 +14195,37 @@ class Orcatrata extends CI_Controller {
 		$data['count']['PRCount'] = $j - 1;
 
 		//$this->load->library('pagination');
-		$config['per_page'] = 10;
-		$config["uri_segment"] = 4;
-		$config['reuse_query_string'] = TRUE;
-		$config['num_links'] = 2;
-		$config['use_page_numbers'] = TRUE;
-		$config['full_tag_open'] = "<ul class='pagination'>";
-		$config['full_tag_close'] = "</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tagl_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
+
 		$data['Pesquisa'] = '';
 
 		$data['somatotal'] = 0;
         if ($id) {
-		
-			$config['base_url'] = base_url() . 'Orcatrata/alterarreceitas/' . $id . '/';
-			$config['total_rows'] = $this->Orcatrata_model->get_alterarorcamentos($id, TRUE);
-		   
+			
+			$data['pesquisa_query'] = $this->Orcatrata_model->get_alterarorcamentos($id, TRUE);
+			$_SESSION['Pesquisa_Query']['FinalTotal'] = $data['pesquisa_query']->soma2->somafinal2;
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			//$config['total_rows'] = $this->Orcatrata_model->get_alterarorcamentos($id, TRUE);
+			$config['base_url'] = base_url() . 'Orcatrata/alterarreceitas/' . $id . '/';	
+			$config['per_page'] = 50;
+			$config["uri_segment"] = 4;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+			
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{
@@ -14322,6 +14326,7 @@ class Orcatrata extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
 			
 			$this->load->view('orcatrata/form_alterarorcamentos', $data);
+			
 		} else {
 
             $data['bd']['Dia'] = $data['query']['Dia'];
@@ -14538,33 +14543,39 @@ class Orcatrata extends CI_Controller {
 		$data['count']['PRCount'] = $j - 1;
 
 		//$this->load->library('pagination');
-		$config['per_page'] = 10;
-		$config["uri_segment"] = 4;
-		$config['reuse_query_string'] = TRUE;
-		$config['num_links'] = 2;
-		$config['use_page_numbers'] = TRUE;
-		$config['full_tag_open'] = "<ul class='pagination'>";
-		$config['full_tag_close'] = "</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tagl_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
+
 		$data['Pesquisa'] = '';
 
 		$data['somatotal'] = 0;
         if ($id) {
 		
+			$data['pesquisa_query'] = $this->Orcatrata_model->get_alterarorcamentos($id, TRUE);
+			$_SESSION['Pesquisa_Query']['FinalTotal'] = $data['pesquisa_query']->soma2->somafinal2;
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			
+			//$config['total_rows'] = $this->Orcatrata_model->get_alterarorcamentos($id, TRUE);
+			
 			$config['base_url'] = base_url() . 'Orcatrata/alterardespesas/' . $id . '/';
-			$config['total_rows'] = $this->Orcatrata_model->get_alterarorcamentos($id, TRUE);
-		   
+			$config['per_page'] = 50;
+			$config["uri_segment"] = 4;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";		   
+			
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{
@@ -14847,33 +14858,39 @@ class Orcatrata extends CI_Controller {
 		$data['count']['PRCount'] = $j - 1;
 
 		//$this->load->library('pagination');
-		$config['per_page'] = 10;
-		$config["uri_segment"] = 4;
-		$config['reuse_query_string'] = TRUE;
-		$config['num_links'] = 2;
-		$config['use_page_numbers'] = TRUE;
-		$config['full_tag_open'] = "<ul class='pagination'>";
-		$config['full_tag_close'] = "</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tagl_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
+
 		$data['Pesquisa'] = '';
 		
 		$data['somatotal'] = 0;
         if ($id) {
-		
+			
+			$data['pesquisa_query'] = $this->Orcatrata_model->get_baixadacomissao($id, TRUE);
+			$_SESSION['Pesquisa_Query']['ComissaoTotal'] = $data['pesquisa_query']->soma2->somacomissao2;
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			
+			//$config['total_rows'] = $this->Orcatrata_model->get_baixadacomissao($id, TRUE);
+			
 			$config['base_url'] = base_url() . 'Orcatrata/baixadacomissao/' . $id . '/';
-			$config['total_rows'] = $this->Orcatrata_model->get_baixadacomissao($id, TRUE);
-		   
+			$config['per_page'] = 50;
+			$config["uri_segment"] = 4;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";		   
+			
 			if($config['total_rows'] >= 1){
 				$_SESSION['Total_Rows'] = $data['total_rows'] = $config['total_rows'];
 			}else{
@@ -15063,6 +15080,8 @@ class Orcatrata extends CI_Controller {
 			*/
 			$data['msg'] = '?m=1';
 
+			unset($_SESSION['SomaTotal']);		
+			
 			//redirect(base_url() . 'relatorio/comissao/' . $data['msg']);
 			redirect(base_url() . 'orcatrata/baixadacomissao/' . $_SESSION['log']['idSis_Empresa'] . $data['msg']);
 
@@ -15130,33 +15149,39 @@ class Orcatrata extends CI_Controller {
 		$data['count']['PRCount'] = $j - 1;
 
 		//$this->load->library('pagination');
-		$config['per_page'] = 10;
-		$config["uri_segment"] = 4;
-		$config['reuse_query_string'] = TRUE;
-		$config['num_links'] = 2;
-		$config['use_page_numbers'] = TRUE;
-		$config['full_tag_open'] = "<ul class='pagination'>";
-		$config['full_tag_close'] = "</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tagl_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
+
 		$data['Pesquisa'] = '';
 		
 		$data['somatotal'] = 0;
         if ($id) {
+			
+			$data['pesquisa_query'] = $this->Orcatrata_model->get_baixadacomissao($id, TRUE);
+			$_SESSION['Pesquisa_Query']['ComissaoTotal'] = $data['pesquisa_query']->soma2->somacomissao2;
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			
+			//$config['total_rows'] = $this->Orcatrata_model->get_baixadacomissao($id, TRUE);
 		
-			$config['base_url'] = base_url() . 'Orcatrata/baixadacomissao_online/' . $id . '/';
-			$config['total_rows'] = $this->Orcatrata_model->get_baixadacomissao($id, TRUE);
-		   
+			$config['base_url'] = base_url() . 'Orcatrata/baixadacomissao_online/' . $id . '/';	
+			$config['per_page'] = 50;
+			$config["uri_segment"] = 4;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";		   
+			
 			if($config['total_rows'] >= 1){
 				$_SESSION['Total_Rows'] = $data['total_rows'] = $config['total_rows'];
 			}else{
@@ -15334,6 +15359,9 @@ class Orcatrata extends CI_Controller {
             }
 			
 			$data['msg'] = '?m=1';
+			
+			unset($_SESSION['SomaTotal']);		
+	
 			redirect(base_url() . 'orcatrata/baixadacomissao_online/' . $_SESSION['log']['idSis_Empresa'] . $data['msg']);
 
 			exit();

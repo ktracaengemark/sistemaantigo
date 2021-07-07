@@ -295,32 +295,37 @@ class OrcatrataPrint extends CI_Controller {
 		*/
 
 		//$this->load->library('pagination');
-		$config['per_page'] = 10;
-		$config["uri_segment"] = 4;
-		$config['reuse_query_string'] = TRUE;
-		$config['num_links'] = 2;
-		$config['use_page_numbers'] = TRUE;
-		$config['full_tag_open'] = "<ul class='pagination'>";
-		$config['full_tag_close'] = "</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tagl_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
+
 		$data['Pesquisa'] = '';
 				
         if ($id) {
-
+			
+			$data['pesquisa_query'] = $this->Orcatrataprint_model->get_orcatrata_cliente($id, TRUE);
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			
+			//$config['total_rows'] = $this->Orcatrataprint_model->get_orcatrata_cliente($id, TRUE);
+			
 			$config['base_url'] = base_url() . 'OrcatrataPrint/imprimirlistacliente/' . $id . '/';
-			$config['total_rows'] = $this->Orcatrataprint_model->get_orcatrata_cliente($id, TRUE);
-		   
+			$config['per_page'] = 50;
+			$config["uri_segment"] = 4;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+			
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{
@@ -526,32 +531,34 @@ class OrcatrataPrint extends CI_Controller {
 		$data['Imprimir']['DataFim4'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim4'], 'barras');
 
 		//$this->load->library('pagination');
-		$config['per_page'] = 10;
-		$config["uri_segment"] = 4;
-		$config['reuse_query_string'] = TRUE;
-		$config['num_links'] = 2;
-		$config['use_page_numbers'] = TRUE;
-		$config['full_tag_open'] = "<ul class='pagination'>";
-		$config['full_tag_close'] = "</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tagl_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
+
 		$data['Pesquisa'] = '';
 				
         if ($id) {
             
 			$config['base_url'] = base_url() . 'OrcatrataPrint/imprimirreciborec/' . $id . '/';
 			$config['total_rows'] = $this->Orcatrataprintcobranca_model->get_orcatrata($id, TRUE);
-		   
+			
+			$config['per_page'] = 12;
+			$config["uri_segment"] = 4;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";		   
+			
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{
@@ -685,32 +692,34 @@ class OrcatrataPrint extends CI_Controller {
 		$data['Imprimir']['DataFim4'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim4'], 'barras');
 
 		//$this->load->library('pagination');
-		$config['per_page'] = 10;
-		$config["uri_segment"] = 4;
-		$config['reuse_query_string'] = TRUE;
-		$config['num_links'] = 2;
-		$config['use_page_numbers'] = TRUE;
-		$config['full_tag_open'] = "<ul class='pagination'>";
-		$config['full_tag_close'] = "</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tagl_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
+
 		$data['Pesquisa'] = '';
 		
         if ($id) {
 		
 			$config['base_url'] = base_url() . 'OrcatrataPrint/imprimirlistarec/' . $id . '/';
 			$config['total_rows'] = $this->Orcatrataprintcobranca_model->get_orcatrata($id, TRUE);
-		   
+			
+			$config['per_page'] = 12;
+			$config["uri_segment"] = 4;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";		   
+			
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{
@@ -843,32 +852,34 @@ class OrcatrataPrint extends CI_Controller {
 		$data['Imprimir']['DataFim4'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim4'], 'barras');
 
 		//$this->load->library('pagination');
-		$config['per_page'] = 10;
-		$config["uri_segment"] = 4;
-		$config['reuse_query_string'] = TRUE;
-		$config['num_links'] = 2;
-		$config['use_page_numbers'] = TRUE;
-		$config['full_tag_open'] = "<ul class='pagination'>";
-		$config['full_tag_close'] = "</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tagl_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
+
 		$data['Pesquisa'] = '';
 						
         if ($id) {
             
 			$config['base_url'] = base_url() . 'OrcatrataPrint/imprimirreciborec/' . $id . '/';
 			$config['total_rows'] = $this->Orcatrataprintcobranca_model->get_orcatrata($id, TRUE);
-		   
+			
+			$config['per_page'] = 12;
+			$config["uri_segment"] = 4;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";		   
+			
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{
@@ -1001,32 +1012,34 @@ class OrcatrataPrint extends CI_Controller {
 		$data['Imprimir']['DataFim4'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim4'], 'barras');
 
 		//$this->load->library('pagination');
-		$config['per_page'] = 10;
-		$config["uri_segment"] = 4;
-		$config['reuse_query_string'] = TRUE;
-		$config['num_links'] = 2;
-		$config['use_page_numbers'] = TRUE;
-		$config['full_tag_open'] = "<ul class='pagination'>";
-		$config['full_tag_close'] = "</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tagl_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
+
 		$data['Pesquisa'] = '';
 				
         if ($id) {
 		
 			$config['base_url'] = base_url() . 'OrcatrataPrint/imprimirlistadesp/' . $id . '/';
 			$config['total_rows'] = $this->Orcatrataprintcobranca_model->get_orcatrata($id, TRUE);
-		   
+			
+			$config['per_page'] = 12;
+			$config["uri_segment"] = 4;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";		   
+			
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{
@@ -1155,33 +1168,38 @@ class OrcatrataPrint extends CI_Controller {
             $data['msg'] = '';
 		
 		//$this->load->library('pagination');
-		$config['per_page'] = 10;
-		$config["uri_segment"] = 4;
-		$config['reuse_query_string'] = TRUE;
-		$config['num_links'] = 2;
-		$config['use_page_numbers'] = TRUE;
-		$config['full_tag_open'] = "<ul class='pagination'>";
-		$config['full_tag_close'] = "</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tagl_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
+
 		$data['Pesquisa'] = '';
 					
 		$data['somatotal'] = 0;
         if ($id) {
+			
+			$data['pesquisa_query'] = $this->Orcatrataprintcomissao_model->get_orcatrata($id, TRUE);
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			
+			//$config['total_rows'] = $this->Orcatrataprintcomissao_model->get_orcatrata($id, TRUE);
 
-			$config['base_url'] = base_url() . 'OrcatrataPrint/imprimircomissao/' . $id . '/';
-			$config['total_rows'] = $this->Orcatrataprintcomissao_model->get_orcatrata($id, TRUE);
-		   
+			$config['base_url'] = base_url() . 'OrcatrataPrint/imprimircomissao/' . $id . '/';			
+			$config['per_page'] = 50;
+			$config["uri_segment"] = 4;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";		   
+			
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{
@@ -1321,33 +1339,38 @@ class OrcatrataPrint extends CI_Controller {
             $data['msg'] = '';		
 		
 		//$this->load->library('pagination');
-		$config['per_page'] = 10;
-		$config["uri_segment"] = 4;
-		$config['reuse_query_string'] = TRUE;
-		$config['num_links'] = 2;
-		$config['use_page_numbers'] = TRUE;
-		$config['full_tag_open'] = "<ul class='pagination'>";
-		$config['full_tag_close'] = "</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tagl_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
+
 		$data['Pesquisa'] = '';
 					
 		$data['somatotal'] = 0;
         if ($id) {
+			
+			$data['pesquisa_query'] = $this->Orcatrataprintcomissao_model->get_orcatrata($id, TRUE);
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			
+			//$config['total_rows'] = $this->Orcatrataprintcomissao_model->get_orcatrata($id, TRUE);
 
-			$config['base_url'] = base_url() . 'OrcatrataPrint/imprimircomissao_online/' . $id . '/';
-			$config['total_rows'] = $this->Orcatrataprintcomissao_model->get_orcatrata($id, TRUE);
-		   
+			$config['base_url'] = base_url() . 'OrcatrataPrint/imprimircomissao_online/' . $id . '/';			
+			$config['per_page'] = 50;
+			$config["uri_segment"] = 4;
+			$config['reuse_query_string'] = TRUE;
+			$config['num_links'] = 2;
+			$config['use_page_numbers'] = TRUE;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] = "</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open'] = "<li>";
+			$config['next_tagl_close'] = "</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] = "<li>";
+			$config['first_tagl_close'] = "</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+			
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{

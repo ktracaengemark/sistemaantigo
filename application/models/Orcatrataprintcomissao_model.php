@@ -120,6 +120,7 @@ class Orcatrataprintcomissao_model extends CI_Model {
 				OT.idApp_Fornecedor,
 				OT.ValorOrca,
 				OT.ValorTotalOrca,
+				OT.ValorFinalOrca,
 				OT.ValorDev,
 				OT.ValorDinheiro,
 				OT.ValorTroco,
@@ -203,7 +204,23 @@ class Orcatrataprintcomissao_model extends CI_Model {
         ');
 	
 		if($total == TRUE) {
-			return $query->num_rows();
+			//return $query->num_rows();
+			//$somafinal2=0;
+			$somacomissao2=0;
+			
+			foreach ($query->result() as $row) {
+				
+				//$somafinal2 += $row->ValorFinalOrca;
+				$somacomissao2 += $row->ValorComissao;
+				
+			}
+			
+			$query->soma2 = new stdClass();
+			
+			//$query->soma2->somafinal2 = number_format($somafinal2, 2, ',', '.');
+			$query->soma2->somacomissao2 = number_format($somacomissao2, 2, ',', '.');
+			
+			return $query;			
 		}
 				
         $query = $query->result_array();

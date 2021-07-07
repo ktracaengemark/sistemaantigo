@@ -277,14 +277,17 @@ class Relatorio_pag extends CI_Controller {
 		
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
-
+			
 			//$this->load->library('pagination');
-			$config['per_page'] = 10;
+			$data['pesquisa_query'] = $this->Relatorio_model->list_orcamento(FALSE,TRUE, TRUE);
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			//$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE,TRUE, TRUE);
+			$config['base_url'] = base_url() . 'relatorio_pag/receitas_pag/';
+			$config['per_page'] = 50;
 			$config["uri_segment"] = 3;
 			$config['reuse_query_string'] = TRUE;
 			$config['num_links'] = 2;
 			$config['use_page_numbers'] = TRUE;
-
 			$config['full_tag_open'] = "<ul class='pagination'>";
 			$config['full_tag_close'] = "</ul>";
 			$config['num_tag_open'] = '<li>';
@@ -299,11 +302,9 @@ class Relatorio_pag extends CI_Controller {
 			$config['first_tagl_close'] = "</li>";
 			$config['last_tag_open'] = "<li>";
 			$config['last_tagl_close'] = "</li>";
+			
 			$data['Pesquisa'] = '';
 			
-			$config['base_url'] = base_url() . 'relatorio_pag/receitas_pag/';
-			$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE,TRUE, TRUE);
-           
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{
@@ -371,7 +372,11 @@ class Relatorio_pag extends CI_Controller {
         if ($this->form_validation->run() !== TRUE) {
 
 			//$this->load->library('pagination');
-			$config['per_page'] = 10;
+			$data['pesquisa_query'] = $this->Relatorio_model->list_orcamento(FALSE,TRUE, TRUE);
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			//$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE, TRUE, TRUE);
+			$config['base_url'] = base_url() . 'relatorio_pag/despesas_pag/';
+			$config['per_page'] = 50;
 			$config["uri_segment"] = 3;
 			$config['reuse_query_string'] = TRUE;
 			$config['num_links'] = 2;
@@ -390,10 +395,8 @@ class Relatorio_pag extends CI_Controller {
 			$config['first_tagl_close'] = "</li>";
 			$config['last_tag_open'] = "<li>";
 			$config['last_tagl_close'] = "</li>";
-			$data['Pesquisa'] = '';
 			
-			$config['base_url'] = base_url() . 'relatorio_pag/despesas_pag/';
-			$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE, TRUE, TRUE);
+			$data['Pesquisa'] = '';
            
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
@@ -537,8 +540,12 @@ class Relatorio_pag extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
 
+			$data['pesquisa_query'] = $this->Relatorio_model->list_orcamento(FALSE,TRUE, TRUE);
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			//$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE, TRUE, TRUE); 
+			$config['base_url'] = base_url() . 'relatorio_pag/comissao_pag/';
 			//$this->load->library('pagination');
-			$config['per_page'] = 10;
+			$config['per_page'] = 50;
 			$config["uri_segment"] = 3;
 			$config['reuse_query_string'] = TRUE;
 			$config['num_links'] = 2;
@@ -557,11 +564,9 @@ class Relatorio_pag extends CI_Controller {
 			$config['first_tagl_close'] = "</li>";
 			$config['last_tag_open'] = "<li>";
 			$config['last_tagl_close'] = "</li>";
-			$data['Pesquisa'] = '';
 			
-			$config['base_url'] = base_url() . 'relatorio_pag/comissao_pag/';
-			$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE, TRUE, TRUE);
-           
+			$data['Pesquisa'] = '';
+
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{
@@ -694,8 +699,12 @@ class Relatorio_pag extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
 
+			$data['pesquisa_query'] = $this->Relatorio_model->list_orcamento(FALSE,TRUE, TRUE);
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			//$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE, TRUE, TRUE);
+			$config['base_url'] = base_url() . 'relatorio_pag/comissao_online_pag/';
 			//$this->load->library('pagination');
-			$config['per_page'] = 10;
+			$config['per_page'] = 50;
 			$config["uri_segment"] = 3;
 			$config['reuse_query_string'] = TRUE;
 			$config['num_links'] = 2;
@@ -714,11 +723,9 @@ class Relatorio_pag extends CI_Controller {
 			$config['first_tagl_close'] = "</li>";
 			$config['last_tag_open'] = "<li>";
 			$config['last_tagl_close'] = "</li>";
+			
 			$data['Pesquisa'] = '';
 			
-			$config['base_url'] = base_url() . 'relatorio_pag/comissao_online_pag/';
-			$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE, TRUE, TRUE);
-           
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{
@@ -821,7 +828,11 @@ class Relatorio_pag extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
 
+			$data['pesquisa_query'] = $this->Relatoriocomissoes_model->list_porservicos(FALSE,TRUE, TRUE);
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			//$config['total_rows'] = $this->Relatoriocomissoes_model->list_porservicos(FALSE, TRUE, TRUE);
 			//$this->load->library('pagination');
+			$config['base_url'] = base_url() . 'relatorio_pag/porservicos_pag/';
 			$config['per_page'] = 10;
 			$config["uri_segment"] = 3;
 			$config['reuse_query_string'] = TRUE;
@@ -841,11 +852,9 @@ class Relatorio_pag extends CI_Controller {
 			$config['first_tagl_close'] = "</li>";
 			$config['last_tag_open'] = "<li>";
 			$config['last_tagl_close'] = "</li>";
+			
 			$data['Pesquisa'] = '';
 			
-			$config['base_url'] = base_url() . 'relatorio_pag/porservicos_pag/';
-			$config['total_rows'] = $this->Relatoriocomissoes_model->list_porservicos(FALSE, TRUE, TRUE);
-           
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{
@@ -1655,13 +1664,16 @@ class Relatorio_pag extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
 
-			//$this->load->library('pagination');
-			$config['per_page'] = 10;
+			//$this->load->library('pagination');			
+			$data['pesquisa_query'] = $this->Relatorio_model->list_orcamento(FALSE,TRUE, TRUE);
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			//$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE,TRUE, TRUE);
+			$config['base_url'] = base_url() . 'relatorio_pag/alterarreceitas_pag/';
+			$config['per_page'] = 50;
 			$config["uri_segment"] = 3;
 			$config['reuse_query_string'] = TRUE;
 			$config['num_links'] = 2;
 			$config['use_page_numbers'] = TRUE;
-
 			$config['full_tag_open'] = "<ul class='pagination'>";
 			$config['full_tag_close'] = "</ul>";
 			$config['num_tag_open'] = '<li>';
@@ -1676,17 +1688,15 @@ class Relatorio_pag extends CI_Controller {
 			$config['first_tagl_close'] = "</li>";
 			$config['last_tag_open'] = "<li>";
 			$config['last_tagl_close'] = "</li>";
+			
 			$data['Pesquisa'] = '';
 			
-			$config['base_url'] = base_url() . 'relatorio_pag/alterarreceitas_pag/';
-			$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE,TRUE, TRUE);
-           
-		   
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{
 				$data['total_rows'] = 0;
 			}
+			
             $this->pagination->initialize($config);
             
 			$page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
@@ -1747,8 +1757,14 @@ class Relatorio_pag extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
 
-			//$this->load->library('pagination');
-			$config['per_page'] = 10;
+			//$this->load->library('pagination');			
+			$data['pesquisa_query'] = $this->Relatorio_model->list_orcamento(FALSE,TRUE, TRUE);
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			
+			//$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE, TRUE, TRUE);
+			
+			$config['base_url'] = base_url() . 'relatorio_pag/alterardespesas_pag/';
+			$config['per_page'] = 50;
 			$config["uri_segment"] = 3;
 			$config['reuse_query_string'] = TRUE;
 			$config['num_links'] = 2;
@@ -1767,11 +1783,9 @@ class Relatorio_pag extends CI_Controller {
 			$config['first_tagl_close'] = "</li>";
 			$config['last_tag_open'] = "<li>";
 			$config['last_tagl_close'] = "</li>";
+			
 			$data['Pesquisa'] = '';
 			
-			$config['base_url'] = base_url() . 'relatorio_pag/alterardespesas_pag/';
-			$config['total_rows'] = $this->Relatorio_model->list_orcamento(FALSE, TRUE, TRUE);
-           
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{

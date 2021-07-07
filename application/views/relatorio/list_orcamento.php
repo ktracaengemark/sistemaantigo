@@ -2,7 +2,7 @@
 	<div class="panel-heading">
 		<div class="row">
 			<div class="col-md-2">
-				<label for="DataFim">Resultado:</label>
+				<label for="DataFim">Cont: Parc / Total</label>
 				<div class="input-group">
 					<span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
 					<input type="text" class="form-control" disabled aria-label="Contagem" value="<?php echo $report->num_rows(); ?> / <?php echo $total_rows; ?>">
@@ -52,20 +52,20 @@
 					</div>
 				</div>
 				<div class="col-md-2">
-					<label for="DataFim">Final:</label>
+					<label for="DataFim">Final: Parc / Total</label>
 					<div class="input-group">
 						<span class="input-group-addon">R$</span>
-						<input type="text" class="form-control" disabled aria-label="Total" value="<?php echo $report->soma->somafinal ?>">
+						<input type="text" class="form-control" disabled aria-label="Total" value="<?php echo $report->soma->somafinal ?> / <?php echo $pesquisa_query->soma2->somafinal2 ?>">
 					</div>
 				</div>
 			<?php } ?>
 			<?php if($metodo == 1 || $metodo == 2) { ?>
 				<?php if($_SESSION['Usuario']['Rel_Com'] == "S") {?>
 					<div class="col-md-2">
-						<label for="DataFim">Comissao:</label>
+						<label for="DataFim">Comissao: Parc / Total</label>
 						<div class="input-group">
 							<span class="input-group-addon">R$</span>
-							<input type="text" class="form-control" disabled aria-label="Comissao" value="<?php echo $report->soma->somacomissao ?>">
+							<input type="text" class="form-control" disabled aria-label="Comissao" value="<?php echo $report->soma->somacomissao ?> / <?php echo $pesquisa_query->soma2->somacomissao2 ?>">
 						</div>
 					</div>
 				<?php } ?>	

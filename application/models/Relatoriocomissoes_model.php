@@ -60,17 +60,6 @@ class Relatoriocomissoes_model extends CI_Model {
 		
 		}else{
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			$date_inicio_orca 		= ($_SESSION['FiltroAlteraParcela']['DataInicio']) ? 'OT.DataOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND ' : FALSE;
 			$date_fim_orca 			= ($_SESSION['FiltroAlteraParcela']['DataFim']) ? 'OT.DataOrca <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '" AND ' : FALSE;
 			
@@ -113,14 +102,6 @@ class Relatoriocomissoes_model extends CI_Model {
 			$Ordenamento 			= (!$_SESSION['FiltroAlteraParcela']['Ordenamento']) ? 'ASC' : $_SESSION['FiltroAlteraParcela']['Ordenamento'];        
 				
 		}
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		$querylimit = '';
         if ($limit)
@@ -285,7 +266,24 @@ class Relatoriocomissoes_model extends CI_Model {
 		');
 		
 		if($total == TRUE) {
-			return $query->num_rows();
+			//return $query->num_rows();			
+			
+			if ($completo === FALSE) {
+				return TRUE;
+			} else {
+
+				//$somafinal2=0;
+				//$somacomissao2=0;
+				
+				foreach ($query->result() as $row) {
+					
+				}
+				
+				$query->soma2 = new stdClass();
+				
+				return $query;
+			}
+			
 		}
 		
         ####################################################################

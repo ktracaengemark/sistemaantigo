@@ -538,7 +538,27 @@ class Relatorio_model extends CI_Model {
 		#echo $this->db->last_query();
 		
 		if($total == TRUE) {
-			return $query->num_rows();
+			//return $query->num_rows();
+			
+			if ($completo === FALSE) {
+				return TRUE;
+			} else {
+
+				$somafinal2=0;
+				$somacomissao2=0;
+				
+				foreach ($query->result() as $row) {
+					$somafinal2 += $row->ValorFinalOrca;
+					$somacomissao2 += $row->ValorComissao;
+				}
+				
+				$query->soma2 = new stdClass();
+				$query->soma2->somafinal2 = number_format($somafinal2, 2, ',', '.');
+				$query->soma2->somacomissao2 = number_format($somacomissao2, 2, ',', '.');
+
+				return $query;
+			}
+			
 		}
 		
         /*

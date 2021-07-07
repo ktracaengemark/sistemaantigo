@@ -36,7 +36,7 @@
 									<div class="col-md-2 text-left">	
 										<br>
 										<a type= "button" class="btn btn-md btn-warning btn-block" role="button">
-											<span class="glyphicon glyphicon-usd"></span>R$ <?php echo $_SESSION['SomaTotal']; ?>
+											<span class="glyphicon glyphicon-usd"></span>R$ <?php if(isset($_SESSION['SomaTotal'])) echo $_SESSION['SomaTotal']; ?> / <?php echo $_SESSION['Pesquisa_Query']['ComissaoTotal'] ?>
 										</a>
 									</div>
 									<div class="col-md-4 text-left">

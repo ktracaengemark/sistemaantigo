@@ -354,7 +354,10 @@ class Relatoriocomissoes extends CI_Controller {
             $data['bd']['idTab_TipoRD'] = $data['TipoRD'];
 			
 			//$data['report'] = $this->Relatoriocomissoes_model->list_porservicos($data['bd'],TRUE);
-
+			$data['pesquisa_query'] = $this->Relatoriocomissoes_model->list_porservicos($data['bd'],TRUE, TRUE);
+			$config['total_rows'] = $data['pesquisa_query']->num_rows();
+			//$config['total_rows'] = $this->Relatoriocomissoes_model->list_porservicos($data['bd'],TRUE, TRUE);
+			$config['base_url'] = base_url() . 'relatorio_pag/porservicos_pag/';
 			//$this->load->library('pagination');
 			$config['per_page'] = 10;
 			$config["uri_segment"] = 3;
@@ -375,11 +378,9 @@ class Relatoriocomissoes extends CI_Controller {
 			$config['first_tagl_close'] = "</li>";
 			$config['last_tag_open'] = "<li>";
 			$config['last_tagl_close'] = "</li>";
+			
 			$data['Pesquisa'] = '';
 			
-			$config['base_url'] = base_url() . 'relatorio_pag/porservicos_pag/';
-			$config['total_rows'] = $this->Relatoriocomissoes_model->list_porservicos($data['bd'],TRUE, TRUE);
-           
 			if($config['total_rows'] >= 1){
 				$data['total_rows'] = $config['total_rows'];
 			}else{

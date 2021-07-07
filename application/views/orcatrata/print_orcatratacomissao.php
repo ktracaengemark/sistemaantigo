@@ -16,7 +16,7 @@
 						<span class="glyphicon glyphicon-print"></span>
 					</a>
 					<a type="button" class="col-md-8 btn btn-md btn-warning "  href="<?php echo base_url() . $form_open_path . $_SESSION['log']['idSis_Empresa'];?>">
-						<span class="glyphicon glyphicon-pencil"></span> Editar
+						<span class="glyphicon glyphicon-pencil"></span> Baixa
 					</a>
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 					<tr>
 						<td class="col-md-1" scope="col"><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>"class="img-circle img-responsive" width='100'></td>
 						<td class="col-md-3 text-left" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>'?></td>
-						<td class="col-md-3 text-left" scope="col"><?php echo '<strong>' . $titulo . '</strong>'?><br>Total: R$ <?php echo '<strong>' . $somatotal . '</strong>'?></td>
+						<td class="col-md-3 text-left" scope="col"><?php echo '<strong>' . $titulo . '</strong>'?><br>Total: R$ <?php echo $somatotal?> / <?php echo '<strong>' . $pesquisa_query->soma2->somacomissao2 . '</strong>' ?></td>
 					</tr>
 				</thead>			
 			</table>

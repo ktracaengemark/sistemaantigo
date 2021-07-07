@@ -31,7 +31,7 @@
 									<div class="col-md-2 text-left">	
 										<br>
 										<a type= "button" class="btn btn-md btn-warning btn-block" role="button">
-											<span class="glyphicon glyphicon-usd"></span>R$ <?php echo $somatotal; ?>
+											<span class="glyphicon glyphicon-usd"></span>R$ <?php echo $somatotal; ?> / <?php echo $_SESSION['Pesquisa_Query']['FinalTotal'] ?>
 										</a>
 									</div>
 									<div class="col-md-6 text-left">
