@@ -124,7 +124,7 @@
 																					echo ''
 																					. '<label class="btn btn-warning active" name="' . $statuscomissao . $i . '_' . $hideshow . '">'
 																					. '<input type="radio" name="' . $statuscomissao . $i . '" id="' . $hideshow . '" '
-																					. 'onchange="carregaDataPagoComissaoOrca(this.value,this.name,'.$i.',1)" '
+																					//. 'onchange="carregaDataPagoComissaoOrca(this.value,this.name,'.$i.',1)" '
 																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																					. '</label>'
 																					;
@@ -132,7 +132,7 @@
 																					echo ''
 																					. '<label class="btn btn-default" name="' . $statuscomissao . $i . '_' . $hideshow . '">'
 																					. '<input type="radio" name="' . $statuscomissao . $i . '" id="' . $hideshow . '" '
-																					. 'onchange="carregaDataPagoComissaoOrca(this.value,this.name,'.$i.',1)" '
+																					//. 'onchange="carregaDataPagoComissaoOrca(this.value,this.name,'.$i.',1)" '
 																					. 'autocomplete="off" value="' . $key . '" >' . $row
 																					. '</label>'
 																					;
