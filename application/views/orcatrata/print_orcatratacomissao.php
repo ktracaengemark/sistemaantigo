@@ -1,8 +1,8 @@
 <?php if (isset($msg)) echo $msg; ?>
 
 <?php echo validation_errors(); ?>
-<div class="col-md-3"></div>
-<div class="col-md-6">	
+<div class="col-md-2"></div>
+<div class="col-md-8">	
 	<nav class="navbar navbar-inverse navbar-fixed" role="banner">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -46,6 +46,7 @@
 						<th class="col-md-1" scope="col">Valor</th>
 						<th class="col-md-1" scope="col">Comissao</th>
 						<th class="col-md-1" scope="col">Pago</th>
+						<th class="col-md-1" scope="col">Data</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -62,6 +63,7 @@
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['ValorRestanteOrca'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['ValorComissao'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i][$status] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['DataPagoComissaoOrca'] ?></td>
 						</tr>
 						
 						<?php

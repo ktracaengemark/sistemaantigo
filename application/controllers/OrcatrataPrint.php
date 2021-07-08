@@ -1234,6 +1234,7 @@ class OrcatrataPrint extends CI_Controller {
 						$data['orcatrata'][$j]['DataQuitado'] = $this->basico->mascara_data($data['orcatrata'][$j]['DataQuitado'], 'barras');
 						$data['orcatrata'][$j]['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata'][$j]['DataEntradaOrca'], 'barras');
 						$data['orcatrata'][$j]['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata'][$j]['DataVencimentoOrca'], 'barras');
+						$data['orcatrata'][$j]['DataPagoComissaoOrca'] = $this->basico->mascara_data($data['orcatrata'][$j]['DataPagoComissaoOrca'], 'barras');
 						$data['orcatrata'][$j]['ValorTotalOrca'] = number_format(($data['orcatrata'][$j]['ValorTotalOrca']), 2, ',', '.');
 						$data['orcatrata'][$j]['ValorRestanteOrca'] = number_format(($data['orcatrata'][$j]['ValorRestanteOrca']), 2, ',', '.');
 						$data['orcatrata'][$j]['ValorComissao'] = number_format(($data['orcatrata'][$j]['ValorComissao']), 2, ',', '.');
